@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'LabGrotesque-Regular';
+  src: url('/fonts/LabGrotesque/LabGrotesque-Regular.woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LabGrotesque-Italic';
+  src: url('/fonts/LabGrotesque/LabGrotesque-Italic.woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LabGrotesque-Bold';
+  src: url('/fonts/LabGrotesque/LabGrotesque-Bold.woff');
+  font-display: swap;
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'LabGrotesque-Light';
+  src: url('/fonts/LabGrotesque/LabGrotesque-Light.woff');
+  font-display: swap;
+}
+
+body {
+  margin: 0;
+  font-family: 'LabGrotesque-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}

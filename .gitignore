@@ -1,0 +1,13 @@
+# macOS stuff
+.DS_Store
+
+# Node stuff
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+
+.env
+
+lerna.log*
+lerna-debug.log*

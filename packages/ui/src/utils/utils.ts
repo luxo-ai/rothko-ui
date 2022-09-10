@@ -1,0 +1,24 @@
+export const debugFactory = (module?: string) => {
+  const canDebug = process.env.NODE_ENV !== 'production' && process.env.DEBUG === '1';
+  return (...argz: (string | object | symbol | number)[]) => {
+    if (canDebug) {
+      console.log(`[aemiko${module ? `:${module}` : ''}]`, ...argz);
+    }
+  };
+};
+
+type ArrLike<T> = {
+  [index: number]: T;
+  length: number;
+};
+
+export const findBy = <T>(arr: ArrLike<T>, pred: (v: T) => boolean) => {
+  for (let i = 0; i < arr.length; i++) {
+    const val = arr[i];
+    if (pred(val)) return val;
+  }
+};
+
+export const parseDecimal = (val: string) => {
+  return parseInt(val, 10);
+};

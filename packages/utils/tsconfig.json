@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "outDir": "dist",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "target": "ES2020",
+    "lib": ["esnext"],
+    "moduleResolution": "node"
+  },
+  "compileOnSave": true,
+  "exclude": ["**/*.spec.ts", "node_modules", "dist"],
+  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx"]
+}
