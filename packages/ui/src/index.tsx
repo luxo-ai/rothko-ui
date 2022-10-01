@@ -13,6 +13,7 @@ export * from './Input';
 export * from './Label';
 export * from './Library/Hooks';
 export * from './Modal';
+export * from './OptionGroup';
 export * from './OrNull';
 export * from './Popup';
 export * from './Skeleton';
@@ -22,6 +23,7 @@ export * from './TabBar';
 export * from './Text';
 export * from './Theme';
 export * from './Tooltip';
+export * from './Radio';
 export type { EmSize, PercentSize, RemSize, ViewportSize } from './types';
 export {
   clearAllBodyScrollLocks,

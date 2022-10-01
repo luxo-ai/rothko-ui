@@ -1,5 +1,4 @@
-type Nil = undefined | null;
-type WithData<Base, DataType> = DataType extends Nil ? Base : Base & { data: DataType };
+type WithData<Base, DataType> = DataType extends undefined ? Base : Base & { data: DataType };
 
 export type Value = string | number;
 export type Option<V, T = undefined> = Readonly<WithData<{ id: V; label: string }, T>>;

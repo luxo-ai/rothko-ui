@@ -1,28 +1,27 @@
-import { disableBodyScroll, enableBodyScroll } from '../utils/domUtils';
+import { CloseOutline } from '@aemiko/icons';
 import clsx from 'clsx';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Icon, ShadedBackdrop } from '../Library/Common';
-import { PhantomButton } from '../Button/PhantomButton';
+import { phantomButtonStyle } from '../Button/PhantomButton';
+import { ShadedBackdrop } from '../Library/Common';
 import { DomPortal } from '../Portal';
+import { BODY_SCROLL_LOCK_IGNORE_ID, disableBodyScroll, enableBodyScroll } from '../utils/domUtils';
 
-type ContainerProps = Pick<
-  React.HTMLProps<HTMLDivElement>,
-  'className' | 'style' | 'id' | 'aria-label'
->;
+type ContainerProps = Pick<React.HTMLProps<HTMLDivElement>, 'className' | 'style' | 'id'>;
 
 type PopupProps = ContainerProps & {
   onClose: () => void;
   isOpen: boolean;
-  children: React.ReactNode
+  children: React.ReactNode;
 };
 
 export const BottomPopup: React.FC<PopupProps> = ({
+  id,
+  style,
   onClose,
   isOpen,
   className,
   children,
-  ...containerProps
 }) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
 
@@ -42,7 +41,7 @@ export const BottomPopup: React.FC<PopupProps> = ({
           // ISSUE w v^4.0.0-beta.0 https://github.com/willmcpo/body-scroll-lock/issues/182
           let runner = el;
           while (runner && runner !== document.body) {
-            if (runner.getAttribute('data-aemiko-body-scroll-lock-ignore') !== null) {
+            if (runner.getAttribute(BODY_SCROLL_LOCK_IGNORE_ID) !== null) {
               return true;
             }
             const { parentElement } = runner;
@@ -62,27 +61,25 @@ export const BottomPopup: React.FC<PopupProps> = ({
   return (
     <DomPortal wrapperId="bottom-popup-portal">
       <ShadedBackdrop onClick={onBackdropClick} className={clsx({ ['backdrop-open']: isOpen })}>
-        <PopupContainer
-          {...containerProps}
+        <PopupContainerDiv
+          id={id}
+          style={style}
           ref={popupRef}
-          className={clsx({ ['popup-open']: isOpen }, 'relative', className)}
+          className={clsx({ ['popup-open']: isOpen }, className)}
         >
-          <PhantomButton
-            type="button"
-            onClick={() => onClose()}
-            style={{ top: 20, right: 32 }}
-            className="absolute"
-          >
-            <Icon.close size="1.75rem" />
-          </PhantomButton>
-          {children}
-        </PopupContainer>
+          <div style={{ position: 'relative' }}>
+            <PopupCloseButton onClick={() => onClose()}>
+              <CloseOutline width="1.75rem" height="1.75rem" />
+            </PopupCloseButton>
+            {children}
+          </div>
+        </PopupContainerDiv>
       </ShadedBackdrop>
     </DomPortal>
   );
 };
 
-const PopupContainer = styled.div`
+const PopupContainerDiv = styled.div`
   border-top-left-radius: 1.5rem;
   border-top-right-radius: 1.5rem;
   background-color: white;
@@ -116,4 +113,11 @@ const PopupContainer = styled.div`
 
     overflow: visible;
   }
+`;
+
+const PopupCloseButton = styled.button.attrs({ type: 'button' })`
+  ${phantomButtonStyle}
+  position: absolute;
+  top: 20px;
+  right: 32px;
 `;

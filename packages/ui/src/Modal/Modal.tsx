@@ -1,4 +1,5 @@
 import { CloseOutline } from '@aemiko/icons';
+import { animated, useTransition } from '@react-spring/web';
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
 import React, { useEffect, useRef } from 'react';
@@ -9,7 +10,13 @@ import { DomPortal } from '../Portal';
 import { BODY_FONT_FAMILY } from '../Text';
 import { textStyle } from '../Text/Text';
 import { AemikoSize } from '../Theme/types';
-import { addEvent, disableBodyScroll, enableBodyScroll, removeEvent } from '../utils/domUtils';
+import {
+  addEvent,
+  disableBodyScroll,
+  enableBodyScroll,
+  removeEvent,
+  BODY_SCROLL_LOCK_IGNORE_ID,
+} from '../utils/domUtils';
 
 const bodyStyleMap: Record<AemikoSize, FlattenSimpleInterpolation> = {
   xs: css`
@@ -64,7 +71,7 @@ const headerStyleMap: Record<AemikoSize, FlattenSimpleInterpolation> = {
   `,
 };
 
-type LimitedDivProps = Pick<React.HTMLProps<HTMLDivElement>, 'id' | 'style' | 'className'>;
+type LimitedDivProps = Pick<React.HTMLProps<HTMLDivElement>, 'id' | 'className'>;
 
 type ModalProps = {
   isOpen: boolean;
@@ -82,7 +89,6 @@ export const Modal = ({
   title,
   className,
   id,
-  style,
 }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -92,10 +98,40 @@ export const Modal = ({
     }
   };
 
+  const transition = useTransition(isOpen, {
+    // delay: 200,
+    from: { opacity: 0.75, transform: 'translate3d(0, 101%, 0)' },
+    enter: { opacity: 1, transform: 'translate3d(0,0,0)' },
+    leave: {
+      immediate: true,
+      opacity: 0.75,
+      transform: 'translate3d(0, 101%, 0)',
+    },
+  });
+
   useEffect(() => {
-    if (isOpen && modalRef.current) {
-      disableBodyScroll(modalRef.current);
-    } else if (modalRef.current) {
+    if (!modalRef.current) return;
+    if (isOpen) {
+      disableBodyScroll(modalRef.current, {
+        allowTouchMove: el => {
+          // Adaption of https://github.com/willmcpo/body-scroll-lock
+          // except we prevent ascending the tree past the container ref
+          // ISSUE w v^4.0.0-beta.0 https://github.com/willmcpo/body-scroll-lock/issues/182
+          let runner = el;
+          while (runner && runner !== document.body) {
+            if (runner.getAttribute(BODY_SCROLL_LOCK_IGNORE_ID) !== null) {
+              return true;
+            }
+            const { parentElement } = runner;
+            if (!parentElement || parentElement.isEqualNode(modalRef.current)) {
+              return false;
+            }
+            runner = parentElement;
+          }
+          return false;
+        },
+      });
+    } else {
       enableBodyScroll(modalRef.current);
     }
   }, [isOpen, modalRef]);
@@ -116,20 +152,25 @@ export const Modal = ({
   return (
     <DomPortal wrapperId={`modal-portal-${size}`}>
       <ModalBackdrop className={clsx({ ['backdrop-open']: isOpen })} onClick={onBackdropClick}>
-        <ModalContainer
-          id={id}
-          style={style}
-          className={clsx(`modal-size-${size}`, { ['modal-open']: isOpen }, className)}
-          ref={modalRef}
-        >
-          <ModalCloseButton onClick={() => onClose()}>
-            <CloseOutline width="1.5rem" height="1.5rem" />
-          </ModalCloseButton>
-          {title && (
-            <ModalHeaderText className={`modal-header-size-${size}`}>{title}</ModalHeaderText>
-          )}
-          {children}
-        </ModalContainer>
+        {transition(
+          (style, item) =>
+            item && (
+              <AnimatedModalContainer
+                id={id}
+                style={style}
+                className={clsx(`modal-size-${size}`, className)}
+                ref={modalRef}
+              >
+                <ModalCloseButton onClick={() => onClose()}>
+                  <CloseOutline width="1.5rem" height="1.5rem" />
+                </ModalCloseButton>
+                {title && (
+                  <ModalHeaderText className={`modal-header-size-${size}`}>{title}</ModalHeaderText>
+                )}
+                {children}
+              </AnimatedModalContainer>
+            )
+        )}
       </ModalBackdrop>
     </DomPortal>
   );
@@ -144,23 +185,13 @@ const ModalContainer = styled.div`
   background: white;
   margin: auto;
   overflow: scroll;
-  // display: none;
   scrollbar-width: thin;
   z-index: 2;
 
-  // opacity: 0;
-  transform: translate3d(0, 101%, 0);
-  transition-property: transform; //, opacity;
-  will-change: transform; //, opacity;
+  will-change: transform;
+  transition-property: transform, opacity;
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
 
-  &.modal-open {
-    // display: block;
-    transform: translate3d(0, 0, 0);
-    //  opacity: 1;
-    transition-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
-    transition-duration: 400ms;
-    // pointer-events: all;
-  }
   ${Object.entries(bodyStyleMap).map(
     ([key, value]) => css`
       &.modal-size-${key} {
@@ -169,6 +200,8 @@ const ModalContainer = styled.div`
     `
   )};
 `;
+
+const AnimatedModalContainer = animated(ModalContainer);
 
 const ModalHeaderText = styled.p`
   ${textStyle}
@@ -183,8 +216,6 @@ const ModalHeaderText = styled.p`
 
 const ModalBackdrop = styled(ShadedBackdrop)`
   -webkit-backface-visibility: hidden;
-  //transition-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
-  //transition-duration: 400ms;
   z-index: 1;
   display: flex;
   padding: 0 1rem;

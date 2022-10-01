@@ -9,6 +9,8 @@ import { parseDecimal } from '../utils';
 import { getStyle, scrollBarWidth } from './dimensions';
 import { addEvent, hasTouches, removeEvent, WithTouches } from './event';
 
+export const BODY_SCROLL_LOCK_IGNORE_ID = 'data-aemiko-body-scroll-lock-ignore';
+
 type IOSPrevStyle = Readonly<{
   position: string;
   top: string;

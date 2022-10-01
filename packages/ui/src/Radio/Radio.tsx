@@ -47,7 +47,7 @@ export const Radio = ({ label, checked, onChange }: RadioProps) => {
   const handleChange = () => onChange(!checked);
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: handleChange });
   return (
-    <div className="flex items-start justify-start">
+    <RadioC>
       <RadioContainer>
         <StyledRadio
           tabIndex={0}
@@ -63,9 +63,16 @@ export const Radio = ({ label, checked, onChange }: RadioProps) => {
         </div>
       </RadioContainer>
       {label && <Text.bodySmall>{label}</Text.bodySmall>}
-    </div>
+    </RadioC>
   );
 };
+
+const RadioC = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+`;
 
 const RadioContainer = styled.div`
   position: relative;
@@ -99,10 +106,10 @@ const StyledRadio = styled.input<ThemedElement>`
   }
 
   &:checked ~ .radio-outer {
-    border-color: ${({ aemikoTheme }) => aemikoTheme['primary-500']};
+    border-color: ${({ aemikoTheme }) => aemikoTheme['info-500']};
 
     > .radio-inner {
-      background-color: ${({ aemikoTheme }) => aemikoTheme['primary-500']};
+      background-color: ${({ aemikoTheme }) => aemikoTheme['info-500']};
     }
   }
 
@@ -116,6 +123,7 @@ const StyledRadio = styled.input<ThemedElement>`
 
   &:focus-visible {
     & ~ .radio-outer {
+      //? was info always
       outline: 1px solid ${({ aemikoTheme }) => aemikoTheme['info-300']};
     }
   }

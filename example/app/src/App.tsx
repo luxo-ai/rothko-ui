@@ -4,16 +4,18 @@ import {
   Alert,
   Avatar,
   BackLinkButton,
+  BottomPopup,
   Button,
   Checkbox,
+  ExpandableLabel,
   GentleImage,
   Input,
   Label,
+  Modal,
+  OptionGroup,
+  Radio,
   SkeletonBoxWithLabel,
   ThemeProvider,
-  ExpandableLabel,
-  Modal,
-  Text,
 } from '@aemiko/ui';
 import { useState } from 'react';
 import './App.css';
@@ -28,6 +30,9 @@ const App = () => {
           <h2>use me to test components</h2>
         </header>
         <main className="example-cards">
+          <RadioCard />
+          <BottomPopupCard />
+          <OptionGroupCard />
           <ModalCard />
           <LabelCard />
           <InputCard />
@@ -217,6 +222,52 @@ const ModalCard = () => {
           Click me to close
         </Button>
       </Modal>
+    </div>
+  );
+};
+
+const OptionGroupCard = () => {
+  const [selectedValue, setSelectedValue] = useState<number | null>(null);
+  return (
+    <div className="white-padded-card">
+      <h3>Option Group</h3>
+      <OptionGroup
+        fillRemainingSpace
+        value={selectedValue}
+        onChange={v => setSelectedValue(v)}
+        kind="info"
+        maxRow={1}
+        maxCol={2}
+        options={[
+          { id: 1, label: 'One' },
+          { id: 2, label: 'Two' },
+          { id: 3, label: 'Three' },
+        ]}
+      />
+    </div>
+  );
+};
+
+const BottomPopupCard = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="white-padded-card">
+      <h3>Bottom Popup</h3>
+      <Button onClick={() => setIsOpen(true)}>Open popup</Button>
+      <BottomPopup isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <div>Hello world</div>
+      </BottomPopup>
+    </div>
+  );
+};
+
+const RadioCard = () => {
+  const [checked1, setChecked1] = useState(false);
+  const [checked2, setChecked2] = useState(false);
+  return (
+    <div className="white-padded-card">
+      <h3>Radio</h3>
+      <Radio checked={checked1} onChange={c => setChecked1(c)} />
     </div>
   );
 };
