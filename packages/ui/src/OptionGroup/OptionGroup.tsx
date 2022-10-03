@@ -3,7 +3,7 @@ import times from 'lodash/times';
 import React, { useEffect, useMemo, useState } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
-import { Option as OptionButton, Value } from '../Elements/Library/types';
+import { Option, Value } from '../Elements/Library/types';
 import { Grid } from '../Grid';
 import { BODY_FONT_FAMILY, Text } from '../Text';
 import { AemikoKind, AemikoSize, CanColor, useKindTheme } from '../Theme';
@@ -13,7 +13,7 @@ type OptionGroupProps<V extends Value> = {
   kind?: AemikoKind;
   size?: AemikoSize;
   value?: V | null;
-  options: OptionButton<V, { disabled?: boolean } | null>[];
+  options: Option<V, { disabled?: boolean } | undefined>[];
   onChange: (id: V) => void;
   onExpand?: () => void;
   maxCol?: number;
@@ -61,7 +61,7 @@ export function OptionGroup<V extends Value>({
     <OptionGroupContainer id={id} style={style} className={className}>
       <Grid flexGrow={1} gridTemplateColumns={`repeat(${maxCol}, 1fr)`} gap={optionGap}>
         {displayableOptions.map(o => {
-          const isDisabled = Boolean(o?.data?.disabled);
+          const isDisabled = 'data' in o && Boolean(o?.data?.disabled);
           const isSelected = o.id === value;
 
           const classObj = {
@@ -130,6 +130,7 @@ const OptionGroupContainer = styled.div`
 `;
 
 const OptionButton = styled.button.attrs({ as: 'button' })<CanColor>`
+  -webkit-tap-highlight-color: transparent;
   ${phantomButtonStyle}
   font-family: ${BODY_FONT_FAMILY.regular};
   display: inline-flex;
@@ -160,19 +161,6 @@ const OptionButton = styled.button.attrs({ as: 'button' })<CanColor>`
       }
     `
   )}
-
-  &:not(.disabled) {
-    :hover,
-    :focus {
-    }
-    :active {
-      &:not(.selected) {
-        background: ${({ themeColorer }) => themeColorer('bg:active')};
-        border-color: ${({ themeColorer }) => themeColorer('bg:active')};
-        color: ${({ themeColorer }) => themeColorer('text')};
-      }
-    }
-  }
 
   &.disabled {
     border-color: ${({ themeColorer }) => themeColorer('bg:disabled')};

@@ -2,9 +2,10 @@ import clsx from 'clsx';
 import { isArray } from 'lodash';
 import React from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
+import { phantomButtonStyle } from '../Button/PhantomButton';
+import { Option, Value } from '../Elements/Library/types';
 import { BODY_FONT_FAMILY, Text } from '../Text';
 import { AemikoKind, AemikoSize, CanColor, useKindTheme } from '../Theme';
-import { Option, Value } from '../Elements/Library/types';
 
 type FilterGroupProps<V extends Value> = {
   kind?: AemikoKind;
@@ -31,48 +32,41 @@ export function FilterGroup<V extends Value>({
   const [themeColorer] = useKindTheme(kind);
   const valueArray: V[] = !!value ? (isArray(value) ? value : [value]) : [];
   const selectedLookup = new Set(valueArray);
-
   return (
-    <>
-      <div id={id} style={style} className={className}>
-        {label && (
-          <Text.labelLite kind="black" className="mb1" style={{ whiteSpace: 'nowrap' }}>
-            {label}
-          </Text.labelLite>
-        )}
-        <div className="flex flex-row">
-          {options.map((o, idx) => {
-            const isFirst = idx === 0;
-            const isLast = idx === options.length - 1;
-            const isSelected = selectedLookup.has(o.id);
+    <div id={id} style={style} className={className}>
+      {label && <FilterText kind="black">{label}</FilterText>}
+      <FilterGroupContainerDiv>
+        {options.map((o, idx) => {
+          const isFirst = idx === 0;
+          const isLast = idx === options.length - 1;
+          const isSelected = selectedLookup.has(o.id);
 
-            const classObj = {
-              selected: isSelected,
-              ['left-curved']: isFirst,
-              ['right-curved']: isLast,
-            } as const;
+          const classObj = {
+            selected: isSelected,
+            ['left-curved']: isFirst,
+            ['right-curved']: isLast,
+          } as const;
 
-            return (
-              <Filter
-                onClick={() => {
-                  if (isSelected) {
-                    const arrValues = valueArray.filter(v => v !== o.id);
-                    onSelect(multible && arrValues.length ? arrValues : null);
-                  } else {
-                    onSelect(multible ? [...valueArray, o.id] : o.id);
-                  }
-                }}
-                themeColorer={themeColorer}
-                key={o.id}
-                className={clsx(classObj, `filt-size-${size}`, 'flex-1')}
-              >
-                {o.label}
-              </Filter>
-            );
-          })}
-        </div>
-      </div>
-    </>
+          return (
+            <FilterButton
+              onClick={() => {
+                if (isSelected) {
+                  const arrValues = valueArray.filter(v => v !== o.id);
+                  onSelect(multible && arrValues.length ? arrValues : null);
+                } else {
+                  onSelect(multible ? [...valueArray, o.id] : o.id);
+                }
+              }}
+              themeColorer={themeColorer}
+              key={o.id}
+              className={clsx(classObj, `filter-size-${size}`)}
+            >
+              {o.label}
+            </FilterButton>
+          );
+        })}
+      </FilterGroupContainerDiv>
+    </div>
   );
 }
 
@@ -113,7 +107,7 @@ const filterBaseStyle = css<CanColor>`
 
   border-top-width: 1px;
   border-bottom-width: 1px;
-  border-right-width: 1px;
+  border-right-width: 0;
   border-left-width: 0;
 
   &.left-curved {
@@ -123,6 +117,7 @@ const filterBaseStyle = css<CanColor>`
   }
 
   &.right-curved {
+    border-right-width: 1px;
     border-top-right-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
   }
@@ -144,22 +139,25 @@ const filterBaseStyle = css<CanColor>`
 
   ${Object.entries(sizeMap).map(
     ([key, value]) => css`
-      &.filt-size-${key} {
+      &.filter-size-${key} {
         ${value}
       }
     `
   )}
-
-  :hover, :focus {
-  }
-  :active {
-    &:not(.selected) {
-      background: ${({ themeColorer }) => themeColorer()};
-      color: ${({ themeColorer }) => themeColorer('text')};
-    }
-  }
 `;
 
-const Filter = styled.div<CanColor>`
+const FilterButton = styled.button<CanColor>`
+  ${phantomButtonStyle}
   ${filterBaseStyle}
+  flex: 1 1 0%;
+`;
+
+const FilterText = styled(Text.labelLite)`
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+`;
+
+const FilterGroupContainerDiv = styled.div`
+  display: flex;
+  flex-direction: row;
 `;

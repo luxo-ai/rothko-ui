@@ -12,10 +12,10 @@ import { textStyle } from '../Text/Text';
 import { AemikoSize } from '../Theme/types';
 import {
   addEvent,
+  BODY_SCROLL_LOCK_IGNORE_ID,
   disableBodyScroll,
   enableBodyScroll,
   removeEvent,
-  BODY_SCROLL_LOCK_IGNORE_ID,
 } from '../utils/domUtils';
 
 const bodyStyleMap: Record<AemikoSize, FlattenSimpleInterpolation> = {
@@ -99,13 +99,18 @@ export const Modal = ({
   };
 
   const transition = useTransition(isOpen, {
-    // delay: 200,
-    from: { opacity: 0.75, transform: 'translate3d(0, 101%, 0)' },
-    enter: { opacity: 1, transform: 'translate3d(0,0,0)' },
+    from: {
+      opacity: 0.75,
+      transform: 'translate3d(0,101%,0)',
+    },
+    enter: {
+      opacity: 1,
+      transform: 'translate3d(0,0,0)',
+    },
     leave: {
       immediate: true,
       opacity: 0.75,
-      transform: 'translate3d(0, 101%, 0)',
+      transform: 'translate3d(0,101%,0)',
     },
   });
 
@@ -176,7 +181,7 @@ export const Modal = ({
   );
 };
 
-const ModalContainer = styled.div`
+const ModalContainerDiv = styled.div`
   border-radius: 0.125rem; // 2px
   -webkit-backface-visibility: hidden;
   width: 100%;
@@ -188,7 +193,7 @@ const ModalContainer = styled.div`
   scrollbar-width: thin;
   z-index: 2;
 
-  will-change: transform;
+  will-change: transform, opacity;
   transition-property: transform, opacity;
   transition-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
 
@@ -201,7 +206,7 @@ const ModalContainer = styled.div`
   )};
 `;
 
-const AnimatedModalContainer = animated(ModalContainer);
+const AnimatedModalContainer = animated(ModalContainerDiv);
 
 const ModalHeaderText = styled.p`
   ${textStyle}

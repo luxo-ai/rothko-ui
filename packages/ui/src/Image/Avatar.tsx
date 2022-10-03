@@ -68,8 +68,10 @@ export const Avatar = ({
           onLoad={({ currentTarget: ct }) => {
             setImgDim({ width: ct.naturalWidth, height: ct.naturalHeight });
           }}
-          width={imgDim.width <= imgDim.height ? sizePx : undefined}
-          height={imgDim.height <= imgDim.width ? sizePx : undefined}
+          width={sizePx}
+          height={sizePx}
+          // width={imgDim.width <= imgDim.height ? sizePx : undefined}
+          // height={imgDim.height <= imgDim.width ? sizePx : undefined}
         />
       ) : (
         /* make this work according to the size */

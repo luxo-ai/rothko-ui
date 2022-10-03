@@ -8,7 +8,6 @@ import {
   Button,
   Checkbox,
   ExpandableLabel,
-  GentleImage,
   Input,
   Label,
   Modal,
@@ -16,6 +15,8 @@ import {
   Radio,
   SkeletonBoxWithLabel,
   ThemeProvider,
+  FilterGroup,
+  Tag,
 } from '@aemiko/ui';
 import { useState } from 'react';
 import './App.css';
@@ -30,13 +31,13 @@ const App = () => {
           <h2>use me to test components</h2>
         </header>
         <main className="example-cards">
+          <FilterGroupCard />
           <RadioCard />
           <BottomPopupCard />
           <OptionGroupCard />
           <ModalCard />
           <LabelCard />
           <InputCard />
-          <GentleImageCard />
           <CheckboxCard />
           <AlertCard />
           <AccordionCard />
@@ -45,6 +46,28 @@ const App = () => {
         </main>
       </div>
     </ThemeProvider>
+  );
+};
+
+const FilterGroupCard = () => {
+  const [selectedValue, setSelectedValue] = useState<number[]>([]);
+  return (
+    <div className="white-padded-card">
+      <h3>Filter Group</h3>
+      <div className="accordion-container">
+        <FilterGroup
+          kind="info"
+          value={selectedValue}
+          multible
+          options={[
+            { id: 1, label: 'One' },
+            { id: 2, label: 'Two' },
+            { id: 3, label: 'Three' },
+          ]}
+          onSelect={ids => setSelectedValue(ids as number[])}
+        />
+      </div>
+    </div>
   );
 };
 
@@ -166,24 +189,6 @@ const CheckboxCard = () => {
   );
 };
 
-const GentleImageCard = () => {
-  const [reloadCount, setReloadCount] = useState(0);
-  return (
-    <div className="white-padded-card">
-      <h3>Gentle Image</h3>
-      <Button onClick={() => setReloadCount(c => c + 1)}>Reload</Button>
-      <GentleImage
-        // in order to force reload
-        key={`gentle-image-${reloadCount}`}
-        width={300}
-        height={300}
-        alt="dog"
-        src="assets/dog.png"
-      />
-    </div>
-  );
-};
-
 const InputCard = () => {
   return (
     <div className="white-padded-card">
@@ -241,7 +246,7 @@ const OptionGroupCard = () => {
         options={[
           { id: 1, label: 'One' },
           { id: 2, label: 'Two' },
-          { id: 3, label: 'Three' },
+          { id: 3, label: 'Three', data: { disabled: true } },
         ]}
       />
     </div>

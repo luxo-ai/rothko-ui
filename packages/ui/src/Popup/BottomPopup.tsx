@@ -1,4 +1,5 @@
 import { CloseOutline } from '@aemiko/icons';
+import { animated, useTransition } from '@react-spring/web';
 import clsx from 'clsx';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
@@ -7,7 +8,7 @@ import { ShadedBackdrop } from '../Library/Common';
 import { DomPortal } from '../Portal';
 import { BODY_SCROLL_LOCK_IGNORE_ID, disableBodyScroll, enableBodyScroll } from '../utils/domUtils';
 
-type ContainerProps = Pick<React.HTMLProps<HTMLDivElement>, 'className' | 'style' | 'id'>;
+type ContainerProps = Pick<React.HTMLProps<HTMLDivElement>, 'className' | 'id'>;
 
 type PopupProps = ContainerProps & {
   onClose: () => void;
@@ -15,14 +16,7 @@ type PopupProps = ContainerProps & {
   children: React.ReactNode;
 };
 
-export const BottomPopup: React.FC<PopupProps> = ({
-  id,
-  style,
-  onClose,
-  isOpen,
-  className,
-  children,
-}) => {
+export const BottomPopup: React.FC<PopupProps> = ({ id, onClose, isOpen, className, children }) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
 
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -30,6 +24,28 @@ export const BottomPopup: React.FC<PopupProps> = ({
       onClose();
     }
   };
+
+  const transition = useTransition(isOpen, {
+    from: {
+      opacity: 0.75,
+      height: 0,
+      overflow: 'hidden',
+      transform: 'translate3d(0,101%,0)',
+    },
+    enter: {
+      opacity: 1,
+      height: 'auto',
+      overflow: 'visible',
+      transform: 'translate3d(0,0,0)',
+    },
+    leave: {
+      immediate: true,
+      opacity: 0.75,
+      height: 0,
+      overflow: 'hidden',
+      transform: 'translate3d(0,101%,0)',
+    },
+  });
 
   useEffect(() => {
     if (!popupRef.current) return;
@@ -61,19 +77,19 @@ export const BottomPopup: React.FC<PopupProps> = ({
   return (
     <DomPortal wrapperId="bottom-popup-portal">
       <ShadedBackdrop onClick={onBackdropClick} className={clsx({ ['backdrop-open']: isOpen })}>
-        <PopupContainerDiv
-          id={id}
-          style={style}
-          ref={popupRef}
-          className={clsx({ ['popup-open']: isOpen }, className)}
-        >
-          <div style={{ position: 'relative' }}>
-            <PopupCloseButton onClick={() => onClose()}>
-              <CloseOutline width="1.75rem" height="1.75rem" />
-            </PopupCloseButton>
-            {children}
-          </div>
-        </PopupContainerDiv>
+        {transition(
+          (style, item) =>
+            item && (
+              <div style={{ position: 'relative' }}>
+                <AnimatedPopupContainer id={id} style={style} ref={popupRef} className={className}>
+                  <PopupCloseButton onClick={() => onClose()}>
+                    <CloseOutline width="1.75rem" height="1.75rem" />
+                  </PopupCloseButton>
+                  {children}
+                </AnimatedPopupContainer>
+              </div>
+            )
+        )}
       </ShadedBackdrop>
     </DomPortal>
   );
@@ -92,17 +108,12 @@ const PopupContainerDiv = styled.div`
   height: 0;
   overflow: hidden;
 
-  -webkit-transform: translateY(100%);
-  -moz-transform: translateY(100%);
-  -ms-transform: translateY(100%);
-  transform: translateY(100%);
+  will-change: transform, opacity, height;
+  transition-property: transform;
+  transition-timing-function: ease-out;
 
-  -webkit-transition: transform 450ms ease-out;
-  -moz-transition: transform 450ms ease-out;
-  -ms-transition: transform 450ms ease-out;
-  transition: transform 450ms ease-out;
-
-  &.popup-open {
+  /*  
+  &.popup-open-old {
     height: auto;
     max-height: 100%;
 
@@ -113,11 +124,14 @@ const PopupContainerDiv = styled.div`
 
     overflow: visible;
   }
+  */
 `;
+
+const AnimatedPopupContainer = animated(PopupContainerDiv);
 
 const PopupCloseButton = styled.button.attrs({ type: 'button' })`
   ${phantomButtonStyle}
   position: absolute;
-  top: 20px;
-  right: 32px;
+  top: 14px;
+  right: 16px;
 `;
