@@ -31,6 +31,7 @@ const App = () => {
           <h2>use me to test components</h2>
         </header>
         <main className="example-cards">
+          <TagCard />
           <FilterGroupCard />
           <RadioCard />
           <BottomPopupCard />
@@ -46,6 +47,25 @@ const App = () => {
         </main>
       </div>
     </ThemeProvider>
+  );
+};
+
+const TagCard = () => {
+  return (
+    <div className="white-padded-card">
+      <h3>Tag</h3>
+      <div className="accordion-container">
+        <Tag
+          onClose={() => {
+            console.log('ayo');
+          }}
+          appearance="outline"
+          kind="danger"
+        >
+          my first tag
+        </Tag>
+      </div>
+    </div>
   );
 };
 
