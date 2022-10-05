@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { phantomButtonStyle } from '../Button/PhantomButton';
 import { AemikoKind, GreyScale, greyScale, theme, Theme } from '../Theme';
 import { BODY_FONT_FAMILY, HEADER_FONT_FAMILY } from './common';
 
@@ -46,10 +47,15 @@ export const linkStyle = css<TextProps>`
   text-decoration: none;
   color: ${({ kind = 'info' }) => getTextColor(kind)};
 
+  &.underline {
+    text-decoration: underline;
+  }
+
   :hover:not(:disabled) {
     cursor: pointer;
     text-decoration: underline;
   }
+
   :disabled {
     color: ${theme['basic-500']};
   }
@@ -178,4 +184,9 @@ export const labelLite = styled(body)`
 
 export const externalLink = styled.a<TextProps>`
   ${linkStyle};
+`;
+
+export const linkButton = styled.button<TextProps>`
+  ${phantomButtonStyle}
+  ${linkStyle}
 `;

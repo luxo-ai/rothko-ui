@@ -1,14 +1,13 @@
 import { CloseOutline } from '@aemiko/icons';
 import React from 'react';
 import styled from 'styled-components';
-import { PhantomButton, phantomButtonStyle } from '../Button/PhantomButton';
+import { phantomButtonStyle } from '../Button/PhantomButton';
 import { CanColor, useKindTheme } from '../Theme';
 import { AemikoKind, GreyScale } from '../Theme/types';
 
 type Appearance = 'filled' | 'outline';
 
 type TagProps = {
-  /** the semantic kind of the button */
   kind?: AemikoKind | GreyScale;
   appearance?: Appearance;
   children?: React.ReactNode;

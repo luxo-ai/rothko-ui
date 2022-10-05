@@ -1,1 +1,1 @@
-export { BreadCrumbs } from './BreadCrumbs';
+export { BreadCrumbItem, BreadCrumbs } from './BreadCrumbs';

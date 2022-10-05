@@ -5,48 +5,90 @@ import {
   Avatar,
   BackLinkButton,
   BottomPopup,
+  BreadCrumbItem,
+  BreadCrumbs,
   Button,
   Checkbox,
   ExpandableLabel,
+  FilterGroup,
   Input,
   Label,
   Modal,
   OptionGroup,
   Radio,
   SkeletonBoxWithLabel,
-  ThemeProvider,
-  FilterGroup,
   Tag,
+  ThemeProvider,
+  ToastContextProvider,
+  useToaster,
 } from '@aemiko/ui';
 import { useState } from 'react';
 import './App.css';
+import * as lorem from 'lorem-ipsum';
 
 // linear-gradient(0.25turn, #9198e5, #e66465)
 
 const App = () => {
   return (
     <ThemeProvider>
-      <div className="app-container">
-        <header className="app-header">
-          <h2>use me to test components</h2>
-        </header>
-        <main className="example-cards">
-          <TagCard />
-          <FilterGroupCard />
-          <RadioCard />
-          <BottomPopupCard />
-          <OptionGroupCard />
-          <ModalCard />
-          <LabelCard />
-          <InputCard />
-          <CheckboxCard />
-          <AlertCard />
-          <AccordionCard />
-          <AvatarCard />
-          <ButtonCard />
-        </main>
-      </div>
+      <ToastContextProvider>
+        <div className="app-container">
+          <header className="app-header">
+            <h2>use me to test components</h2>
+          </header>
+          <main className="example-cards">
+            <ToastCard />
+            <BreadCrumbsCard />
+            <TagCard />
+            <FilterGroupCard />
+            <RadioCard />
+            <BottomPopupCard />
+            <OptionGroupCard />
+            <ModalCard />
+            <LabelCard />
+            <InputCard />
+            <CheckboxCard />
+            <AlertCard />
+            <AccordionCard />
+            <AvatarCard />
+            <ButtonCard />
+          </main>
+        </div>
+      </ToastContextProvider>
     </ThemeProvider>
+  );
+};
+
+const ToastCard = () => {
+  const { addToast } = useToaster();
+  return (
+    <div className="white-padded-card">
+      <h3>Toasts</h3>
+      <div className="accordion-container">
+        <button
+          onClick={() => {
+            addToast({ label: lorem.loremIpsum({ count: 4 }) });
+          }}
+        >
+          Click
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const BreadCrumbsCard = () => {
+  return (
+    <div className="white-padded-card">
+      <h3>Bread Crumbs</h3>
+      <div className="accordion-container">
+        <BreadCrumbs>
+          <BreadCrumbItem to="ok">One</BreadCrumbItem>
+          <BreadCrumbItem onClick={() => console.log('ok')}>Two</BreadCrumbItem>
+          <BreadCrumbItem>Three</BreadCrumbItem>
+        </BreadCrumbs>
+      </div>
+    </div>
   );
 };
 
@@ -59,7 +101,7 @@ const TagCard = () => {
           onClose={() => {
             console.log('ayo');
           }}
-          appearance="outline"
+          appearance="filled"
           kind="danger"
         >
           my first tag
