@@ -1,7 +1,9 @@
-import React, { createContext, useMemo, useCallback, useContext, useState } from 'react';
+import { CloseOutline } from '@aemiko/icons';
+import { animated, useTransition } from '@react-spring/web';
+import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import uuid from 'uuid';
-import { useTransition, animated } from '@react-spring/web';
+import { PhantomButton } from '../Button/PhantomButton';
 
 type Toast = {
   label?: React.ReactNode;
@@ -33,7 +35,6 @@ type ToastContextProviderProps = {
 export const ToastContextProvider = ({ children }: ToastContextProviderProps) => {
   const refMap = useMemo(() => new WeakMap(), []);
   const cancelMap = useMemo(() => new WeakMap(), []);
-
   const [toasts, setToasts] = useState<(Toast & { key: ToastKey })[]>([]);
 
   const addToast = useCallback(
@@ -64,14 +65,10 @@ export const ToastContextProvider = ({ children }: ToastContextProviderProps) =>
       await next({ life: '0%' });
     },
     leave: [{ opacity: 0 }, { height: 0 }],
-    onRest: (result, ctrl, toast) => {
-      setToasts(state =>
-        state.filter(i => {
-          return i.key !== toast.key;
-        })
-      );
+    onRest: (_result, _ctrl, toast) => {
+      setToasts(state => state.filter(i => i.key !== toast.key));
     },
-    config: (toast, index, phase) => key =>
+    config: (_toast, _index, phase) => key =>
       phase === 'enter' && key === 'life' ? { duration: timeout } : config,
   });
 
@@ -81,18 +78,21 @@ export const ToastContextProvider = ({ children }: ToastContextProviderProps) =>
       <ToastsContainerDiv id="toaster">
         {transitions(({ life, ...style }, toast) => (
           <ToastContainerDiv style={style} key={toast.key}>
+            <Life style={{ right: life }} />
+            <PhantomButton
+              style={{ position: 'absolute', top: 10, right: 10 }}
+              onClick={e => {
+                e.stopPropagation();
+                if (cancelMap.has(toast) && life.get() !== '0%') {
+                  cancelMap.get(toast)();
+                }
+              }}
+            >
+              <CloseOutline width={16} height={16} />
+            </PhantomButton>
             <Content ref={(ref: HTMLDivElement) => ref && refMap.set(toast, ref)}>
-              <Life style={{ right: life }} />
               {toast.label && <p>{toast.label}</p>}
               {toast.content && <p>{toast.content}</p>}
-              <button
-                onClick={e => {
-                  e.stopPropagation();
-                  if (cancelMap.has(toast) && life.get() !== '0%') cancelMap.get(toast)();
-                }}
-              >
-                cancel
-              </button>
             </Content>
           </ToastContainerDiv>
         ))}
@@ -113,7 +113,7 @@ const ToastsContainerDiv = styled.div`
 `;
 
 const ToastContainerDiv = styled(animated.div)`
-  padding: 0.75rem;
+  margin: auto;
   border-radius: 0.125rem;
   border: 1px solid black;
   background: white;
@@ -121,35 +121,16 @@ const ToastContainerDiv = styled(animated.div)`
   & > p {
     margin: 0;
   }
+  position: relative;
 `;
-//  ref={(ref: HTMLDivElement) => ref && refMap.set(toast, ref)}
+
 const Content = styled.div`
-  color: white;
-  background: #445159;
-  opacity: 0.9;
-  padding: 12px 22px;
-  font-size: 1em;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-gap: 10px;
+  padding: 1rem;
   overflow: hidden;
   height: auto;
-  border-radius: 3px;
-  margin-top: 10px;
-  position: relative;
 `;
 
-export const Message = styled(animated.div)`
-  box-sizing: border-box;
-  position: relative;
-  overflow: hidden;
-  width: 40ch;
-  @media (max-width: 680px) {
-    width: 100%;
-  }
-`;
-
-export const Life = styled(animated.div)`
+const Life = styled(animated.div)`
   position: absolute;
   bottom: 0;
   left: 0px;
