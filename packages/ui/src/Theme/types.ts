@@ -8,7 +8,7 @@ type ColorName = SemanticName | BrandName;
 type LightnessKey = Lightness | TransparentLightness;
 type ThemeKey = `${ColorName}-${LightnessKey}`;
 
-type State = 'focus' | 'hover' | 'active' | 'disabled';
+type State = 'focus' | 'hover' | 'active' | 'disabled' | 'transparent';
 type Colorable = 'text' | 'bg' | 'border';
 
 export type HexColor = `#${string}`;

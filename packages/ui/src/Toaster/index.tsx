@@ -1,1 +1,2 @@
-export { ToastContextProvider, useToaster } from './Toaster';
+export { Toast } from './Toaster';
+export { ToastContextProvider, useToaster } from './ToasterContext';

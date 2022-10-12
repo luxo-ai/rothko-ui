@@ -1,16 +1,16 @@
+import { CloseOutline } from '@aemiko/icons';
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import styled from 'styled-components';
-import { Icon } from '../../Library/Common';
 import { PhantomButton } from '../../Button/PhantomButton';
 import { DomPortal } from '../../Portal';
 import { addEvent, disableBodyScroll, enableBodyScroll, removeEvent } from '../../utils/domUtils';
+import { directionMap } from '../../utils/keyUtils';
 import { debugFactory } from '../../utils/utils';
 import { DefaultRenderOption } from '../Library/RenderOption';
 import { FocusHandler, Option, RenderOption, Value } from '../Library/types';
 import useMenu from '../Library/useMenu';
-import { directionMap } from '../../utils/keyUtils';
 import { DummySearchBar, SearchBar } from './SearchBar';
 import { OptionFetcher, useSearch } from './useSearch';
 
@@ -297,7 +297,7 @@ export const FullScreen = ({ isOpen, onClose, children, header }: FullProps) => 
              * with the header icon
              */}
             <PhantomButton onClick={() => onCloseLocal()} className="nb1">
-              <Icon.close size="2rem" />
+              <CloseOutline width="2rem" height="2rem" />
             </PhantomButton>
             {header && (
               <>

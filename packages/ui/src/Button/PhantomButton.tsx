@@ -10,6 +10,9 @@ export const phantomButtonStyle = css`
   padding: 0;
   cursor: pointer;
   z-index: 1;
+  &.db {
+    display: block;
+  }
 `;
 
 export const PhantomButton = styled.button`

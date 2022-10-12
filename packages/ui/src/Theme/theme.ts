@@ -29,9 +29,11 @@ export const lightnessMap: LightnessMap = {
   'bg:active': 600,
   'bg:focus': 600,
   'bg:disabled': 'transparent-500',
+  'bg:transparent': 'transparent-300',
   'bg:hover': 600,
   'border:active': 500,
   'border:focus': 500,
+  'border:transparent': 'transparent-300',
   'border:disabled': 'transparent-500',
   'border:hover': 500,
 };

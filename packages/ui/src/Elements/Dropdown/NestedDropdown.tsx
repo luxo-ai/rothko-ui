@@ -1,17 +1,17 @@
+import { ChevronDownOutline } from '@aemiko/icons';
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
 import isNil from 'lodash/isNil';
 import React, { useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { BackLinkButton } from '../../Button/BackLinkButton';
-import { Icon } from '../../Library/Common';
 import { Text } from '../../Text';
 import { useTheme } from '../../Theme';
+import { directionMap } from '../../utils/keyUtils';
 import { debugFactory } from '../../utils/utils';
 import { DefaultRenderOption } from '../Library/RenderOption';
 import { FocusHandler, NestedOption, Option, RenderOption, Value } from '../Library/types';
 import useMenu from '../Library/useMenu';
-import { directionMap } from '../../utils/keyUtils';
 import {
   ControlContainer,
   DropdownContainer,
@@ -191,7 +191,7 @@ export function NestedDropdown<V extends Value, T = undefined>({
           )}
         </TextContainer>
         <ControlContainer className={clsx({ open, disabled })} onClick={toggleMenu}>
-          <Icon.chevronDown size="1rem" />
+          <ChevronDownOutline width="1rem" height="1rem" />
         </ControlContainer>
         {open && (
           <DropdownMenu

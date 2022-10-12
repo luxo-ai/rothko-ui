@@ -21,6 +21,7 @@ import {
   ThemeProvider,
   ToastContextProvider,
   useToaster,
+  Toast,
 } from '@aemiko/ui';
 import { useState } from 'react';
 import './App.css';
@@ -67,7 +68,12 @@ const ToastCard = () => {
       <div className="accordion-container">
         <button
           onClick={() => {
-            addToast({ label: lorem.loremIpsum({ count: 4 }) });
+            addToast({
+              label: lorem.loremIpsum({ count: 1 }),
+              content: lorem.loremIpsum({ count: 3 }),
+              withLife: true,
+              kind: 'danger',
+            });
           }}
         >
           Click

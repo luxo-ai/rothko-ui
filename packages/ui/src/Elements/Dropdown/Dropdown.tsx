@@ -1,19 +1,19 @@
+import { ChevronDownOutline, CloseOutline } from '@aemiko/icons';
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
 import isArray from 'lodash/isArray';
 import isNil from 'lodash/isNil';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Icon } from '../../Library/Common';
 import { PhantomButton } from '../../Button/PhantomButton';
 import { Text } from '../../Text';
 import { useTheme } from '../../Theme';
 import { ThemedElement } from '../../Theme/types';
+import { directionMap } from '../../utils/keyUtils';
 import { debugFactory } from '../../utils/utils';
 import { DefaultRenderOption } from '../Library/RenderOption';
 import { FocusHandler, Option, RenderOption, Value } from '../Library/types';
 import useMenu from '../Library/useMenu';
-import { directionMap } from '../../utils/keyUtils';
 import {
   ControlContainer,
   DropdownContainer,
@@ -301,11 +301,11 @@ export function Dropdown<V extends Value, T = undefined>({
         </TextContainer>
         {!canClear ? (
           <ControlContainer className={clsx({ open, disabled })} onClick={toggleMenu}>
-            <Icon.chevronDown size="1rem" />
+            <ChevronDownOutline width="1rem" height="1rem" />
           </ControlContainer>
         ) : (
           <ControlContainer className="open" onClick={() => onSelectHandler(null)}>
-            <Icon.close size="1.2rem" />
+            <CloseOutline width="1.2rem" height="1.2rem" />
           </ControlContainer>
         )}
         {open && (

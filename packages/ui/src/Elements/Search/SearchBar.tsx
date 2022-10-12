@@ -1,8 +1,8 @@
+import { SearchOutline } from '@aemiko/icons';
 import { Nullable } from '@aemiko/utils';
 import clsx from 'clsx';
 import React, { useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
-import { Icon } from '../../Library/Common';
 import { PhantomButton } from '../../Button/PhantomButton';
 import { hideBrowserOutline } from '../../Text';
 import { BODY_FONT_FAMILY } from '../../Text/common';
@@ -111,7 +111,7 @@ const SearchButton = ({ onClick, disabled }: SearchButtonProps) => {
   const { theme } = useTheme();
   return (
     <SearchButtonBase type="submit" aemikoTheme={theme} disabled={disabled} onClick={onClick}>
-      <Icon.search size="1.5rem" />
+      <SearchOutline width="1.5rem" height="1.5rem" />
     </SearchButtonBase>
   );
 };
