@@ -1,8 +1,8 @@
 {
-  "name": "tbd-monorepo",
+  "name": "tbd",
   "repository": "git@github.com:amikos-software/verde.git",
   "author": "luxo-ai <luxo.ai@proton.me>",
-  "private": true,
+  "private": false,
   "scripts": {
     "add:all": "lerna add",
     "add:example": "lerna add $1 --scope=app",
