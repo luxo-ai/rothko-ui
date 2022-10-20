@@ -2,7 +2,7 @@ import capitalize from 'lodash/capitalize';
 import compact from 'lodash/compact';
 import flatten from 'lodash/flatten';
 import isNil from 'lodash/isNil';
-import { Nullable } from './types';
+import type { Nullable } from './types';
 
 export * from './hooks';
 export * from './types';
