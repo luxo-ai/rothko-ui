@@ -177,7 +177,6 @@ const SingleDropdownCard = () => {
       <h3>Single Dropdown</h3>
       <div className="accordion-container">
         <Dropdown
-          search
           value={selectedValue}
           onChange={v => setSelectedValue(v as number[])}
           options={[
