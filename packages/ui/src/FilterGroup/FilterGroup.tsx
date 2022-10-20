@@ -3,7 +3,7 @@ import { isArray } from 'lodash';
 import React from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
-import { Option, Value } from '../Elements/Library/types';
+import { Option, Value } from '../Library/types';
 import { BODY_FONT_FAMILY, Text } from '../Text';
 import { AemikoKind, AemikoSize, CanColor, useKindTheme } from '../Theme';
 

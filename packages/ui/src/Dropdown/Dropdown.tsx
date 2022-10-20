@@ -5,15 +5,15 @@ import isArray from 'lodash/isArray';
 import isNil from 'lodash/isNil';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { PhantomButton } from '../../Button/PhantomButton';
-import { Text } from '../../Text';
-import { useTheme } from '../../Theme';
-import { ThemedElement } from '../../Theme/types';
-import { directionMap } from '../../utils/keyUtils';
-import { debugFactory } from '../../utils/utils';
+import { PhantomButton } from '../Button/PhantomButton';
+import { Text } from '../Text';
+import { useTheme } from '../Theme';
+import { ThemedElement } from '../Theme/types';
+import { directionMap } from '../utils/keyUtils';
+import { debugFactory } from '../utils/utils';
 import { DefaultRenderOption } from '../Library/RenderOption';
 import { FocusHandler, Option, RenderOption, Value } from '../Library/types';
-import useMenu from '../Library/useMenu';
+import useMenu from '../Library/Hooks/useMenu';
 import {
   ControlContainer,
   DropdownContainer,
@@ -21,6 +21,7 @@ import {
   ItemText,
   PhantomInput,
   TextContainer,
+  LabelText,
 } from './Common';
 import { QueryMatchFn } from './types';
 import useSelect from './useSelect';
@@ -225,11 +226,7 @@ export function Dropdown<V extends Value, T = undefined>({
 
   return (
     <div className={className}>
-      {label && (
-        <Text.labelLite kind="black" className="mb1">
-          {label}
-        </Text.labelLite>
-      )}
+      {label && <LabelText kind="black">{label}</LabelText>}
       <DropdownContainer
         ref={containerRef}
         tabIndex={0}
@@ -257,7 +254,7 @@ export function Dropdown<V extends Value, T = undefined>({
             <ItemText className="placeholder">{placeholder}</ItemText>
           )}
           {!isNil(value) && isArray(value) && (
-            <MultiSelectContainer>
+            <MultiSelectContainerDiv>
               {value.map(v => {
                 const opt = optionLookup[v];
                 return (
@@ -269,7 +266,7 @@ export function Dropdown<V extends Value, T = undefined>({
                   >
                     <RenderOpt option={opt} />
                     <PhantomButton
-                      style={{ marginBottom: -1 }}
+                      style={{ marginBottom: -3 }}
                       type="button"
                       tabIndex={-1}
                       onClick={() => {
@@ -277,20 +274,12 @@ export function Dropdown<V extends Value, T = undefined>({
                         containerRef.current?.focus();
                       }}
                     >
-                      <svg
-                        fill="#281D75'"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        width="18"
-                        height="18"
-                      >
-                        <path d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z" />
-                      </svg>
+                      <CloseOutline fill="#281D75" width={16} height={16} />
                     </PhantomButton>
                   </MultiSelectItem>
                 );
               })}
-            </MultiSelectContainer>
+            </MultiSelectContainerDiv>
           )}
           {!multiple && !isNil(value) && !isArray(value) && (
             <ItemText>
@@ -317,7 +306,7 @@ export function Dropdown<V extends Value, T = undefined>({
             data-aemiko-body-scroll-lock-ignore
           >
             {!hasOptions ? (
-              <ItemText className="pa3 tc">{noResultsMessage}</ItemText>
+              <NoResultsText>{noResultsMessage}</NoResultsText>
             ) : (
               <ul role="listbox" tabIndex={-1}>
                 {options.map((option, idx) => {
@@ -350,7 +339,7 @@ export function Dropdown<V extends Value, T = undefined>({
   );
 }
 
-const MultiSelectContainer = styled.div`
+const MultiSelectContainerDiv = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -363,7 +352,8 @@ const MultiSelectItem = styled.div<ThemedElement>`
   flex-direction: row;
   gap: 0.125rem;
   align-items: center;
-  padding: 0.125rem 0.3rem 0.125rem 0.5rem;
+  padding: 0.0625rem 0.3rem 0.0625rem 0.5rem;
+  // padding: 0.125rem 0.3rem 0.125rem 0.5rem;
   // margin: 0 0.25rem;
   background-color: ${({ aemikoTheme }) => aemikoTheme['info-transparent-100']};
   border: 1px solid ${({ aemikoTheme }) => aemikoTheme['info-500']};
@@ -372,4 +362,9 @@ const MultiSelectItem = styled.div<ThemedElement>`
   }
   border-radius: 3.25rem; // 0.25rem;
   cursor: initial;
+`;
+
+const NoResultsText = styled(ItemText)`
+  text-align: center;
+  padding: 1rem;
 `;

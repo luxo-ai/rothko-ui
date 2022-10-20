@@ -5,7 +5,7 @@ import React from 'react';
 import { Controller, RegisterOptions, useFormContext } from 'react-hook-form';
 // import InputMask from 'react-input-mask';
 import { Checkbox } from '../Checkbox';
-import { Dropdown } from '../Elements/Dropdown';
+import { Dropdown } from '../Dropdown';
 import { FormControl, FormControlProps } from './FormControl';
 // import { validatePhoneNumber } from './FormValidators';
 import { Input, InputProps, Textarea, TextareaProps } from '../Input';

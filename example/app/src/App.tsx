@@ -22,6 +22,10 @@ import {
   ToastContextProvider,
   useToaster,
   Toast,
+  Dropdown,
+  NestedDropdown,
+  Search,
+  Text,
 } from '@aemiko/ui';
 import { useState } from 'react';
 import './App.css';
@@ -38,6 +42,10 @@ const App = () => {
             <h2>use me to test components</h2>
           </header>
           <main className="example-cards">
+            <NestedDropdownCard />
+            <SearchCard />
+            <SingleDropdownCard />
+            <MultiDropdownCard />
             <ToastCard />
             <BreadCrumbsCard />
             <TagCard />
@@ -60,6 +68,138 @@ const App = () => {
   );
 };
 
+const NestedDropdownCard = () => {
+  const [singleVal, setSingleVal] = useState<string | null>(null);
+  return (
+    <div className="white-padded-card">
+      <h3>NestedDropdown</h3>
+      <div className="accordion-container">
+        <NestedDropdown value={singleVal} onChange={v => setSingleVal(v)} options={nestedOptions} />
+      </div>
+    </div>
+  );
+};
+
+const nestedOptions = [
+  {
+    id: '0',
+    label: 'Sub',
+    subcategories: [
+      {
+        id: '01',
+        label: 'Sub-One',
+      },
+      {
+        id: '02',
+        label: 'Sub-Two',
+      },
+      { id: '03', label: 'Sub-Three' },
+    ],
+  },
+  {
+    id: '1',
+    label: 'Two',
+  },
+  {
+    id: '2',
+    label: 'Three',
+  },
+];
+
+const getBooks = async (q: string) => {
+  const books = await fetch(`http://openlibrary.org/search.json?q=${q}`);
+  const j = await books.json();
+  console.log('ayo', j);
+  return (j.docs as any[]).map((x, i) => ({ id: `${i}-${x.title}`, label: x.title }));
+};
+
+const SearchCard = () => {
+  return (
+    <div className="white-padded-card">
+      <h3>Search</h3>
+      <div className="accordion-container">
+        <Search
+          onSearch={q => console.log('?', q)}
+          placeholder="Search..."
+          dataFetcher={getBooks}
+        />
+      </div>
+    </div>
+  );
+};
+
+const MultiDropdownCard = () => {
+  const [singleVal, setSingleVal] = useState<number>();
+  return (
+    <div className="white-padded-card">
+      <h3>Multi Dropdown</h3>
+      <div className="accordion-container">
+        <Dropdown
+          multiple
+          value={singleVal}
+          onChange={v => setSingleVal(v as number)}
+          options={[
+            {
+              id: 0,
+              label: 'Zero',
+            },
+            {
+              id: 1,
+              label: 'One',
+            },
+            {
+              id: 2,
+              label: 'Two',
+            },
+            {
+              id: 3,
+              label: 'Three',
+            },
+            {
+              id: 4,
+              label: 'Four',
+            },
+            {
+              id: 5,
+              label: 'Five',
+            },
+          ]}
+        />
+      </div>
+    </div>
+  );
+};
+
+const SingleDropdownCard = () => {
+  const [selectedValue, setSelectedValue] = useState<number[]>([]);
+  return (
+    <div className="white-padded-card">
+      <h3>Single Dropdown</h3>
+      <div className="accordion-container">
+        <Dropdown
+          search
+          value={selectedValue}
+          onChange={v => setSelectedValue(v as number[])}
+          options={[
+            {
+              id: 0,
+              label: 'Zero',
+            },
+            {
+              id: 1,
+              label: 'One',
+            },
+            {
+              id: 2,
+              label: 'Two',
+            },
+          ]}
+        />
+      </div>
+    </div>
+  );
+};
+
 const ToastCard = () => {
   const { addToast } = useToaster();
   return (
@@ -72,7 +212,8 @@ const ToastCard = () => {
               label: lorem.loremIpsum({ count: 1 }),
               content: lorem.loremIpsum({ count: 3 }),
               withLife: true,
-              kind: 'danger',
+              kind: 'warning',
+              duration: Math.random() * 3000 + 9000,
             });
           }}
         >

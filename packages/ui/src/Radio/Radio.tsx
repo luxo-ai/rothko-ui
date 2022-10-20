@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Text } from '../Text';
 import { useTheme } from '../Theme';
 import { ThemedElement } from '../Theme/types';
-import { Option, Value } from '../Elements/Library/types';
+import { Option, Value } from '../Library/types';
 import { keyDownFactory } from '../utils/keyUtils';
 
 type RadioProps = {

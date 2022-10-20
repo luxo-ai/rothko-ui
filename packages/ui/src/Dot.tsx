@@ -16,13 +16,13 @@ type DotProps = {
 export const Dot = React.forwardRef<HTMLDivElement, DotProps>(
   ({ size, kind = 'primary', ...style }, ref) => {
     const [colorer] = useKindTheme(kind);
-    return <DotEl ref={ref} themeColorer={colorer} size={size} style={style} />;
+    return <DotDiv ref={ref} themeColorer={colorer} size={size} style={style} />;
   }
 );
 
 type DotElProps = CanColor & { size: Size };
 
-const DotEl = styled.div<DotElProps>`
+const DotDiv = styled.div<DotElProps>`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
   border-radius: calc(${({ size }) => size} / 2);

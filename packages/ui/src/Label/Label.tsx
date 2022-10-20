@@ -3,7 +3,7 @@ import { animated, useSpring } from '@react-spring/web';
 import React, { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
-import { unselectableStyle } from '../Styles';
+import { unselectableStyle } from '../Library/Styles';
 import { Text } from '../Text';
 import { getElementFullHeight } from '../utils/domUtils';
 

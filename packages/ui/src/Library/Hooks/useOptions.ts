@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { debugFactory } from '../../utils/utils';
-import { Option } from './types';
+import { Option } from '../types';
 
 const debug = debugFactory('useOptions');
 

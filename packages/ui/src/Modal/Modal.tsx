@@ -6,7 +6,7 @@ import React, { useEffect, useRef } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
 import { ShadedBackdrop } from '../Library/Common';
-import { DomPortal } from '../Portal';
+import { DomPortal } from '../Library/Portal';
 import { BODY_FONT_FAMILY } from '../Text';
 import { textStyle } from '../Text/Text';
 import { AemikoSize } from '../Theme/types';

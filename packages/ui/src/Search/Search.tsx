@@ -3,14 +3,14 @@ import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import styled from 'styled-components';
-import { PhantomButton } from '../../Button/PhantomButton';
-import { DomPortal } from '../../Portal';
-import { addEvent, disableBodyScroll, enableBodyScroll, removeEvent } from '../../utils/domUtils';
-import { directionMap } from '../../utils/keyUtils';
-import { debugFactory } from '../../utils/utils';
+import { PhantomButton } from '../Button/PhantomButton';
+import { DomPortal } from '../Library/Portal';
+import { addEvent, disableBodyScroll, enableBodyScroll, removeEvent } from '../utils/domUtils';
+import { directionMap } from '../utils/keyUtils';
+import { debugFactory } from '../utils/utils';
 import { DefaultRenderOption } from '../Library/RenderOption';
 import { FocusHandler, Option, RenderOption, Value } from '../Library/types';
-import useMenu from '../Library/useMenu';
+import useMenu from '../Library/Hooks/useMenu';
 import { DummySearchBar, SearchBar } from './SearchBar';
 import { OptionFetcher, useSearch } from './useSearch';
 
@@ -209,7 +209,7 @@ export function Search<V extends Value, T = undefined>({
           placeholder={placeholder}
         />
         <FullScreen isOpen={open} onClose={() => closeMenu()} header={header}>
-          <div className="ph3">
+          <div style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
             <SearchBar
               className={formClasses}
               onSubmit={onSubmit}
@@ -227,10 +227,10 @@ export function Search<V extends Value, T = undefined>({
   }
 
   return (
-    <Wrapper
+    <WrapperDiv
       ref={containerRef}
       tabIndex={0}
-      className="relative"
+      style={{ position: 'relative' }}
       /* TODO: not sure if these should be here. this needs some tweaking HANDE FULL ON FOCUS */
       onFocus={e => onFocusHandler(e)}
       onBlur={e => onBlurHandler(e)}
@@ -246,7 +246,7 @@ export function Search<V extends Value, T = undefined>({
         disabled={disabled}
       />
       {dropdownResults}
-    </Wrapper>
+    </WrapperDiv>
   );
 }
 
@@ -289,14 +289,25 @@ export const FullScreen = ({ isOpen, onClose, children, header }: FullProps) => 
   return (
     <DomPortal wrapperId="search-portal">
       {isOpen && (
-        <FullScreenContainer ref={fullScreenRef}>
-          <div className="flex flex-row justify-between items-center mb3 ph3">
+        <FullScreenContainerDiv ref={fullScreenRef}>
+          <div
+            style={{
+              /* eventually make this a class */
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '1rem',
+              paddingRight: '1rem',
+              paddingLeft: '1rem',
+            }}
+          >
             {/*
              * nb1 since the close button has a 24x24 box
              * around it and causes some issues alligning
              * with the header icon
              */}
-            <PhantomButton onClick={() => onCloseLocal()} className="nb1">
+            <PhantomButton onClick={() => onCloseLocal()} style={{ marginBottom: '-0.25rem' }}>
               <CloseOutline width="2rem" height="2rem" />
             </PhantomButton>
             {header && (
@@ -307,7 +318,7 @@ export const FullScreen = ({ isOpen, onClose, children, header }: FullProps) => 
             )}
           </div>
           {children}
-        </FullScreenContainer>
+        </FullScreenContainerDiv>
       )}
     </DomPortal>
   );
@@ -358,12 +369,12 @@ const DropdownMenu = styled.div`
   }
 `;
 
-const Wrapper = styled.div`
+const WrapperDiv = styled.div`
   margin: 0;
   padding: 0;
 `;
 
-const FullScreenContainer = styled.div`
+const FullScreenContainerDiv = styled.div`
   overflow: auto;
   position: absolute;
   z-index: 999;

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { NonEmptyArray } from '../Library/types';
 import { textStyle } from '../Text/Text';
 import { useTheme } from '../Theme';
-import { ThemedElement } from '../Theme/types';
-import { NonEmptyArray } from '../types';
+import type { ThemedElement } from '../Theme/types';
 
 type KeyLike = string | number | symbol;
 type RenderTab = () => JSX.Element;

@@ -5,7 +5,7 @@ import React, { createContext, useCallback, useContext, useMemo, useRef, useStat
 import styled, { css } from 'styled-components';
 import uuid from 'uuid';
 import { phantomButtonStyle } from '../Button/PhantomButton';
-import { unselectableStyle } from '../Styles';
+import { unselectableStyle } from '../Library/Styles';
 import { Text } from '../Text';
 import { useKindTheme } from '../Theme/ThemeContext';
 import { AemikoKind, Color, GreyScale } from '../Theme/types';

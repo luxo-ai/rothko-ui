@@ -1,22 +1,23 @@
-import { ChevronDownOutline } from '@aemiko/icons';
+import { ChevronDownOutline, ChevronRightOutline } from '@aemiko/icons';
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
 import isNil from 'lodash/isNil';
 import React, { useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { BackLinkButton } from '../../Button/BackLinkButton';
-import { Text } from '../../Text';
-import { useTheme } from '../../Theme';
-import { directionMap } from '../../utils/keyUtils';
-import { debugFactory } from '../../utils/utils';
+import { BackLinkButton } from '../Button/BackLinkButton';
+import { Text } from '../Text';
+import { useTheme } from '../Theme';
+import { directionMap } from '../utils/keyUtils';
+import { debugFactory } from '../utils/utils';
 import { DefaultRenderOption } from '../Library/RenderOption';
 import { FocusHandler, NestedOption, Option, RenderOption, Value } from '../Library/types';
-import useMenu from '../Library/useMenu';
+import useMenu from '../Library/Hooks/useMenu';
 import {
   ControlContainer,
   DropdownContainer,
   DropdownMenu,
   ItemText,
+  LabelText,
   TextContainer,
 } from './Common';
 import useNestedOptions, { StackOption } from './useNestedOptions';
@@ -168,11 +169,7 @@ export function NestedDropdown<V extends Value, T = undefined>({
 
   return (
     <div className={className}>
-      {label && (
-        <Text.labelLite kind="black" className="mb1">
-          {label}
-        </Text.labelLite>
-      )}
+      {label && <LabelText kind="black">{label}</LabelText>}
       <DropdownContainer
         id={id}
         ref={containerRef}
@@ -187,7 +184,7 @@ export function NestedDropdown<V extends Value, T = undefined>({
         <TextContainer className={clsx({ disabled })} tabIndex={-1}>
           {isNil(value) && <ItemText className="placeholder">{placeholder}</ItemText>}
           {!isNil(value) && (
-            <ItemText>{pathToCurrentOption.map(o => o.label).join(' > ')}</ItemText>
+            <ItemText>{pathToCurrentOption.map(o => o.label).join(' / ')}</ItemText>
           )}
         </TextContainer>
         <ControlContainer className={clsx({ open, disabled })} onClick={toggleMenu}>
@@ -201,15 +198,14 @@ export function NestedDropdown<V extends Value, T = undefined>({
             data-aemiko-body-scroll-lock-ignore
           >
             {canGoToPrevCategory && (
-              <ButtonContainer>
+              <ButtonContainerDiv>
                 <BackLinkButton
                   onClick={() => {
                     goToPrevCategory();
                     containerRef.current?.focus();
                   }}
-                  className="nl1"
                 />
-              </ButtonContainer>
+              </ButtonContainerDiv>
             )}
             {title && <TitleText kind="black">{title}</TitleText>}
             <ul role="listbox" tabIndex={-1}>
@@ -231,7 +227,10 @@ export function NestedDropdown<V extends Value, T = undefined>({
                       containerRef.current?.focus();
                     }}
                   >
-                    <RenderOpt option={option} />
+                    <NestedOptionContainerDiv>
+                      <RenderOpt option={option} />
+                      {option.data.hasMore && <ChevronRightOutline width="1rem" height="1rem" />}
+                    </NestedOptionContainerDiv>
                   </li>
                 );
               })}
@@ -263,13 +262,20 @@ const menuItemHPadding = css`
   padding-right: 1rem;
 `;
 
-const ButtonContainer = styled.div`
+const ButtonContainerDiv = styled.div`
   padding-top: 0.5rem;
-  ${menuItemHPadding}
+  padding-left: 0.5rem;
 `;
 
 const TitleText = styled(Text.label)`
   padding-top: 1rem;
   padding-bottom: 0.125rem;
   ${menuItemHPadding};
+`;
+
+const NestedOptionContainerDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 `;

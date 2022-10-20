@@ -5,7 +5,7 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
 import { ShadedBackdrop } from '../Library/Common';
-import { DomPortal } from '../Portal';
+import { DomPortal } from '../Library/Portal';
 import { BODY_SCROLL_LOCK_IGNORE_ID, disableBodyScroll, enableBodyScroll } from '../utils/domUtils';
 
 type ContainerProps = Pick<React.HTMLProps<HTMLDivElement>, 'className' | 'id'>;

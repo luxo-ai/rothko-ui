@@ -3,7 +3,7 @@ import times from 'lodash/times';
 import React, { useEffect, useMemo, useState } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
-import { Option, Value } from '../Elements/Library/types';
+import { Option, Value } from '../Library/types';
 import { Grid } from '../Grid';
 import { BODY_FONT_FAMILY, Text } from '../Text';
 import { AemikoKind, AemikoSize, CanColor, useKindTheme } from '../Theme';

@@ -2,7 +2,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import isFunction from 'lodash/isFunction';
 import last from 'lodash/last';
 import React, { useReducer } from 'react';
-import { debugFactory } from '../../utils/utils';
+import { debugFactory } from '../utils/utils';
 
 const debug = debugFactory('useStatefulScreens');
 

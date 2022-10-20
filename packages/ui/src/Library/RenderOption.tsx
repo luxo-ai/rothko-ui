@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Text } from '../../Text';
-import { RenderOption } from '../Library/types';
+import { Text } from '../Text';
+import { RenderOption } from './types';
 
 export const DefaultRenderOption: RenderOption<any> = ({ option }) => (
   <OptText>{option.label}</OptText>
 );
 
 const OptText = styled(Text.bodySmall)`
+  margin: 0;
   user-select: none;
 `;

@@ -1,9 +1,9 @@
 import debounce from 'lodash/debounce';
 import identityFn from 'lodash/identity';
 import { useCallback, useEffect, useState } from 'react';
-import { useLRUCache } from '../../Library/Hooks/useCache';
+import { useLRUCache } from '../Library/Hooks/useCache';
 import { Option } from '../Library/types';
-import useOptions from '../Library/useOptions';
+import useOptions from '../Library/Hooks/useOptions';
 
 export type OptionFetcher<V, T = undefined> = (query: string) => Promise<Option<V, T>[]>;
 

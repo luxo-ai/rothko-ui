@@ -3,9 +3,9 @@ import { Set } from 'immutable';
 import isFunction from 'lodash/isFunction';
 import isNil from 'lodash/isNil';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { debugFactory } from '../../utils/utils';
+import { debugFactory } from '../utils/utils';
 import { Option, Value } from '../Library/types';
-import useOptions from '../Library/useOptions';
+import useOptions from '../Library/Hooks/useOptions';
 import { QueryMatchFn } from './types';
 
 const debug = debugFactory('useSelect');
