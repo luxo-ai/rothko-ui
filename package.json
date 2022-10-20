@@ -1,5 +1,5 @@
 {
-  "name": "tbd",
+  "name": "luxo-tbd",
   "repository": "git@github.com:amikos-software/verde.git",
   "author": "luxo-ai <luxo.ai@proton.me>",
   "private": false,
@@ -30,5 +30,6 @@
       "packages/*",
       "example/app"
     ]
-  }
+  },
+  "version": "0.1.0"
 }
