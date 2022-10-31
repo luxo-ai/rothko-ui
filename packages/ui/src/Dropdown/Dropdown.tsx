@@ -6,22 +6,21 @@ import isNil from 'lodash/isNil';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { PhantomButton } from '../Button/PhantomButton';
-import { Text } from '../Text';
+import useMenu from '../Library/Hooks/useMenu';
+import { DefaultRenderOption } from '../Library/RenderOption';
+import { FocusHandler, Option, RenderOption, Value } from '../Library/types';
 import { useTheme } from '../Theme';
 import { ThemedElement } from '../Theme/types';
 import { directionMap } from '../utils/keyUtils';
 import { debugFactory } from '../utils/utils';
-import { DefaultRenderOption } from '../Library/RenderOption';
-import { FocusHandler, Option, RenderOption, Value } from '../Library/types';
-import useMenu from '../Library/Hooks/useMenu';
 import {
   ControlContainer,
   DropdownContainer,
   DropdownMenu,
   ItemText,
+  LabelText,
   PhantomInput,
   TextContainer,
-  LabelText,
 } from './Common';
 import { QueryMatchFn } from './types';
 import useSelect from './useSelect';

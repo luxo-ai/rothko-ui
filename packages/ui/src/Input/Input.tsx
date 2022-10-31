@@ -108,6 +108,7 @@ export const baseInputStyle = css<ThemedElement>`
     &:focus:not(.disabled),
     &:active:not(.disabled) {
       outline: none;
+      border: 1px solid ${({ aemikoTheme }) => aemikoTheme['info-500']};
       border-color: ${({ aemikoTheme }) => aemikoTheme['info-300']};
     }
     :hover:not(:focus):not(.focus) {

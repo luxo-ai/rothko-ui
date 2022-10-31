@@ -6,6 +6,8 @@ import { Text } from '../Text';
 
 export const DropdownContainer = styled.div<ThemedElement>`
   ${baseInputStyle} // causing issues before, this helped
+  -webkit-tap-highlight-color: transparent;
+  // background: red;
   position: relative;
   padding: 0.5rem 1rem 0.5rem 1rem;
   display: flex;
