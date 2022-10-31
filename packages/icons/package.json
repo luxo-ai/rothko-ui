@@ -1,6 +1,6 @@
 {
   "name": "@aemiko/icons",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": "git@github.com:amikos-software/verde.git",
   "author": "luserazo <serazo.luis@gmail.com>",
   "main": "dist/index.js",

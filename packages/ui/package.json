@@ -1,6 +1,6 @@
 {
   "name": "@aemiko/ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": "git@github.com:amikos-software/verde.git",
   "author": "luserazo <serazo.luis@gmail.com>",
   "main": "dist/index.js",
@@ -14,8 +14,8 @@
     "prepare": "run-s build"
   },
   "dependencies": {
-    "@aemiko/icons": "^0.1.0",
-    "@aemiko/utils": "^0.1.0",
+    "@aemiko/icons": "^0.1.1",
+    "@aemiko/utils": "^0.1.1",
     "@react-spring/web": "^9.5.2",
     "clsx": "^1.1.1",
     "dotenv": "^10.0.0",
