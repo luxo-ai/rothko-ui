@@ -1,6 +1,6 @@
 {
   "name": "@aemiko/utils",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": "git@github.com:amikos-software/verde.git",
   "author": "luxo-ai <luxo.ai@proton.me>",
   "main": "dist/index.js",
