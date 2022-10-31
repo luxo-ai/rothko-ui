@@ -1,6 +1,9 @@
 {
   "name": "luxo-tbd",
-  "repository": "git@github.com:amikos-software/verde.git",
+  "repository": "git+https://github.com/luxo-ai/tbd.git",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@luxo-ai"
+  },
   "author": "luxo-ai <luxo.ai@proton.me>",
   "private": false,
   "scripts": {
