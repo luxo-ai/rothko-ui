@@ -1,4 +1,4 @@
-# Aemiko Security Policy :fire
+# Security Policy :fire
 
 ![this is fine](img/this_is_fine.png)
 
