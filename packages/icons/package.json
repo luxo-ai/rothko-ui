@@ -7,7 +7,6 @@
   "module": "dist/index.modern.js",
   "types": "dist/index.d.ts",
   "source": "src/index.ts",
-  "private": true,
   "scripts": {
     "prebuild": "rimraf src && rimraf dist && yarn run svgr",
     "build": "microbundle --jsx React.createElement --format modern,cjs",

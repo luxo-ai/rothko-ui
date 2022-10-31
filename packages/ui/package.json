@@ -7,7 +7,6 @@
   "module": "dist/index.modern.js",
   "types": "dist/index.d.ts",
   "source": "src/index.tsx",
-  "private": true,
   "scripts": {
     "build": "microbundle --jsx React.createElement --format modern,cjs",
     "build:dev": "microbundle watch --no-compress --jsx React.createElement --format modern,cjs",

@@ -30,8 +30,7 @@
   },
   "workspaces": {
     "packages": [
-      "packages/*",
-      "example/app"
+      "packages/*"
     ]
   },
   "version": "0.1.0"
