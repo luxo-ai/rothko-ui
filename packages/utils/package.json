@@ -1,13 +1,18 @@
 {
-  "name": "@aemiko/utils",
-  "version": "0.1.2",
-  "repository": "git@github.com:amikos-software/verde.git",
+  "name": "@rothko-ui/utils",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luxo-ai/rothko-ui",
+    "directory": "packages/utils"
+  },
+  "private": false,
+  "license": "MIT",
   "author": "luxo-ai <luxo.ai@proton.me>",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "types": "dist/index.d.ts",
   "source": "src/index.ts",
-  "private": true,
   "scripts": {
     "build": "microbundle --format modern,cjs",
     "build:dev": "microbundle watch --no-compress --format modern,cjs",

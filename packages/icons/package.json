@@ -1,8 +1,14 @@
 {
-  "name": "@aemiko/icons",
-  "version": "0.1.3",
-  "repository": "git@github.com:amikos-software/verde.git",
-  "author": "luserazo <serazo.luis@gmail.com>",
+  "name": "@rothko-ui/icons",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luxo-ai/rothko-ui",
+    "directory": "packages/icons"
+  },
+  "private": false,
+  "license": "MIT",
+  "author": "luxo-ai <luxo.ai@proton.me>",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "types": "dist/index.d.ts",
@@ -22,7 +28,6 @@
   },
   "peerDependencies": {
     "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
     "typescript": "^4.4.2"
   },
   "devDependencies": {
@@ -31,5 +36,5 @@
     "rimraf": "^3.0.2",
     "run-s": "^0.0.0",
     "typescript": "^4.7.4"
-  }
+ }
 }
