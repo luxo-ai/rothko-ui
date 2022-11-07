@@ -2,9 +2,9 @@
 
 # rothko-ui
 
-Author: @luxo-ai  <luxo.ai@proton.me>
+author: @luxo-ai  <luxo.ai@proton.me>
 
-Sponsor Me: `0x7A67fF6354d983B6cfc3a7f7C5BA93f73C864b32`
+sonsor me: `0x7A67fF6354d983B6cfc3a7f7C5BA93f73C864b32`
 
 ### Installation
 
