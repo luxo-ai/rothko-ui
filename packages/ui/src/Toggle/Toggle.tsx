@@ -1,9 +1,11 @@
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
-import React, { CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { CanColor, useKindTheme } from '../Theme';
-import { AemikoKind, ThemedElement } from '../Theme/types';
+import type { CanColor } from '../Theme';
+import { useKindTheme } from '../Theme';
+import type { AemikoKind, ThemedElement } from '../Theme/types';
 import { keyDownFactory } from '../utils/keyUtils';
 
 export type ToggleProps = {

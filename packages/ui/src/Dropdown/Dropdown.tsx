@@ -8,9 +8,9 @@ import styled from 'styled-components';
 import { PhantomButton } from '../Button/PhantomButton';
 import useMenu from '../Library/Hooks/useMenu';
 import { DefaultRenderOption } from '../Library/RenderOption';
-import { FocusHandler, Option, RenderOption, Value } from '../Library/types';
+import type { FocusHandler, Option, RenderOption, Value } from '../Library/types';
 import { useTheme } from '../Theme';
-import { ThemedElement } from '../Theme/types';
+import type { ThemedElement } from '../Theme/types';
 import { directionMap } from '../utils/keyUtils';
 import { debugFactory } from '../utils/utils';
 import {
@@ -22,7 +22,7 @@ import {
   PhantomInput,
   TextContainer,
 } from './Common';
-import { QueryMatchFn } from './types';
+import type { QueryMatchFn } from './types';
 import useSelect from './useSelect';
 
 const debug = debugFactory('dropdown');

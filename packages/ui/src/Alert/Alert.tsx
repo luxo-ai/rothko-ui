@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Text } from '../Text';
 import { useTheme } from '../Theme';
-import { ThemedElement } from '../Theme/types';
+import type { ThemedElement } from '../Theme/types';
 
 type AlertProps = {
   className?: string;
@@ -19,6 +19,8 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(({ children, .
     </AlertContainerDiv>
   );
 });
+
+Alert.displayName = 'Alert';
 
 const AlertContainerDiv = styled.div<ThemedElement>`
   background-color: ${({ aemikoTheme }) => aemikoTheme['danger-transparent-300']};

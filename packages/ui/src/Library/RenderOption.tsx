@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Text } from '../Text';
-import { RenderOption } from './types';
+import type { RenderOption } from './types';
 
 export const DefaultRenderOption: RenderOption<any> = ({ option }) => (
   <OptText>{option.label}</OptText>

@@ -3,7 +3,7 @@
 export type Nullable<T> = T | undefined | null;
 export type Nil = undefined | null;
 
-type Obj = Record<string | number, unknown>;
+export type Obj = Record<string | number, unknown>;
 
 export type JsonLike<T> = T | { [k: string]: T | JsonLike<T> | T[] | JsonLike<T>[] };
 export type Json = JsonLike<string | number | boolean | null>;

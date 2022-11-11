@@ -3,13 +3,14 @@ import { animated, useTransition } from '@react-spring/web';
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
 import React, { useEffect, useRef } from 'react';
-import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
+import type { FlattenSimpleInterpolation } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
 import { ShadedBackdrop } from '../Library/Common';
 import { DomPortal } from '../Library/Portal';
 import { BODY_FONT_FAMILY } from '../Text';
 import { textStyle } from '../Text/Text';
-import { AemikoSize } from '../Theme/types';
+import type { AemikoSize } from '../Theme/types';
 import {
   addEvent,
   BODY_SCROLL_LOCK_IGNORE_ID,

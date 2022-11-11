@@ -1,9 +1,10 @@
-import { Nullable } from '@rothko-ui/utils';
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { Nullable, Obj } from '@rothko-ui/utils';
+import type React from 'react';
 
 const touchesKeys = ['touches', 'targetTouches', 'changedTouches'] as const;
 type TouchKey = typeof touchesKeys[number];
-export type WithTouches<V extends object, K extends TouchKey> = V & { [k in K]: React.TouchList };
+export type WithTouches<V extends Obj, K extends TouchKey> = V & { [k in K]: React.TouchList };
 
 // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
 export const isMainClick = (e: React.MouseEvent) => {

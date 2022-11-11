@@ -1,12 +1,13 @@
-import { Nullable, useIsMounted } from '@rothko-ui/utils';
+import type { Nullable } from '@rothko-ui/utils';
+import { useIsMounted } from '@rothko-ui/utils';
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { AemikoKind, CanColor, ThemedElement, useKindTheme } from '../Theme';
+import type { AemikoKind, CanColor, ThemedElement } from '../Theme';
+import { useKindTheme } from '../Theme';
+import type { DragDelta, DragEvent } from '../utils/domUtils';
 import {
   addEvent,
   calculateXYDragPosn,
-  DragDelta,
-  DragEvent,
   getTouch,
   getTouchIdentifier,
   isMainClick,

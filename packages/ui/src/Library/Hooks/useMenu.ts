@@ -1,6 +1,7 @@
-import React, { useCallback, useRef, useState } from 'react';
+import type React from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { debugFactory } from '../../utils/utils';
-import { FocusHandler } from '../types';
+import type { FocusHandler } from '../types';
 
 const debug = debugFactory('useMenu');
 

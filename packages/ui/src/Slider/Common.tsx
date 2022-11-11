@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { CanColor, ThemedElement } from '../Theme';
-import { EmSize, PercentSize, RemSize } from '../types';
+import type { CanColor, ThemedElement } from '../Theme';
+import type { EmSize, PercentSize, RemSize } from '../types';
 
 export type SliderWidth = RemSize | EmSize | PercentSize;
 

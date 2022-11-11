@@ -5,7 +5,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { PhantomButton } from '../Button/PhantomButton';
 import { Text } from '../Text';
-import { CanColor, useKindTheme } from '../Theme/ThemeContext';
+import type { CanColor } from '../Theme/ThemeContext';
+import { useKindTheme } from '../Theme/ThemeContext';
 import type { AemikoKind } from '../Theme/types';
 import type { ToastDetails } from './types';
 
@@ -58,6 +59,8 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
     );
   }
 );
+
+Toast.displayName = 'Toast';
 
 const ToastAnimatedContainerDiv = styled.div<CanColor>`
   display: flex;

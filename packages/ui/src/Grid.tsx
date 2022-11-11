@@ -1,5 +1,6 @@
 import React from 'react';
-import styled, { CSSProperties } from 'styled-components';
+import type { CSSProperties } from 'styled-components';
+import styled from 'styled-components';
 
 type GridProps = {
   className?: string;
@@ -16,6 +17,8 @@ export const Grid: React.FC<GridProps> = React.forwardRef<HTMLDivElement, GridPr
     );
   }
 );
+
+Grid.displayName = 'Grid';
 
 const StyledGrid = styled.div`
   display: grid;

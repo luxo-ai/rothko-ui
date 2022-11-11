@@ -1,4 +1,4 @@
-import { AemikoKind } from '../Theme';
+import type { AemikoKind } from '../Theme';
 
 export type ToastDetails = {
   kind?: AemikoKind;

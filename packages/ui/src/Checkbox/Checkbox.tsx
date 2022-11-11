@@ -3,7 +3,7 @@ import keyboardKey from 'keyboard-key';
 import React from 'react';
 import styled from 'styled-components';
 import { useTheme } from '../Theme';
-import { ThemedElement } from '../Theme/types';
+import type { ThemedElement } from '../Theme/types';
 import { keyDownFactory } from '../utils/keyUtils';
 
 export type CheckboxProps = {

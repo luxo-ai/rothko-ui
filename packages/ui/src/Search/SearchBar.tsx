@@ -1,5 +1,5 @@
 import { SearchOutline } from '@rothko-ui/icons';
-import { Nullable } from '@rothko-ui/utils';
+import type { Nullable } from '@rothko-ui/utils';
 import clsx from 'clsx';
 import React, { useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
@@ -7,7 +7,7 @@ import { PhantomButton } from '../Button/PhantomButton';
 import { hideBrowserOutline } from '../Text';
 import { BODY_FONT_FAMILY } from '../Text/common';
 import { useTheme } from '../Theme';
-import { ThemedElement } from '../Theme/types';
+import type { ThemedElement } from '../Theme/types';
 
 type SearchBarProps = {
   query: Nullable<string>;

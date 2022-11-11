@@ -5,6 +5,7 @@ type OrNullProps = React.HTMLProps<HTMLDivElement> & {
 };
 
 export function orNullFactory(lookup: Record<string, React.FC>) {
+  // eslint-disable-next-line react/display-name
   return ({ lookupKey, ...props }: OrNullProps) => {
     const E = lookup[lookupKey];
     if (!E) return null;

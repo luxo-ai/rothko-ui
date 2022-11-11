@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import upperCase from 'lodash/upperCase';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { HexColor } from '../Theme/types';
-import { RemSize } from '../types';
+import type { HexColor } from '../Theme/types';
+import type { RemSize } from '../types';
 import { convertRemToPixels } from '../utils/domUtils';
 import { FallbackText } from './Common';
 

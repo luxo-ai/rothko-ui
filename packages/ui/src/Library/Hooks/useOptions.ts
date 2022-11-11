@@ -1,6 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import type React from 'react';
+import { useCallback, useState } from 'react';
 import { debugFactory } from '../../utils/utils';
-import { Option } from '../types';
+import type { Option } from '../types';
 
 const debug = debugFactory('useOptions');
 

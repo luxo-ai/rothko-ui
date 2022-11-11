@@ -1,9 +1,11 @@
 import clsx from 'clsx';
 import React from 'react';
-import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
+import type { FlattenSimpleInterpolation } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { BODY_FONT_FAMILY } from '../Text';
-import { AemikoSize, useTheme } from '../Theme';
-import { ThemedElement } from '../Theme/types';
+import type { AemikoSize } from '../Theme';
+import { useTheme } from '../Theme';
+import type { ThemedElement } from '../Theme/types';
 
 export type HtmlInputProps = Omit<
   React.HTMLProps<HTMLInputElement>,

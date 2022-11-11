@@ -2,8 +2,9 @@ import { CloseOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
-import { CanColor, useKindTheme } from '../Theme';
-import { AemikoKind, GreyScale } from '../Theme/types';
+import type { CanColor } from '../Theme';
+import { useKindTheme } from '../Theme';
+import type { AemikoKind, GreyScale } from '../Theme/types';
 
 type Appearance = 'filled' | 'outline';
 

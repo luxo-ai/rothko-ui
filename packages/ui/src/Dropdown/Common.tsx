@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { hideBrowserOutline } from '../Text';
-import { ThemedElement } from '../Theme/types';
+import type { ThemedElement } from '../Theme/types';
 import { baseInputStyle } from '../Input';
 import { Text } from '../Text';
 

@@ -1,9 +1,10 @@
 import { ChevronLeftOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
-import { linkStyle, TextProps } from '../Text/Text';
+import type { TextProps } from '../Text/Text';
+import { linkStyle } from '../Text/Text';
 import { useKindTheme } from '../Theme/ThemeContext';
-import { AemikoKind, GreyScale } from '../Theme/types';
+import type { AemikoKind, GreyScale } from '../Theme/types';
 
 type LimitedButtonProps = Pick<
   React.HTMLProps<HTMLButtonElement>,

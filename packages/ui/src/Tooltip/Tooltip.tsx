@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { RemSize } from '../types';
+import type { RemSize } from '../types';
 
 const distanceFromElement: RemSize = '1rem';
 const arrowSize: RemSize = '0.3rem';

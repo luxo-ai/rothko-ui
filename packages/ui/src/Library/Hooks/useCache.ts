@@ -83,7 +83,7 @@ export const useLRUCache = <T, Arg = undefined>({
 };
 
 const evictLeastUsed = <T>(cache: Cache<T>) => {
-  let LRUKey: string = '';
+  let LRUKey = '';
   for (const [k, v] of cache) {
     const { lastFetchedAt } = v.metadata;
     const currLastUsed = cache.get(LRUKey)?.metadata?.lastFetchedAt;

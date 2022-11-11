@@ -1,8 +1,10 @@
-import { Nullable } from '@rothko-ui/utils';
+import type { Nullable } from '@rothko-ui/utils';
 import React, { useCallback, useMemo } from 'react';
 import { Text } from '../Text';
-import { AemikoKind, useKindTheme } from '../Theme';
-import { SliderContainer, SliderRange, SliderTrack, SliderWidth } from './Common';
+import type { AemikoKind } from '../Theme';
+import { useKindTheme } from '../Theme';
+import type { SliderWidth } from './Common';
+import { SliderContainer, SliderRange, SliderTrack } from './Common';
 import { SliderHandle } from './SliderHandle';
 import { getOffsetFactory } from './sliderUtils';
 

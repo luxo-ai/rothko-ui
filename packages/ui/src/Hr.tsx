@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { HexColor, RGBColor } from './Theme/types';
+import type { HexColor, RGBColor } from './Theme/types';
 
 type HrProps = {
   lineColor?: HexColor | RGBColor;

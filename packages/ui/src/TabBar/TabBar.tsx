@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { NonEmptyArray } from '../Library/types';
+import type { NonEmptyArray } from '../Library/types';
 import { textStyle } from '../Text/Text';
 import { useTheme } from '../Theme';
 import type { ThemedElement } from '../Theme/types';

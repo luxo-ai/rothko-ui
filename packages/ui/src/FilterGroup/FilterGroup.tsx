@@ -1,11 +1,13 @@
 import clsx from 'clsx';
 import { isArray } from 'lodash';
 import React from 'react';
-import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
+import type { FlattenSimpleInterpolation } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
-import { Option, Value } from '../Library/types';
+import type { Option, Value } from '../Library/types';
 import { BODY_FONT_FAMILY, Text } from '../Text';
-import { AemikoKind, AemikoSize, CanColor, useKindTheme } from '../Theme';
+import type { AemikoKind, AemikoSize, CanColor } from '../Theme';
+import { useKindTheme } from '../Theme';
 
 type FilterGroupProps<V extends Value> = {
   kind?: AemikoKind;

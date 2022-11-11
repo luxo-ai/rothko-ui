@@ -9,10 +9,11 @@ import { addEvent, disableBodyScroll, enableBodyScroll, removeEvent } from '../u
 import { directionMap } from '../utils/keyUtils';
 import { debugFactory } from '../utils/utils';
 import { DefaultRenderOption } from '../Library/RenderOption';
-import { FocusHandler, Option, RenderOption, Value } from '../Library/types';
+import type { FocusHandler, Option, RenderOption, Value } from '../Library/types';
 import useMenu from '../Library/Hooks/useMenu';
 import { DummySearchBar, SearchBar } from './SearchBar';
-import { OptionFetcher, useSearch } from './useSearch';
+import type { OptionFetcher } from './useSearch';
+import { useSearch } from './useSearch';
 
 const debug = debugFactory('search');
 

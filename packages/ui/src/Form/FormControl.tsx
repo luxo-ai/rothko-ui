@@ -1,7 +1,7 @@
 import isString from 'lodash/isString';
 import React from 'react';
 import { Text } from '../Text';
-import { AemikoKind, GreyScale } from '../Theme/types';
+import type { AemikoKind, GreyScale } from '../Theme/types';
 
 export type FormControlProps = {
   name: string;

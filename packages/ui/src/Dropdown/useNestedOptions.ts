@@ -1,7 +1,8 @@
 import { useCallback, useMemo, useState } from 'react';
-import { Stack, stackPeak, stackPop, stackPush } from '../Library/dataStructures';
+import type { Stack } from '../Library/dataStructures';
+import { stackPeak, stackPop, stackPush } from '../Library/dataStructures';
 import { debugFactory } from '../utils/utils';
-import { NestedOption, Option, Value } from '../Library/types';
+import type { NestedOption, Option, Value } from '../Library/types';
 
 const debug = debugFactory('useNestedOptions');
 

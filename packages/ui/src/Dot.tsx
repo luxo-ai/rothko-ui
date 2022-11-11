@@ -1,7 +1,9 @@
 import React from 'react';
-import styled, { CSSProperties } from 'styled-components';
-import { AemikoKind, CanColor, useKindTheme } from './Theme';
-import { EmSize, RemSize } from './types';
+import type { CSSProperties } from 'styled-components';
+import styled from 'styled-components';
+import type { AemikoKind, CanColor } from './Theme';
+import { useKindTheme } from './Theme';
+import type { EmSize, RemSize } from './types';
 
 type Size = EmSize | RemSize;
 
@@ -19,6 +21,8 @@ export const Dot = React.forwardRef<HTMLDivElement, DotProps>(
     return <DotDiv ref={ref} themeColorer={colorer} size={size} style={style} />;
   }
 );
+
+Dot.displayName = 'Dot';
 
 type DotElProps = CanColor & { size: Size };
 

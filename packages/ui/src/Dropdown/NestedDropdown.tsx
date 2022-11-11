@@ -10,7 +10,7 @@ import { useTheme } from '../Theme';
 import { directionMap } from '../utils/keyUtils';
 import { debugFactory } from '../utils/utils';
 import { DefaultRenderOption } from '../Library/RenderOption';
-import { FocusHandler, NestedOption, Option, RenderOption, Value } from '../Library/types';
+import type { FocusHandler, NestedOption, Option, RenderOption, Value } from '../Library/types';
 import useMenu from '../Library/Hooks/useMenu';
 import {
   ControlContainer,
@@ -20,7 +20,8 @@ import {
   LabelText,
   TextContainer,
 } from './Common';
-import useNestedOptions, { StackOption } from './useNestedOptions';
+import type { StackOption } from './useNestedOptions';
+import useNestedOptions from './useNestedOptions';
 
 const debug = debugFactory('nestedDropdown');
 

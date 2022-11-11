@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { EmSize, PercentSize, RemSize } from './types';
+import type { EmSize, PercentSize, RemSize } from './types';
 
 type Size = RemSize | EmSize | PercentSize | number;
 

@@ -1,13 +1,15 @@
 import clsx from 'clsx';
 import times from 'lodash/times';
 import React, { useEffect, useMemo, useState } from 'react';
-import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
+import type { FlattenSimpleInterpolation } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
-import { Option, Value } from '../Library/types';
+import type { Option, Value } from '../Library/types';
 import { Grid } from '../Grid';
 import { BODY_FONT_FAMILY, Text } from '../Text';
-import { AemikoKind, AemikoSize, CanColor, useKindTheme } from '../Theme';
-import { EmSize, RemSize } from '../types';
+import type { AemikoKind, AemikoSize, CanColor } from '../Theme';
+import { useKindTheme } from '../Theme';
+import type { EmSize, RemSize } from '../types';
 
 type OptionGroupProps<V extends Value> = {
   kind?: AemikoKind;

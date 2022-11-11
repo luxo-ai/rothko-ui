@@ -1,9 +1,11 @@
 import clsx from 'clsx';
 import React from 'react';
-import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
-import { CanColor, useKindTheme } from '../Theme/ThemeContext';
-import { AemikoKind, GreyScale } from '../Theme/types';
-import { SpinnerSize } from './types';
+import type { FlattenSimpleInterpolation } from 'styled-components';
+import styled, { css } from 'styled-components';
+import type { CanColor } from '../Theme/ThemeContext';
+import { useKindTheme } from '../Theme/ThemeContext';
+import type { AemikoKind, GreyScale } from '../Theme/types';
+import type { SpinnerSize } from './types';
 
 type SimpleInlineSpinnerProps = {
   size?: SpinnerSize;

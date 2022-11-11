@@ -8,7 +8,7 @@ import { phantomButtonStyle } from '../Button/PhantomButton';
 import { unselectableStyle } from '../Library/Styles';
 import { Text } from '../Text';
 import { useKindTheme } from '../Theme/ThemeContext';
-import { AemikoKind, Color, GreyScale } from '../Theme/types';
+import type { AemikoKind, Color, GreyScale } from '../Theme/types';
 import { getElementFullHeight } from '../utils/domUtils/dimensions';
 
 type IAccordionCtx = {

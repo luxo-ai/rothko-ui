@@ -1,7 +1,9 @@
 import React from 'react';
-import styled, { CSSProperties } from 'styled-components';
-import { CanColor, useKindTheme } from '../Theme/ThemeContext';
-import { AemikoKind, GreyScale } from '../Theme/types';
+import type { CSSProperties } from 'styled-components';
+import styled from 'styled-components';
+import type { CanColor } from '../Theme/ThemeContext';
+import { useKindTheme } from '../Theme/ThemeContext';
+import type { AemikoKind, GreyScale } from '../Theme/types';
 
 export type ContainerProps = {
   as?: keyof JSX.IntrinsicElements;
@@ -20,6 +22,8 @@ export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
     );
   }
 );
+
+Container.displayName = 'Container';
 
 const ContainerBase = styled.div<CanColor>`
   background: ${({ themeColorer }) => themeColorer()}
