@@ -32,10 +32,13 @@ import {
 import { useState } from 'react';
 import './App.css';
 import * as lorem from 'lorem-ipsum';
+import EthereumQRPlugin from 'ethereum-qr-code';
 
 const on = false;
 
 const App = () => {
+  const qr = new EthereumQRPlugin();
+
   return (
     <RothkoProvider
       themeOverrides={
@@ -56,7 +59,9 @@ const App = () => {
             </header>
             <Text.body>testing</Text.body>
             <ThemeButton />
+            <div id="#my-qr-code"></div>
             <main className="example-cards">
+              <ButtonCard />
               <NestedDropdownCard />
               <SearchCard />
               <SingleDropdownCard />
@@ -75,7 +80,6 @@ const App = () => {
               <AlertCard />
               <AccordionCard />
               <AvatarCard />
-              <ButtonCard />
             </main>
           </div>
         </ToastContextProvider>

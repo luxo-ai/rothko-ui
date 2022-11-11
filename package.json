@@ -9,9 +9,9 @@
   "author": "luxo-ai <luxo.ai@proton.me>",
   "private": true,
   "scripts": {
-    "start:example": "lerna --scope=app run dev --stream",
+    "start:example": "lerna --scope=demo run dev --stream",
     "add:all": "lerna add",
-    "add:example": "lerna add $1 --scope=app",
+    "add:example": "lerna add $1 --scope=demo",
     "add:ui": "lerna add $1 --scope=@rothko-ui/ui",
     "add:utils": "lerna add $1 --scope=@rothko-ui/utils",
     "add:icons": "lerna add $1 --scope=@rothko-ui/icons",

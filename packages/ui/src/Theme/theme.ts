@@ -1,4 +1,5 @@
-import { ColorOverrideMap, greyScale, LightnessMap, Theme } from './types';
+import type { ColorOverrideMap, LightnessMap, Theme } from './types';
+import { greyScale } from './types';
 
 /* Later create json override file that merges w base */
 export const baseOverrides: ColorOverrideMap = {
