@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { SimpleInlineSpinner } from '../Spinner';
-import { BODY_FONT_FAMILY } from '../Typography';
-import type { RothkoKind, RothkoSize } from '../Theme';
+import InlineSpinnerLoader from '../Loader/InlineSpinnerLoader';
 import { idkFn } from '../Theme/themeV2';
+import type { KindProps, RothkoKind, RothkoSize } from '../Theme/types';
+import { BODY_FONT_FAMILY } from '../Typography';
 
 type ButtonAppearance = 'filled' | 'outline';
 
@@ -89,6 +89,9 @@ export const Button: React.FC<ButtonProps> = ({
   tabIndex,
   type = 'button',
 }) => {
+  const childrenContainerRef = useRef<HTMLSpanElement | null>(null);
+  const [childrenHeight, setChildrenHeight] = useState<number | null>(null);
+
   const appearanceClasses = {
     ['btn-circle']: circle,
     ['btn-pill']: pill,
@@ -96,6 +99,12 @@ export const Button: React.FC<ButtonProps> = ({
   } as const;
 
   const iconColor = appearance === 'outline' ? idkFn(kind) : idkFn(kind, 'text');
+
+  useEffect(() => {
+    if (!childrenContainerRef.current) return;
+    const { height } = childrenContainerRef.current.getBoundingClientRect();
+    setChildrenHeight(height - 4); // figure out this value later
+  }, [setChildrenHeight, childrenContainerRef]);
 
   return (
     <StyledButton
@@ -110,16 +119,21 @@ export const Button: React.FC<ButtonProps> = ({
     >
       {Left && <Left size={accessorySizeMap[size]} color={iconColor} />}
       {loading ? (
-        <SimpleInlineSpinner asText={appearance !== 'outline'} kind={kind} size="s" />
+        <InlineSpinnerLoader
+          style={childrenHeight ? { width: childrenHeight, height: childrenHeight } : undefined}
+          asText={appearance !== 'outline'}
+          kind={kind}
+          size="s"
+        />
       ) : (
-        <>{children}</>
+        <span ref={childrenContainerRef}>{children}</span>
       )}
       {Right && <Right size={accessorySizeMap[size]} color={iconColor} />}
     </StyledButton>
   );
 };
 
-type BaseButtonProps = { appearance: ButtonAppearance; kind: RothkoKind };
+type BaseButtonProps = Required<KindProps> & { appearance: ButtonAppearance };
 
 export const buttonStyle = css<BaseButtonProps>`
   -webkit-tap-highlight-color: transparent;
@@ -178,9 +192,9 @@ const StyledButton = styled.button<BaseButtonProps>`
      * hover is annoying and has bad UX on touch based machines
      * The element is still marked as "hover" after pressing and until
      * onBlur is called. Keep the same look for now (deactivate :hover)
-     */
-    :hover {
+      :hover {
     }
+    */
     :focus {
     }
     :active {

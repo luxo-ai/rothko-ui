@@ -24,6 +24,9 @@ const lightTextStyle = css`
 `;
 
 const textStyle = css<TextProps>`
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
   margin: 0.125rem 0;
 
   font-family: ${BODY_FONT_FAMILY.regular};

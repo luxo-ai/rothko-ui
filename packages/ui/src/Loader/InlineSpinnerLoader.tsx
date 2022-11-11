@@ -2,30 +2,30 @@ import clsx from 'clsx';
 import React from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import type { CanColor } from '../Theme/ThemeContext';
-import { useKindTheme } from '../Theme/ThemeContext';
-import type { RothkoKind, GreyScale } from '../Theme/types';
+import { idkFn } from '../Theme/themeV2';
+import type { KindProps, RothkoKind } from '../Theme/types';
 import type { SpinnerSize } from './types';
 
 type SimpleInlineSpinnerProps = {
-  size?: SpinnerSize;
-  kind?: RothkoKind | GreyScale;
-  className?: string;
   asText?: boolean;
+  className?: string;
+  kind?: RothkoKind;
+  size?: SpinnerSize;
+  style?: React.CSSProperties;
 };
 
-export const SimpleInlineSpinner = ({
-  className,
+const InlineSpinnerLoader = ({
   asText,
+  className,
+  kind,
   size = 'm',
-  kind = 'info',
+  style,
 }: SimpleInlineSpinnerProps) => {
-  const [themeColorer] = useKindTheme(kind);
   const baseClasses = clsx(`spinner-size-${size}`, className);
   return (
-    <SpinnerContainer themeColorer={themeColorer} asText={asText} className={baseClasses}>
+    <SpinnerSpan style={style} kind={kind} asText={asText} className={baseClasses}>
       loading...
-    </SpinnerContainer>
+    </SpinnerSpan>
   );
 };
 
@@ -47,9 +47,13 @@ const spinnerSizeMap: Record<SpinnerSize, FlattenSimpleInterpolation> = {
   `,
 };
 
-const SpinnerContainer = styled.div<CanColor & { asText?: boolean }>`
-  display: inline-block;
+type SpinnerSpanProps = KindProps & {
+  asText?: boolean;
+};
+
+const SpinnerSpan = styled.span<SpinnerSpanProps>`
   border-radius: 50%;
+  text-indent: -9999em;
 
   ${Object.entries(spinnerSizeMap).map(
     ([key, value]) => css`
@@ -59,14 +63,19 @@ const SpinnerContainer = styled.div<CanColor & { asText?: boolean }>`
     `
   )}
 
-  text-indent: -9999em;
+  border-top-color: ${({ kind, asText }) => {
+    if (!kind) return '#000';
+    return asText ? idkFn(kind, 'text') : idkFn(kind);
+  }};
+  border-right-color: ${({ kind, asText }) => {
+    if (!kind) return '#000';
+    return asText ? idkFn(kind, 'text') : idkFn(kind);
+  }};
+  border-bottom-color: ${({ kind, asText }) => {
+    if (!kind) return '#000';
+    return asText ? idkFn(kind, 'text') : idkFn(kind);
+  }};
 
-  border-top-color: ${({ themeColorer, asText }) =>
-    asText ? themeColorer('text') : themeColorer()};
-  border-right-color: ${({ themeColorer, asText }) =>
-    asText ? themeColorer('text') : themeColorer()};
-  border-bottom-color: ${({ themeColorer, asText }) =>
-    asText ? themeColorer('text') : themeColorer()};
   border-left-color: transparent;
   border-style: solid;
 
@@ -86,6 +95,7 @@ const SpinnerContainer = styled.div<CanColor & { asText?: boolean }>`
       transform: rotate(360deg);
     }
   }
+
   @keyframes load {
     0% {
       -webkit-transform: rotate(0deg);
@@ -97,3 +107,5 @@ const SpinnerContainer = styled.div<CanColor & { asText?: boolean }>`
     }
   }
 `;
+
+export default InlineSpinnerLoader;

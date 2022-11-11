@@ -28,6 +28,7 @@ import {
   Typography,
   RothkoProvider,
   useRothko,
+  InlineRythmLoader,
 } from '@rothko-ui/ui';
 import { useState } from 'react';
 import './App.css';
@@ -54,6 +55,7 @@ const App = () => {
       <ThemeProvider>
         <ToastContextProvider>
           <div className="app-container">
+            <InlineRythmLoader asText size="m" kind="primary" />
             <header className="app-header">
               <Typography.h1 bold italic light kind="secondary">
                 use me to test components
@@ -374,7 +376,6 @@ const ButtonCard = () => {
       <div>
         <Button
           loading={loading2}
-          kind="black"
           size="l"
           onClick={() => setLoading2(!loading2)}
           style={{ maxWidth: 200, marginBottom: '1rem' }}
@@ -385,7 +386,6 @@ const ButtonCard = () => {
       <div>
         <Button
           loading={loading3}
-          kind="success"
           onClick={() => setLoading3(!loading3)}
           style={{ maxWidth: 200, marginBottom: '1rem' }}
         >

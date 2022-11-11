@@ -25,7 +25,7 @@ export * from './RothkoProvider';
 export * from './Search';
 export * from './Skeleton';
 export * from './Slider';
-export * from './Spinner';
+export * from './Loader';
 export * from './TabBar';
 export * from './Tag';
 export * from './Theme';

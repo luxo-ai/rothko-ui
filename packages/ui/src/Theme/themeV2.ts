@@ -34,16 +34,16 @@ export const lightnessMap: LightnessMap = {
 };
 
 const idk: Record<Exclude<ColorableKey, 'text'>, string | number> = {
-  'bg-active': 600,
+  'bg-active': 400,
   'bg-focus': 600,
-  'bg-disabled': 'transparent-500',
+  'bg-disabled': 'transparent-600',
   'bg-transparent': 'transparent-300',
-  'bg-hover': 600,
+  'bg-hover': 400,
   'border-active': 500,
   'border-focus': 500,
   'border-transparent': 'transparent-300',
   'border-disabled': 'transparent-500',
-  'border-hover': 500,
+  'border-hover': 300,
 };
 
 export const idkFn = (kind: RothkoKind, ok?: ColorableKey) => {
@@ -51,6 +51,7 @@ export const idkFn = (kind: RothkoKind, ok?: ColorableKey) => {
     return kind === 'info' ? 'var(--secondary-400)' : `var(--${kind}-500)`;
   }
   if (ok === 'text') {
+    if (kind === 'primary') return '#fff';
     return 'black';
   }
   return `var(--${kind}-${idk[ok]})`;
@@ -58,7 +59,7 @@ export const idkFn = (kind: RothkoKind, ok?: ColorableKey) => {
 
 const kindToStyle: Record<RothkoKind, FlattenSimpleInterpolation> = {
   primary: css`
-    color: black;
+    color: white;
   `,
   secondary: css`
     color: white;
