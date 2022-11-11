@@ -16,7 +16,7 @@ export const generateCssAnimation = (animationName: string, frames: string): str
   `;
 
   if (styleSheet) {
-    styleSheet.insertRule(keyFrames.toString(), 0);
+    styleSheet.insertRule(keyFrames.join(''), 0);
   }
 
   return animationName;
