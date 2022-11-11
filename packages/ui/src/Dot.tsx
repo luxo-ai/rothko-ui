@@ -1,7 +1,7 @@
 import React from 'react';
 import type { CSSProperties } from 'styled-components';
 import styled from 'styled-components';
-import type { AemikoKind, CanColor } from './Theme';
+import type { RothkoKind, CanColor } from './Theme';
 import { useKindTheme } from './Theme';
 import type { EmSize, RemSize } from './types';
 
@@ -9,7 +9,7 @@ type Size = EmSize | RemSize;
 
 type DotProps = {
   size: Size;
-  kind?: AemikoKind;
+  kind?: RothkoKind;
 } & Pick<
   CSSProperties,
   'position' | 'inset' | 'left' | 'right' | 'top' | 'bottom' | 'margin' | 'padding' | 'border'

@@ -5,13 +5,13 @@ import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
 import type { Option, Value } from '../Library/types';
-import { BODY_FONT_FAMILY, Text } from '../Text';
-import type { AemikoKind, AemikoSize, CanColor } from '../Theme';
+import Typography, { BODY_FONT_FAMILY } from '../Typography';
+import type { RothkoKind, RothkoSize, CanColor } from '../Theme';
 import { useKindTheme } from '../Theme';
 
 type FilterGroupProps<V extends Value> = {
-  kind?: AemikoKind;
-  size?: AemikoSize;
+  kind?: RothkoKind;
+  size?: RothkoSize;
   value?: V | V[] | null;
   label?: string;
   options: Option<V>[];
@@ -36,7 +36,7 @@ export function FilterGroup<V extends Value>({
   const selectedLookup = new Set(valueArray);
   return (
     <div id={id} style={style} className={className}>
-      {label && <FilterText kind="black">{label}</FilterText>}
+      {label && <FilterText>{label}</FilterText>}
       <FilterGroupContainerDiv>
         {options.map((o, idx) => {
           const isFirst = idx === 0;
@@ -72,7 +72,7 @@ export function FilterGroup<V extends Value>({
   );
 }
 
-const sizeMap: Record<AemikoSize, FlattenSimpleInterpolation> = {
+const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
     padding: 0.4rem 0.4rem;
     font-size: 0.75rem;
@@ -154,7 +154,7 @@ const FilterButton = styled.button<CanColor>`
   flex: 1 1 0%;
 `;
 
-const FilterText = styled(Text.labelLite)`
+const FilterText = styled(Typography.label).attrs({ light: true })`
   margin-bottom: 0.25rem;
   white-space: nowrap;
 `;

@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import React, { useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import { PhantomButton } from '../Button/PhantomButton';
-import { hideBrowserOutline } from '../Text';
-import { BODY_FONT_FAMILY } from '../Text/common';
+import { hideBrowserOutline } from '../Typography';
+import { BODY_FONT_FAMILY } from '../Typography/constants';
 import { useTheme } from '../Theme';
 import type { ThemedElement } from '../Theme/types';
 

@@ -1,10 +1,9 @@
 import { ChevronLeftOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
-import type { TextProps } from '../Text/Text';
-import { linkStyle } from '../Text/Text';
-import { useKindTheme } from '../Theme/ThemeContext';
-import type { AemikoKind, GreyScale } from '../Theme/types';
+import { idkFn } from '../Theme/themeV2';
+import type { RothkoKind } from '../Theme/types';
+import Typography from '../Typography/Typography';
 
 type LimitedButtonProps = Pick<
   React.HTMLProps<HTMLButtonElement>,
@@ -12,21 +11,17 @@ type LimitedButtonProps = Pick<
 >;
 
 type BackLinkProps = {
-  kind?: AemikoKind | GreyScale;
+  kind?: RothkoKind;
 } & LimitedButtonProps;
 
-export const BackLinkButton = ({ kind = 'info', ...buttonProps }: BackLinkProps) => {
-  const [themeColorer] = useKindTheme(kind);
-  return (
-    <LinkButton {...buttonProps} kind={kind}>
-      <ChevronLeftOutline width="1.25rem" height="1.25rem" fill={themeColorer()} />
-      back
-    </LinkButton>
-  );
-};
+export const BackLinkButton = ({ kind = 'info', ...buttonProps }: BackLinkProps) => (
+  <LinkButton {...buttonProps} kind={kind}>
+    <ChevronLeftOutline width="1.25rem" height="1.25rem" fill={idkFn(kind)} />
+    back
+  </LinkButton>
+);
 
-const LinkButton = styled.button<TextProps>`
-  ${linkStyle}
+const LinkButton = styled(Typography.linkButton)`
   -webkit-tap-highlight-color: transparent;
   display: inline-flex;
   flex-direction: row;

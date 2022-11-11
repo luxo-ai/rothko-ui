@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import cloneDeep from 'lodash/cloneDeep';
 import isFunction from 'lodash/isFunction';
 import last from 'lodash/last';
 import React, { useReducer } from 'react';
 import { debugFactory } from '../utils/utils';
+import type { Obj } from '@rothko-ui/utils';
 
 const debug = debugFactory('useStatefulScreens');
 
@@ -17,7 +20,7 @@ type Screen<Key extends keyof any, Event extends keyof any, Ctx> = {
   on: { [e in Event]?: Transition<Key, Ctx> };
 };
 
-export type Config<Event extends keyof any, Ctx extends object, Key extends keyof any = string> = {
+export type Config<Event extends keyof any, Ctx extends Obj, Key extends keyof any = string> = {
   initialScreen: Key;
   initialCtx: Ctx;
   screens: Record<Key, Screen<Key, Event, Ctx>>;
@@ -41,7 +44,7 @@ type Action<Ctx, Event extends keyof any> =
   | { type: 'forward'; event: Event; updater?: (ctx: Ctx) => Ctx };
 
 export const useStatefulScreens = <
-  Ctx extends object,
+  Ctx extends Obj,
   Event extends keyof any,
   Key extends keyof any = string
 >(
@@ -69,7 +72,7 @@ export const useStatefulScreens = <
       const nextStack = [...stack, nextScreenKey];
       if (nextScreenKey === null) setImmediate(() => config.onExit?.(nextContext));
 
-      debug(action.event, nextStack, { prevCtx: context, nextCtx: nextContext });
+      debug(action.event, nextStack as any, { prevCtx: context, nextCtx: nextContext });
       return { stack: nextStack, context: nextContext };
     },
     { stack: [config.initialScreen], context: config.initialCtx }

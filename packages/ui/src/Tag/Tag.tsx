@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
 import type { CanColor } from '../Theme';
 import { useKindTheme } from '../Theme';
-import type { AemikoKind, GreyScale } from '../Theme/types';
+import type { RothkoKind, GreyScale } from '../Theme/types';
 
 type Appearance = 'filled' | 'outline';
 
 type TagProps = {
-  kind?: AemikoKind | GreyScale;
+  kind?: RothkoKind | GreyScale;
   appearance?: Appearance;
   children?: React.ReactNode;
   onClose?: () => void;

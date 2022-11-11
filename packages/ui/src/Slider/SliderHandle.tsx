@@ -2,7 +2,7 @@ import type { Nullable } from '@rothko-ui/utils';
 import { useIsMounted } from '@rothko-ui/utils';
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import type { AemikoKind, CanColor, ThemedElement } from '../Theme';
+import type { RothkoKind, CanColor, ThemedElement } from '../Theme';
 import { useKindTheme } from '../Theme';
 import type { DragDelta, DragEvent } from '../utils/domUtils';
 import {
@@ -41,7 +41,7 @@ type SliderHandleProps = Pick<
   onChange: (v: number) => void;
   onDrag?: (e: DragEvent) => void;
   onMouseDown?: (e: DragEvent) => void;
-  kind?: AemikoKind;
+  kind?: RothkoKind;
   vertical?: boolean;
   disabled?: boolean;
   value: number;

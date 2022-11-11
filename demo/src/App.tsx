@@ -381,10 +381,8 @@ const ButtonCard = () => {
       </div>
       <div>
         <Button
-          pill
           loading={loading3}
           kind="success"
-          size="s"
           onClick={() => setLoading3(!loading3)}
           style={{ maxWidth: 200, marginBottom: '1rem' }}
         >

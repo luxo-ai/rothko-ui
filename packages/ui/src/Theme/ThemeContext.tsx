@@ -1,15 +1,7 @@
 import React, { useContext } from 'react';
 import { baseOverrides, lightnessMap, theme } from './theme';
-import {
-  AemikoKind,
-  Color,
-  ColorableKey,
-  greyScale,
-  isGreyScale,
-  GreyScale,
-  Theme,
-  greyScaleInverse,
-} from './types';
+import type { RothkoKind, Color, ColorableKey, GreyScale, Theme } from './types';
+import { greyScale, isGreyScale, greyScaleInverse } from './types';
 
 type Mode = 'dark' | 'light';
 
@@ -32,7 +24,7 @@ export const useTheme = () => {
 type Colorer = (c?: ColorableKey) => Color;
 export type CanColor = { themeColorer: Colorer };
 
-export const useKindTheme = (kind: AemikoKind | GreyScale) => {
+export const useKindTheme = (kind: RothkoKind | GreyScale) => {
   const { theme } = useTheme();
 
   const colorWithKind: Colorer = c => {

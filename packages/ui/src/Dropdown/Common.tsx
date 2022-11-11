@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { hideBrowserOutline } from '../Text';
+import { hideBrowserOutline } from '../Typography';
 import type { ThemedElement } from '../Theme/types';
 import { baseInputStyle } from '../Input';
-import { Text } from '../Text';
+import Typography from '../Typography';
 
 export const DropdownContainer = styled.div<ThemedElement>`
   ${baseInputStyle} // causing issues before, this helped
@@ -147,13 +147,13 @@ export const TextContainer = styled.div`
   }
 `;
 
-export const ItemText = styled(Text.body)`
+export const ItemText = styled(Typography.body)`
   user-select: none;
   &.placeholder {
     opacity: 0.75;
   }
 `;
 
-export const LabelText = styled(Text.labelLite)`
+export const LabelText = styled(Typography.label).attrs({ light: true })`
   margin-bottom: 0.25rem;
 `;

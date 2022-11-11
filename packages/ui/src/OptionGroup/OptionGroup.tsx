@@ -6,14 +6,14 @@ import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
 import type { Option, Value } from '../Library/types';
 import { Grid } from '../Grid';
-import { BODY_FONT_FAMILY, Text } from '../Text';
-import type { AemikoKind, AemikoSize, CanColor } from '../Theme';
+import Typography, { BODY_FONT_FAMILY } from '../Typography';
+import type { RothkoKind, RothkoSize, CanColor } from '../Theme';
 import { useKindTheme } from '../Theme';
 import type { EmSize, RemSize } from '../types';
 
 type OptionGroupProps<V extends Value> = {
-  kind?: AemikoKind;
-  size?: AemikoSize;
+  kind?: RothkoKind;
+  size?: RothkoSize;
   value?: V | null;
   options: Option<V, { disabled?: boolean } | undefined>[];
   onChange: (id: V) => void;
@@ -103,7 +103,7 @@ export function OptionGroup<V extends Value>({
   );
 }
 
-const sizeMap: Record<AemikoSize, FlattenSimpleInterpolation> = {
+const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
     padding: 0.25rem 0.4rem;
     font-size: 0.75rem;
@@ -171,7 +171,7 @@ const OptionButton = styled.button.attrs({ as: 'button' })<CanColor>`
   }
 `;
 
-const expandedButtonWidth: Record<AemikoSize, FlattenSimpleInterpolation> = {
+const expandedButtonWidth: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
     width: 50px; // rem
   `,
@@ -190,7 +190,7 @@ const expandedButtonWidth: Record<AemikoSize, FlattenSimpleInterpolation> = {
 };
 
 const ExpandButtonLink = styled.a`
-  ${Text.linkStyle}
+  ${Typography.linkStyle}
   height: fit-content;
   ${Object.entries(sizeMap).map(
     ([key, value]) => css`

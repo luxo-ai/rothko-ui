@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import React from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { BODY_FONT_FAMILY } from '../Text';
-import type { AemikoSize } from '../Theme';
+import { BODY_FONT_FAMILY } from '../Typography';
+import type { RothkoSize } from '../Theme';
 import { useTheme } from '../Theme';
 import type { ThemedElement } from '../Theme/types';
 
@@ -16,7 +16,7 @@ export type HtmlTextareaProps = Omit<
   'ref' | 'size' | 'as' | 'theme'
 >;
 
-type InputSize = Extract<AemikoSize, 's' | 'm' | 'l'>;
+type InputSize = Extract<RothkoSize, 's' | 'm' | 'l'>;
 
 const sizeMap: Record<InputSize, FlattenSimpleInterpolation> = {
   s: css`

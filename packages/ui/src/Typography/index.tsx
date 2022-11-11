@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
-import * as Text from './Text';
-export { BODY_FONT_FAMILY } from './common';
-export { Text };
+import Typography from './Typography';
+export { BODY_FONT_FAMILY } from './constants';
 
 export const PaddedPage = styled.div`
   padding-top: 4rem;
@@ -18,3 +17,5 @@ export const hideBrowserOutline = css`
     outline: none;
   }
 `;
+
+export default Typography;

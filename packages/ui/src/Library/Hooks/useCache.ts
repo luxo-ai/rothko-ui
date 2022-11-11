@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Map as ImmutableMap } from 'immutable';
 import moment from 'moment';
 import { useCallback, useRef } from 'react';
@@ -45,7 +46,7 @@ export const useLRUCache = <T, Arg = undefined>({
       return isValueExpired ? [...acc, key] : acc;
     }, [] as string[]);
 
-    debug('Vacuuming keys', expiredKeys);
+    debug('Vacuuming keys', expiredKeys as any);
     cache.current = currCache.removeAll(expiredKeys);
   }, vacuumDelaySeconds * ONE_MS);
 

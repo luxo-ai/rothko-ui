@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Adaption of: https://github.com/willmcpo/body-scroll-lock
  * The decision to adapt was to get more control and fix mobie issues found in the original solution
@@ -57,7 +58,7 @@ const allowTouchMove = (el: Element) => {
 const preventDefault = (evt: React.UIEvent<HTMLElement>) => {
   const touchMoveAllowed = allowTouchMove(evt.target as HTMLElement);
   // Do not prevent if the event has more than one touch (usually meaning this is a multi touch gesture like pinch to zoom).
-  if (!touchMoveAllowed && hasTouches(evt, 'touches') && evt.touches.length <= 1) {
+  if (!touchMoveAllowed && hasTouches(evt, 'touches') && (evt as any).touches.length <= 1) {
     evt.preventDefault();
   }
 };
@@ -166,20 +167,20 @@ const isAtTopOfScroll = (targetElement: HTMLElement) => {
 };
 
 const onTouchStart = (event: React.UIEvent<HTMLElement>) => {
-  if (hasTouches(event, 'targetTouches') && event.targetTouches.length === 1) {
-    initialTouchClientY = event.targetTouches[0].clientY;
+  if (hasTouches(event, 'targetTouches') && (event as any).targetTouches.length === 1) {
+    initialTouchClientY = ((event as any).targetTouches as any)[0].clientY;
   }
 };
 
 const onTouchMove = (event: React.UIEvent<HTMLElement>) => {
-  if (hasTouches(event, 'targetTouches') && event.targetTouches.length === 1) {
+  if (hasTouches(event, 'targetTouches') && (event as any).targetTouches.length === 1) {
     // currentTarget is element that this listener is attached to
     handleTouchScroll(event, event.currentTarget);
   }
 };
-
+// React.UIEvent<HTMLElement>
 const handleTouchScroll = (
-  event: WithTouches<React.UIEvent<HTMLElement>, 'targetTouches'>,
+  event: WithTouches<any, 'targetTouches'>,
   targetElement: HTMLElement
 ) => {
   // how much did we move since the initial touch

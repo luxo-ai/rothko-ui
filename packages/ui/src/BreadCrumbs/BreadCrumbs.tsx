@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Text } from '../Text';
+import Typography from '../Typography';
 
 type BreadCrumbsProps = {
   children: React.ReactNode;
@@ -21,24 +21,24 @@ export const BreadCrumbItem = ({ to, target, onClick, children }: BreadCrumbItem
   if (to) {
     return (
       <BreadCrumbsItemContainerSpan>
-        <Text.externalLink className="underline" href={to} target={target}>
+        <Typography.externalLink className="underline" href={to} target={target}>
           {children}
-        </Text.externalLink>
+        </Typography.externalLink>
       </BreadCrumbsItemContainerSpan>
     );
   }
   if (onClick) {
     return (
       <BreadCrumbsItemContainerSpan>
-        <Text.linkButton className="underline" onClick={onClick}>
+        <Typography.linkButton className="underline" onClick={onClick}>
           {children}
-        </Text.linkButton>
+        </Typography.linkButton>
       </BreadCrumbsItemContainerSpan>
     );
   }
   return (
     <BreadCrumbsItemContainerSpan>
-      <Text.body as="span">{children}</Text.body>
+      <Typography.body as="span">{children}</Typography.body>
     </BreadCrumbsItemContainerSpan>
   );
 };

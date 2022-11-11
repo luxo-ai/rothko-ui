@@ -1,7 +1,7 @@
 import { isString } from 'lodash';
 import React from 'react';
 import styled from 'styled-components';
-import { Text } from '../Text';
+import Typography from '../Typography';
 import { useTheme } from '../Theme';
 import type { ThemedElement } from '../Theme/types';
 
@@ -12,7 +12,11 @@ type AlertProps = {
 
 export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(({ children, ...props }, ref) => {
   const { theme } = useTheme();
-  const renderContent = isString(children) ? <Text.body>{children}</Text.body> : children;
+  const renderContent = isString(children) ? (
+    <Typography.body>{children}</Typography.body>
+  ) : (
+    children
+  );
   return (
     <AlertContainerDiv {...props} aemikoTheme={theme} ref={ref}>
       {renderContent}

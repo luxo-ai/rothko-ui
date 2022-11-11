@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
 import { unselectableStyle } from '../Library/Styles';
-import { Text } from '../Text';
+import Typography from '../Typography';
 import { getElementFullHeight } from '../utils/domUtils';
 
 type LabelProps = {
@@ -14,7 +14,7 @@ type LabelProps = {
 
 export const Label = ({ children, className }: LabelProps) => (
   <LabelContainerDiv className={className}>
-    <LabelText kind="black">{children}</LabelText>
+    <LabelText>{children}</LabelText>
   </LabelContainerDiv>
 );
 
@@ -64,7 +64,7 @@ export const ExpandableLabel = ({ label, className, children }: ExpandableProps)
     <LabelContainerDiv className={className}>
       <header>
         <ExpandableLabelButton onClick={() => setExpanded(ex => !ex)}>
-          <LabelText kind="black">{label}</LabelText>
+          <LabelText>{label}</LabelText>
           <Icon width="0.875rem" height="0.875rem" />
         </ExpandableLabelButton>
       </header>
@@ -102,7 +102,7 @@ const LabelContainerDiv = styled.div`
   ${labelStyle}
 `;
 
-const LabelText = styled(Text.label)`
+const LabelText = styled(Typography.label)`
   ${unselectableStyle}
   text-align: center;
 `;
@@ -111,6 +111,6 @@ const ExpandableLabelContentContainerDiv = styled.div`
   border-top: 1px solid black;
 `;
 
-const ExpandableLabelContentText = styled(Text.bodySmall)`
+const ExpandableLabelContentText = styled(Typography.bodySmall)`
   margin: 0;
 `;

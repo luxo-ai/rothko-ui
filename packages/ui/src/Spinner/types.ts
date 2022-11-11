@@ -1,3 +1,3 @@
-import type { AemikoSize } from '../Theme/types';
+import type { RothkoSize } from '../Theme/types';
 
-export type SpinnerSize = Exclude<AemikoSize, 'xs' | 'xl'>;
+export type SpinnerSize = Exclude<RothkoSize, 'xs' | 'xl'>;

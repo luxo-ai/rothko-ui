@@ -3,12 +3,12 @@ import type { CSSProperties } from 'styled-components';
 import styled from 'styled-components';
 import type { CanColor } from '../Theme/ThemeContext';
 import { useKindTheme } from '../Theme/ThemeContext';
-import type { AemikoKind, GreyScale } from '../Theme/types';
+import type { RothkoKind, GreyScale } from '../Theme/types';
 
 export type ContainerProps = {
   as?: keyof JSX.IntrinsicElements;
   className?: string;
-  kind?: AemikoKind | GreyScale;
+  kind?: RothkoKind | GreyScale;
   children?: React.ReactNode;
 } & CSSProperties;
 

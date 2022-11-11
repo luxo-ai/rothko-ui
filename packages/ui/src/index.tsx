@@ -1,3 +1,4 @@
+import Typography from './Typography';
 export * from './Accordion';
 export * from './Alert';
 export * from './BreadCrumbs';
@@ -19,18 +20,17 @@ export * from './OptionGroup';
 export { orNullFactory } from './OrNull';
 export * from './Popup';
 export * from './Radio';
+export * from './RothkoProvider';
 export * from './Search';
 export * from './Skeleton';
 export * from './Slider';
 export * from './Spinner';
-export type { EmSize, PercentSize, RemSize, ViewportSize } from './types';
 export * from './TabBar';
 export * from './Tag';
-export * from './Text';
 export * from './Theme';
 export * from './Toaster';
 export * from './Tooltip';
-export * from './RothkoProvider';
+export type { EmSize, PercentSize, RemSize, ViewportSize } from './types';
 export {
   clearAllBodyScrollLocks,
   disableBodyScroll,
@@ -38,3 +38,4 @@ export {
   getStyle,
 } from './utils/domUtils';
 export { When } from './When';
+export { Typography };

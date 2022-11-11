@@ -1,11 +1,11 @@
 import isString from 'lodash/isString';
 import React from 'react';
-import { Text } from '../Text';
-import type { AemikoKind, GreyScale } from '../Theme/types';
+import type { RothkoKind } from '../Theme/types';
+import Typography from '../Typography';
 
 export type FormControlProps = {
   name: string;
-  kind?: AemikoKind | GreyScale;
+  kind?: RothkoKind;
   label?: string | JSX.Element;
   className?: string;
   required?: boolean;
@@ -25,9 +25,9 @@ export const FormControl: React.FC<FormControlProps> = ({
   const renderLabel = isString(label) ? (
     <label htmlFor={name} className="f5 db mb1">
       {label && (
-        <Text.caption kind={kind} className="mb1 dib">
+        <Typography.caption kind={kind} className="mb1 dib">
           {label} {required && <Asterisk />}
-        </Text.caption>
+        </Typography.caption>
       )}
     </label>
   ) : (
@@ -38,9 +38,9 @@ export const FormControl: React.FC<FormControlProps> = ({
       {renderLabel}
       {children}
       {error && (
-        <Text.caption className="tl mt1" kind="danger">
+        <Typography.caption className="tl mt1" kind="danger">
           {error}
-        </Text.caption>
+        </Typography.caption>
       )}
     </div>
   );

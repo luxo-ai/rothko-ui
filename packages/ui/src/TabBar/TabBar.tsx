@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import type { NonEmptyArray } from '../Library/types';
-import { textStyle } from '../Text/Text';
+import { textStyle } from '../Typography/Typography';
 import { useTheme } from '../Theme';
 import type { ThemedElement } from '../Theme/types';
 

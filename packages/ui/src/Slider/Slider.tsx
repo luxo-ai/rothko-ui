@@ -1,8 +1,8 @@
 import type { Nullable } from '@rothko-ui/utils';
 import React, { useCallback, useMemo } from 'react';
-import { Text } from '../Text';
-import type { AemikoKind } from '../Theme';
+import type { RothkoKind } from '../Theme';
 import { useKindTheme } from '../Theme';
+import Typography from '../Typography';
 import type { SliderWidth } from './Common';
 import { SliderContainer, SliderRange, SliderTrack } from './Common';
 import { SliderHandle } from './SliderHandle';
@@ -12,7 +12,7 @@ type SliderProps = {
   min?: number;
   max: number;
   onChange: (v: number) => void;
-  kind?: AemikoKind;
+  kind?: RothkoKind;
   value?: Nullable<number>;
   minWidth?: SliderWidth;
   maxWidth?: SliderWidth;
@@ -50,12 +50,12 @@ export const Slider = ({
   return (
     <SliderContainer mw={maxWidth} nw={minWidth ?? maxWidth} className={className}>
       <div className="flex justify-between gap-2 mb3">
-        {label && <Text.labelLite kind="black">{label}</Text.labelLite>}
-        <Text.labelLite kind="black">
+        {label && <Typography.label light>{label}</Typography.label>}
+        <Typography.label light>
           {localVal.toFixed(precision)}
           {postfix ?? ''}
           {maxReached && orMore ? '+' : ''}
-        </Text.labelLite>
+        </Typography.label>
       </div>
       <SliderTrack className="flex flex-row items-center relative w-100" aemikoTheme={theme}>
         <SliderHandle

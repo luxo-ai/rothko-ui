@@ -1,13 +1,3 @@
-/*
-~~~~ Used to use Cera Pro for Headers ~~~~
-const FONT_FAMILY_CERA_PRO = {
-  regular: 'CeraPro-Regular',
-  italic: 'CeraPro-Regular-Italic',
-  bold: 'CeraPro-Bold',
-} as const;
-
-*/
-
 const FONT_FAMILY_LAB_GROTESQUE = {
   light: 'LabGrotesque-Light',
   regular: 'LabGrotesque-Regular',

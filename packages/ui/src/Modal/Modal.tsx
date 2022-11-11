@@ -8,9 +8,9 @@ import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
 import { ShadedBackdrop } from '../Library/Common';
 import { DomPortal } from '../Library/Portal';
-import { BODY_FONT_FAMILY } from '../Text';
-import { textStyle } from '../Text/Text';
-import type { AemikoSize } from '../Theme/types';
+import { BODY_FONT_FAMILY } from '../Typography';
+import { textStyle } from '../Typography/Typography';
+import type { RothkoSize } from '../Theme/types';
 import {
   addEvent,
   BODY_SCROLL_LOCK_IGNORE_ID,
@@ -19,7 +19,7 @@ import {
   removeEvent,
 } from '../utils/domUtils';
 
-const bodyStyleMap: Record<AemikoSize, FlattenSimpleInterpolation> = {
+const bodyStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
     padding: 2.75rem 1.125rem 1.5rem 1.125rem;
     max-width: 20rem;
@@ -42,7 +42,7 @@ const bodyStyleMap: Record<AemikoSize, FlattenSimpleInterpolation> = {
   `,
 };
 
-const headerStyleMap: Record<AemikoSize, FlattenSimpleInterpolation> = {
+const headerStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
     margin: 0 0 1.125rem 0;
     line-height: 1.25rem;
@@ -78,7 +78,7 @@ type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
-  size?: AemikoSize;
+  size?: RothkoSize;
   title?: string;
 } & LimitedDivProps;
 

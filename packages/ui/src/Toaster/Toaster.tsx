@@ -4,10 +4,10 @@ import { animated } from '@react-spring/web';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { PhantomButton } from '../Button/PhantomButton';
-import { Text } from '../Text';
+import Typography from '../Typography';
 import type { CanColor } from '../Theme/ThemeContext';
 import { useKindTheme } from '../Theme/ThemeContext';
-import type { AemikoKind } from '../Theme/types';
+import type { RothkoKind } from '../Theme/types';
 import type { ToastDetails } from './types';
 
 type AnimatedStyle = {
@@ -17,7 +17,7 @@ type AnimatedStyle = {
 };
 
 type ToastProps = Pick<ToastDetails, 'label' | 'content' | 'withLife'> & {
-  kind?: AemikoKind;
+  kind?: RothkoKind;
   animatedStyle?: AnimatedStyle;
   style?: React.CSSProperties;
   onClose?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -43,9 +43,14 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
       >
         <ToastAnimatedContainerDiv ref={ref} themeColorer={themeColorer}>
           <ToastContentContainerDiv>
-            {label && (typeof label === 'string' ? <Text.h3>{label}</Text.h3> : <div>{label}</div>)}
+            {label &&
+              (typeof label === 'string' ? (
+                <Typography.h3>{label}</Typography.h3>
+              ) : (
+                <div>{label}</div>
+              ))}
             {content && typeof content === 'string' ? (
-              <Text.body>{content}</Text.body>
+              <Typography.body>{content}</Typography.body>
             ) : (
               <div>{content}</div>
             )}

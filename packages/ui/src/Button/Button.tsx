@@ -3,18 +3,18 @@ import React from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { SimpleInlineSpinner } from '../Spinner';
-import { BODY_FONT_FAMILY } from '../Text';
-import type { AemikoKind, AemikoSize, CanColor, Color, GreyScale } from '../Theme';
-import { useKindTheme } from '../Theme';
+import { BODY_FONT_FAMILY } from '../Typography';
+import type { RothkoKind, RothkoSize } from '../Theme';
+import { idkFn } from '../Theme/themeV2';
 
-type Appearance = 'filled' | 'outline';
+type ButtonAppearance = 'filled' | 'outline';
 
 type HtmlButtonProps = Pick<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
   'className' | 'onClick' | 'type' | 'disabled' | 'tabIndex' | 'style'
 >;
 
-const sizeMap: Record<AemikoSize, FlattenSimpleInterpolation> = {
+const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
     padding: 0.3rem 0.5rem;
     font-size: 0.75rem;
@@ -39,7 +39,7 @@ const sizeMap: Record<AemikoSize, FlattenSimpleInterpolation> = {
   `,
 };
 
-const accessorySizeMap: Record<AemikoSize, number> = {
+const accessorySizeMap: Record<RothkoSize, number> = {
   xs: 10,
   s: 17,
   m: 23,
@@ -47,15 +47,15 @@ const accessorySizeMap: Record<AemikoSize, number> = {
   xl: 35,
 };
 
-type Accessory = (props: { size: number; color: Color }) => JSX.Element;
+type Accessory = (props: { size: number; color: string }) => JSX.Element;
 
 type ButtonProps = {
   /** the semantic kind of the button */
-  kind?: AemikoKind | GreyScale;
+  kind?: RothkoKind;
   /** does the button appear filled or outlined */
-  appearance?: Appearance;
+  appearance?: ButtonAppearance;
   /** button size */
-  size?: AemikoSize;
+  size?: RothkoSize;
   /** render an accessory to the left of the button content */
   accessoryLeft?: Accessory;
   /** render an accessory to the right of the button content  */
@@ -72,73 +72,76 @@ type ButtonProps = {
 } & HtmlButtonProps;
 
 export const Button: React.FC<ButtonProps> = ({
-  kind = 'primary',
-  appearance = 'filled',
-  size = 'm',
-  type = 'button',
   accessoryLeft: Left,
   accessoryRight: Right,
-  className,
+  appearance = 'filled',
   children,
-  tabIndex,
+  circle,
+  className,
   disabled,
-  pill,
   fitContent,
+  kind = 'primary',
   loading,
   onClick,
+  pill,
+  size = 'm',
   style,
-  circle,
+  tabIndex,
+  type = 'button',
 }) => {
-  const [themeColorer] = useKindTheme(kind);
-
   const appearanceClasses = {
+    ['btn-circle']: circle,
     ['btn-pill']: pill,
     ['fit-content']: fitContent,
-    ['btn-circle']: circle,
   } as const;
+
+  const iconColor = appearance === 'outline' ? idkFn(kind) : idkFn(kind, 'text');
 
   return (
     <StyledButton
-      className={clsx(appearanceClasses, `btn-size-${size}`, className)}
       appearance={appearance}
-      type={type}
+      className={clsx(appearanceClasses, `btn-size-${size}`, className)}
       disabled={disabled}
-      tabIndex={disabled ? -1 : tabIndex}
-      themeColorer={themeColorer}
+      kind={kind}
       onClick={onClick}
       style={style}
+      tabIndex={disabled ? -1 : tabIndex}
+      type={type}
     >
-      {Left && <Left size={accessorySizeMap[size]} color={themeColorer('text')} />}
+      {Left && <Left size={accessorySizeMap[size]} color={iconColor} />}
       {loading ? (
         <SimpleInlineSpinner asText={appearance !== 'outline'} kind={kind} size="s" />
       ) : (
         <>{children}</>
       )}
-      {Right && <Right size={accessorySizeMap[size]} color={themeColorer('text')} />}
+      {Right && <Right size={accessorySizeMap[size]} color={iconColor} />}
     </StyledButton>
   );
 };
 
-type BaseButtonProps = CanColor & { appearance: Appearance };
+type BaseButtonProps = { appearance: ButtonAppearance; kind: RothkoKind };
 
 export const buttonStyle = css<BaseButtonProps>`
-  width: 100%;
   -webkit-tap-highlight-color: transparent;
-  background: var(--primary-500); /*${({ appearance, themeColorer }) =>
-    appearance === 'outline' ? css`white` : themeColorer()};*/
+
+  width: 100%;
+  background: ${({ appearance, kind }) => (appearance === 'outline' ? css`white` : idkFn(kind))};
   font-family: ${BODY_FONT_FAMILY.regular};
+  color: ${({ appearance, kind }) =>
+    appearance === 'outline' ? idkFn(kind) : idkFn(kind, 'text')};
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   position: relative;
   overflow: hidden;
   cursor: pointer;
   user-select: none;
+
   outline: none;
   border: ${({ appearance }) => (appearance == 'outline' ? '1px solid' : 'none')};
-  border-color: ${({ themeColorer }) => themeColorer()};
-  color: ${({ appearance, themeColorer }) =>
-    appearance === 'outline' ? themeColorer() : themeColorer('text')};
+  border-color: ${({ kind }) => idkFn(kind)};
 
   ${Object.entries(sizeMap).map(
     ([key, value]) => css`
@@ -149,14 +152,17 @@ export const buttonStyle = css<BaseButtonProps>`
   )}
 
   &:not(.btn-pill) {
-    border-radius: 0.125rem; // 2px
+    border-radius: 0.125rem;
   }
+
   &.btn-pill {
     border-radius: 50vmin;
   }
+
   &.fit-content {
     width: fit-content;
   }
+
   &.btn-circle {
     border-radius: 50%;
     width: fit-content;
@@ -169,32 +175,33 @@ const StyledButton = styled.button<BaseButtonProps>`
 
   :not(:disabled) {
     /**
-   * hover is annoying and has bad UX on touch based machines
-   * The element is still marked as "hover" after pressing and until
-   * onBlur is called. Keep the same look for now (deactivate :hover)
-   */
+     * hover is annoying and has bad UX on touch based machines
+     * The element is still marked as "hover" after pressing and until
+     * onBlur is called. Keep the same look for now (deactivate :hover)
+     */
     :hover {
     }
     :focus {
     }
     :active {
-      background: ${({ appearance, themeColorer }) =>
-        appearance === 'outline' ? css`transparent` : themeColorer('bg:active')};
-      border-color: ${({ themeColorer }) => themeColorer('bg:active')};
-      ${({ appearance, themeColorer }) =>
+      background: ${({ appearance, kind }) =>
+        appearance === 'outline' ? css`transparent` : idkFn(kind, 'bg-active')};
+
+      border-color: ${({ kind }) => idkFn(kind, 'bg-active')};
+      ${({ appearance, kind }) =>
         appearance === 'outline'
           ? css`
-              color: ${themeColorer('bg:active')};
+              color: ${idkFn(kind, 'bg-active')};
             `
           : ''};
     }
   }
 
   :disabled {
-    background: ${({ appearance, themeColorer }) =>
-      appearance === 'outline' ? css`transparent` : themeColorer('bg:disabled')};
-    border-color: ${({ appearance, themeColorer }) =>
-      appearance !== 'outline' ? css`transparent` : themeColorer('bg:disabled')};
+    background: ${({ appearance, kind }) =>
+      appearance === 'outline' ? css`transparent` : idkFn(kind, 'bg-disabled')};
+    border-color: ${({ appearance, kind }) =>
+      appearance !== 'outline' ? css`transparent` : idkFn(kind, 'bg-disabled')};
     cursor: not-allowed;
     opacity: 0.75;
   }

@@ -5,7 +5,7 @@ import React from 'react';
 import styled from 'styled-components';
 import type { CanColor } from '../Theme';
 import { useKindTheme } from '../Theme';
-import type { AemikoKind, ThemedElement } from '../Theme/types';
+import type { RothkoKind, ThemedElement } from '../Theme/types';
 import { keyDownFactory } from '../utils/keyUtils';
 
 export type ToggleProps = {
@@ -14,7 +14,7 @@ export type ToggleProps = {
   children?: React.ReactNode;
   style?: CSSProperties;
   className?: string;
-  kind?: AemikoKind;
+  kind?: RothkoKind;
 };
 
 export function Toggle({

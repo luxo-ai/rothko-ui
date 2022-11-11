@@ -1,6 +1,7 @@
-import type { DeepPartial, NestedRecord } from '@rothko-ui/utils';
 import { pathToCssVariable } from '@rothko-ui/tokens';
+import type { DeepPartial, NestedRecord } from '@rothko-ui/utils';
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import type { RothkoKind } from './types';
 
 type Mode = 'light' | 'dark';
 
@@ -8,121 +9,7 @@ const TERMINAL_KEY = 'value' as const;
 
 type ThemeOverrides = DeepPartial<{
   color: {
-    primary: {
-      100: { [TERMINAL_KEY]: string };
-      200: { [TERMINAL_KEY]: string };
-      300: { [TERMINAL_KEY]: string };
-      400: { [TERMINAL_KEY]: string };
-      500: { [TERMINAL_KEY]: string };
-      600: { [TERMINAL_KEY]: string };
-      700: { [TERMINAL_KEY]: string };
-      800: { [TERMINAL_KEY]: string };
-      900: { [TERMINAL_KEY]: string };
-      transparent: {
-        100: { [TERMINAL_KEY]: string };
-        200: { [TERMINAL_KEY]: string };
-        300: { [TERMINAL_KEY]: string };
-        400: { [TERMINAL_KEY]: string };
-        500: { [TERMINAL_KEY]: string };
-        600: { [TERMINAL_KEY]: string };
-      };
-    };
-    secondary: {
-      100: { [TERMINAL_KEY]: string };
-      200: { [TERMINAL_KEY]: string };
-      300: { [TERMINAL_KEY]: string };
-      400: { [TERMINAL_KEY]: string };
-      500: { [TERMINAL_KEY]: string };
-      600: { [TERMINAL_KEY]: string };
-      700: { [TERMINAL_KEY]: string };
-      800: { [TERMINAL_KEY]: string };
-      900: { [TERMINAL_KEY]: string };
-      transparent: {
-        100: { [TERMINAL_KEY]: string };
-        200: { [TERMINAL_KEY]: string };
-        300: { [TERMINAL_KEY]: string };
-        400: { [TERMINAL_KEY]: string };
-        500: { [TERMINAL_KEY]: string };
-        600: { [TERMINAL_KEY]: string };
-      };
-    };
-    success: {
-      100: { [TERMINAL_KEY]: string };
-      200: { [TERMINAL_KEY]: string };
-      300: { [TERMINAL_KEY]: string };
-      400: { [TERMINAL_KEY]: string };
-      500: { [TERMINAL_KEY]: string };
-      600: { [TERMINAL_KEY]: string };
-      700: { [TERMINAL_KEY]: string };
-      800: { [TERMINAL_KEY]: string };
-      900: { [TERMINAL_KEY]: string };
-      transparent: {
-        100: { [TERMINAL_KEY]: string };
-        200: { [TERMINAL_KEY]: string };
-        300: { [TERMINAL_KEY]: string };
-        400: { [TERMINAL_KEY]: string };
-        500: { [TERMINAL_KEY]: string };
-        600: { [TERMINAL_KEY]: string };
-      };
-    };
-    info: {
-      100: { [TERMINAL_KEY]: string };
-      200: { [TERMINAL_KEY]: string };
-      300: { [TERMINAL_KEY]: string };
-      400: { [TERMINAL_KEY]: string };
-      500: { [TERMINAL_KEY]: string };
-      600: { [TERMINAL_KEY]: string };
-      700: { [TERMINAL_KEY]: string };
-      800: { [TERMINAL_KEY]: string };
-      900: { [TERMINAL_KEY]: string };
-      transparent: {
-        100: { [TERMINAL_KEY]: string };
-        200: { [TERMINAL_KEY]: string };
-        300: { [TERMINAL_KEY]: string };
-        400: { [TERMINAL_KEY]: string };
-        500: { [TERMINAL_KEY]: string };
-        600: { [TERMINAL_KEY]: string };
-      };
-    };
-    warning: {
-      100: { [TERMINAL_KEY]: string };
-      200: { [TERMINAL_KEY]: string };
-      300: { [TERMINAL_KEY]: string };
-      400: { [TERMINAL_KEY]: string };
-      500: { [TERMINAL_KEY]: string };
-      600: { [TERMINAL_KEY]: string };
-      700: { [TERMINAL_KEY]: string };
-      800: { [TERMINAL_KEY]: string };
-      900: { [TERMINAL_KEY]: string };
-      transparent: {
-        100: { [TERMINAL_KEY]: string };
-        200: { [TERMINAL_KEY]: string };
-        300: { [TERMINAL_KEY]: string };
-        400: { [TERMINAL_KEY]: string };
-        500: { [TERMINAL_KEY]: string };
-        600: { [TERMINAL_KEY]: string };
-      };
-    };
-    danger: {
-      100: { [TERMINAL_KEY]: string };
-      200: { [TERMINAL_KEY]: string };
-      300: { [TERMINAL_KEY]: string };
-      400: { [TERMINAL_KEY]: string };
-      500: { [TERMINAL_KEY]: string };
-      600: { [TERMINAL_KEY]: string };
-      700: { [TERMINAL_KEY]: string };
-      800: { [TERMINAL_KEY]: string };
-      900: { [TERMINAL_KEY]: string };
-      transparent: {
-        100: { [TERMINAL_KEY]: string };
-        200: { [TERMINAL_KEY]: string };
-        300: { [TERMINAL_KEY]: string };
-        400: { [TERMINAL_KEY]: string };
-        500: { [TERMINAL_KEY]: string };
-        600: { [TERMINAL_KEY]: string };
-      };
-    };
-    basic: {
+    [kind in RothkoKind]: {
       100: { [TERMINAL_KEY]: string };
       200: { [TERMINAL_KEY]: string };
       300: { [TERMINAL_KEY]: string };
@@ -209,7 +96,7 @@ export const ThemeContextProvider = ({
   );
 };
 
-export const useTheme = () => {
+export const useThemeV2 = () => {
   const ctx = useContext(Context);
   return { mode: ctx.mode, toggleMode: ctx.toggleMode };
 };

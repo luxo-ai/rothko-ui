@@ -46,6 +46,6 @@ export type LightnessMap = {
 };
 
 export type Theme = { readonly [key in ThemeKey]: Color };
-export type AemikoKind = ColorName;
-export type AemikoSize = 'xs' | 's' | 'm' | 'l' | 'xl';
+export type RothkoKind = ColorName;
+export type RothkoSize = 'xs' | 's' | 'm' | 'l' | 'xl';
 export type ThemedElement = { aemikoTheme: Theme };

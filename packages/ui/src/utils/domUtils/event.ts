@@ -22,11 +22,8 @@ export const isMouseEvent = (e: React.UIEvent): e is React.MouseEvent => {
     'mousemove',
   ].includes(e.type);
 };
-
-export const hasTouches = <K extends TouchKey>(
-  evt: React.UIEvent,
-  ...keys: K[]
-): evt is WithTouches<typeof evt, K> => {
+// WithTouches<typeof evt, K>
+export const hasTouches = <K extends TouchKey>(evt: React.UIEvent, ...keys: K[]): evt is any => {
   return keys.every(
     k => k in evt && typeof (evt as any)[k] === 'object' && 'identifiedTouch' in (evt as any)[k]
   );

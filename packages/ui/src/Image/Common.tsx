@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { textStyle } from '../Text/Text';
+import { textStyle } from '../Typography/Typography';
 
 export const FallbackText = styled.p<{ boxSize: string }>`
   ${textStyle}

@@ -1,7 +1,7 @@
-import type { AemikoKind } from '../Theme';
+import type { RothkoKind } from '../Theme';
 
 export type ToastDetails = {
-  kind?: AemikoKind;
+  kind?: RothkoKind;
   label?: React.ReactNode;
   content?: React.ReactNode;
   duration?: number;

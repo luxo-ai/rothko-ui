@@ -5,7 +5,7 @@ import isNil from 'lodash/isNil';
 import React, { useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { BackLinkButton } from '../Button/BackLinkButton';
-import { Text } from '../Text';
+import Typography from '../Typography';
 import { useTheme } from '../Theme';
 import { directionMap } from '../utils/keyUtils';
 import { debugFactory } from '../utils/utils';
@@ -170,7 +170,7 @@ export function NestedDropdown<V extends Value, T = undefined>({
 
   return (
     <div className={className}>
-      {label && <LabelText kind="black">{label}</LabelText>}
+      {label && <LabelText>{label}</LabelText>}
       <DropdownContainer
         id={id}
         ref={containerRef}
@@ -208,7 +208,7 @@ export function NestedDropdown<V extends Value, T = undefined>({
                 />
               </ButtonContainerDiv>
             )}
-            {title && <TitleText kind="black">{title}</TitleText>}
+            {title && <TitleText>{title}</TitleText>}
             <ul role="listbox" tabIndex={-1}>
               {currentOptions.map((option, idx) => {
                 const selected = optIdx === idx;
@@ -268,7 +268,7 @@ const ButtonContainerDiv = styled.div`
   padding-left: 0.5rem;
 `;
 
-const TitleText = styled(Text.label)`
+const TitleText = styled(Typography.label)`
   padding-top: 1rem;
   padding-bottom: 0.125rem;
   ${menuItemHPadding};

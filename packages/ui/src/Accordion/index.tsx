@@ -1,14 +1,14 @@
-import { MinusOutline, PlusOutline } from '@rothko-ui/icons';
 import { animated, useSpring } from '@react-spring/web';
+import { MinusOutline, PlusOutline } from '@rothko-ui/icons';
 import { Set as ImSet } from 'immutable';
 import React, { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import uuid from 'uuid';
 import { phantomButtonStyle } from '../Button/PhantomButton';
 import { unselectableStyle } from '../Library/Styles';
-import { Text } from '../Text';
 import { useKindTheme } from '../Theme/ThemeContext';
-import type { AemikoKind, Color, GreyScale } from '../Theme/types';
+import type { Color, GreyScale, RothkoKind } from '../Theme/types';
+import Typography from '../Typography';
 import { getElementFullHeight } from '../utils/domUtils/dimensions';
 
 type IAccordionCtx = {
@@ -32,7 +32,7 @@ type AccordionProps = {
   bordered?: boolean;
   className?: string;
   style?: React.CSSProperties;
-  kind?: AemikoKind | GreyScale;
+  kind?: RothkoKind | GreyScale;
   children: React.ReactNode;
 };
 
@@ -188,12 +188,12 @@ const PanelContentDiv = styled.div`
   padding-bottom: 0.75rem;
 `;
 
-const DefaultBodyText = styled(Text.body)`
+const DefaultBodyText = styled(Typography.body)`
   margin: 0;
   padding: 0;
 `;
 
-const DefaultLabelText = styled(Text.bodyBold)`
+const DefaultLabelText = styled(Typography.body).attrs({ bold: true })`
   margin: 0;
   padding: 0;
 `;

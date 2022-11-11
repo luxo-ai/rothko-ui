@@ -1,7 +1,7 @@
 import keyboardKey from 'keyboard-key';
 import React from 'react';
 import styled from 'styled-components';
-import { Text } from '../Text';
+import Typography from '../Typography';
 import { useTheme } from '../Theme';
 import type { ThemedElement } from '../Theme/types';
 import type { Option, Value } from '../Library/types';
@@ -62,7 +62,7 @@ export const Radio = ({ label, checked, onChange }: RadioProps) => {
           <div className="radio-inner" />
         </div>
       </RadioContainer>
-      {label && <Text.bodySmall>{label}</Text.bodySmall>}
+      {label && <Typography.bodySmall>{label}</Typography.bodySmall>}
     </RadioC>
   );
 };
