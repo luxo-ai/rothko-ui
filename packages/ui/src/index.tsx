@@ -1,9 +1,10 @@
+import Alert from './Alert';
+import Checkbox from './Checkbox';
 import Typography from './Typography';
+
 export * from './Accordion';
-export * from './Alert';
 export * from './BreadCrumbs';
 export * from './Button';
-export * from './Checkbox';
 export { MaxWidth, MinWidth, WidthGeqOnly, WidthLeqOnly } from './Dimensions';
 export { Dot } from './Dot';
 export * from './Dropdown';
@@ -38,4 +39,6 @@ export {
   getStyle,
 } from './utils/domUtils';
 export { When } from './When';
+export { Alert };
+export { Checkbox };
 export { Typography };

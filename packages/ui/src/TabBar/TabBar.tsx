@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import type { NonEmptyArray } from '../Library/types';
-import { textStyle } from '../Typography/Typography';
+import Typography from '../Typography/Typography';
 import { useTheme } from '../Theme';
 import type { ThemedElement } from '../Theme/types';
 
@@ -86,8 +86,7 @@ const TabList = styled.ul`
   justify-content: space-around;
 `;
 
-const TabItem = styled.li`
-  ${textStyle}
+const TabItem = styled(Typography.body).attrs({ as: 'li' })`
   padding: 0 3rem;
   cursor: pointer;
 `;

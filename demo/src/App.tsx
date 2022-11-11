@@ -25,7 +25,7 @@ import {
   Dropdown,
   NestedDropdown,
   Search,
-  Text,
+  Typography,
   RothkoProvider,
   useRothko,
 } from '@rothko-ui/ui';
@@ -55,9 +55,12 @@ const App = () => {
         <ToastContextProvider>
           <div className="app-container">
             <header className="app-header">
-              <h2 className="idk ok">use me to test components</h2>
+              <Typography.h1 bold italic light kind="secondary">
+                use me to test components
+              </Typography.h1>
+              <Typography.body>testing</Typography.body>
             </header>
-            <Text.body>testing</Text.body>
+            <Typography.body>testing</Typography.body>
             <ThemeButton />
             <div id="#my-qr-code"></div>
             <main className="example-cards">
@@ -412,8 +415,8 @@ const CheckboxCard = () => {
   return (
     <div className="white-padded-card">
       <h3>Checkbox</h3>
-      <Checkbox checked={checked1} onChange={() => setChecked1(!checked1)} />
-      <Checkbox checked={checked2} onChange={() => setChecked2(!checked2)}>
+      <Checkbox kind="danger" checked={checked1} onChange={() => setChecked1(!checked1)} />
+      <Checkbox kind="info" checked={checked2} onChange={() => setChecked2(!checked2)}>
         Hello world
       </Checkbox>
     </div>

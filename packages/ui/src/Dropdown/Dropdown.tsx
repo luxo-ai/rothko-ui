@@ -225,7 +225,7 @@ export function Dropdown<V extends Value, T = undefined>({
 
   return (
     <div className={className}>
-      {label && <LabelText kind="black">{label}</LabelText>}
+      {label && <LabelText>{label}</LabelText>}
       <DropdownContainer
         ref={containerRef}
         tabIndex={0}

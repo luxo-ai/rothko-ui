@@ -1,5 +1,5 @@
-import { CloseOutline } from '@rothko-ui/icons';
 import { animated, useTransition } from '@react-spring/web';
+import { CloseOutline } from '@rothko-ui/icons';
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
 import React, { useEffect, useRef } from 'react';
@@ -8,9 +8,9 @@ import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
 import { ShadedBackdrop } from '../Library/Common';
 import { DomPortal } from '../Library/Portal';
-import { BODY_FONT_FAMILY } from '../Typography';
-import { textStyle } from '../Typography/Typography';
 import type { RothkoSize } from '../Theme/types';
+import { BODY_FONT_FAMILY } from '../Typography';
+import Typography from '../Typography/Typography';
 import {
   addEvent,
   BODY_SCROLL_LOCK_IGNORE_ID,
@@ -209,8 +209,7 @@ const ModalContainerDiv = styled.div`
 
 const AnimatedModalContainer = animated(ModalContainerDiv);
 
-const ModalHeaderText = styled.p`
-  ${textStyle}
+const ModalHeaderText = styled(Typography.body)`
   ${Object.entries(headerStyleMap).map(
     ([key, value]) => css`
       &.modal-header-size-${key} {

@@ -4,6 +4,10 @@ type TransparentLightness = `transparent-${Exclude<Lightness, 700 | 800 | 900>}`
 type SemanticName = 'success' | 'info' | 'warning' | 'danger' | 'basic';
 type BrandName = 'primary' | 'secondary';
 
+export type KindProps = {
+  kind?: RothkoKind;
+};
+
 type ColorName = SemanticName | BrandName;
 type LightnessKey = Lightness | TransparentLightness;
 type ThemeKey = `${ColorName}-${LightnessKey}`;

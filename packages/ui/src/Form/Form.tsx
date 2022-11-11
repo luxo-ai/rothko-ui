@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import clsx from 'clsx';
 import get from 'lodash/get';
 // import moment from 'moment-timezone';
@@ -5,7 +7,7 @@ import React from 'react';
 import type { RegisterOptions } from 'react-hook-form';
 import { Controller, useFormContext } from 'react-hook-form';
 // import InputMask from 'react-input-mask';
-import { Checkbox } from '../Checkbox';
+import Checkbox from '../Checkbox/Checkbox';
 import { Dropdown } from '../Dropdown';
 import type { FormControlProps } from './FormControl';
 import { FormControl } from './FormControl';
@@ -14,7 +16,7 @@ import type { InputProps, TextareaProps } from '../Input';
 import { Input, Textarea } from '../Input';
 import { OptionGroup } from '../OptionGroup';
 import { RadioGroup } from '../Radio';
-import { MultiSlider, Range, Slider } from '../Slider';
+import { MultiSlider, Slider } from '../Slider';
 import { Toggle } from '../Toggle/Toggle';
 
 type ControllerRenderProps = Parameters<Parameters<typeof Controller>[0]['render']>[0]['field'];
