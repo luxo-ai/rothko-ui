@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
-import { AemikoKind, GreyScale, greyScale, theme, Theme } from '../Theme';
+import type { AemikoKind, GreyScale, Theme } from '../Theme';
+import { greyScale, theme } from '../Theme';
 import { BODY_FONT_FAMILY, HEADER_FONT_FAMILY } from './common';
 
 export type TextProps = {
@@ -24,7 +25,7 @@ export const textStyle = css<TextProps>`
   font-size: 1rem;
   line-height: 1.25rem;
   margin: 0.125rem 0;
-  color: ${({ kind }) => getTextColor(kind)};
+  color: var(--primary-100); //${({ kind }) => getTextColor(kind)};
   &.light {
     font-family: ${BODY_FONT_FAMILY.light};
   }

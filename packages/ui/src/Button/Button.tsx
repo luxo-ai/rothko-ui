@@ -1,9 +1,11 @@
 import clsx from 'clsx';
 import React from 'react';
-import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
+import type { FlattenSimpleInterpolation } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { SimpleInlineSpinner } from '../Spinner';
 import { BODY_FONT_FAMILY } from '../Text';
-import { AemikoKind, AemikoSize, CanColor, Color, GreyScale, useKindTheme } from '../Theme';
+import type { AemikoKind, AemikoSize, CanColor, Color, GreyScale } from '../Theme';
+import { useKindTheme } from '../Theme';
 
 type Appearance = 'filled' | 'outline';
 
@@ -122,8 +124,8 @@ type BaseButtonProps = CanColor & { appearance: Appearance };
 export const buttonStyle = css<BaseButtonProps>`
   width: 100%;
   -webkit-tap-highlight-color: transparent;
-  background: ${({ appearance, themeColorer }) =>
-    appearance === 'outline' ? css`white` : themeColorer()};
+  background: var(--primary-500); /*${({ appearance, themeColorer }) =>
+    appearance === 'outline' ? css`white` : themeColorer()};*/
   font-family: ${BODY_FONT_FAMILY.regular};
   display: inline-flex;
   align-items: center;

@@ -1,4 +1,4 @@
-import { ChevronDownOutline, CloseOutline } from '@aemiko/icons';
+import { ChevronDownOutline, CloseOutline } from '@rothko-ui/icons';
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
 import isArray from 'lodash/isArray';

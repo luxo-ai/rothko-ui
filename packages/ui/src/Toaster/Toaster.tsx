@@ -1,4 +1,4 @@
-import { CloseOutline } from '@aemiko/icons';
+import { CloseOutline } from '@rothko-ui/icons';
 import type { SpringValue } from '@react-spring/web';
 import { animated } from '@react-spring/web';
 import React from 'react';

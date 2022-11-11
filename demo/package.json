@@ -10,7 +10,7 @@
   "license": "MIT",
   "author": "luxo-ai <luxo.ai@proton.me>",
   "dependencies": {
-    "@rothko-ui/ui": "^0.1.2",
+    "@rothko-ui/ui": "^1.0.0",
     "lorem-ipsum": "^2.0.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",

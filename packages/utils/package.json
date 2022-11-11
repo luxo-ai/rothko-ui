@@ -16,7 +16,9 @@
   "scripts": {
     "build": "microbundle --format modern,cjs",
     "build:dev": "microbundle watch --no-compress --format modern,cjs",
-    "prepare": "run-s build"
+    "prepare": "run-s build",
+    "lint": "eslint ./src --ext .js,.ts",
+    "lint:fix": "eslint ./src --ext .js,.ts --fix"
   },
   "dependencies": {
     "axios": "^0.27.2",

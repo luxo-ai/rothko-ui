@@ -1,4 +1,4 @@
-import { CloseOutline } from '@aemiko/icons';
+import { CloseOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';

@@ -1,4 +1,4 @@
-import { Nullable } from '@aemiko/utils';
+import { Nullable } from '@rothko-ui/utils';
 import React, { useCallback, useMemo } from 'react';
 import { Text } from '../Text';
 import { AemikoKind, useKindTheme } from '../Theme';

@@ -1,4 +1,4 @@
-import { CloseOutline } from '@aemiko/icons';
+import { CloseOutline } from '@rothko-ui/icons';
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';

@@ -1,4 +1,4 @@
-import { CollapseOutline, ExpandOutline } from '@aemiko/icons';
+import { CollapseOutline, ExpandOutline } from '@rothko-ui/icons';
 import { animated, useSpring } from '@react-spring/web';
 import React, { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';

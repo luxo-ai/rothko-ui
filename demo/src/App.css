@@ -31,3 +31,7 @@
 .accordion-container {
   padding: 0.5rem;
 }
+
+.idk {
+  color: var(--primary-500);
+}

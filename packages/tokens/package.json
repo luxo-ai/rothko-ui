@@ -1,0 +1,49 @@
+{
+  "name": "@rothko-ui/tokens",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luxo-ai/rothko-ui",
+    "directory": "packages/tokens"
+  },
+  "private": true,
+  "license": "MIT",
+  "author": "luxo-ai <luxo.ai@proton.me>",
+  "description": "style tokens for rothko-ui",
+  "dependencies": {
+    "style-dictionary": "^3.7.1"
+  },
+  "devDependencies": {
+    "fs": "^0.0.1-security",
+    "microbundle": "^0.15.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  },
+  "scripts": {
+    "prebuild": "rimraf build",
+    "build": "microbundle --format modern,cjs && ts-node-esm --skip-project ./src/build.ts",
+    "postbuild": "rimraf tmp",
+    "clean": "rm -rf build",
+    "lint": "eslint ./src --ext .js,.ts",
+    "lint:fix": "eslint ./src --ext .js,.ts --fix"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    },
+    "./build/index.css": {
+      "import": "./build/index.css",
+      "require": "./build/index.css"
+    }
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.modern.js",
+  "types": "dist/index.d.ts",
+  "source": "index.ts",
+  "files": [
+    "dist/index.js",
+    "build/*.css"
+  ]
+}

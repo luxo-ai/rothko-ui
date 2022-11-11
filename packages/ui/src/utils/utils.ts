@@ -1,6 +1,6 @@
 export const debugFactory = (module?: string) => {
-  const canDebug = process.env.NODE_ENV !== 'production' && process.env.DEBUG === '1';
-  return (...argz: (string | object | symbol | number)[]) => {
+  const canDebug = false; // process.env.NODE_ENV !== 'production' && process.env.DEBUG === '1';
+  return (...argz: (string | Record<string, unknown> | symbol | number)[]) => {
     if (canDebug) {
       console.log(`[aemiko${module ? `:${module}` : ''}]`, ...argz);
     }

@@ -1,4 +1,4 @@
-import { Nullable } from '@aemiko/utils';
+import { Nullable } from '@rothko-ui/utils';
 import React from 'react';
 
 const touchesKeys = ['touches', 'targetTouches', 'changedTouches'] as const;

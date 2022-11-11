@@ -26,47 +26,67 @@ import {
   NestedDropdown,
   Search,
   Text,
-} from '@aemiko/ui';
+  RothkoProvider,
+  useRothko,
+} from '@rothko-ui/ui';
 import { useState } from 'react';
 import './App.css';
 import * as lorem from 'lorem-ipsum';
-// import { } from 'react'
 
-// linear-gradient(0.25turn, #9198e5, #e66465)
+const on = false;
 
 const App = () => {
   return (
-    <ThemeProvider>
-      <ToastContextProvider>
-        <div className="app-container">
-          <header className="app-header">
-            <h2>use me to test components</h2>
-          </header>
-          <main className="example-cards">
-            <NestedDropdownCard />
-            <SearchCard />
-            <SingleDropdownCard />
-            <MultiDropdownCard />
-            <ToastCard />
-            <BreadCrumbsCard />
-            <TagCard />
-            <FilterGroupCard />
-            <RadioCard />
-            <BottomPopupCard />
-            <OptionGroupCard />
-            <ModalCard />
-            <LabelCard />
-            <InputCard />
-            <CheckboxCard />
-            <AlertCard />
-            <AccordionCard />
-            <AvatarCard />
-            <ButtonCard />
-          </main>
-        </div>
-      </ToastContextProvider>
-    </ThemeProvider>
+    <RothkoProvider
+      themeOverrides={
+        on
+          ? {
+              color: {
+                primary: { 100: { value: 'red' }, transparent: { 400: { value: '#ff00bf443' } } },
+              },
+            }
+          : undefined
+      }
+    >
+      <ThemeProvider>
+        <ToastContextProvider>
+          <div className="app-container">
+            <header className="app-header">
+              <h2 className="idk ok">use me to test components</h2>
+            </header>
+            <Text.body>testing</Text.body>
+            <ThemeButton />
+            <main className="example-cards">
+              <NestedDropdownCard />
+              <SearchCard />
+              <SingleDropdownCard />
+              <MultiDropdownCard />
+              <ToastCard />
+              <BreadCrumbsCard />
+              <TagCard />
+              <FilterGroupCard />
+              <RadioCard />
+              <BottomPopupCard />
+              <OptionGroupCard />
+              <ModalCard />
+              <LabelCard />
+              <InputCard />
+              <CheckboxCard />
+              <AlertCard />
+              <AccordionCard />
+              <AvatarCard />
+              <ButtonCard />
+            </main>
+          </div>
+        </ToastContextProvider>
+      </ThemeProvider>
+    </RothkoProvider>
   );
+};
+
+const ThemeButton = () => {
+  const { toggleMode } = useRothko();
+  return <Button onClick={toggleMode}>toggle theme</Button>;
 };
 
 const NestedDropdownCard = () => {

@@ -1,4 +1,4 @@
-import { flatCompact } from '@aemiko/utils';
+import { flatCompact } from '@rothko-ui/utils';
 import { Set } from 'immutable';
 import isFunction from 'lodash/isFunction';
 import isNil from 'lodash/isNil';

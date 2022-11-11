@@ -12,20 +12,27 @@
     "start:example": "lerna --scope=app run dev --stream",
     "add:all": "lerna add",
     "add:example": "lerna add $1 --scope=app",
-    "add:ui": "lerna add $1 --scope=@aemiko/ui",
-    "add:utils": "lerna add $1 --scope=@aemiko/utils",
-    "add:icons": "lerna add $1 --scope=@aemiko/icons",
+    "add:ui": "lerna add $1 --scope=@rothko-ui/ui",
+    "add:utils": "lerna add $1 --scope=@rothko-ui/utils",
+    "add:icons": "lerna add $1 --scope=@rothko-ui/icons",
+    "add:tokens": "lerna add $1 --scope=@rothko-ui/tokens",
     "bootstrap": "lerna bootstrap",
     "prebuild": "lerna bootstrap",
-    "build:icons": "lerna --scope=@aemiko/icons run build --stream",
-    "build:shared": "lerna --scope='{@aemiko/ui,@aemiko/utils,@aemiko/icons}' run build --stream",
-    "build:shared:dev": "lerna --scope='{@aemiko/ui,@aemiko/utils}' run build:dev --stream",
-    "build:ui:dev": "lerna --scope=@aemiko/ui run build:dev --stream"
+    "build:icons": "lerna --scope=@rothko-ui/icons run build --stream",
+    "build:utils": "lerna --scope=@rothko-ui/utils run build --stream",
+    "build:shared": "lerna --scope='{@rothko-ui/ui,@rothko-ui/utils,@rothko-ui/icons}' run build --stream",
+    "build:shared:dev": "lerna --scope='{@rothko-ui/ui,@rothko-ui/utils}' run build:dev --stream",
+    "build:ui:dev": "lerna --scope=@rothko-ui/ui run build:dev --stream",
+    "lint": "lerna run lint",
+    "lint:fix": "lerna run lint:fix"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.10",
     "lerna": "^4.0.0",
     "prettier": "^2.3.2",
     "run-s": "^0.0.0",
@@ -36,5 +43,8 @@
       "packages/*",
       "demo"
     ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
   }
 }

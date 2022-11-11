@@ -1,4 +1,4 @@
-import { kebabToCamelCase, Nullable } from '@aemiko/utils';
+import { kebabToCamelCase, Nullable } from '@rothko-ui/utils';
 import parseInt from 'lodash/parseInt';
 import React from 'react';
 import { RemSize } from '../../types';

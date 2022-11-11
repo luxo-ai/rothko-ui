@@ -1,5 +1,5 @@
 // ignore PascalCase requirements for exports from text.tsx
-const lowerCaseExports = new RegExp('^export const ([a-z][a-zA-Z0-9]*)\\s{0,1}=.*$', 'gm');
+// const lowerCaseExports = new RegExp('^export const ([a-z][a-zA-Z0-9]*)\\s{0,1}=.*$', 'gm');
 /*const textNames = require('fs')
   .readFileSync('./packages/ui/Text/Text.tsx')
   .toString()
@@ -66,3 +66,21 @@ module.exports = {
   },
 };
 */
+
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint', 'react', 'prettier'],
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+    'plugin:react/recommended',
+  ],
+  rules: {
+    '@typescript-eslint/consistent-type-imports': [1],
+    '@typescript-eslint/explicit-module-boundary-types': [0],
+  },
+  parserOptions: {
+    tsconfigRootDir: __dirname,
+    project: ['./packages/**/tsconfig.json'],
+  },
+};

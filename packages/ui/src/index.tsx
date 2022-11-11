@@ -30,6 +30,7 @@ export * from './Text';
 export * from './Theme';
 export * from './Toaster';
 export * from './Tooltip';
+export * from './RothkoProvider';
 export {
   clearAllBodyScrollLocks,
   disableBodyScroll,

@@ -1,4 +1,4 @@
-import { Nullable } from '@aemiko/utils';
+import { Nullable } from '@rothko-ui/utils';
 import { parseDecimal } from '../utils';
 
 export const innerHeight = (el: HTMLElement) => {

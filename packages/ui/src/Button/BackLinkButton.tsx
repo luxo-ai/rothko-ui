@@ -1,4 +1,4 @@
-import { ChevronLeftOutline } from '@aemiko/icons';
+import { ChevronLeftOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
 import { linkStyle, TextProps } from '../Text/Text';

@@ -1,4 +1,4 @@
-import { CloseOutline } from '@aemiko/icons';
+import { CloseOutline } from '@rothko-ui/icons';
 import { animated, useTransition } from '@react-spring/web';
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
