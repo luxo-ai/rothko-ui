@@ -5,13 +5,12 @@ import isNil from 'lodash/isNil';
 import React, { useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { BackLinkButton } from '../Button/BackLinkButton';
-import Typography from '../Typography';
-import { useTheme } from '../Theme';
-import { directionMap } from '../utils/keyUtils';
-import { debugFactory } from '../utils/utils';
+import useMenu from '../Library/Hooks/useMenu';
 import { DefaultRenderOption } from '../Library/RenderOption';
 import type { FocusHandler, NestedOption, Option, RenderOption, Value } from '../Library/types';
-import useMenu from '../Library/Hooks/useMenu';
+import Typography from '../Typography';
+import { directionMap } from '../utils/keyUtils';
+import { debugFactory } from '../utils/utils';
 import {
   ControlContainer,
   DropdownContainer,
@@ -74,8 +73,6 @@ export function NestedDropdown<V extends Value, T = undefined>({
   placeholder = 'Select',
   label,
 }: NestedDropdownProps<V, T>) {
-  const { theme } = useTheme();
-
   const {
     currentOptions,
     canGoToPrevCategory,
@@ -179,7 +176,6 @@ export function NestedDropdown<V extends Value, T = undefined>({
         onBlur={onBlurHandler}
         onClick={openMenu}
         onKeyDown={onKeyDown}
-        aemikoTheme={theme}
         className={containerClasses}
       >
         <TextContainer className={clsx({ disabled })} tabIndex={-1}>
@@ -196,7 +192,7 @@ export function NestedDropdown<V extends Value, T = undefined>({
             ref={menuRef}
             id="dropdown-menu"
             tabIndex={-1}
-            data-aemiko-body-scroll-lock-ignore
+            data-rothko-body-scroll-lock-ignore
           >
             {canGoToPrevCategory && (
               <ButtonContainerDiv>

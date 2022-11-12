@@ -1,10 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from 'styled-components';
-import { hideBrowserOutline } from '../Typography';
-import type { ThemedElement } from '../Theme/types';
 import { baseInputStyle } from '../Input';
-import Typography from '../Typography';
+import Typography, { hideBrowserOutline } from '../Typography';
 
-export const DropdownContainer = styled.div<ThemedElement>`
+export const DropdownContainer = styled.div`
   ${baseInputStyle} // causing issues before, this helped
   -webkit-tap-highlight-color: transparent;
   // background: red;

@@ -9,8 +9,6 @@ import { PhantomButton } from '../Button/PhantomButton';
 import useMenu from '../Library/Hooks/useMenu';
 import { DefaultRenderOption } from '../Library/RenderOption';
 import type { FocusHandler, Option, RenderOption, Value } from '../Library/types';
-import { useTheme } from '../Theme';
-import type { ThemedElement } from '../Theme/types';
 import { directionMap } from '../utils/keyUtils';
 import { debugFactory } from '../utils/utils';
 import {
@@ -98,8 +96,6 @@ export function Dropdown<V extends Value, T = undefined>({
   label,
   openReverse,
 }: DropdownProps<V, T>) {
-  const { theme } = useTheme();
-
   const {
     query,
     optIdx,
@@ -233,7 +229,6 @@ export function Dropdown<V extends Value, T = undefined>({
         onBlur={onBlurHandler}
         onClick={openDropdownMenu}
         onKeyDown={onKeyDown}
-        aemikoTheme={theme}
         className={containerClasses}
       >
         {search && !disabled && (
@@ -257,12 +252,7 @@ export function Dropdown<V extends Value, T = undefined>({
               {value.map(v => {
                 const opt = optionLookup[v];
                 return (
-                  <MultiSelectItem
-                    tabIndex={-1}
-                    key={opt.id}
-                    aemikoTheme={theme}
-                    className={clsx({ open })}
-                  >
+                  <MultiSelectItem tabIndex={-1} key={opt.id} className={clsx({ open })}>
                     <RenderOpt option={opt} />
                     <PhantomButton
                       style={{ marginBottom: -3 }}
@@ -302,7 +292,7 @@ export function Dropdown<V extends Value, T = undefined>({
             id="dropdown-menu"
             tabIndex={-1}
             className={dropdownClasses}
-            data-aemiko-body-scroll-lock-ignore
+            data-rothko-body-scroll-lock-ignore
           >
             {!hasOptions ? (
               <NoResultsText>{noResultsMessage}</NoResultsText>
@@ -345,7 +335,7 @@ const MultiSelectContainerDiv = styled.div`
   gap: 0.5rem;
 `;
 
-const MultiSelectItem = styled.div<ThemedElement>`
+const MultiSelectItem = styled.div`
   opacity: 1;
   display: flex;
   flex-direction: row;
@@ -354,10 +344,10 @@ const MultiSelectItem = styled.div<ThemedElement>`
   padding: 0.0625rem 0.3rem 0.0625rem 0.5rem;
   // padding: 0.125rem 0.3rem 0.125rem 0.5rem;
   // margin: 0 0.25rem;
-  background-color: ${({ aemikoTheme }) => aemikoTheme['info-transparent-100']};
-  border: 1px solid ${({ aemikoTheme }) => aemikoTheme['info-500']};
+  background-color: var(--info-transparent-100);
+  border: 1px solid var(--info-500);
   & > p {
-    color: ${({ aemikoTheme }) => aemikoTheme['info-600']} !important;
+    color: var(--info-500) !important;
   }
   border-radius: 3.25rem; // 0.25rem;
   cursor: initial;

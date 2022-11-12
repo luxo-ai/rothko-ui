@@ -11,7 +11,7 @@ import { getStyle, scrollBarWidth } from './dimensions';
 import type { WithTouches } from './event';
 import { addEvent, hasTouches, removeEvent } from './event';
 
-export const BODY_SCROLL_LOCK_IGNORE_ID = 'data-aemiko-body-scroll-lock-ignore';
+export const BODY_SCROLL_LOCK_IGNORE_ID = 'data-rothko-body-scroll-lock-ignore';
 
 type IOSPrevStyle = Readonly<{
   position: string;

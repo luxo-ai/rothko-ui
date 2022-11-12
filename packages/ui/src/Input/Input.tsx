@@ -2,10 +2,8 @@ import clsx from 'clsx';
 import React from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { BODY_FONT_FAMILY } from '../Typography';
 import type { RothkoSize } from '../Theme';
-import { useTheme } from '../Theme';
-import type { ThemedElement } from '../Theme/types';
+import { BODY_FONT_FAMILY } from '../Typography';
 
 export type HtmlInputProps = Omit<
   React.HTMLProps<HTMLInputElement>,
@@ -40,12 +38,10 @@ export type InputProps = {
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ size = 'm', className, disabled, tabIndex, ...props }, ref) => {
-    const { theme } = useTheme();
     return (
       <StyledInput
         {...props}
         ref={ref}
-        aemikoTheme={theme}
         className={clsx(`inpt_size_${size}`, className)}
         disabled={disabled}
         tabIndex={disabled ? -1 : tabIndex}
@@ -54,6 +50,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
+Input.displayName = 'Input';
+
 export type TextareaProps = {
   /** textarea size */
   size?: InputSize;
@@ -61,12 +59,10 @@ export type TextareaProps = {
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ size = 'm', className, disabled, tabIndex, ...props }, ref) => {
-    const { theme } = useTheme();
     const baseClasses = clsx(`inpt_size_${size}`, className);
     return (
       <StyledTextarea
         ref={ref}
-        aemikoTheme={theme}
         className={baseClasses}
         disabled={disabled}
         tabIndex={disabled ? -1 : tabIndex}
@@ -76,20 +72,22 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   }
 );
 
-export const baseInputStyle = css<ThemedElement>`
+Textarea.displayName = 'Textarea';
+
+export const baseInputStyle = css`
   -webkit-tap-highlight-color: transparent;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  background: ${({ aemikoTheme }) => aemikoTheme['basic-200']};
+  background: var(--basic-200);
 
   font-family: ${BODY_FONT_FAMILY.regular};
   display: inline-block;
   box-sizing: border-box;
   line-height: 20px;
 
-  border: 1px solid ${({ aemikoTheme }) => aemikoTheme['basic-500']};
+  border: 1px solid var(--basic-500);
   border-radius: 0.125rem; // 2px
 
   ${Object.entries(sizeMap).map(
@@ -101,8 +99,8 @@ export const baseInputStyle = css<ThemedElement>`
   )}
 
   &.error:not(:focus):not(.focus) {
-    background: ${({ aemikoTheme }) => aemikoTheme['danger-transparent-100']};
-    border-color: ${({ aemikoTheme }) => aemikoTheme['danger-500']};
+    background: var(--danger-transparent-100);
+    border-color: var(--danger-500);
   }
 
   :not(:disabled) {
@@ -110,21 +108,21 @@ export const baseInputStyle = css<ThemedElement>`
     &:focus:not(.disabled),
     &:active:not(.disabled) {
       outline: none;
-      border: 1px solid ${({ aemikoTheme }) => aemikoTheme['info-500']};
-      border-color: ${({ aemikoTheme }) => aemikoTheme['info-300']};
+      border: 1px solid var(--info-500);
+      border-color: var(--info-300);
     }
     :hover:not(:focus):not(.focus) {
-      // background: ${({ aemikoTheme }) => aemikoTheme['basic-300']};
+      // background: var(--basic-300);
     }
   }
   :disabled {
     cursor: not-allowed;
-    background: ${({ aemikoTheme }) => aemikoTheme['basic-transparent-200']};
-    border-color: ${({ aemikoTheme }) => aemikoTheme['basic-transparent-500']};
+    background: var(--basic-transparent-200);
+    border-color: var(--basic-transparent-500);
   }
 `;
 
-const StyledInput = styled.input<ThemedElement>`
+const StyledInput = styled.input`
   ${baseInputStyle}
 `;
 
