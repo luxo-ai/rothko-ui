@@ -1,22 +1,28 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from 'styled-components';
 import { baseInputStyle } from '../Input';
 import Typography, { hideBrowserOutline } from '../Typography';
 
-export const DropdownContainer = styled.div`
-  ${baseInputStyle} // causing issues before, this helped
+export const DropdownContainerDiv = styled.div`
   -webkit-tap-highlight-color: transparent;
-  // background: red;
+  ${baseInputStyle} // causing issues before, this helped
+
   position: relative;
-  padding: 0.5rem 1rem 0.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+
+  // prevent multi-select shrinkage
+  // placeholder text (body) line-height + text margin + top padding + bottom padding + top border + bottom border
+  min-height: calc(1.5rem + 2 * 0.125rem + 2 * 0.5rem + 2 * 2px);
+
+  border: 0.125rem solid black;
+
   cursor: pointer;
-  min-height: 42px;
 
   &.disabled {
     cursor: not-allowed;
+    border-color: var(--basic-transparent-500);
   }
 
   &.empty {
@@ -27,27 +33,6 @@ export const DropdownContainer = styled.div`
     background: transparent;
     border: none;
   }
-
-  // display: block;
-`;
-
-export const PhantomInput = styled.input`
-  ${hideBrowserOutline}
-  background: none !important;
-  border: none !important;
-  outline: none !important;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  z-index: 2;
-  // left padding of icon + right padding of icon + width of icon
-  padding: 0.5rem calc(1rem + 1rem + 16px) 0.5rem 1rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  cursor: text;
-  width: 100%;
-  height: 100%;
 `;
 
 export const ControlContainer = styled.div`
@@ -91,7 +76,7 @@ export const DropdownMenu = styled.div`
 
   left: 0;
   max-height: 13rem;
-  border-radius: 0.25rem;
+  border-radius: 0.125rem;
   width: 100%;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -116,20 +101,18 @@ export const DropdownMenu = styled.div`
       cursor: default;
     }
 
-    &.option {
-      cursor: pointer;
-      padding: 0.75rem 1rem;
-      &:hover,
-      &:focus,
-      &.selected {
-        background-color: rgb(238, 238, 238);
-      }
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    &:hover,
+    &:focus,
+    &.selected {
+      background-color: rgb(238, 238, 238);
     }
   }
 `;
 
 // replace with just input text instead... if you can (just use textStyle etc)
-export const TextContainer = styled.div`
+export const TextContainerDiv = styled.div`
   ${hideBrowserOutline}
   font-size: 1rem;
   display: inline-block;
@@ -146,11 +129,9 @@ export const TextContainer = styled.div`
   }
 `;
 
-export const ItemText = styled(Typography.body)`
+export const ItemText = styled(Typography.body)<{ placeHolder?: boolean }>`
   user-select: none;
-  &.placeholder {
-    opacity: 0.75;
-  }
+  opacity: ${({ placeHolder }) => (placeHolder ? 0.75 : 1)};
 `;
 
 export const LabelText = styled(Typography.label).attrs({ light: true })`

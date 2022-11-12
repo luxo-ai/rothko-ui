@@ -18,7 +18,7 @@ type TagProps = {
 export const Tag = ({ kind = 'primary', appearance = 'filled', children, onClose }: TagProps) => {
   const [themeColorer] = useKindTheme(kind);
   return (
-    <TagContainerSpan appearance={appearance} themeColorer={themeColorer}>
+    <TagContainerDiv appearance={appearance} themeColorer={themeColorer}>
       {children}
       {onClose && (
         <TagCloseButton>
@@ -30,14 +30,15 @@ export const Tag = ({ kind = 'primary', appearance = 'filled', children, onClose
           />
         </TagCloseButton>
       )}
-    </TagContainerSpan>
+    </TagContainerDiv>
   );
 };
 
 type ContainerProps = CanColor & { appearance: Appearance };
 
-const TagContainerSpan = styled.span<ContainerProps>`
-  display: inline-flex;
+const TagContainerDiv = styled.div<ContainerProps>`
+  display: flex;
+  flex-direction: row;
   align-items: center;
   background-color: ${({ themeColorer, appearance }) =>
     appearance === 'filled' ? themeColorer() : 'transparent'};
@@ -53,4 +54,6 @@ const TagCloseButton = styled.button`
   ${phantomButtonStyle}
   margin-left: 0.25rem;
   display: flex;
+  align-items: center;
+  justify-content: center;
 `;

@@ -23,7 +23,7 @@ const lightTextStyle = css`
   font-family: ${BODY_FONT_FAMILY.light};
 `;
 
-const textStyle = css<TextProps>`
+export const textStyle = css<TextProps>`
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 
@@ -125,7 +125,7 @@ const labelStyle = css<TextProps>`
   font-weight: bold;
   letter-spacing: 0.0625rem;
   line-height: 0.9375rem;
-  color: var(--basic-500);
+  color: var(--basic-700);
 `;
 
 const label = styled(body)`

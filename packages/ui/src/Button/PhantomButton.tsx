@@ -13,6 +13,9 @@ export const phantomButtonStyle = css`
   &.db {
     display: block;
   }
+  &.dflx {
+    display: flex;
+  }
 `;
 
 export const PhantomButton = styled.button`

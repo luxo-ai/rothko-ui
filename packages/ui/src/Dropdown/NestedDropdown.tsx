@@ -13,11 +13,11 @@ import { directionMap } from '../utils/keyUtils';
 import { debugFactory } from '../utils/utils';
 import {
   ControlContainer,
-  DropdownContainer,
+  DropdownContainerDiv,
   DropdownMenu,
   ItemText,
   LabelText,
-  TextContainer,
+  TextContainerDiv,
 } from './Common';
 import type { StackOption } from './useNestedOptions';
 import useNestedOptions from './useNestedOptions';
@@ -168,7 +168,7 @@ export function NestedDropdown<V extends Value, T = undefined>({
   return (
     <div className={className}>
       {label && <LabelText>{label}</LabelText>}
-      <DropdownContainer
+      <DropdownContainerDiv
         id={id}
         ref={containerRef}
         tabIndex={0}
@@ -178,12 +178,12 @@ export function NestedDropdown<V extends Value, T = undefined>({
         onKeyDown={onKeyDown}
         className={containerClasses}
       >
-        <TextContainer className={clsx({ disabled })} tabIndex={-1}>
+        <TextContainerDiv className={clsx({ disabled })} tabIndex={-1}>
           {isNil(value) && <ItemText className="placeholder">{placeholder}</ItemText>}
           {!isNil(value) && (
             <ItemText>{pathToCurrentOption.map(o => o.label).join(' / ')}</ItemText>
           )}
-        </TextContainer>
+        </TextContainerDiv>
         <ControlContainer className={clsx({ open, disabled })} onClick={toggleMenu}>
           <ChevronDownOutline width="1rem" height="1rem" />
         </ControlContainer>
@@ -234,7 +234,7 @@ export function NestedDropdown<V extends Value, T = undefined>({
             </ul>
           </DropdownMenu>
         )}
-      </DropdownContainer>
+      </DropdownContainerDiv>
     </div>
   );
 }

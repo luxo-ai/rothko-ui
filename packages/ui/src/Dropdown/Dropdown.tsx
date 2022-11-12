@@ -9,16 +9,17 @@ import { PhantomButton } from '../Button/PhantomButton';
 import useMenu from '../Library/Hooks/useMenu';
 import { DefaultRenderOption } from '../Library/RenderOption';
 import type { FocusHandler, Option, RenderOption, Value } from '../Library/types';
+import { hideBrowserOutline } from '../Typography';
+import { textStyle } from '../Typography/Typography';
 import { directionMap } from '../utils/keyUtils';
 import { debugFactory } from '../utils/utils';
 import {
   ControlContainer,
-  DropdownContainer,
+  DropdownContainerDiv,
   DropdownMenu,
   ItemText,
   LabelText,
-  PhantomInput,
-  TextContainer,
+  TextContainerDiv,
 } from './Common';
 import type { QueryMatchFn } from './types';
 import useSelect from './useSelect';
@@ -64,73 +65,75 @@ type DropdownProps<V extends Value, T> = {
   className?: string;
   /** if the dropdown has a label */
   label?: string;
-  /** open dropdown in reverse */
-  openReverse?: boolean;
+  /** open dropdown position */
+  menuPosition?: 'top' | 'bottom' | 'auto';
   /** is this a minimal dropdown */
   minimal?: boolean;
   /** prefix of a selected item */
   selectedPrefix?: string;
 };
 
-export function Dropdown<V extends Value, T = undefined>({
-  value,
-  options: optionsRaw,
-  onChange,
-  onBlur,
-  onFocus,
-  onDelete,
-  onOpen,
+function Dropdown<V extends Value, T = undefined>({
+  className,
   clearable,
   closeOnEsc = true,
   disabled,
   error,
-  loading,
-  multiple,
-  search,
-  className,
-  minimal,
-  renderOption: RenderOpt = DefaultRenderOption,
-  placeholder = 'Select',
-  noResultsMessage = 'No results',
-  selectedPrefix = '',
   label,
-  openReverse,
+  loading,
+  menuPosition = 'bottom',
+  minimal,
+  multiple,
+  noResultsMessage = 'No results',
+  onBlur,
+  onChange,
+  onDelete,
+  onFocus,
+  onOpen,
+  options: optionsRaw,
+  placeholder = 'Select',
+  renderOption: RenderOpt = DefaultRenderOption,
+  search,
+  selectedPrefix = '',
+  value,
 }: DropdownProps<V, T>) {
+  const openReverse = menuPosition === 'top';
+
   const {
-    query,
+    deleteOne,
+    moveOptionIdx,
     optIdx,
     optionLookup,
     options,
-    selectOne,
-    deleteOne,
-    moveOptionIdx,
-    setQuery,
+    query,
     reset,
+    selectOne,
+    setQuery,
   } = useSelect({
-    options: optionsRaw,
+    multiple,
     onChange,
     onDelete,
-    value,
-    multiple,
-    search,
     openReverse,
+    options: optionsRaw,
+    search,
+    value,
   });
 
   const {
-    containerRef,
-    menuRef,
-    open,
-    focus,
-    openMenu,
     closeMenu,
-    scrollIntoView,
-    onFocusHandler,
+    containerRef,
+    focus,
+    menuRef,
     onBlurHandler,
+    onFocusHandler,
+    open,
+    openMenu,
+    scrollIntoView,
   } = useMenu({
+    disabled,
     onBlur,
     onFocus,
     onOpen,
-    disabled,
   });
 
   const hasOptions = Boolean(options.length);
@@ -182,11 +185,13 @@ export function Dropdown<V extends Value, T = undefined>({
       const option = options[optIdx];
       return onSelectHandler(option.id);
     }
+
     if (code === keyboardKey.Escape) {
       if (!closeOnEsc) return;
       e.preventDefault();
       return closeMenu();
     }
+
     if (code === keyboardKey.Delete) {
       if (!isArray(value)) return;
       e.preventDefault();
@@ -194,17 +199,21 @@ export function Dropdown<V extends Value, T = undefined>({
       if (!lastAdded) return;
       deleteOne(lastAdded);
     }
+
     const direction = directionMap[code];
     if (!direction) return;
     e.preventDefault();
     moveOptionIdx(direction);
   };
 
+  console.log('?', optIdx);
+
   useEffect(() => {
     if (!open) return;
+    console.log('?', optIdx);
     const scrollIdx = optIdx < 0 && openReverse ? options.length - 1 : optIdx;
     scrollIntoView(`#option-${scrollIdx}`);
-  }, [optIdx, options.length, openReverse, open]);
+  }, [optIdx, openReverse, open]);
 
   const containerClasses = clsx({
     error,
@@ -215,21 +224,21 @@ export function Dropdown<V extends Value, T = undefined>({
     empty: !hasOptions,
   });
 
-  const dropdownClasses = clsx({
+  const dropdownMenuClasses = clsx({
     ['open-reverse']: openReverse,
   });
 
   return (
     <div className={className}>
       {label && <LabelText>{label}</LabelText>}
-      <DropdownContainer
+      <DropdownContainerDiv
         ref={containerRef}
-        tabIndex={0}
-        onFocus={onFocusHandler}
+        className={containerClasses}
         onBlur={onBlurHandler}
         onClick={openDropdownMenu}
+        onFocus={onFocusHandler}
         onKeyDown={onKeyDown}
-        className={containerClasses}
+        tabIndex={0}
       >
         {search && !disabled && (
           <PhantomInput
@@ -240,22 +249,22 @@ export function Dropdown<V extends Value, T = undefined>({
             className={clsx({ disabled })}
           />
         )}
-        <TextContainer
+        <TextContainerDiv
           className={clsx({ hidden: query?.length, disabled, multiple })}
           tabIndex={-1}
         >
           {(isNil(value) || (isArray(value) && !value.length)) && !query && (
-            <ItemText className="placeholder">{placeholder}</ItemText>
+            <ItemText placeHolder>{placeholder}</ItemText>
           )}
           {!isNil(value) && isArray(value) && (
             <MultiSelectContainerDiv>
               {value.map(v => {
                 const opt = optionLookup[v];
                 return (
-                  <MultiSelectItem tabIndex={-1} key={opt.id} className={clsx({ open })}>
+                  <MultiSelectLabelDiv tabIndex={-1} key={opt.id}>
                     <RenderOpt option={opt} />
                     <PhantomButton
-                      style={{ marginBottom: -3 }}
+                      className="dflx"
                       type="button"
                       tabIndex={-1}
                       onClick={() => {
@@ -263,9 +272,9 @@ export function Dropdown<V extends Value, T = undefined>({
                         containerRef.current?.focus();
                       }}
                     >
-                      <CloseOutline fill="#281D75" width={16} height={16} />
+                      <CloseOutline fill="var(--info-500)" width={16} height={16} />
                     </PhantomButton>
-                  </MultiSelectItem>
+                  </MultiSelectLabelDiv>
                 );
               })}
             </MultiSelectContainerDiv>
@@ -276,22 +285,24 @@ export function Dropdown<V extends Value, T = undefined>({
               {optionLookup[value].label}
             </ItemText>
           )}
-        </TextContainer>
+        </TextContainerDiv>
         {!canClear ? (
           <ControlContainer className={clsx({ open, disabled })} onClick={toggleMenu}>
             <ChevronDownOutline width="1rem" height="1rem" />
           </ControlContainer>
         ) : (
-          <ControlContainer className="open" onClick={() => onSelectHandler(null)}>
-            <CloseOutline width="1.2rem" height="1.2rem" />
+          <ControlContainer
+            className={clsx('open', { disabled })}
+            onClick={() => onSelectHandler(null)}
+          >
+            <CloseOutline width="1rem" height="1rem" />
           </ControlContainer>
         )}
         {open && (
           <DropdownMenu
             ref={menuRef}
-            id="dropdown-menu"
+            className={dropdownMenuClasses}
             tabIndex={-1}
-            className={dropdownClasses}
             data-rothko-body-scroll-lock-ignore
           >
             {!hasOptions ? (
@@ -302,15 +313,16 @@ export function Dropdown<V extends Value, T = undefined>({
                   const selected = optIdx === idx;
                   return (
                     <li
-                      className={clsx('option', { selected })}
-                      id={`option-${idx}`}
-                      key={option.id}
-                      role="option"
-                      aria-disabled={false}
+                      aria-disabled={option.disabled}
                       aria-label={option.label}
                       aria-selected={selected}
+                      className={clsx({ selected })}
+                      id={`option-${option.id}`}
+                      key={`option-${option.id}`}
+                      role="option"
                       tabIndex={-1}
                       onClick={e => {
+                        if (option.disabled) return;
                         e.preventDefault();
                         onSelectHandler(option.id);
                       }}
@@ -323,7 +335,7 @@ export function Dropdown<V extends Value, T = undefined>({
             )}
           </DropdownMenu>
         )}
-      </DropdownContainer>
+      </DropdownContainerDiv>
     </div>
   );
 }
@@ -335,15 +347,12 @@ const MultiSelectContainerDiv = styled.div`
   gap: 0.5rem;
 `;
 
-const MultiSelectItem = styled.div`
-  opacity: 1;
+const MultiSelectLabelDiv = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.125rem;
   align-items: center;
   padding: 0.0625rem 0.3rem 0.0625rem 0.5rem;
-  // padding: 0.125rem 0.3rem 0.125rem 0.5rem;
-  // margin: 0 0.25rem;
   background-color: var(--info-transparent-100);
   border: 1px solid var(--info-500);
   & > p {
@@ -357,3 +366,22 @@ const NoResultsText = styled(ItemText)`
   text-align: center;
   padding: 1rem;
 `;
+
+const PhantomInput = styled.input`
+  ${hideBrowserOutline}
+  ${textStyle}
+  position: absolute;
+  inset: 0;
+  background: none !important;
+  border: none !important;
+  outline: none !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 2;
+  // left padding of icon + right padding of icon + width of icon
+  padding: 0.5rem calc(1rem + 1rem + 16px) 0.5rem 1rem;
+  cursor: text;
+`;
+
+export default Dropdown;

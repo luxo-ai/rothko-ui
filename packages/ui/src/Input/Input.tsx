@@ -80,14 +80,14 @@ export const baseInputStyle = css`
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  background: var(--basic-200);
+  background: var(--basic-transparent-100); // basic-200
 
   font-family: ${BODY_FONT_FAMILY.regular};
   display: inline-block;
   box-sizing: border-box;
   line-height: 20px;
-
-  border: 1px solid var(--basic-500);
+  // 0.125rem
+  border: 1px solid black; // #8a8a8a; // var(--basic-500);
   border-radius: 0.125rem; // 2px
 
   ${Object.entries(sizeMap).map(
@@ -108,13 +108,14 @@ export const baseInputStyle = css`
     &:focus:not(.disabled),
     &:active:not(.disabled) {
       outline: none;
-      border: 1px solid var(--info-500);
-      border-color: var(--info-300);
+      // border: 1.5px solid var(--info-500);
+      border-color: black; // var(--info-500); // var(--info-300);
     }
     :hover:not(:focus):not(.focus) {
       // background: var(--basic-300);
     }
   }
+  .disabled,
   :disabled {
     cursor: not-allowed;
     background: var(--basic-transparent-200);

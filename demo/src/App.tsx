@@ -10,7 +10,6 @@ import {
   Button,
   Checkbox,
   ExpandableLabel,
-  FilterGroup,
   Input,
   Label,
   Modal,
@@ -74,7 +73,6 @@ const App = () => {
               <ToastCard />
               <BreadCrumbsCard />
               <TagCard />
-              <FilterGroupCard />
               <RadioCard />
               <BottomPopupCard />
               <OptionGroupCard />
@@ -171,7 +169,7 @@ const MultiDropdownCard = () => {
           options={[
             {
               id: 0,
-              label: 'Zero',
+              label: 'Zero ds dsfdsdf fsdfsdfdsfdsfdsfds sdfdsfsdfds',
             },
             {
               id: 1,
@@ -207,6 +205,8 @@ const SingleDropdownCard = () => {
       <h3>Single Dropdown</h3>
       <div className="accordion-container">
         <Dropdown
+          search
+          label="Testing"
           value={selectedValue}
           onChange={v => setSelectedValue(v as number[])}
           options={[
@@ -282,28 +282,6 @@ const TagCard = () => {
         >
           my first tag
         </Tag>
-      </div>
-    </div>
-  );
-};
-
-const FilterGroupCard = () => {
-  const [selectedValue, setSelectedValue] = useState<number[]>([]);
-  return (
-    <div className="white-padded-card">
-      <h3>Filter Group</h3>
-      <div className="accordion-container">
-        <FilterGroup
-          kind="info"
-          value={selectedValue}
-          multible
-          options={[
-            { id: 1, label: 'One' },
-            { id: 2, label: 'Two' },
-            { id: 3, label: 'Three' },
-          ]}
-          onSelect={ids => setSelectedValue(ids as number[])}
-        />
       </div>
     </div>
   );

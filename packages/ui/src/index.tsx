@@ -8,7 +8,6 @@ export * from './Button';
 export { MaxWidth, MinWidth, WidthGeqOnly, WidthLeqOnly } from './Dimensions';
 export { Dot } from './Dot';
 export * from './Dropdown';
-export * from './FilterGroup';
 export * from './Form';
 export { Grid, GridSpan } from './Grid';
 export * from './Hooks';

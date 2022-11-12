@@ -11,7 +11,6 @@ export const PaddedPage = styled.div`
 
 export const hideBrowserOutline = css`
   outline: none;
-
   :active,
   :focus {
     outline: none;

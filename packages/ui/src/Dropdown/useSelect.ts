@@ -21,9 +21,9 @@ type HookArgs<V, T> = {
 };
 
 const useSelect = <V extends Value, T = undefined>(args: HookArgs<V, T>) => {
-  const { value, multiple, search, onChange, onDelete } = args;
+  const { multiple, onChange, onDelete, search, value } = args;
 
-  const { options, optIdx, moveOptionIdx, resetOptionIdx, setOptions } = useOptions({
+  const { optIdx, moveOptionIdx, options, resetOptionIdx, setOptions } = useOptions({
     reverse: args.openReverse,
     options: args.options,
   });
@@ -78,8 +78,13 @@ const useSelect = <V extends Value, T = undefined>(args: HookArgs<V, T>) => {
   );
 
   useEffect(() => {
-    if (!search || !query) return;
-    setOptions(args.options.filter(o => matchesQuery(o)));
+    if (!search) return;
+    if (query) {
+      setOptions(args.options.filter(o => matchesQuery(o)));
+    } else if (!query && args.options.length > options.length) {
+      // reset options
+      setOptions(args.options);
+    }
   }, [search, query, matchesQuery, setOptions, args.options]);
 
   useEffect(() => {
@@ -91,15 +96,15 @@ const useSelect = <V extends Value, T = undefined>(args: HookArgs<V, T>) => {
   }, [selectedValues, multiple, setOptions, args.options]);
 
   return {
-    query,
+    deleteOne,
+    moveOptionIdx,
     optIdx,
     optionLookup,
     options,
-    setQuery,
-    selectOne,
-    deleteOne,
-    moveOptionIdx,
+    query,
     reset: resetOptionIdx,
+    selectOne,
+    setQuery,
   };
 };
 
