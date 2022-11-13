@@ -2,7 +2,7 @@ import type { Nullable } from '@rothko-ui/utils';
 import { useIsMounted } from '@rothko-ui/utils';
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { idkFn } from '../Theme/themeV2';
+import { idkFn } from '../Theme/theme';
 import type { KindProps, RothkoKind } from '../Theme/types';
 import type { DragDelta, DragEvent } from '../utils/domUtils';
 import {

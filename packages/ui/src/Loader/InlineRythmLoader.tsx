@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { idkFn } from '../Theme/themeV2';
+import { idkFn } from '../Theme/theme';
 import type { KindProps, RothkoKind } from '../Theme/types';
 import { generateCssAnimation } from '../utils/domUtils/style';
 import type { SpinnerSize } from './types';

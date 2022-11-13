@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { idkFn } from '../Theme/themeV2';
+import { idkFn } from '../Theme/theme';
 import type { KindProps, RothkoKind } from '../Theme/types';
 import type { SpinnerSize } from './types';
 

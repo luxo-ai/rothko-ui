@@ -3,14 +3,15 @@ import React, { createContext, useCallback, useContext, useMemo, useState } from
 import styled from 'styled-components';
 import uuid from 'uuid';
 import { DomPortal } from '../Library/Portal';
-import { Toast } from './Toaster';
+import Toast from './Toaster';
 import type { ToastDetails, ToastKey } from './types';
 
 const DEFAULT_DURATION_MS = 3000;
+
 const EXIT_CONFIG = {
-  tension: 125,
   friction: 20,
   precision: 0.1,
+  tension: 125,
 } as const;
 
 type IToasterCtx = {
@@ -105,14 +106,17 @@ export const tabletOrMobileMaxWidth = 800; // px
 
 const ToastsContainerDiv = styled.div`
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
   bottom: 0.75rem;
   margin: 0.25rem 1rem;
+
   @media only screen and (min-width: ${tabletOrMobileMaxWidth}px) {
     right: 0.75rem;
     max-width: max(32rem, 20%);
   }
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+
   z-index: 99999;
 `;

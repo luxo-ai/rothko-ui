@@ -1,79 +1,73 @@
-import { CloseOutline } from '@rothko-ui/icons';
 import type { SpringValue } from '@react-spring/web';
 import { animated } from '@react-spring/web';
+import { CloseOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { PhantomButton } from '../Button/PhantomButton';
+import { idkFn } from '../Theme/theme';
+import type { KindProps, RothkoKind } from '../Theme/types';
 import Typography from '../Typography';
-import type { CanColor } from '../Theme/ThemeContext';
-import { useKindTheme } from '../Theme/ThemeContext';
-import type { RothkoKind } from '../Theme/types';
 import type { ToastDetails } from './types';
 
 type AnimatedStyle = {
-  opacity?: SpringValue<number>;
   height?: SpringValue<number>;
   life?: SpringValue<string>;
+  opacity?: SpringValue<number>;
 };
 
 type ToastProps = Pick<ToastDetails, 'label' | 'content' | 'withLife'> & {
-  kind?: RothkoKind;
   animatedStyle?: AnimatedStyle;
-  style?: React.CSSProperties;
+  kind?: RothkoKind;
   onClose?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  style?: React.CSSProperties;
 };
 
-export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
-  (
-    {
-      kind = 'success',
-      label,
-      content,
-      withLife,
-      onClose,
-      style = {},
-      animatedStyle: { life, ...animatedStyle } = {},
-    },
-    ref
-  ) => {
-    const [themeColorer] = useKindTheme(kind);
-    return (
-      <AnimatedWhiteBackdrop
-        style={{ ...style, opacity: animatedStyle.opacity, height: animatedStyle.height }}
-      >
-        <ToastAnimatedContainerDiv ref={ref} themeColorer={themeColorer}>
-          <ToastContentContainerDiv>
-            {label &&
-              (typeof label === 'string' ? (
-                <Typography.h3>{label}</Typography.h3>
-              ) : (
-                <div>{label}</div>
-              ))}
-            {content && typeof content === 'string' ? (
-              <Typography.body>{content}</Typography.body>
+const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
+  const {
+    animatedStyle: { life, ...animatedStyle } = {},
+    content,
+    kind = 'success',
+    label,
+    onClose,
+    style = {},
+    withLife,
+  } = props;
+  return (
+    <AnimatedWhiteBackdrop
+      style={{ ...style, opacity: animatedStyle.opacity, height: animatedStyle.height }}
+    >
+      <ToastAnimatedContainerDiv ref={ref} kind={kind}>
+        <ToastContentContainerDiv>
+          {label &&
+            (typeof label === 'string' ? (
+              <Typography.h3>{label}</Typography.h3>
             ) : (
-              <div>{content}</div>
-            )}
-          </ToastContentContainerDiv>
-          <PhantomButton onClick={onClose} className="db">
-            <CloseOutline width={20} height={20} />
-          </PhantomButton>
-          {withLife && <AnimatedLife themeColorer={themeColorer} style={{ right: life }} />}
-        </ToastAnimatedContainerDiv>
-      </AnimatedWhiteBackdrop>
-    );
-  }
-);
+              <div>{label}</div>
+            ))}
+          {content && typeof content === 'string' ? (
+            <Typography.body>{content}</Typography.body>
+          ) : (
+            <div>{content}</div>
+          )}
+        </ToastContentContainerDiv>
+        <PhantomButton onClick={onClose} className="db">
+          <CloseOutline width={20} height={20} />
+        </PhantomButton>
+        {withLife && <AnimatedLife style={{ right: life }} kind={kind} />}
+      </ToastAnimatedContainerDiv>
+    </AnimatedWhiteBackdrop>
+  );
+});
 
 Toast.displayName = 'Toast';
 
-const ToastAnimatedContainerDiv = styled.div<CanColor>`
+const ToastAnimatedContainerDiv = styled.div<Required<KindProps>>`
   display: flex;
   gap: 0.125rem;
   align-items: start;
   justify-content: space-between;
   padding: 1.25rem;
-  background: ${({ themeColorer }) => themeColorer('bg:transparent')};
+  background: ${({ kind }) => idkFn(kind, 'bg-transparent')};
   border-radius: 0.125rem;
 `;
 
@@ -92,12 +86,14 @@ const ToastContentContainerDiv = styled.div`
   gap: 0.25rem;
 `;
 
-const AnimatedLife = styled(animated.div)<CanColor>`
+const AnimatedLife = styled(animated.div)<Required<KindProps>>`
   position: absolute;
   bottom: 0;
   left: 0px;
   width: auto;
-  background-image: ${({ themeColorer }) =>
-    css`linear-gradient(130deg, ${themeColorer()}, ${themeColorer('bg:transparent')})`};
+  background-image: ${({ kind }) =>
+    css`linear-gradient(130deg, ${idkFn(kind)}, ${idkFn(kind, 'bg-transparent')})`};
   height: 5px;
 `;
+
+export default Toast;

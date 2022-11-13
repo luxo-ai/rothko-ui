@@ -7,7 +7,7 @@ import { phantomButtonStyle } from '../Button/PhantomButton';
 import Grid from '../Grid/Grid';
 import type { Option, Value } from '../Library/types';
 import type { KindProps, RothkoSize } from '../Theme';
-import { idkFn } from '../Theme/themeV2';
+import { idkFn } from '../Theme/theme';
 import type { EmSize, RemSize } from '../types';
 import Typography, { BODY_FONT_FAMILY } from '../Typography';
 

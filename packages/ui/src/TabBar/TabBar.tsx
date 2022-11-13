@@ -2,7 +2,7 @@ import type { KeyLike } from '@rothko-ui/utils';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import type { KindProps } from '../Theme';
-import { idkFn } from '../Theme/themeV2';
+import { idkFn } from '../Theme/theme';
 import Typography from '../Typography/Typography';
 import type { RenderTab, Tab } from './types';
 

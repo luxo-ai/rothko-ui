@@ -1,7 +1,7 @@
 import { ChevronLeftOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
-import { idkFn } from '../Theme/themeV2';
+import { idkFn } from '../Theme/theme';
 import type { RothkoKind } from '../Theme/types';
 import Typography from '../Typography/Typography';
 

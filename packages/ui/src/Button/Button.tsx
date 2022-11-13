@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
 import InlineSpinnerLoader from '../Loader/InlineSpinnerLoader';
-import { idkFn } from '../Theme/themeV2';
+import { idkFn } from '../Theme/theme';
 import type { KindProps, RothkoKind, RothkoSize } from '../Theme/types';
 import { BODY_FONT_FAMILY } from '../Typography';
 

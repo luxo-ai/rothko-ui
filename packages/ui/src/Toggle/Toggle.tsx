@@ -3,7 +3,7 @@ import keyboardKey from 'keyboard-key';
 import type { CSSProperties } from 'react';
 import React from 'react';
 import styled from 'styled-components';
-import { idkFn } from '../Theme/themeV2';
+import { idkFn } from '../Theme/theme';
 import type { KindProps } from '../Theme/types';
 import { hideBrowserOutline } from '../Typography';
 import { keyDownFactory } from '../utils/keyUtils';

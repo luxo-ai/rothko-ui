@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import type { CustomColorCssProperties } from './Container/Container';
 import { useStyleProps } from './Container/Container';
-import { idkFn } from './Theme/themeV2';
+import { idkFn } from './Theme/theme';
 import type { HexColor, RGBColor, RothkoKind } from './Theme/types';
 import { isRothkoKind } from './Theme/types';
 import type { EmSize, RemSize } from './types';

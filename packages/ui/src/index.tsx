@@ -28,7 +28,6 @@ export * from './Skeleton';
 export * from './Slider';
 export * from './TabBar';
 export * from './Tag';
-export * from './Theme';
 export * from './Toaster';
 export * from './Toggle';
 export * from './Tooltip';

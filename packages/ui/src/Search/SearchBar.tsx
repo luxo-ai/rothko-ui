@@ -6,8 +6,6 @@ import styled, { css } from 'styled-components';
 import { PhantomButton } from '../Button/PhantomButton';
 import { hideBrowserOutline } from '../Typography';
 import { BODY_FONT_FAMILY } from '../Typography/constants';
-import { useTheme } from '../Theme';
-import type { ThemedElement } from '../Theme/types';
 
 type SearchBarProps = {
   className?: string;
@@ -32,7 +30,6 @@ export const SearchBar = ({
   placeholder,
   query,
 }: SearchBarProps) => {
-  const { theme } = useTheme();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -45,7 +42,6 @@ export const SearchBar = ({
     <SearchForm
       role="search"
       tabIndex={-1}
-      aemikoTheme={theme}
       className={className}
       onSubmit={e => {
         e.preventDefault();
@@ -55,7 +51,6 @@ export const SearchBar = ({
       <PhantomInput
         ref={inputRef}
         type="text"
-        aemikoTheme={theme}
         className={clsx({ disabled })}
         disabled={disabled}
         tabIndex={0}
@@ -76,19 +71,17 @@ type DummySearchBarProps = Pick<
 >;
 
 export const DummySearchBar = ({
-  query,
-  onSubmit,
-  onClick,
-  disabled,
-  placeholder,
   className,
+  disabled,
+  onClick,
+  onSubmit,
+  placeholder,
+  query,
 }: DummySearchBarProps) => {
-  const { theme } = useTheme();
   return (
-    <DummyWrapper className={clsx('bg-white', className)} aemikoTheme={theme}>
+    <DummyWrapper className={clsx('bg-white', className)}>
       <PhantomInput
         type="text"
-        aemikoTheme={theme}
         disabled={disabled}
         tabIndex={-1}
         placeholder={placeholder}
@@ -107,16 +100,13 @@ type SearchButtonProps = {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const SearchButton = ({ onClick, disabled }: SearchButtonProps) => {
-  const { theme } = useTheme();
-  return (
-    <SearchButtonBase type="submit" aemikoTheme={theme} disabled={disabled} onClick={onClick}>
-      <SearchOutline width="1.5rem" height="1.5rem" />
-    </SearchButtonBase>
-  );
-};
+const SearchButton = ({ disabled, onClick }: SearchButtonProps) => (
+  <SearchButtonBase type="submit" disabled={disabled} onClick={onClick}>
+    <SearchOutline width="1.5rem" height="1.5rem" />
+  </SearchButtonBase>
+);
 
-const searchBarWrapperStyle = css<ThemedElement>`
+const searchBarWrapperStyle = css`
   -webkit-tap-highlight-color: transparent;
   ${hideBrowserOutline}
   -webkit-appearance: none;
@@ -129,7 +119,7 @@ const searchBarWrapperStyle = css<ThemedElement>`
   background: white;
 
   &:not(.bg-white) {
-    background: ${({ aemikoTheme }) => aemikoTheme['basic-200']};
+    background: var(--basic-200);
   }
 
   display: flex;
@@ -140,7 +130,7 @@ const searchBarWrapperStyle = css<ThemedElement>`
   font-family: ${BODY_FONT_FAMILY.light};
   line-height: 20px;
 
-  border: 2px solid black; // ${({ aemikoTheme }) => aemikoTheme['basic-500']};
+  border: 2px solid black; // basic-500; before
   border-radius: 0.125rem; // 2rem; //0.25rem;
 
   &.b-radius-bold {
@@ -148,21 +138,21 @@ const searchBarWrapperStyle = css<ThemedElement>`
   }
 
   &.error:not(:focus):not(.focus) {
-    background: ${({ aemikoTheme }) => aemikoTheme['danger-transparent-100']};
-    border-color: ${({ aemikoTheme }) => aemikoTheme['danger-500']};
+    background: var(--danger-transparent-100);
+    border-color: var(--danger-500);
   }
 
   &.focus:not(.disabled),
   &:focus:not(.disabled),
   &:active:not(.disabled) {
     outline: none;
-    // border-color: ${({ aemikoTheme }) => aemikoTheme['basic-800']};
+    // border-color: var(--basic-800)
   }
 
   &.disabled {
     cursor: not-allowed;
-    background: ${({ aemikoTheme }) => aemikoTheme['basic-transparent-200']};
-    border-color: ${({ aemikoTheme }) => aemikoTheme['basic-transparent-500']};
+    background: var(--basic-transparent-200);
+    border-color: var(--basic-transparent-500);
     & > input,
     button {
       cursor: not-allowed;
@@ -171,15 +161,15 @@ const searchBarWrapperStyle = css<ThemedElement>`
   }
 `;
 
-const SearchForm = styled.form<ThemedElement>`
+const SearchForm = styled.form`
   ${searchBarWrapperStyle};
 `;
 
-const DummyWrapper = styled.div<ThemedElement>`
+const DummyWrapper = styled.div`
   ${searchBarWrapperStyle}
 `;
 
-const SearchButtonBase = styled(PhantomButton)<ThemedElement>`
+const SearchButtonBase = styled(PhantomButton)`
   padding: 0.5rem;
   margin: 0;
   touch-action: manipulation;
@@ -193,14 +183,14 @@ const SearchButtonBase = styled(PhantomButton)<ThemedElement>`
   height: 100%;
   width: auto;
   :active:not(:disabled) {
-    background-color: black; // ${({ aemikoTheme }) => aemikoTheme['info-transparent-500']};
+    background-color: black; // var(--info-transparent-500)
     & > svg {
       fill: white;
     }
   }
 `;
 
-const PhantomInput = styled.input<ThemedElement>`
+const PhantomInput = styled.input`
   ${hideBrowserOutline}
   font-size: 1rem;
   font-family: ${BODY_FONT_FAMILY.light};

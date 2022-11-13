@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { idkFn } from '../Theme/themeV2';
+import { idkFn } from '../Theme/theme';
 import type { KindProps } from '../Theme/types';
 import type { EmSize, PercentSize, RemSize } from '../types';
 

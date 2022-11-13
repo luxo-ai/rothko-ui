@@ -1,36 +1,34 @@
 import type { SVGAttributes } from 'react';
 import React, { useRef } from 'react';
 import uuid from 'uuid';
-import { useTheme } from '../Theme';
 import type { Color } from '../Theme/types';
 
 const ANIMATION_KEY_TIMES = '0;0.5;1';
 
-export type SkeletonBuilderProps = {
+export type SkeletonBuilderProps = SVGAttributes<SVGElement> & {
   backgroundColor?: Color;
-  foregroundColor?: Color;
-  speed?: number;
-  gradientProps?: SVGAttributes<SVGLinearGradientElement>;
   children: React.ReactNode;
-} & SVGAttributes<SVGElement>;
+  foregroundColor?: Color;
+  gradientProps?: SVGAttributes<SVGLinearGradientElement>;
+  speed?: number;
+};
 
 export const SkeletonBuilder = ({
   backgroundColor: bgColorProp,
-  foregroundColor: fgColorProp,
-  speed = 1.5,
-  gradientProps,
   children,
+  foregroundColor: fgColorProp,
+  gradientProps,
+  speed = 1.5,
   ...svgProps
 }: SkeletonBuilderProps) => {
-  const { theme } = useTheme();
   const uuidRef = useRef(uuid.v4());
 
   const ariaId = `${uuidRef.current}-aria`;
   const clipId = `${uuidRef.current}-clip`;
   const gradientId = `${uuidRef.current}-gradient`;
 
-  const backgroundColor = bgColorProp || theme['basic-300'];
-  const foregroundColor = fgColorProp || theme['basic-200'];
+  const backgroundColor = bgColorProp || 'var(--basic-300)';
+  const foregroundColor = fgColorProp || 'var(--basic-200)';
   const animationDuration = `${speed}s`;
 
   return (
