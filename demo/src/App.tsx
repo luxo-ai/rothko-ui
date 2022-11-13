@@ -175,7 +175,7 @@ const SliderCard = () => {
     <div className="white-padded-card">
       <h3>Slider</h3>
       <div className="accordion-container">
-        <Slider value={singleVal} max={100} onChange={v => setSingleVal(v)} />
+        <Slider kind="primary" value={singleVal} max={100} onChange={v => setSingleVal(v)} />
       </div>
     </div>
   );

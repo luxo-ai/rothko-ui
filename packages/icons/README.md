@@ -1,6 +1,6 @@
 # Icon Library
 
-This sub repo contains the aemiko SVG icon components.
+This sub repo contains the rothko-ui SVG icon components.
 
 ## For contributers
 

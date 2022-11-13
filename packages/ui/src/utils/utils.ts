@@ -2,7 +2,7 @@ export const debugFactory = (module?: string) => {
   const canDebug = false; // process.env.NODE_ENV !== 'production' && process.env.DEBUG === '1';
   return (...argz: (string | Record<string, unknown> | symbol | number)[]) => {
     if (canDebug) {
-      console.log(`[aemiko${module ? `:${module}` : ''}]`, ...argz);
+      console.log(`[rokthko-ui${module ? `:${module}` : ''}]`, ...argz);
     }
   };
 };
