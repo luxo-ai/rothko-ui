@@ -14,7 +14,6 @@ import {
   Label,
   Modal,
   OptionGroup,
-  Radio,
   SkeletonBoxWithLabel,
   Tag,
   ThemeProvider,
@@ -73,7 +72,7 @@ const App = () => {
               <ToastCard />
               <BreadCrumbsCard />
               <TagCard />
-              <RadioCard />
+
               <BottomPopupCard />
               <OptionGroupCard />
               <ModalCard />
@@ -474,17 +473,6 @@ const BottomPopupCard = () => {
       <BottomPopup isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <div>Hello world</div>
       </BottomPopup>
-    </div>
-  );
-};
-
-const RadioCard = () => {
-  const [checked1, setChecked1] = useState(false);
-  const [checked2, setChecked2] = useState(false);
-  return (
-    <div className="white-padded-card">
-      <h3>Radio</h3>
-      <Radio checked={checked1} onChange={c => setChecked1(c)} />
     </div>
   );
 };

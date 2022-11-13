@@ -21,7 +21,6 @@ export * from './Modal';
 export * from './OptionGroup';
 export { orNullFactory } from './OrNull';
 export * from './Popup';
-export * from './Radio';
 export * from './RothkoProvider';
 export * from './Search';
 export * from './Skeleton';
