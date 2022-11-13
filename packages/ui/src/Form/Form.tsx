@@ -15,7 +15,6 @@ import { FormControl } from './FormControl';
 import type { InputProps, TextareaProps } from '../Input';
 import { Input, Textarea } from '../Input';
 import { OptionGroup } from '../OptionGroup';
-import { RadioGroup } from '../Radio';
 import { MultiSlider, Slider } from '../Slider';
 import { Toggle } from '../Toggle/Toggle';
 
@@ -80,11 +79,6 @@ export const DropdownRHF = withControllerFactory({
 export const ToggleRHF = withControllerFactory({
   component: Toggle,
   propMapper: ({ value, ...rest }, props) => ({ toggled: value, ...rest, ...props }),
-});
-
-export const RadioGroupRHF = withControllerFactory({
-  component: RadioGroup,
-  propMapper: ({ onChange, value }, props) => ({ ...props, onChange, value }),
 });
 
 export const CheckboxRHF = withControllerFactory({

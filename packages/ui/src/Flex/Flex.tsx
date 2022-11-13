@@ -1,25 +1,27 @@
 import React from 'react';
-import type { CSSProperties } from 'styled-components';
 import styled from 'styled-components';
+import type { CustomColorCssProperties } from '../Container/Container';
+import { useStyleProps } from '../Container/Container';
 
-type FlexProps = Omit<CSSProperties, 'display'> & {
+type FlexProps = Omit<CustomColorCssProperties, 'display'> & {
   children: React.ReactNode;
   className?: string;
 };
 
 const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
-  ({ children, className, ...style }, ref) => {
+  ({ children, className, ...styles }, ref) => {
+    const style = useStyleProps(styles);
     return (
-      <StyledFlex ref={ref} className={className} style={style}>
+      <StyledFlexDiv ref={ref} className={className} style={style}>
         {children}
-      </StyledFlex>
+      </StyledFlexDiv>
     );
   }
 );
 
 Flex.displayName = 'Flex';
 
-const StyledFlex = styled.div`
+const StyledFlexDiv = styled.div`
   display: flex;
 `;
 

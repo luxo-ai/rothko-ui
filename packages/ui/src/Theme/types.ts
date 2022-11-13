@@ -1,8 +1,14 @@
 type Lightness = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 type TransparentLightness = `transparent-${Exclude<Lightness, 700 | 800 | 900>}`;
 
-type SemanticName = 'success' | 'info' | 'warning' | 'danger' | 'basic';
-type BrandName = 'primary' | 'secondary';
+export const semanticNames = ['success', 'info', 'warning', 'danger', 'basic'] as const;
+type SemanticName = typeof semanticNames[number];
+export const brandName = ['primary', 'secondary'] as const;
+type BrandName = typeof brandName[number];
+
+export const isRothkoKind = (v: string): v is RothkoKind => {
+  return ([...semanticNames, ...brandName] as string[]).includes(v);
+};
 
 export type KindProps = {
   kind?: RothkoKind;

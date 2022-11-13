@@ -61,7 +61,13 @@ export function OptionGroup<V extends Value>({
 
   return (
     <OptionGroupContainer id={id} style={style} className={className}>
-      <Grid flexGrow={1} gridTemplateColumns={`repeat(${maxCol}, 1fr)`} gap={optionGap}>
+      <Grid
+        borderWidth={2}
+        borderColor="success"
+        flexGrow={1}
+        gridTemplateColumns={`repeat(${maxCol}, 1fr)`}
+        gap={optionGap}
+      >
         {displayableOptions.map(o => {
           const isDisabled = 'data' in o && Boolean(o?.data?.disabled);
           const isSelected = o.id === value;
