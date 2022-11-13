@@ -3,7 +3,9 @@
 export type Nullable<T> = T | undefined | null;
 export type Nil = undefined | null;
 
-export type Obj = Record<string | number, unknown>;
+export type KeyLike = string | number | symbol;
+
+export type Obj = Record<KeyLike, unknown>;
 
 export type JsonLike<T> = T | { [k: string]: T | JsonLike<T> | T[] | JsonLike<T>[] };
 export type Json = JsonLike<string | number | boolean | null>;
@@ -47,4 +49,4 @@ export type DeepPartial<T> = T extends Obj
     }
   : T;
 
-export type NestedRecord = { [k: string | number]: NestedRecord | string };
+export type NestedRecord<T = string> = { [k: KeyLike]: NestedRecord | T };

@@ -4,15 +4,16 @@ import type { CustomColorCssProperties } from '../Container/Container';
 import { useStyleProps } from '../Container/Container';
 
 type FlexProps = CustomColorCssProperties & {
+  as?: keyof JSX.IntrinsicElements;
   children: React.ReactNode;
   className?: string;
 };
 
 const FlexItem = React.forwardRef<HTMLDivElement, FlexProps>(
-  ({ children, className, ...styles }, ref) => {
+  ({ as, children, className, ...styles }, ref) => {
     const style = useStyleProps(styles);
     return (
-      <StyledFlexItemDiv ref={ref} className={className} style={style}>
+      <StyledFlexItemDiv as={as} ref={ref} className={className} style={style}>
         {children}
       </StyledFlexItemDiv>
     );

@@ -46,9 +46,22 @@ const idk: Record<Exclude<ColorableKey, 'text'>, string | number> = {
   'border-hover': 300,
 };
 
-export const idkFn = (kind: RothkoKind, ok?: ColorableKey) => {
+type Opts = {
+  default?: HexColor | RGBColor;
+};
+
+export const idkFn = (kind: RothkoKind, ok?: ColorableKey, opts?: Opts) => {
+  const generateVarWithDefault = (k: RothkoKind, num = 500) => {
+    if (opts?.default) {
+      return `var(--${k}-${num}, ${opts.default})`;
+    }
+    return `var(--${k}-${num})`;
+  };
+
   if (!ok) {
-    return kind === 'info' ? 'var(--secondary-400)' : `var(--${kind}-500)`;
+    return kind === 'info'
+      ? generateVarWithDefault('secondary', 400)
+      : generateVarWithDefault(kind, 500);
   }
   if (ok === 'text') {
     if (kind === 'primary') return '#fff';

@@ -1,47 +1,40 @@
+import type { KeyLike } from '@rothko-ui/utils';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import type { NonEmptyArray } from '../Library/types';
+import type { KindProps } from '../Theme';
+import { idkFn } from '../Theme/themeV2';
 import Typography from '../Typography/Typography';
-import { useTheme } from '../Theme';
-import type { ThemedElement } from '../Theme/types';
+import type { RenderTab, Tab } from './types';
 
-type KeyLike = string | number | symbol;
-type RenderTab = () => JSX.Element;
-
-export type Tab<Key extends KeyLike> = {
-  title: string;
-  key: Key;
-  render: RenderTab;
-};
-
-export type TabBarProps<Key extends KeyLike> = Pick<
-  React.HTMLProps<HTMLDivElement>,
-  'className' | 'style'
-> & {
-  tabs: NonEmptyArray<Tab<Key>>;
+type TabBarProps<Key extends KeyLike> = KindProps & {
+  className?: string;
   initialTab?: Key;
   onSelect?: (tab: Key) => void;
+  style?: React.CSSProperties;
+  tabs: ReadonlyArray<Tab<Key>>;
 };
 
-export function TabBar<Key extends KeyLike>({
-  tabs,
-  initialTab,
-  onSelect,
+function TabBar<Key extends KeyLike>({
   className,
+  initialTab,
+  kind,
+  onSelect,
   style,
+  tabs,
 }: TabBarProps<Key>) {
+  const tabCount = tabs.length;
   const initialIdx = tabs.findIndex(t => t.key === initialTab);
-  const { theme } = useTheme();
   const [tabIdx, setTabIdx] = useState(initialIdx >= 0 ? initialIdx : 0);
   const TabComponent: RenderTab = tabs[tabIdx].render;
   return (
     <>
-      <div className={className} style={style}>
-        <TabList role="tablist">
+      <TabListContainerDiv className={className} style={style}>
+        <TabList aria-label="tablist" role="tablist" tabCount={tabCount}>
           {tabs.map((t, idx) => (
             <TabItem
+              aria-label={t.title}
+              key={`${String(t.key)}-${idx}`}
               role="tab"
-              key={String(t.key)}
               onClick={() => {
                 setTabIdx(idx);
                 onSelect?.(t.key);
@@ -51,21 +44,25 @@ export function TabBar<Key extends KeyLike>({
             </TabItem>
           ))}
         </TabList>
-        <UnderLine aemikoTheme={theme} tabCount={tabs.length} currentTabIdx={tabIdx} />
-      </div>
+        <UnderLineDiv kind={kind} tabCount={tabCount} currentTabIdx={tabIdx} />
+      </TabListContainerDiv>
       <TabComponent />
     </>
   );
 }
 
-type UnderlineProps = ThemedElement & {
-  tabCount: number;
+type UnderlineDivProps = KindProps & {
   currentTabIdx: number;
+  tabCount: number;
 };
 
-const UnderLine = styled.div<UnderlineProps>`
-  width: ${({ tabCount }) => `${100 / tabCount}%`};
-  border-bottom: 3px solid ${({ aemikoTheme }) => aemikoTheme['secondary-500']};
+const TabListContainerDiv = styled.div`
+  margin: 0.5rem 0;
+`;
+
+const UnderLineDiv = styled.div<UnderlineDivProps>`
+  width: ${({ tabCount }) => `${(100 / tabCount).toFixed(2)}%`};
+  border-bottom: 3px solid ${({ kind }) => (kind ? idkFn(kind) : '#000')};
   border-radius: 50vmin;
 
   -webkit-transform: translateX(calc(100% * ${({ currentTabIdx }) => currentTabIdx}));
@@ -77,16 +74,19 @@ const UnderLine = styled.div<UnderlineProps>`
   transition: transform 0.2s ease-in;
 `;
 
-const TabList = styled.ul`
-  padding: 1rem 0;
-  margin: 0;
+const TabList = styled.ul<{ tabCount: number }>`
+  display: grid;
+  grid-template-columns: repeat(${({ tabCount }) => tabCount}, 1fr);
   list-style: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+
+  padding: 0.875rem 0;
+  margin: 0;
 `;
 
 const TabItem = styled(Typography.body).attrs({ as: 'li' })`
-  padding: 0 3rem;
+  -webkit-tap-highlight-color: transparent;
+  margin: 0 auto;
   cursor: pointer;
 `;
+
+export default TabBar;

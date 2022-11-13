@@ -47,15 +47,16 @@ export const useStyleProps = ({
 };
 
 type ContainerProps = CustomColorCssProperties & {
+  as?: keyof JSX.IntrinsicElements;
   children: React.ReactNode;
   className?: string;
 };
 
 const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
-  ({ children, className, ...styles }) => {
+  ({ as, children, className, ...styles }) => {
     const style = useStyleProps(styles);
     return (
-      <StyledContainerDiv className={className} style={style}>
+      <StyledContainerDiv as={as} className={className} style={style}>
         {children}
       </StyledContainerDiv>
     );

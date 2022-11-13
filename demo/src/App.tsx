@@ -28,6 +28,8 @@ import {
   useRothko,
   InlineRythmLoader,
   Toggle,
+  TabBar,
+  Tab,
 } from '@rothko-ui/ui';
 import { useState } from 'react';
 import './App.css';
@@ -65,6 +67,7 @@ const App = () => {
             <ThemeButton />
             <div id="#my-qr-code"></div>
             <main className="example-cards">
+              <TabBarCard />
               <ToggleCard />
               <ButtonCard />
               <NestedDropdownCard />
@@ -94,6 +97,24 @@ const App = () => {
 const ThemeButton = () => {
   const { toggleMode } = useRothko();
   return <Button onClick={toggleMode}>toggle theme</Button>;
+};
+
+const TabBarCard = () => {
+  const [singleVal, setSingleVal] = useState<boolean>(false);
+  const tabs = [
+    { title: 'One', key: 'one', render: () => <Typography.h3>One</Typography.h3> },
+    { title: 'Two', key: 'two', render: () => <Typography.h3>Two</Typography.h3> },
+    { title: 'Three', key: 'three', render: () => <Typography.h3>Three</Typography.h3> },
+  ] as const;
+
+  return (
+    <div className="white-padded-card">
+      <h3>TabBar</h3>
+      <div className="accordion-container">
+        <TabBar kind="danger" tabs={tabs} />
+      </div>
+    </div>
+  );
 };
 
 const ToggleCard = () => {
