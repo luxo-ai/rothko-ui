@@ -96,7 +96,7 @@ const PanelContent = ({ children, id, isOpen }: PanelContentProps) => {
   );
 };
 
-const PanelContainerDiv = styled.div<{ borderColor?: Color }>`
+const PanelContainerDiv = styled.div<{ borderColor?: string }>`
   overflow: hidden;
   ${({ borderColor }) =>
     borderColor

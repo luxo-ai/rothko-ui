@@ -1,4 +1,4 @@
-import type { RothkoKind } from '../Theme';
+import type { RothkoKind } from '../Theme/types';
 
 export type ToastDetails = {
   content?: React.ReactNode;

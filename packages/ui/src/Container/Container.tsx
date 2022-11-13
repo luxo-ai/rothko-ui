@@ -53,10 +53,10 @@ type ContainerProps = CustomColorCssProperties & {
 };
 
 const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
-  ({ as, children, className, ...styles }) => {
+  ({ as, children, className, ...styles }, ref) => {
     const style = useStyleProps(styles);
     return (
-      <StyledContainerDiv as={as} className={className} style={style}>
+      <StyledContainerDiv ref={ref} as={as} className={className} style={style}>
         {children}
       </StyledContainerDiv>
     );

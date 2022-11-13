@@ -1,6 +1,6 @@
 import type { Nullable } from '@rothko-ui/utils';
 import React, { useCallback, useMemo } from 'react';
-import type { RothkoKind } from '../Theme';
+import type { RothkoKind } from '../Theme/types';
 import Typography from '../Typography';
 import type { SliderWidth } from './Common';
 import { SliderContainer, SliderRange, SliderTrack } from './Common';

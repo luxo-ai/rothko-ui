@@ -1,7 +1,8 @@
-import { kebabToCamelCase, Nullable } from '@rothko-ui/utils';
+import type { Nullable } from '@rothko-ui/utils';
+import { kebabToCamelCase } from '@rothko-ui/utils';
 import parseInt from 'lodash/parseInt';
-import React from 'react';
-import { RemSize } from '../../types';
+import type React from 'react';
+import type { RemSize } from '../../types';
 import { findBy } from '../utils';
 import { innerHeight, innerWidth, outerHeight, outerWidth } from './dimensions';
 import { isMouseEvent } from './event';

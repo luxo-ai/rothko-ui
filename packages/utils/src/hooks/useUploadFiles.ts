@@ -31,7 +31,6 @@ export const useUploadFiles = ({ getMeta, beforeUpload, afterUpload }: HookArgs)
           const formData = new FormData();
           fields.forEach(([name, value]) => formData.append(name, value));
           formData.append('file', f);
-          console.log('f', formData);
           setProgress(p => (p + 33.33) / files.length);
           await axios.get(url, { data: formData });
           setProgress(p => (p + 33.33) / files.length);

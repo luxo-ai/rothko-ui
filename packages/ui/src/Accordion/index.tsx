@@ -1,3 +1,4 @@
 import Accordion from './Accordion';
+import AccordionPanel from './AccordionPanel';
 
-export { Accordion };
+export { Accordion, AccordionPanel };

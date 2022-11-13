@@ -206,11 +206,8 @@ function Dropdown<V extends Value, T = undefined>({
     moveOptionIdx(direction);
   };
 
-  console.log('?', optIdx);
-
   useEffect(() => {
     if (!open) return;
-    console.log('?', optIdx);
     const scrollIdx = optIdx < 0 && openReverse ? options.length - 1 : optIdx;
     scrollIntoView(`#option-${scrollIdx}`);
   }, [optIdx, openReverse, open]);

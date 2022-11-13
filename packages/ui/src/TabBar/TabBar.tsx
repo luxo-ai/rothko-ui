@@ -1,7 +1,7 @@
 import type { KeyLike } from '@rothko-ui/utils';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import type { KindProps } from '../Theme';
+import type { KindProps } from '../Theme/types';
 import { idkFn } from '../Theme/theme';
 import Typography from '../Typography/Typography';
 import type { RenderTab, Tab } from './types';

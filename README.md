@@ -9,13 +9,13 @@ sponsor me: `0x7A67fF6354d983B6cfc3a7f7C5BA93f73C864b32`
 ### Installation
 
 ```bash
-npm install @rothko-ui/ui @rothko-ui/icons @rothko-ui/utils
+npm install @rothko-ui/ui @rothko-ui/icons
 ```
 
 or
 
 ```bash
-yarn add @rothko-ui/ui @rothko-ui/icons @rothko-ui/utils
+yarn add @rothko-ui/ui @rothko-ui/icons
 ```
 
 ### License

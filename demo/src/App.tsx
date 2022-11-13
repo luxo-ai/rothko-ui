@@ -16,7 +16,6 @@ import {
   OptionGroup,
   SkeletonBoxWithLabel,
   Tag,
-  ThemeProvider,
   ToastContextProvider,
   useToaster,
   Toast,
@@ -54,45 +53,43 @@ const App = () => {
           : undefined
       }
     >
-      <ThemeProvider>
-        <ToastContextProvider>
-          <div className="app-container">
-            <InlineRythmLoader asText size="m" kind="primary" />
-            <header className="app-header">
-              <Typography.h1 bold italic light kind="secondary">
-                use me to test components
-              </Typography.h1>
-              <Typography.body>testing</Typography.body>
-            </header>
+      <ToastContextProvider>
+        <div className="app-container">
+          <InlineRythmLoader asText size="m" kind="primary" />
+          <header className="app-header">
+            <Typography.h1 bold italic light kind="secondary">
+              use me to test components
+            </Typography.h1>
             <Typography.body>testing</Typography.body>
-            <ThemeButton />
-            <div id="#my-qr-code"></div>
-            <main className="example-cards">
-              <SliderCard />
-              <MultiSliderCard />
-              <TabBarCard />
-              <ToggleCard />
-              <ButtonCard />
-              <NestedDropdownCard />
-              <SearchCard />
-              <SingleDropdownCard />
-              <MultiDropdownCard />
-              <ToastCard />
-              <BreadCrumbsCard />
-              <TagCard />
-              <BottomPopupCard />
-              <OptionGroupCard />
-              <ModalCard />
-              <LabelCard />
-              <InputCard />
-              <CheckboxCard />
-              <AlertCard />
-              <AccordionCard />
-              <AvatarCard />
-            </main>
-          </div>
-        </ToastContextProvider>
-      </ThemeProvider>
+          </header>
+          <Typography.body>testing</Typography.body>
+          <ThemeButton />
+          <div id="#my-qr-code"></div>
+          <main className="example-cards">
+            <SliderCard />
+            <MultiSliderCard />
+            <TabBarCard />
+            <ToggleCard />
+            <ButtonCard />
+            <NestedDropdownCard />
+            <SearchCard />
+            <SingleDropdownCard />
+            <MultiDropdownCard />
+            <ToastCard />
+            <BreadCrumbsCard />
+            <TagCard />
+            <BottomPopupCard />
+            <OptionGroupCard />
+            <ModalCard />
+            <LabelCard />
+            <InputCard />
+            <CheckboxCard />
+            <AlertCard />
+            <AccordionCard />
+            <AvatarCard />
+          </main>
+        </div>
+      </ToastContextProvider>
     </RothkoProvider>
   );
 };

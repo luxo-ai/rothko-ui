@@ -36,49 +36,6 @@ export const isValidPhone = (phone: string) => {
   return /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(phone);
 };
 
-export const titleCase = (str: string) => {
-  if (!str.length) return str;
-  return str
-    .split(' ')
-    .map(i => i[0].toUpperCase() + i.slice(1))
-    .join(' ');
-};
-
-export const englishList = (items: string[], conjunction = 'and') => {
-  if (items.length === 0) return '';
-  if (items.length === 1) return items[0];
-  if (items.length === 2) return `${items[0]} ${conjunction} ${items[1]}`;
-  return `${items.slice(0, items.length - 1).join(', ')}, ${conjunction} ${
-    items[items.length - 1]
-  }`;
-};
-
-type HasName = {
-  firstName: string;
-  lastName: string;
-  preferredName?: string;
-};
-
-export const getName = <P extends HasName>(person: P, format: 'l f' | 'f l' | 'p l') => {
-  const { firstName, preferredName, lastName } = person;
-  const result: string[] = [];
-  for (const token of format) {
-    if (token === 'f') {
-      result.push(firstName);
-    } else if (token === 'p') {
-      result.push(preferredName ?? firstName);
-    } else if (token === 'l') {
-      result.push(lastName);
-    } else {
-      result.push(token);
-    }
-  }
-};
-
-export const getDomainFromEmail = (email: string) => {
-  return email.toLowerCase().split('@')[1];
-};
-
 export const kebabToCamelCase = (str: string) => {
   const camelCaps = str
     .split('-')
