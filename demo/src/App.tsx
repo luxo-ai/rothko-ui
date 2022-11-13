@@ -110,7 +110,7 @@ const NotificationCard = () => {
     <div className="white-padded-card">
       <h3>Notification</h3>
       <div className="accordion-container">
-        <Notification color="success" size={10} count={400} maxCount={40} maxLength={1}>
+        <Notification color="success" size={10} count={400} maxCount={40}>
           <Bell width={24} height={24} />
         </Notification>
       </div>
@@ -469,8 +469,12 @@ const CheckboxCard = () => {
   return (
     <div className="white-padded-card">
       <h3>Checkbox</h3>
-      <Checkbox kind="danger" checked={checked1} onChange={() => setChecked1(!checked1)} />
-      <Checkbox kind="info" checked={checked2} onChange={() => setChecked2(!checked2)}>
+      <Checkbox
+        style={{ marginBottom: 18 }}
+        checked={checked1}
+        onChange={() => setChecked1(!checked1)}
+      />
+      <Checkbox withCheck kind="info" checked={checked2} onChange={() => setChecked2(!checked2)}>
         Hello world
       </Checkbox>
     </div>
