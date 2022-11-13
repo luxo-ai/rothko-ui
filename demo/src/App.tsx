@@ -417,7 +417,7 @@ const ButtonCard = () => {
       <h3>Button</h3>
       <div>
         <Button
-          pill
+          shape="circle"
           loading={loading1}
           appearance="outline"
           kind="danger"

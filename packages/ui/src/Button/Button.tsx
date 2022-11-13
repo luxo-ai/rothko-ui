@@ -60,10 +60,8 @@ type ButtonProps = {
   accessoryLeft?: Accessory;
   /** render an accessory to the right of the button content  */
   accessoryRight?: Accessory;
-  /** is the button pill shaped */
-  pill?: boolean;
-  /** is the button circular shaped */
-  circle?: boolean;
+  /** the button shaped */
+  shape?: 'pill' | 'square' | 'circle';
   /** is content loading from this target */
   loading?: boolean;
   /** make the width fit the button content */
@@ -76,14 +74,13 @@ export const Button: React.FC<ButtonProps> = ({
   accessoryRight: Right,
   appearance = 'filled',
   children,
-  circle,
   className,
   disabled,
   fitContent,
   kind = 'primary',
   loading,
   onClick,
-  pill,
+  shape,
   size = 'm',
   style,
   tabIndex,
@@ -93,8 +90,9 @@ export const Button: React.FC<ButtonProps> = ({
   const [childrenHeight, setChildrenHeight] = useState<number | null>(null);
 
   const appearanceClasses = {
-    ['btn-circle']: circle,
-    ['btn-pill']: pill,
+    ['btn-pill']: shape === 'pill',
+    ['btn-square']: shape == 'square',
+    ['btn-circle']: shape === 'circle',
     ['fit-content']: fitContent,
   } as const;
 
@@ -165,12 +163,16 @@ export const buttonStyle = css<BaseButtonProps>`
     `
   )}
 
-  &:not(.btn-pill) {
-    border-radius: 0.125rem;
-  }
+  border-radius: 0.125rem;
 
   &.btn-pill {
     border-radius: 50vmin;
+  }
+  &.btn-circle {
+    border-radius: 50%;
+  }
+  &.btn-square {
+    border-radius: 0;
   }
 
   &.fit-content {
