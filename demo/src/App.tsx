@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Accordion,
   AccordionPanel,
@@ -30,7 +31,9 @@ import {
   TabBar,
   Tab,
   Slider,
+  Notification,
 } from '@rothko-ui/ui';
+import { Bell } from '@rothko-ui/icons';
 import { useState } from 'react';
 import './App.css';
 import * as lorem from 'lorem-ipsum';
@@ -66,6 +69,7 @@ const App = () => {
           <ThemeButton />
           <div id="#my-qr-code"></div>
           <main className="example-cards">
+            <NotificationCard />
             <SliderCard />
             <MultiSliderCard />
             <TabBarCard />
@@ -97,6 +101,21 @@ const App = () => {
 const ThemeButton = () => {
   const { toggleMode } = useRothko();
   return <Button onClick={toggleMode}>toggle theme</Button>;
+};
+
+const NotificationCard = () => {
+  const [singleVal, setSingleVal] = useState<boolean>(false);
+
+  return (
+    <div className="white-padded-card">
+      <h3>Notification</h3>
+      <div className="accordion-container">
+        <Notification color="success" size={10} count={400} maxCount={40} maxLength={1}>
+          <Bell width={24} height={24} />
+        </Notification>
+      </div>
+    </div>
+  );
 };
 
 const TabBarCard = () => {
@@ -349,7 +368,7 @@ const AccordionCard = () => {
     <div className="white-padded-card">
       <h3>Accordion</h3>
       <div className="accordion-container">
-        <Accordion kind="black" mutuallyExclusive bordered>
+        <Accordion kind="primary" mutuallyExclusive bordered>
           <AccordionPanel title="Label 1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit

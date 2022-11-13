@@ -17,7 +17,8 @@
       "@rothko-ui/ui": ["./packages/ui"],
       "@rothko-ui/utils": ["./packages/utils"],
       "@rothko-ui/tokens": ["./packages/tokens"],
-      "@rothko-ui/icons": ["./packages/icons"]
+      "@rothko-ui/icons": ["./packages/icons"],
+      "demo": ["./demo"]
     }
   },
   "compileOnSave": true,

@@ -9,4 +9,4 @@ src/generated/*
 *.md
 *.json
 *.png
-*.js
+.eslintrc.js

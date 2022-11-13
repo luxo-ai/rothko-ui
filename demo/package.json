@@ -10,6 +10,7 @@
   "license": "MIT",
   "author": "luxo-ai <luxo.ai@proton.me>",
   "dependencies": {
+    "@rothko-ui/icons": "^1.0.0",
     "@rothko-ui/ui": "^1.0.0",
     "ethereum-qr-code": "^0.3.0",
     "lorem-ipsum": "^2.0.8",

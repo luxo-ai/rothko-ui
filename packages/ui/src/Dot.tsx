@@ -7,34 +7,33 @@ import type { HexColor, RGBColor, RothkoKind } from './Theme/types';
 import { isRothkoKind } from './Theme/types';
 import type { EmSize, RemSize } from './types';
 
-type Size = EmSize | RemSize;
+type Size = EmSize | RemSize | number;
 
 type DotProps = Omit<
   CustomColorCssProperties,
-  'backgroundColor' | 'borderRadius' | 'height' | 'width'
+  'backgroundColor' | 'borderRadius' | 'height' | 'width' | 'color'
 > & {
-  dotColor?: RothkoKind | HexColor | RGBColor;
+  color?: RothkoKind | HexColor | RGBColor;
   size: Size;
 };
 
-const Dot = React.forwardRef<HTMLDivElement, DotProps>(({ size, dotColor, ...styles }, ref) => {
+const Dot = React.forwardRef<HTMLDivElement, DotProps>(({ size, color, ...styles }, ref) => {
   const style = useStyleProps(styles);
-  return <DotDiv ref={ref} dotColor={dotColor} size={size} style={style} />;
+  return <DotDiv ref={ref} $color={color} $size={size} style={style} />;
 });
 
 Dot.displayName = 'Dot';
 
 type DotElProps = {
-  dotColor?: RothkoKind | HexColor | RGBColor;
-  size: Size;
+  $color?: RothkoKind | HexColor | RGBColor;
+  $size: Size;
 };
 
 const DotDiv = styled.div<DotElProps>`
-  width: ${({ size }) => size};
-  height: ${({ size }) => size};
-  border-radius: calc(${({ size }) => size} / 2);
-  background-color: ${({ dotColor = '#000' }) =>
-    isRothkoKind(dotColor) ? idkFn(dotColor) : dotColor};
+  width: ${({ $size }) => (typeof $size === 'number' ? `${$size}px` : $size)};
+  height: ${({ $size }) => (typeof $size === 'number' ? `${$size}px` : $size)};
+  border-radius: calc(${({ $size }) => (typeof $size === 'number' ? `${$size}px` : $size)} / 2);
+  background-color: ${({ $color = '#000' }) => (isRothkoKind($color) ? idkFn($color) : $color)};
 `;
 
 export default Dot;
