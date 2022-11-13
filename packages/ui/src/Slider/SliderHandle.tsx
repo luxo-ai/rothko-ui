@@ -237,7 +237,7 @@ export const SliderHandle = ({
       kind={kind}
       onMouseDown={e => handleDragStart(e, false)}
       onMouseUp={e => handleDragStop(e, false)}
-      onTouchStart={_ => {
+      onTouchStart={() => {
         // the pseudo selector was not working on mobile for some reason
         handleRef.current?.classList.add('active');
       }}
