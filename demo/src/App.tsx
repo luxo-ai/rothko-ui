@@ -27,6 +27,7 @@ import {
   RothkoProvider,
   useRothko,
   InlineRythmLoader,
+  Toggle,
 } from '@rothko-ui/ui';
 import { useState } from 'react';
 import './App.css';
@@ -64,6 +65,7 @@ const App = () => {
             <ThemeButton />
             <div id="#my-qr-code"></div>
             <main className="example-cards">
+              <ToggleCard />
               <ButtonCard />
               <NestedDropdownCard />
               <SearchCard />
@@ -72,7 +74,6 @@ const App = () => {
               <ToastCard />
               <BreadCrumbsCard />
               <TagCard />
-
               <BottomPopupCard />
               <OptionGroupCard />
               <ModalCard />
@@ -93,6 +94,18 @@ const App = () => {
 const ThemeButton = () => {
   const { toggleMode } = useRothko();
   return <Button onClick={toggleMode}>toggle theme</Button>;
+};
+
+const ToggleCard = () => {
+  const [singleVal, setSingleVal] = useState<boolean>(false);
+  return (
+    <div className="white-padded-card">
+      <h3>Toggle</h3>
+      <div className="accordion-container">
+        <Toggle toggled={singleVal} onChange={v => setSingleVal(v)} />
+      </div>
+    </div>
+  );
 };
 
 const NestedDropdownCard = () => {

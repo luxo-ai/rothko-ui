@@ -8,23 +8,16 @@ import { useKindTheme } from '../Theme';
 import type { RothkoKind, ThemedElement } from '../Theme/types';
 import { keyDownFactory } from '../utils/keyUtils';
 
-export type ToggleProps = {
-  toggled?: boolean;
-  onChange: (toggled: boolean) => void;
+type ToggleProps = {
   children?: React.ReactNode;
-  style?: CSSProperties;
   className?: string;
   kind?: RothkoKind;
+  onChange: (toggled: boolean) => void;
+  style?: CSSProperties;
+  toggled?: boolean;
 };
 
-export function Toggle({
-  toggled,
-  onChange,
-  children,
-  style,
-  className,
-  kind = 'info',
-}: ToggleProps) {
+const Toggle = ({ children, className, kind = 'info', onChange, style, toggled }: ToggleProps) => {
   const [colorer, theme] = useKindTheme(kind);
   const handleChange = () => onChange(!toggled);
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: handleChange });
@@ -43,7 +36,7 @@ export function Toggle({
       <div className="flex-1 ml3">{children}</div>
     </div>
   );
-}
+};
 
 const Outer = styled.div<ThemedElement & CanColor>`
   border-radius: 50vmin;
@@ -98,3 +91,5 @@ const Inner = styled.div`
     display: none;
   }
 `;
+
+export default Toggle;

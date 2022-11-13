@@ -16,7 +16,7 @@ import type { InputProps, TextareaProps } from '../Input';
 import { Input, Textarea } from '../Input';
 import { OptionGroup } from '../OptionGroup';
 import { MultiSlider, Slider } from '../Slider';
-import { Toggle } from '../Toggle/Toggle';
+import Toggle from '../Toggle/Toggle';
 
 type ControllerRenderProps = Parameters<Parameters<typeof Controller>[0]['render']>[0]['field'];
 

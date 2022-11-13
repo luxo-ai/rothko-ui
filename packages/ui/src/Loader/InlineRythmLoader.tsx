@@ -83,7 +83,7 @@ const animation = generateCssAnimation(
 const RythmDotSpan = styled.span<RythmDotSpanProps>`
   width: 100%;
   height: 100%;
-  border-radius: 100%; // 0.125rem;
+  border-radius: 0.25rem;
 
   background-color: ${({ kind, asText }) => {
     if (!kind) return '#000';

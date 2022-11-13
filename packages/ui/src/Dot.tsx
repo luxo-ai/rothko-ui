@@ -1,36 +1,40 @@
 import React from 'react';
-import type { CSSProperties } from 'styled-components';
 import styled from 'styled-components';
-import type { RothkoKind, CanColor } from './Theme';
-import { useKindTheme } from './Theme';
+import type { CustomColorCssProperties } from './Container/Container';
+import { useStyleProps } from './Container/Container';
+import { idkFn } from './Theme/themeV2';
+import type { HexColor, RGBColor, RothkoKind } from './Theme/types';
+import { isRothkoKind } from './Theme/types';
 import type { EmSize, RemSize } from './types';
 
 type Size = EmSize | RemSize;
 
-type DotProps = {
+type DotProps = Omit<
+  CustomColorCssProperties,
+  'backgroundColor' | 'borderRadius' | 'height' | 'width'
+> & {
+  dotColor?: RothkoKind | HexColor | RGBColor;
   size: Size;
-  kind?: RothkoKind;
-} & Pick<
-  CSSProperties,
-  'position' | 'inset' | 'left' | 'right' | 'top' | 'bottom' | 'margin' | 'padding' | 'border'
->;
+};
 
-const Dot = React.forwardRef<HTMLDivElement, DotProps>(
-  ({ size, kind = 'primary', ...style }, ref) => {
-    const [colorer] = useKindTheme(kind);
-    return <DotDiv ref={ref} themeColorer={colorer} size={size} style={style} />;
-  }
-);
+const Dot = React.forwardRef<HTMLDivElement, DotProps>(({ size, dotColor, ...styles }, ref) => {
+  const style = useStyleProps(styles);
+  return <DotDiv ref={ref} dotColor={dotColor} size={size} style={style} />;
+});
 
 Dot.displayName = 'Dot';
 
-type DotElProps = CanColor & { size: Size };
+type DotElProps = {
+  dotColor?: RothkoKind | HexColor | RGBColor;
+  size: Size;
+};
 
 const DotDiv = styled.div<DotElProps>`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
   border-radius: calc(${({ size }) => size} / 2);
-  background-color: ${({ themeColorer }) => themeColorer()};
+  background-color: ${({ dotColor = '#000' }) =>
+    isRothkoKind(dotColor) ? idkFn(dotColor) : dotColor};
 `;
 
 export default Dot;
