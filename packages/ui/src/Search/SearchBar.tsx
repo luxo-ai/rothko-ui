@@ -117,6 +117,8 @@ const SearchButton = ({ onClick, disabled }: SearchButtonProps) => {
 };
 
 const searchBarWrapperStyle = css<ThemedElement>`
+  -webkit-tap-highlight-color: transparent;
+  ${hideBrowserOutline}
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
