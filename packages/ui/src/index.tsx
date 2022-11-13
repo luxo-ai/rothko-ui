@@ -5,6 +5,7 @@ import Hr from './Hr';
 import Typography from './Typography';
 import When from './When';
 
+export * from './Flex';
 export * from './Accordion';
 export * from './BreadCrumbs';
 export * from './Button';
