@@ -46,6 +46,8 @@ type SearchProps<V extends Value, T> = {
   mobile?: boolean;
   /* header of the search (logo, etc) */
   header?: React.ReactElement;
+  /* opt into traditional search drop-down style */
+  traditionalUx?: boolean;
 };
 
 function Search<V extends Value, T = undefined>({

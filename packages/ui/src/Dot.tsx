@@ -15,7 +15,7 @@ type DotProps = {
   'position' | 'inset' | 'left' | 'right' | 'top' | 'bottom' | 'margin' | 'padding' | 'border'
 >;
 
-export const Dot = React.forwardRef<HTMLDivElement, DotProps>(
+const Dot = React.forwardRef<HTMLDivElement, DotProps>(
   ({ size, kind = 'primary', ...style }, ref) => {
     const [colorer] = useKindTheme(kind);
     return <DotDiv ref={ref} themeColorer={colorer} size={size} style={style} />;
@@ -32,3 +32,5 @@ const DotDiv = styled.div<DotElProps>`
   border-radius: calc(${({ size }) => size} / 2);
   background-color: ${({ themeColorer }) => themeColorer()};
 `;
+
+export default Dot;

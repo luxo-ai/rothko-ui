@@ -5,7 +5,7 @@ import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
 import type { Option, Value } from '../Library/types';
-import { Grid } from '../Grid';
+import { Grid } from '../Grid/Grid';
 import Typography, { BODY_FONT_FAMILY } from '../Typography';
 import type { RothkoKind, RothkoSize, CanColor } from '../Theme';
 import { useKindTheme } from '../Theme';

@@ -1,20 +1,22 @@
 import Alert from './Alert';
 import Checkbox from './Checkbox';
+import Dot from './Dot';
+import Hr from './Hr';
 import Typography from './Typography';
+import When from './When';
 
 export * from './Accordion';
 export * from './BreadCrumbs';
 export * from './Button';
 export { MaxWidth, MinWidth, WidthGeqOnly, WidthLeqOnly } from './Dimensions';
-export { Dot } from './Dot';
 export * from './Dropdown';
 export * from './Form';
-export { Grid, GridSpan } from './Grid';
+export * from './Grid';
 export * from './Hooks';
-export { Hr } from './Hr';
 export * from './Image';
 export * from './Input';
 export * from './Label';
+export * from './Loader';
 export * from './Modal';
 export * from './OptionGroup';
 export { orNullFactory } from './OrNull';
@@ -24,7 +26,6 @@ export * from './RothkoProvider';
 export * from './Search';
 export * from './Skeleton';
 export * from './Slider';
-export * from './Loader';
 export * from './TabBar';
 export * from './Tag';
 export * from './Theme';
@@ -37,7 +38,9 @@ export {
   enableBodyScroll,
   getStyle,
 } from './utils/domUtils';
-export { When } from './When';
+export { Dot };
+export { When };
 export { Alert };
 export { Checkbox };
 export { Typography };
+export { Hr };
