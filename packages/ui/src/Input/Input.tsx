@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import type { RothkoSize } from '../Theme';
+import type { RothkoSize } from '../Theme/types';
 import { BODY_FONT_FAMILY } from '../Typography';
 
 export type HtmlInputProps = Omit<
