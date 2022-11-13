@@ -190,6 +190,7 @@ const expandedButtonWidth: Record<RothkoSize, FlattenSimpleInterpolation> = {
 };
 
 const ExpandButtonLink = styled.a`
+  -webkit-tap-highlight-color: transparent;
   ${Typography.linkStyle}
   height: fit-content;
   ${Object.entries(sizeMap).map(

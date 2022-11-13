@@ -58,6 +58,7 @@ const CheckboxContainerDiv = styled.div`
 `;
 
 const StyledCheckboxDiv = styled.div<KindProps>`
+  -webkit-tap-highlight-color: transparent;
   background-color: var(--basic-200);
   cursor: pointer;
 

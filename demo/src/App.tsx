@@ -111,7 +111,7 @@ const TabBarCard = () => {
     <div className="white-padded-card">
       <h3>TabBar</h3>
       <div className="accordion-container">
-        <TabBar kind="danger" tabs={tabs} />
+        <TabBar kind="info" tabs={tabs} />
       </div>
     </div>
   );
@@ -123,7 +123,7 @@ const ToggleCard = () => {
     <div className="white-padded-card">
       <h3>Toggle</h3>
       <div className="accordion-container">
-        <Toggle toggled={singleVal} onChange={v => setSingleVal(v)} />
+        <Toggle kind="success" toggled={singleVal} onChange={v => setSingleVal(v)} />
       </div>
     </div>
   );

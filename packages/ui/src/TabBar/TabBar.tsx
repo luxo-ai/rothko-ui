@@ -60,6 +60,30 @@ const TabListContainerDiv = styled.div`
   margin: 0.5rem 0;
 `;
 
+const TabList = styled.ul<{ tabCount: number }>`
+  display: grid;
+  grid-template-columns: repeat(${({ tabCount }) => tabCount}, 1fr);
+
+  list-style: none;
+
+  margin: 0;
+  // padding betweeb list and underline
+  padding: 1rem 0;
+  // tablet and mobile
+  @media only screen and (max-width: 700px) {
+    padding: 0.5rem 0;
+  }
+`;
+
+const TabItem = styled(Typography.body).attrs({ as: 'li' })`
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+`;
+
 const UnderLineDiv = styled.div<UnderlineDivProps>`
   width: ${({ tabCount }) => `${(100 / tabCount).toFixed(2)}%`};
   border-bottom: 3px solid ${({ kind }) => (kind ? idkFn(kind) : '#000')};
@@ -72,21 +96,6 @@ const UnderLineDiv = styled.div<UnderlineDivProps>`
   -webkit-transition: transform 0.2s ease-in;
   -moz-transition: transform 0.2s ease-in;
   transition: transform 0.2s ease-in;
-`;
-
-const TabList = styled.ul<{ tabCount: number }>`
-  display: grid;
-  grid-template-columns: repeat(${({ tabCount }) => tabCount}, 1fr);
-  list-style: none;
-
-  padding: 0.875rem 0;
-  margin: 0;
-`;
-
-const TabItem = styled(Typography.body).attrs({ as: 'li' })`
-  -webkit-tap-highlight-color: transparent;
-  margin: 0 auto;
-  cursor: pointer;
 `;
 
 export default TabBar;
