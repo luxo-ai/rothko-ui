@@ -2,8 +2,8 @@ import type { Nullable } from '@rothko-ui/utils';
 import { useIsMounted } from '@rothko-ui/utils';
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import type { RothkoKind, CanColor, ThemedElement } from '../Theme';
-import { useKindTheme } from '../Theme';
+import { idkFn } from '../Theme/themeV2';
+import type { KindProps, RothkoKind } from '../Theme/types';
 import type { DragDelta, DragEvent } from '../utils/domUtils';
 import {
   addEvent,
@@ -67,7 +67,6 @@ export const SliderHandle = ({
   onChange,
 }: SliderHandleProps) => {
   const isMounted = useIsMounted();
-  const [colorer, theme] = useKindTheme(kind);
 
   const handleRef = useRef<HTMLButtonElement | null>(null);
   const onChangeRef = useRef(onChange);
@@ -215,13 +214,6 @@ export const SliderHandle = ({
     [handleRef, isDraggingRef]
   );
 
-  /*
-  const buttonStyle = getInlineCSSTranslation({
-    x: vertical ? 0 : position,
-    y: vertical ? position : 0,
-  });
-  */
-
   const offset = getOffset(value);
   const positionStyle = vertical
     ? { bottom: offset, top: 'auto' }
@@ -234,13 +226,15 @@ export const SliderHandle = ({
 
   return (
     <HandleButton
-      id={id}
-      ref={handleRef}
-      style={elStyle}
-      tabIndex={tabIndex}
+      aria-disabled={!!disabled}
+      aria-label={ariaLabel}
+      aria-valuemax={max}
+      aria-valuemin={min}
+      aria-valuenow={value}
       className={className}
       disabled={disabled}
-      role="slider"
+      id={id}
+      kind={kind}
       onMouseDown={e => handleDragStart(e, false)}
       onMouseUp={e => handleDragStop(e, false)}
       onTouchStart={_ => {
@@ -252,21 +246,20 @@ export const SliderHandle = ({
         // the pseudo selector was not working on mobile for some reason
         handleRef.current?.classList.remove('active');
       }}
+      ref={handleRef}
+      role="slider"
+      style={elStyle}
+      tabIndex={tabIndex}
       vertical={vertical}
-      aemikoTheme={theme}
-      themeColorer={colorer}
-      aria-label={ariaLabel}
-      aria-valuemin={min}
-      aria-valuemax={max}
-      aria-valuenow={value}
-      aria-disabled={!!disabled}
     />
   );
 };
 
 const HandleButton = styled.button.attrs({ type: 'button' })<
-  ThemedElement & CanColor & { vertical?: boolean }
+  Required<KindProps> & { vertical?: boolean }
 >`
+  -webkit-tap-highlight-color: transparent;
+  position: absolute;
   // https://stackoverflow.com/questions/30552307/ios-safari-buttons-not-perfect-circles
   padding: 0;
   width: 1.5rem;
@@ -279,7 +272,7 @@ const HandleButton = styled.button.attrs({ type: 'button' })<
   border-radius: 50%;
   border-style: solid;
   border-width: 1px;
-  border-color: ${({ aemikoTheme }) => aemikoTheme['basic-500']};
+  border-color: ${idkFn('basic')}; // basic 500
   overflow: visible;
   touch-action: ${({ vertical }) => (vertical ? `pan-y` : `pan-x`)};
   z-index: 3;
@@ -289,7 +282,7 @@ const HandleButton = styled.button.attrs({ type: 'button' })<
     &:hover,
     &:active,
     &.active {
-      border-color: ${({ themeColorer }) => themeColorer()};
+      border-color: ${({ kind }) => idkFn(kind)};
     }
   }
   :disabled {

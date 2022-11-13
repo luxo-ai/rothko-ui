@@ -1,8 +1,7 @@
 import type { Nullable } from '@rothko-ui/utils';
 import React, { useCallback, useMemo } from 'react';
-import Typography from '../Typography';
 import type { RothkoKind } from '../Theme';
-import { useKindTheme } from '../Theme';
+import Typography from '../Typography';
 import type { SliderWidth } from './Common';
 import { SliderContainer, SliderRange, SliderTrack } from './Common';
 import { SliderHandle } from './SliderHandle';
@@ -13,37 +12,36 @@ const BUFFER = 3;
 export type Range = [number, number];
 
 type MultiSliderProps = {
-  min?: number;
-  max: number;
-  onChange: (r: Range) => void;
-  kind?: RothkoKind;
-  value?: Nullable<Range>;
-  minWidth?: SliderWidth;
-  maxWidth?: SliderWidth;
   className?: string;
-  label?: string;
   disabled?: boolean;
-  precision?: number;
+  kind?: RothkoKind;
+  label?: string;
+  max: number;
+  maxWidth?: SliderWidth;
+  min?: number;
+  minWidth?: SliderWidth;
+  onChange: (r: Range) => void;
   orMore?: boolean;
   postfix?: string;
+  precision?: number;
+  value?: Nullable<Range>;
 };
 
-export const MultiSlider = ({
-  onChange,
-  value,
-  max,
-  disabled,
+const MultiSlider = ({
   className,
-  label,
-  orMore,
-  minWidth,
-  postfix,
+  disabled,
   kind = 'info',
+  label,
+  max,
   maxWidth = '100%',
   min = 0,
+  minWidth,
+  onChange,
+  orMore,
+  postfix,
   precision = 0,
+  value,
 }: MultiSliderProps) => {
-  const [colorer, theme] = useKindTheme(kind);
   const getOffset = useCallback(getOffsetFactory({ min, max }), [min, max]);
 
   const [lower, upper] = useMemo(() => {
@@ -62,7 +60,7 @@ export const MultiSlider = ({
           {maxReached && orMore ? '+' : ''}
         </Typography.label>
       </div>
-      <SliderTrack className="flex flex-row items-center relative w-100" aemikoTheme={theme}>
+      <SliderTrack className="flex flex-row items-center relative w-100">
         <SliderHandle
           id="multi-slider-handle-min"
           className="absolute"
@@ -79,11 +77,11 @@ export const MultiSlider = ({
         />
         <SliderRange
           className="absolute"
+          kind={kind}
           style={{
             left: getOffset(lower),
             width: getOffset(upper - lower),
           }}
-          themeColorer={colorer}
         />
         <SliderHandle
           id="multi-slider-handle-max"
@@ -103,3 +101,5 @@ export const MultiSlider = ({
     </SliderContainer>
   );
 };
+
+export default MultiSlider;

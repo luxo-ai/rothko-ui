@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import type { CanColor, ThemedElement } from '../Theme';
+import { idkFn } from '../Theme/themeV2';
+import type { KindProps } from '../Theme/types';
 import type { EmSize, PercentSize, RemSize } from '../types';
 
 export type SliderWidth = RemSize | EmSize | PercentSize;
@@ -11,19 +12,19 @@ export const SliderContainer = styled.div<{ mw: SliderWidth; nw: SliderWidth }>`
   max-width: ${({ mw }) => mw};
 `;
 
-export const SliderTrack = styled.div<ThemedElement>`
+export const SliderTrack = styled.div`
   height: 0.3rem;
-  background: ${({ aemikoTheme }) => aemikoTheme['basic-500']};
+  background: ${idkFn('basic')}; // basic 500
   border-radius: 3px;
   user-select: none;
   z-index: 0;
 `;
 
-export const SliderRange = styled.div<CanColor>`
+export const SliderRange = styled.div<Required<KindProps>>`
   height: 100%;
   margin: 0;
   border-radius: 3px;
-  background: ${({ themeColorer }) => themeColorer()};
+  background: ${({ kind }) => idkFn(kind)};
   overflow: hidden;
   user-select: none;
   z-index: 2;

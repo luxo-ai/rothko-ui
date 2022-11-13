@@ -30,6 +30,7 @@ import {
   Toggle,
   TabBar,
   Tab,
+  Slider,
 } from '@rothko-ui/ui';
 import { useState } from 'react';
 import './App.css';
@@ -67,6 +68,8 @@ const App = () => {
             <ThemeButton />
             <div id="#my-qr-code"></div>
             <main className="example-cards">
+              <SliderCard />
+              <MultiSliderCard />
               <TabBarCard />
               <ToggleCard />
               <ButtonCard />
@@ -112,6 +115,30 @@ const TabBarCard = () => {
       <h3>TabBar</h3>
       <div className="accordion-container">
         <TabBar kind="info" tabs={tabs} />
+      </div>
+    </div>
+  );
+};
+
+const SliderCard = () => {
+  const [singleVal, setSingleVal] = useState<number>(40);
+  return (
+    <div className="white-padded-card">
+      <h3>Slider</h3>
+      <div className="accordion-container">
+        <Slider value={singleVal} max={100} onChange={v => setSingleVal(v)} />
+      </div>
+    </div>
+  );
+};
+
+const MultiSliderCard = () => {
+  const [singleVal, setSingleVal] = useState<boolean>(false);
+  return (
+    <div className="white-padded-card">
+      <h3>Multi Slider</h3>
+      <div className="accordion-container">
+        <Toggle kind="success" toggled={singleVal} onChange={v => setSingleVal(v)} />
       </div>
     </div>
   );
