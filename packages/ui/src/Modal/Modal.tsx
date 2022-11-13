@@ -94,7 +94,7 @@ export const Modal = ({
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!modalRef.current || !modalRef.current.contains(e.target as any)) {
+    if (!modalRef.current || !modalRef.current.contains(e.target as Node)) {
       onClose();
     }
   };

@@ -32,6 +32,9 @@ import {
   Tab,
   Slider,
   Notification,
+  Drawer,
+  DrawerContext,
+  useDrawerContext,
 } from '@rothko-ui/ui';
 import { Bell } from '@rothko-ui/icons';
 import { useState } from 'react';
@@ -69,6 +72,7 @@ const App = () => {
           <ThemeButton />
           <div id="#my-qr-code"></div>
           <main className="example-cards">
+            <DrawerCard />
             <NotificationCard />
             <SliderCard />
             <MultiSliderCard />
@@ -101,6 +105,35 @@ const App = () => {
 const ThemeButton = () => {
   const { toggleMode } = useRothko();
   return <Button onClick={toggleMode}>toggle theme</Button>;
+};
+
+const DrawerCard = () => {
+  const [singleVal, setSingleVal] = useState<boolean>(false);
+
+  return (
+    <div className="white-padded-card">
+      <h3>Drawer</h3>
+      <Button onClick={() => setSingleVal(true)}>open me</Button>
+      <div className="accordion-container">
+        <DrawerContext.Provider
+          value={{
+            isOpen: singleVal,
+            closeDrawer: () => setSingleVal(false),
+            openDrawer: () => setSingleVal(true),
+          }}
+        >
+          <Drawer>
+            <Typography.h2>Hello world</Typography.h2>
+            <Typography.body>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit
+              at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.
+            </Typography.body>
+          </Drawer>
+        </DrawerContext.Provider>
+      </div>
+    </div>
+  );
 };
 
 const NotificationCard = () => {

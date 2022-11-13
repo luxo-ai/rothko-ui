@@ -10,6 +10,7 @@ export * from './Accordion';
 export * from './BreadCrumbs';
 export * from './Button';
 export * from './Dimensions';
+export * from './Drawer';
 export * from './Dropdown';
 export * from './Flex';
 export * from './Form';
