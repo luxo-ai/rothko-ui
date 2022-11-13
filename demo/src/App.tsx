@@ -311,7 +311,7 @@ const TagCard = () => {
             console.log('ayo');
           }}
           appearance="filled"
-          kind="danger"
+          kind="success"
         >
           my first tag
         </Tag>
@@ -485,7 +485,7 @@ const OptionGroupCard = () => {
         fillRemainingSpace
         value={selectedValue}
         onChange={v => setSelectedValue(v)}
-        kind="info"
+        kind="primary"
         maxRow={1}
         maxCol={2}
         options={[

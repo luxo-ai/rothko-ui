@@ -1,1 +1,3 @@
-export * from './OptionGroup';
+import OptionGroup from './OptionGroup';
+
+export { OptionGroup };

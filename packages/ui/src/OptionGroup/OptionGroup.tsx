@@ -4,47 +4,48 @@ import React, { useEffect, useMemo, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
-import type { Option, Value } from '../Library/types';
 import Grid from '../Grid/Grid';
-import Typography, { BODY_FONT_FAMILY } from '../Typography';
-import type { RothkoKind, RothkoSize, CanColor } from '../Theme';
-import { useKindTheme } from '../Theme';
+import type { Option, Value } from '../Library/types';
+import type { KindProps, RothkoSize } from '../Theme';
+import { idkFn } from '../Theme/themeV2';
 import type { EmSize, RemSize } from '../types';
+import Typography, { BODY_FONT_FAMILY } from '../Typography';
 
-type OptionGroupProps<V extends Value> = {
-  kind?: RothkoKind;
-  size?: RothkoSize;
-  value?: V | null;
-  options: Option<V, { disabled?: boolean } | undefined>[];
-  onChange: (id: V) => void;
-  onExpand?: () => void;
+type OptionGroupProps<V extends Value> = KindProps & {
+  children?: React.ReactNode;
+  className?: string;
+  fillRemainingSpace?: boolean;
+  id?: string;
   maxCol?: number;
   maxRow?: number;
-  children?: React.ReactNode;
-  fillRemainingSpace?: boolean;
-  optionsWithRadius?: boolean;
+  onChange: (id: V) => void;
+  onExpand?: () => void;
   optionGap?: RemSize | EmSize | number;
-} & Pick<React.HTMLProps<HTMLDivElement>, 'style' | 'className' | 'id'>;
+  options: Option<V, { disabled?: boolean } | undefined>[];
+  optionsWithRadius?: boolean;
+  size?: RothkoSize;
+  style?: React.CSSProperties;
+  value?: V | null;
+};
 
-export function OptionGroup<V extends Value>({
-  id,
-  kind = 'primary',
-  size = 'm',
-  options,
-  onChange,
-  maxCol = 4,
-  maxRow,
+function OptionGroup<V extends Value>({
   children,
-  onExpand,
-  value,
   className,
   fillRemainingSpace,
-  optionsWithRadius = true,
+  id,
+  kind = 'info',
+  maxCol = 4,
+  maxRow,
+  onChange,
+  onExpand,
   optionGap = '0.5rem',
+  options,
+  optionsWithRadius = true,
+  size = 'm',
   style,
+  value,
 }: OptionGroupProps<V>) {
   const [expanded, setExpanded] = useState(false);
-  const [themeColorer] = useKindTheme(kind);
 
   const maxOptions = Math.min(options.length, maxRow ? maxRow * maxCol : Infinity);
 
@@ -66,7 +67,7 @@ export function OptionGroup<V extends Value>({
           const isDisabled = 'data' in o && Boolean(o?.data?.disabled);
           const isSelected = o.id === value;
 
-          const classObj = {
+          const classes = {
             disabled: isDisabled,
             selected: isSelected,
             ['with-radius']: optionsWithRadius,
@@ -74,10 +75,10 @@ export function OptionGroup<V extends Value>({
 
           return (
             <OptionButton
+              className={clsx(classes, `opt-size-${size}`)}
               key={o.id}
+              kind={kind}
               onClick={isDisabled ? undefined : () => onChange(o.id)}
-              themeColorer={themeColorer}
-              className={clsx(classObj, `opt-size-${size}`)}
               role="option"
             >
               {o.label}
@@ -131,7 +132,7 @@ const OptionGroupContainer = styled.div`
   flex-direction: row;
 `;
 
-const OptionButton = styled.button.attrs({ as: 'button' })<CanColor>`
+const OptionButton = styled.button<Required<KindProps>>`
   -webkit-tap-highlight-color: transparent;
   ${phantomButtonStyle}
   font-family: ${BODY_FONT_FAMILY.regular};
@@ -140,16 +141,16 @@ const OptionButton = styled.button.attrs({ as: 'button' })<CanColor>`
   justify-content: center;
   overflow: hidden;
   cursor: pointer;
-  border: 0.125rem solid ${({ themeColorer }) => themeColorer()};
+  border: 0.125rem solid ${({ kind }) => idkFn(kind)};
   user-select: none;
 
   // fix later to work with theming
   background: #ffffff;
-  color: ${({ themeColorer }) => themeColorer()};
+  color: ${({ kind }) => idkFn(kind)};
 
   &.selected {
-    background: ${({ themeColorer }) => themeColorer()};
-    color: ${({ themeColorer }) => themeColorer('text')};
+    background: ${({ kind }) => idkFn(kind)};
+    color: ${({ kind }) => idkFn(kind, 'text')};
   }
 
   &.with-radius {
@@ -165,7 +166,7 @@ const OptionButton = styled.button.attrs({ as: 'button' })<CanColor>`
   )}
 
   &.disabled {
-    border-color: ${({ themeColorer }) => themeColorer('bg:disabled')};
+    border-color: ${({ kind }) => idkFn(kind, 'bg-disabled')};
     cursor: not-allowed;
     opacity: 0.75;
   }
@@ -208,3 +209,5 @@ const ExpandButtonLink = styled.a`
     `
   )}
 `;
+
+export default OptionGroup;

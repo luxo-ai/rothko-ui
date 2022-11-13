@@ -2,29 +2,26 @@ import { CloseOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
-import type { CanColor } from '../Theme';
-import { useKindTheme } from '../Theme';
-import type { RothkoKind, GreyScale } from '../Theme/types';
+import { idkFn } from '../Theme/themeV2';
+import type { KindProps } from '../Theme/types';
 
-type Appearance = 'filled' | 'outline';
+type TagAppearance = 'filled' | 'outline';
 
-type TagProps = {
-  kind?: RothkoKind | GreyScale;
-  appearance?: Appearance;
+type TagProps = KindProps & {
+  appearance?: TagAppearance;
   children?: React.ReactNode;
   onClose?: () => void;
 };
 
-export const Tag = ({ kind = 'primary', appearance = 'filled', children, onClose }: TagProps) => {
-  const [themeColorer] = useKindTheme(kind);
+const Tag = ({ appearance = 'filled', children, kind = 'primary', onClose }: TagProps) => {
   return (
-    <TagContainerDiv appearance={appearance} themeColorer={themeColorer}>
+    <TagContainerDiv appearance={appearance} kind={kind}>
       {children}
       {onClose && (
         <TagCloseButton>
           <CloseOutline
             onClick={onClose}
-            fill={appearance === 'filled' ? themeColorer('text') : themeColorer()}
+            fill={appearance === 'filled' ? idkFn(kind, 'text') : idkFn(kind)}
             width={16}
             height={16}
           />
@@ -34,20 +31,27 @@ export const Tag = ({ kind = 'primary', appearance = 'filled', children, onClose
   );
 };
 
-type ContainerProps = CanColor & { appearance: Appearance };
+type ContainerProps = Required<KindProps> & {
+  appearance: TagAppearance;
+};
 
 const TagContainerDiv = styled.div<ContainerProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: ${({ themeColorer, appearance }) =>
-    appearance === 'filled' ? themeColorer() : 'transparent'};
-  color: ${({ themeColorer, appearance }) =>
-    themeColorer(appearance === 'filled' ? 'text' : undefined)};
-  border: 1px solid ${({ themeColorer }) => themeColorer()};
-  border-radius: 50vh;
+
   width: fit-content;
   padding: 0.25rem 0.5rem;
+
+  background-color: ${({ kind, appearance }) => {
+    return appearance === 'filled' ? idkFn(kind) : 'transparent';
+  }};
+  color: ${({ kind, appearance }) => {
+    return appearance === 'filled' ? idkFn(kind, 'text') : idkFn(kind);
+  }};
+
+  border: 1px solid ${({ kind }) => idkFn(kind)};
+  border-radius: 50vh;
 `;
 
 const TagCloseButton = styled.button`
@@ -57,3 +61,5 @@ const TagCloseButton = styled.button`
   align-items: center;
   justify-content: center;
 `;
+
+export default Tag;
