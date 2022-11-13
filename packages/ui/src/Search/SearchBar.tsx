@@ -10,27 +10,27 @@ import { useTheme } from '../Theme';
 import type { ThemedElement } from '../Theme/types';
 
 type SearchBarProps = {
-  query: Nullable<string>;
-  onQueryChange: (q: string) => void;
-  onSubmit: () => void;
+  className?: string;
+  disabled?: boolean;
+  focusOnMount?: boolean;
   onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  disabled?: boolean;
+  onQueryChange: (q: string) => void;
+  onSubmit: () => void;
   placeholder?: string;
-  className?: string;
-  focusOnMount?: boolean;
+  query: Nullable<string>;
 };
 
 export const SearchBar = ({
   className,
   disabled,
+  focusOnMount,
+  onClick,
+  onKeyDown,
+  onQueryChange,
+  onSubmit,
   placeholder,
   query,
-  focusOnMount,
-  onKeyDown,
-  onSubmit,
-  onClick,
-  onQueryChange,
 }: SearchBarProps) => {
   const { theme } = useTheme();
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -138,8 +138,8 @@ const searchBarWrapperStyle = css<ThemedElement>`
   font-family: ${BODY_FONT_FAMILY.light};
   line-height: 20px;
 
-  border: 1px solid ${({ aemikoTheme }) => aemikoTheme['basic-500']};
-  border-radius: 2rem; //0.25rem;
+  border: 2px solid black; // ${({ aemikoTheme }) => aemikoTheme['basic-500']};
+  border-radius: 0.125rem; // 2rem; //0.25rem;
 
   &.b-radius-bold {
     border-radius: 0.25rem;
@@ -154,7 +154,7 @@ const searchBarWrapperStyle = css<ThemedElement>`
   &:focus:not(.disabled),
   &:active:not(.disabled) {
     outline: none;
-    border-color: ${({ aemikoTheme }) => aemikoTheme['basic-800']};
+    // border-color: ${({ aemikoTheme }) => aemikoTheme['basic-800']};
   }
 
   &.disabled {
@@ -182,10 +182,6 @@ const SearchButtonBase = styled(PhantomButton)<ThemedElement>`
   margin: 0;
   touch-action: manipulation;
   cursor: pointer;
-  border-top-right-radius: inherit;
-  border-top-left-radius: 0;
-  border-bottom-right-radius: inherit;
-  border-bottom-left-radius: 0;
   white-space: nowrap;
   user-select: none;
   -webkit-font-smoothing: antialiased;
@@ -195,7 +191,10 @@ const SearchButtonBase = styled(PhantomButton)<ThemedElement>`
   height: 100%;
   width: auto;
   :active:not(:disabled) {
-    background-color: ${({ aemikoTheme }) => aemikoTheme['basic-500']};
+    background-color: black; // ${({ aemikoTheme }) => aemikoTheme['info-transparent-500']};
+    & > svg {
+      fill: white;
+    }
   }
 `;
 

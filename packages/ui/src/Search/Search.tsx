@@ -17,7 +17,7 @@ import { useSearch } from './useSearch';
 
 const debug = debugFactory('search');
 
-export type SearchProps<V extends Value, T> = {
+type SearchProps<V extends Value, T> = {
   /** function for fetching data async */
   dataFetcher?: OptionFetcher<V, T>;
   /** callback triggered on search */
@@ -48,36 +48,36 @@ export type SearchProps<V extends Value, T> = {
   header?: React.ReactElement;
 };
 
-export function Search<V extends Value, T = undefined>({
+function Search<V extends Value, T = undefined>({
+  className,
+  closeOnEsc = true,
   dataFetcher,
+  disabled,
+  header,
+  mobile,
   onBlur,
   onFocus,
   onOpen,
   onSearch,
-  closeOnEsc = true,
-  disabled,
-  className,
-  mobile,
-  header,
-  placeholder = 'Search...',
   optionLimit: limit,
+  placeholder = 'Search...',
   renderOption: RenderOpt = DefaultRenderOption,
 }: SearchProps<V, T>) {
-  const { options, loading, error, setQuery, query, moveOptionIdx, optIdx } = useSearch({
+  const { error, loading, moveOptionIdx, optIdx, options, query, setQuery } = useSearch({
     dataFetcher,
     limit,
   });
 
   const {
-    containerRef,
-    menuRef,
-    open,
-    focus,
-    openMenu,
     closeMenu,
-    scrollIntoView,
+    containerRef,
+    focus,
+    menuRef,
     onBlurHandler,
     onFocusHandler,
+    open,
+    openMenu,
+    scrollIntoView,
   } = useMenu({
     onBlur,
     onFocus,
@@ -163,13 +163,13 @@ export function Search<V extends Value, T = undefined>({
             const selected = optIdx === idx;
             return (
               <li
+                aria-disabled={false}
+                aria-label={option.label}
+                aria-selected={selected}
                 className={clsx('option', { selected })}
                 id={`option-${idx}`}
                 key={option.id}
                 role="option"
-                aria-disabled={false}
-                aria-label={option.label}
-                aria-selected={selected}
                 tabIndex={-1}
                 onClick={e => {
                   e.preventDefault();
@@ -385,3 +385,5 @@ const FullScreenContainerDiv = styled.div`
   display: block;
   padding: 1.5rem 0;
 `;
+
+export default Search;

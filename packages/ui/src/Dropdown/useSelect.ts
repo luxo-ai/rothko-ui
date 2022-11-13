@@ -85,6 +85,7 @@ const useSelect = <V extends Value, T = undefined>(args: HookArgs<V, T>) => {
       // reset options
       setOptions(args.options);
     }
+    // careful. addting options to the dependency array causes an infinite loop
   }, [search, query, matchesQuery, setOptions, args.options]);
 
   useEffect(() => {
