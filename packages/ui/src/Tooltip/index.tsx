@@ -1,1 +1,3 @@
-export * from './WithTooltip';
+import WithToolip from './WithTooltip';
+
+export { WithToolip };

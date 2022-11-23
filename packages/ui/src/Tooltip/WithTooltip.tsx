@@ -3,13 +3,13 @@ import { Tooltip, Wrapper } from './Tooltip';
 import useTooltip from './useTooltip';
 
 type TooltipProps = {
-  text: string;
-  kind?: 'top' | 'right' | 'bottom' | 'left';
-  delay?: number;
   children?: React.ReactNode;
+  delay?: number;
+  kind?: 'top' | 'right' | 'bottom' | 'left';
+  text: string;
 };
 
-export const WithToolip: React.FC<TooltipProps> = ({ children, text, delay, kind = 'top' }) => {
+const WithToolip = ({ children, delay, kind = 'top', text }: TooltipProps) => {
   const [active, { showTip, hideTip }] = useTooltip({ delay });
   return (
     <Wrapper onMouseEnter={showTip} onMouseLeave={hideTip}>
@@ -18,3 +18,5 @@ export const WithToolip: React.FC<TooltipProps> = ({ children, text, delay, kind
     </Wrapper>
   );
 };
+
+export default WithToolip;

@@ -1,20 +1,18 @@
-import { CloseOutline } from '@rothko-ui/icons';
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
-import { PhantomButton } from '../Button/PhantomButton';
-import { DomPortal } from '../Library/Portal';
-import { addEvent, disableBodyScroll, enableBodyScroll, removeEvent } from '../utils/domUtils';
-import { directionMap } from '../utils/keyUtils';
-import { debugFactory } from '../utils/utils';
+import { Container } from '../Container';
+import useMenu from '../Library/Hooks/useMenu';
 import { DefaultRenderOption } from '../Library/RenderOption';
 import type { FocusHandler, Option, RenderOption, Value } from '../Library/types';
-import useMenu from '../Library/Hooks/useMenu';
+import { directionMap } from '../utils/keyUtils';
+import { debugFactory } from '../utils/utils';
 import { DummySearchBar, SearchBar } from './SearchBar';
+import SearchPopout from './SearchPopout';
 import type { OptionFetcher } from './useSearch';
 import { useSearch } from './useSearch';
-
+// SEARCH SHOULD USE CONTEXT API
 const debug = debugFactory('search');
 
 type SearchProps<V extends Value, T> = {
@@ -56,7 +54,7 @@ function Search<V extends Value, T = undefined>({
   dataFetcher,
   disabled,
   header,
-  mobile,
+  mobile = true,
   onBlur,
   onFocus,
   onOpen,
@@ -211,35 +209,29 @@ function Search<V extends Value, T = undefined>({
           disabled={disabled}
           placeholder={placeholder}
         />
-        <FullScreen isOpen={open} onClose={() => closeMenu()} header={header}>
-          <div style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
-            <SearchBar
-              className={formClasses}
-              onSubmit={onSubmit}
-              query={query}
-              onQueryChange={setQuery}
-              placeholder={placeholder}
-              disabled={disabled}
-              focusOnMount
-            />
-            {dropdownResults}
-          </div>
-        </FullScreen>
+        <SearchPopout
+          setQuery={setQuery}
+          query={query}
+          onSubmit={onSubmit}
+          isOpen={open}
+          onClose={() => closeMenu()}
+          header={header}
+        >
+          {dropdownResults}
+        </SearchPopout>
       </>
     );
   }
 
   return (
-    <WrapperDiv
+    <Container
       ref={containerRef}
-      tabIndex={0}
-      style={{ position: 'relative' }}
-      /* TODO: not sure if these should be here. this needs some tweaking HANDE FULL ON FOCUS */
-      onFocus={e => onFocusHandler(e)}
-      onBlur={e => onBlurHandler(e)}
+      onFocus={onFocusHandler}
+      onBlur={onBlurHandler}
+      position="relative"
     >
       <SearchBar
-        className={clsx('bg-white', formClasses)}
+        className={formClasses}
         onSubmit={onSubmit}
         onKeyDown={onKeyDown}
         onClick={() => openMenu()}
@@ -249,90 +241,16 @@ function Search<V extends Value, T = undefined>({
         disabled={disabled}
       />
       {dropdownResults}
-    </WrapperDiv>
+    </Container>
   );
 }
 
-type FullProps = {
-  isOpen?: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-  header?: React.ReactElement;
-};
-
-export const FullScreen = ({ isOpen, onClose, children, header }: FullProps) => {
-  const fullScreenRef = useRef<HTMLDivElement | null>(null);
-
-  const onCloseLocal = useCallback(() => {
-    if (fullScreenRef.current) {
-      enableBodyScroll(fullScreenRef.current);
-    }
-    onClose();
-  }, [onClose, fullScreenRef.current]);
-
-  useEffect(() => {
-    if (fullScreenRef.current) {
-      disableBodyScroll(fullScreenRef.current);
-    }
-  }, [isOpen, fullScreenRef]);
-
-  useEffect(() => {
-    const closeOnEsc = (e: React.KeyboardEvent) => {
-      const code = keyboardKey.getCode(e);
-      if (!code) return;
-      if (code === keyboardKey.Escape) {
-        e.preventDefault();
-        onCloseLocal();
-      }
-    };
-    addEvent(document.body, 'keydown', closeOnEsc);
-    return () => removeEvent(document.body, 'keydown', closeOnEsc);
-  }, [onCloseLocal]);
-
-  return (
-    <DomPortal wrapperId="search-portal">
-      {isOpen && (
-        <FullScreenContainerDiv ref={fullScreenRef}>
-          <div
-            style={{
-              /* eventually make this a class */
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginBottom: '1rem',
-              paddingRight: '1rem',
-              paddingLeft: '1rem',
-            }}
-          >
-            {/*
-             * nb1 since the close button has a 24x24 box
-             * around it and causes some issues alligning
-             * with the header icon
-             */}
-            <PhantomButton onClick={() => onCloseLocal()} style={{ marginBottom: '-0.25rem' }}>
-              <CloseOutline width="2rem" height="2rem" />
-            </PhantomButton>
-            {header && (
-              <>
-                <div>{header}</div>
-                <div style={{ width: '2rem' }} />
-              </>
-            )}
-          </div>
-          {children}
-        </FullScreenContainerDiv>
-      )}
-    </DomPortal>
-  );
-};
-
 const DropdownMenu = styled.div`
-  top: calc(100% + 0.25rem);
-  left: 0;
   width: 100%;
   z-index: 10;
   background-color: white;
+  top: calc(100% + 0.25rem);
+  left: 0;
 
   &:not(.full-screen) {
     position: absolute;
@@ -341,9 +259,11 @@ const DropdownMenu = styled.div`
     border-radius: 0.25rem;
     box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2);
   }
+
   &.full-screen {
-    margin: 1rem 0 2rem 0;
+    margin: 0 0 2rem 0;
     height: 100%;
+    overflow-y: scroll;
   }
 
   & ul {
@@ -354,12 +274,6 @@ const DropdownMenu = styled.div`
 
   & li {
     outline: none;
-
-    &.group-header {
-      padding: 1rem;
-      cursor: default;
-    }
-
     &.option {
       cursor: pointer;
       padding: 0.75rem 1rem;
@@ -370,22 +284,6 @@ const DropdownMenu = styled.div`
       }
     }
   }
-`;
-
-const WrapperDiv = styled.div`
-  margin: 0;
-  padding: 0;
-`;
-
-const FullScreenContainerDiv = styled.div`
-  overflow: auto;
-  position: absolute;
-  z-index: 999;
-  inset: 0;
-  background: white;
-  margin: auto;
-  display: block;
-  padding: 1.5rem 0;
 `;
 
 export default Search;

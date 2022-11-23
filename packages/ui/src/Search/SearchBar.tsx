@@ -17,53 +17,67 @@ type SearchBarProps = {
   onSubmit: () => void;
   placeholder?: string;
   query: Nullable<string>;
+  onFocus?: (e: React.FocusEvent<HTMLElement, Element>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLElement, Element>) => void;
 };
 
-export const SearchBar = ({
-  className,
-  disabled,
-  focusOnMount,
-  onClick,
-  onKeyDown,
-  onQueryChange,
-  onSubmit,
-  placeholder,
-  query,
-}: SearchBarProps) => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
+export const SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
+  (
+    {
+      className,
+      disabled,
+      focusOnMount,
+      onClick,
+      onKeyDown,
+      onQueryChange,
+      onSubmit,
+      onBlur,
+      onFocus,
+      placeholder,
+      query,
+    },
+    ref
+  ) => {
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
-  useEffect(() => {
-    if (focusOnMount) {
-      inputRef.current?.focus();
-    }
-  }, [focusOnMount]);
+    useEffect(() => {
+      if (focusOnMount) {
+        inputRef.current?.focus();
+      }
+    }, [focusOnMount]);
 
-  return (
-    <SearchForm
-      role="search"
-      tabIndex={-1}
-      className={className}
-      onSubmit={e => {
-        e.preventDefault();
-        onSubmit();
-      }}
-    >
-      <PhantomInput
-        ref={inputRef}
-        type="text"
-        className={clsx({ disabled })}
-        disabled={disabled}
-        tabIndex={0}
-        placeholder={placeholder}
-        onChange={e => onQueryChange(e.target.value)}
-        value={query ?? ''}
-        onClick={onClick}
-        onKeyDown={onKeyDown}
-      />
-      <SearchButton disabled={disabled || !query} onClick={() => onSubmit()} />
-    </SearchForm>
-  );
-};
+    return (
+      <SearchForm
+        ref={ref}
+        role="search"
+        tabIndex={-1}
+        className={className}
+        onSubmit={e => {
+          e.preventDefault();
+          onSubmit();
+        }}
+        onFocus={onFocus}
+        onBlur={onBlur}
+      >
+        <PhantomInput
+          ref={inputRef}
+          type="text"
+          className={clsx({ disabled })}
+          disabled={disabled}
+          tabIndex={0}
+          placeholder={placeholder}
+          onChange={e => onQueryChange(e.target.value)}
+          value={query ?? ''}
+          onClick={onClick}
+          onKeyDown={onKeyDown}
+        />
+        <SearchButton disabled={disabled || !query} onClick={() => onSubmit()} />
+      </SearchForm>
+    );
+  }
+);
+
+SearchBar.displayName = 'SearchBar';
 
 type DummySearchBarProps = Pick<
   SearchBarProps,
@@ -79,7 +93,7 @@ export const DummySearchBar = ({
   query,
 }: DummySearchBarProps) => {
   return (
-    <DummyWrapper className={clsx('bg-white', className)}>
+    <DummyWrapper className={className}>
       <PhantomInput
         type="text"
         disabled={disabled}
@@ -117,10 +131,6 @@ const searchBarWrapperStyle = css`
   width: 100%;
 
   background: white;
-
-  &:not(.bg-white) {
-    background: var(--basic-200);
-  }
 
   display: flex;
   flex-wrap: nowrap;

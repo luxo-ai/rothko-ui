@@ -13,17 +13,17 @@ export const SliderContainer = styled.div<{ mw: SliderWidth; nw: SliderWidth }>`
 `;
 
 export const SliderTrack = styled.div`
-  height: 0.3rem;
-  background: ${idkFn('basic')}; // basic 500
-  border-radius: 3px;
+  height: 1px; // 0.27rem;
+  background: black; // ${idkFn('basic')}; // basic 500
+  border-radius: 2px;
   user-select: none;
   z-index: 0;
 `;
 
 export const SliderRange = styled.div<Required<KindProps>>`
-  height: 100%;
+  height: 0.27rem; // 100%;
   margin: 0;
-  border-radius: 3px;
+  border-radius: 2px;
   background: ${({ kind }) => idkFn(kind)};
   overflow: hidden;
   user-select: none;

@@ -268,11 +268,11 @@ const HandleButton = styled.button.attrs({ type: 'button' })<
   background-color: white;
   transition-property: border;
   transition-duration: 0.2s;
-  box-shadow: 0 2px 6px 0 rgb(101 110 123 / 20%);
+  // box-shadow: 0 2px 6px 0 rgb(101 110 123 / 20%);
   border-radius: 50%;
   border-style: solid;
-  border-width: 1px;
-  border-color: ${idkFn('basic')}; // basic 500
+  border-width: 3px;
+  border-color: black; // ${idkFn('basic')}; // basic 500
   overflow: visible;
   touch-action: ${({ vertical }) => (vertical ? `pan-y` : `pan-x`)};
   z-index: 3;

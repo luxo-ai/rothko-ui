@@ -1,6 +1,7 @@
 import { pathToCssVariable } from '@rothko-ui/tokens';
 import type { DeepPartial, NestedRecord } from '@rothko-ui/utils';
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import { PORTAL_ROOT_ID } from '../Library/Portal';
 import type { RothkoKind } from './types';
 
 type Mode = 'light' | 'dark';
@@ -91,6 +92,7 @@ export const ThemeContextProvider = ({
         style={inlineOverrides?.reduce((acc, curr) => ({ ...acc, ...curr }))}
       >
         {children}
+        <div id={PORTAL_ROOT_ID} />
       </div>
     </Context.Provider>
   );

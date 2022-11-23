@@ -107,10 +107,18 @@ const bodySmall = styled(body)`
   line-height: 1.25rem;
 `;
 
-const title = styled(body)`
+const title = styled(h1)`
   font-family: ${BODY_FONT_FAMILY.bold};
   font-size: 3.5rem;
   line-height: 4rem;
+  font-weight: 700;
+`;
+
+const titleBig = styled(h1)`
+  font-family: ${BODY_FONT_FAMILY.bold};
+  font-size: clamp(3.8rem, 8vw, 6rem);
+  line-height: calc(100% + 0.5rem);
+  letter-spacing: -0.03rem;
   font-weight: 700;
 `;
 
@@ -180,6 +188,7 @@ export default {
   label,
   externalLink,
   linkButton,
+  titleBig,
   // for now
   linkStyle,
 };

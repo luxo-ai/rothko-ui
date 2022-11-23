@@ -8,11 +8,14 @@ import { isRothkoKind } from '../Theme/types';
 export type CustomColorCssProperties = Omit<
   CSSProperties,
   'color' | 'backgroundColor' | 'borderColor'
-> & {
-  color?: RothkoKind | string;
-  backgroundColor?: RothkoKind | string;
-  borderColor?: RothkoKind | string;
-};
+> &
+  Pick<React.HTMLAttributes<HTMLDivElement>, 'onFocus' | 'onBlur' | 'onClick' | 'aria-label'> & {
+    color?: RothkoKind | string;
+    backgroundColor?: RothkoKind | string;
+    borderColor?: RothkoKind | string;
+    onFocus?: (e: React.FocusEvent<HTMLElement, Element>) => void;
+    onBlur?: (e: React.FocusEvent<HTMLElement, Element>) => void;
+  };
 
 export const useStyleProps = ({
   backgroundColor,
@@ -53,10 +56,22 @@ type ContainerProps = CustomColorCssProperties & {
 };
 
 const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
-  ({ as, children, className, ...styles }, ref) => {
+  (
+    { as, children, className, onBlur, onClick, onFocus, ['aria-label']: ariaLabel, ...styles },
+    ref
+  ) => {
     const style = useStyleProps(styles);
     return (
-      <StyledContainerDiv ref={ref} as={as} className={className} style={style}>
+      <StyledContainerDiv
+        ref={ref}
+        as={as}
+        onBlur={onBlur}
+        onClick={onClick}
+        onFocus={onFocus}
+        aria-label={ariaLabel}
+        className={className}
+        style={style}
+      >
         {children}
       </StyledContainerDiv>
     );

@@ -71,13 +71,10 @@ const Drawer = ({ children, id, className, style: styleProp = {} }: DrawerProps)
 
   return (
     <DomPortal wrapperId={`drawer-portal-${id || 'unknown'}`}>
-      {transition(
-        (style, item) =>
-          item && (
-            <DrawerBackdrop
-              className={clsx({ ['backdrop-open']: isOpen })}
-              onClick={onBackdropClick}
-            >
+      <DrawerBackdrop className={clsx({ ['backdrop-open']: isOpen })} onClick={onBackdropClick}>
+        {transition(
+          (style, item) =>
+            item && (
               <AnimatedDrawerContainerDiv
                 className={className}
                 id={id}
@@ -89,9 +86,9 @@ const Drawer = ({ children, id, className, style: styleProp = {} }: DrawerProps)
                 </PhantomButton>
                 {children}
               </AnimatedDrawerContainerDiv>
-            </DrawerBackdrop>
-          )
-      )}
+            )
+        )}
+      </DrawerBackdrop>
     </DomPortal>
   );
 };

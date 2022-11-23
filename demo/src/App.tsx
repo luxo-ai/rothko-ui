@@ -35,8 +35,10 @@ import {
   Drawer,
   DrawerContext,
   useDrawerContext,
+  WithToolip,
+  MultiSlider,
 } from '@rothko-ui/ui';
-import { Bell } from '@rothko-ui/icons';
+import { Bell, Info } from '@rothko-ui/icons';
 import { useState } from 'react';
 import './App.css';
 import * as lorem from 'lorem-ipsum';
@@ -61,6 +63,14 @@ const App = () => {
     >
       <ToastContextProvider>
         <div className="app-container">
+          <div style={{ margin: '0 auto', width: 'fit-content' }}>
+            <img style={{ margin: '0 auto' }} src="/logo512.png" width={340} height={340} />
+          </div>
+          <div style={{ maxWidth: '30rem', marginLeft: '0rem', textAlign: 'center' }}>
+            <Typography.titleBig style={{ color: 'white' }}>
+              Powerful for developers. Fast for everyone.
+            </Typography.titleBig>
+          </div>
           <InlineRythmLoader asText size="m" kind="primary" />
           <header className="app-header">
             <Typography.h1 bold italic light kind="secondary">
@@ -72,6 +82,8 @@ const App = () => {
           <ThemeButton />
           <div id="#my-qr-code"></div>
           <main className="example-cards">
+            <SearchCard />
+            <TooltipCard />
             <DrawerCard />
             <NotificationCard />
             <SliderCard />
@@ -80,7 +92,6 @@ const App = () => {
             <ToggleCard />
             <ButtonCard />
             <NestedDropdownCard />
-            <SearchCard />
             <SingleDropdownCard />
             <MultiDropdownCard />
             <ToastCard />
@@ -105,6 +116,27 @@ const App = () => {
 const ThemeButton = () => {
   const { toggleMode } = useRothko();
   return <Button onClick={toggleMode}>toggle theme</Button>;
+};
+
+const TooltipCard = () => {
+  const [singleVal, setSingleVal] = useState<boolean>(false);
+
+  return (
+    <div className="white-padded-card">
+      <h3>Tooltip</h3>
+      <Button onClick={() => setSingleVal(true)}>open me</Button>
+      <div className="accordion-container">
+        <WithToolip
+          kind="right"
+          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit
+              at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget."
+        >
+          <Info height={20} width={20} />
+        </WithToolip>
+      </div>
+    </div>
+  );
 };
 
 const DrawerCard = () => {
@@ -182,12 +214,12 @@ const SliderCard = () => {
 };
 
 const MultiSliderCard = () => {
-  const [singleVal, setSingleVal] = useState<boolean>(false);
+  const [singleVal, setSingleVal] = useState<[number, number]>([0, 50]);
   return (
     <div className="white-padded-card">
       <h3>Multi Slider</h3>
       <div className="accordion-container">
-        <Toggle kind="success" toggled={singleVal} onChange={v => setSingleVal(v)} />
+        <MultiSlider value={singleVal} max={100} onChange={r => setSingleVal(r)} />
       </div>
     </div>
   );
@@ -256,6 +288,8 @@ const SearchCard = () => {
       <h3>Search</h3>
       <div className="accordion-container">
         <Search
+          // mobile={false}
+          header={<Typography.h5>Leaving home</Typography.h5>}
           onSearch={q => console.log('?', q)}
           placeholder="Search..."
           dataFetcher={getBooks}
