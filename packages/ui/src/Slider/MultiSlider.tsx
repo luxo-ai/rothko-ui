@@ -1,5 +1,6 @@
 import type { Nullable } from '@rothko-ui/utils';
 import React, { useCallback, useMemo } from 'react';
+import styled from 'styled-components';
 import type { RothkoKind } from '../Theme/types';
 import Typography from '../Typography';
 import type { SliderWidth } from './Common';
@@ -52,15 +53,15 @@ const MultiSlider = ({
 
   return (
     <SliderContainer mw={maxWidth} nw={minWidth ?? maxWidth} className={className}>
-      <div className="flex justify-between gap-2 mb3">
+      <SliderLegendContainerDiv>
         {label && <Typography.label light>{label}</Typography.label>}
         <Typography.label light>
           {lower.toFixed(precision)} - {upper.toFixed(precision)}
           {postfix ?? ''}
           {maxReached && orMore ? '+' : ''}
         </Typography.label>
-      </div>
-      <SliderTrack className="flex flex-row items-center relative w-100">
+      </SliderLegendContainerDiv>
+      <MultiSliderTrack>
         <SliderHandle
           id="multi-slider-handle-min"
           className="absolute"
@@ -75,7 +76,7 @@ const MultiSlider = ({
           max={max}
           disabled={disabled}
         />
-        <SliderRange
+        <MultiSliderRange
           className="absolute"
           kind={kind}
           style={{
@@ -97,9 +98,28 @@ const MultiSlider = ({
           max={max}
           disabled={disabled}
         />
-      </SliderTrack>
+      </MultiSliderTrack>
     </SliderContainer>
   );
 };
+
+const MultiSliderRange = styled(SliderRange)`
+  position: absolute;
+`;
+
+const MultiSliderTrack = styled(SliderTrack)`
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+`;
+
+const SliderLegendContainerDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  margin-bottom: 1rem;
+`;
 
 export default MultiSlider;

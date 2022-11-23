@@ -219,7 +219,7 @@ const MultiSliderCard = () => {
     <div className="white-padded-card">
       <h3>Multi Slider</h3>
       <div className="accordion-container">
-        <MultiSlider value={singleVal} max={100} onChange={r => setSingleVal(r)} />
+        <MultiSlider kind="primary" value={singleVal} max={100} onChange={r => setSingleVal(r)} />
       </div>
     </div>
   );
