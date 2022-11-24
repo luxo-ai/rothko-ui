@@ -14,6 +14,8 @@ type ToggleProps = KindProps & {
   onChange: (toggled: boolean) => void;
   style?: CSSProperties;
   toggled?: boolean;
+  onIcon?: JSX.Element;
+  offIcon?: JSX.Element;
 };
 
 const Toggle = ({
@@ -23,6 +25,8 @@ const Toggle = ({
   onChange,
   style,
   toggled,
+  onIcon,
+  offIcon,
 }: ToggleProps) => {
   const handleChange = () => onChange(!toggled);
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: handleChange });
@@ -35,7 +39,9 @@ const Toggle = ({
         tabIndex={0}
         toggled={toggled}
       >
-        <InnerToggleDiv className={clsx(toggled && 'active')}></InnerToggleDiv>
+        <InnerToggleDiv className={clsx(toggled && 'active')}>
+          {toggled ? onIcon && <>{onIcon}</> : offIcon && <>{offIcon}</>}
+        </InnerToggleDiv>
       </OuterToggleDiv>
       <div className="flex-1 ml3">{children}</div>
     </ToggleContainerDiv>
@@ -109,7 +115,7 @@ const InnerToggleDiv = styled.div`
 
   &.active {
     // outer toggle width - width of inner toggle - horizontal margin - offset
-    transform: translateX(calc(3rem - 1.5rem - 1px - 2px));
+    transform: translateX(calc(3rem - 1.5rem - 0px - 2px));
   }
 `;
 

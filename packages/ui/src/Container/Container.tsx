@@ -44,7 +44,7 @@ export const useStyleProps = ({
       baseStyle = { ...baseStyle, ...rest };
     }
     return baseStyle;
-  }, [backgroundColor, borderColor, color]);
+  }, [backgroundColor, borderColor, color, rest]);
 
   return style;
 };

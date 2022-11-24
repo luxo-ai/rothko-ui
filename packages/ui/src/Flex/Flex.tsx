@@ -4,16 +4,17 @@ import type { CustomColorCssProperties } from '../Container/Container';
 import { useStyleProps } from '../Container/Container';
 
 type FlexProps = Omit<CustomColorCssProperties, 'display'> & {
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
   as?: keyof JSX.IntrinsicElements;
   children: React.ReactNode;
   className?: string;
 };
 
 const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
-  ({ as, children, className, ...styles }, ref) => {
+  ({ as, children, className, onClick, ...styles }, ref) => {
     const style = useStyleProps(styles);
     return (
-      <StyledFlexDiv as={as} ref={ref} className={className} style={style}>
+      <StyledFlexDiv as={as} ref={ref} onClick={onClick} className={className} style={style}>
         {children}
       </StyledFlexDiv>
     );

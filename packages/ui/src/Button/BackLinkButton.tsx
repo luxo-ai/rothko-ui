@@ -14,7 +14,7 @@ type BackLinkProps = {
   kind?: RothkoKind;
 } & LimitedButtonProps;
 
-export const BackLinkButton = ({ kind = 'info', ...buttonProps }: BackLinkProps) => (
+const BackLinkButton = ({ kind = 'info', ...buttonProps }: BackLinkProps) => (
   <LinkButton {...buttonProps} kind={kind}>
     <ChevronLeftOutline width="1.25rem" height="1.25rem" fill={idkFn(kind)} />
     back
@@ -27,3 +27,5 @@ const LinkButton = styled(Typography.linkButton)`
   flex-direction: row;
   align-items: center;
 `;
+
+export default BackLinkButton;

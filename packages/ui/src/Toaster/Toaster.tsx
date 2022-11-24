@@ -40,7 +40,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
         <ToastContentContainerDiv>
           {label &&
             (typeof label === 'string' ? (
-              <Typography.h3>{label}</Typography.h3>
+              <Typography.h5>{label}</Typography.h5>
             ) : (
               <div>{label}</div>
             ))}

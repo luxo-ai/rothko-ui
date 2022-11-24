@@ -4,7 +4,7 @@ import keyboardKey from 'keyboard-key';
 import isNil from 'lodash/isNil';
 import React, { useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { BackLinkButton } from '../Button/BackLinkButton';
+import BackLinkButton from '../Button/BackLinkButton';
 import useMenu from '../Library/Hooks/useMenu';
 import { DefaultRenderOption } from '../Library/RenderOption';
 import type { FocusHandler, NestedOption, Option, RenderOption, Value } from '../Library/types';

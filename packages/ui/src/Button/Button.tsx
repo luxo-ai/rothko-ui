@@ -69,7 +69,7 @@ type ButtonProps = {
   children?: React.ReactNode;
 } & HtmlButtonProps;
 
-export const Button: React.FC<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   accessoryLeft: Left,
   accessoryRight: Right,
   appearance = 'filled',
@@ -222,3 +222,5 @@ const StyledButton = styled.button<BaseButtonProps>`
     opacity: 0.75;
   }
 `;
+
+export default Button;

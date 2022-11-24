@@ -1,0 +1,41 @@
+.nav {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // center content
+  margin: 0 auto;
+  height: 100%;
+  background: black;
+  border-bottom: 1px solid rgb(51, 51, 51);
+  & > #nav-title {
+    user-select: none;
+  }
+}
+
+$headerBarHeightPx: 60px;
+
+.paddedNavContainer {
+  height: 100%;
+  padding-top: $headerBarHeightPx;
+  display: flex;
+  flex-direction: column;
+  background: black;
+  // background: #f6f9fc;
+  // overflow: hidden;
+  // Header content
+  & > header {
+    height: $headerBarHeightPx;
+    position: fixed;
+    inset: 0 0 auto 0;
+    background: white;
+    z-index: 999998;
+  }
+  // Main content
+  & > main {
+    flex: 1 0 auto;
+    padding: 1rem;
+    height: 100%;
+    //  overflow: auto;
+  }
+}

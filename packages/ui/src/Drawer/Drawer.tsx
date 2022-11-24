@@ -102,6 +102,7 @@ const AnimatedDrawerContainerDiv = animated(styled.div`
 
   z-index: 999999;
   width: ${DEFAULT_DRAWER_WIDTH_PX}px;
+  overflow-y: auto;
 
   @media only screen and (max-width: ${TABLET_OR_MOBILE_MAX_WIDTH_PX}px) {
     width: calc(100% - 2 * 1.5rem);

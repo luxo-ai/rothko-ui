@@ -14,7 +14,7 @@ export const ShadedBackdrop = styled.div`
     opacity: 1;
     background-color: rgba(0, 0, 0, 0.5);
     inset: 0;
-    z-index: 999;
+    z-index: 999999;
 
     -webkit-transition: opacity 70ms linear;
     -moz-transition: opacity 70ms linear;
