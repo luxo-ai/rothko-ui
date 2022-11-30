@@ -39,7 +39,7 @@ const Accordion = ({
     <AccordionContext.Provider
       value={{
         selectedPanels,
-        borderColor: bordered ? (kind ? idkFn(kind) : '#000') : undefined,
+        borderColor: bordered ? (kind ? idkFn(kind) : 'var(--color-border, #000)') : undefined,
         onClickPanel,
       }}
     >

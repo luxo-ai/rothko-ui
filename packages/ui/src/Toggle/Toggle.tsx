@@ -115,7 +115,7 @@ const InnerToggleDiv = styled.div`
 
   &.active {
     // outer toggle width - width of inner toggle - horizontal margin - offset
-    transform: translateX(calc(3rem - 1.5rem - 0px - 2px));
+    transform: translateX(calc(3rem - 1.5rem - 1px - 2px));
   }
 `;
 

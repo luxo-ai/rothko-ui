@@ -87,7 +87,7 @@ export const baseInputStyle = css`
   box-sizing: border-box;
   line-height: 20px;
   // 0.125rem
-  border: 1px solid black; // #8a8a8a; // var(--basic-500);
+  border: 1px solid var(--color-border, #000); // #8a8a8a; // var(--basic-500);
   border-radius: 0.125rem; // 2px
 
   ${Object.entries(sizeMap).map(
@@ -109,7 +109,7 @@ export const baseInputStyle = css`
     &:active:not(.disabled) {
       outline: none;
       // border: 1.5px solid var(--info-500);
-      border-color: black; // var(--info-500); // var(--info-300);
+      border-color: var(--color-border, #000); // var(--info-500); // var(--info-300);
     }
     :hover:not(:focus):not(.focus) {
       // background: var(--basic-300);

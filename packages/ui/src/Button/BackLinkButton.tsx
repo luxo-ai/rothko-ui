@@ -14,9 +14,13 @@ type BackLinkProps = {
   kind?: RothkoKind;
 } & LimitedButtonProps;
 
-const BackLinkButton = ({ kind = 'info', ...buttonProps }: BackLinkProps) => (
-  <LinkButton {...buttonProps} kind={kind}>
-    <ChevronLeftOutline width="1.25rem" height="1.25rem" fill={idkFn(kind)} />
+const BackLinkButton = ({ kind, ...buttonProps }: BackLinkProps) => (
+  <LinkButton {...buttonProps} kind={kind} asText={!!kind}>
+    <ChevronLeftOutline
+      width="1.25rem"
+      height="1.25rem"
+      fill={kind ? idkFn(kind) : 'var(--rothko-link-color, #0000ee)'}
+    />
     back
   </LinkButton>
 );

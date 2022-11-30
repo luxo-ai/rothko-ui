@@ -82,7 +82,7 @@ const Drawer = ({ children, id, className, style: styleProp = {} }: DrawerProps)
                 style={{ ...styleProp, ...style }}
               >
                 <PhantomButton style={{ marginBottom: '1rem' }} onClick={() => closeDrawer()}>
-                  <Close fill="#000" width={24} height={24} />
+                  <Close width={24} height={24} />
                 </PhantomButton>
                 {children}
               </AnimatedDrawerContainerDiv>
@@ -96,7 +96,7 @@ const Drawer = ({ children, id, className, style: styleProp = {} }: DrawerProps)
 const AnimatedDrawerContainerDiv = animated(styled.div`
   position: fixed;
   inset: 0 auto 0 0;
-  background: white;
+  background: var(--color-background, #fff);
 
   padding: 1.5rem 1.5rem;
 

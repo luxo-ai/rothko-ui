@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Typography from '../Typography';
+import { textStyle } from '../Typography/Typography';
 
 type BreadCrumbsProps = {
   children: React.ReactNode;
@@ -52,6 +53,7 @@ const BreadCrumbsContainerDiv = styled.div`
 
 const BreadCrumbsItemContainerSpan = styled.span`
   &:not(:last-of-type):after {
+    ${textStyle}
     content: ' / ';
   }
 `;

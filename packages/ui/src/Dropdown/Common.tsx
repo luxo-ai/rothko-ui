@@ -16,7 +16,7 @@ export const DropdownContainerDiv = styled.div`
   // placeholder text (body) line-height + text margin + top padding + bottom padding + top border + bottom border
   min-height: calc(1.5rem + 2 * 0.125rem + 2 * 0.5rem + 2 * 2px);
 
-  border: 0.125rem solid black;
+  border: 0.125rem solid var(--color-border, #000);
 
   cursor: pointer;
 
@@ -82,7 +82,7 @@ export const DropdownMenu = styled.div`
   -webkit-overflow-scrolling: touch;
   position: absolute;
   z-index: 10;
-  background-color: white;
+  background-color: var(--color-background, #fff);
   box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2);
   transition-duration: 0.1s;
   transition-property: transform;
@@ -106,7 +106,7 @@ export const DropdownMenu = styled.div`
     &:hover,
     &:focus,
     &.selected {
-      background-color: rgb(238, 238, 238);
+      background-color: var(--dropdown-background-selected, #eeeeee);
     }
   }
 `;

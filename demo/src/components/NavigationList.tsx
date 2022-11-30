@@ -1,7 +1,8 @@
 import { List, ListItem, Typography } from '@rothko-ui/ui';
 import { camelCase, uniqueId } from 'lodash';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
+//import { useNavigate, useParams } from 'react-router-dom';
 import componentsList from './componentsList';
 
 type NavListItemLeaf = {
@@ -57,13 +58,23 @@ type ExpandNavListProps = {
   depth?: number;
   item: NavListItem;
   selected?: string;
+  onNavigate?: () => void;
 };
 
-const ExpandNavList = ({ depth = 0, item, selected }: ExpandNavListProps) => {
+const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListProps) => {
+  const router = useRouter();
+
   if (isLeaf(item)) {
     return (
       <ListItem>
-        <Typography.externalLink href={item.to} style={{ textDecoration: 'none', color: 'white' }}>
+        <Typography.linkButton
+          asText
+          onClick={() => {
+            onNavigate?.();
+            router.push(`/component/${item.to}`);
+          }}
+          style={{ textDecoration: 'none', width: '100%', textAlign: 'inherit' }}
+        >
           <div
             style={{
               padding:
@@ -78,18 +89,19 @@ const ExpandNavList = ({ depth = 0, item, selected }: ExpandNavListProps) => {
           >
             {item.text}
           </div>
-        </Typography.externalLink>
+        </Typography.linkButton>
       </ListItem>
     );
   }
   return (
     <List padding="0" kind="none">
       <ListItem paddingLeft={`calc(${depth} * 1.25rem)`}>
-        <Typography.label style={{ color: 'white' }}>{item.label.toUpperCase()}</Typography.label>
+        <Typography.label>{item.label.toUpperCase()}</Typography.label>
       </ListItem>
       <List padding="0" kind="none">
         {item.children.map((subItem, idx) => (
           <ExpandNavList
+            onNavigate={onNavigate}
             selected={selected}
             depth={depth + 1}
             key={`${item.label}-sub-${idx}`}
@@ -101,13 +113,16 @@ const ExpandNavList = ({ depth = 0, item, selected }: ExpandNavListProps) => {
   );
 };
 
-const NavigationList = () => {
-  const { id } = useParams<{ id: string }>();
+type NavigationListProps = {
+  onNavigate?: () => void;
+};
+const NavigationList = ({ onNavigate }: NavigationListProps) => {
+  // const { id } = useParams<{ id: string }>();
   const uuid = uniqueId('root');
   return (
     <nav>
       {navList.map((item, idx) => (
-        <ExpandNavList selected={id} key={`${uuid}-${idx}`} item={item} />
+        <ExpandNavList key={`${uuid}-${idx}`} onNavigate={onNavigate} item={item} />
       ))}
     </nav>
   );

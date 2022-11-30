@@ -350,7 +350,8 @@ const MultiSelectLabelDiv = styled.div`
   gap: 0.125rem;
   align-items: center;
   padding: 0.0625rem 0.3rem 0.0625rem 0.5rem;
-  background-color: var(--info-transparent-100);
+  background-color: var(--dropdown-multiselect-background, transparent);
+  //  background: white;
   border: 1px solid var(--info-500);
   & > p {
     color: var(--info-500) !important;

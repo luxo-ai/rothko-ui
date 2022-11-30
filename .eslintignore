@@ -10,3 +10,5 @@ src/generated/*
 *.json
 *.png
 .eslintrc.js
+*.js
+next-env.d.ts

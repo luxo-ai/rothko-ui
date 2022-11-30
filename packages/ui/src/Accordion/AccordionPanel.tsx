@@ -5,7 +5,6 @@ import styled, { css } from 'styled-components';
 import uuid from 'uuid';
 import { phantomButtonStyle } from '../Button/PhantomButton';
 import { unselectableStyle } from '../Library/Styles';
-import type { Color } from '../Theme/types';
 import Typography from '../Typography';
 import { getElementFullHeight } from '../utils/domUtils/dimensions';
 import { useAccordion } from './AccordionContext';
@@ -35,7 +34,7 @@ const AccordionPanel = ({ children, className, labelProps, title }: AccordionPan
           className={labelProps?.className}
           onClick={() => onClickPanel(panelIdRef.current)}
         >
-          <Icon width="1rem" height="1rem" />
+          <Icon fill="var(--color-border, #000)" width="1rem" height="1rem" />
           {typeof title === 'string' ? <DefaultLabelText>{title}</DefaultLabelText> : <>{title}</>}
         </PanelLabelButton>
       </header>
@@ -98,6 +97,7 @@ const PanelContent = ({ children, id, isOpen }: PanelContentProps) => {
 
 const PanelContainerDiv = styled.div<{ borderColor?: string }>`
   overflow: hidden;
+  background: var(--color-background, transparent);
   ${({ borderColor }) =>
     borderColor
       ? css`
@@ -120,6 +120,7 @@ const PanelLabelButton = styled.button`
 `;
 
 const PanelContentDiv = styled.div`
+  background: var(--color-background, transparent);
   padding-bottom: 0.75rem;
 `;
 

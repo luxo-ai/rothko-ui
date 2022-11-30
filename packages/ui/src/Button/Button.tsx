@@ -101,7 +101,7 @@ const Button: React.FC<ButtonProps> = ({
   useEffect(() => {
     if (!childrenContainerRef.current) return;
     const { height } = childrenContainerRef.current.getBoundingClientRect();
-    setChildrenHeight(height - 4); // figure out this value later
+    setChildrenHeight(height - 0); // figure out this value later was 4
   }, [setChildrenHeight, childrenContainerRef]);
 
   return (
@@ -137,10 +137,10 @@ export const buttonStyle = css<BaseButtonProps>`
   -webkit-tap-highlight-color: transparent;
 
   width: 100%;
-  background: ${({ appearance, kind }) => (appearance === 'outline' ? css`white` : idkFn(kind))};
+  background: ${({ appearance, kind }) => (appearance === 'outline' ? 'white' : idkFn(kind))};
   font-family: ${BODY_FONT_FAMILY.regular};
   color: ${({ appearance, kind }) =>
-    appearance === 'outline' ? idkFn(kind) : idkFn(kind, 'text')};
+    appearance === 'outline' ? idkFn(kind) : `var(--button-${kind}-color)`};
 
   display: inline-flex;
   align-items: center;

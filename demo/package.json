@@ -12,13 +12,15 @@
   "dependencies": {
     "@rothko-ui/icons": "^1.0.0",
     "@rothko-ui/ui": "^1.0.0",
-    "ethereum-qr-code": "^0.3.0",
     "lodash": "^4.17.21",
     "lorem-ipsum": "^2.0.8",
+    "next": "^13.0.5",
+    "next-transpile-modules": "^10.0.0",
+    "path": "^0.12.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-router-dom": "^6.4.3",
     "sass": "^1.56.1",
+    "styled-components": "^5.3.6",
     "typescript": "^4.4.2"
   },
   "devDependencies": {
@@ -26,26 +28,12 @@
     "@types/lorem-ipsum": "^2.0.0",
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "@types/react-router-dom": "^5.3.3",
-    "@vitejs/plugin-react": "^2.2.0",
-    "vite": "^3.2.2"
+    "@types/react-dom": "^18.0.0"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   }
 }

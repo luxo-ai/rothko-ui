@@ -32,7 +32,7 @@ export const textStyle = css<TextProps>`
   font-family: ${BODY_FONT_FAMILY.regular};
   font-size: 1rem;
   line-height: 1.5rem;
-  color: ${({ kind }) => (kind ? `var(--${kind}-500)` : '#000')};
+  color: ${({ kind }) => (kind ? `var(--${kind}-500, #000)` : 'var(--color-text, #000)')};
 
   & > strong {
     ${boldTextStyle}
@@ -133,7 +133,7 @@ const labelStyle = css<TextProps>`
   font-weight: bold;
   letter-spacing: 0.0625rem;
   line-height: 0.9375rem;
-  color: var(--basic-700);
+  // color: var(--basic-700);
 `;
 
 const label = styled(body)`
@@ -142,14 +142,22 @@ const label = styled(body)`
   font-size: 0.75rem;
 `;
 
-const linkStyle = css<TextProps>`
+type LinkProps = TextProps & { asText?: boolean };
+
+const linkStyle = css<LinkProps>`
   ${textStyle}
 
   border: none;
   background: none;
   padding: 0px;
   text-decoration: none;
-  color: var(--info-500);
+
+  ${({ asText }) =>
+    asText
+      ? ''
+      : css`
+          color: var(--rothko-link-color, #0000ee);
+        `}
 
   &.underline {
     text-decoration: underline;
@@ -165,11 +173,11 @@ const linkStyle = css<TextProps>`
   }
 `;
 
-const externalLink = styled.a<TextProps>`
+const externalLink = styled.a<LinkProps>`
   ${linkStyle};
 `;
 
-const linkButton = styled.button<TextProps>`
+const linkButton = styled.button<LinkProps>`
   ${phantomButtonStyle}
   ${linkStyle}
 `;

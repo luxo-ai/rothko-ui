@@ -1,0 +1,9 @@
+{
+  "component": {
+    "color": {
+      "border": { "value": "#FFF" },
+      "background": { "value": "#141414" },
+      "text": { "value": "#FFF" }
+    }
+  }
+}
