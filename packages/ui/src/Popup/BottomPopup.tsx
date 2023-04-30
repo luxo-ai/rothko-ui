@@ -16,7 +16,7 @@ type PopupProps = ContainerProps & {
   children: React.ReactNode;
 };
 
-export const BottomPopup: React.FC<PopupProps> = ({ id, onClose, isOpen, className, children }) => {
+const BottomPopup: React.FC<PopupProps> = ({ id, onClose, isOpen, className, children }) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
 
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -136,3 +136,5 @@ const PopupCloseButton = styled.button.attrs({ type: 'button' })`
   top: 14px;
   right: 16px;
 `;
+
+export default BottomPopup;

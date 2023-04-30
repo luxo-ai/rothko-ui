@@ -25,6 +25,7 @@ export * from './Modal';
 export * from './Notification';
 export * from './OptionGroup';
 export * from './Popup';
+export * from './Radio';
 export * from './RothkoProvider';
 export * from './Search';
 export * from './Skeleton';

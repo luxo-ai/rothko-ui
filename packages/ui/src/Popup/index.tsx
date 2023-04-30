@@ -1,1 +1,3 @@
-export * from './BottomPopup';
+import BottomPopup from './BottomPopup';
+
+export { BottomPopup };

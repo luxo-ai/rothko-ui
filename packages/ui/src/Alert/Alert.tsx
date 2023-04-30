@@ -2,7 +2,7 @@ import { isString } from 'lodash';
 import React from 'react';
 import styled from 'styled-components';
 import type { KindProps, RothkoKind } from '../Theme/types';
-import Typography from '../Typography';
+import Typography from '../Typography/Typography';
 
 type AlertProps = {
   children: React.ReactNode;

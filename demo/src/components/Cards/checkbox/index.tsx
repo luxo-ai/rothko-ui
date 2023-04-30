@@ -18,12 +18,8 @@ const CheckboxCard = () => {
   return (
     <div className="white-padded-card">
       <Typography.h3>Checkbox</Typography.h3>
-      <Checkbox
-        style={{ marginBottom: 18 }}
-        checked={checked1}
-        onChange={() => setChecked1(!checked1)}
-      />
-      <Checkbox withCheck kind="info" checked={checked2} onChange={() => setChecked2(!checked2)}>
+      <Checkbox style={{ marginBottom: 18 }} checked={checked1} onChange={v => setChecked1(v)} />
+      <Checkbox withCheck kind="info" checked={checked2} onChange={v => setChecked2(v)}>
         Hello world
       </Checkbox>
     </div>

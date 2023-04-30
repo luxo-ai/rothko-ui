@@ -248,7 +248,7 @@ function Search<V extends Value, T = undefined>({
 const DropdownMenu = styled.div`
   width: 100%;
   z-index: 10;
-  background-color: white;
+  background-color: var(--basic-transparent-100, white);
   top: calc(100% + 0.25rem);
   left: 0;
 

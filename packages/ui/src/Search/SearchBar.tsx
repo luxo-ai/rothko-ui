@@ -130,7 +130,7 @@ const searchBarWrapperStyle = css`
   box-sizing: border-box;
   width: 100%;
 
-  background: white;
+  background: var(--basic-transparent-100);
 
   display: flex;
   flex-wrap: nowrap;
@@ -140,7 +140,7 @@ const searchBarWrapperStyle = css`
   font-family: ${BODY_FONT_FAMILY.light};
   line-height: 20px;
 
-  border: 2px solid black; // basic-500; before
+  border: 2px solid var(--color-border, #000); // basic-500; before
   border-radius: 0.125rem; // 2rem; //0.25rem;
 
   &.b-radius-bold {

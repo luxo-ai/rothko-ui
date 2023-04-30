@@ -5,7 +5,7 @@ const AlertCard = () => {
   return (
     <div className="white-padded-card">
       <Typography.h3>Alert</Typography.h3>
-      <Alert kind="success">Testing</Alert>
+      <Alert kind="danger">Testing</Alert>
     </div>
   );
 };

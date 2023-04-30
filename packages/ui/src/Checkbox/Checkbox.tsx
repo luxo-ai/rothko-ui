@@ -1,8 +1,10 @@
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
+import isString from 'lodash/isString';
 import React from 'react';
 import styled from 'styled-components';
 import type { KindProps, RothkoKind } from '../Theme/types';
+import Typography from '../Typography/Typography';
 import { keyDownFactory } from '../utils/keyUtils';
 
 type CheckboxProps = {
@@ -32,9 +34,14 @@ const Checkbox = ({
 }: CheckboxProps) => {
   const handleChange = () => onChange(!checked);
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: handleChange });
+  const renderContent = isString(children) ? (
+    <Typography.body>{children}</Typography.body>
+  ) : (
+    children
+  );
   return (
     <CheckboxContainerDiv style={style} className={className}>
-      <StyledCheckboxDiv
+      <CheckboxDiv
         aria-invalid={!!error}
         aria-required={!!required}
         className={clsx({ error, checked, ['with-check']: withCheck })}
@@ -46,7 +53,7 @@ const Checkbox = ({
         role="checkbox"
         tabIndex={0}
       />
-      <div>{children}</div>
+      {renderContent && <div>{renderContent}</div>}
     </CheckboxContainerDiv>
   );
 };
@@ -54,18 +61,18 @@ const Checkbox = ({
 const CheckboxContainerDiv = styled.div`
   position: relative;
   display: flex;
-  align-items: flex-start;
+  align-items: center; // for children
   justify-content: flex-start;
   gap: 0.3rem;
 `;
 
-const StyledCheckboxDiv = styled.div<KindProps>`
+const CheckboxDiv = styled.div<KindProps>`
   -webkit-tap-highlight-color: transparent;
-  background-color: var(--basic-200);
+  background-color: var(--basic-300);
   cursor: pointer;
 
-  width: 1rem;
-  height: 1rem;
+  width: 1.125rem;
+  height: 1.125rem;
 
   border-radius: 1px;
   padding: 0.25rem;

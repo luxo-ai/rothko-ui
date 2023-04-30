@@ -106,7 +106,7 @@ const SearchBarContainerDiv = styled.div`
 const FullScreenContainerDiv = styled.div`
   z-index: 999;
 
-  background: white;
+  background: var(--color-background, #fff);
   margin: 2rem auto;
   //  height: calc(100% - 2 * 2rem - 2 * 1.5rem);
   display: block;
