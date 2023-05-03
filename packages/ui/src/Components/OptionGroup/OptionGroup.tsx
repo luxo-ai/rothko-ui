@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
-import Grid from '../Grid/Grid';
+import Grid from '../../Layout/Grid/Grid';
 import type { Option, Value } from '../../Library/types';
 import { idkFn } from '../../Theme/theme';
 import type { KindProps, RothkoSize } from '../../Theme';

@@ -4,10 +4,8 @@ import cloneDeep from 'lodash/cloneDeep';
 import isFunction from 'lodash/isFunction';
 import last from 'lodash/last';
 import React, { useReducer } from 'react';
-import { debugFactory } from '../utils/utils';
 import type { Obj } from '@rothko-ui/utils';
-
-const debug = debugFactory('useStatefulScreens');
+import { useDebuggerContext } from '../Library/DebuggerContext';
 
 type Dispatch<Event extends keyof any, Ctx> = (e: Event, updater?: (ctx: Ctx) => Ctx) => void;
 
@@ -50,6 +48,8 @@ export const useStatefulScreens = <
 >(
   config: Config<Event, Ctx, Key>
 ) => {
+  const debug = useDebuggerContext('useStatefulScreeens');
+
   const [state, dispatch] = useReducer(
     ({ stack, context }: ReducerState<Ctx, Key>, action: Action<Ctx, Event>) => {
       if (action.type === 'back') {

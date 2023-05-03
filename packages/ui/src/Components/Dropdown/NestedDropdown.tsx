@@ -4,13 +4,13 @@ import keyboardKey from 'keyboard-key';
 import isNil from 'lodash/isNil';
 import React, { useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import BackLinkButton from '../Button/BackLinkButton';
+import { useDebuggerContext } from '../../Library/DebuggerContext';
 import useDropdownMenu from '../../Library/Hooks/useMenu';
 import { DefaultRenderOption } from '../../Library/RenderOption';
 import type { FocusHandler, NestedOption, Option, RenderOption, Value } from '../../Library/types';
-import Typography from '../Typography';
 import { directionMap } from '../../utils/keyUtils';
-import { debugFactory } from '../../utils/utils';
+import BackLinkButton from '../Button/BackLinkButton';
+import Typography from '../Typography';
 import {
   ControlContainer,
   DropdownContainerDiv,
@@ -21,8 +21,6 @@ import {
 } from './Common';
 import type { StackOption } from './useNestedOptions';
 import useNestedOptions from './useNestedOptions';
-
-const debug = debugFactory('nestedDropdown');
 
 type NestedDropdownProps<V extends Value, T> = {
   id?: string;
@@ -73,6 +71,8 @@ export function NestedDropdown<V extends Value, T = undefined>({
   placeholder = 'Select',
   label,
 }: NestedDropdownProps<V, T>) {
+  const debug = useDebuggerContext('<NestedDropdown />');
+
   const {
     currentOptions,
     canGoToPrevCategory,

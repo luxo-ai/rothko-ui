@@ -4,7 +4,7 @@ import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { PhantomButton } from '../Button/PhantomButton';
-import { Grid } from '../Grid';
+import { Grid } from '../../Layout/Grid';
 import { ShadedBackdrop } from '../../Library/Common';
 import { DomPortal } from '../../Library/Portal';
 import { addEvent, disableBodyScroll, enableBodyScroll, removeEvent } from '../../utils/domUtils';

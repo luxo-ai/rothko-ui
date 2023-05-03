@@ -1,9 +1,7 @@
 import type React from 'react';
 import { useCallback, useState } from 'react';
-import { debugFactory } from '../../utils/utils';
+import { useDebuggerContext } from '../DebuggerContext';
 import type { Option } from '../types';
-
-const debug = debugFactory('useOptions');
 
 type HookArgs<V, T> = {
   options: Option<V, T>[];
@@ -12,6 +10,7 @@ type HookArgs<V, T> = {
 };
 
 const useOptions = <V, T>({ initialIdx = -1, reverse, options: optionsRaw }: HookArgs<V, T>) => {
+  const debug = useDebuggerContext();
   const [optIdx, setOptIdx] = useState<number>(initialIdx);
 
   const [options, setOptionsInner] = useState<Option<V, T>[]>(

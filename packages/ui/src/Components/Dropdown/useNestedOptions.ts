@@ -1,10 +1,8 @@
 import { useCallback, useMemo, useState } from 'react';
+import { useDebuggerContext } from '../../Library/DebuggerContext';
 import type { Stack } from '../../Library/dataStructures';
 import { stackPeak, stackPop, stackPush } from '../../Library/dataStructures';
-import { debugFactory } from '../../utils/utils';
 import type { NestedOption, Option, Value } from '../../Library/types';
-
-const debug = debugFactory('useNestedOptions');
 
 type HookArgs<V extends Value> = {
   options: NestedOption<V>[];
@@ -20,6 +18,7 @@ export type StackValue<V extends Value> = {
 };
 
 const useNestedOptions = <V extends Value>({ options, onChange, initialIdx = -1 }: HookArgs<V>) => {
+  const debug = useDebuggerContext('useNestedOptions');
   const [optIdx, setOptIdx] = useState<number>(initialIdx);
 
   const [optionStack, setOptionStack] = useState<Stack<StackValue<V>>>([

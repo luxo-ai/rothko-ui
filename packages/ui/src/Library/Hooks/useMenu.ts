@@ -1,9 +1,7 @@
 import type React from 'react';
 import { useCallback, useRef, useState } from 'react';
-import { debugFactory } from '../../utils/utils';
+import { useDebuggerContext } from '../DebuggerContext';
 import type { FocusHandler } from '../types';
-
-const debug = debugFactory('useMenu');
 
 type HookArgs = {
   onFocus?: FocusHandler;
@@ -21,6 +19,7 @@ const useDropdownMenu = <
   onOpen,
   disabled,
 }: HookArgs) => {
+  const debug = useDebuggerContext('useDropdownMenu');
   const timeoutId = useRef<NodeJS.Timeout>();
   const containerRef = useRef<ContainerEl>(null);
   const menuRef = useRef<MenuEl>(null);

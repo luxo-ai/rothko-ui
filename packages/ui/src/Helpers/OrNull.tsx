@@ -4,7 +4,7 @@ type OrNullProps = React.HTMLProps<HTMLDivElement> & {
   lookupKey: string;
 };
 
-function orNullFactory(lookup: Record<string, React.FC>) {
+export function orNullFactory(lookup: Record<string, React.FC>) {
   // eslint-disable-next-line react/display-name
   return ({ lookupKey, ...props }: OrNullProps) => {
     const E = lookup[lookupKey];
@@ -16,5 +16,3 @@ function orNullFactory(lookup: Record<string, React.FC>) {
     );
   };
 }
-
-export default orNullFactory;

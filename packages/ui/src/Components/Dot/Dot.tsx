@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import type { CustomColorCssProperties } from '../Container/Container';
-import { useStyleProps } from '../Container/Container';
+import type { CustomColorCssProperties } from '../../Layout/Container';
+import { useStyleProps } from '../../Layout/Container';
 import { idkFn } from '../../Theme/theme';
 import type { HexColor, RGBColor, RothkoKind } from '../../Theme';
 import { isRothkoKind } from '../../Theme';

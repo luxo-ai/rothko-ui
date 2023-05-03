@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import type { CustomColorCssProperties } from '../Container/Container';
-import { useStyleProps } from '../Container/Container';
+import type { CustomColorCssProperties } from '../Container';
+import { useStyleProps } from '../Container';
 
 type GridSpanProps = Omit<CustomColorCssProperties, 'gridColumnStart' | 'gridColumnEnd'> & {
   as?: keyof JSX.IntrinsicElements;

@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import type { CSSProperties } from 'styled-components';
 import styled from 'styled-components';
-import { idkFn } from '../../Theme/theme';
-import type { RothkoKind } from '../../Theme';
-import { isRothkoKind } from '../../Theme';
+import { idkFn } from '../Theme/theme';
+import type { RothkoKind } from '../Theme';
+import { isRothkoKind } from '../Theme';
 
 export type CustomColorCssProperties = Omit<
   CSSProperties,

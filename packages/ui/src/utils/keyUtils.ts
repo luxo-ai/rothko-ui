@@ -2,7 +2,8 @@ import keyboardKey from 'keyboard-key';
 import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';
 import memoize from 'lodash/memoize';
-import React, { ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
+import React from 'react';
 
 const keys = [
   keyboardKey.Enter,

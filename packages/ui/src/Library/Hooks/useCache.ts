@@ -2,10 +2,8 @@
 import { Map as ImmutableMap } from 'immutable';
 import moment from 'moment';
 import { useCallback, useRef } from 'react';
-import { debugFactory } from '../../utils/utils';
+import { useDebuggerContext } from '../DebuggerContext';
 import useInterval from './useInterval';
-
-const debug = debugFactory('useCache');
 
 const ONE_MS = 1000;
 const EXPIRES_SECONDS_DEFAULT = 5 * 60; // 5 min
@@ -33,6 +31,7 @@ export const useLRUCache = <T, Arg = undefined>({
   expiresSeconds = EXPIRES_SECONDS_DEFAULT,
   vacuumDelaySeconds = VACUUM_DELAY_SECONDS_DEFAULT,
 }: HookArgs<T, Arg>) => {
+  const debug = useDebuggerContext('useLRUCache');
   /* contains meta data on values in cache */
   const cache = useRef<Cache<T>>(ImmutableMap());
 
@@ -93,6 +92,5 @@ const evictLeastUsed = <T>(cache: Cache<T>) => {
       LRUKey = k;
     }
   }
-  debug('Evicting w key: ', LRUKey);
   return cache.remove(LRUKey);
 };

@@ -3,12 +3,10 @@ import { Set } from 'immutable';
 import isFunction from 'lodash/isFunction';
 import isNil from 'lodash/isNil';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { debugFactory } from '../../utils/utils';
-import type { Option, Value } from '../../Library/types';
+import { useDebuggerContext } from '../../Library/DebuggerContext';
 import useOptions from '../../Library/Hooks/useOptions';
+import type { Option, Value } from '../../Library/types';
 import type { QueryMatchFn } from './types';
-
-const debug = debugFactory('useSelect');
 
 type HookArgs<V, T> = {
   options: Option<V, T>[];
@@ -21,6 +19,7 @@ type HookArgs<V, T> = {
 };
 
 const useSelect = <V extends Value, T = undefined>(args: HookArgs<V, T>) => {
+  const debug = useDebuggerContext('useSelect');
   const { multiple, onChange, onDelete, search, value } = args;
 
   const { optIdx, moveOptionIdx, options, resetOptionIdx, setOptions } = useOptions({

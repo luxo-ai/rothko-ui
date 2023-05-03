@@ -1,7 +1,7 @@
 import React from 'react';
 import type { CSSProperties } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { useStyleProps } from '../Container/Container';
+import { useStyleProps } from '../../Layout/Container';
 
 const listStyle = css`
   padding: 0 0 0 1rem;

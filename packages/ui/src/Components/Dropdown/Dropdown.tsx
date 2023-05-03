@@ -5,27 +5,25 @@ import isArray from 'lodash/isArray';
 import isNil from 'lodash/isNil';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { PhantomButton } from '../Button/PhantomButton';
+import { useDebuggerContext } from '../../Library/DebuggerContext';
 import useDropdownMenu from '../../Library/Hooks/useMenu';
 import { DefaultRenderOption } from '../../Library/RenderOption';
 import type { FocusHandler, Option, RenderOption, Value } from '../../Library/types';
+import { directionMap } from '../../utils/keyUtils';
+import { PhantomButton } from '../Button/PhantomButton';
 import { hideBrowserOutline } from '../Typography';
 import { textStyle } from '../Typography/Typography';
-import { directionMap } from '../../utils/keyUtils';
-import { debugFactory } from '../../utils/utils';
 import {
   ControlContainer,
   DropdownContainerDiv,
   DropdownMenu,
-  MakeMoreCommon,
-  LabelText,
-  TextContainerDiv,
   ItemText,
+  LabelText,
+  MakeMoreCommon,
+  TextContainerDiv,
 } from './Common';
 import type { QueryMatchFn } from './types';
 import useSelect from './useSelect';
-
-const debug = debugFactory('dropdown');
 
 type DropdownProps<V extends Value, T> = {
   /** Current value of dropdown or value array if multiple */
@@ -98,6 +96,8 @@ function Dropdown<V extends Value, T = undefined>({
   selectedPrefix = '',
   value,
 }: DropdownProps<V, T>) {
+  const debug = useDebuggerContext('<Dropdown/>');
+
   const openReverse = menuPosition === 'top';
 
   const {

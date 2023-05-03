@@ -6,7 +6,7 @@ import PaddedNavLayout from '../components/Layout/PaddedNavLayout';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <RothkoProvider themeMode="dark">
+    <RothkoProvider themeMode="dark" debugMode>
       <PaddedNavLayout>
         <Component {...pageProps} />
       </PaddedNavLayout>

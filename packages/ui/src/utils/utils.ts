@@ -1,12 +1,3 @@
-export const debugFactory = (module?: string) => {
-  const canDebug = false; // process.env.NODE_ENV !== 'production' && process.env.DEBUG === '1';
-  return (...argz: (string | Record<string, unknown> | symbol | number)[]) => {
-    if (canDebug) {
-      console.log(`[rokthko-ui${module ? `:${module}` : ''}]`, ...argz);
-    }
-  };
-};
-
 type ArrLike<T> = {
   [index: number]: T;
   length: number;

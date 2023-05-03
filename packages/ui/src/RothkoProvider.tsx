@@ -1,10 +1,9 @@
 import '@rothko-ui/tokens/build/index.css';
 import React from 'react';
+import { DebuggerContextProvider } from './Library/DebuggerContext';
+import { PORTAL_ROOT_ID } from './Library/Portal';
 import type { ThemeMode, ThemeOverrides } from './Theme';
 import { ThemeContextProvider, useTheme } from './Theme';
-import { PORTAL_ROOT_ID } from './Library/Portal';
-// add "debugMode (on/off) to context"
-// Proxy for theme context provider + other context apis
 
 type RothkoProviderProps = {
   children: React.ReactNode;
@@ -13,19 +12,20 @@ type RothkoProviderProps = {
   themeOverrides?: ThemeOverrides;
 };
 
+// proxy provider for theme and debugger contexts
 export const RothkoProvider = ({
   children,
   debugMode,
   themeMode,
   themeOverrides,
-}: RothkoProviderProps) => {
-  return (
-    <ThemeContextProvider themeOverrides={themeOverrides} mode={themeMode}>
+}: RothkoProviderProps) => (
+  <ThemeContextProvider themeOverrides={themeOverrides} mode={themeMode}>
+    <DebuggerContextProvider debug={debugMode}>
       {children}
       <div id={PORTAL_ROOT_ID} />
-    </ThemeContextProvider>
-  );
-};
+    </DebuggerContextProvider>
+  </ThemeContextProvider>
+);
 
 export const useRothko = () => {
   const themeCtx = useTheme();

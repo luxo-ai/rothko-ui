@@ -2,20 +2,18 @@ import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
-import { Container } from '../Container';
-import { LabelText } from '../Dropdown/Common';
+import { Container } from '../../Layout';
+import { useDebuggerContext } from '../../Library/DebuggerContext';
 import useDropdownMenu from '../../Library/Hooks/useMenu';
 import { DefaultRenderOption } from '../../Library/RenderOption';
 import type { FocusHandler, Option, RenderOption, Value } from '../../Library/types';
 import { directionMap } from '../../utils/keyUtils';
-import { debugFactory } from '../../utils/utils';
+import { LabelText } from '../Dropdown/Common';
 import DummySearchBar from './SearchBar/DummySearchBar';
 import SearchBar from './SearchBar/SearchBar';
 import SearchPopout from './SearchPopout';
 import type { OptionFetcher } from './useSearch';
 import { useSearch } from './useSearch';
-
-const debug = debugFactory('search');
 
 type SearchMode = 'dropdown' | 'popout';
 
@@ -77,6 +75,8 @@ function Search<V extends Value, T = undefined>({
   popoutHeader,
   renderOption: RenderOpt = DefaultRenderOption,
 }: SearchProps<V, T>) {
+  const debug = useDebuggerContext('<Search />');
+
   const { error, loading, moveOptionIdx, optIdx, options, query, setQuery } = useSearch({
     dataFetcher,
     limit,

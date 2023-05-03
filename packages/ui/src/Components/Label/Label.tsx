@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../Button/PhantomButton';
 import { unselectableStyle } from '../../Library/Styles';
-import Typography from '../Typography';
+import Typography from '../Typography/Typography';
 import { getElementFullHeight } from '../../utils/domUtils';
 
 type LabelProps = {
