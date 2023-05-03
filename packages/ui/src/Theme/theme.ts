@@ -1,37 +1,11 @@
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import { css } from 'styled-components';
-import type { RothkoKind } from './types';
-
-export type HexColor = `#${string}`;
-export type RGBColor = `rgba(${string})`;
-
-type Lightness = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
-type TransparentLightness = `transparent-${Exclude<Lightness, 700 | 800 | 900>}`;
-
-type LightnessKey = Lightness | TransparentLightness;
+import type { RothkoKind, HexColor, RGBColor } from './types';
 
 type State = 'focus' | 'hover' | 'active' | 'disabled' | 'transparent';
 type Colorable = 'text' | 'bg' | 'border';
 
-export type Color = HexColor | RGBColor;
 export type ColorableKey = Extract<Colorable, 'text'> | `${Exclude<Colorable, 'text'>}-${State}`;
-
-export type LightnessMap = {
-  readonly [key in Exclude<ColorableKey, 'text'>]: LightnessKey;
-};
-
-export const lightnessMap: LightnessMap = {
-  'bg-active': 600,
-  'bg-focus': 600,
-  'bg-disabled': 'transparent-500',
-  'bg-transparent': 'transparent-300',
-  'bg-hover': 600,
-  'border-active': 500,
-  'border-focus': 500,
-  'border-transparent': 'transparent-300',
-  'border-disabled': 'transparent-500',
-  'border-hover': 500,
-};
 
 const idk: Record<Exclude<ColorableKey, 'text'>, string | number> = {
   'bg-active': 400,
@@ -46,11 +20,11 @@ const idk: Record<Exclude<ColorableKey, 'text'>, string | number> = {
   'border-hover': 300,
 };
 
-type Opts = {
-  default?: HexColor | RGBColor;
-};
-
-export const idkFn = (kind: RothkoKind, ok?: ColorableKey, opts?: Opts) => {
+export const idkFn = (
+  kind: RothkoKind,
+  ok?: ColorableKey,
+  opts?: { default: HexColor | RGBColor }
+) => {
   const generateVarWithDefault = (k: RothkoKind, num = 500) => {
     if (opts?.default) {
       return `var(--${k}-${num}, ${opts.default})`;
@@ -94,11 +68,7 @@ const kindToStyle: Record<RothkoKind, FlattenSimpleInterpolation> = {
   `,
 };
 
-type StyleProps = {
-  kind: RothkoKind;
-};
-
-export default css<StyleProps>`
+export default css<{ kind: RothkoKind }>`
   color: black;
   ${({ kind }) => kindToStyle[kind]}
 `;

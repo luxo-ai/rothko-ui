@@ -1,21 +1,19 @@
+// ~~ THEME ~~
 const semanticNames = ['success', 'info', 'warning', 'danger', 'basic'] as const;
-type SemanticName = typeof semanticNames[number];
-
 const brandName = ['primary', 'secondary'] as const;
-type BrandName = typeof brandName[number];
 
-export const isRothkoKind = (v: string): v is RothkoKind => {
-  return ([...semanticNames, ...brandName] as string[]).includes(v);
-};
+export const rothkoKinds = [...semanticNames, ...brandName] as const;
+export type RothkoKind = typeof rothkoKinds[number];
 
 export type KindProps = {
   kind?: RothkoKind;
 };
 
+export type ThemeMode = 'light' | 'dark';
+export type RothkoSize = 'xs' | 's' | 'm' | 'l' | 'xl';
+
+// ~~ COLORS ~~
 export type HexColor = `#${string}`;
 export type RGBColor = `rgba(${string})`;
 
 export type Color = HexColor | RGBColor;
-
-export type RothkoKind = SemanticName | BrandName;
-export type RothkoSize = 'xs' | 's' | 'm' | 'l' | 'xl';

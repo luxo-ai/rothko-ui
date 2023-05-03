@@ -12,7 +12,7 @@ type HookArgs = {
   disabled?: boolean;
 };
 
-const useMenu = <
+const useDropdownMenu = <
   ContainerEl extends HTMLElement = HTMLDivElement,
   MenuEl extends HTMLElement = HTMLDivElement
 >({
@@ -110,4 +110,4 @@ const useMenu = <
   };
 };
 
-export default useMenu;
+export default useDropdownMenu;

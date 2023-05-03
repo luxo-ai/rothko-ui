@@ -2,6 +2,8 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export const PORTAL_ROOT_ID = 'portal-root';
+
+// compantibility with SSR
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 type PortalProps = {

@@ -7,16 +7,16 @@ import React from 'react';
 import type { RegisterOptions } from 'react-hook-form';
 import { Controller, useFormContext } from 'react-hook-form';
 // import InputMask from 'react-input-mask';
-import Checkbox from '../Checkbox/Checkbox';
-import { Dropdown } from '../Dropdown';
+import Checkbox from '../Components/Checkbox/Checkbox';
+import { Dropdown } from '../Components/Dropdown';
 import type { FormControlProps } from './FormControl';
 import { FormControl } from './FormControl';
 // import { validatePhoneNumber } from './FormValidators';
-import type { InputProps, TextareaProps } from '../Input';
-import { Input, Textarea } from '../Input';
-import { OptionGroup } from '../OptionGroup';
-import { MultiSlider, Slider } from '../Slider';
-import Toggle from '../Toggle/Toggle';
+import type { InputProps, TextareaProps } from '../Components/Input';
+import { Input, Textarea } from '../Components/Input';
+import { OptionGroup } from '../Components/OptionGroup';
+import { MultiSlider, Slider } from '../Components/Slider';
+import Toggle from '../Components/Toggle/Toggle';
 
 type ControllerRenderProps = Parameters<Parameters<typeof Controller>[0]['render']>[0]['field'];
 

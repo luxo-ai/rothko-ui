@@ -9,7 +9,28 @@ const SingleDropdownCard = () => {
       <Typography.h3 style={{ marginBottom: '1rem' }}>Single Dropdown</Typography.h3>
       <div className="accordion-container">
         <Dropdown
-          multiple
+          //  multiple
+          label="Testing"
+          value={selectedValue}
+          onChange={v => setSelectedValue(v as number[])}
+          options={[
+            {
+              id: 0,
+              label: 'Zero',
+            },
+            {
+              id: 1,
+              label: 'One',
+            },
+            {
+              id: 2,
+              label: 'Two',
+            },
+          ]}
+        />
+        <Dropdown
+          //  multiple
+          search
           label="Testing"
           value={selectedValue}
           onChange={v => setSelectedValue(v as number[])}

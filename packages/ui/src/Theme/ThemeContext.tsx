@@ -1,14 +1,11 @@
 import { pathToCssVariable } from '@rothko-ui/tokens';
 import type { DeepPartial, NestedRecord } from '@rothko-ui/utils';
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
-import { PORTAL_ROOT_ID } from '../Library/Portal';
-import type { RothkoKind } from './types';
-
-type Mode = 'light' | 'dark';
+import type { RothkoKind, ThemeMode } from './types';
 
 const TERMINAL_KEY = 'value' as const;
 
-type ThemeOverrides = DeepPartial<{
+export type ThemeOverrides = DeepPartial<{
   color: {
     [kind in RothkoKind]: {
       100: { [TERMINAL_KEY]: string };
@@ -32,7 +29,7 @@ type ThemeOverrides = DeepPartial<{
   };
 }>;
 
-const themeOverrideTokens = (overrides: ThemeOverrides) => {
+const createThemeOverrideStyle = (overrides: ThemeOverrides) => {
   const { color } = overrides;
   if (!color) return;
 
@@ -58,47 +55,48 @@ const themeOverrideTokens = (overrides: ThemeOverrides) => {
 };
 
 type IThemeContext = {
-  themeOverrides?: ThemeOverrides;
-  mode?: Mode;
+  mode: ThemeMode;
   toggleMode: () => void;
 };
 
-const Context = createContext<IThemeContext>({
-  mode: 'light',
-  toggleMode: () => {
-    throw new Error('not setup yet');
-  },
-});
+const Context = createContext<IThemeContext | null>(null);
 
-export type ThemeContextProviderProps = Pick<Partial<IThemeContext>, 'themeOverrides' | 'mode'> & {
+type ThemeContextProviderProps = {
   children?: React.ReactNode;
+  mode?: ThemeMode;
+  themeOverrides?: ThemeOverrides;
 };
 
 export const ThemeContextProvider = ({
   children,
-  themeOverrides = {},
   mode: initialMode = 'light',
+  themeOverrides = {},
 }: ThemeContextProviderProps) => {
-  const [mode, setMode] = useState<Mode>(initialMode);
+  const [mode, setMode] = useState<ThemeMode>(initialMode);
+
   const toggleMode = useCallback(() => {
     setMode(currMode => (currMode == 'light' ? 'dark' : 'light'));
   }, [setMode]);
-  const inlineOverrides = useMemo(() => themeOverrideTokens(themeOverrides), [themeOverrides]);
+
+  const inlineOverrides = useMemo(() => createThemeOverrideStyle(themeOverrides), [themeOverrides]);
+
   return (
-    <Context.Provider value={{ themeOverrides, mode, toggleMode }}>
+    <Context.Provider value={{ mode, toggleMode }}>
       <div
         id="theme-root"
         className={mode}
         style={inlineOverrides?.reduce((acc, curr) => ({ ...acc, ...curr }))}
       >
         {children}
-        <div id={PORTAL_ROOT_ID} />
       </div>
     </Context.Provider>
   );
 };
 
-export const useThemeV2 = () => {
+export const useTheme = () => {
   const ctx = useContext(Context);
-  return { mode: ctx.mode, toggleMode: ctx.toggleMode };
+  if (!ctx) {
+    throw Error('useTheme must be used within a ThemeContextProvider');
+  }
+  return ctx;
 };

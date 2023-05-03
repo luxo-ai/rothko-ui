@@ -1,40 +1,40 @@
-import Alert from './Alert';
-import Checkbox from './Checkbox';
-import Dot from './Dot';
+import Alert from './Components/Alert';
+import Checkbox from './Components/Checkbox';
 import Hr from './Hr';
 import orNullFactory from './OrNull';
-import Typography from './Typography';
+import Typography from './Components/Typography';
 import When from './When';
 
-export * from './Accordion';
-export * from './BreadCrumbs';
-export * from './Button';
+export * from './Components/Dot';
+export * from './Components/Accordion';
+export * from './Components/BreadCrumbs';
+export * from './Components/Button';
 export * from './Dimensions';
-export * from './Drawer';
-export * from './Dropdown';
-export * from './Flex';
+export * from './Components/Drawer';
+export * from './Components/Dropdown';
+export * from './Components/Flex';
 export * from './Form';
-export * from './Grid';
+export * from './Components/Grid';
 export * from './Hooks';
-export * from './Image';
-export * from './Input';
-export * from './Label';
-export * from './List';
-export * from './Loader';
-export * from './Modal';
-export * from './Notification';
-export * from './OptionGroup';
-export * from './Popup';
-export * from './Radio';
+export * from './Components/Image';
+export * from './Components/Input';
+export * from './Components/Label';
+export * from './Components/List';
+export * from './Components/Loader';
+export * from './Components/Modal';
+export * from './Components/Notification';
+export * from './Components/OptionGroup';
+export * from './Components/Popup';
+export * from './Components/Radio';
 export * from './RothkoProvider';
-export * from './Search';
-export * from './Skeleton';
-export * from './Slider';
-export * from './TabBar';
-export * from './Tag';
-export * from './Toaster';
-export * from './Toggle';
-export * from './Tooltip';
+export * from './Components/Search';
+export * from './Components/Skeleton';
+export * from './Components/Slider';
+export * from './Components/TabBar';
+export * from './Components/Tag';
+export * from './Components/Toaster';
+export * from './Components/Toggle';
+export * from './Components/Tooltip';
 export type { EmSize, PercentSize, RemSize, ViewportSize } from './types';
 export {
   clearAllBodyScrollLocks,
@@ -42,7 +42,7 @@ export {
   enableBodyScroll,
   getStyle,
 } from './utils/domUtils';
-export { Dot };
+
 export { When };
 export { Alert };
 export { Checkbox };
