@@ -1,17 +1,17 @@
-import { Heart, HeartOutline, Menu, Moon, Sun } from '@rothko-ui/icons';
+import { Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
 import {
   Button,
   Flex,
   FlexItem,
-  PhantomButton,
   Toggle,
   Typography,
+  WidthGeqOnly,
   useDrawerContext,
   useRothko,
-  WidthGeqOnly,
 } from '@rothko-ui/ui';
-import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import React from 'react';
 
 import styles from './Navigation.module.scss';
 
@@ -31,9 +31,9 @@ const Navigation = () => {
       <Flex justifyContent="space-between">
         <Flex alignItems="center" justifyContent="center" columnGap="1rem">
           <FlexItem>
-            <PhantomButton className="dflx" onClick={() => openDrawer()}>
+            <button className="dflx" onClick={() => openDrawer()}>
               <Menu width={24} height={24} />
-            </PhantomButton>
+            </button>
           </FlexItem>
           <FlexItem>
             <Flex
