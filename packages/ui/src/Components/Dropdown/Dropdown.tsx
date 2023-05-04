@@ -14,7 +14,7 @@ import { hideChromeBrowserOutline } from '../../Library/Styles';
 import type { FocusHandler, Option, RenderOption, Value } from '../../Library/types';
 import { directionMap } from '../../utils/keyUtils';
 import { textStyle } from '../Typography/Typography';
-import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } from './Common';
+import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } from './Shared';
 import type { QueryMatchFn } from './types';
 import useSelect from './useSelect';
 
@@ -346,13 +346,17 @@ const MultiSelectLabelDiv = styled.div`
   flex-direction: row;
   gap: 0.125rem;
   align-items: center;
+
   padding: 0.0625rem 0.3rem 0.0625rem 0.5rem;
+
   background-color: var(--dropdown-multiselect-background, transparent);
   border: 1px solid var(--info-500);
+
   & > p {
     color: var(--info-500) !important;
   }
-  border-radius: 3.25rem; // 0.25rem;
+
+  border-radius: 3.25rem;
   cursor: initial;
 `;
 

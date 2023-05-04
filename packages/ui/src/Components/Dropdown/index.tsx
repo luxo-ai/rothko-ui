@@ -1,3 +1,4 @@
 import Dropdown from './Dropdown';
-export * from './NestedDropdown';
-export { Dropdown };
+import NestedDropdown from './NestedDropdown/NestedDropdown';
+
+export { Dropdown, NestedDropdown };

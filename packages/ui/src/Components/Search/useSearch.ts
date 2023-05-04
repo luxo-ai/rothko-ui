@@ -2,12 +2,14 @@ import debounce from 'lodash/debounce';
 import identityFn from 'lodash/identity';
 import { useCallback, useEffect, useState } from 'react';
 import { useLRUCache } from '../../Library/Hooks/useCache';
-import type { Option } from '../../Library/types';
 import useOptions from '../../Library/Hooks/useOptions';
+import type { Option } from '../../Library/types';
+
+const DEBOUNCE_WAIT_MS = 250;
 
 export type OptionFetcher<V, T = undefined> = (query: string) => Promise<Option<V, T>[]>;
 
-export type HookProperties<V, T = undefined> = {
+type HookProperties<V, T = undefined> = {
   dataFetcher?: OptionFetcher<V, T>;
   initialQuery?: string;
   limit?: number;
@@ -40,7 +42,7 @@ export function useSearch<V, T = undefined>({
       } finally {
         setLoading(false);
       }
-    }, 250),
+    }, DEBOUNCE_WAIT_MS),
     [setOptions, setError, setLoading, options]
   );
 
