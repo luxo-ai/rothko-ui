@@ -10,7 +10,7 @@ const SearchCard = () => {
         <Search
           initialQuery={idk}
           placeholder={undefined}
-          mode="popout"
+          //mode="popout"
           label="testing"
           dataFetcher={async () => {
             return [

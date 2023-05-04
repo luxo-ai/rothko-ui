@@ -3,6 +3,7 @@ import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { Container } from '../../Layout';
+import { MenuBase } from '../../Library/Common';
 import { useDebuggerContext } from '../../Library/DebuggerContext';
 import useDropdownMenu from '../../Library/Hooks/useMenu';
 import { DefaultRenderOption } from '../../Library/RenderOption';
@@ -170,7 +171,7 @@ function Search<V extends Value, T = undefined>({
   const dropdownResults = useMemo(() => {
     if (!open || !hasOptions) return null;
     return (
-      <DropdownMenu
+      <SearchMenu
         ref={menuRef}
         tabIndex={-1}
         className={clsx({
@@ -185,7 +186,7 @@ function Search<V extends Value, T = undefined>({
                 aria-disabled={false}
                 aria-label={option.label}
                 aria-selected={selected}
-                className={clsx('option', { selected })}
+                className={clsx({ selected })}
                 id={`option-${idx}`}
                 key={option.id}
                 role="option"
@@ -201,7 +202,7 @@ function Search<V extends Value, T = undefined>({
             );
           })}
         </ul>
-      </DropdownMenu>
+      </SearchMenu>
     );
   }, [open, hasOptions, menuRef, showPopout, options, optIdx, RenderOpt, onSelectOption, setQuery]);
 
@@ -270,46 +271,16 @@ function Search<V extends Value, T = undefined>({
   );
 }
 
-const DropdownMenu = styled.div`
-  width: 100%;
+const SearchMenu = styled(MenuBase)`
+  max-height: 20rem;
   z-index: 10;
-  background-color: var(--color-background, #fff); // var(
-  // --dropdown-multiselect-background,
-  // transparent
-  // ); // var(--basic-transparent-100, white);
-  top: calc(100% + 0.25rem);
-  left: 0;
-
-  &:not(.pop-out) {
-    position: absolute;
-    max-height: 30rem;
-    overflow-y: scroll;
-    border-radius: 0.125rem;
-    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2);
-  }
-
-  &.pop-out {
-    margin: 0 0 2rem 0;
-    height: 100%;
-    overflow-y: scroll;
-  }
-
-  & ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+  background-color: var(--color-background, #fff);
 
   & li {
-    outline: none;
-    &.option {
-      cursor: pointer;
-      padding: 0.75rem 1rem;
-      &:hover,
-      &:focus,
-      &.selected {
-        background-color: var(--dropdown-background-selected, #eeeeee);
-      }
+    &:hover,
+    &:focus,
+    &.selected {
+      background-color: var(--dropdown-background-selected, #eeeeee);
     }
   }
 `;

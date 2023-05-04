@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { baseInputStyle } from '../Input';
+import { MenuBase } from '../../Library/Common';
+import { baseInputStyle } from '../Input/styles';
 import Typography, { hideBrowserOutline } from '../Typography';
 
 export const DropdownContainerDiv = styled.div`
@@ -65,44 +66,12 @@ export const ControlContainer = styled.div`
   }
 `;
 
-export const DropdownMenu = styled.div`
-  &.open-reverse {
-    bottom: calc(100% + 0.25rem);
-    top: auto;
-  }
-  &:not(.open-reverse) {
-    top: calc(100% + 0.25rem);
-  }
-
-  left: 0;
+export const DropdownMenu = styled(MenuBase)`
   max-height: 13rem;
-  border-radius: 0.125rem;
-  width: 100%;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-  position: absolute;
   z-index: 10;
   background-color: var(--color-background, #fff);
-  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2);
-  transition-duration: 0.1s;
-  transition-property: transform;
-
-  & ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
 
   & li {
-    outline: none;
-
-    &.group-header {
-      padding: 1rem;
-      cursor: default;
-    }
-
-    cursor: pointer;
-    padding: 0.75rem 1rem;
     &:hover,
     &:focus,
     &.selected {

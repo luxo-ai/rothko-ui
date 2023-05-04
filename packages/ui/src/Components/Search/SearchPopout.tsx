@@ -3,21 +3,21 @@ import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { PhantomButton } from '../Button/PhantomButton';
 import { Grid } from '../../Layout/Grid';
 import { ShadedBackdrop } from '../../Library/Common';
 import { DomPortal } from '../../Library/Portal';
 import { addEvent, disableBodyScroll, enableBodyScroll, removeEvent } from '../../utils/domUtils';
+import { PhantomButton } from '../Button/PhantomButton';
 import SearchBar from './SearchBar/SearchBar';
 
 type SearchPopoutProps = {
-  setQuery: (q: string) => void;
-  query?: string | null;
-  onSubmit: () => void;
-  isOpen?: boolean;
-  onClose: () => void;
   children: React.ReactNode;
   header?: React.ReactElement;
+  isOpen?: boolean;
+  onClose: () => void;
+  onSubmit: () => void;
+  query?: string | null;
+  setQuery: (q: string) => void;
 };
 
 const SearchPopout = React.forwardRef<HTMLDivElement, SearchPopoutProps>(
