@@ -2,6 +2,8 @@ import type { FlattenSimpleInterpolation } from 'styled-components';
 import { css } from 'styled-components';
 import { BODY_FONT_FAMILY } from '../Typography';
 import type { InputSize } from './types';
+import type { TextProps } from '../Typography/Typography';
+import { textStyle } from '../Typography/Typography';
 
 const sizeMap: Record<InputSize, FlattenSimpleInterpolation> = {
   s: css`

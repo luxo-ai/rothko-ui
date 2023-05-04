@@ -3,7 +3,7 @@ import times from 'lodash/times';
 import React, { useEffect, useMemo, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { phantomButtonStyle } from '../Button/PhantomButton';
+import { phantomButtonStyle } from '../../Library/PhantomButton';
 import Grid from '../../Layout/Grid/Grid';
 import type { Option, Value } from '../../Library/types';
 import { idkFn } from '../../Theme/theme';

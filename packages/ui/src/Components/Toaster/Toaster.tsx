@@ -3,7 +3,7 @@ import { animated } from '@react-spring/web';
 import { CloseOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { PhantomButton } from '../Button/PhantomButton';
+import { PhantomButton } from '../../Library/PhantomButton';
 import { idkFn } from '../../Theme/theme';
 import type { KindProps, RothkoKind } from '../../Theme';
 import Typography from '../Typography';

@@ -1,7 +1,7 @@
 import { CloseOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
-import { phantomButtonStyle } from '../Button/PhantomButton';
+import { phantomButtonStyle } from '../../Library/PhantomButton';
 import { idkFn } from '../../Theme/theme';
 import type { KindProps } from '../../Theme/types';
 

@@ -8,3 +8,12 @@ export const unselectableStyle = css`
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none;
 `;
+
+// input, text elements (Chrome)
+export const hideChromeBrowserOutline = css`
+  outline: none;
+  :active,
+  :focus {
+    outline: none;
+  }
+`;

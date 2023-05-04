@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
-import { phantomButtonStyle } from '../Button/PhantomButton';
+import { phantomButtonStyle } from '../../Library/PhantomButton';
 import type { RothkoKind } from '../../Theme';
 import { BODY_FONT_FAMILY, HEADER_FONT_FAMILY } from './constants';
 
-type TextProps = {
+export type TextProps = {
   light?: boolean;
   bold?: boolean;
   italic?: boolean;

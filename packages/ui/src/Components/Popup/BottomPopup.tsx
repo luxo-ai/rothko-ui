@@ -3,7 +3,7 @@ import { animated, useTransition } from '@react-spring/web';
 import clsx from 'clsx';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { phantomButtonStyle } from '../Button/PhantomButton';
+import { phantomButtonStyle } from '../../Library/PhantomButton';
 import { ShadedBackdrop } from '../../Library/Common';
 import { DomPortal } from '../../Library/Portal';
 import {

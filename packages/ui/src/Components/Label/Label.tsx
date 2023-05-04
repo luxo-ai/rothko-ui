@@ -2,7 +2,7 @@ import { CollapseOutline, ExpandOutline } from '@rothko-ui/icons';
 import { animated, useSpring } from '@react-spring/web';
 import React, { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { phantomButtonStyle } from '../Button/PhantomButton';
+import { phantomButtonStyle } from '../../Library/PhantomButton';
 import { unselectableStyle } from '../../Library/Styles';
 import Typography from '../Typography/Typography';
 import { getElementFullHeight } from '../../utils/domUtils';

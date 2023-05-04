@@ -3,7 +3,7 @@ import { Close } from '@rothko-ui/icons';
 import clsx from 'clsx';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { PhantomButton } from '../Button/PhantomButton';
+import { PhantomButton } from '../../Library/PhantomButton';
 import { ShadedBackdrop } from '../../Library/Common';
 import { DomPortal } from '../../Library/Portal';
 import {

@@ -2,8 +2,9 @@ import type { Nullable } from '@rothko-ui/utils';
 import clsx from 'clsx';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { hideBrowserOutline } from '../../Typography';
-import { BODY_FONT_FAMILY } from '../../Typography/constants';
+import { phantomInputStyle } from '../../../Library/PhantomInput';
+import type { TextProps } from '../../Typography/Typography';
+import { textStyle } from '../../Typography/Typography';
 import SearchButton from './SearchButton';
 import styles from './styles';
 
@@ -61,17 +62,18 @@ const SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
         onFocus={onFocus}
         onBlur={onBlur}
       >
-        <PhantomInput
-          ref={inputRef}
-          type="text"
+        <SearchInput
+          light
           className={clsx({ disabled })}
           disabled={disabled}
-          tabIndex={0}
-          placeholder={placeholder}
           onChange={e => onQueryChange(e.target.value)}
-          value={query ?? ''}
           onClick={onClick}
           onKeyDown={onKeyDown}
+          placeholder={placeholder}
+          ref={inputRef}
+          tabIndex={0}
+          type="text"
+          value={query ?? ''}
         />
         <SearchButton disabled={disabled || !query} onClick={() => onSubmit()} />
         {children}
@@ -88,21 +90,15 @@ const SearchForm = styled.form`
   min-height: calc(1.5rem + 2 * 0.125rem + 2 * 0.5rem + 2 * 2px);
 `;
 
-const PhantomInput = styled.input`
-  ${hideBrowserOutline}
-  font-size: 1rem;
-  font-family: ${BODY_FONT_FAMILY.light};
-  background: none !important;
-  border: none !important;
-  outline: none !important;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+const SearchInput = styled.input<Pick<TextProps, 'light'>>`
+  ${textStyle}
+  ${phantomInputStyle}
+ // margin: 0;
   z-index: 2;
-  cursor: text;
-  padding: 0.5rem 0.5rem 0.5rem 1rem;
+
   width: 100%;
   height: 100%;
+
   padding: 0.5rem 1rem 0.5rem 1rem;
 `;
 

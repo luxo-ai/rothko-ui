@@ -5,7 +5,7 @@ import keyboardKey from 'keyboard-key';
 import React, { useEffect, useRef } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { phantomButtonStyle } from '../Button/PhantomButton';
+import { phantomButtonStyle } from '../../Library/PhantomButton';
 import { ShadedBackdrop } from '../../Library/Common';
 import { DomPortal } from '../../Library/Portal';
 import type { RothkoSize } from '../../Theme';

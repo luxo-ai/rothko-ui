@@ -7,7 +7,7 @@ import { Grid } from '../../Layout/Grid';
 import { ShadedBackdrop } from '../../Library/Common';
 import { DomPortal } from '../../Library/Portal';
 import { addEvent, disableBodyScroll, enableBodyScroll, removeEvent } from '../../utils/domUtils';
-import { PhantomButton } from '../Button/PhantomButton';
+import { PhantomButton } from '../../Library/PhantomButton';
 import SearchBar from './SearchBar/SearchBar';
 
 type SearchPopoutProps = {

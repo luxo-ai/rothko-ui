@@ -2,7 +2,7 @@ import { SearchOutline } from '@rothko-ui/icons';
 import clsx from 'clsx';
 import React from 'react';
 import styled from 'styled-components';
-import { PhantomButton } from '../../Button/PhantomButton';
+import { PhantomButton } from '../../../Library/PhantomButton';
 
 type SearchButtonProps = {
   disabled?: boolean;

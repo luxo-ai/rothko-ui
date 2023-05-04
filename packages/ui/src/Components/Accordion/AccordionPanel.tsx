@@ -3,7 +3,7 @@ import { MinusOutline, PlusOutline } from '@rothko-ui/icons';
 import React, { useMemo, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import uuid from 'uuid';
-import { phantomButtonStyle } from '../Button/PhantomButton';
+import { phantomButtonStyle } from '../../Library/PhantomButton';
 import { unselectableStyle } from '../../Library/Styles';
 import Typography from '../Typography';
 import { getElementFullHeight } from '../../utils/domUtils/dimensions';

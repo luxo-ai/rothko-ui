@@ -10,7 +10,7 @@ import useDropdownMenu from '../../Library/Hooks/useMenu';
 import { DefaultRenderOption } from '../../Library/RenderOption';
 import type { FocusHandler, Option, RenderOption, Value } from '../../Library/types';
 import { directionMap } from '../../utils/keyUtils';
-import { PhantomButton } from '../Button/PhantomButton';
+import { PhantomButton } from '../../Library/PhantomButton';
 import { hideBrowserOutline } from '../Typography';
 import { textStyle } from '../Typography/Typography';
 import {

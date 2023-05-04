@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components';
 
-// FOR INTERNAL USE, DON'T EXPORT FROM PACKAGE
-
 export const phantomButtonStyle = css`
   -webkit-tap-highlight-color: transparent;
   background: transparent;
