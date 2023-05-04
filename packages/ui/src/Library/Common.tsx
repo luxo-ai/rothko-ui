@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { baseInputStyle } from '../Components/Input/styles';
+import { Typography } from '../Components';
 
 /* ATTN: ~~ DO NOT EXPORT IN index.tsx (for internal use only) ~~ */
 
@@ -101,4 +102,13 @@ export const MenuBase = styled.div`
       background-color: var(--dropdown-background-selected, #eeeeee);
     }
   }
+`;
+
+export const ItemText = styled(Typography.inlineBody)<{ placeHolder?: boolean }>`
+  user-select: none;
+  opacity: ${({ placeHolder }) => (placeHolder ? 0.75 : 1)};
+`;
+
+export const LabelText = styled(Typography.label).attrs({ light: true })`
+  margin-bottom: 0.25rem;
 `;

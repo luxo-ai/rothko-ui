@@ -1,5 +1,4 @@
 import type { Nullable } from '@rothko-ui/utils';
-import clsx from 'clsx';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { phantomInputStyle } from '../../../Library/PhantomInput';
@@ -64,7 +63,6 @@ const SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
       >
         <SearchInput
           light
-          className={clsx({ disabled })}
           disabled={disabled}
           onChange={e => onQueryChange(e.target.value)}
           onClick={onClick}
@@ -73,7 +71,7 @@ const SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
           ref={inputRef}
           tabIndex={0}
           type="text"
-          value={query ?? ''}
+          value={query || ''}
         />
         <SearchButton disabled={disabled || !query} onClick={() => onSubmit()} />
         {children}
@@ -86,16 +84,13 @@ SearchBar.displayName = 'SearchBar';
 
 const SearchForm = styled.form`
   ${styles.searchBarWrapperStyle};
-  position: 'relative';
-  min-height: calc(1.5rem + 2 * 0.125rem + 2 * 0.5rem + 2 * 2px);
+  position: relative;
 `;
 
 const SearchInput = styled.input<Pick<TextProps, 'light'>>`
   ${textStyle}
   ${phantomInputStyle}
-  z-index: 2;
-  width: 100%;
-  padding: 0.5rem 1rem 0.5rem 1rem;
+  ${styles.searchBarInputStyle}
 `;
 
 export default SearchBar;

@@ -5,23 +5,16 @@ import isArray from 'lodash/isArray';
 import isNil from 'lodash/isNil';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { ItemText, LabelText } from '../../Library/Common';
 import { useDebuggerContext } from '../../Library/DebuggerContext';
 import useDropdownMenu from '../../Library/Hooks/useMenu';
+import { PhantomButton } from '../../Library/PhantomButton';
 import { DefaultRenderOption } from '../../Library/RenderOption';
+import { hideChromeBrowserOutline } from '../../Library/Styles';
 import type { FocusHandler, Option, RenderOption, Value } from '../../Library/types';
 import { directionMap } from '../../utils/keyUtils';
-import { PhantomButton } from '../../Library/PhantomButton';
-import { hideBrowserOutline } from '../Typography';
 import { textStyle } from '../Typography/Typography';
-import {
-  ControlButton,
-  DropdownContainerDiv,
-  DropdownMenu,
-  ItemText,
-  LabelText,
-  MakeMoreCommon,
-  TextContainerDiv,
-} from './Common';
+import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } from './Common';
 import type { QueryMatchFn } from './types';
 import useSelect from './useSelect';
 
@@ -256,9 +249,7 @@ function Dropdown<V extends Value, T = undefined>({
           })}
           tabIndex={-1}
         >
-          {!hasValue && (!query || !hasOptions) && (
-            <MakeMoreCommon placeHolder>{placeholder}</MakeMoreCommon>
-          )}
+          {!hasValue && (!query || !hasOptions) && <ItemText placeHolder>{placeholder}</ItemText>}
           {!isNil(value) && isArray(value) && (
             <MultiSelectContainerDiv>
               {value.map(v => {
@@ -283,10 +274,10 @@ function Dropdown<V extends Value, T = undefined>({
             </MultiSelectContainerDiv>
           )}
           {!multiple && !isNil(value) && !isArray(value) && (
-            <MakeMoreCommon>
+            <ItemText>
               {selectedPrefix}
               {optionLookup[value].label}
-            </MakeMoreCommon>
+            </ItemText>
           )}
         </TextContainerDiv>
         {!canClear ? (
@@ -357,7 +348,6 @@ const MultiSelectLabelDiv = styled.div`
   align-items: center;
   padding: 0.0625rem 0.3rem 0.0625rem 0.5rem;
   background-color: var(--dropdown-multiselect-background, transparent);
-  //  background: white;
   border: 1px solid var(--info-500);
   & > p {
     color: var(--info-500) !important;
@@ -366,13 +356,13 @@ const MultiSelectLabelDiv = styled.div`
   cursor: initial;
 `;
 
-const NoResultsText = styled(ItemText)`
+const NoResultsText = styled(ItemText).attrs({ as: 'p' })`
   text-align: center;
   padding: 1rem;
 `;
 
 const PhantomInput = styled.input`
-  ${hideBrowserOutline}
+  ${hideChromeBrowserOutline}
   ${textStyle}
   position: absolute;
   inset: 0;

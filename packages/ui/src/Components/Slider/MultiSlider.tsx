@@ -2,7 +2,7 @@ import type { Nullable } from '@rothko-ui/utils';
 import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import type { RothkoKind } from '../../Theme';
-import Typography from '../Typography';
+import Typography from '../Typography/Typography';
 import type { SliderWidth } from './Common';
 import { SliderContainer, SliderRange, SliderTrack } from './Common';
 import { SliderHandle } from './SliderHandle';

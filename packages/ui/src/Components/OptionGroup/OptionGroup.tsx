@@ -3,13 +3,14 @@ import times from 'lodash/times';
 import React, { useEffect, useMemo, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { phantomButtonStyle } from '../../Library/PhantomButton';
 import Grid from '../../Layout/Grid/Grid';
+import { phantomButtonStyle } from '../../Library/PhantomButton';
 import type { Option, Value } from '../../Library/types';
-import { idkFn } from '../../Theme/theme';
 import type { KindProps, RothkoSize } from '../../Theme';
+import { idkFn } from '../../Theme/theme';
 import type { EmSize, RemSize } from '../../types';
-import Typography, { BODY_FONT_FAMILY } from '../Typography';
+import { BODY_FONT_FAMILY } from '../Typography';
+import Typography from '../Typography/Typography';
 
 type OptionGroupProps<V extends Value> = KindProps & {
   children?: React.ReactNode;

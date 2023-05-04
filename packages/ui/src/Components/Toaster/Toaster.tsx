@@ -4,9 +4,9 @@ import { CloseOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { PhantomButton } from '../../Library/PhantomButton';
-import { idkFn } from '../../Theme/theme';
 import type { KindProps, RothkoKind } from '../../Theme';
-import Typography from '../Typography';
+import { idkFn } from '../../Theme/theme';
+import Typography from '../Typography/Typography';
 import type { ToastDetails } from './types';
 
 type AnimatedStyle = {

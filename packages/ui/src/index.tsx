@@ -1,5 +1,3 @@
-import Typography from './Components/Typography';
-
 export * from './Components';
 export * from './Form';
 export * from './Helpers';
@@ -15,5 +13,3 @@ export {
   enableBodyScroll,
   getStyle,
 } from './utils/domUtils';
-
-export { Typography };

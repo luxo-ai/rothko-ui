@@ -1,7 +1,7 @@
-export * from './Dot';
 export * from './Accordion';
 export * from './BreadCrumbs';
 export * from './Button';
+export * from './Dot';
 export * from './Drawer';
 export * from './Dropdown';
 export * from './Image';
@@ -22,3 +22,4 @@ export * from './Tag';
 export * from './Toaster';
 export * from './Toggle';
 export * from './Tooltip';
+export * from './Typography';

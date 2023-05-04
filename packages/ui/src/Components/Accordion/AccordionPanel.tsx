@@ -5,8 +5,8 @@ import styled, { css } from 'styled-components';
 import uuid from 'uuid';
 import { phantomButtonStyle } from '../../Library/PhantomButton';
 import { unselectableStyle } from '../../Library/Styles';
-import Typography from '../Typography';
 import { getElementFullHeight } from '../../utils/domUtils/dimensions';
+import Typography from '../Typography/Typography';
 import { useAccordion } from './AccordionContext';
 
 type LabelProps = {

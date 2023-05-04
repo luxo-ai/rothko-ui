@@ -1,13 +1,16 @@
-import { Dropdown, Typography } from '@rothko-ui/ui';
+import { Dropdown, Input, Typography } from '@rothko-ui/ui';
 import { useState } from 'react';
 import React from 'react';
 
 const SingleDropdownCard = () => {
+  const [a, setA] = useState('');
   const [selectedValue, setSelectedValue] = useState<number[]>([]);
   return (
     <div className="white-padded-card">
       <Typography.h3 style={{ marginBottom: '1rem' }}>Single Dropdown</Typography.h3>
       <div className="accordion-container">
+        <Input value={a} onChange={v => setA(v.currentTarget.value)} />
+
         <Dropdown
           multiple
           clearable

@@ -4,21 +4,15 @@ import keyboardKey from 'keyboard-key';
 import isNil from 'lodash/isNil';
 import React, { useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
+import { ItemText, LabelText } from '../../Library/Common';
 import { useDebuggerContext } from '../../Library/DebuggerContext';
 import useDropdownMenu from '../../Library/Hooks/useMenu';
 import { DefaultRenderOption } from '../../Library/RenderOption';
 import type { FocusHandler, NestedOption, Option, RenderOption, Value } from '../../Library/types';
 import { directionMap } from '../../utils/keyUtils';
 import BackLinkButton from '../Button/BackLinkButton';
-import Typography from '../Typography';
-import {
-  ControlButton,
-  DropdownContainerDiv,
-  DropdownMenu,
-  ItemText,
-  LabelText,
-  TextContainerDiv,
-} from './Common';
+import Typography from '../Typography/Typography';
+import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } from './Common';
 import type { StackOption } from './useNestedOptions';
 import useNestedOptions from './useNestedOptions';
 

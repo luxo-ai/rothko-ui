@@ -21,7 +21,7 @@ const SearchButtonBase = styled(PhantomButton)`
   width: auto;
 
   padding: 0.5rem;
-  margin: 0.25rem 0.125rem 0.25rem 0;
+  margin: 0.25rem 0.25rem 0.25rem 0;
 
   border-radius: 50%;
 

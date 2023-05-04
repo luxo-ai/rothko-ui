@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { MenuBase } from '../../Library/Common';
-import { baseInputStyle } from '../Input/styles';
-import Typography, { hideBrowserOutline } from '../Typography';
 import { PhantomButton } from '../../Library/PhantomButton';
+import { hideChromeBrowserOutline } from '../../Library/Styles';
+import { baseInputStyle } from '../Input/styles';
 
 export const DropdownContainerDiv = styled.div`
   -webkit-tap-highlight-color: transparent;
   ${baseInputStyle} // causing issues before, this helped
+  background: var(--basic-transparent-100);
 
   position: relative;
   display: flex;
@@ -82,7 +83,7 @@ export const DropdownMenu = styled(MenuBase)`
 
 // replace with just input text instead... if you can (just use textStyle etc)
 export const TextContainerDiv = styled.div`
-  ${hideBrowserOutline}
+  ${hideChromeBrowserOutline}
   font-size: 1rem;
   display: inline-block;
   // left padding of icon + right padding of icon + width of icon
@@ -96,18 +97,4 @@ export const TextContainerDiv = styled.div`
   &.disabled {
     opacity: 0.5;
   }
-`;
-
-export const ItemText = styled(Typography.body)<{ placeHolder?: boolean }>`
-  user-select: none;
-  opacity: ${({ placeHolder }) => (placeHolder ? 0.75 : 1)};
-`;
-
-export const MakeMoreCommon = styled(Typography.inlineBody)<{ placeHolder?: boolean }>`
-  user-select: none;
-  opacity: ${({ placeHolder }) => (placeHolder ? 0.75 : 1)};
-`;
-
-export const LabelText = styled(Typography.label).attrs({ light: true })`
-  margin-bottom: 0.25rem;
 `;

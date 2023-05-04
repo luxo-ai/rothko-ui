@@ -5,9 +5,9 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Grid } from '../../Layout/Grid';
 import { ShadedBackdrop } from '../../Library/Common';
+import { PhantomButton } from '../../Library/PhantomButton';
 import { DomPortal } from '../../Library/Portal';
 import { addEvent, disableBodyScroll, enableBodyScroll, removeEvent } from '../../utils/domUtils';
-import { PhantomButton } from '../../Library/PhantomButton';
 import SearchBar from './SearchBar/SearchBar';
 
 type SearchPopoutProps = {

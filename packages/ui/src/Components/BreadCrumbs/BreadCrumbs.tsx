@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Typography from '../Typography';
-import { textStyle } from '../Typography/Typography';
+import Typography, { textStyle } from '../Typography/Typography';
 
 type BreadCrumbsProps = {
   children: React.ReactNode;

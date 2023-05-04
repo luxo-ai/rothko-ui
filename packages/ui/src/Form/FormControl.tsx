@@ -1,7 +1,7 @@
 import isString from 'lodash/isString';
 import React from 'react';
+import Typography from '../Components/Typography/Typography';
 import type { RothkoKind } from '../Theme/types';
-import Typography from '../Components/Typography';
 
 export type FormControlProps = {
   name: string;

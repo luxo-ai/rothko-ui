@@ -1,12 +1,14 @@
-import { Typography, Search } from '@rothko-ui/ui';
+import { Typography, Search, Input } from '@rothko-ui/ui';
 import React, { useState } from 'react';
 
 const SearchCard = () => {
+  const [a, setA] = useState('');
   const [idk, setIdk] = useState('');
   return (
     <div className="white-padded-card">
       <Typography.h3 style={{ marginBottom: '1rem' }}>Search</Typography.h3>
       <div className="accordion-container">
+        <Input value={a} onChange={v => setA(v.currentTarget.value)} />
         <Search
           initialQuery={idk}
           placeholder={undefined}

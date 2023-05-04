@@ -3,13 +3,12 @@ import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { Container } from '../../Layout';
-import { MenuBase } from '../../Library/Common';
+import { LabelText, MenuBase } from '../../Library/Common';
 import { useDebuggerContext } from '../../Library/DebuggerContext';
 import useDropdownMenu from '../../Library/Hooks/useMenu';
 import { DefaultRenderOption } from '../../Library/RenderOption';
 import type { FocusHandler, Option, RenderOption, Value } from '../../Library/types';
 import { directionMap } from '../../utils/keyUtils';
-import { LabelText } from '../Dropdown/Common';
 import DummySearchBar from './SearchBar/DummySearchBar';
 import SearchBar from './SearchBar/SearchBar';
 import SearchPopout from './SearchPopout';
@@ -212,7 +211,7 @@ function Search<V extends Value, T = undefined>({
   }, [optIdx]);
 
   const formClasses = clsx(className, {
-    error,
+    error: true,
     loading,
     disabled,
     focus,
