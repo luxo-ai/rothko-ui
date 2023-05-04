@@ -93,12 +93,8 @@ const SearchForm = styled.form`
 const SearchInput = styled.input<Pick<TextProps, 'light'>>`
   ${textStyle}
   ${phantomInputStyle}
- // margin: 0;
   z-index: 2;
-
   width: 100%;
-  height: 100%;
-
   padding: 0.5rem 1rem 0.5rem 1rem;
 `;
 

@@ -14,7 +14,7 @@ import { PhantomButton } from '../../Library/PhantomButton';
 import { hideBrowserOutline } from '../Typography';
 import { textStyle } from '../Typography/Typography';
 import {
-  ControlContainer,
+  ControlButton,
   DropdownContainerDiv,
   DropdownMenu,
   ItemText,
@@ -138,7 +138,8 @@ function Dropdown<V extends Value, T = undefined>({
   });
 
   const hasOptions = Boolean(options.length);
-  const canClear = clearable && !isNil(value) && (!isArray(value) || value.length > 0);
+  const hasValue = !isNil(value) && (!isArray(value) || value.length > 0);
+  const canClear = clearable && hasValue && !disabled;
 
   // add these to the menu hook...
   const openDropdownMenu = () => {
@@ -248,10 +249,14 @@ function Dropdown<V extends Value, T = undefined>({
           />
         )}
         <TextContainerDiv
-          className={clsx({ hidden: query?.length, disabled, multiple })}
+          className={clsx({
+            hidden: query?.length && (hasOptions || open),
+            disabled,
+            multiple,
+          })}
           tabIndex={-1}
         >
-          {(isNil(value) || (isArray(value) && !value.length)) && !query && (
+          {!hasValue && (!query || !hasOptions) && (
             <MakeMoreCommon placeHolder>{placeholder}</MakeMoreCommon>
           )}
           {!isNil(value) && isArray(value) && (
@@ -285,16 +290,16 @@ function Dropdown<V extends Value, T = undefined>({
           )}
         </TextContainerDiv>
         {!canClear ? (
-          <ControlContainer className={clsx({ open, disabled })} onClick={toggleMenu}>
+          <ControlButton className={clsx({ open, disabled })} onClick={toggleMenu}>
             <ChevronDownOutline width="1rem" height="1rem" />
-          </ControlContainer>
+          </ControlButton>
         ) : (
-          <ControlContainer
+          <ControlButton
             className={clsx('open', { disabled })}
             onClick={() => onSelectHandler(null)}
           >
             <CloseOutline width="1rem" height="1rem" />
-          </ControlContainer>
+          </ControlButton>
         )}
         {open && (
           <DropdownMenu

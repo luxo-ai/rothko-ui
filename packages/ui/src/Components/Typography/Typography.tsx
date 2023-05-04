@@ -24,6 +24,7 @@ const lightTextStyle = css`
 `;
 
 export const textStyle = css<TextProps>`
+  // use font smoothing to make text more readable
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 

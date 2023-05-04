@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { MenuBase } from '../../Library/Common';
 import { baseInputStyle } from '../Input/styles';
 import Typography, { hideBrowserOutline } from '../Typography';
+import { PhantomButton } from '../../Library/PhantomButton';
 
 export const DropdownContainerDiv = styled.div`
   -webkit-tap-highlight-color: transparent;
@@ -36,8 +37,7 @@ export const DropdownContainerDiv = styled.div`
   }
 `;
 
-export const ControlContainer = styled.div`
-  // position: absolute;
+export const ControlButton = styled(PhantomButton)`
   display: flex;
   align-items: center;
   top: 0.51rem;

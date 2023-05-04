@@ -1,10 +1,10 @@
-import { CloseOutline } from '@rothko-ui/icons';
 import { animated, useTransition } from '@react-spring/web';
+import { CloseOutline } from '@rothko-ui/icons';
 import clsx from 'clsx';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { phantomButtonStyle } from '../../Library/PhantomButton';
 import { ShadedBackdrop } from '../../Library/Common';
+import { phantomButtonStyle } from '../../Library/PhantomButton';
 import { DomPortal } from '../../Library/Portal';
 import {
   BODY_SCROLL_LOCK_IGNORE_ID,
@@ -100,9 +100,8 @@ const BottomPopup: React.FC<PopupProps> = ({ id, onClose, isOpen, className, chi
 };
 
 const PopupContainerDiv = styled.div`
-  border-top-left-radius: 1.5rem;
-  border-top-right-radius: 1.5rem;
-  // background-color: white;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
   background: var(--color-background, #fff);
   padding: 3.25rem 1.5rem 1.5rem 1.5rem;
   position: fixed;
@@ -116,20 +115,6 @@ const PopupContainerDiv = styled.div`
   will-change: transform, opacity, height;
   transition-property: transform;
   transition-timing-function: ease-out;
-
-  /*  
-  &.popup-open-old {
-    height: auto;
-    max-height: 100%;
-
-    -webkit-transform: translateY(0);
-    -moz-transform: translateY(0);
-    -ms-transform: translateY(0);
-    transform: translateY(0);
-
-    overflow: visible;
-  }
-  */
 `;
 
 const AnimatedPopupContainer = animated(PopupContainerDiv);

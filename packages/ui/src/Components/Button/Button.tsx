@@ -134,7 +134,12 @@ const Button: React.FC<ButtonProps> = ({
 type BaseButtonProps = Required<KindProps> & { appearance: ButtonAppearance };
 
 export const buttonStyle = css<BaseButtonProps>`
+  // use font smoothing to make text more readable
+  -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
+
+  // prevent double tap zoom on mobile
+  touch-action: manipulation;
 
   width: 100%;
   background: ${({ appearance, kind }) => (appearance === 'outline' ? 'white' : idkFn(kind))};

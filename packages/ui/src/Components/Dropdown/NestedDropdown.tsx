@@ -12,7 +12,7 @@ import { directionMap } from '../../utils/keyUtils';
 import BackLinkButton from '../Button/BackLinkButton';
 import Typography from '../Typography';
 import {
-  ControlContainer,
+  ControlButton,
   DropdownContainerDiv,
   DropdownMenu,
   ItemText,
@@ -184,9 +184,9 @@ export function NestedDropdown<V extends Value, T = undefined>({
             <ItemText>{pathToCurrentOption.map(o => o.label).join(' / ')}</ItemText>
           )}
         </TextContainerDiv>
-        <ControlContainer className={clsx({ open, disabled })} onClick={toggleMenu}>
+        <ControlButton className={clsx({ open, disabled })} onClick={toggleMenu}>
           <ChevronDownOutline width="1rem" height="1rem" />
-        </ControlContainer>
+        </ControlButton>
         {open && (
           <DropdownMenu
             ref={menuRef}
