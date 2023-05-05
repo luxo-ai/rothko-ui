@@ -1,9 +1,11 @@
-import { Typography, Search, Input } from '@rothko-ui/ui';
+import { Typography, Search, Input, Slider, MultiSlider } from '@rothko-ui/ui';
 import React, { useState } from 'react';
 
 const SearchCard = () => {
   const [a, setA] = useState('');
   const [idk, setIdk] = useState('');
+  const [v, setV] = useState(0);
+  const [b, setB] = useState<[number, number]>([0, 10]);
   return (
     <div className="white-padded-card">
       <Typography.h3 style={{ marginBottom: '1rem' }}>Search</Typography.h3>
@@ -28,6 +30,8 @@ const SearchCard = () => {
           }}
           onSearch={q => setIdk(q)}
         />
+        <Slider value={v} onChange={setV} max={100} />
+        <MultiSlider label="testing" value={b} onChange={v1 => setB(v1)} max={100} />
       </div>
     </div>
   );

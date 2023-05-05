@@ -3,12 +3,12 @@ import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import type { RothkoKind } from '../../Theme';
 import Typography from '../Typography/Typography';
-import type { SliderWidth } from './Common';
-import { SliderContainer, SliderRange, SliderTrack } from './Common';
-import { SliderHandle } from './SliderHandle';
+import { SliderContainerDiv, SliderRangeDiv, SliderTrackDiv } from './Shared';
+import { SliderHandle } from './Shared/SliderHandle';
 import { getOffsetFactory } from './sliderUtils';
+import type { SliderWidth } from './types';
 
-const BUFFER = 3;
+const BUFFER = 1;
 
 export type Range = [number, number];
 
@@ -31,7 +31,7 @@ type MultiSliderProps = {
 const MultiSlider = ({
   className,
   disabled,
-  kind = 'info',
+  kind,
   label,
   max,
   maxWidth = '100%',
@@ -52,7 +52,7 @@ const MultiSlider = ({
   const maxReached = upper >= max;
 
   return (
-    <SliderContainer mw={maxWidth} nw={minWidth ?? maxWidth} className={className}>
+    <SliderContainerDiv $maxWidth={maxWidth} $minWidth={minWidth || maxWidth} className={className}>
       <SliderLegendContainerDiv>
         {label && <Typography.label light>{label}</Typography.label>}
         <Typography.label light>
@@ -61,23 +61,20 @@ const MultiSlider = ({
           {maxReached && orMore ? '+' : ''}
         </Typography.label>
       </SliderLegendContainerDiv>
-      <MultiSliderTrack>
+      <SliderTrackDiv>
         <SliderHandle
-          id="multi-slider-handle-min"
-          className="absolute"
-          ariaLabel="slider handle min value"
+          ariaLabel="slider min value"
+          disabled={disabled}
           kind={kind}
+          max={max}
+          min={min}
+          value={lower}
           onChange={v => {
             if (v + BUFFER >= upper) return;
             onChange([v, upper]);
           }}
-          value={lower}
-          min={min}
-          max={max}
-          disabled={disabled}
         />
-        <MultiSliderRange
-          className="absolute"
+        <SliderRangeDiv
           kind={kind}
           style={{
             left: getOffset(lower),
@@ -85,34 +82,21 @@ const MultiSlider = ({
           }}
         />
         <SliderHandle
-          id="multi-slider-handle-max"
-          className="absolute"
-          ariaLabel="slider handle max value"
+          ariaLabel="slider max value"
+          disabled={disabled}
           kind={kind}
+          max={max}
+          min={min}
+          value={upper}
           onChange={v => {
             if (v - BUFFER <= lower) return;
             onChange([lower, v]);
           }}
-          value={upper}
-          min={min}
-          max={max}
-          disabled={disabled}
         />
-      </MultiSliderTrack>
-    </SliderContainer>
+      </SliderTrackDiv>
+    </SliderContainerDiv>
   );
 };
-
-const MultiSliderRange = styled(SliderRange)`
-  position: absolute;
-`;
-
-const MultiSliderTrack = styled(SliderTrack)`
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-`;
 
 const SliderLegendContainerDiv = styled.div`
   display: flex;

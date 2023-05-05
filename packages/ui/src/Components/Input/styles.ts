@@ -24,7 +24,7 @@ export const baseInputStyle = css`
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  background: var(--basic-transparent-300); // basic-200 // 300
+  background: var(--basic-transparent-300);
 
   font-family: ${BODY_FONT_FAMILY.regular};
   display: inline-block;

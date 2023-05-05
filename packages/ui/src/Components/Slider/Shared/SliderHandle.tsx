@@ -2,9 +2,8 @@ import type { Nullable } from '@rothko-ui/utils';
 import { useIsMounted } from '@rothko-ui/utils';
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { idkFn } from '../../Theme/theme';
-import type { KindProps, RothkoKind } from '../../Theme';
-import type { DragDelta, DragEvent } from '../../utils/domUtils';
+import type { KindProps, RothkoKind } from '../../../Theme';
+import type { DragDelta, DragEvent } from '../../../utils/domUtils';
 import {
   addEvent,
   calculateXYDragPosn,
@@ -13,8 +12,9 @@ import {
   isMainClick,
   isMouseEvent,
   removeEvent,
-} from '../../utils/domUtils';
-import { getOffsetFactory } from './sliderUtils';
+} from '../../../utils/domUtils';
+import { getOffsetFactory } from '../sliderUtils';
+import { hideChromeBrowserOutline } from '../../../Library/Styles';
 
 type DraggableEvents = {
   start: string;
@@ -61,7 +61,7 @@ export const SliderHandle = ({
   min = 0,
   max,
   ariaLabel,
-  kind = 'primary',
+  kind,
   onDrag,
   onMouseDown,
   onChange,
@@ -255,9 +255,8 @@ export const SliderHandle = ({
   );
 };
 
-const HandleButton = styled.button.attrs({ type: 'button' })<
-  Required<KindProps> & { vertical?: boolean }
->`
+const HandleButton = styled.button.attrs({ type: 'button' })<KindProps & { vertical?: boolean }>`
+  ${hideChromeBrowserOutline}
   -webkit-tap-highlight-color: transparent;
   position: absolute;
   // https://stackoverflow.com/questions/30552307/ios-safari-buttons-not-perfect-circles
@@ -265,14 +264,14 @@ const HandleButton = styled.button.attrs({ type: 'button' })<
   width: 1.5rem;
   height: 1.5rem;
   transform: ${({ vertical }) => (vertical ? `translate(0%, -50%)` : `translate(-50%, 0%)`)};
-  background-color: white;
+  background-color: var(--basic-200, #fff);
   transition-property: border;
   transition-duration: 0.2s;
   // box-shadow: 0 2px 6px 0 rgb(101 110 123 / 20%);
   border-radius: 50%;
   border-style: solid;
-  border-width: 3px;
-  border-color: black; // ${idkFn('basic')}; // basic 500
+  border-width: 2px;
+  border-color: var(--basic-400, #000);
   overflow: visible;
   touch-action: ${({ vertical }) => (vertical ? `pan-y` : `pan-x`)};
   z-index: 3;
@@ -282,7 +281,8 @@ const HandleButton = styled.button.attrs({ type: 'button' })<
     &:hover,
     &:active,
     &.active {
-      border-color: ${({ kind }) => idkFn(kind)};
+      border-color: ${({ kind }) =>
+        kind ? `var(--color-${kind}-500, #000)` : `var(--basic-200, #fff)`};
     }
   }
   :disabled {
