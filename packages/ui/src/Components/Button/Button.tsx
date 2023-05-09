@@ -2,10 +2,9 @@ import clsx from 'clsx';
 import React, { useEffect, useRef, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import InlineSpinnerLoader from '../Loader/InlineSpinnerLoader';
-import { idkFn } from '../../Theme/theme';
 import type { KindProps, RothkoKind, RothkoSize } from '../../Theme';
-import { BODY_FONT_FAMILY } from '../Typography';
+import { idkFn } from '../../Theme/theme';
+import InlineSpinnerLoader from '../Loader/InlineSpinnerLoader';
 
 type ButtonAppearance = 'filled' | 'outline';
 
@@ -143,7 +142,7 @@ export const buttonStyle = css<BaseButtonProps>`
 
   width: 100%;
   background: ${({ appearance, kind }) => (appearance === 'outline' ? 'white' : idkFn(kind))};
-  font-family: ${BODY_FONT_FAMILY.regular};
+  font-family: var(--rothko-typography-body-regular);
   color: ${({ appearance, kind }) =>
     appearance === 'outline' ? idkFn(kind) : `var(--rothko-button-${kind}-color)`};
 

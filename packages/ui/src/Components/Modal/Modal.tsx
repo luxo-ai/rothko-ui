@@ -5,19 +5,18 @@ import keyboardKey from 'keyboard-key';
 import React, { useEffect, useRef } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { phantomButtonStyle } from '../../Library/PhantomButton';
 import { ShadedBackdrop } from '../../Library/Common';
+import { phantomButtonStyle } from '../../Library/PhantomButton';
 import { DomPortal } from '../../Library/Portal';
 import type { RothkoSize } from '../../Theme';
-import { BODY_FONT_FAMILY } from '../Typography';
-import Typography from '../Typography/Typography';
 import {
-  addEvent,
   BODY_SCROLL_LOCK_IGNORE_ID,
+  addEvent,
   disableBodyScroll,
   enableBodyScroll,
   removeEvent,
 } from '../../utils/domUtils';
+import Typography from '../Typography/Typography';
 
 const bodyStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
@@ -47,7 +46,7 @@ const headerStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
     margin: 0 0 1.125rem 0;
     line-height: 1.25rem;
     font-size: 1rem;
-    font-family: ${BODY_FONT_FAMILY.bold};
+    font-family: var(--rothko-typography-body-bold);
     font-weight: bold;
   `,
   s: css`

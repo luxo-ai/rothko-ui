@@ -1,6 +1,5 @@
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import { css } from 'styled-components';
-import { BODY_FONT_FAMILY } from '../Typography';
 import type { InputSize } from './types';
 
 const sizeMap: Record<InputSize, FlattenSimpleInterpolation> = {
@@ -26,7 +25,7 @@ export const baseInputStyle = css`
   width: 100%;
   background: var(--rothko-basic-transparent-300);
 
-  font-family: ${BODY_FONT_FAMILY.regular};
+  font-family: var(--rothko-typography-body-regular);
   color: var(--rothko-color, #000);
   display: inline-block;
   box-sizing: border-box;

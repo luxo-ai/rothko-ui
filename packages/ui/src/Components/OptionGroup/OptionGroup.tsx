@@ -9,7 +9,6 @@ import type { Option, Value } from '../../Library/types';
 import type { KindProps, RothkoSize } from '../../Theme';
 import { idkFn } from '../../Theme/theme';
 import type { EmSize, RemSize } from '../../types';
-import { BODY_FONT_FAMILY } from '../Typography';
 import Typography from '../Typography/Typography';
 
 type OptionGroupProps<V extends Value> = KindProps & {
@@ -136,7 +135,7 @@ const OptionGroupContainer = styled.div`
 const OptionButton = styled.button<Required<KindProps>>`
   -webkit-tap-highlight-color: transparent;
   ${phantomButtonStyle}
-  font-family: ${BODY_FONT_FAMILY.regular};
+  font-family: var(--rothko-typography-body-regular);
   display: inline-flex;
   align-items: center;
   justify-content: center;

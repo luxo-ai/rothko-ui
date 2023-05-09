@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../../Library/PhantomButton';
 import type { RothkoKind } from '../../Theme';
-import { BODY_FONT_FAMILY, HEADER_FONT_FAMILY } from './constants';
 
 export type TextProps = {
   light?: boolean;
@@ -11,16 +10,16 @@ export type TextProps = {
 };
 
 const boldTextStyle = css`
-  font-family: ${BODY_FONT_FAMILY.bold};
+  font-family: var(--rothko-typography-body-bold);
   font-weight: bold;
 `;
 
 const italicTextStyle = css`
-  font-family: ${BODY_FONT_FAMILY.italic};
+  font-family: var(--rothko-typography-body-italic);
 `;
 
 const lightTextStyle = css`
-  font-family: ${BODY_FONT_FAMILY.light};
+  font-family: var(--rothko-typography-body-light);
 `;
 
 export const textStyle = css<TextProps>`
@@ -30,7 +29,7 @@ export const textStyle = css<TextProps>`
 
   margin: 0.125rem 0;
 
-  font-family: ${BODY_FONT_FAMILY.regular};
+  font-family: var(--rothko-typography-body-regular);
   font-size: 1rem;
   line-height: 1.5rem;
   color: ${({ kind }) => (kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)')};
@@ -40,7 +39,7 @@ export const textStyle = css<TextProps>`
   }
 
   & > i {
-    font-family: ${BODY_FONT_FAMILY.italic};
+    ${italicTextStyle}
   }
 
   ${({ light }) => {
@@ -58,7 +57,7 @@ export const textStyle = css<TextProps>`
 
 const headerStyle = css<TextProps>`
   ${textStyle}
-  font-family: ${HEADER_FONT_FAMILY.regular};
+  font-family: var(--rothko-typography-header);
   font-weight: 700;
 `;
 
@@ -109,14 +108,14 @@ const bodySmall = styled(body)`
 `;
 
 const title = styled(h1)`
-  font-family: ${BODY_FONT_FAMILY.bold};
+  font-family: var(--rothko-typography-body-bold);
   font-size: 3.5rem;
   line-height: 4rem;
   font-weight: 700;
 `;
 
 const titleBig = styled(h1)`
-  font-family: ${BODY_FONT_FAMILY.bold};
+  font-family: var(--rothko-typography-body-bold);
   font-size: clamp(3.8rem, 8vw, 6rem);
   line-height: calc(100% + 0.5rem);
   letter-spacing: -0.03rem;
@@ -139,7 +138,7 @@ const labelStyle = css<TextProps>`
 
 const label = styled(body)`
   ${labelStyle}
-  font-family: ${BODY_FONT_FAMILY.bold};
+  font-family: var(--rothko-typography-body-bold);
   font-size: 0.75rem;
 `;
 
