@@ -1,2 +1,3 @@
-export * from './useIsMounted';
-export * from './useUploadFiles';
+import useIsMounted from './useIsMounted';
+
+export { useIsMounted };

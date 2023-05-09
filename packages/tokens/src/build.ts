@@ -1,17 +1,16 @@
-import fs from 'fs';
-import type { Config as StyleConfig, Formatter } from 'style-dictionary';
+/* eslint-disable no-console */
+import type { Formatter, Config as StyleConfig } from 'style-dictionary';
 import styledDictionary from 'style-dictionary';
 import { pathToCssVariable } from './utils';
 
 const VARIABLE_PREFIX = 'rothko';
-const TEMP_DIR = 'tmp';
-const OUT_DIR = 'build';
+const OUT_DIRECTORY = 'build';
 
 const generateThemeStyleDictionaryConfig = (theme: string): StyleConfig => ({
   source: [`tokens/themes/${theme}/*.json`],
   platforms: {
     web: {
-      buildPath: `${OUT_DIR}/`,
+      buildPath: `${OUT_DIRECTORY}/`,
       transformGroup: 'css',
       files: [
         {
@@ -28,7 +27,7 @@ const generatePlatformStyleDictionaryConfig = (): StyleConfig => ({
   source: [`tokens/platforms/**/*.json`],
   platforms: {
     web: {
-      buildPath: `${OUT_DIR}/`,
+      buildPath: `${OUT_DIRECTORY}/`,
       files: [
         {
           destination: 'global-variables.css',
@@ -69,20 +68,6 @@ styledDictionary.registerFormat({
   formatter: rothkoCssRootFormatter,
 });
 
-const readContents = (directory: string, fileNames: string[]) => {
-  const contents: string[] = [];
-
-  for (const fileName of fileNames) {
-    const path = `${directory}/${fileName}`;
-    if (fs.existsSync(path)) {
-      const fileContents = fs.readFileSync(path, 'utf8');
-      contents.push(fileContents);
-    }
-  }
-
-  return contents.join('\n');
-};
-
 const build = async () => {
   ['light', 'dark'].map(theme => {
     console.log('\n==============================================');
@@ -95,21 +80,6 @@ const build = async () => {
   console.log(`\nCreating typography`);
   styledDictionary.extend(generatePlatformStyleDictionaryConfig()).buildPlatform('web');
 
-  /*
-  if (!fs.existsSync(OUT_DIR)) {
-    console.log('Creating output dir');
-    fs.mkdirSync(OUT_DIR);
-  }
-
-  console.log('Merging styles into one file');
-  fs.writeFileSync(
-    `${OUT_DIR}/index.css`,
-    readContents(
-      TEMP_DIR,
-      ['light', 'dark'].map(theme => `${theme}.css`)
-    )
-  );
-*/
   console.log('\n==============================================');
   console.log('\nBuild completed!');
 };
