@@ -145,7 +145,7 @@ export const buttonStyle = css<BaseButtonProps>`
   background: ${({ appearance, kind }) => (appearance === 'outline' ? 'white' : idkFn(kind))};
   font-family: ${BODY_FONT_FAMILY.regular};
   color: ${({ appearance, kind }) =>
-    appearance === 'outline' ? idkFn(kind) : `var(--button-${kind}-color)`};
+    appearance === 'outline' ? idkFn(kind) : `var(--rothko-button-${kind}-color)`};
 
   display: inline-flex;
   align-items: center;

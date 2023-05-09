@@ -7,7 +7,9 @@ const SliderRangeDiv = styled.div<KindProps>`
   margin: 0;
   border-radius: 2px;
   background: ${({ kind }) =>
-    kind ? `var(--color-${kind}-500, --color-background, #000)` : `var(--color-background, #000)`};
+    kind
+      ? `var(--rothko-${kind}-500, --color-background, #000)`
+      : `var(--rothko-color-background, #000)`};
   overflow: hidden;
   user-select: none;
   z-index: 2;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { baseInputStyle } from '../Components/Input/styles';
-import { Typography } from '../Components';
+import Typography from '../Components/Typography/Typography';
 
 /* ATTN: ~~ DO NOT EXPORT IN index.tsx (for internal use only) ~~ */
 
@@ -39,13 +39,13 @@ export const DropdownContainerDiv = styled.div`
   // placeholder text (body) line-height + text margin + top padding + bottom padding + top border + bottom border
   min-height: calc(1.5rem + 2 * 0.125rem + 2 * 0.5rem + 2 * 2px);
 
-  border: 0.125rem solid var(--color-border, #000);
+  border: 0.125rem solid var(--rothko-color-border, #000);
 
   cursor: pointer;
 
   &.disabled {
     cursor: not-allowed;
-    border-color: var(--basic-transparent-500);
+    border-color: var(--rothko-basic-transparent-500);
   }
 
   &.empty {
@@ -63,7 +63,7 @@ export const MenuBase = styled.div`
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 
-  background-color: var(--color-background, #fff);
+  background-color: var(--rothko-dropdown-background, #fff);
 
   &:not(.pop-out) {
     position: absolute;
@@ -99,7 +99,7 @@ export const MenuBase = styled.div`
     &:hover,
     &:focus,
     &.selected {
-      background-color: var(--dropdown-background-selected, #eeeeee);
+      background-color: var(--rothko-dropdown-option-background-selected, #eee);
     }
   }
 `;

@@ -18,6 +18,7 @@
     "add:tokens": "lerna add $1 --scope=@rothko-ui/tokens",
     "bootstrap": "lerna bootstrap",
     "prebuild": "lerna bootstrap",
+    "build:tokens": "lerna --scope=@rothko-ui/tokens run build --stream",
     "build:icons": "lerna --scope=@rothko-ui/icons run build --stream",
     "build:utils": "lerna --scope=@rothko-ui/utils run build --stream",
     "build:shared": "lerna --scope='{@rothko-ui/ui,@rothko-ui/utils,@rothko-ui/icons}' run build --stream",

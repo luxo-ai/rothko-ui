@@ -3,6 +3,7 @@ import type { Config as StyleConfig } from 'style-dictionary';
 import styledDictionary from 'style-dictionary';
 import { pathToCssVariable } from './utils';
 
+const VARIABLE_PREFIX = 'rothko';
 const TEMP_DIR = 'tmp';
 const OUT_DIR = 'build';
 const THEMES = ['dark', 'light'] as const;
@@ -15,7 +16,7 @@ const generateStyleDictionaryConfig = ({
   theme,
   dir,
 }: GenerateStyledDictionaryConfigArgs): StyleConfig => ({
-  source: ['tokens/themes/light/**/*.json'],
+  source: [`tokens/themes/${theme}/**/*.json`],
   platforms: {
     web: {
       buildPath: `${dir}/`,
@@ -37,7 +38,7 @@ styledDictionary.registerFormat({
     // const header = styledDictionary.formatHelpers.fileHeader({ file });
     const cssVariables = dictionary.allProperties.map(properties => {
       const [, ...path] = properties.path;
-      return `${pathToCssVariable(path)}: ${properties.value};`;
+      return `${pathToCssVariable(path, VARIABLE_PREFIX)}: ${properties.value};`;
     });
     return `:root .${theme} {\n\t${cssVariables.join('\n\t')}\n}\n`;
   },

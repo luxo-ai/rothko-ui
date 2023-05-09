@@ -33,7 +33,8 @@ export const textStyle = css<TextProps>`
   font-family: ${BODY_FONT_FAMILY.regular};
   font-size: 1rem;
   line-height: 1.5rem;
-  color: ${({ kind }) => (kind ? `var(--${kind}-500, #000)` : 'var(--color-text, #000)')};
+  color: ${({ kind }) =>
+    kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color-text, #000)'};
 
   & > strong {
     ${boldTextStyle}
@@ -134,7 +135,7 @@ const labelStyle = css<TextProps>`
   font-weight: bold;
   letter-spacing: 0.0625rem;
   line-height: 0.9375rem;
-  // color: var(--basic-700);
+  // color: var(--rothko-basic-700);
 `;
 
 const label = styled(body)`
@@ -170,7 +171,7 @@ const linkStyle = css<LinkProps>`
   }
 
   :disabled {
-    color: var(--basic-500);
+    color: var(--rothko-basic-500);
   }
 `;
 

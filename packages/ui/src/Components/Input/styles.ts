@@ -27,6 +27,7 @@ export const baseInputStyle = css`
   background: var(--basic-transparent-300);
 
   font-family: ${BODY_FONT_FAMILY.regular};
+  color: var(--color-text, #000);
   display: inline-block;
   box-sizing: border-box;
   line-height: 20px;

@@ -27,9 +27,9 @@ export const idkFn = (
 ) => {
   const generateVarWithDefault = (k: RothkoKind, num = 500) => {
     if (opts?.default) {
-      return `var(--${k}-${num}, ${opts.default})`;
+      return `var(--rothko-${k}-${num}, ${opts.default})`;
     }
-    return `var(--${k}-${num})`;
+    return `var(--rothko-${k}-${num})`;
   };
 
   if (!ok) {
@@ -41,7 +41,7 @@ export const idkFn = (
     if (kind === 'primary') return '#fff';
     return 'black';
   }
-  return `var(--${kind}-${idk[ok]})`;
+  return `var(--rothko-${kind}-${idk[ok]})`;
 };
 
 const kindToStyle: Record<RothkoKind, FlattenSimpleInterpolation> = {

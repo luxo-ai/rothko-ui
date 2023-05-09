@@ -73,7 +73,7 @@ const OuterToggleDiv = styled.div<OuterToogleDivProp>`
   width: 3rem;
   height: calc(1.5rem + 2px);
 
-  border: 1px solid var(--basic-300);
+  border: 1px solid var(--rothko-basic-300);
   border-radius: 50vmin;
 
   background-color: ${({ toggled, kind }) =>

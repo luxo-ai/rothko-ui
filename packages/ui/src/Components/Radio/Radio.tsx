@@ -47,7 +47,7 @@ const RadioContainerDiv = styled.div<{ $disabled?: boolean }>`
 
 const RadioOutlineDiv = styled.div`
   -webkit-tap-highlight-color: transparent;
-  background-color: var(--basic-300);
+  background-color: var(--rothko-basic-300);
   width: 1.25rem;
   height: 1.25rem;
   border-radius: calc(1.25rem / 2);
@@ -56,7 +56,7 @@ const RadioOutlineDiv = styled.div`
 
 const RadioInnerDiv = styled.div<KindProps>`
   -webkit-tap-highlight-color: transparent;
-  background-color: var(--basic-200);
+  background-color: var(--rothko-basic-200);
 
   width: 100%;
   height: 100%;
@@ -68,7 +68,7 @@ const RadioInnerDiv = styled.div<KindProps>`
   transition: background-color 0.1s ease;
 
   &.selected {
-    background-color: ${({ kind = 'info' }) => `var(--${kind}-500)`};
+    background-color: ${({ kind = 'info' }) => `var(--rothko-${kind}-500)`};
   }
 `;
 

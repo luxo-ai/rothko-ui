@@ -29,7 +29,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
 Alert.displayName = 'Alert';
 
 const AlertContainerDiv = styled.div<KindProps>`
-  background-color: ${({ kind = 'danger' }) => `var(--${kind}-transparent-300)`};
+  background-color: ${({ kind = 'danger' }) => `var(--rothko-${kind}-transparent-300)`};
   padding: 1rem 1.25rem;
   font-size: 1rem;
 `;

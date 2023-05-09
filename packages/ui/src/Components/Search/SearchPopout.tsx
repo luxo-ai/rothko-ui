@@ -95,13 +95,13 @@ const HeaderContainerDiv = styled.div`
 
 const SearchBarContainerDiv = styled.div`
   padding: 0 1rem 1rem 1rem;
-  border-bottom: 1px solid var(--basic-500);
+  border-bottom: 1px solid var(--rothko-basic-500);
 `;
 
 const FullScreenContainerDiv = styled.div`
   z-index: 999;
 
-  background: var(--color-background, #fff);
+  background: var(--rothko-color-background, #fff);
   margin: 2rem auto;
   //  height: calc(100% - 2 * 2rem - 2 * 1.5rem);
   display: block;

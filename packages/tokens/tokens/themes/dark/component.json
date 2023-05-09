@@ -4,6 +4,38 @@
       "border": { "value": "#FFF" },
       "background": { "value": "#141414" },
       "text": { "value": "#FFF" }
+    },
+    "slider": {
+      "handle": {
+        "border": { "value": "#000" },
+        "background": { "value": "#FFF" }
+      },
+      "range": {
+        "background": { "value": "#FFF" }
+      },
+      "track": {
+        "background": { "value": "#FFF" }
+      }
+    },
+    "dropdown": {
+      "background": { "value": "#141414" },
+      "multiselect": {
+        "text": { "value": "var(--rothko-info-500, #000)" },
+        "background": { "value": "#A0A0A0" }
+      },
+      "option": {
+        "background": {
+          "selected": { "value": "#3B3B3B" }
+        }
+      }
+    },
+    "search": {
+      "background": { "value": "#141414" },
+      "option": {
+        "background": {
+          "selected": { "value": "#3B3B3B" }
+        }
+      }
     }
   }
 }

@@ -100,7 +100,7 @@ const Drawer = ({ children, id, className, style: styleProp = {} }: DrawerProps)
 const AnimatedDrawerContainerDiv = animated(styled.div`
   position: fixed;
   inset: 0 auto 0 0;
-  background: var(--color-background, #fff);
+  background: var(--rothko-color-background, #fff);
 
   padding: 1.5rem 1.5rem;
 

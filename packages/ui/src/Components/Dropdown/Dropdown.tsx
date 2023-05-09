@@ -17,6 +17,7 @@ import { textStyle } from '../Typography/Typography';
 import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } from './Shared';
 import type { QueryMatchFn } from './types';
 import useSelect from './useSelect';
+import Typography from '../Typography/Typography';
 
 type DropdownProps<V extends Value, T> = {
   /** Current value of dropdown or value array if multiple */
@@ -256,7 +257,7 @@ function Dropdown<V extends Value, T = undefined>({
                 const opt = optionLookup[v];
                 return (
                   <MultiSelectLabelDiv tabIndex={-1} key={opt.id}>
-                    <RenderOpt option={opt} />
+                    <MultiSelectItemText>{opt.label}</MultiSelectItemText>
                     <PhantomButton
                       className="dflx"
                       type="button"
@@ -266,7 +267,11 @@ function Dropdown<V extends Value, T = undefined>({
                         containerRef.current?.focus();
                       }}
                     >
-                      <CloseOutline fill="var(--info-500)" width={16} height={16} />
+                      <CloseOutline
+                        fill="var(--rothko-dropdown-multiselect-text, #000)"
+                        width={16}
+                        height={16}
+                      />
                     </PhantomButton>
                   </MultiSelectLabelDiv>
                 );
@@ -349,15 +354,17 @@ const MultiSelectLabelDiv = styled.div`
 
   padding: 0.0625rem 0.3rem 0.0625rem 0.5rem;
 
-  background-color: var(--dropdown-multiselect-background, transparent);
-  border: 1px solid var(--info-500);
-
-  & > p {
-    color: var(--info-500) !important;
-  }
+  background: var(--rothko-dropdown-multiselect-background, #fff);
+  border: 1px solid var(--rothko-dropdown-multiselect-text, #000);
 
   border-radius: 3.25rem;
   cursor: initial;
+`;
+
+const MultiSelectItemText = styled(Typography.bodySmall)`
+  margin: 0;
+  user-select: none;
+  color: var(--rothko-dropdown-multiselect-text, #000);
 `;
 
 const NoResultsText = styled(ItemText).attrs({ as: 'p' })`
