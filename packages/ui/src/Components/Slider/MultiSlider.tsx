@@ -26,6 +26,7 @@ type MultiSliderProps = {
   postfix?: string;
   precision?: number;
   value?: Nullable<Range>;
+  showRange?: boolean;
 };
 
 const MultiSlider = ({
@@ -41,6 +42,7 @@ const MultiSlider = ({
   orMore,
   postfix,
   precision = 0,
+  showRange,
   value,
 }: MultiSliderProps) => {
   const getOffset = useCallback(getOffsetFactory({ min, max }), [min, max]);
@@ -55,11 +57,13 @@ const MultiSlider = ({
     <SliderContainerDiv $maxWidth={maxWidth} $minWidth={minWidth || maxWidth} className={className}>
       <SliderLegendContainerDiv>
         {label && <Typography.label light>{label}</Typography.label>}
-        <Typography.label light>
-          {lower.toFixed(precision)} - {upper.toFixed(precision)}
-          {postfix ?? ''}
-          {maxReached && orMore ? '+' : ''}
-        </Typography.label>
+        {showRange && (
+          <Typography.label light>
+            {lower.toFixed(precision)} - {upper.toFixed(precision)}
+            {postfix ?? ''}
+            {maxReached && orMore ? '+' : ''}
+          </Typography.label>
+        )}
       </SliderLegendContainerDiv>
       <SliderTrackDiv>
         <SliderHandle

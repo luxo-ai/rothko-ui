@@ -22,6 +22,7 @@ type SliderProps = {
   postfix?: string;
   precision?: number;
   value?: Nullable<number>;
+  showValue?: boolean;
 };
 
 const Slider = ({
@@ -37,6 +38,7 @@ const Slider = ({
   orMore,
   postfix,
   precision = 0,
+  showValue,
   value,
 }: SliderProps) => {
   const getOffset = useCallback(getOffsetFactory({ min, max }), [min, max]);
@@ -51,11 +53,13 @@ const Slider = ({
     <SliderContainerDiv $maxWidth={maxWidth} $minWidth={minWidth || maxWidth} className={className}>
       <SliderLegendContainerDiv>
         {label && <Typography.label light>{label}</Typography.label>}
-        <Typography.label light>
-          {localVal.toFixed(precision)}
-          {postfix ?? ''}
-          {maxReached && orMore ? '+' : ''}
-        </Typography.label>
+        {showValue && (
+          <Typography.label light>
+            {localVal.toFixed(precision)}
+            {postfix ?? ''}
+            {maxReached && orMore ? '+' : ''}
+          </Typography.label>
+        )}
       </SliderLegendContainerDiv>
       <SliderTrackDiv>
         <SliderHandle

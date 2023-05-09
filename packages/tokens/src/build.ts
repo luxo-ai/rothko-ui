@@ -1,47 +1,72 @@
 import fs from 'fs';
-import type { Config as StyleConfig } from 'style-dictionary';
+import type { Config as StyleConfig, Formatter } from 'style-dictionary';
 import styledDictionary from 'style-dictionary';
 import { pathToCssVariable } from './utils';
 
 const VARIABLE_PREFIX = 'rothko';
 const TEMP_DIR = 'tmp';
 const OUT_DIR = 'build';
-const THEMES = ['dark', 'light'] as const;
 
-type GenerateStyledDictionaryConfigArgs = {
-  theme: string;
-  dir: string;
-};
-const generateStyleDictionaryConfig = ({
-  theme,
-  dir,
-}: GenerateStyledDictionaryConfigArgs): StyleConfig => ({
-  source: [`tokens/themes/${theme}/**/*.json`],
+const generateThemeStyleDictionaryConfig = (theme: string): StyleConfig => ({
+  source: [`tokens/themes/${theme}/*.json`],
   platforms: {
     web: {
-      buildPath: `${dir}/`,
+      buildPath: `${OUT_DIR}/`,
+      transformGroup: 'css',
       files: [
         {
-          destination: `${theme}.css`,
+          destination: `${theme}-variables.css`,
           format: 'css/variables-themed',
-          options: { theme },
+          options: { className: theme },
         },
       ],
     },
   },
 });
 
+const generatePlatformStyleDictionaryConfig = (): StyleConfig => ({
+  source: [`tokens/platforms/**/*.json`],
+  platforms: {
+    web: {
+      buildPath: `${OUT_DIR}/`,
+      files: [
+        {
+          destination: 'global-variables.css',
+          format: 'css/variables',
+        },
+      ],
+    },
+  },
+});
+
+const rothkoCssRootFormatter: Formatter = ({ dictionary, options, file }) => {
+  const header = styledDictionary.formatHelpers.fileHeader({ file });
+  const { className } = options;
+
+  const cssVariables = dictionary.allProperties.map(properties => {
+    const [, ...path] = properties.path;
+    return `${pathToCssVariable(path, VARIABLE_PREFIX)}: ${properties.value};`;
+  });
+
+  const styleClassName = className ? `:root .${className}` : ':root';
+  const styleContent = `  ${[...cssVariables].join('\n  ')}`;
+
+  return `${header}${styleClassName} {\n${styleContent}\n}`;
+};
+
 styledDictionary.registerFormat({
   name: 'css/variables-themed',
-  formatter: function ({ dictionary, options }) {
-    const { theme } = options;
-    // const header = styledDictionary.formatHelpers.fileHeader({ file });
-    const cssVariables = dictionary.allProperties.map(properties => {
-      const [, ...path] = properties.path;
-      return `${pathToCssVariable(path, VARIABLE_PREFIX)}: ${properties.value};`;
-    });
-    return `:root .${theme} {\n\t${cssVariables.join('\n\t')}\n}\n`;
+  formatter: function (args) {
+    const themedVariablesFormat = rothkoCssRootFormatter(args);
+    const fill = 'fill: var(--rothko-svg-fill, #000)';
+    const className = args.options.className ? `:root .${args.options.className}` : ':root';
+    return `${themedVariablesFormat}\n\n${className} {\n  ${fill}\n}`;
   },
+});
+
+styledDictionary.registerFormat({
+  name: 'css/variables',
+  formatter: rothkoCssRootFormatter,
 });
 
 const readContents = (directory: string, fileNames: string[]) => {
@@ -59,18 +84,18 @@ const readContents = (directory: string, fileNames: string[]) => {
 };
 
 const build = async () => {
-  THEMES.map(theme => {
+  ['light', 'dark'].map(theme => {
     console.log('\n==============================================');
     console.log(`\nCreating theme - ${theme}`);
-
-    const StyleDictionary = styledDictionary.extend(
-      generateStyleDictionaryConfig({ theme, dir: TEMP_DIR })
-    );
-    StyleDictionary.buildPlatform('web');
-
+    styledDictionary.extend(generateThemeStyleDictionaryConfig(theme)).buildPlatform('web');
     console.log(`\nFinish theme - ${theme}`);
   });
 
+  console.log('\n==============================================');
+  console.log(`\nCreating typography`);
+  styledDictionary.extend(generatePlatformStyleDictionaryConfig()).buildPlatform('web');
+
+  /*
   if (!fs.existsSync(OUT_DIR)) {
     console.log('Creating output dir');
     fs.mkdirSync(OUT_DIR);
@@ -81,10 +106,10 @@ const build = async () => {
     `${OUT_DIR}/index.css`,
     readContents(
       TEMP_DIR,
-      THEMES.map(theme => `${theme}.css`)
+      ['light', 'dark'].map(theme => `${theme}.css`)
     )
   );
-
+*/
   console.log('\n==============================================');
   console.log('\nBuild completed!');
 };

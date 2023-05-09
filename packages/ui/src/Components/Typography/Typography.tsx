@@ -33,8 +33,7 @@ export const textStyle = css<TextProps>`
   font-family: ${BODY_FONT_FAMILY.regular};
   font-size: 1rem;
   line-height: 1.5rem;
-  color: ${({ kind }) =>
-    kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color-text, #000)'};
+  color: ${({ kind }) => (kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)')};
 
   & > strong {
     ${boldTextStyle}

@@ -1,17 +1,21 @@
 {
+  "base": {
+    "background": { "value": "#141414" },
+    "border": { "value": "#FFF" },
+    "color": { "value": "#FFF" },
+    "svg": {
+      "fill": { "value": "{base.color}" },
+      "stroke": { "value": "{base.color}" }
+    }
+  },
   "component": {
-    "color": {
-      "border": { "value": "#FFF" },
-      "background": { "value": "#141414" },
-      "text": { "value": "#FFF" }
-    },
     "slider": {
       "handle": {
-        "border": { "value": "#000" },
-        "background": { "value": "#FFF" }
+        "border": { "value": "#6b6b6b" },
+        "background": { "value": "#2D3035" }
       },
       "range": {
-        "background": { "value": "#FFF" }
+        "background": { "value": "#505e9d" }
       },
       "track": {
         "background": { "value": "#FFF" }
@@ -20,7 +24,7 @@
     "dropdown": {
       "background": { "value": "#141414" },
       "multiselect": {
-        "text": { "value": "var(--rothko-info-500, #000)" },
+        "text": { "value": "{semanticColor.info.500}" },
         "background": { "value": "#A0A0A0" }
       },
       "option": {

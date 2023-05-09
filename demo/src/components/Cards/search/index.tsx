@@ -30,7 +30,7 @@ const SearchCard = () => {
           }}
           onSearch={q => setIdk(q)}
         />
-        <Slider value={v} onChange={setV} max={100} />
+        <Slider kind="warning" value={v} onChange={setV} max={100} />
         <MultiSlider label="testing" value={b} onChange={v1 => setB(v1)} max={100} />
       </div>
     </div>

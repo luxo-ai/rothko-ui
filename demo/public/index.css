@@ -20,6 +20,13 @@
   font-display: swap;
 }
 
+:root .dark {
+  --demo-background: #000;
+}
+:root .light {
+  --demo-background: #fff;
+}
+
 body {
   margin: 0;
   font-family: 'LabGrotesque-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',

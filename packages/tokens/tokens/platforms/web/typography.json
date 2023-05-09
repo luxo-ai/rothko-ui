@@ -1,0 +1,11 @@
+{
+  "font": {
+    "body": {
+      "bold": { "value": "'LabGrotesque-Bold'" },
+      "italic": { "value": "'LabGrotesque-Italic'" },
+      "light": { "value": "'LabGrotesque-Light'" },
+      "regular": { "value": "'LabGrotesque-Regular'" }
+    },
+    "header": { "value": "'LabGrotesque-Regular'" }
+  }
+}

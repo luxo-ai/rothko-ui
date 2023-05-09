@@ -39,7 +39,7 @@ export const DropdownContainerDiv = styled.div`
   // placeholder text (body) line-height + text margin + top padding + bottom padding + top border + bottom border
   min-height: calc(1.5rem + 2 * 0.125rem + 2 * 0.5rem + 2 * 2px);
 
-  border: 0.125rem solid var(--rothko-color-border, #000);
+  border: 0.125rem solid var(--rothko-border, #000);
 
   cursor: pointer;
 

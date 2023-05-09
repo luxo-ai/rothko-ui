@@ -1,5 +1,5 @@
 {
-  "color": {
+  "semanticColor": {
     "primary": {
       "100": { "value": "#F7FFF4" },
       "200": { "value": "#EDFFEA" },

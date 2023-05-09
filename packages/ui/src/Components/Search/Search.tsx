@@ -273,13 +273,13 @@ function Search<V extends Value, T = undefined>({
 const SearchMenu = styled(MenuBase)`
   max-height: 20rem;
   z-index: 10;
-  background-color: var(--rothko-color-background, #fff);
+  background-color: var(--rothko-search-background, #141414);
 
   & li {
     &:hover,
     &:focus,
     &.selected {
-      background-color: var(--rothko-dropdown-background-selected, #eeeeee);
+      background-color: var(--rothko-search-option-background-selected, #eee);
     }
   }
 `;

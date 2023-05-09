@@ -1,26 +1,30 @@
 {
+  "base": {
+    "background": { "value": "#FFF" },
+    "border": { "value": "#000" },
+    "color": { "value": "#000" },
+    "svg": {
+      "fill": { "value": "{base.color}" },
+      "stroke": { "value": "{base.color}" }
+    }
+  },
   "component": {
-    "color": {
-      "border": { "value": "#000" },
-      "background": { "value": "#FFF" },
-      "text": { "value": "#000" }
-    },
     "slider": {
       "handle": {
-        "border": { "value": "#000" },
-        "background": { "value": "#FFF" }
+        "border": { "value": "{semanticColor.basic.300}" },
+        "background": { "value": "{semanticColor.basic.200}" }
       },
       "range": {
-        "background": { "value": "#FFF" }
+        "background": { "value": "#3e4e94" }
       },
       "track": {
-        "background": { "value": "#FFF" }
+        "background": { "value": "#000" }
       }
     },
     "dropdown": {
       "background": { "value": "#FFF" },
       "multiselect": {
-        "text": { "value": "var(--rothko-info-500, #000)" },
+        "text": { "value": "{semanticColor.info.500}" },
         "background": { "value": "#FFF" }
       },
       "option": {

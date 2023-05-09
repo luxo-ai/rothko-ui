@@ -102,7 +102,7 @@ const BottomPopup: React.FC<PopupProps> = ({ id, onClose, isOpen, className, chi
 const PopupContainerDiv = styled.div`
   border-top-left-radius: 0.75rem;
   border-top-right-radius: 0.75rem;
-  background: var(--rothko-color-background, #fff);
+  background: var(--rothko-background, #fff);
   padding: 3.25rem 1.5rem 1.5rem 1.5rem;
   position: fixed;
   right: 0;

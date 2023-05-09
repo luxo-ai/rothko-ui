@@ -46,3 +46,10 @@ a {
     background: black;
   }
 }
+
+:root .dark {
+  --demo-background: #000;
+}
+:root .light {
+  --demo-background: #fff;
+}

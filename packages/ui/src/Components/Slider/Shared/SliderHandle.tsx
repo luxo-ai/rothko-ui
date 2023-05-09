@@ -264,25 +264,28 @@ const HandleButton = styled.button.attrs({ type: 'button' })<KindProps & { verti
   width: 1.5rem;
   height: 1.5rem;
   transform: ${({ vertical }) => (vertical ? `translate(0%, -50%)` : `translate(-50%, 0%)`)};
-  background-color: var(--rothko-basic-200, #fff);
+  background-color: var(--rothko-slider-handle-background, #ebf2fb);
   transition-property: border;
   transition-duration: 0.2s;
   // box-shadow: 0 2px 6px 0 rgb(101 110 123 / 20%);
   border-radius: 50%;
   border-style: solid;
   border-width: 2px;
-  border-color: var(--rothko-basic-400, #000);
+  border-color: var(--rothko-slider-handle-border, #bcc7df);
   overflow: visible;
   touch-action: ${({ vertical }) => (vertical ? `pan-y` : `pan-x`)};
   z-index: 3;
   user-select: none;
+  cursor: pointer;
 
   &:not(:disabled) {
     &:hover,
     &:active,
     &.active {
       border-color: ${({ kind }) =>
-        kind ? `var(--rothko-${kind}-500, #000)` : `var(--rothko-basic-200, #fff)`};
+        kind
+          ? `var(--rothko-${kind}-500, #000)`
+          : `var(--rothko-slider-handle-background, #ebf2fb)`};
     }
   }
   :disabled {

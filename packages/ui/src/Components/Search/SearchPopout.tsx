@@ -101,7 +101,7 @@ const SearchBarContainerDiv = styled.div`
 const FullScreenContainerDiv = styled.div`
   z-index: 999;
 
-  background: var(--rothko-color-background, #fff);
+  background: var(--rothko-background, #fff);
   margin: 2rem auto;
   //  height: calc(100% - 2 * 2rem - 2 * 1.5rem);
   display: block;
