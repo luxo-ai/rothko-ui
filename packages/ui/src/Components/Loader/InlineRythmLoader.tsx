@@ -76,6 +76,7 @@ const animation = generateCssAnimation(
 );
 
 const RythmDotSpan = styled.span<RythmDotSpanProps>`
+  display: inline-block;
   width: 100%;
   height: 100%;
   border-radius: 0.25rem;

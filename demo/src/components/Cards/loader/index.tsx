@@ -8,7 +8,9 @@ const LoaderCard = () => {
     <div className="white-padded-card">
       <Typography.h3>Loader</Typography.h3>
       <InlineRythmLoader size="m" />
-      <InlineSpinnerLoader size="l" />
+      <p>
+        <InlineSpinnerLoader size="s" />
+      </p>
     </div>
   );
 };

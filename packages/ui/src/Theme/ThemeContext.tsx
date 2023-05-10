@@ -1,8 +1,14 @@
-import { pathToCssVariable } from '@rothko-ui/tokens';
 import type { NestedRecord, Nullable } from '@rothko-ui/utils';
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import type { ThemeMode, ThemeOverrides } from './types';
 import { TERMINAL_KEY } from './types';
+
+// TEMPORARY HACK
+const CSS_VARIABLE_PREFIX = 'rothko';
+const pathToCssVariable = (path: string[], prefix: string = CSS_VARIABLE_PREFIX) => {
+  return `--${(prefix ? [prefix, ...path] : path).join('-')}`;
+};
+// END TEMPORARY HACKs
 
 const createThemeOverrideStyle = (overrides: Nullable<ThemeOverrides[ThemeMode]>) => {
   if (!overrides) return overrides;

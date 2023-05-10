@@ -41,6 +41,7 @@ type SpinnerSpanProps = {
 };
 
 const SpinnerSpan = styled.span<SpinnerSpanProps>`
+  display: inline-block;
   border-radius: 50%;
   text-indent: -9999em;
 
