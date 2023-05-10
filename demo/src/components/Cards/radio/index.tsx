@@ -3,17 +3,10 @@ import React, { useState } from 'react';
 
 const RadioCard = () => {
   const [selected, setSelected] = useState(false);
-
   return (
     <div className="white-padded-card">
       <Typography.h3>Radio</Typography.h3>
-      <Radio
-        selected={selected}
-        onChange={v => {
-          console.log('hello', v);
-          setSelected(v);
-        }}
-      >
+      <Radio selected={selected} onSelect={() => setSelected(true)}>
         Hello world
       </Radio>
     </div>

@@ -29,17 +29,13 @@
         "background": { "value": "#FFF" }
       },
       "option": {
-        "background": {
-          "selected": { "value": "#EEE" }
-        }
+        "background_selected": { "value": "#EEE" }
       }
     },
     "search": {
       "background": { "value": "#FFF" },
       "option": {
-        "background": {
-          "selected": { "value": "#EEE" }
-        }
+        "background_selected": { "value": "#EEE" }
       }
     },
     "tabBar": {
@@ -56,7 +52,7 @@
         "color": { "value": "{base.color}" }
       },
       "info": {
-        "color": { "value": "{base.color}" }
+        "color": { "value": "#FFF" }
       },
       "warning": {
         "color": { "value": "#000" }
@@ -67,6 +63,11 @@
       "basic": {
         "color": { "value": "#000" }
       }
+    },
+    "radio": {
+      "border": { "value": "{semanticColor.basic.300}" },
+      "background": { "value": "{semanticColor.basic.200}" },
+      "background_selected": { "value": "{semanticColor.info.500}" }
     }
   }
 }

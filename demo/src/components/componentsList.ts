@@ -16,7 +16,6 @@ const componentsList = [
   'MultiSlider',
   'NestedDropdown',
   'Notification',
-  'OptionGroup',
   'Radio',
   'Search',
   'SingleDropdown',

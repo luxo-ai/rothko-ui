@@ -1,33 +1,46 @@
-import React from 'react';
-import type { KindProps, RothkoKind } from '../../Theme';
-import styled from 'styled-components';
 import clsx from 'clsx';
-import Typography from '../Typography/Typography';
 import isString from 'lodash/isString';
+import React from 'react';
+import styled from 'styled-components';
+import type { KindProps, RothkoKind } from '../../Theme';
+import Typography from '../Typography/Typography';
 
 type RadioProps = {
-  selected?: boolean;
   children?: React.ReactNode;
   className?: string;
-  error?: boolean;
-  id?: string;
-  kind?: RothkoKind;
-  onChange: (val: boolean) => void;
-  style?: React.CSSProperties;
   disabled?: boolean;
+  error?: boolean;
+  kind?: RothkoKind;
+  onSelect: () => void;
+  selected?: boolean;
+  style?: React.CSSProperties;
 };
 
-const Radio = ({ children, disabled, selected, onChange }: RadioProps) => {
-  const handleChange = () => onChange(!selected);
+const Radio = ({
+  children,
+  className,
+  disabled,
+  error,
+  kind,
+  onSelect,
+  selected,
+  style,
+}: RadioProps) => {
   const renderContent = isString(children) ? (
     <Typography.body>{children}</Typography.body>
   ) : (
     children
   );
   return (
-    <RadioContainerDiv aria-disabled={disabled} $disabled={disabled} onClick={handleChange}>
+    <RadioContainerDiv
+      style={style}
+      className={className}
+      aria-disabled={disabled}
+      $disabled={disabled}
+      onClick={onSelect}
+    >
       <RadioOutlineDiv>
-        <RadioInnerDiv className={clsx({ selected })} />
+        <RadioInnerDiv kind={kind} className={clsx({ selected, error, disabled })} />
       </RadioOutlineDiv>
       {renderContent && <div>{renderContent}</div>}
     </RadioContainerDiv>
@@ -47,7 +60,7 @@ const RadioContainerDiv = styled.div<{ $disabled?: boolean }>`
 
 const RadioOutlineDiv = styled.div`
   -webkit-tap-highlight-color: transparent;
-  background-color: var(--rothko-basic-300);
+  background-color: var(--rothko-radio-border, #000);
   width: 1.25rem;
   height: 1.25rem;
   border-radius: calc(1.25rem / 2);
@@ -56,7 +69,7 @@ const RadioOutlineDiv = styled.div`
 
 const RadioInnerDiv = styled.div<KindProps>`
   -webkit-tap-highlight-color: transparent;
-  background-color: var(--rothko-basic-200);
+  background-color: var(--rothko-radio-background, #ccc);
 
   width: 100%;
   height: 100%;
@@ -68,7 +81,18 @@ const RadioInnerDiv = styled.div<KindProps>`
   transition: background-color 0.1s ease;
 
   &.selected {
-    background-color: ${({ kind = 'info' }) => `var(--rothko-${kind}-500)`};
+    background-color: ${({ kind }) =>
+      kind
+        ? `var(--rothko-${kind}-500, #281D75)`
+        : `var(--rothko-radio-background_selected, #281D75)`};
+  }
+
+  &.error {
+    background-color: var(--rothko-error-500, #e60000);
+  }
+
+  &.disabled {
+    opacity: 0.75;
   }
 `;
 

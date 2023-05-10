@@ -85,17 +85,13 @@ type ComponentOverrides = DeepPartial<{
       background: { [TERMINAL_KEY]: string };
     };
     option: {
-      background: {
-        selected: { [TERMINAL_KEY]: string };
-      };
+      ['background_selected']: { [TERMINAL_KEY]: string };
     };
   };
   search: {
     background: { [TERMINAL_KEY]: string };
     option: {
-      background: {
-        selected: { [TERMINAL_KEY]: string };
-      };
+      ['background_selected']: { [TERMINAL_KEY]: string };
     };
   };
   tabBar: {
@@ -123,6 +119,11 @@ type ComponentOverrides = DeepPartial<{
     basic: {
       color: { [TERMINAL_KEY]: string };
     };
+  };
+  radio: {
+    border: { [TERMINAL_KEY]: string };
+    background: { [TERMINAL_KEY]: string };
+    ['background_selected']: { [TERMINAL_KEY]: string };
   };
 }>;
 

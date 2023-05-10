@@ -142,7 +142,7 @@ const label = styled(body)`
   font-size: 0.75rem;
 `;
 
-type LinkProps = TextProps & { asText?: boolean };
+type LinkProps = Pick<TextProps, 'bold'> & { asText?: boolean };
 
 const linkStyle = css<LinkProps>`
   ${textStyle}
@@ -152,12 +152,7 @@ const linkStyle = css<LinkProps>`
   padding: 0px;
   text-decoration: none;
 
-  ${({ asText }) =>
-    asText
-      ? ''
-      : css`
-          color: var(--rothko-link-color, #0000ee);
-        `}
+  color: ${({ asText }) => (asText ? `var(--rothko-color, #000)` : 'var(--rothko-link, #0000ee)')};
 
   &.underline {
     text-decoration: underline;

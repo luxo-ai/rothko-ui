@@ -1,20 +1,24 @@
 import { ChevronLeftOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
-import type { RothkoKind } from '../../Theme/types';
 import Typography from '../Typography/Typography';
 
-type LimitedButtonProps = Pick<
-  React.HTMLProps<HTMLButtonElement>,
-  'className' | 'style' | 'id' | 'onClick' | 'disabled' | 'aria-label'
->;
-
 type BackLinkProps = {
-  kind?: RothkoKind;
-} & LimitedButtonProps;
+  ariaLabel?: string;
+  className?: string;
+  disabled?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  style?: React.CSSProperties;
+};
 
-const BackLinkButton = ({ kind, ...buttonProps }: BackLinkProps) => (
-  <LinkButton {...buttonProps} kind={kind} asText={!!kind}>
+const BackLinkButton = ({ ariaLabel, className, disabled, onClick, style }: BackLinkProps) => (
+  <LinkButton
+    aria-label={ariaLabel}
+    className={className}
+    disabled={disabled}
+    onClick={onClick}
+    style={style}
+  >
     <ChevronLeftOutline width="1.25rem" height="1.25rem" fill={'var(--rothko-link, #0000ee)'} />
     back
   </LinkButton>

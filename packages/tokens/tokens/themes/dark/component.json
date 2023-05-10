@@ -9,7 +9,7 @@
     }
   },
   "component": {
-    "link": { "value": "#0000ee" },
+    "link": { "value": "#e93c2f" },
     "slider": {
       "handle": {
         "border": { "value": "#6b6b6b" },
@@ -25,21 +25,17 @@
     "dropdown": {
       "background": { "value": "#141414" },
       "multiselect": {
-        "text": { "value": "{semanticColor.info.500}" },
-        "background": { "value": "#A0A0A0" }
+        "text": { "value": "#c42317" },
+        "background": { "value": "#000" }
       },
       "option": {
-        "background": {
-          "selected": { "value": "#3B3B3B" }
-        }
+        "background_selected": { "value": "#3B3B3B" }
       }
     },
     "search": {
       "background": { "value": "#141414" },
       "option": {
-        "background": {
-          "selected": { "value": "#3B3B3B" }
-        }
+        "background_selected": { "value": "#3B3B3B" }
       }
     },
     "tabBar": {
@@ -67,6 +63,11 @@
       "basic": {
         "color": { "value": "#000" }
       }
+    },
+    "radio": {
+      "border": { "value": "#6b6b6b" },
+      "background": { "value": "#2D3035" },
+      "background_selected": { "value": "#c42317" }
     }
   }
 }

@@ -7,10 +7,14 @@ import InlineSpinnerLoader from '../Loader/InlineSpinnerLoader';
 
 type ButtonAppearance = 'filled' | 'outline';
 
-type HtmlButtonProps = Pick<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  'className' | 'onClick' | 'type' | 'disabled' | 'tabIndex' | 'style'
->;
+type HtmlButtonProps = {
+  className?: string;
+  disabled?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  style?: React.CSSProperties;
+  tabIndex?: number;
+  type?: 'button' | 'submit' | 'reset';
+};
 
 const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
@@ -59,7 +63,7 @@ type ButtonProps = {
   /** render an accessory to the right of the button content  */
   accessoryRight?: Accessory;
   /** the button shaped */
-  shape?: 'pill' | 'square' | 'circle';
+  shape?: 'pill' | 'square';
   /** is content loading from this target */
   loading?: boolean;
   /** make the width fit the button content */
@@ -90,14 +94,13 @@ const Button: React.FC<ButtonProps> = ({
   const appearanceClasses = {
     ['btn-pill']: shape === 'pill',
     ['btn-square']: shape == 'square',
-    ['btn-circle']: shape === 'circle',
     ['fit-content']: fitContent,
   } as const;
 
   const iconColor =
     appearance === 'outline'
       ? (`var(--rothko-${kind}-500, #000)` as const)
-      : (`var(--rothko-button-primary-color, #000)` as const);
+      : (`var(--rothko-button-${kind}-color, #000)` as const);
 
   useEffect(() => {
     if (!childrenContainerRef.current) return;
@@ -148,7 +151,7 @@ export const buttonStyle = css<BaseButtonProps>`
   color: ${({ appearance, kind }) =>
     appearance === 'outline'
       ? `var(--rothko-${kind}-500, #000)`
-      : `var(--rothko-button-primary-color, #000)`};
+      : `var(--rothko-button-${kind}-color, #000)`};
 
   display: inline-flex;
   align-items: center;
@@ -176,9 +179,7 @@ export const buttonStyle = css<BaseButtonProps>`
   &.btn-pill {
     border-radius: 50vmin;
   }
-  &.btn-circle {
-    border-radius: 50%;
-  }
+
   &.btn-square {
     border-radius: 0;
   }
@@ -210,16 +211,15 @@ const StyledButton = styled.button<BaseButtonProps>`
     :active {
       background: ${({ appearance, kind }) =>
         appearance === 'outline' ? css`transparent` : `var(--rothko-${kind}-400, #000)`};
-
       border-color: ${({ kind }) => `var(--rothko-${kind}-400, #000)`};
     }
   }
 
   :disabled {
     background: ${({ appearance, kind }) =>
-      appearance === 'outline' ? css`transparent` : `var(--rothko-${kind}-transparent-600, #000)`};
+      appearance === 'outline' ? css`transparent` : `var(--rothko-${kind}-transparent-500, #000)`};
     border-color: ${({ appearance, kind }) =>
-      appearance !== 'outline' ? css`transparent` : `var(--rothko-${kind}-transparent-600, #000)`};
+      appearance !== 'outline' ? css`transparent` : `var(--rothko-${kind}-transparent-500, #000)`};
     cursor: not-allowed;
     opacity: 0.75;
   }

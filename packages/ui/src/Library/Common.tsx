@@ -99,7 +99,7 @@ export const MenuBase = styled.div`
     &:hover,
     &:focus,
     &.selected {
-      background-color: var(--rothko-dropdown-option-background-selected, #eee);
+      background-color: var(--rothko-dropdown-option-background_selected, #eee);
     }
   }
 `;

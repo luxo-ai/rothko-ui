@@ -279,7 +279,7 @@ const SearchMenu = styled(MenuBase)`
     &:hover,
     &:focus,
     &.selected {
-      background-color: var(--rothko-search-option-background-selected, #eee);
+      background-color: var(--rothko-search-option-background_selected, #eee);
     }
   }
 `;

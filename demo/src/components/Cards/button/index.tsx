@@ -11,7 +11,7 @@ const ButtonCard = () => {
       <Typography.h3>Button</Typography.h3>
       <div>
         <Button
-          shape="circle"
+          shape="pill"
           loading={loading1}
           appearance="outline"
           kind="danger"
@@ -23,8 +23,10 @@ const ButtonCard = () => {
       </div>
       <div>
         <Button
+          disabled
           loading={loading2}
           size="l"
+          kind="info"
           onClick={() => setLoading2(!loading2)}
           style={{ maxWidth: 200, marginBottom: '1rem' }}
         >
