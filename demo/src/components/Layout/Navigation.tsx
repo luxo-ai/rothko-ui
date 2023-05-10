@@ -31,7 +31,7 @@ const Navigation = () => {
       <Flex justifyContent="space-between">
         <Flex alignItems="center" justifyContent="center" columnGap="1rem">
           <FlexItem>
-            <button className="dflx" onClick={() => openDrawer()}>
+            <button className={`dflx ${styles.phantomButton}`} onClick={() => openDrawer()}>
               <Menu width={24} height={24} />
             </button>
           </FlexItem>

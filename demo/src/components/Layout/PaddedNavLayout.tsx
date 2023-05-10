@@ -1,6 +1,6 @@
 'use client';
 import { Email, Github, Heart, Twitter } from '@rothko-ui/icons';
-import { Button, Drawer, DrawerContext, Flex, Typography, useRothko } from '@rothko-ui/ui';
+import { Drawer, DrawerContext, Flex, Typography, useRothko } from '@rothko-ui/ui';
 import React, { useCallback, useState } from 'react';
 import NavigationList from '../NavigationList';
 import Navigation from './Navigation';

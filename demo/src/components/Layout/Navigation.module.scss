@@ -44,3 +44,16 @@ $headerBarHeightPx: 60px;
     margin: 8rem auto 2rem auto;
   }
 }
+
+.phantomButton {
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1;
+}
