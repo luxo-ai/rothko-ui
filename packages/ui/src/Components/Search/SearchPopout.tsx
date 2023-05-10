@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { CloseOutline } from '@rothko-ui/icons';
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
@@ -7,7 +8,13 @@ import { Grid } from '../../Layout/Grid';
 import { ShadedBackdrop } from '../../Library/Common';
 import { PhantomButton } from '../../Library/PhantomButton';
 import { DomPortal } from '../../Library/Portal';
-import { addEvent, disableBodyScroll, enableBodyScroll, removeEvent } from '../../utils/domUtils';
+import {
+  addEvent,
+  disableBodyScroll,
+  enableBodyScroll,
+  removeEvent,
+  clearAllBodyScrollLocks,
+} from '../../utils/domUtils';
 import SearchBar from './SearchBar/SearchBar';
 
 type SearchPopoutProps = {
@@ -40,6 +47,8 @@ const SearchPopout = React.forwardRef<HTMLDivElement, SearchPopoutProps>(
     useEffect(() => {
       if (searchPopoutRef.current) {
         disableBodyScroll(searchPopoutRef.current);
+      } else {
+        clearAllBodyScrollLocks();
       }
     }, [isOpen, searchPopoutRef]);
 
