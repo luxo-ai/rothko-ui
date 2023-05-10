@@ -10,6 +10,7 @@ const componentsList = [
   'Input',
   'Label',
   'List',
+  'Loader',
   'Modal',
   'MultiDropdown',
   'MultiSlider',

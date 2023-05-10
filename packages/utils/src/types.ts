@@ -5,7 +5,7 @@ export type Nil = undefined | null;
 
 export type KeyLike = string | number | symbol;
 
-type Obj = Record<KeyLike, unknown>;
+export type Obj = Record<KeyLike, unknown>;
 
 type WithKey<Base extends Obj, DataType, Key extends keyof any> = DataType extends Nil
   ? Base

@@ -3,13 +3,13 @@ import * as React from 'react';
 
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import type { KindProps, RothkoKind } from '../../Theme';
+import { isRothkoKind } from '../../Theme';
 import { generateCssAnimation } from '../../utils/domUtils/style';
-import type { SpinnerSize } from './types';
+import type { LoaderColor, SpinnerSize } from './types';
 
 type RythmLoaderProps = {
   className?: string;
-  kind?: RothkoKind;
+  color?: LoaderColor;
   size?: SpinnerSize;
   speedMultiplier?: number;
   style?: React.CSSProperties;
@@ -17,15 +17,15 @@ type RythmLoaderProps = {
 
 const InlineRythmLoader = ({
   className,
-  kind,
+  color,
   size = 'm',
   speedMultiplier,
   style,
 }: RythmLoaderProps) => (
   <RythmSpan style={style} className={clsx(`rythm-loader-size-${size}`, className)}>
-    <RythmDotSpan kind={kind} speedMultiplier={speedMultiplier} off={1} />
-    <RythmDotSpan kind={kind} speedMultiplier={speedMultiplier} off={2} />
-    <RythmDotSpan kind={kind} speedMultiplier={speedMultiplier} off={3} />
+    <RythmDotSpan $color={color} speedMultiplier={speedMultiplier} off={1} />
+    <RythmDotSpan $color={color} speedMultiplier={speedMultiplier} off={2} />
+    <RythmDotSpan $color={color} speedMultiplier={speedMultiplier} off={3} />
   </RythmSpan>
 );
 
@@ -64,7 +64,8 @@ const RythmSpan = styled.span`
   }
 `;
 
-type RythmDotSpanProps = KindProps & {
+type RythmDotSpanProps = {
+  $color?: LoaderColor;
   off: number;
   speedMultiplier?: number;
 };
@@ -79,8 +80,10 @@ const RythmDotSpan = styled.span<RythmDotSpanProps>`
   height: 100%;
   border-radius: 0.25rem;
 
-  background-color: ${({ kind }) =>
-    kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)'};
+  background-color: ${({ $color }) => {
+    if (!$color) return 'var(--rothko-color, #000)';
+    return isRothkoKind($color) ? `var(--rothko-${$color}-500, #000)` : $color;
+  }};
 
   animation-fill-mode: both;
   animation: ${animation} ${({ speedMultiplier = 1 }) => 0.7 / speedMultiplier}s

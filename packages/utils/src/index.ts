@@ -4,7 +4,7 @@ import flatten from 'lodash/flatten';
 import type { Nullable } from './types';
 
 export * from './hooks';
-export type { DeepPartial, KeyLike, NestedRecord, Nil, Nullable, WithData } from './types';
+export type { DeepPartial, KeyLike, NestedRecord, Nil, Nullable, WithData, Obj } from './types';
 
 export const formatPhoneNumber = (phone: string) => {
   let formatted = `(${phone.slice(0, 3)}) ${phone.slice(3, 6)}-${phone.slice(6, 10)}`;

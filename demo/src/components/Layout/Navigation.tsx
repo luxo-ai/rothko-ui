@@ -44,7 +44,6 @@ const Navigation = ({ openDrawer }: NavigationProps) => {
           <WidthGeqOnly threshold={750}>
             <Button
               size="s"
-              // appearance="outline"
               kind="warning"
               style={{ height: '100%' }}
               // style={{ background: 'white', color: 'black' }}

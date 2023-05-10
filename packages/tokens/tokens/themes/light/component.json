@@ -44,6 +44,29 @@
     },
     "tabBar": {
       "border": { "value": "#000" }
+    },
+    "button": {
+      "primary": {
+        "color": { "value": "#000" }
+      },
+      "secondary": {
+        "color": { "value": "{base.color}" }
+      },
+      "success": {
+        "color": { "value": "{base.color}" }
+      },
+      "info": {
+        "color": { "value": "{base.color}" }
+      },
+      "warning": {
+        "color": { "value": "#000" }
+      },
+      "danger": {
+        "color": { "value": "#FFF" }
+      },
+      "basic": {
+        "color": { "value": "#000" }
+      }
     }
   }
 }

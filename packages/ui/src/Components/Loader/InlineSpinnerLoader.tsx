@@ -2,18 +2,18 @@ import clsx from 'clsx';
 import React from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import type { KindProps, RothkoKind } from '../../Theme';
-import type { SpinnerSize } from './types';
+import { isRothkoKind } from '../../Theme';
+import type { LoaderColor, SpinnerSize } from './types';
 
 type SimpleInlineSpinnerProps = {
   className?: string;
-  kind?: RothkoKind;
+  color?: LoaderColor;
   size?: SpinnerSize;
   style?: React.CSSProperties;
 };
 
-const InlineSpinnerLoader = ({ className, kind, size = 'm', style }: SimpleInlineSpinnerProps) => (
-  <SpinnerSpan style={style} kind={kind} className={clsx(`spinner-size-${size}`, className)}>
+const InlineSpinnerLoader = ({ className, color, size = 'm', style }: SimpleInlineSpinnerProps) => (
+  <SpinnerSpan style={style} $color={color} className={clsx(`spinner-size-${size}`, className)}>
     loading...
   </SpinnerSpan>
 );
@@ -36,7 +36,9 @@ const spinnerSizeMap: Record<SpinnerSize, FlattenSimpleInterpolation> = {
   `,
 };
 
-type SpinnerSpanProps = KindProps;
+type SpinnerSpanProps = {
+  $color?: LoaderColor;
+};
 
 const SpinnerSpan = styled.span<SpinnerSpanProps>`
   border-radius: 50%;
@@ -50,14 +52,20 @@ const SpinnerSpan = styled.span<SpinnerSpanProps>`
     `
   )}
 
-  border-top-color: ${({ kind }) =>
-    kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)'};
+  border-top-color: ${({ $color }) => {
+    if (!$color) return 'var(--rothko-color, #000)';
+    return isRothkoKind($color) ? `var(--rothko-${$color}-500, #000)` : $color;
+  }};
 
-  border-right-color: ${({ kind }) =>
-    kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)'};
+  border-right-color: ${({ $color }) => {
+    if (!$color) return 'var(--rothko-color, #000)';
+    return isRothkoKind($color) ? `var(--rothko-${$color}-500, #000)` : $color;
+  }};
 
-  border-bottom-color: ${({ kind }) =>
-    kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)'};
+  border-bottom-color: ${({ $color }) => {
+    if (!$color) return 'var(--rothko-color, #000)';
+    return isRothkoKind($color) ? `var(--rothko-${$color}-500, #000)` : $color;
+  }};
 
   border-left-color: transparent;
   border-style: solid;

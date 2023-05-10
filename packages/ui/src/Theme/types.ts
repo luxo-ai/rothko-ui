@@ -65,6 +65,7 @@ type ComponentOverrides = DeepPartial<{
     fill: { [TERMINAL_KEY]: string };
     stroke: { [TERMINAL_KEY]: string };
   };
+  link: { [TERMINAL_KEY]: string };
   slider: {
     handle: {
       border: { [TERMINAL_KEY]: string };
@@ -95,6 +96,32 @@ type ComponentOverrides = DeepPartial<{
       background: {
         selected: { [TERMINAL_KEY]: string };
       };
+    };
+  };
+  tabBar: {
+    border: { [TERMINAL_KEY]: string };
+  };
+  button: {
+    primary: {
+      color: { [TERMINAL_KEY]: string };
+    };
+    secondary: {
+      color: { [TERMINAL_KEY]: string };
+    };
+    success: {
+      color: { [TERMINAL_KEY]: string };
+    };
+    info: {
+      color: { [TERMINAL_KEY]: string };
+    };
+    warning: {
+      color: { [TERMINAL_KEY]: string };
+    };
+    danger: {
+      color: { [TERMINAL_KEY]: string };
+    };
+    basic: {
+      color: { [TERMINAL_KEY]: string };
     };
   };
 }>;

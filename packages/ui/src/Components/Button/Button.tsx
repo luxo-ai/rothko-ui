@@ -95,7 +95,9 @@ const Button: React.FC<ButtonProps> = ({
   } as const;
 
   const iconColor =
-    appearance === 'outline' ? `var(--rothko-${kind}-500, #000)` : `var(--rothko-color, #FFF)`;
+    appearance === 'outline'
+      ? (`var(--rothko-${kind}-500, #000)` as const)
+      : (`var(--rothko-button-primary-color, #000)` as const);
 
   useEffect(() => {
     if (!childrenContainerRef.current) return;
@@ -118,7 +120,7 @@ const Button: React.FC<ButtonProps> = ({
       {loading ? (
         <InlineSpinnerLoader
           style={childrenHeight ? { width: childrenHeight, height: childrenHeight } : undefined}
-          kind={appearance === 'outline' ? kind : undefined}
+          color={iconColor}
           size="s"
         />
       ) : (
@@ -144,7 +146,9 @@ export const buttonStyle = css<BaseButtonProps>`
     appearance === 'outline' ? 'transparent' : `var(--rothko-${kind}-500, #000)`};
   font-family: var(--rothko-typography-body-regular);
   color: ${({ appearance, kind }) =>
-    appearance === 'outline' ? `var(--rothko-${kind}-500, #000)` : `var(--rothko-color, #FFF)`};
+    appearance === 'outline'
+      ? `var(--rothko-${kind}-500, #000)`
+      : `var(--rothko-button-primary-color, #000)`};
 
   display: inline-flex;
   align-items: center;
