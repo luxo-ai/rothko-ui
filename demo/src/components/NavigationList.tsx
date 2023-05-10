@@ -35,18 +35,18 @@ const navList: NavListItem[] = [
     label: 'Components',
     children: componentsList.map(componentName => ({
       text: componentName,
-      to: camelCase(componentName),
+      to: `component/${camelCase(componentName)}`,
     })),
   },
   {
     label: 'Forms',
     children: [
-      { text: 'Overview', to: 'overview' },
+      { text: 'Overview', to: 'form/overview' },
       {
         label: 'Components',
         children: [
-          { text: 'Input', to: 'input' },
-          { text: 'Checkmark', to: 'checkmark' },
+          { text: 'Input', to: 'form/input' },
+          { text: 'Checkbox', to: 'form/checkbox' },
         ],
       },
     ],
@@ -70,7 +70,7 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
           asText
           onClick={() => {
             onNavigate?.();
-            router.push(`/component/${item.to}`);
+            router.push(`/${item.to}`);
           }}
           style={{ textDecoration: 'none', width: '100%', textAlign: 'inherit' }}
         >

@@ -5,7 +5,6 @@ const SvgCheckmarkCircle2Outline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVG
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    fill="#79D33D"
     width="1em"
     height="1em"
     role="img"
