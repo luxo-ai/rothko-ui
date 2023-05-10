@@ -95,7 +95,7 @@ const HeaderContainerDiv = styled.div`
 
 const SearchBarContainerDiv = styled.div`
   padding: 0 1rem 1rem 1rem;
-  border-bottom: 1px solid var(--rothko-basic-500);
+  border-bottom: 1px solid var(--rothko-border, #000);
 `;
 
 const FullScreenContainerDiv = styled.div`
