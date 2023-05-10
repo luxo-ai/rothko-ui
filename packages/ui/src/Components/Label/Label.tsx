@@ -82,12 +82,12 @@ export const ExpandableLabel = ({ label, className, children }: ExpandableProps)
 };
 
 const labelStyle = css`
-  background-color: white;
+  background-color: var(--rothko-background, #fff);
   padding: 0.5rem 0.75rem;
   max-width: fit-content;
   min-width: 6rem;
   border-radius: 0.125rem;
-  border: 1px solid black;
+  border: 1px solid var(--rothko-border, #000);
 `;
 
 const ExpandableLabelButton = styled.button`
@@ -108,7 +108,7 @@ const LabelText = styled(Typography.label)`
 `;
 
 const ExpandableLabelContentContainerDiv = styled.div`
-  border-top: 1px solid black;
+  border-top: 1px solid var(--rothko-border, #000);
 `;
 
 const ExpandableLabelContentText = styled(Typography.bodySmall)`

@@ -1,17 +1,18 @@
 import { animated, useTransition } from '@react-spring/web';
 import { Close } from '@rothko-ui/icons';
 import clsx from 'clsx';
+import noop from 'lodash/noop';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { PhantomButton } from '../../Library/PhantomButton';
 import { ShadedBackdrop } from '../../Library/Common';
+import { PhantomButton } from '../../Library/PhantomButton';
 import { DomPortal } from '../../Library/Portal';
 import {
   BODY_SCROLL_LOCK_IGNORE_ID,
   disableBodyScroll,
   enableBodyScroll,
 } from '../../utils/domUtils';
-import { useDrawerContext } from './DrawerContext';
+import { DrawerContext } from './DrawerContext';
 
 const TABLET_OR_MOBILE_MAX_WIDTH_PX = 750;
 const DEFAULT_DRAWER_WIDTH_PX = 350;
@@ -20,12 +21,20 @@ type DrawerProps = {
   children?: React.ReactNode;
   className?: string;
   id?: string;
+  isOpen?: boolean;
+  onClose?: () => void;
   style?: React.CSSProperties;
 };
 
-const Drawer = ({ children, id, className, style: styleProp = {} }: DrawerProps) => {
+const Drawer = ({
+  children,
+  className,
+  id,
+  isOpen = false,
+  onClose: closeDrawer = noop,
+  style: styleProp = {},
+}: DrawerProps) => {
   const drawerRef = useRef<HTMLDivElement | null>(null);
-  const { isOpen, closeDrawer } = useDrawerContext();
 
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!drawerRef.current || !drawerRef.current.contains(e.target as Node)) {
@@ -74,26 +83,28 @@ const Drawer = ({ children, id, className, style: styleProp = {} }: DrawerProps)
   }, [isOpen, drawerRef]);
 
   return (
-    <DomPortal wrapperId={`drawer-portal-${id || 'unknown'}`}>
-      <DrawerBackdrop className={clsx({ ['backdrop-open']: isOpen })} onClick={onBackdropClick}>
-        {transition(
-          (style, item) =>
-            item && (
-              <AnimatedDrawerContainerDiv
-                className={className}
-                id={id}
-                ref={drawerRef}
-                style={{ ...styleProp, ...style }}
-              >
-                <PhantomButton style={{ marginBottom: '1rem' }} onClick={() => closeDrawer()}>
-                  <Close width={24} height={24} />
-                </PhantomButton>
-                {children}
-              </AnimatedDrawerContainerDiv>
-            )
-        )}
-      </DrawerBackdrop>
-    </DomPortal>
+    <DrawerContext.Provider value={{ isOpen, closeDrawer }}>
+      <DomPortal wrapperId={`drawer-portal-${id || 'unknown'}`}>
+        <DrawerBackdrop className={clsx({ ['backdrop-open']: isOpen })} onClick={onBackdropClick}>
+          {transition(
+            (style, item) =>
+              item && (
+                <AnimatedDrawerContainerDiv
+                  className={className}
+                  id={id}
+                  ref={drawerRef}
+                  style={{ ...styleProp, ...style }}
+                >
+                  <PhantomButton style={{ marginBottom: '1rem' }} onClick={() => closeDrawer()}>
+                    <Close width={24} height={24} />
+                  </PhantomButton>
+                  {children}
+                </AnimatedDrawerContainerDiv>
+              )
+          )}
+        </DrawerBackdrop>
+      </DomPortal>
+    </DrawerContext.Provider>
   );
 };
 

@@ -1,12 +1,5 @@
-import {
-  BottomPopup,
-  BreadCrumbItem,
-  BreadCrumbs,
-  Button,
-  Dropdown,
-  Typography,
-} from '@rothko-ui/ui';
-import { useState } from 'react';
+import { BreadCrumbItem, BreadCrumbs, Typography } from '@rothko-ui/ui';
+import { noop } from 'lodash';
 import React from 'react';
 
 const BreadCrumbsCard = () => {
@@ -16,7 +9,7 @@ const BreadCrumbsCard = () => {
       <div className="accordion-container">
         <BreadCrumbs>
           <BreadCrumbItem to="ok">One</BreadCrumbItem>
-          <BreadCrumbItem onClick={() => console.log('ok')}>Two</BreadCrumbItem>
+          <BreadCrumbItem onClick={noop}>Two</BreadCrumbItem>
           <BreadCrumbItem>Three</BreadCrumbItem>
         </BreadCrumbs>
       </div>

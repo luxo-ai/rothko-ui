@@ -2,6 +2,7 @@ import { animated, useTransition } from '@react-spring/web';
 import { CloseOutline } from '@rothko-ui/icons';
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
+import noop from 'lodash/noop';
 import React, { useEffect, useRef } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
@@ -71,24 +72,22 @@ const headerStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   `,
 };
 
-type LimitedDivProps = Pick<React.HTMLProps<HTMLDivElement>, 'id' | 'className'>;
-
 type ModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
   children: React.ReactNode;
+  className?: string;
+  isOpen?: boolean;
+  onClose?: () => void;
   size?: RothkoSize;
   title?: string;
-} & LimitedDivProps;
+};
 
 export const Modal = ({
-  isOpen,
-  onClose,
   children,
+  className,
+  isOpen = false,
+  onClose = noop,
   size = 'm',
   title,
-  className,
-  id,
 }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -161,7 +160,6 @@ export const Modal = ({
           (style, item) =>
             item && (
               <AnimatedModalContainer
-                id={id}
                 style={style}
                 className={clsx(`modal-size-${size}`, className)}
                 ref={modalRef}
@@ -187,7 +185,7 @@ const ModalContainerDiv = styled.div`
   width: 100%;
   max-height: calc(100vh - 1rem);
   position: relative;
-  background: white;
+  background: var(--rothko-background, #fff);
   margin: auto;
   overflow: scroll;
   scrollbar-width: thin;

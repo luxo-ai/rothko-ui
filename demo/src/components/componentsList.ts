@@ -24,7 +24,6 @@ const componentsList = [
   'Tag',
   'Toast',
   'Toggle',
-  'Tooltip',
 ] as const;
 
 export default componentsList;

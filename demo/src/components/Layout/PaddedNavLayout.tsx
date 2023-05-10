@@ -1,10 +1,11 @@
 'use client';
 import { Email, Github, Heart, Twitter } from '@rothko-ui/icons';
-import { Drawer, DrawerContext, Flex, Typography, useRothko } from '@rothko-ui/ui';
-import React, { useCallback, useState } from 'react';
+import { Drawer, Flex, Typography, useRothko } from '@rothko-ui/ui';
+import { useCallback, useState } from 'react';
 import NavigationList from '../NavigationList';
 import Navigation from './Navigation';
 import styles from './Navigation.module.scss';
+import React from 'react';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -17,14 +18,12 @@ const PaddedNavLayout = ({ children }: LayoutProps) => {
   const openDrawer = useCallback(() => setIsDrawerOpen(true), [setIsDrawerOpen]);
   return (
     <div className={styles.paddedNavContainer}>
-      <DrawerContext.Provider value={{ closeDrawer, isOpen: isDrawerOpen, openDrawer }}>
-        <Drawer>
-          <NavigationList onNavigate={() => setIsDrawerOpen(false)} />
-        </Drawer>
-        <header>
-          <Navigation />
-        </header>
-      </DrawerContext.Provider>
+      <Drawer isOpen={isDrawerOpen} onClose={closeDrawer}>
+        <NavigationList onNavigate={() => setIsDrawerOpen(false)} />
+      </Drawer>
+      <header>
+        <Navigation openDrawer={openDrawer} />
+      </header>
       <main>{children}</main>
       <footer>
         <Typography.bodySmall style={{ marginBottom: '0.5rem' }}>

@@ -26,7 +26,7 @@ type AvatarProps = Pick<
   'id' | 'className' | 'style' | 'aria-label' | 'onClick'
 > & {
   url?: string | null;
-  name: string;
+  name?: string;
   onClick?: () => any | Promise<any>;
   size?: RemSize | number;
   fallbackBackgound?: Background;
@@ -43,7 +43,7 @@ export const Avatar = ({
 }: AvatarProps) => {
   const [imgDim, setImgDim] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
 
-  const fallbackInitials = name
+  const fallbackInitials = (name || '')
     .split(' ')
     .slice(0, 2)
     .map(v => upperCase(v.length > 0 ? v[0] : ''))

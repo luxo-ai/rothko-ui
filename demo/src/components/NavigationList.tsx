@@ -1,8 +1,7 @@
 import { List, ListItem, Typography } from '@rothko-ui/ui';
 import { camelCase, uniqueId } from 'lodash';
-import React from 'react';
 import { useRouter } from 'next/navigation';
-//import { useNavigate, useParams } from 'react-router-dom';
+import React from 'react';
 import componentsList from './componentsList';
 
 type NavListItemLeaf = {

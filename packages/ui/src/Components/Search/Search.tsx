@@ -211,7 +211,7 @@ function Search<V extends Value, T = undefined>({
   }, [optIdx]);
 
   const formClasses = clsx(className, {
-    error: true,
+    error,
     loading,
     disabled,
     focus,

@@ -1,14 +1,5 @@
-import {
-  BackLinkButton,
-  BottomPopup,
-  BreadCrumbItem,
-  BreadCrumbs,
-  Button,
-  Dropdown,
-  Typography,
-} from '@rothko-ui/ui';
-import { useState } from 'react';
-import React from 'react';
+import { BackLinkButton, Button, Typography } from '@rothko-ui/ui';
+import React, { useState } from 'react';
 
 const ButtonCard = () => {
   const [loading1, setLoading1] = useState(false);

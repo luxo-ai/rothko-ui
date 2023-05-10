@@ -1,1 +1,1 @@
-export * from './Label';
+export { Label, ExpandableLabel } from './Label';

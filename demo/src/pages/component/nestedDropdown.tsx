@@ -1,19 +1,17 @@
-import { Grid, ToastContextProvider, WidthGeqOnly } from '@rothko-ui/ui';
-import TooltipCard from '../../components/Cards/tooltip';
+import { Grid, WidthGeqOnly } from '@rothko-ui/ui';
+import NestedDropdownCard from '../../components/Cards/nestedDropdown';
 import NavigationList from '../../components/NavigationList';
 import React from 'react';
 
-const Tooltip = () => {
+const NestedDropdown = () => {
   return (
     <Grid padding="2rem 0" gridTemplateColumns="minmax(100px, 250px) 1fr">
       <WidthGeqOnly threshold={750}>
         <NavigationList />
       </WidthGeqOnly>
-      <ToastContextProvider>
-        <TooltipCard />
-      </ToastContextProvider>
+      <NestedDropdownCard />
     </Grid>
   );
 };
 
-export default Tooltip;
+export default NestedDropdown;

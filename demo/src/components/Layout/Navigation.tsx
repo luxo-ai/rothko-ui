@@ -1,24 +1,17 @@
 import { Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
-import {
-  Button,
-  Flex,
-  FlexItem,
-  Toggle,
-  Typography,
-  WidthGeqOnly,
-  useDrawerContext,
-  useRothko,
-} from '@rothko-ui/ui';
+import { Button, Flex, FlexItem, Toggle, Typography, WidthGeqOnly, useRothko } from '@rothko-ui/ui';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import styles from './Navigation.module.scss';
 
-const Navigation = () => {
+type NavigationProps = {
+  openDrawer: () => void;
+};
+
+const Navigation = ({ openDrawer }: NavigationProps) => {
   const router = useRouter();
   const { mode, toggleMode } = useRothko();
-  const { openDrawer } = useDrawerContext();
 
   useEffect(() => {
     if (typeof window !== 'undefined' && mode) {

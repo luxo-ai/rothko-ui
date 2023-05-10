@@ -1,6 +1,5 @@
 import { Radio, Typography } from '@rothko-ui/ui';
-import { useState } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 
 const RadioCard = () => {
   const [selected, setSelected] = useState(false);

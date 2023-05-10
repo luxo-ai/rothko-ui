@@ -1,17 +1,14 @@
+import noop from 'lodash/noop';
 import { createContext, useContext } from 'react';
 
 type IDrawerContext = {
   isOpen: boolean;
   closeDrawer: () => void;
-  openDrawer: () => void;
 };
 
-export const DrawerContext = createContext<IDrawerContext | null>(null);
+export const DrawerContext = createContext<IDrawerContext>({
+  isOpen: false,
+  closeDrawer: noop,
+});
 
-export const useDrawerContext = () => {
-  const ctx = useContext(DrawerContext);
-  if (!ctx) {
-    throw new Error('Calling "useDrawerContext" outside of context');
-  }
-  return ctx;
-};
+export const useDrawerContext = () => useContext(DrawerContext);

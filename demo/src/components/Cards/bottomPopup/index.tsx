@@ -1,6 +1,5 @@
-import { BottomPopup, Button, Dropdown, Typography } from '@rothko-ui/ui';
-import { useState } from 'react';
-import React from 'react';
+import { BottomPopup, Button, Typography } from '@rothko-ui/ui';
+import React, { useState } from 'react';
 
 const BottomPopupCard = () => {
   const [isOpen, setIsOpen] = useState(false);

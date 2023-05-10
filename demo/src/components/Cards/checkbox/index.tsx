@@ -1,15 +1,5 @@
-import {
-  BackLinkButton,
-  BottomPopup,
-  BreadCrumbItem,
-  BreadCrumbs,
-  Button,
-  Checkbox,
-  Dropdown,
-  Typography,
-} from '@rothko-ui/ui';
-import { useState } from 'react';
-import React from 'react';
+import { Checkbox, Typography } from '@rothko-ui/ui';
+import React, { useState } from 'react';
 
 const CheckboxCard = () => {
   const [checked1, setChecked1] = useState(false);
