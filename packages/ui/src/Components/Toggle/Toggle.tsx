@@ -4,7 +4,6 @@ import type { CSSProperties } from 'react';
 import React from 'react';
 import styled from 'styled-components';
 import { hideChromeBrowserOutline } from '../../Library/Styles';
-import { idkFn } from '../../Theme/theme';
 import type { KindProps } from '../../Theme/types';
 import { keyDownFactory } from '../../utils/keyUtils';
 
@@ -77,7 +76,7 @@ const OuterToggleDiv = styled.div<OuterToogleDivProp>`
   border-radius: 50vmin;
 
   background-color: ${({ toggled, kind }) =>
-    toggled ? idkFn(kind, 'bg-active') : 'rgba(143, 155, 179, 0.16)'};
+    toggled ? `var(--rothko-${kind}-400, #000)` : 'rgba(143, 155, 179, 0.16)'};
 
   -webkit-transition: background-color 0.5s ease;
   -moz-transition: background-color 0.5s ease;
@@ -91,7 +90,7 @@ const OuterToggleDiv = styled.div<OuterToogleDivProp>`
       position: absolute;
       inset: -0.13rem;
       border-radius: 50vmin;
-      border: 0.125rem solid ${({ kind }) => idkFn(kind, 'border-active')};
+      border: 0.125rem solid ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
     }
   }
 `;

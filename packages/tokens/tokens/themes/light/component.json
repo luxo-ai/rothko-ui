@@ -9,6 +9,7 @@
     }
   },
   "component": {
+    "link": { "value": "#0000ee" },
     "slider": {
       "handle": {
         "border": { "value": "{semanticColor.basic.300}" },
@@ -40,6 +41,9 @@
           "selected": { "value": "#EEE" }
         }
       }
+    },
+    "tabBar": {
+      "border": { "value": "#000" }
     }
   }
 }

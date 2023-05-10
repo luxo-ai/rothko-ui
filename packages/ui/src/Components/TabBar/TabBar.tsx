@@ -2,7 +2,6 @@ import type { KeyLike } from '@rothko-ui/utils';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import type { KindProps } from '../../Theme/types';
-import { idkFn } from '../../Theme/theme';
 import Typography from '../Typography/Typography';
 import type { RenderTab, Tab } from './types';
 
@@ -86,7 +85,8 @@ const TabItem = styled(Typography.body).attrs({ as: 'li' })`
 
 const UnderLineDiv = styled.div<UnderlineDivProps>`
   width: ${({ tabCount }) => `${(100 / tabCount).toFixed(2)}%`};
-  border-bottom: 3px solid ${({ kind }) => (kind ? idkFn(kind) : '#000')};
+  border-bottom: 3px solid
+    ${({ kind }) => (kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-tabBar-border, #000')};
   border-radius: 50vmin;
 
   -webkit-transform: translateX(calc(100% * ${({ currentTabIdx }) => currentTabIdx}));

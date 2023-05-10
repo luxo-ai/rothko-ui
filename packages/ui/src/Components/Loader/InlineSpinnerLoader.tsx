@@ -2,32 +2,21 @@ import clsx from 'clsx';
 import React from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { idkFn } from '../../Theme/theme';
 import type { KindProps, RothkoKind } from '../../Theme';
 import type { SpinnerSize } from './types';
 
 type SimpleInlineSpinnerProps = {
-  asText?: boolean;
   className?: string;
   kind?: RothkoKind;
   size?: SpinnerSize;
   style?: React.CSSProperties;
 };
 
-const InlineSpinnerLoader = ({
-  asText,
-  className,
-  kind,
-  size = 'm',
-  style,
-}: SimpleInlineSpinnerProps) => {
-  const baseClasses = clsx(`spinner-size-${size}`, className);
-  return (
-    <SpinnerSpan style={style} kind={kind} asText={asText} className={baseClasses}>
-      loading...
-    </SpinnerSpan>
-  );
-};
+const InlineSpinnerLoader = ({ className, kind, size = 'm', style }: SimpleInlineSpinnerProps) => (
+  <SpinnerSpan style={style} kind={kind} className={clsx(`spinner-size-${size}`, className)}>
+    loading...
+  </SpinnerSpan>
+);
 
 const spinnerSizeMap: Record<SpinnerSize, FlattenSimpleInterpolation> = {
   s: css`
@@ -47,9 +36,7 @@ const spinnerSizeMap: Record<SpinnerSize, FlattenSimpleInterpolation> = {
   `,
 };
 
-type SpinnerSpanProps = KindProps & {
-  asText?: boolean;
-};
+type SpinnerSpanProps = KindProps;
 
 const SpinnerSpan = styled.span<SpinnerSpanProps>`
   border-radius: 50%;
@@ -63,18 +50,14 @@ const SpinnerSpan = styled.span<SpinnerSpanProps>`
     `
   )}
 
-  border-top-color: ${({ kind, asText }) => {
-    if (!kind) return '#000';
-    return asText ? idkFn(kind, 'text') : idkFn(kind);
-  }};
-  border-right-color: ${({ kind, asText }) => {
-    if (!kind) return '#000';
-    return asText ? idkFn(kind, 'text') : idkFn(kind);
-  }};
-  border-bottom-color: ${({ kind, asText }) => {
-    if (!kind) return '#000';
-    return asText ? idkFn(kind, 'text') : idkFn(kind);
-  }};
+  border-top-color: ${({ kind }) =>
+    kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)'};
+
+  border-right-color: ${({ kind }) =>
+    kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)'};
+
+  border-bottom-color: ${({ kind }) =>
+    kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)'};
 
   border-left-color: transparent;
   border-style: solid;

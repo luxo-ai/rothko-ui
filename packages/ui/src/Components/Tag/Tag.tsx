@@ -2,7 +2,6 @@ import { CloseOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
 import { phantomButtonStyle } from '../../Library/PhantomButton';
-import { idkFn } from '../../Theme/theme';
 import type { KindProps } from '../../Theme/types';
 
 type TagAppearance = 'filled' | 'outline';
@@ -13,25 +12,23 @@ type TagProps = KindProps & {
   onClose?: () => void;
 };
 
-const Tag = ({ appearance = 'filled', children, kind = 'primary', onClose }: TagProps) => {
+const Tag = ({ appearance = 'filled', children, kind, onClose }: TagProps) => {
+  const iconColor =
+    appearance === 'outline' ? `var(--rothko-${kind}-500, #000)` : `var(--rothko-color, #FFF)`;
+
   return (
     <TagContainerDiv appearance={appearance} kind={kind}>
       {children}
       {onClose && (
         <TagCloseButton>
-          <CloseOutline
-            onClick={onClose}
-            fill={appearance === 'filled' ? idkFn(kind, 'text') : idkFn(kind)}
-            width={16}
-            height={16}
-          />
+          <CloseOutline onClick={onClose} fill={iconColor} width={16} height={16} />
         </TagCloseButton>
       )}
     </TagContainerDiv>
   );
 };
 
-type ContainerProps = Required<KindProps> & {
+type ContainerProps = KindProps & {
   appearance: TagAppearance;
 };
 
@@ -44,13 +41,22 @@ const TagContainerDiv = styled.div<ContainerProps>`
   padding: 0.25rem 0.5rem;
 
   background-color: ${({ kind, appearance }) => {
-    return appearance === 'filled' ? idkFn(kind) : 'transparent';
+    if (kind) {
+      return appearance === 'filled' ? `var(--rothko-${kind}-500, #000)` : 'transparent';
+    }
+    return appearance === 'filled' ? `var(--rothko-background, #FFF)` : 'transparent';
   }};
   color: ${({ kind, appearance }) => {
-    return appearance === 'filled' ? idkFn(kind, 'text') : idkFn(kind);
+    if (kind) {
+      return appearance === 'filled'
+        ? `var(--rothko-color, #000)`
+        : `var(--rothko-${kind}-500, #000)`;
+    }
+    return `var(--rothko-color, #000)`;
   }};
 
-  border: 1px solid ${({ kind }) => idkFn(kind)};
+  border: 1px solid
+    ${({ kind }) => (kind ? `var(--rothko-${kind}-500, #000)` : `var(--rothko-color, #000)`)};
   border-radius: 50vh;
 `;
 

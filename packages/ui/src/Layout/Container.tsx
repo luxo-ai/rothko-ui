@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import type { CSSProperties } from 'styled-components';
 import styled from 'styled-components';
-import { idkFn } from '../Theme/theme';
 import type { RothkoKind } from '../Theme';
 import { isRothkoKind } from '../Theme';
 
@@ -26,18 +25,23 @@ export const useStyleProps = ({
   const style = useMemo(() => {
     let baseStyle = {};
     if (color) {
-      baseStyle = { ...baseStyle, color: isRothkoKind(color) ? idkFn(color) : color };
+      baseStyle = {
+        ...baseStyle,
+        color: isRothkoKind(color) ? `var(--rothko-${color}-500, #000)` : color,
+      };
     }
     if (backgroundColor) {
       baseStyle = {
         ...baseStyle,
-        backgroundColor: isRothkoKind(backgroundColor) ? idkFn(backgroundColor) : color,
+        backgroundColor: isRothkoKind(backgroundColor)
+          ? `var(--rothko-${backgroundColor}-500, #000)`
+          : color,
       };
     }
     if (borderColor) {
       baseStyle = {
         ...baseStyle,
-        borderColor: isRothkoKind(borderColor) ? idkFn(borderColor) : color,
+        borderColor: isRothkoKind(borderColor) ? `var(--rothko-${borderColor}-500, #000)` : color,
       };
     }
     if (rest) {

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import type { CustomColorCssProperties } from '../../Layout/Container';
 import { useStyleProps } from '../../Layout/Container';
-import { idkFn } from '../../Theme/theme';
 import type { HexColor, RGBColor, RothkoKind } from '../../Theme';
 import { isRothkoKind } from '../../Theme';
 import type { EmSize, RemSize } from '../../types';
@@ -33,7 +32,8 @@ const DotDiv = styled.div<DotElProps>`
   width: ${({ $size }) => (typeof $size === 'number' ? `${$size}px` : $size)};
   height: ${({ $size }) => (typeof $size === 'number' ? `${$size}px` : $size)};
   border-radius: calc(${({ $size }) => (typeof $size === 'number' ? `${$size}px` : $size)} / 2);
-  background-color: ${({ $color = '#000' }) => (isRothkoKind($color) ? idkFn($color) : $color)};
+  background-color: ${({ $color = '#000' }) =>
+    isRothkoKind($color) ? `var(--rothko-${$color}-500, #000)` : $color};
 `;
 
 export default Dot;

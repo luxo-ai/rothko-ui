@@ -1,7 +1,6 @@
 import { ChevronLeftOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
-import { idkFn } from '../../Theme/theme';
 import type { RothkoKind } from '../../Theme/types';
 import Typography from '../Typography/Typography';
 
@@ -16,11 +15,7 @@ type BackLinkProps = {
 
 const BackLinkButton = ({ kind, ...buttonProps }: BackLinkProps) => (
   <LinkButton {...buttonProps} kind={kind} asText={!!kind}>
-    <ChevronLeftOutline
-      width="1.25rem"
-      height="1.25rem"
-      fill={kind ? idkFn(kind) : 'var(--rothko-link-color, #0000ee)'}
-    />
+    <ChevronLeftOutline width="1.25rem" height="1.25rem" fill={'var(--rothko-link, #0000ee)'} />
     back
   </LinkButton>
 );

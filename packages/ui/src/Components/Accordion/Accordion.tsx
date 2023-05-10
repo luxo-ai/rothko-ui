@@ -1,7 +1,6 @@
 import { Set as ImSet } from 'immutable';
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { idkFn } from '../../Theme/theme';
 import type { RothkoKind } from '../../Theme/types';
 import { AccordionContext } from './AccordionContext';
 
@@ -39,7 +38,11 @@ const Accordion = ({
     <AccordionContext.Provider
       value={{
         selectedPanels,
-        borderColor: bordered ? (kind ? idkFn(kind) : 'var(--rothko-border, #000)') : undefined,
+        borderColor: bordered
+          ? kind
+            ? `var(--rothko-${kind}-500, #000)`
+            : 'var(--rothko-border, #000)'
+          : undefined,
         onClickPanel,
       }}
     >

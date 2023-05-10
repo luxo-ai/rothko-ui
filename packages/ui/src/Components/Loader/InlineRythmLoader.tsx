@@ -3,13 +3,11 @@ import * as React from 'react';
 
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { idkFn } from '../../Theme/theme';
 import type { KindProps, RothkoKind } from '../../Theme';
 import { generateCssAnimation } from '../../utils/domUtils/style';
 import type { SpinnerSize } from './types';
 
 type RythmLoaderProps = {
-  asText?: boolean;
   className?: string;
   kind?: RothkoKind;
   size?: SpinnerSize;
@@ -18,21 +16,18 @@ type RythmLoaderProps = {
 };
 
 const InlineRythmLoader = ({
-  asText,
   className,
   kind,
   size = 'm',
   speedMultiplier,
   style,
-}: RythmLoaderProps) => {
-  return (
-    <RythmSpan style={style} className={clsx(`rythm-loader-size-${size}`, className)}>
-      <RythmDotSpan asText={asText} kind={kind} speedMultiplier={speedMultiplier} off={1} />
-      <RythmDotSpan asText={asText} kind={kind} speedMultiplier={speedMultiplier} off={2} />
-      <RythmDotSpan asText={asText} kind={kind} speedMultiplier={speedMultiplier} off={3} />
-    </RythmSpan>
-  );
-};
+}: RythmLoaderProps) => (
+  <RythmSpan style={style} className={clsx(`rythm-loader-size-${size}`, className)}>
+    <RythmDotSpan kind={kind} speedMultiplier={speedMultiplier} off={1} />
+    <RythmDotSpan kind={kind} speedMultiplier={speedMultiplier} off={2} />
+    <RythmDotSpan kind={kind} speedMultiplier={speedMultiplier} off={3} />
+  </RythmSpan>
+);
 
 const spinnerSizeMap: Record<SpinnerSize, FlattenSimpleInterpolation> = {
   s: css`
@@ -72,7 +67,6 @@ const RythmSpan = styled.span`
 type RythmDotSpanProps = KindProps & {
   off: number;
   speedMultiplier?: number;
-  asText?: boolean;
 };
 
 const animation = generateCssAnimation(
@@ -85,10 +79,8 @@ const RythmDotSpan = styled.span<RythmDotSpanProps>`
   height: 100%;
   border-radius: 0.25rem;
 
-  background-color: ${({ kind, asText }) => {
-    if (!kind) return '#000';
-    return asText ? idkFn(kind, 'text') : idkFn(kind);
-  }};
+  background-color: ${({ kind }) =>
+    kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)'};
 
   animation-fill-mode: both;
   animation: ${animation} ${({ speedMultiplier = 1 }) => 0.7 / speedMultiplier}s

@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
 import type { KindProps, RothkoKind, RothkoSize } from '../../Theme';
-import { idkFn } from '../../Theme/theme';
 import InlineSpinnerLoader from '../Loader/InlineSpinnerLoader';
 
 type ButtonAppearance = 'filled' | 'outline';
@@ -95,7 +94,8 @@ const Button: React.FC<ButtonProps> = ({
     ['fit-content']: fitContent,
   } as const;
 
-  const iconColor = appearance === 'outline' ? idkFn(kind) : idkFn(kind, 'text');
+  const iconColor =
+    appearance === 'outline' ? `var(--rothko-${kind}-500, #000)` : `var(--rothko-color, #FFF)`;
 
   useEffect(() => {
     if (!childrenContainerRef.current) return;
@@ -118,8 +118,7 @@ const Button: React.FC<ButtonProps> = ({
       {loading ? (
         <InlineSpinnerLoader
           style={childrenHeight ? { width: childrenHeight, height: childrenHeight } : undefined}
-          asText={appearance !== 'outline'}
-          kind={kind}
+          kind={appearance === 'outline' ? kind : undefined}
           size="s"
         />
       ) : (
@@ -141,10 +140,11 @@ export const buttonStyle = css<BaseButtonProps>`
   touch-action: manipulation;
 
   width: 100%;
-  background: ${({ appearance, kind }) => (appearance === 'outline' ? 'white' : idkFn(kind))};
+  background: ${({ appearance, kind }) =>
+    appearance === 'outline' ? 'transparent' : `var(--rothko-${kind}-500, #000)`};
   font-family: var(--rothko-typography-body-regular);
   color: ${({ appearance, kind }) =>
-    appearance === 'outline' ? idkFn(kind) : `var(--rothko-button-${kind}-color)`};
+    appearance === 'outline' ? `var(--rothko-${kind}-500, #000)` : `var(--rothko-color, #FFF)`};
 
   display: inline-flex;
   align-items: center;
@@ -157,7 +157,7 @@ export const buttonStyle = css<BaseButtonProps>`
 
   outline: none;
   border: ${({ appearance }) => (appearance == 'outline' ? '1px solid' : 'none')};
-  border-color: ${({ kind }) => idkFn(kind)};
+  border-color: ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
 
   ${Object.entries(sizeMap).map(
     ([key, value]) => css`
@@ -205,23 +205,17 @@ const StyledButton = styled.button<BaseButtonProps>`
     }
     :active {
       background: ${({ appearance, kind }) =>
-        appearance === 'outline' ? css`transparent` : idkFn(kind, 'bg-active')};
+        appearance === 'outline' ? css`transparent` : `var(--rothko-${kind}-400, #000)`};
 
-      border-color: ${({ kind }) => idkFn(kind, 'bg-active')};
-      ${({ appearance, kind }) =>
-        appearance === 'outline'
-          ? css`
-              color: ${idkFn(kind, 'bg-active')};
-            `
-          : ''};
+      border-color: ${({ kind }) => `var(--rothko-${kind}-400, #000)`};
     }
   }
 
   :disabled {
     background: ${({ appearance, kind }) =>
-      appearance === 'outline' ? css`transparent` : idkFn(kind, 'bg-disabled')};
+      appearance === 'outline' ? css`transparent` : `var(--rothko-${kind}-transparent-600, #000)`};
     border-color: ${({ appearance, kind }) =>
-      appearance !== 'outline' ? css`transparent` : idkFn(kind, 'bg-disabled')};
+      appearance !== 'outline' ? css`transparent` : `var(--rothko-${kind}-transparent-600, #000)`};
     cursor: not-allowed;
     opacity: 0.75;
   }

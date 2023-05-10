@@ -7,7 +7,6 @@ import Grid from '../../Layout/Grid/Grid';
 import { phantomButtonStyle } from '../../Library/PhantomButton';
 import type { Option, Value } from '../../Library/types';
 import type { KindProps, RothkoSize } from '../../Theme';
-import { idkFn } from '../../Theme/theme';
 import type { EmSize, RemSize } from '../../types';
 import Typography from '../Typography/Typography';
 
@@ -141,16 +140,16 @@ const OptionButton = styled.button<Required<KindProps>>`
   justify-content: center;
   overflow: hidden;
   cursor: pointer;
-  border: 0.125rem solid ${({ kind }) => idkFn(kind)};
+  border: 0.125rem solid ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
   user-select: none;
 
   // fix later to work with theming
   background: #ffffff;
-  color: ${({ kind }) => idkFn(kind)};
+  color: ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
 
   &.selected {
-    background: ${({ kind }) => idkFn(kind)};
-    color: ${({ kind }) => idkFn(kind, 'text')};
+    background: ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
+    color: var(--rothko-color, #000);
   }
 
   &.with-radius {
@@ -166,7 +165,7 @@ const OptionButton = styled.button<Required<KindProps>>`
   )}
 
   &.disabled {
-    border-color: ${({ kind }) => idkFn(kind, 'bg-disabled')};
+    border-color: ${({ kind }) => `var(--rothko-${kind}-transparent-600, #000)`};
     cursor: not-allowed;
     opacity: 0.75;
   }

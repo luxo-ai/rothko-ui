@@ -2,10 +2,9 @@ import type { SpringValue } from '@react-spring/web';
 import { animated } from '@react-spring/web';
 import { CloseOutline } from '@rothko-ui/icons';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { PhantomButton } from '../../Library/PhantomButton';
 import type { KindProps, RothkoKind } from '../../Theme';
-import { idkFn } from '../../Theme/theme';
 import Typography from '../Typography/Typography';
 import type { ToastDetails } from './types';
 
@@ -67,7 +66,7 @@ const ToastAnimatedContainerDiv = styled.div<Required<KindProps>>`
   align-items: start;
   justify-content: space-between;
   padding: 1.25rem;
-  background: ${({ kind }) => idkFn(kind, 'bg-transparent')};
+  background: ${({ kind }) => `var(--rothko-${kind}-transparent-300, #000)`};
   border-radius: 0.125rem;
 `;
 
@@ -92,7 +91,7 @@ const AnimatedLife = styled(animated.div)<Required<KindProps>>`
   left: 0px;
   width: auto;
   background-image: ${({ kind }) =>
-    css`linear-gradient(130deg, ${idkFn(kind)}, ${idkFn(kind, 'bg-transparent')})`};
+    `linear-gradient(130deg, var(--rothko-${kind}-500, #000), var(--rothko-${kind}-transparent-300, #000)`};
   height: 5px;
 `;
 

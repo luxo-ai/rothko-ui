@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MinWidth } from '../../Layout/Dimensions';
-import { idkFn } from '../../Theme/theme';
 import type { HexColor, KindProps, RGBColor, RothkoKind } from '../../Theme';
 import { isRothkoKind } from '../../Theme';
 import type { EmSize, RemSize } from '../../types';
@@ -64,7 +63,8 @@ const DotDiv = styled(MinWidth)<DotElProps>`
   gap: 0.125rem;
 
   height: ${({ $size }) => (typeof $size === 'number' ? `${$size}px` : $size)};
-  background-color: ${({ $color = '#000' }) => (isRothkoKind($color) ? idkFn($color) : $color)};
+  background-color: ${({ $color = '#000' }) =>
+    isRothkoKind($color) ? `var(--rothko-${$color}-500, #000)` : $color};
 
   & > p {
     ${textStyle}

@@ -9,6 +9,7 @@
     }
   },
   "component": {
+    "link": { "value": "#0000ee" },
     "slider": {
       "handle": {
         "border": { "value": "#6b6b6b" },
@@ -40,6 +41,9 @@
           "selected": { "value": "#3B3B3B" }
         }
       }
+    },
+    "tabBar": {
+      "border": { "value": "#FFF" }
     }
   }
 }
