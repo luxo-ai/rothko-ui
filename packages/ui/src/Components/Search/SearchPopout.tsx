@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { CloseOutline } from '@rothko-ui/icons';
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
