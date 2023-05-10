@@ -51,6 +51,7 @@ const Navigation = ({ openDrawer }: NavigationProps) => {
               accessoryLeft={({ size }) => (
                 <Heart style={{ marginRight: '0.5rem' }} fill="black" height={size} width={size} />
               )}
+              onClick={() => router.push('/sponsor')}
             >
               Sponsor
             </Button>

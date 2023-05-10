@@ -1,8 +1,10 @@
 'use client';
 import { Github } from '@rothko-ui/icons';
-import { Button, Flex, MaxWidth, Typography, WidthGeqOnly } from '@rothko-ui/ui';
-import React from 'react';
+import { Button, Flex, MaxWidth, Typography } from '@rothko-ui/ui';
 import { useRouter } from 'next/navigation';
+import React from 'react';
+
+const REPO_URL = 'https://github.com/luxo-ai/rothko-ui';
 
 const Page = () => {
   const router = useRouter();
@@ -22,13 +24,13 @@ const Page = () => {
           <MaxWidth maxW="34rem">
             <Typography.titleBig>Powerful for developers. Fast for everyone.</Typography.titleBig>
             <Flex columnGap="0.5rem" maxWidth="20rem" margin="2rem 0">
-              <Button onClick={() => router.push('/component/accordion')} kind="info" shape="pill">
+              <Button onClick={() => router.push('/overview')} kind="info" shape="pill">
                 Get Started
               </Button>
               <Button
-                accessoryLeft={({ size }) => (
+                accessoryLeft={({ size, color }) => (
                   <Github
-                    fill="black"
+                    fill={color}
                     style={{ marginRight: '0.5rem' }}
                     width={size}
                     height={size}
@@ -37,6 +39,7 @@ const Page = () => {
                 kind="primary"
                 appearance="outline"
                 shape="pill"
+                onClick={() => window.open(REPO_URL, '_blank')}
               >
                 Github
               </Button>
