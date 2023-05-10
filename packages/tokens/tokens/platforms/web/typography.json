@@ -2,12 +2,12 @@
   "fontFamily": {
     "typography": {
       "body": {
-        "bold": { "value": "'LabGrotesque-Bold'" },
-        "italic": { "value": "'LabGrotesque-Italic'" },
-        "light": { "value": "'LabGrotesque-Light'" },
-        "regular": { "value": "'LabGrotesque-Regular'" }
+        "bold": { "value": "{fontFamily.typography.body.regular}" },
+        "italic": { "value": "{fontFamily.typography.body.regular}" },
+        "light": { "value": "{fontFamily.typography.body.regular}" },
+        "regular": { "value": "'Helvetica'" }
       },
-      "header": { "value": "'LabGrotesque-Regular'" }
+      "header": { "value": "{fontFamily.typography.body.regular}" }
     }
   }
 }

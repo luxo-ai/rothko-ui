@@ -3,7 +3,6 @@ import type { Formatter, Config as StyleConfig } from 'style-dictionary';
 import styledDictionary from 'style-dictionary';
 import { pathToCssVariable } from './utils';
 
-const VARIABLE_PREFIX = 'rothko';
 const OUT_DIRECTORY = 'build';
 
 const generateThemeStyleDictionaryConfig = (theme: string): StyleConfig => ({
@@ -44,7 +43,7 @@ const rothkoCssRootFormatter: Formatter = ({ dictionary, options, file }) => {
 
   const cssVariables = dictionary.allProperties.map(properties => {
     const [, ...path] = properties.path;
-    return `${pathToCssVariable(path, VARIABLE_PREFIX)}: ${properties.value};`;
+    return `${pathToCssVariable(path)}: ${properties.value};`;
   });
 
   const styleClassName = className ? `:root .${className}` : ':root';

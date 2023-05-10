@@ -1,5 +1,4 @@
 export { ThemeContextProvider, useTheme } from './ThemeContext';
-export type { ThemeOverrides } from './ThemeContext';
 export { isRothkoKind } from './helpers';
 export type {
   Color,
@@ -9,4 +8,5 @@ export type {
   RothkoKind,
   RothkoSize,
   ThemeMode,
+  ThemeOverrides,
 } from './types';

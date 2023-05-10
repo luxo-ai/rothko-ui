@@ -1,37 +1,11 @@
 import { pathToCssVariable } from '@rothko-ui/tokens';
-import type { DeepPartial, NestedRecord } from '@rothko-ui/utils';
+import type { NestedRecord, Nullable } from '@rothko-ui/utils';
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
-import type { RothkoKind, ThemeMode } from './types';
+import type { ThemeMode, ThemeOverrides } from './types';
+import { TERMINAL_KEY } from './types';
 
-const TERMINAL_KEY = 'value' as const;
-
-export type ThemeOverrides = DeepPartial<{
-  color: {
-    [kind in RothkoKind]: {
-      100: { [TERMINAL_KEY]: string };
-      200: { [TERMINAL_KEY]: string };
-      300: { [TERMINAL_KEY]: string };
-      400: { [TERMINAL_KEY]: string };
-      500: { [TERMINAL_KEY]: string };
-      600: { [TERMINAL_KEY]: string };
-      700: { [TERMINAL_KEY]: string };
-      800: { [TERMINAL_KEY]: string };
-      900: { [TERMINAL_KEY]: string };
-      transparent: {
-        100: { [TERMINAL_KEY]: string };
-        200: { [TERMINAL_KEY]: string };
-        300: { [TERMINAL_KEY]: string };
-        400: { [TERMINAL_KEY]: string };
-        500: { [TERMINAL_KEY]: string };
-        600: { [TERMINAL_KEY]: string };
-      };
-    };
-  };
-}>;
-
-const createThemeOverrideStyle = (overrides: ThemeOverrides) => {
-  const { color } = overrides;
-  if (!color) return;
+const createThemeOverrideStyle = (overrides: Nullable<ThemeOverrides[ThemeMode]>) => {
+  if (!overrides) return overrides;
 
   const recursiveCollect = (
     acc: Record<string, string>[],
@@ -43,7 +17,7 @@ const createThemeOverrideStyle = (overrides: ThemeOverrides) => {
         if (key !== TERMINAL_KEY) {
           throw Error('Poorly structured override');
         }
-        return [...acc, { [pathToCssVariable(currPath)]: value }];
+        return [...acc, { [pathToCssVariable(currPath, 'rothko')]: value }];
       } else {
         acc = recursiveCollect(acc, [...currPath, key], value);
       }
@@ -51,7 +25,7 @@ const createThemeOverrideStyle = (overrides: ThemeOverrides) => {
     return acc;
   };
 
-  return recursiveCollect([], [], color as NestedRecord);
+  return recursiveCollect([], [], overrides as NestedRecord);
 };
 
 type IThemeContext = {
@@ -78,7 +52,10 @@ export const ThemeContextProvider = ({
     setMode(currMode => (currMode == 'light' ? 'dark' : 'light'));
   }, [setMode]);
 
-  const inlineOverrides = useMemo(() => createThemeOverrideStyle(themeOverrides), [themeOverrides]);
+  const inlineOverrides = useMemo(() => {
+    const { light, dark, ...rest } = themeOverrides;
+    return createThemeOverrideStyle({ ...((mode === 'light' ? light : dark) || {}), ...rest });
+  }, [themeOverrides, mode]);
 
   return (
     <Context.Provider value={{ mode, toggleMode }}>
