@@ -1,6 +1,6 @@
 import { Grid, WidthGeqOnly } from '@rothko-ui/ui';
 import TabBarCard from '../../components/Cards/tabBar';
-import NavigationList from '../../components/NavigationList';
+import NavigationList from '../../components/Navigation/NavigationList';
 import React from 'react';
 
 const TabBar = () => {

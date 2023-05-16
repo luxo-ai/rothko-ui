@@ -46,7 +46,7 @@
         "color": { "value": "#000" }
       },
       "secondary": {
-        "color": { "value": "{base.color}" }
+        "color": { "value": "#000" }
       },
       "success": {
         "color": { "value": "{base.color}" }

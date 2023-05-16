@@ -9,6 +9,8 @@ import type { Option, Value } from '../../Library/types';
 import type { KindProps, RothkoSize } from '../../Theme';
 import type { EmSize, RemSize } from '../../types';
 import Typography from '../Typography/Typography';
+import { Flex, FlexItem } from '../../Layout';
+import { CodeOutline } from '@rothko-ui/icons';
 
 type OptionGroupProps<V extends Value> = KindProps & {
   children?: React.ReactNode;
@@ -66,6 +68,10 @@ function OptionGroup<V extends Value>({
           const isDisabled = 'data' in o && Boolean(o?.data?.disabled);
           const isSelected = o.id === value;
 
+          const svgColor = isSelected
+            ? `var(--rothko-button-${kind}-color, #000)`
+            : `var(--rothko-${kind}-500, #000)`;
+
           const classes = {
             disabled: isDisabled,
             selected: isSelected,
@@ -80,7 +86,12 @@ function OptionGroup<V extends Value>({
               onClick={isDisabled ? undefined : () => onChange(o.id)}
               role="option"
             >
-              {o.label}
+              <Flex gap="0.5rem" alignItems="center" justifyContent="space-between">
+                <FlexItem display="flex">
+                  <CodeOutline fill={svgColor} />
+                </FlexItem>
+                <FlexItem>{o.label}</FlexItem>
+              </Flex>
             </OptionButton>
           );
         })}
@@ -113,8 +124,8 @@ const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
     font-size: 0.85rem;
   `,
   m: css`
-    padding: 0.75rem 0.75rem;
-    font-size: 1rem;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.875rem;
   `,
   l: css`
     padding: 0.625rem 0.94rem;
@@ -134,7 +145,7 @@ const OptionGroupContainer = styled.div`
 const OptionButton = styled.button<Required<KindProps>>`
   -webkit-tap-highlight-color: transparent;
   ${phantomButtonStyle}
-  font-family: var(--rothko-typography-body-regular);
+  font-family: var(--rothko-typography-body-bold); // was reg
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -142,6 +153,18 @@ const OptionButton = styled.button<Required<KindProps>>`
   cursor: pointer;
   border: 0.125rem solid ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
   user-select: none;
+  // added
+
+  border-radius: 0.75rem;
+
+  transition-timing-function: cubic-bezier(0, 0, 1, 1);
+  transition-property: background-color, color, border-color;
+  transition-duration: 0.2s;
+
+  ::selection {
+    background: #276ef1;
+    color: white;
+  }
 
   // fix later to work with theming
   background: #ffffff;
@@ -149,11 +172,12 @@ const OptionButton = styled.button<Required<KindProps>>`
 
   &.selected {
     background: ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
-    color: var(--rothko-color, #000);
+    color: ${({ kind }) => `var(--rothko-button-${kind}-color, #000)`};
   }
 
   &.with-radius {
     border-radius: 0.125rem; // 2px
+    border-radius: 0.75rem;
   }
 
   ${Object.entries(sizeMap).map(

@@ -2,7 +2,7 @@
 import { Email, Github, Heart, Twitter } from '@rothko-ui/icons';
 import { Drawer, Flex, Typography, useRothko } from '@rothko-ui/ui';
 import { useCallback, useState } from 'react';
-import NavigationList from '../NavigationList';
+import NavigationList from '../Navigation/NavigationList';
 import Navigation from './Navigation';
 import styles from './Navigation.module.scss';
 import React from 'react';

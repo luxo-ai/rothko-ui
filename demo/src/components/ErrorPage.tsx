@@ -7,7 +7,7 @@ type ErrorProps = {
   children?: React.ReactNode;
 };
 
-const DemoError = ({ code, header, children }: ErrorProps) => {
+const ErrorPage = ({ code, header, children }: ErrorProps) => {
   return (
     <Flex
       height="50vh"
@@ -40,4 +40,4 @@ const DemoError = ({ code, header, children }: ErrorProps) => {
   );
 };
 
-export default DemoError;
+export default ErrorPage;

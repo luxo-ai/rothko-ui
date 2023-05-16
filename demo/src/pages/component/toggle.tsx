@@ -1,7 +1,7 @@
 import { Grid, WidthGeqOnly } from '@rothko-ui/ui';
 import React from 'react';
 import ToggleCard from '../../components/Cards/toggle';
-import NavigationList from '../../components/NavigationList';
+import NavigationList from '../../components/Navigation/NavigationList';
 
 const Toggle = () => {
   return (

@@ -28,6 +28,8 @@ export const textStyle = css<TextProps>`
   text-rendering: optimizeLegibility;
 
   margin: 0.125rem 0;
+  // to make overriding in css/scc easier don't use canonical margin ^
+  // instead use margin-* ??????
 
   font-family: var(--rothko-typography-body-regular);
   font-size: 1rem;

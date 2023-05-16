@@ -1,7 +1,7 @@
 import { useTransition } from '@react-spring/web';
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import styled from 'styled-components';
-import uuid from 'uuid';
+import * as uuid from 'uuid';
 import { DomPortal } from '../../Library/Portal';
 import Toast from './Toaster';
 import type { ToastDetails, ToastKey } from './types';

@@ -1,6 +1,6 @@
 import type { SVGAttributes } from 'react';
 import React, { useRef } from 'react';
-import uuid from 'uuid';
+import * as uuid from 'uuid';
 import type { Color } from '../../Theme';
 
 const ANIMATION_KEY_TIMES = '0;0.5;1';

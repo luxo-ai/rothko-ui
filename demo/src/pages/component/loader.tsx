@@ -1,7 +1,7 @@
 import { Grid, WidthGeqOnly } from '@rothko-ui/ui';
 import React from 'react';
 import LoaderCard from '../../components/Cards/loader';
-import NavigationList from '../../components/NavigationList';
+import NavigationList from '../../components/Navigation/NavigationList';
 
 const Loader = () => {
   return (

@@ -1,7 +1,7 @@
 import { Grid, WidthGeqOnly } from '@rothko-ui/ui';
 import React from 'react';
 import TypographyCard from '../components/Cards/typography';
-import NavigationList from '../components/NavigationList';
+import NavigationList from '../components/Navigation/NavigationList';
 
 const Typography = () => {
   return (

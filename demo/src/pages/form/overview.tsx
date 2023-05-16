@@ -1,6 +1,6 @@
 import { Grid, Typography, WidthGeqOnly } from '@rothko-ui/ui';
 import React from 'react';
-import NavigationList from '../../components/NavigationList';
+import NavigationList from '../../components/Navigation/NavigationList';
 
 const Overview = () => {
   return (

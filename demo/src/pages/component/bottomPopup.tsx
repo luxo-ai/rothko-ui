@@ -1,6 +1,6 @@
 import { Grid, WidthGeqOnly } from '@rothko-ui/ui';
 import AlertCard from '../../components/Cards/alert';
-import NavigationList from '../../components/NavigationList';
+import NavigationList from '../../components/Navigation/NavigationList';
 import React from 'react';
 import AvatarCard from '../../components/Cards/avatar';
 import BottomPopupCard from '../../components/Cards/bottomPopup';

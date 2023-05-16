@@ -38,7 +38,11 @@ const TagContainerDiv = styled.div<ContainerProps>`
   align-items: center;
 
   width: fit-content;
-  padding: 0.25rem 0.5rem;
+  min-width: 4rem;
+  height: max-content;
+  padding: 0.125rem 0.5rem;
+  justify-content: center;
+  text-align: center;
 
   background-color: ${({ kind, appearance }) => {
     if (kind) {

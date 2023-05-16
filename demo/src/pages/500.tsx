@@ -1,11 +1,11 @@
 import { Typography } from '@rothko-ui/ui';
-import DemoError from '../components/DemoError';
+import ErrorPage from '../components/ErrorPage';
 import React from 'react';
 
 const InternalErrorPage = () => (
-  <DemoError code={500} header="Interna Error">
+  <ErrorPage code={500} header="Interna Error">
     <Typography.body>Sorry, something went wrong</Typography.body>
-  </DemoError>
+  </ErrorPage>
 );
 
 export default InternalErrorPage;

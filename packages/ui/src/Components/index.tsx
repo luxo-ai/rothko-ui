@@ -13,7 +13,7 @@ export * from './List';
 export * from './Loader';
 export * from './Modal';
 export * from './Notification';
-// export * from './OptionGroup';
+export * from './OptionGroup';
 export * from './Popup';
 export * from './Radio';
 export * from './Search';

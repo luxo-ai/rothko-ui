@@ -1,61 +1,13 @@
 import { List, ListItem, Typography } from '@rothko-ui/ui';
-import { camelCase, uniqueId } from 'lodash';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import componentsList from './componentsList';
-
-type NavListItemLeaf = {
-  text: string;
-  to: string;
-};
-
-type NavListItem =
-  | {
-      label: string;
-      children: NavListItem[];
-    }
-  | NavListItemLeaf;
-
-const isLeaf = (item: NavListItem): item is NavListItemLeaf => {
-  return 'text' in item && 'to' in item;
-};
-
-const navList: NavListItem[] = [
-  {
-    label: 'Getting Started',
-    children: [
-      { text: 'Setup', to: 'setup' },
-      { text: 'Overview', to: 'overview' },
-      { text: 'Theming', to: 'theming' },
-      { text: 'Typography', to: 'typography' },
-      { text: 'Icons', to: 'icons' },
-    ],
-  },
-  {
-    label: 'Components',
-    children: componentsList.map(componentName => ({
-      text: componentName,
-      to: `component/${camelCase(componentName)}`,
-    })),
-  },
-  {
-    label: 'Forms',
-    children: [
-      { text: 'Overview', to: 'form/overview' },
-      {
-        label: 'Components',
-        children: [
-          { text: 'Input', to: 'form/input' },
-          { text: 'Checkbox', to: 'form/checkbox' },
-        ],
-      },
-    ],
-  },
-];
+import { NAVIGATION_LIST } from './constants';
+import { isLeaf } from './helpers';
+import type { NavigationSection } from './types';
 
 type ExpandNavListProps = {
   depth?: number;
-  item: NavListItem;
+  item: NavigationSection;
   selected?: string;
   onNavigate?: () => void;
 };
@@ -86,7 +38,7 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
               cursor: 'pointer',
             }}
           >
-            {item.text}
+            {item.label}
           </div>
         </Typography.linkButton>
       </ListItem>
@@ -114,17 +66,20 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
 
 type NavigationListProps = {
   onNavigate?: () => void;
+  selected?: string;
 };
-const NavigationList = ({ onNavigate }: NavigationListProps) => {
-  // const { id } = useParams<{ id: string }>();
-  const uuid = uniqueId('root');
-  return (
-    <nav>
-      {navList.map((item, idx) => (
-        <ExpandNavList key={`${uuid}-${idx}`} onNavigate={onNavigate} item={item} />
-      ))}
-    </nav>
-  );
-};
+
+const NavigationList = ({ onNavigate, selected }: NavigationListProps) => (
+  <nav>
+    {NAVIGATION_LIST.map(item => (
+      <ExpandNavList
+        item={item}
+        key={`${isLeaf(item) ? 'leaf' : 'section'}_${item.label}`}
+        onNavigate={onNavigate}
+        selected={selected}
+      />
+    ))}
+  </nav>
+);
 
 export default NavigationList;

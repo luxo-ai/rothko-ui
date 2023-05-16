@@ -1,6 +1,6 @@
 import { Grid, WidthGeqOnly } from '@rothko-ui/ui';
 import RadioCard from '../../components/Cards/radio';
-import NavigationList from '../../components/NavigationList';
+import NavigationList from '../../components/Navigation/NavigationList';
 import React from 'react';
 
 const Radio = () => {

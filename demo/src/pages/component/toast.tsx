@@ -1,7 +1,7 @@
 import { Grid, ToastContextProvider, WidthGeqOnly } from '@rothko-ui/ui';
 import React from 'react';
 import ToastCard from '../../components/Cards/toast';
-import NavigationList from '../../components/NavigationList';
+import NavigationList from '../../components/Navigation/NavigationList';
 
 const Toast = () => {
   return (
