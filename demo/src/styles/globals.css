@@ -36,7 +36,7 @@ a {
 * {
   box-sizing: border-box;
 }
-
+/*
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -46,12 +46,15 @@ a {
     background: black;
   }
 }
+*/
 
 :root .dark {
   --demo-background: #000;
+  background: #000;
 }
 :root .light {
   --demo-background: #fff;
+  background: #fff;
 }
 
 .phantom-button {

@@ -1,7 +1,18 @@
 import type { NestedRecord, Nullable } from '@rothko-ui/utils';
-import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from 'react';
 import type { ThemeMode, ThemeOverrides } from './types';
 import { TERMINAL_KEY } from './types';
+
+// compantibility with SSR
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 // TEMPORARY HACK
 const CSS_VARIABLE_PREFIX = 'rothko';
@@ -62,6 +73,15 @@ export const ThemeContextProvider = ({
     const { light, dark, ...rest } = themeOverrides;
     return createThemeOverrideStyle({ ...((mode === 'light' ? light : dark) || {}), ...rest });
   }, [themeOverrides, mode]);
+
+  // background hack
+  useIsomorphicLayoutEffect(() => {
+    const body = document.body;
+    if (body) {
+      body.classList.remove('light', 'dark');
+      body.classList.add(mode);
+    }
+  }, [mode]);
 
   return (
     <Context.Provider value={{ mode, toggleMode }}>
