@@ -1,4 +1,4 @@
 import Toast from './Toaster';
 
-export { ToastContextProvider, useToaster } from './ToasterContext';
+export { ToastContextConsumer, ToastContextProvider, useToaster } from './ToasterContext';
 export { Toast };

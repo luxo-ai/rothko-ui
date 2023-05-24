@@ -4,7 +4,7 @@ import type { RemSize } from '../../types';
 const distanceFromElement: RemSize = '1rem';
 const arrowSize: RemSize = '0.3rem';
 
-export const Wrapper = styled.div`
+export const TooltipContainerDiv = styled.div`
   display: inline-block;
   position: relative;
 `;

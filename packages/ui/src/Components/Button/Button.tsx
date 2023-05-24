@@ -4,6 +4,7 @@ import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
 import type { KindProps, RothkoKind, RothkoSize } from '../../Theme';
 import InlineSpinnerLoader from '../Loader/InlineSpinnerLoader';
+import type { Accessory } from '../../Library/types';
 
 type ButtonAppearance = 'filled' | 'outline';
 
@@ -48,8 +49,6 @@ const accessorySizeMap: Record<RothkoSize, number> = {
   l: 30,
   xl: 35,
 };
-
-type Accessory = (props: { size: number; color: string }) => JSX.Element;
 
 type ButtonProps = {
   /** the semantic kind of the button */

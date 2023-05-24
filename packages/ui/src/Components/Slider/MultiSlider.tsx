@@ -106,7 +106,6 @@ const SliderLegendContainerDiv = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
-
   margin-bottom: 1rem;
 `;
 

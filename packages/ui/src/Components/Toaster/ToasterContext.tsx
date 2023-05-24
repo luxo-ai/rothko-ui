@@ -19,15 +19,16 @@ type IToasterCtx = {
   addToast: (toast: ToastDetails) => ToastKey;
 };
 
-const ToastCtx = createContext<IToasterCtx | null>(null);
-
-export const useToaster = () => {
-  const ctx = useContext(ToastCtx);
-  if (!ctx) {
+const ToastCtx = createContext<IToasterCtx>({
+  removeToast: () => {
     throw new Error('Outside of toast context');
-  }
-  return ctx;
-};
+  },
+  addToast: () => {
+    throw new Error('Outside of toast context');
+  },
+});
+
+export const useToaster = () => useContext(ToastCtx);
 
 type ToastContextProviderProps = {
   children?: React.ReactNode;
@@ -99,6 +100,8 @@ export const ToastContextProvider = ({ children }: ToastContextProviderProps) =>
     </ToastCtx.Provider>
   );
 };
+
+export const ToastContextConsumer = ToastCtx.Consumer;
 
 export const mobileXsMaxWidth = 300; // ps
 export const mobileMaxWidth = 480; // px

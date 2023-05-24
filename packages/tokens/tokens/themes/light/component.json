@@ -68,6 +68,14 @@
       "border": { "value": "{semanticColor.basic.300}" },
       "background": { "value": "{semanticColor.basic.200}" },
       "background_selected": { "value": "{semanticColor.info.500}" }
+    },
+    "table": {
+      "header": {
+        "background": { "value": "#EEE" }
+      },
+      "row": {
+        "border": { "value": "#eaeaea" }
+      }
     }
   }
 }

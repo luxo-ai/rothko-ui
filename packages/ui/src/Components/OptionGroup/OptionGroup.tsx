@@ -3,14 +3,27 @@ import times from 'lodash/times';
 import React, { useEffect, useMemo, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
+import { Flex, FlexItem } from '../../Layout';
 import Grid from '../../Layout/Grid/Grid';
 import { phantomButtonStyle } from '../../Library/PhantomButton';
-import type { Option, Value } from '../../Library/types';
+import type { Accessory, Option, Value } from '../../Library/types';
 import type { KindProps, RothkoSize } from '../../Theme';
 import type { EmSize, RemSize } from '../../types';
 import Typography from '../Typography/Typography';
-import { Flex, FlexItem } from '../../Layout';
-import { CodeOutline } from '@rothko-ui/icons';
+
+const accessorySizeMap: Record<RothkoSize, number> = {
+  xs: 10,
+  s: 13,
+  m: 18,
+  l: 30,
+  xl: 35,
+};
+
+type OptionArgs = {
+  disabled?: boolean;
+  accessoryLeft?: Accessory;
+  accessoryRight?: Accessory;
+};
 
 type OptionGroupProps<V extends Value> = KindProps & {
   children?: React.ReactNode;
@@ -22,14 +35,19 @@ type OptionGroupProps<V extends Value> = KindProps & {
   onChange: (id: V) => void;
   onExpand?: () => void;
   optionGap?: RemSize | EmSize | number;
-  options: Option<V, { disabled?: boolean } | undefined>[];
+  options: Option<V, OptionArgs | undefined>[];
   optionsWithRadius?: boolean;
   size?: RothkoSize;
   style?: React.CSSProperties;
   value?: V | null;
+  withoutBorder?: boolean;
+  accessoryLeft?: Accessory;
+  accessoryRight?: Accessory;
 };
 
 function OptionGroup<V extends Value>({
+  accessoryLeft: globalAccessoryLeft,
+  accessoryRight: globalAccessoryRight,
   children,
   className,
   fillRemainingSpace,
@@ -41,7 +59,8 @@ function OptionGroup<V extends Value>({
   onExpand,
   optionGap = '0.5rem',
   options,
-  optionsWithRadius = true,
+  optionsWithRadius,
+  withoutBorder,
   size = 'm',
   style,
   value,
@@ -65,8 +84,11 @@ function OptionGroup<V extends Value>({
     <OptionGroupContainer id={id} style={style} className={className}>
       <Grid flexGrow={1} gridTemplateColumns={`repeat(${maxCol}, 1fr)`} gap={optionGap}>
         {displayableOptions.map(o => {
-          const isDisabled = 'data' in o && Boolean(o?.data?.disabled);
+          const dataOptions = 'data' in o ? o?.data : undefined;
+          const isDisabled = Boolean(dataOptions?.disabled);
           const isSelected = o.id === value;
+          const localAccessoryLeft = dataOptions?.accessoryLeft;
+          const localAccessoryRight = dataOptions?.accessoryRight;
 
           const svgColor = isSelected
             ? `var(--rothko-button-${kind}-color, #000)`
@@ -76,7 +98,11 @@ function OptionGroup<V extends Value>({
             disabled: isDisabled,
             selected: isSelected,
             ['with-radius']: optionsWithRadius,
+            ['without-border']: withoutBorder,
           } as const;
+
+          const Left = localAccessoryLeft || globalAccessoryLeft;
+          const Right = localAccessoryRight || globalAccessoryRight;
 
           return (
             <OptionButton
@@ -87,10 +113,17 @@ function OptionGroup<V extends Value>({
               role="option"
             >
               <Flex gap="0.5rem" alignItems="center" justifyContent="space-between">
-                <FlexItem display="flex">
-                  <CodeOutline fill={svgColor} />
-                </FlexItem>
+                {Left && (
+                  <FlexItem display="flex">
+                    <Left size={accessorySizeMap[size]} color={svgColor} />
+                  </FlexItem>
+                )}
                 <FlexItem>{o.label}</FlexItem>
+                {Right && (
+                  <FlexItem display="flex">
+                    <Right size={accessorySizeMap[size]} color={svgColor} />
+                  </FlexItem>
+                )}
               </Flex>
             </OptionButton>
           );
@@ -120,7 +153,7 @@ const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
     font-size: 0.75rem;
   `,
   s: css`
-    padding: 0.3rem 0.5rem;
+    padding: 0.35rem 0.5rem;
     font-size: 0.85rem;
   `,
   m: css`
@@ -151,11 +184,14 @@ const OptionButton = styled.button<Required<KindProps>>`
   justify-content: center;
   overflow: hidden;
   cursor: pointer;
-  border: 0.125rem solid ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
   user-select: none;
+
+  &:not(.without-border) {
+    border: 0.1rem solid ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
+  }
   // added
 
-  border-radius: 0.75rem;
+  // border-radius: 0.25rem;
 
   transition-timing-function: cubic-bezier(0, 0, 1, 1);
   transition-property: background-color, color, border-color;
@@ -178,6 +214,7 @@ const OptionButton = styled.button<Required<KindProps>>`
   &.with-radius {
     border-radius: 0.125rem; // 2px
     border-radius: 0.75rem;
+    border-radius: 1rem;
   }
 
   ${Object.entries(sizeMap).map(

@@ -68,6 +68,14 @@
       "border": { "value": "#6b6b6b" },
       "background": { "value": "#2D3035" },
       "background_selected": { "value": "#c42317" }
+    },
+    "table": {
+      "header": {
+        "background": { "value": "#3B3B3B" }
+      },
+      "row": {
+        "border": { "value": "#585858" }
+      }
     }
   }
 }

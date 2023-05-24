@@ -20,6 +20,10 @@ export const useStyleProps = ({
   backgroundColor,
   borderColor,
   color,
+  borderBottomColor,
+  borderTopColor,
+  borderLeftColor,
+  borderRightColor,
   ...rest
 }: CustomColorCssProperties) => {
   const style = useMemo(() => {
@@ -35,13 +39,47 @@ export const useStyleProps = ({
         ...baseStyle,
         backgroundColor: isRothkoKind(backgroundColor)
           ? `var(--rothko-${backgroundColor}-500, #000)`
-          : color,
+          : backgroundColor,
       };
     }
     if (borderColor) {
       baseStyle = {
         ...baseStyle,
-        borderColor: isRothkoKind(borderColor) ? `var(--rothko-${borderColor}-500, #000)` : color,
+        borderColor: isRothkoKind(borderColor)
+          ? `var(--rothko-${borderColor}-500, #000)`
+          : borderColor,
+      };
+    }
+    if (borderTopColor) {
+      baseStyle = {
+        ...baseStyle,
+        borderColor: isRothkoKind(borderTopColor)
+          ? `var(--rothko-${borderTopColor}-500, #000)`
+          : borderTopColor,
+      };
+    }
+    if (borderRightColor) {
+      baseStyle = {
+        ...baseStyle,
+        borderColor: isRothkoKind(borderRightColor)
+          ? `var(--rothko-${borderRightColor}-500, #000)`
+          : borderRightColor,
+      };
+    }
+    if (borderBottomColor) {
+      baseStyle = {
+        ...baseStyle,
+        borderColor: isRothkoKind(borderBottomColor)
+          ? `var(--rothko-${borderBottomColor}-500, #000)`
+          : borderBottomColor,
+      };
+    }
+    if (borderLeftColor) {
+      baseStyle = {
+        ...baseStyle,
+        borderColor: isRothkoKind(borderLeftColor)
+          ? `var(--rothko-${borderLeftColor}-500, #000)`
+          : borderLeftColor,
       };
     }
     if (rest) {
@@ -54,6 +92,7 @@ export const useStyleProps = ({
 };
 
 type ContainerProps = CustomColorCssProperties & {
+  id?: string;
   as?: keyof JSX.IntrinsicElements;
   children: React.ReactNode;
   className?: string;
@@ -61,12 +100,13 @@ type ContainerProps = CustomColorCssProperties & {
 
 const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
   (
-    { as, children, className, onBlur, onClick, onFocus, ['aria-label']: ariaLabel, ...styles },
+    { as, id, children, className, onBlur, onClick, onFocus, ['aria-label']: ariaLabel, ...styles },
     ref
   ) => {
     const style = useStyleProps(styles);
     return (
       <StyledContainerDiv
+        id={id}
         ref={ref}
         as={as}
         onBlur={onBlur}

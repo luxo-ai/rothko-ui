@@ -10,3 +10,5 @@ export type NestedOption<V> = Option<V> & { subcategories?: Option<V>[] };
 export type RenderOption<V, T = undefined> = (props: { option: Option<V, T> }) => JSX.Element;
 
 export type FocusHandler = (e: React.FocusEvent<HTMLElement>) => void;
+
+export type Accessory = (props: { size: number; color: string }) => JSX.Element;

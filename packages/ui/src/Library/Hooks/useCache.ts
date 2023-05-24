@@ -10,7 +10,7 @@ const EXPIRES_SECONDS_DEFAULT = 5 * 60; // 5 min
 const VACUUM_DELAY_SECONDS_DEFAULT = 2 * 60; // 2 min
 const CACHE_MAX_DEFAULT = 10;
 
-type DataFecher<T, Arg = undefined> = (arg: Arg) => Promise<T>;
+type DataFecher<T, Arg = undefined> = (arg: Arg) => Promise<T> | T;
 type Metadata = { lastFetchedAt: string };
 type CacheValue<T> = { data: T; metadata: Metadata };
 type Cache<T> = ImmutableMap<string, CacheValue<T>>;

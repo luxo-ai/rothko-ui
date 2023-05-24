@@ -7,7 +7,9 @@ import type { Option } from '../../Library/types';
 
 const DEBOUNCE_WAIT_MS = 250;
 
-export type OptionFetcher<V, T = undefined> = (query: string) => Promise<Option<V, T>[]>;
+export type OptionFetcher<V, T = undefined> = (
+  query: string
+) => Promise<Option<V, T>[]> | Option<V, T>[];
 
 type HookProperties<V, T = undefined> = {
   dataFetcher?: OptionFetcher<V, T>;

@@ -37,7 +37,7 @@ const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
   { label: 'Skeleton' },
   {
     label: 'Slider',
-    children: [{ label: 'Single Slider' }, { label: 'Range Slider' }],
+    children: [{ label: 'Single Slider' }, { label: 'Multi Slider' }],
   },
   { label: 'TabBar' },
   { label: 'Tag' },
@@ -76,8 +76,8 @@ export const NAVIGATION_LIST: readonly NavigationSection[] = [
     label: 'Components',
     children: buildSections(COMPONENTS, 'component'),
   },
-  {
+  /*{
     label: 'Forms',
     children: buildSections(FORMS, 'form'),
-  },
+  },*/
 ];

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tooltip, Wrapper } from './Tooltip';
+import { Tooltip, TooltipContainerDiv } from './Tooltip';
 import useTooltip from './useTooltip';
 
 type TooltipProps = {
@@ -10,12 +10,12 @@ type TooltipProps = {
 };
 
 const WithToolip = ({ children, delay, kind = 'top', text }: TooltipProps) => {
-  const [active, { showTip, hideTip }] = useTooltip({ delay });
+  const [active, { showToolTip, hideToolTip }] = useTooltip({ delay });
   return (
-    <Wrapper onMouseEnter={showTip} onMouseLeave={hideTip}>
+    <TooltipContainerDiv onMouseEnter={showToolTip} onMouseLeave={hideToolTip}>
       {children}
       {active && <Tooltip className={kind}>{text}</Tooltip>}
-    </Wrapper>
+    </TooltipContainerDiv>
   );
 };
 
