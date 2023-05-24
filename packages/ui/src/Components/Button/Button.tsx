@@ -5,8 +5,7 @@ import styled, { css } from 'styled-components';
 import type { KindProps, RothkoKind, RothkoSize } from '../../Theme';
 import InlineSpinnerLoader from '../Loader/InlineSpinnerLoader';
 import type { Accessory } from '../../Library/types';
-
-type ButtonAppearance = 'filled' | 'outline';
+import type { ButtonAppearance, ButtonShape } from './types';
 
 type HtmlButtonProps = {
   className?: string;
@@ -62,7 +61,7 @@ type ButtonProps = {
   /** render an accessory to the right of the button content  */
   accessoryRight?: Accessory;
   /** the button shaped */
-  shape?: 'pill' | 'square';
+  shape?: ButtonShape;
   /** is content loading from this target */
   loading?: boolean;
   /** make the width fit the button content */

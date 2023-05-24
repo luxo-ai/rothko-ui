@@ -1,8 +1,10 @@
 import { Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
 import { Button, Flex, FlexItem, Toggle, Typography, WidthGeqOnly, useRothko } from '@rothko-ui/ui';
+import cookieCutter from 'cookie-cutter';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
+import { ROTHKO_MODE_COOKIE_NAME } from '../../constants';
 import styles from './Navigation.module.scss';
 
 type NavigationProps = {
@@ -15,7 +17,9 @@ const Navigation = ({ openDrawer }: NavigationProps) => {
 
   useEffect(() => {
     if (typeof window !== 'undefined' && mode) {
-      localStorage.setItem('rothko-ui-mode-preference', mode);
+      // Set a cookie
+      const expirationDate = new Date(Date.now() + 1000 * 60 * 60 * 24 * 3); // 3 days
+      cookieCutter.set(ROTHKO_MODE_COOKIE_NAME, mode, { expires: expirationDate, path: '/' });
     }
   }, [mode]);
 

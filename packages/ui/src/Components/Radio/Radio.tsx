@@ -64,7 +64,7 @@ const RadioOutlineDiv = styled.div`
   width: 1.25rem;
   height: 1.25rem;
   border-radius: calc(1.25rem / 2);
-  padding: 0.125rem;
+  padding: 0.1875rem;
 `;
 
 const RadioInnerDiv = styled.div<KindProps>`

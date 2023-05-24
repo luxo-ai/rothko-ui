@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../../Library/PhantomButton';
-import type { RothkoKind } from '../../Theme';
+import type { KindProps, RothkoKind } from '../../Theme';
 
 export type TextProps = {
   light?: boolean;
@@ -184,6 +184,10 @@ const inlineBody = styled.span<TextProps>`
   font-weight: normal;
 `;
 
+const code = styled.code<KindProps>`
+  color: ${({ kind }) => (kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)')};
+`;
+
 export default {
   // for now
   body,
@@ -202,4 +206,5 @@ export default {
   linkStyle,
   title,
   titleBig,
+  code,
 };

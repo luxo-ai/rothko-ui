@@ -28,7 +28,6 @@ type OptionArgs = {
 type OptionGroupProps<V extends Value> = KindProps & {
   children?: React.ReactNode;
   className?: string;
-  fillRemainingSpace?: boolean;
   id?: string;
   maxCol?: number;
   maxRow?: number;
@@ -50,7 +49,6 @@ function OptionGroup<V extends Value>({
   accessoryRight: globalAccessoryRight,
   children,
   className,
-  fillRemainingSpace,
   id,
   kind = 'info',
   maxCol = 4,
@@ -78,10 +76,11 @@ function OptionGroup<V extends Value>({
     if (expanded) onExpand?.();
   }, [expanded]);
 
+  const fillRemainingSpace = Boolean(children);
   const remainingSpace = (maxCol - (displayableOptions.length % maxCol)) % maxCol;
 
   return (
-    <OptionGroupContainer id={id} style={style} className={className}>
+    <OptionGroupContainerDiv id={id} style={style} className={className}>
       <Grid flexGrow={1} gridTemplateColumns={`repeat(${maxCol}, 1fr)`} gap={optionGap}>
         {displayableOptions.map(o => {
           const dataOptions = 'data' in o ? o?.data : undefined;
@@ -133,7 +132,7 @@ function OptionGroup<V extends Value>({
           times(remainingSpace).map(i => (
             <div key={`opt-group-blank-${i}`} id={`opt-group-blank-${i}`} />
           ))}
-        {children}
+        {<div>{children}</div>}
       </Grid>
       {maxOptions < options.length && (
         <ExpandButtonLink
@@ -143,7 +142,7 @@ function OptionGroup<V extends Value>({
           {expanded ? '- less' : '+ more'}
         </ExpandButtonLink>
       )}
-    </OptionGroupContainer>
+    </OptionGroupContainerDiv>
   );
 }
 
@@ -170,7 +169,7 @@ const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   `,
 };
 
-const OptionGroupContainer = styled.div`
+const OptionGroupContainerDiv = styled.div`
   display: flex;
   flex-direction: row;
 `;

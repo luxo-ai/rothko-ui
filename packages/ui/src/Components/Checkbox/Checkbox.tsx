@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import type { KindProps, RothkoKind } from '../../Theme/types';
 import Typography from '../Typography/Typography';
 import { keyDownFactory } from '../../utils/keyUtils';
+import { LabelText } from '../../Library/Common';
 
 type CheckboxProps = {
   checked?: boolean;
