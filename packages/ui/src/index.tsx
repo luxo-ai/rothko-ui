@@ -1,6 +1,5 @@
 export * from './Components';
 export type { ButtonAppearance, ButtonShape } from './Components/Button/types';
-export * from './Form';
 export * from './Helpers';
 export * from './Hooks';
 export * from './Layout';
