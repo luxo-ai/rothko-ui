@@ -4,7 +4,7 @@ import WithNavigation from '../components/WithNavigation';
 
 const Icons = () => {
   return (
-    <WithNavigation selected="/icons">
+    <WithNavigation selected="icons">
       <IconsCard />
     </WithNavigation>
   );

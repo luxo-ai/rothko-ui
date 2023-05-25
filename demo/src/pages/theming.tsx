@@ -4,7 +4,7 @@ import WithNavigation from '../components/WithNavigation';
 
 const Theming = () => {
   return (
-    <WithNavigation selected="/theming">
+    <WithNavigation selected="theming">
       <Typography.h1>Todo</Typography.h1>
     </WithNavigation>
   );

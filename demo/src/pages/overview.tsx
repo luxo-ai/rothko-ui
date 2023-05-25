@@ -19,7 +19,7 @@ BashCode.displayName = 'BashCode';
 const Overview = () => {
   const router = useRouter();
   return (
-    <WithNavigation selected="/overview">
+    <WithNavigation selected="overview">
       <Typography.h1>Overview</Typography.h1>
       <Typography.body style={{ marginTop: '1rem' }}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel neque nec quam

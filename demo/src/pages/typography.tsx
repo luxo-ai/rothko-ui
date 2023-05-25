@@ -4,7 +4,7 @@ import WithNavigation from '../components/WithNavigation';
 
 const Typography = () => {
   return (
-    <WithNavigation selected="/typography">
+    <WithNavigation selected="typography">
       <TypographyCard />
     </WithNavigation>
   );
