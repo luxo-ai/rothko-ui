@@ -3,10 +3,9 @@ import { Button, MaxWidth } from '@rothko-ui/ui';
 import { useState } from 'react';
 import Card from '../Card';
 import { CodeLanguage } from '../CodeExample';
+import CustomizationsAccordion from './CustomizationsAccordion';
 import buttonCopy from './copy';
 import buttonProps from './props';
-import CustomizationsAccordion from './CustomizationsAccordion';
-import { useIsMobileOrTablet } from '../../IsMobileOrTabletContext';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
@@ -37,7 +36,6 @@ const ButtonCard = () => {
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [alertOnClick, setAlertOnClick] = useState(false);
-  const isMobile = useIsMobileOrTablet();
 
   return (
     <Card
@@ -46,7 +44,6 @@ const ButtonCard = () => {
       propsMeta={{ meta: buttonProps, description: buttonCopy.description }}
     >
       <MaxWidth maxW="55rem">
-        is mobile {!isMobile ? 'false' : 'true'}
         <CustomizationsAccordion
           alertOnClick={alertOnClick}
           appearance={appearance}

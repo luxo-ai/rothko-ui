@@ -38,15 +38,8 @@ type AccordionPanelProps = {
   open?: boolean;
 };
 
-const AccordionPanel = ({
-  children,
-  className,
-  labelProps,
-  title,
-  style,
-  open: initialOpen,
-}: AccordionPanelProps) => {
-  const { selectedPanels, onClickPanel, bordered, kind, iconKind, registerPanel } = useAccordion();
+const AccordionPanel = ({ children, className, labelProps, title, style }: AccordionPanelProps) => {
+  const { selectedPanels, onClickPanel, bordered, kind, iconKind } = useAccordion();
   const panelIdRef = useRef(uuid.v4());
   const isPanelSelected = selectedPanels.has(panelIdRef.current);
 
@@ -55,9 +48,10 @@ const AccordionPanel = ({
     return isPanelSelected ? open : closed;
   }, [isPanelSelected, iconKind]);
 
-  const iconColor = kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-border, #000)';
-
-  registerPanel(panelIdRef.current, !!initialOpen);
+  const iconColor = kind
+    ? `var(--rothko-${kind}-500, #000)`
+    : 'var(--rothko-accordion-border, #000)';
+  // : 'var(--rothko-border, #000)';
 
   return (
     <PanelContainerDiv
@@ -137,11 +131,13 @@ const PanelContent = ({ children, id, isOpen }: PanelContentProps) => {
 
 const PanelContainerDiv = styled.div<KindProps>`
   overflow: hidden;
-  background: var(--rothko-background, transparent);
+  background: var(--rothko-accordion-background, #fff);
+  // var(--rothko-background, transparent);
   padding: 0 0.875rem;
   border-radius: 0.125rem;
 
   &.bordered {
+    background: var(--rothko-background, transparent);
     border: 1px solid
       ${({ kind }) => (kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-border, #000)')};
   }
@@ -159,7 +155,8 @@ const PanelLabelButton = styled.button`
 `;
 
 const PanelContentDiv = styled.div`
-  background: var(--rothko-background, transparent);
+  background: var(--rothko-accordion-background, #fff);
+  // var(--rothko-background, transparent);
   padding-bottom: 0.875rem;
 `;
 

@@ -63,5 +63,8 @@ App.getInitialProps = async (ctx: AppContext) => {
   const cookieString = ctx.ctx.req?.headers.cookie || '';
   const cookies = cookie.parse(cookieString);
   const mobileDetect = new MobileDetect(ctx.ctx.req?.headers['user-agent'] || '');
-  return { cookies, IsMobileOrTablet: !!mobileDetect.mobile() || !!mobileDetect.tablet };
+  return {
+    cookies,
+    isMobileOrTablet: !!mobileDetect.mobile() || !!mobileDetect.tablet(),
+  };
 };

@@ -4,7 +4,6 @@ import type { RothkoKind } from '../../Theme';
 import type { IconKind } from './types';
 
 type IAccordionContext = {
-  registerPanel: (id: string, initiallyOpen: boolean) => void;
   onClickPanel: (id: string) => void;
   selectedPanels: ImSet<string>;
   kind?: RothkoKind;

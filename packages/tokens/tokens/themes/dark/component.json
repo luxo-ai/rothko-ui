@@ -105,6 +105,14 @@
       "basic": {
         "color": { "value": "{component.button.basic.color}" }
       }
+    },
+    "box": {
+      "background": { "value": "#141414" },
+      "border": { "value": "{base.border}" }
+    },
+    "accordion": {
+      "border": { "value": "{base.border}" },
+      "background": { "value": "#141414" }
     }
   }
 }
