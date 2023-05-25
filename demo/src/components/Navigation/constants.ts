@@ -65,6 +65,6 @@ export const NAVIGATION_LIST: readonly NavigationSection[] = [
   },
   {
     label: 'Components',
-    children: buildSections(COMPONENTS, 'component'),
+    children: buildSections(COMPONENTS, 'components'),
   },
 ];

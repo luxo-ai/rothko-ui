@@ -1,3 +1,6 @@
+import type { RemSize } from '../types';
+import type { EmSize } from '../types';
+
 type WithData<Base, DataType> = DataType extends undefined ? Base : Base & { data: DataType };
 
 export type Value = string | number;
@@ -11,4 +14,4 @@ export type RenderOption<V, T = undefined> = (props: { option: Option<V, T> }) =
 
 export type FocusHandler = (e: React.FocusEvent<HTMLElement>) => void;
 
-export type Accessory = (props: { size: number; color: string }) => JSX.Element;
+export type Accessory = (props: { size: number | RemSize | EmSize; color: string }) => JSX.Element;

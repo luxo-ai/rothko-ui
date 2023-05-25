@@ -1,10 +1,14 @@
 import type { Set as ImSet } from 'immutable';
 import { createContext, useContext } from 'react';
+import type { RothkoKind } from '../../Theme';
+import type { IconKind } from './types';
 
 type IAccordionContext = {
   onClickPanel: (id: string) => void;
   selectedPanels: ImSet<string>;
-  borderColor?: string;
+  kind?: RothkoKind;
+  bordered?: boolean;
+  iconKind: IconKind;
 };
 
 export const AccordionContext = createContext<IAccordionContext | null>(null);

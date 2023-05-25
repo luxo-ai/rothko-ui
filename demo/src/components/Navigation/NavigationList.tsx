@@ -14,7 +14,6 @@ type ExpandNavListProps = {
 
 const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListProps) => {
   const router = useRouter();
-
   if (isLeaf(item)) {
     return (
       <ListItem>

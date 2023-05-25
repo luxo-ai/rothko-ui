@@ -1,15 +1,12 @@
-import { Grid, Typography, WidthGeqOnly } from '@rothko-ui/ui';
+import { Typography } from '@rothko-ui/ui';
 import React from 'react';
-import NavigationList from '../components/Navigation/NavigationList';
+import WithNavigation from '../components/WithNavigation';
 
 const Theming = () => {
   return (
-    <Grid padding="2rem 0" gridTemplateColumns="minmax(100px, 250px) 1fr">
-      <WidthGeqOnly threshold={750}>
-        <NavigationList />
-      </WidthGeqOnly>
+    <WithNavigation selected="/theming">
       <Typography.h1>Todo</Typography.h1>
-    </Grid>
+    </WithNavigation>
   );
 };
 

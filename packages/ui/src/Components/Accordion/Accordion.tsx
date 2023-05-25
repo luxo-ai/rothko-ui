@@ -3,6 +3,7 @@ import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import type { RothkoKind } from '../../Theme/types';
 import { AccordionContext } from './AccordionContext';
+import type { IconKind } from './types';
 
 type AccordionProps = {
   bordered?: boolean;
@@ -11,6 +12,7 @@ type AccordionProps = {
   kind?: RothkoKind;
   mutuallyExclusive?: boolean;
   style?: React.CSSProperties;
+  iconKind?: IconKind;
 };
 
 const Accordion = ({
@@ -20,6 +22,7 @@ const Accordion = ({
   className,
   kind,
   bordered,
+  iconKind = 'standard',
 }: AccordionProps) => {
   const [selectedPanels, setSelectedPanels] = useState(ImSet<string>());
 
@@ -38,12 +41,10 @@ const Accordion = ({
     <AccordionContext.Provider
       value={{
         selectedPanels,
-        borderColor: bordered
-          ? kind
-            ? `var(--rothko-${kind}-500, #000)`
-            : 'var(--rothko-border, #000)'
-          : undefined,
+        kind,
+        bordered,
         onClickPanel,
+        iconKind,
       }}
     >
       <AccordionGroupDiv style={style} className={className}>
