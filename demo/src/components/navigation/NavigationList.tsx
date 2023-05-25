@@ -23,17 +23,15 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
             onNavigate?.();
             router.push(`/${item.to}`);
           }}
-          style={{ textDecoration: 'none', width: '100%', textAlign: 'inherit' }}
+          style={{
+            textDecoration: 'none',
+            width: '100%',
+            textAlign: 'inherit',
+            padding: `0.5rem calc(${depth} * 1.25rem)`,
+          }}
+          bold={selected === item.to}
         >
-          <div
-            style={{
-              padding: `0.5rem calc(${depth} * 1.25rem)`,
-              color: selected === item.to ? 'var(--rothko-link, #000)' : undefined,
-              cursor: 'pointer',
-            }}
-          >
-            {item.label}
-          </div>
+          {item.label}
         </Typography.linkButton>
       </ListItem>
     );
