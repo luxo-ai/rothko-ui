@@ -4,7 +4,7 @@ import WithNavigation from '../../components/WithNavigation';
 
 const Main = () => {
   return (
-    <WithNavigation>
+    <WithNavigation selected="components/accordion">
       <AccordionCard />
     </WithNavigation>
   );

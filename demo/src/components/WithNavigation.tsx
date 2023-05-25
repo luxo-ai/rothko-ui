@@ -4,13 +4,14 @@ import React from 'react';
 import styles from './WithNavigation.module.scss';
 
 type WithNavigationProps = {
+  selected?: string;
   children: React.ReactNode;
 };
 
-const WithNavigation = ({ children }: WithNavigationProps) => (
+const WithNavigation = ({ children, selected }: WithNavigationProps) => (
   <div className={styles.withNavGrid}>
     <WidthGeqOnly threshold={750}>
-      <NavigationList />
+      <NavigationList selected={selected} />
     </WidthGeqOnly>
     <div>{children}</div>
   </div>

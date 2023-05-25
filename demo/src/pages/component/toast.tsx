@@ -1,18 +1,15 @@
-import { Grid, ToastContextProvider, WidthGeqOnly } from '@rothko-ui/ui';
+import { ToastContextProvider } from '@rothko-ui/ui';
 import React from 'react';
 import ToastCard from '../../components/Cards/toast';
-import NavigationList from '../../components/Navigation/NavigationList';
+import WithNavigation from '../../components/WithNavigation';
 
 const Toast = () => {
   return (
-    <Grid padding="2rem 0" gridTemplateColumns="minmax(100px, 250px) 1fr">
-      <WidthGeqOnly threshold={750}>
-        <NavigationList />
-      </WidthGeqOnly>
+    <WithNavigation selected="components/toast">
       <ToastContextProvider>
         <ToastCard />
       </ToastContextProvider>
-    </Grid>
+    </WithNavigation>
   );
 };
 

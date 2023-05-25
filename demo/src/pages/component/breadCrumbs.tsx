@@ -4,7 +4,7 @@ import WithNavigation from '../../components/WithNavigation';
 
 const BreadCrumbs = () => {
   return (
-    <WithNavigation>
+    <WithNavigation selected="components/breadCrumbs">
       <BreadCrumbsCard />
     </WithNavigation>
   );

@@ -4,7 +4,7 @@ import WithNavigation from '../../components/WithNavigation';
 
 const Alert = () => {
   return (
-    <WithNavigation>
+    <WithNavigation selected="components/alert">
       <AlertCard />
     </WithNavigation>
   );

@@ -4,7 +4,7 @@ import WithNavigation from '../../components/WithNavigation';
 
 const BottomPopup = () => {
   return (
-    <WithNavigation>
+    <WithNavigation selected="components/bottomPopup">
       <BottomPopupCard />
     </WithNavigation>
   );

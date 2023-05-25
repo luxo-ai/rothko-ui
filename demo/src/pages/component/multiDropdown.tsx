@@ -1,16 +1,12 @@
-import { Grid, WidthGeqOnly } from '@rothko-ui/ui';
-import MultiDropdownCard from '../../components/Cards/multiDropdown';
-import NavigationList from '../../components/Navigation/NavigationList';
 import React from 'react';
+import MultiDropdownCard from '../../components/Cards/multiDropdown';
+import WithNavigation from '../../components/WithNavigation';
 
 const MultiDropdown = () => {
   return (
-    <Grid padding="2rem 0" gridTemplateColumns="minmax(100px, 250px) 1fr">
-      <WidthGeqOnly threshold={750}>
-        <NavigationList />
-      </WidthGeqOnly>
+    <WithNavigation selected="components/multiDropdown">
       <MultiDropdownCard />
-    </Grid>
+    </WithNavigation>
   );
 };
 

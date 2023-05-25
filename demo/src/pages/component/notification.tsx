@@ -1,16 +1,12 @@
-import { Grid, WidthGeqOnly } from '@rothko-ui/ui';
-import NotificationCard from '../../components/Cards/notification';
-import NavigationList from '../../components/Navigation/NavigationList';
 import React from 'react';
+import NotificationCard from '../../components/Cards/notification';
+import WithNavigation from '../../components/WithNavigation';
 
 const Notification = () => {
   return (
-    <Grid padding="2rem 0" gridTemplateColumns="minmax(100px, 250px) 1fr">
-      <WidthGeqOnly threshold={750}>
-        <NavigationList />
-      </WidthGeqOnly>
+    <WithNavigation selected="components/notification">
       <NotificationCard />
-    </Grid>
+    </WithNavigation>
   );
 };
 

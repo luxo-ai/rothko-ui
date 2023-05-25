@@ -4,7 +4,7 @@ import WithNavigation from '../../components/WithNavigation';
 
 const Button = () => {
   return (
-    <WithNavigation>
+    <WithNavigation selected="components/button">
       <ButtonCard />
     </WithNavigation>
   );

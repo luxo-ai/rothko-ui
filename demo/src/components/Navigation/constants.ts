@@ -29,7 +29,6 @@ const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
   { label: 'Input' },
   { label: 'Label' },
   { label: 'List' },
-  { label: 'Loader' },
   { label: 'Modal' },
   { label: 'Notification' },
   { label: 'Radio' },
@@ -45,6 +44,7 @@ const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
   { label: 'Toggle' },
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const FORMS: readonly NavigationSectionWithoutTo[] = [
   { label: 'Overview' },
   {

@@ -4,7 +4,7 @@ import WithNavigation from '../../components/WithNavigation';
 
 const Avatar = () => {
   return (
-    <WithNavigation>
+    <WithNavigation selected="components/avatar">
       <AvatarCard />
     </WithNavigation>
   );

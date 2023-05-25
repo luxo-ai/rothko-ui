@@ -28,13 +28,8 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
         >
           <div
             style={{
-              padding:
-                selected === item.to
-                  ? `0.5rem calc(${depth} * 1.25rem - 4px)`
-                  : `0.5rem calc(${depth} * 1.25rem)`,
-              borderLeft: selected === item.to ? '4px solid orange' : undefined,
-              background: selected === item.to ? 'rgb(31, 31, 31)' : undefined,
-              color: selected === item.to ? 'white' : undefined,
+              padding: `0.5rem calc(${depth} * 1.25rem)`,
+              color: selected === item.to ? 'var(--rothko-link, #000)' : undefined,
               cursor: 'pointer',
             }}
           >

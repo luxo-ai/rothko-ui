@@ -1,16 +1,12 @@
-import { Grid, WidthGeqOnly } from '@rothko-ui/ui';
-import NestedDropdownCard from '../../components/Cards/nestedDropdown';
-import NavigationList from '../../components/Navigation/NavigationList';
 import React from 'react';
+import NestedDropdownCard from '../../components/Cards/nestedDropdown';
+import WithNavigation from '../../components/WithNavigation';
 
 const NestedDropdown = () => {
   return (
-    <Grid padding="2rem 0" gridTemplateColumns="minmax(100px, 250px) 1fr">
-      <WidthGeqOnly threshold={750}>
-        <NavigationList />
-      </WidthGeqOnly>
+    <WithNavigation selected="components/nestedDropdown">
       <NestedDropdownCard />
-    </Grid>
+    </WithNavigation>
   );
 };
 
