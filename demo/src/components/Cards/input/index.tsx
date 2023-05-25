@@ -1,7 +1,7 @@
 import { Input } from '@rothko-ui/ui';
 import React, { useState } from 'react';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 import inputCopy from './copy';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {

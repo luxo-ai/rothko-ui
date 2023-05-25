@@ -1,7 +1,7 @@
 import { Button, Container, useToaster } from '@rothko-ui/ui';
 import React from 'react';
 
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 
 import Card from '../Card';
 import toastCopy from './copy';

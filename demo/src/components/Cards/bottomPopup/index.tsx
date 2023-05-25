@@ -2,7 +2,7 @@ import { BottomPopup, Button, Container, Typography } from '@rothko-ui/ui';
 import React, { useState } from 'react';
 import Card from '../Card';
 import bottomPopupCopy from './copy';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 import bottomPopupProps from './props';
 import { ArrowCircleUp } from '@rothko-ui/icons';
 

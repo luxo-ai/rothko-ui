@@ -1,7 +1,7 @@
 import { Button, Container, Drawer, Typography } from '@rothko-ui/ui';
 import React, { useState } from 'react';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 import drawerCopy from './copy';
 import drawerProps from './props';
 import { ArrowCircleRight } from '@rothko-ui/icons';

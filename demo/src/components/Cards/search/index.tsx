@@ -1,7 +1,7 @@
 import { Search } from '@rothko-ui/ui';
 import React, { useState } from 'react';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 import searchCopy from './copy';
 import searchProps from './props';
 

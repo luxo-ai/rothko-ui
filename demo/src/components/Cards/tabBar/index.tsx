@@ -1,6 +1,6 @@
 import { TabBar, Typography } from '@rothko-ui/ui';
 import React from 'react';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 
 import Card from '../Card';
 import tabBarCopy from './copy';

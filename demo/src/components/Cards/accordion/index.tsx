@@ -1,7 +1,7 @@
 import { Accordion, AccordionPanel } from '@rothko-ui/ui';
 import React from 'react';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 import accordionCopy from './copy';
 import accordionProps from './props';
 

@@ -1,7 +1,7 @@
 import { Alert } from '@rothko-ui/ui';
 import React from 'react';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 import alertCopy from './copy';
 import alertProps from './props';
 

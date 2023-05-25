@@ -2,7 +2,7 @@
 import { Tag } from '@rothko-ui/ui';
 import React from 'react';
 
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 
 import Card from '../Card';
 import tagCopy from './copy';

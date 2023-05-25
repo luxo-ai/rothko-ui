@@ -23,18 +23,23 @@ export type CodeSnippetProps = {
   examplesLookup: Record<CodeLanguage, string>;
 };
 
-const CodeSnippet = ({ examplesLookup, alwaysExpanded, initial }: CodeSnippetProps) => {
+const CodeExample = ({
+  examplesLookup,
+  alwaysExpanded = true,
+  initial = CodeLanguage.TS,
+}: CodeSnippetProps) => {
   const [expanded, setExpanded] = useState<CodeLanguage | null>(initial || null);
   const { mode } = useRothko();
   return (
     <>
       <Container marginTop="1rem">
-        <MaxWidth maxW="10rem">
+        <Typography.h3>Example</Typography.h3>
+        <Container marginTop="1rem" maxWidth="10rem">
           <OptionGroup
             maxCol={2}
-            kind="info"
-            optionGap="0.25rem"
-            size="m"
+            kind="warning"
+            optionGap="0.5rem"
+            size="s"
             value={expanded}
             options={[
               { id: CodeLanguage.TS, label: 'TS' },
@@ -51,12 +56,12 @@ const CodeSnippet = ({ examplesLookup, alwaysExpanded, initial }: CodeSnippetPro
             accessoryLeft={({ size, color }) => (
               <CodeOutline height={size} width={size} fill={color} />
             )}
-            optionsWithRadius
+            // optionsWithRadius
+            // withoutBorder
           />
-        </MaxWidth>
+        </Container>
       </Container>
-
-      <Container display={expanded === null ? 'none' : undefined} margin="2rem 0">
+      <Container display={expanded === null ? 'none' : undefined} margin="1rem 0">
         <Highlight
           theme={mode === 'dark' ? themes.nightOwl : themes.nightOwlLight}
           code={expanded !== null ? examplesLookup[expanded] : ''}
@@ -116,4 +121,4 @@ const CodeSnippet = ({ examplesLookup, alwaysExpanded, initial }: CodeSnippetPro
   );
 };
 
-export default CodeSnippet;
+export default CodeExample;

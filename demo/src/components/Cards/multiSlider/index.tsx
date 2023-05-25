@@ -1,7 +1,7 @@
 import { MultiSlider } from '@rothko-ui/ui';
 import React, { useState } from 'react';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 import multiSliderCopy from './copy';
 import multiSliderProps from './props';
 

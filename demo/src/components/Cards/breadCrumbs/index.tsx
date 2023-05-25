@@ -2,7 +2,7 @@ import { BreadCrumbItem, BreadCrumbs } from '@rothko-ui/ui';
 import { noop } from 'lodash';
 import React from 'react';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 import breadCrumbsCopy from './copy';
 import breadCrumbsProps from './props';
 

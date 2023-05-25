@@ -1,7 +1,7 @@
 import { Button, Container, Modal, Typography } from '@rothko-ui/ui';
 import React from 'react';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 import modalCopy from './copy';
 import modalProps from './props';
 import { ArrowCircleUp } from '@rothko-ui/icons';

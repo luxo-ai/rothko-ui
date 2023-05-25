@@ -1,8 +1,8 @@
 import { Container, Typography } from '@rothko-ui/ui';
 import React from 'react';
 import styles from './Cards.module.scss';
-import type { CodeSnippetProps } from './CodeSnippet';
-import CodeSnippet from './CodeSnippet';
+import type { CodeSnippetProps } from './CodeExample';
+import CodeExample from './CodeExample';
 import type { PropMeta } from './PropsTable';
 import PropsTable from './PropsTable';
 import type { CardCopy } from './types';
@@ -21,19 +21,19 @@ const Card = ({ children, copy, propsMeta, codeSnippet }: CardProps) => {
       <Typography.body className={styles.cardDescription}>{copy.description}</Typography.body>
       <div className={styles.section}>{children}</div>
       {codeSnippet && (
-        <Container marginTop="2rem">
-          <CodeSnippet {...codeSnippet} />
+        <Container marginTop="3rem">
+          <CodeExample {...codeSnippet} />
         </Container>
       )}
       {propsMeta && (
-        <Container marginTop="2rem">
-          <Typography.h2>Props</Typography.h2>
+        <Container marginTop="3rem">
+          <Typography.h3>Props</Typography.h3>
           {propsMeta.description && (
             <Typography.body className={styles.cardDescription}>
               {propsMeta.description}
             </Typography.body>
           )}
-          <Container marginTop="2rem">
+          <Container marginTop="3rem">
             <PropsTable propsMeta={propsMeta.meta} />
           </Container>
         </Container>

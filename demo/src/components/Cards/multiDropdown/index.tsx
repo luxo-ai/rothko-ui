@@ -1,7 +1,7 @@
 import { Dropdown } from '@rothko-ui/ui';
 import React, { useState } from 'react';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 import multiDropdownCopy from './copy';
 import multiDropdownProps from './props';
 

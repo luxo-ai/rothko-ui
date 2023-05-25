@@ -2,7 +2,7 @@ import { Slider } from '@rothko-ui/ui';
 import React, { useState } from 'react';
 
 import Card from '../Card';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 import sliderCopy from './copy';
 import sliderProps from './props';
 

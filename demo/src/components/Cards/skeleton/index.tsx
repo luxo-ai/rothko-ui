@@ -2,7 +2,7 @@ import { SkeletonBox, SkeletonBoxWithLabel } from '@rothko-ui/ui';
 import React from 'react';
 
 import Card from '../Card';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 import skeletonCopy from './copy';
 import skeletonProps from './props';
 

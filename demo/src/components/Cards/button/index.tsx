@@ -1,11 +1,18 @@
 import type { ButtonAppearance, ButtonShape, Option, RothkoKind, RothkoSize } from '@rothko-ui/ui';
-import { AccordionPanel } from '@rothko-ui/ui';
-import { Accordion } from '@rothko-ui/ui';
-import { Typography } from '@rothko-ui/ui';
-import { Button, Checkbox, Container, Flex, FlexItem, MaxWidth, RadioGroup } from '@rothko-ui/ui';
-import React, { useState } from 'react';
+import {
+  Accordion,
+  AccordionPanel,
+  Button,
+  Checkbox,
+  Flex,
+  FlexItem,
+  MaxWidth,
+  RadioGroup,
+  Typography,
+} from '@rothko-ui/ui';
+import { useState } from 'react';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 import buttonCopy from './copy';
 import buttonProps from './props';
 

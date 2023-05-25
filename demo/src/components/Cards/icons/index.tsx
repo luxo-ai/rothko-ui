@@ -14,7 +14,7 @@ import { noop } from 'lodash';
 import React, { useMemo, useState } from 'react';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import Card from '../Card';
-import CodeSnippet, { CodeLanguage } from '../CodeSnippet';
+import CodeExample, { CodeLanguage } from '../CodeExample';
 import iconographyCopy from './copy';
 import { filledIconList, outlineIconList } from './iconsList';
 
@@ -62,7 +62,7 @@ const IconsCard = () => {
   return (
     <Card copy={iconographyCopy}>
       <Container marginTop="2rem">
-        <CodeSnippet alwaysExpanded initial={CodeLanguage.TS} examplesLookup={EXAMPLE_LOOKUP} />
+        <CodeExample alwaysExpanded initial={CodeLanguage.TS} examplesLookup={EXAMPLE_LOOKUP} />
         <Typography.h3>Availabe Icons</Typography.h3>
         <Container marginTop="2rem">
           <SearchBar
@@ -76,6 +76,7 @@ const IconsCard = () => {
           <MaxWidth maxW="13rem">
             <OptionGroup
               withoutBorder
+              optionsWithRadius
               maxCol={2}
               kind="secondary"
               optionGap="0.75rem"

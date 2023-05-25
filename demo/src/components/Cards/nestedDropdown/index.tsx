@@ -1,7 +1,7 @@
 import { NestedDropdown } from '@rothko-ui/ui';
 import React, { useState } from 'react';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 import nestedDropdownCopy from './copy';
 import nestedDropdownProps from './props';
 

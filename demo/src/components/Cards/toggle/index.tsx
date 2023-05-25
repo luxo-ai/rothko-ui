@@ -1,7 +1,7 @@
 import { Toggle } from '@rothko-ui/ui';
 import React, { useState } from 'react';
 
-import { CodeLanguage } from '../CodeSnippet';
+import { CodeLanguage } from '../CodeExample';
 
 import Card from '../Card';
 import toggleCopy from './copy';
