@@ -1,5 +1,5 @@
 import React from 'react';
-import AccordionCard from '../../components/ccards/accordion';
+import AccordionCard from '../../components/cards/accordion';
 import WithNavigation from '../../components/WithNavigation';
 
 const Accordion = () => {

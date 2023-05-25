@@ -1,5 +1,5 @@
 import React from 'react';
-import TypographyCard from '../components/ccards/typography';
+import TypographyCard from '../components/cards/typography';
 import WithNavigation from '../components/WithNavigation';
 
 const Typography = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonCard from '../../components/ccards/button';
+import ButtonCard from '../../components/cards/button';
 import WithNavigation from '../../components/WithNavigation';
 
 const Button = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import CheckboxCard from '../../components/ccards/checkbox';
+import CheckboxCard from '../../components/cards/checkbox';
 import WithNavigation from '../../components/WithNavigation';
 
 const Checkbox = () => {

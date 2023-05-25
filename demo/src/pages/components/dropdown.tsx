@@ -1,5 +1,5 @@
 import React from 'react';
-import DropdownCard from '../../components/ccards/dropdown';
+import DropdownCard from '../../components/cards/dropdown';
 import WithNavigation from '../../components/WithNavigation';
 
 const Dropdown = () => {

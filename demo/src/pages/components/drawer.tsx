@@ -1,5 +1,5 @@
 import React from 'react';
-import DrawerCard from '../../components/ccards/drawer';
+import DrawerCard from '../../components/cards/drawer';
 import WithNavigation from '../../components/WithNavigation';
 
 const Drawer = () => {

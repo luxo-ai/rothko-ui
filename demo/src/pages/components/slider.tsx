@@ -1,5 +1,5 @@
 import React from 'react';
-import SliderCard from '../../components/ccards/slider';
+import SliderCard from '../../components/cards/slider';
 import WithNavigation from '../../components/WithNavigation';
 
 const Slider = () => {

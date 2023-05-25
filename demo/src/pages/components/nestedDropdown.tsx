@@ -1,5 +1,5 @@
 import React from 'react';
-import NestedDropdownCard from '../../components/ccards/nestedDropdown';
+import NestedDropdownCard from '../../components/cards/nestedDropdown';
 import WithNavigation from '../../components/WithNavigation';
 
 const NestedDropdown = () => {

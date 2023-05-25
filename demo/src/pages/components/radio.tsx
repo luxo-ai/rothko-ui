@@ -1,5 +1,5 @@
 import React from 'react';
-import RadioCard from '../../components/ccards/radio';
+import RadioCard from '../../components/cards/radio';
 import WithNavigation from '../../components/WithNavigation';
 
 const Radio = () => {

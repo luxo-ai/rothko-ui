@@ -1,5 +1,5 @@
 import React from 'react';
-import TagCard from '../../components/ccards/tag';
+import TagCard from '../../components/cards/tag';
 import WithNavigation from '../../components/WithNavigation';
 
 const Tag = () => {

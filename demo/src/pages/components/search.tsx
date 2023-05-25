@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchCard from '../../components/ccards/search';
+import SearchCard from '../../components/cards/search';
 import WithNavigation from '../../components/WithNavigation';
 
 const Search = () => {

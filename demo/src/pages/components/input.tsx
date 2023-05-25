@@ -1,5 +1,5 @@
 import React from 'react';
-import InputCard from '../../components/ccards/input';
+import InputCard from '../../components/cards/input';
 import WithNavigation from '../../components/WithNavigation';
 
 const Input = () => {

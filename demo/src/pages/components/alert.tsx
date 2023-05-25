@@ -1,5 +1,5 @@
 import React from 'react';
-import AlertCard from '../../components/ccards/alert';
+import AlertCard from '../../components/cards/alert';
 import WithNavigation from '../../components/WithNavigation';
 
 const Alert = () => {

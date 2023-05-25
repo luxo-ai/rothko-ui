@@ -1,5 +1,5 @@
 import React from 'react';
-import MultiDropdownCard from '../../components/ccards/multiDropdown';
+import MultiDropdownCard from '../../components/cards/multiDropdown';
 import WithNavigation from '../../components/WithNavigation';
 
 const MultiDropdown = () => {
