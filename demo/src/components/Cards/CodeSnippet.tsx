@@ -82,7 +82,7 @@ const CodeSnippet = ({ examplesLookup, alwaysExpanded, initial }: CodeSnippetPro
                       >
                         <button className="phantom-button">
                           <Flex gap="0.25rem">
-                            <CopyOutline width="1.125rem" height="1.125rem" />
+                            <CopyOutline fill={style.color} width="1.125rem" height="1.125rem" />
                             <Typography.caption bold style={{ color: style.color }}>
                               Copy
                             </Typography.caption>

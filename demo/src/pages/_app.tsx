@@ -12,7 +12,7 @@ import RothkoHeader from '../components/Header';
 const themeOverride: ThemeOverrides = {
   typography: {
     body: {
-      regular: { value: "'LabGrotesque-Regular'" },
+      regular: { value: `"Helvetica Neue", "Helvetica", Arial, sans-serif` },
       bold: { value: "'LabGrotesque-Bold'" },
       italic: { value: "'LabGrotesque-Italic'" },
       light: { value: "'LabGrotesque-Light'" },
