@@ -1,5 +1,5 @@
 import React from 'react';
-import SkeletonCard from '../../components/Cards/skeleton';
+import SkeletonCard from '../../components/ccards/skeleton';
 import WithNavigation from '../../components/WithNavigation';
 
 const Skeleton = () => {

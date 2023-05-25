@@ -1,5 +1,5 @@
 import React from 'react';
-import BottomPopupCard from '../../components/Cards/bottomPopup';
+import BottomPopupCard from '../../components/ccards/bottomPopup';
 import WithNavigation from '../../components/WithNavigation';
 
 const BottomPopup = () => {

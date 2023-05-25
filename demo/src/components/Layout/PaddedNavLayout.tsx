@@ -4,7 +4,7 @@ import { Drawer, Flex, Typography, useRothko } from '@rothko-ui/ui';
 import Link from 'next/link';
 import React, { useCallback, useState } from 'react';
 import config from '../../config';
-import NavigationList from '../Navigation/NavigationList';
+import NavigationList from '../nnavigation/NavigationList';
 import Navigation from './Navigation';
 import styles from './Navigation.module.scss';
 import { useRouter } from 'next/router';

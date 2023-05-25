@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalCard from '../../components/Cards/modal';
+import ModalCard from '../../components/ccards/modal';
 import WithNavigation from '../../components/WithNavigation';
 
 const Modal = () => {

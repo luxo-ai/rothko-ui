@@ -1,5 +1,5 @@
 import React from 'react';
-import TabBarCard from '../../components/Cards/tabBar';
+import TabBarCard from '../../components/ccards/tabBar';
 import WithNavigation from '../../components/WithNavigation';
 
 const TabBar = () => {

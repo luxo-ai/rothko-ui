@@ -1,5 +1,5 @@
 import { ToastContextProvider, WidthGeqOnly } from '@rothko-ui/ui';
-import NavigationList from './Navigation/NavigationList';
+import NavigationList from './nnavigation/NavigationList';
 import React from 'react';
 import styles from './WithNavigation.module.scss';
 

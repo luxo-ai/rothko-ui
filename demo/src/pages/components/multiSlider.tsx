@@ -1,5 +1,5 @@
 import React from 'react';
-import MultiSliderCard from '../../components/Cards/multiSlider';
+import MultiSliderCard from '../../components/ccards/multiSlider';
 import WithNavigation from '../../components/WithNavigation';
 
 const MultiSlider = () => {

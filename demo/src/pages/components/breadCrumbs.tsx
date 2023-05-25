@@ -1,5 +1,5 @@
 import React from 'react';
-import BreadCrumbsCard from '../../components/Cards/breadCrumbs';
+import BreadCrumbsCard from '../../components/ccards/breadCrumbs';
 import WithNavigation from '../../components/WithNavigation';
 
 const BreadCrumbs = () => {

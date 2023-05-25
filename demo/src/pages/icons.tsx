@@ -1,5 +1,5 @@
 import React from 'react';
-import IconsCard from '../components/Cards/icons';
+import IconsCard from '../components/ccards/icons';
 import WithNavigation from '../components/WithNavigation';
 
 const Icons = () => {

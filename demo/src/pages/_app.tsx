@@ -8,6 +8,7 @@ import PaddedNavLayout from '../components/Layout/PaddedNavLayout';
 import config from '../config';
 import '../styles/globals.css';
 import RothkoHeader from '../components/Header';
+import MobileDetect from 'mobile-detect';
 
 const themeOverride: ThemeOverrides = {
   typography: {
