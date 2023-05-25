@@ -2,14 +2,13 @@ import { CodeOutline, CopyOutline } from '@rothko-ui/icons';
 import {
   Container,
   Flex,
-  MaxWidth,
   OptionGroup,
   ToastContextConsumer,
   Typography,
   useRothko,
 } from '@rothko-ui/ui';
 import { Highlight, themes } from 'prism-react-renderer';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export enum CodeLanguage {

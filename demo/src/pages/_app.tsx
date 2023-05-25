@@ -2,13 +2,13 @@ import type { ThemeOverrides } from '@rothko-ui/ui';
 import { RothkoProvider } from '@rothko-ui/ui';
 import type { Dictionary } from '@rothko-ui/utils';
 import cookie from 'cookie';
+import MobileDetect from 'mobile-detect';
 import type { AppContext, AppProps } from 'next/app';
-import React from 'react';
-import PaddedNavLayout from '../components/lLayout/PaddedNavLayout';
+import RothkoHeader from '../components/Header';
+import { IsMobileOrTabletContext } from '../components/IsMobileOrTabletContext';
+import PaddedNavLayout from '../components/layout/PaddedNavLayout';
 import config from '../config';
 import '../styles/globals.css';
-import RothkoHeader from '../components/Header';
-import MobileDetect from 'mobile-detect';
 
 const themeOverride: ThemeOverrides = {
   typography: {
@@ -22,20 +22,39 @@ const themeOverride: ThemeOverrides = {
   },
 };
 
+type RothkoAppProps = AppProps & {
+  cookies?: Dictionary<string, string>;
+  isMobileOrTablet?: boolean;
+};
 export default function App({
   Component,
   pageProps,
   cookies,
-}: AppProps & { cookies?: Dictionary<string, string> }) {
+  isMobileOrTablet = false,
+}: RothkoAppProps) {
+  // const router = useRouter();
+  // const [pageLoading, setPageLoading] = useState(false);
+
+  // useEffect(() => {
+  // const handleStart = () => setPageLoading(true);
+  //  const handleComplete = () => setPageLoading(false);
+  //  router.events.on('routeChangeStart', handleStart);
+  //  router.events.on('routeChangeComplete', handleComplete);
+  //  router.events.on('routeChangeError', handleComplete);
+  // }, [router, setPageLoading]);
+
   const mode = (cookies?.[config.preference.themeMode] || 'dark') as 'dark' | 'light';
+
   return (
     <>
       <RothkoHeader />
-      <RothkoProvider themeOverrides={themeOverride} themeMode={mode} debugMode>
-        <PaddedNavLayout>
-          <Component {...pageProps} />
-        </PaddedNavLayout>
-      </RothkoProvider>
+      <IsMobileOrTabletContext.Provider value={isMobileOrTablet}>
+        <RothkoProvider themeOverrides={themeOverride} themeMode={mode} debugMode>
+          <PaddedNavLayout>
+            <Component {...pageProps} />
+          </PaddedNavLayout>
+        </RothkoProvider>
+      </IsMobileOrTabletContext.Provider>
     </>
   );
 }
@@ -43,5 +62,6 @@ export default function App({
 App.getInitialProps = async (ctx: AppContext) => {
   const cookieString = ctx.ctx.req?.headers.cookie || '';
   const cookies = cookie.parse(cookieString);
-  return { cookies };
+  const mobileDetect = new MobileDetect(ctx.ctx.req?.headers['user-agent'] || '');
+  return { cookies, IsMobileOrTablet: !!mobileDetect.mobile() || !!mobileDetect.tablet };
 };
