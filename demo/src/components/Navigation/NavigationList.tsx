@@ -39,8 +39,11 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
     );
   }
   return (
-    <List padding="0" kind="none">
-      <ListItem paddingLeft={`calc(${depth} * 1.25rem)`}>
+    <List margin="0.5rem" padding="0" kind="none">
+      <ListItem
+        paddingTop={depth !== 0 ? 'calc(1.25rem / 2)' : undefined}
+        paddingLeft={`calc(${depth} * 1.25rem)`}
+      >
         <Typography.label>{item.label.toUpperCase()}</Typography.label>
       </ListItem>
       <List padding="0" kind="none">

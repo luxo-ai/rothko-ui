@@ -33,7 +33,7 @@ const Navigation = ({ openDrawer }: NavigationProps) => {
               className={`dflx ${styles.phantomButton}`}
               onClick={() => openDrawer()}
             >
-              <Menu width={24} height={24} />
+              <Menu width={28} height={28} />
             </button>
           </FlexItem>
           <FlexItem>

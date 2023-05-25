@@ -96,7 +96,7 @@ const Drawer = ({
                   style={{ ...styleProp, ...style }}
                 >
                   <PhantomButton style={{ marginBottom: '1rem' }} onClick={() => closeDrawer()}>
-                    <Close width={24} height={24} />
+                    <Close width={28} height={28} />
                   </PhantomButton>
                   {children}
                 </AnimatedDrawerContainerDiv>

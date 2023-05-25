@@ -160,7 +160,7 @@ const PanelLabelButton = styled.button`
 
 const PanelContentDiv = styled.div`
   background: var(--rothko-background, transparent);
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.875rem;
 `;
 
 const DefaultBodyText = styled(Typography.body)`

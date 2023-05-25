@@ -120,7 +120,7 @@ const IconsCard = () => {
                         setOpenTooltip(iconName);
                       }
                     }}
-                    id="clickme"
+                    ariaLabel={iconName}
                     as="button"
                     borderWidth={1}
                     borderStyle="solid"

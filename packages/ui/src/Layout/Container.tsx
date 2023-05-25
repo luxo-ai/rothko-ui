@@ -8,7 +8,7 @@ export type CustomColorCssProperties = Omit<
   CSSProperties,
   'color' | 'backgroundColor' | 'borderColor'
 > &
-  Pick<React.HTMLAttributes<HTMLDivElement>, 'onFocus' | 'onBlur' | 'onClick' | 'aria-label'> & {
+  Pick<React.HTMLAttributes<HTMLDivElement>, 'onFocus' | 'onBlur' | 'onClick'> & {
     color?: RothkoKind | string;
     backgroundColor?: RothkoKind | string;
     borderColor?: RothkoKind | string;
@@ -96,13 +96,11 @@ type ContainerProps = CustomColorCssProperties & {
   as?: keyof JSX.IntrinsicElements;
   children: React.ReactNode;
   className?: string;
+  ariaLabel?: string;
 };
 
 const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
-  (
-    { as, id, children, className, onBlur, onClick, onFocus, ['aria-label']: ariaLabel, ...styles },
-    ref
-  ) => {
+  ({ as, id, children, className, onBlur, onClick, onFocus, ariaLabel, ...styles }, ref) => {
     const style = useStyleProps(styles);
     return (
       <StyledContainerDiv

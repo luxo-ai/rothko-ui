@@ -19,7 +19,7 @@ const Page = () => {
           gap="2rem"
         >
           <div style={{ width: 'fit-content' }}>
-            <img src="/logo.svg" width="250rem" height="250rem" />
+            <img src="/logo.svg" width="250rem" height="250rem" alt="Rothko-UI" />
           </div>
           <MaxWidth maxW="34rem">
             <Typography.titleBig>Powerful for developers. Fast for everyone.</Typography.titleBig>
