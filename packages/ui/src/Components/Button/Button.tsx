@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
 import type { KindProps, RothkoKind, RothkoSize } from '../../Theme';
-import InlineSpinnerLoader from '../Loader/InlineSpinnerLoader';
+import InlineSpinnerLoader from '../../Library/Loader/InlineSpinnerLoader';
 import type { Accessory } from '../../Library/types';
 import type { ButtonAppearance, ButtonShape } from './types';
 
