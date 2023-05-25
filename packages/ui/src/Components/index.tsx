@@ -9,7 +9,6 @@ export * from './Dropdown';
 export * from './Input';
 export * from './List';
 export * from './Modal';
-// export * from './Notification';
 export * from './OptionGroup';
 export * from './Popup';
 export * from './Radio';
