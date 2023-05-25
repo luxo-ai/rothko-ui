@@ -1,6 +1,6 @@
 {
-  "short_name": "Example App",
-  "name": "Example App",
+  "short_name": "Rothko UI",
+  "name": "Rothko UI",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#000",
+  "background_color": "#000"
 }

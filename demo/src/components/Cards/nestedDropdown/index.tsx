@@ -1,15 +1,37 @@
-import { NestedDropdown, Typography } from '@rothko-ui/ui';
+import { NestedDropdown } from '@rothko-ui/ui';
 import React, { useState } from 'react';
+import Card from '../Card';
+import { CodeLanguage } from '../CodeSnippet';
+import nestedDropdownCopy from './copy';
+import nestedDropdownProps from './props';
 
-const NestedDropdownCard = () => {
-  const [singleVal, setSingleVal] = useState<string | null>(null);
+const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
+  [CodeLanguage.TS]: `
+  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
 
-  return (
-    <div className="white-padded-card">
-      <Typography.h3>NestedDropdown</Typography.h3>
-      <NestedDropdown value={singleVal} onChange={v => setSingleVal(v)} options={nestedOptions} />
-    </div>
-  );
+  const Example = () => {
+    return (
+      <BreadCrumbs>
+        <BreadCrumbItem to="ok">One</BreadCrumbItem>
+        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
+        <BreadCrumbItem>Three</BreadCrumbItem>
+      </BreadCrumbs> 
+    );
+  }
+`,
+  [CodeLanguage.JS]: `
+  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+
+  const Example = () => {
+    return (
+      <BreadCrumbs>
+        <BreadCrumbItem to="ok">One</BreadCrumbItem>
+        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
+        <BreadCrumbItem>Three</BreadCrumbItem>
+      </BreadCrumbs> 
+    );
+  }
+`,
 };
 
 const nestedOptions = [
@@ -37,5 +59,18 @@ const nestedOptions = [
     label: 'Three',
   },
 ];
+
+const NestedDropdownCard = () => {
+  const [value, setValue] = useState<string | null>(null);
+  return (
+    <Card
+      copy={nestedDropdownCopy}
+      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
+      propsMeta={{ meta: nestedDropdownProps, description: nestedDropdownCopy.description }}
+    >
+      <NestedDropdown value={value} onChange={v => setValue(v)} options={nestedOptions} />
+    </Card>
+  );
+};
 
 export default NestedDropdownCard;

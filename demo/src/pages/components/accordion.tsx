@@ -2,7 +2,7 @@ import React from 'react';
 import AccordionCard from '../../components/Cards/accordion';
 import WithNavigation from '../../components/WithNavigation';
 
-const Main = () => {
+const Accordion = () => {
   return (
     <WithNavigation selected="components/accordion">
       <AccordionCard />
@@ -10,4 +10,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Accordion;

@@ -1,16 +1,50 @@
-import { Typography, SkeletonBox, SkeletonBoxWithLabel, SkeletonBuilder } from '@rothko-ui/ui';
+import { SkeletonBox, SkeletonBoxWithLabel } from '@rothko-ui/ui';
 import React from 'react';
-import cardStyles from '../Cards.module.scss';
+
+import Card from '../Card';
+import { CodeLanguage } from '../CodeSnippet';
+import skeletonCopy from './copy';
+import skeletonProps from './props';
+
+const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
+  [CodeLanguage.TS]: `
+  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+
+  const Example = () => {
+    return (
+      <BreadCrumbs>
+        <BreadCrumbItem to="ok">One</BreadCrumbItem>
+        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
+        <BreadCrumbItem>Three</BreadCrumbItem>
+      </BreadCrumbs> 
+    );
+  }
+`,
+  [CodeLanguage.JS]: `
+  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+
+  const Example = () => {
+    return (
+      <BreadCrumbs>
+        <BreadCrumbItem to="ok">One</BreadCrumbItem>
+        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
+        <BreadCrumbItem>Three</BreadCrumbItem>
+      </BreadCrumbs> 
+    );
+  }
+`,
+};
 
 const SkeletonCard = () => {
   return (
-    <div className={cardStyles.componentCard}>
-      <Typography.h4 style={{ marginBottom: '1rem' }}>Skeleton</Typography.h4>
-      <div className="Skeleton-container">
-        <SkeletonBox width={200} />
-        <SkeletonBoxWithLabel width={100} />
-      </div>
-    </div>
+    <Card
+      copy={skeletonCopy}
+      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
+      propsMeta={{ meta: skeletonProps, description: skeletonCopy.description }}
+    >
+      <SkeletonBox width={200} />
+      <SkeletonBoxWithLabel width={100} />
+    </Card>
   );
 };
 

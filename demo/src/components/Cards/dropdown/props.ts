@@ -1,4 +1,4 @@
-const notificationProps = [
+const dropdownProps = [
   {
     name: 'to',
     type: 'string',
@@ -19,4 +19,4 @@ const notificationProps = [
   },
 ] as const;
 
-export default notificationProps;
+export default dropdownProps;

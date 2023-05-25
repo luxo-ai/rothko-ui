@@ -1,8 +1,9 @@
-import { Input } from '@rothko-ui/ui';
+import { Dropdown } from '@rothko-ui/ui';
 import React, { useState } from 'react';
 import Card from '../Card';
 import { CodeLanguage } from '../CodeSnippet';
-import inputCopy from './copy';
+import dropdownCopy from './copy';
+import dropdownProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
@@ -33,14 +34,38 @@ const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
 `,
 };
 
-const InputCard = () => {
-  const [value, setValue] = useState<string>('');
+const dropdownOptions = [
+  {
+    id: 0,
+    label: 'Zero',
+  },
+  {
+    id: 1,
+    label: 'One',
+  },
+  {
+    id: 2,
+    label: 'Two',
+  },
+];
 
+const SingleDropdownCard = () => {
+  const [selected, setSelected] = useState<number>();
   return (
-    <Card copy={inputCopy} codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}>
-      <Input value={value} onChange={e => setValue(e.currentTarget.value)} />
+    <Card
+      copy={dropdownCopy}
+      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
+      propsMeta={{ meta: dropdownProps, description: dropdownCopy.description }}
+    >
+      <Dropdown
+        clearable
+        label="Testing"
+        value={selected}
+        onChange={v => setSelected(v as number)}
+        options={dropdownOptions}
+      />
     </Card>
   );
 };
 
-export default InputCard;
+export default SingleDropdownCard;
