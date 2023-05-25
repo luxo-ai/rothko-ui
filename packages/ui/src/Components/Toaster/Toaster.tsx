@@ -25,7 +25,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
   const {
     animatedStyle: { life, ...animatedStyle } = {},
     content,
-    kind = 'success',
+    kind,
     label,
     onClose,
     style = {},
@@ -39,39 +39,68 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
         <ToastContentContainerDiv>
           {label &&
             (typeof label === 'string' ? (
-              <Typography.h5>{label}</Typography.h5>
+              <Typography.body bold className="rothko-toast-text">
+                {label}
+              </Typography.body>
             ) : (
               <div>{label}</div>
             ))}
           {content && typeof content === 'string' ? (
-            <Typography.body>{content}</Typography.body>
+            <Typography.body className="rothko-toast-text">{content}</Typography.body>
           ) : (
             <div>{content}</div>
           )}
         </ToastContentContainerDiv>
-        <PhantomButton onClick={onClose} className="db">
-          <CloseOutline width={20} height={20} />
-        </PhantomButton>
-        {withLife && <AnimatedLife style={{ right: life }} kind={kind} />}
+        <ToastCloseButton onClick={onClose}>
+          <CloseOutline className="rothko-toast-icon" width="1.125rem" height="1.125rem" />
+        </ToastCloseButton>
       </ToastAnimatedContainerDiv>
+      {withLife && <AnimatedLife style={{ right: life }} kind={kind} />}
     </AnimatedWhiteBackdrop>
   );
 });
 
 Toast.displayName = 'Toast';
 
-const ToastAnimatedContainerDiv = styled.div<Required<KindProps>>`
+const ToastCloseButton = styled(PhantomButton)`
+  margin-top: 0.125rem;
+  display: block;
+  margin-left: auto;
+`;
+
+const ToastAnimatedContainerDiv = styled.div<KindProps>`
+  flex-wrap: wrap-reverse;
   display: flex;
-  gap: 0.125rem;
+  gap: 0.5rem;
   align-items: start;
   justify-content: space-between;
-  padding: 1.25rem;
-  background: ${({ kind }) => `var(--rothko-${kind}-transparent-300, #000)`};
+  padding: 1rem 0.75rem;
+  background: ${({ kind }) =>
+    kind ? `var(--rothko-${kind}-500, #fff)` : 'var(--rothko-toast-background, #fff)'};
   border-radius: 0.125rem;
+
+  & > h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  code .rothko-toast-text {
+    margin-top: 0;
+    color: ${({ kind }) =>
+      kind ? `var(--rothko-${kind}-color, #000)` : 'var(--rothko-toast-color, #000)'};
+  }
+
+  & > * .rothko-toast-icon {
+    fill: ${({ kind }) =>
+      kind ? `var(--rothko-${kind}-color, #000)` : 'var(--rothko-toast-color, #000)'};
+  }
 `;
 
 const AnimatedWhiteBackdrop = styled(animated.div)`
-  background: white;
+  background: var(--rothko-background, #fff);
   border-radius: 0.125rem;
   box-shadow: 0 1px 4px rgb(28 28 28 / 10%), 0 4px 6px rgb(28 28 28 / 4%),
     0 8px 16px rgb(28 28 28 / 4%), 0 10px 20px 2px rgb(28 28 28 / 2%),
@@ -82,17 +111,22 @@ const AnimatedWhiteBackdrop = styled(animated.div)`
 const ToastContentContainerDiv = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.1rem;
 `;
 
-const AnimatedLife = styled(animated.div)<Required<KindProps>>`
+const AnimatedLife = styled(animated.div)<KindProps>`
   position: absolute;
   bottom: 0;
   left: 0px;
   width: auto;
-  background-image: ${({ kind }) =>
-    `linear-gradient(130deg, var(--rothko-${kind}-500, #000), var(--rothko-${kind}-transparent-300, #000)`};
-  height: 5px;
+  background-image: linear-gradient(
+    130deg,
+    ${({ kind }) =>
+      kind ? `var(--rothko-${kind}-100, #000)` : 'var(--rothko-toast-life-filled, #000)'},
+    ${({ kind }) =>
+      kind ? `var(--rothko-${kind}-transparent-100, #000)` : 'var(--rothko-toast-life-empty, #fff)'}
+  );
+  height: 0.25rem;
 `;
 
 export default Toast;

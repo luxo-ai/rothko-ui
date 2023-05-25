@@ -73,7 +73,7 @@ const OuterToggleDiv = styled.div<OuterToogleDivProp>`
   outline: none;
 
   width: 3rem;
-  height: calc(1.5rem + 2px);
+  height: calc(1.4rem + 2px);
 
   border: 1px solid var(--rothko-basic-300);
   border-radius: 50vmin;
@@ -103,8 +103,8 @@ const InnerToggleDiv = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.4rem;
+  height: 1.4rem;
   margin: 0 1px;
 
   background-color: #ffffff;
@@ -117,7 +117,7 @@ const InnerToggleDiv = styled.div`
 
   &.active {
     // outer toggle width - width of inner toggle - horizontal margin - offset
-    transform: translateX(calc(3rem - 1.5rem - 1px - 2px));
+    transform: translateX(calc(3rem - 1.4rem - 1px - 2px));
   }
 `;
 

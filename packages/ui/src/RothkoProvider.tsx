@@ -1,6 +1,6 @@
 import '@rothko-ui/tokens/web/dark.css';
-import '@rothko-ui/tokens/web/light.css';
 import '@rothko-ui/tokens/web/global.css';
+import '@rothko-ui/tokens/web/light.css';
 
 import React from 'react';
 import { DebuggerContextProvider } from './Library/DebuggerContext';

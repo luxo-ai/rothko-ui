@@ -37,13 +37,14 @@ const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
 
 export const buildSections = (
   sectionList: readonly NavigationSectionWithoutTo[],
-  urlPrefix = ''
+  urlPrefix?: string
 ): NavigationSection[] => {
   return sectionList.map(item => {
     const children = 'children' in item ? buildSections(item.children, urlPrefix) : undefined;
+    const route = camelCase(item.label);
     return {
       ...item,
-      to: `${urlPrefix}/${camelCase(item.label)}`,
+      to: urlPrefix ? `${urlPrefix}/${camelCase(item.label)}` : route,
       children,
     };
   });

@@ -116,9 +116,15 @@ const ToastsContainerDiv = styled.div`
   bottom: 0.75rem;
   margin: 0.25rem 1rem;
 
+  min-width: 10rem;
+  max-width: max(18rem, 20%);
+  right: 0rem;
+
+  // desktop
   @media only screen and (min-width: ${tabletOrMobileMaxWidth}px) {
     right: 0.75rem;
     max-width: max(32rem, 20%);
+    min-width: 15rem;
   }
 
   z-index: 99999;

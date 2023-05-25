@@ -45,7 +45,18 @@ const ToastCard = () => {
       propsMeta={{ meta: toastProps, description: toastCopy.description }}
     >
       <Container maxWidth="11rem">
-        <Button onClick={() => toast.addToast({ content: 'Hello' })}>Click me</Button>
+        <Button
+          onClick={() =>
+            toast.addToast({
+              content: 'Hello',
+              label: 'Hello world!!!!!!!!',
+              withLife: true,
+              duration: 5000,
+            })
+          }
+        >
+          Click me
+        </Button>
       </Container>
     </Card>
   );

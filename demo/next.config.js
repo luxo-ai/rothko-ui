@@ -12,5 +12,6 @@ module.exports = {
   env: {
     DEBUG: process.NEXT_PUBLIC_DEBUG,
     BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+    VERSION: process.env.NEXT_PUBLIC_VERSION,
   },
 };

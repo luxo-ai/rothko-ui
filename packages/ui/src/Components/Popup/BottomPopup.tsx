@@ -87,7 +87,7 @@ const BottomPopup: React.FC<PopupProps> = ({ id, onClose, isOpen, className, chi
               <div style={{ position: 'relative' }}>
                 <AnimatedPopupContainer id={id} style={style} ref={popupRef} className={className}>
                   <PopupCloseButton onClick={() => onClose()}>
-                    <CloseOutline width="1.75rem" height="1.75rem" />
+                    <CloseOutline width="1.5rem" height="1.5rem" />
                   </PopupCloseButton>
                   {children}
                 </AnimatedPopupContainer>

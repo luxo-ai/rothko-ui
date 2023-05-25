@@ -1,13 +1,12 @@
-import omit from 'lodash/omit';
 import React from 'react';
 import styled from 'styled-components';
+import { textStyle } from '../Typography/Typography';
 import TableBody from './TableBody';
 import { TableContextProvider } from './TableContext';
 import TableHeader from './TableHeader';
 import TableHeaders from './TableHeaders';
 import { isStringHeader } from './helpers';
 import type { Header } from './types';
-import { textStyle } from '../Typography/Typography';
 
 type TableProps = {
   headers?: Header[];

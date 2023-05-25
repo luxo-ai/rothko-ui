@@ -1,25 +1,28 @@
-'use client';
+// 'use client';
 import { Email, Github, Heart, Twitter } from '@rothko-ui/icons';
 import { Drawer, Flex, Typography, useRothko } from '@rothko-ui/ui';
-import { useCallback, useState } from 'react';
+import Link from 'next/link';
+import React, { useCallback, useState } from 'react';
+import config from '../../config';
 import NavigationList from '../Navigation/NavigationList';
 import Navigation from './Navigation';
 import styles from './Navigation.module.scss';
-import React from 'react';
+import { useRouter } from 'next/router';
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 
 const PaddedNavLayout = ({ children }: LayoutProps) => {
+  const router = useRouter();
   const { mode } = useRothko();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const closeDrawer = useCallback(() => setIsDrawerOpen(false), [setIsDrawerOpen]);
   const openDrawer = useCallback(() => setIsDrawerOpen(true), [setIsDrawerOpen]);
   return (
-    <div className={styles.paddedNavContainer}>
+    <div style={{ flex: 1 }} className={styles.paddedNavContainer}>
       <Drawer isOpen={isDrawerOpen} onClose={closeDrawer}>
-        <NavigationList onNavigate={() => setIsDrawerOpen(false)} />
+        <NavigationList selected={router.pathname} onNavigate={() => setIsDrawerOpen(false)} />
       </Drawer>
       <header>
         <Navigation openDrawer={openDrawer} />
@@ -33,8 +36,12 @@ const PaddedNavLayout = ({ children }: LayoutProps) => {
         </Typography.bodySmall>
         <Flex columnGap="1rem" justifyContent="center" alignItems="center">
           <Twitter width={20} height={20} fill={mode === 'dark' ? '#cccc' : undefined} />
-          <Github width={20} height={20} fill={mode === 'dark' ? '#cccc' : undefined} />
-          <Email width={20} height={20} fill={mode === 'dark' ? '#cccc' : undefined} />
+          <Link href={config.repoUrl} target="_bank" className="phantom-button">
+            <Github width={20} height={20} fill={mode === 'dark' ? '#cccc' : undefined} />
+          </Link>
+          <Link href={`mailto:${config.contactEmail}`} className="phantom-button">
+            <Email width={20} height={20} fill={mode === 'dark' ? '#cccc' : undefined} />
+          </Link>
         </Flex>
       </footer>
     </div>

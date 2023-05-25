@@ -1,4 +1,4 @@
-import { WidthGeqOnly } from '@rothko-ui/ui';
+import { ToastContextProvider, WidthGeqOnly } from '@rothko-ui/ui';
 import NavigationList from './Navigation/NavigationList';
 import React from 'react';
 import styles from './WithNavigation.module.scss';
@@ -10,10 +10,12 @@ type WithNavigationProps = {
 
 const WithNavigation = ({ children, selected }: WithNavigationProps) => (
   <div className={styles.withNavGrid}>
-    <WidthGeqOnly threshold={750}>
-      <NavigationList selected={selected} />
-    </WidthGeqOnly>
-    <div>{children}</div>
+    <ToastContextProvider>
+      <WidthGeqOnly threshold={750}>
+        <NavigationList selected={selected} />
+      </WidthGeqOnly>
+      <div>{children}</div>
+    </ToastContextProvider>
   </div>
 );
 

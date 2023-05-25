@@ -1,78 +1,20 @@
-import { CopyOutline } from '@rothko-ui/icons';
-import {
-  Container,
-  Flex,
-  ToastContextConsumer,
-  ToastContextProvider,
-  Typography,
-  useRothko,
-} from '@rothko-ui/ui';
-import { Highlight, themes } from 'prism-react-renderer';
-import React from 'react';
-import CopyToClipboard from 'react-copy-to-clipboard';
-import WithNavigation from '../components/WithNavigation';
+import { Container, Flex, Typography } from '@rothko-ui/ui';
 import { useRouter } from 'next/router';
+import { themes } from 'prism-react-renderer';
+import React from 'react';
+import Code from '../components/Code';
+import WithNavigation from '../components/WithNavigation';
 
-type CodeProps = {
-  code: string;
-};
+const BashCode = React.memo(({ code }: { code: string }) => (
+  <Code
+    code={code}
+    darkTheme={themes.jettwaveDark}
+    lightTheme={themes.jettwaveLight}
+    language="bash"
+  />
+));
 
-const Code = ({ code }: CodeProps) => {
-  const { mode } = useRothko();
-  return (
-    <Highlight
-      theme={mode === 'dark' ? themes.jettwaveDark : themes.jettwaveLight}
-      code={code}
-      language="bash"
-    >
-      {({ style, tokens, getLineProps, getTokenProps }) => (
-        <>
-          <Flex
-            alignItems="center"
-            justifyContent="space-between"
-            padding="0.5rem 1rem"
-            backgroundColor={style.backgroundColor}
-          >
-            <Typography.caption style={{ color: style.color }}>bash</Typography.caption>
-            <ToastContextConsumer>
-              {({ addToast }) => (
-                <CopyToClipboard
-                  text={code}
-                  onCopy={() => addToast({ content: 'Snippet added to clipboard' })}
-                >
-                  <button className="phantom-button">
-                    <Flex gap="0.25rem">
-                      <CopyOutline fill={style.color} width="1.125rem" height="1.125rem" />
-                      <Typography.caption bold style={{ color: style.color }}>
-                        Copy
-                      </Typography.caption>
-                    </Flex>
-                  </button>
-                </CopyToClipboard>
-              )}
-            </ToastContextConsumer>
-          </Flex>
-          <pre
-            style={{
-              ...style,
-              margin: '0.125rem 0',
-              padding: '0.5rem 1rem',
-              overflow: 'scroll',
-            }}
-          >
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line })}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token })} />
-                ))}
-              </div>
-            ))}
-          </pre>
-        </>
-      )}
-    </Highlight>
-  );
-};
+BashCode.displayName = 'BashCode';
 
 const Overview = () => {
   const router = useRouter();
@@ -90,22 +32,21 @@ const Overview = () => {
       <Container marginTop="2rem">
         <Typography.h5>Installing Rothko UI</Typography.h5>
         <Typography.body style={{ marginTop: '1rem' }}>
-          Rothko UI is available on npm as @rothko-ui/ui. This single package contains all Rothko UI
-          components. The iconography library is separately available as @rothko-ui/icons.
+          Rothko UI is available on npm as <code>@rothko-ui/ui</code>. This single package contains
+          all Rothko UI components. The iconography library is separately available as{' '}
+          <code>@rothko-ui/icons</code>.
         </Typography.body>
       </Container>
       <Container marginTop="2rem">
-        <ToastContextProvider>
-          <Flex flexDirection="column" rowGap="1rem">
-            <Container maxWidth="28rem">
-              <Code code="yarn add @rothko-ui/ui @rothko-ui/icons" />
-            </Container>
-            <Typography.body>or</Typography.body>
-            <Container maxWidth="28rem">
-              <Code code="npm install @rothko-ui/ui @rothko-ui/icons" />
-            </Container>
-          </Flex>
-        </ToastContextProvider>
+        <Flex flexDirection="column" rowGap="1rem">
+          <Container maxWidth="28rem">
+            <BashCode code="yarn add @rothko-ui/ui @rothko-ui/icons" />
+          </Container>
+          <Typography.body>or</Typography.body>
+          <Container maxWidth="28rem">
+            <BashCode code="npm install @rothko-ui/ui @rothko-ui/icons" />
+          </Container>
+        </Flex>
       </Container>
       <Typography.h3 style={{ marginTop: '3rem' }}>SSR</Typography.h3>
       <Typography.body style={{ marginTop: '1rem' }}>
