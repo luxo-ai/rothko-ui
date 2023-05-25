@@ -4,7 +4,7 @@ import type { Dictionary } from '@rothko-ui/utils';
 import cookie from 'cookie';
 import type { AppContext, AppProps } from 'next/app';
 import React from 'react';
-import PaddedNavLayout from '../components/Layout/PaddedNavLayout';
+import PaddedNavLayout from '../components/lLayout/PaddedNavLayout';
 import config from '../config';
 import '../styles/globals.css';
 import RothkoHeader from '../components/Header';
