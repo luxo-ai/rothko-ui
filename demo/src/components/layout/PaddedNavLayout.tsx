@@ -22,7 +22,11 @@ const PaddedNavLayout = ({ children }: LayoutProps) => {
   return (
     <div style={{ flex: 1 }} className={styles.paddedNavContainer}>
       <Drawer isOpen={isDrawerOpen} onClose={closeDrawer}>
-        <NavigationList selected={router.pathname} onNavigate={() => setIsDrawerOpen(false)} />
+        <NavigationList
+          // too lazy to fix this, remove starting '/' in path
+          selected={router.pathname.substring(1)}
+          onNavigate={() => setIsDrawerOpen(false)}
+        />
       </Drawer>
       <header>
         <Navigation openDrawer={openDrawer} />
