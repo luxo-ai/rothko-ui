@@ -35,7 +35,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.10",
-    "lerna": "^4.0.0",
+    "lerna": "^6.6.2",
     "prettier": "^2.3.2",
     "run-s": "^0.0.0",
     "ts-node": "^10.2.1"
