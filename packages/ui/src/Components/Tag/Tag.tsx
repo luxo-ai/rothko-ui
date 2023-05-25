@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { phantomButtonStyle } from '../../Library/PhantomButton';
 import type { KindProps } from '../../Theme/types';
+import { Typography } from '../Typography';
 
 type TagAppearance = 'filled' | 'outline';
 
@@ -18,7 +19,11 @@ const Tag = ({ appearance = 'filled', children, kind, onClose }: TagProps) => {
 
   return (
     <TagContainerDiv appearance={appearance} kind={kind}>
-      {children}
+      {typeof children === 'string' ? (
+        <Typography.inlineBody style={{ margin: 0 }}>{children}</Typography.inlineBody>
+      ) : (
+        <div>{children}</div>
+      )}
       {onClose && (
         <TagCloseButton>
           <CloseOutline onClick={onClose} fill={iconColor} width={16} height={16} />

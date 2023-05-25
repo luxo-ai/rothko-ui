@@ -11,7 +11,6 @@ const GETTING_STARTED: readonly NavigationSectionWithoutTo[] = [
 const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
   { label: 'Accordion' },
   { label: 'Alert' },
-  { label: 'Avatar' },
   { label: 'Bottom Popup' },
   { label: 'Bread Crumbs' },
   { label: 'Button' },
@@ -22,8 +21,6 @@ const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
     children: [{ label: 'Dropdown' }, { label: 'Multi Dropdown' }, { label: 'Nested Dropdown' }],
   },
   { label: 'Input' },
-  { label: 'Label' },
-  { label: 'List' },
   { label: 'Modal' },
   { label: 'Notification' },
   { label: 'Radio' },
