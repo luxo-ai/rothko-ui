@@ -44,15 +44,6 @@ const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
   { label: 'Toggle' },
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const FORMS: readonly NavigationSectionWithoutTo[] = [
-  { label: 'Overview' },
-  {
-    label: 'Components',
-    children: [{ label: 'Input' }, { label: 'Checkbox' }],
-  },
-];
-
 export const buildSections = (
   sectionList: readonly NavigationSectionWithoutTo[],
   urlPrefix = ''
@@ -76,8 +67,4 @@ export const NAVIGATION_LIST: readonly NavigationSection[] = [
     label: 'Components',
     children: buildSections(COMPONENTS, 'component'),
   },
-  /*{
-    label: 'Forms',
-    children: buildSections(FORMS, 'form'),
-  },*/
 ];
