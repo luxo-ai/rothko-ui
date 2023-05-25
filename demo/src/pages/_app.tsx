@@ -5,8 +5,9 @@ import cookie from 'cookie';
 import type { AppContext, AppProps } from 'next/app';
 import React from 'react';
 import PaddedNavLayout from '../components/Layout/PaddedNavLayout';
-import { ROTHKO_MODE_COOKIE_NAME } from '../constants';
+import config from '../config';
 import '../styles/globals.css';
+import RothkoHeader from '../components/Header';
 
 const themeOverride: ThemeOverrides = {
   typography: {
@@ -25,13 +26,16 @@ export default function App({
   pageProps,
   cookies,
 }: AppProps & { cookies?: Dictionary<string, string> }) {
-  const mode = (cookies?.[ROTHKO_MODE_COOKIE_NAME] || 'dark') as 'dark' | 'light';
+  const mode = (cookies?.[config.preference.themeMode] || 'dark') as 'dark' | 'light';
   return (
-    <RothkoProvider themeOverrides={themeOverride} themeMode={mode} debugMode>
-      <PaddedNavLayout>
-        <Component {...pageProps} />
-      </PaddedNavLayout>
-    </RothkoProvider>
+    <>
+      <RothkoHeader />
+      <RothkoProvider themeOverrides={themeOverride} themeMode={mode} debugMode>
+        <PaddedNavLayout>
+          <Component {...pageProps} />
+        </PaddedNavLayout>
+      </RothkoProvider>
+    </>
   );
 }
 

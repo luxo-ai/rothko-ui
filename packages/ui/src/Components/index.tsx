@@ -22,6 +22,5 @@ export * from './TabBar';
 export * from './Tag';
 export * from './Toaster';
 export * from './Toggle';
-export * from './Tooltip';
 export * from './Typography';
 export * from './Table';

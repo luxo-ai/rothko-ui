@@ -6,10 +6,11 @@ import { PhantomButton } from '../../../Library/PhantomButton';
 type SearchButtonProps = {
   disabled?: boolean;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  type?: 'button' | 'submit';
 };
 
-const SearchButton = ({ disabled, onClick }: SearchButtonProps) => (
-  <SearchButtonBase disabled={disabled} onClick={onClick} type="submit">
+const SearchButton = ({ disabled, onClick, type = 'submit' }: SearchButtonProps) => (
+  <SearchButtonBase aria-label="search" disabled={disabled} onClick={onClick} type={type}>
     <SearchOutline width="1.5rem" height="1.5rem" />
   </SearchButtonBase>
 );

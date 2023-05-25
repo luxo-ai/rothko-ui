@@ -1,5 +1,5 @@
 import { Set as ImSet } from 'immutable';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import type { RothkoKind } from '../../Theme/types';
 import { AccordionContext } from './AccordionContext';
@@ -37,6 +37,17 @@ const Accordion = ({
     [setSelectedPanels, mutuallyExclusive]
   );
 
+  const registerPanel = useCallback(
+    (id: string, initiallyOpen: boolean) => {
+      return useEffect(() => {
+        if (initiallyOpen) {
+          setSelectedPanels(selected => selected.add(id));
+        }
+      }, [selectedPanels]);
+    },
+    [setSelectedPanels]
+  );
+
   return (
     <AccordionContext.Provider
       value={{
@@ -45,6 +56,7 @@ const Accordion = ({
         bordered,
         onClickPanel,
         iconKind,
+        registerPanel,
       }}
     >
       <AccordionGroupDiv style={style} className={className}>

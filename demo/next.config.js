@@ -9,4 +9,8 @@ module.exports = {
   compiler: {
     styledComponents: true,
   },
+  env: {
+    DEBUG: process.NEXT_PUBLIC_DEBUG,
+    BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+  },
 };

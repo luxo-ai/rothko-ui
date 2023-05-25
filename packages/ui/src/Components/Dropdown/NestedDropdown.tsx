@@ -178,7 +178,11 @@ function NestedDropdown<V extends Value, T = undefined>({
             <ItemText>{pathToCurrentOption.map(o => o.label).join(' / ')}</ItemText>
           )}
         </TextContainerDiv>
-        <ControlButton className={clsx({ open, disabled })} onClick={toggleMenu}>
+        <ControlButton
+          aria-label="open nested dropdown"
+          className={clsx({ open, disabled })}
+          onClick={toggleMenu}
+        >
           <ChevronDownOutline width="1rem" height="1rem" />
         </ControlButton>
         {open && (

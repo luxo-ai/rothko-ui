@@ -59,7 +59,7 @@ const AccordionCard = () => {
           ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet
           dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.
         </AccordionPanel>
-        <AccordionPanel initialOpen title="Label 2">
+        <AccordionPanel title="Label 2">
           Massa ultricies mi quis hendrerit dolor magna. Consequat id porta nibh venenatis cras sed
           felis eget. Magna fringilla urna porttitor rhoncus dolor purus non enim praesent.
           Malesuada proin libero nunc consequat interdum varius.

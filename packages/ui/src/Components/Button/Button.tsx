@@ -116,6 +116,7 @@ const Button: React.FC<ButtonProps> = ({
       style={style}
       tabIndex={disabled ? -1 : tabIndex}
       type={type}
+      role="button"
     >
       {Left && <Left size={accessorySizeMap[size]} color={iconColor} />}
       {loading ? (

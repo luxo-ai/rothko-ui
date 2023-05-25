@@ -14,6 +14,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <StyledInput
         {...props}
+        aria-label="input"
         ref={ref}
         className={clsx(`inpt_size_${size}`, className)}
         disabled={disabled}

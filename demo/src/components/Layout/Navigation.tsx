@@ -4,7 +4,7 @@ import cookieCutter from 'cookie-cutter';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import { ROTHKO_MODE_COOKIE_NAME } from '../../constants';
+import config from '../../config';
 import styles from './Navigation.module.scss';
 
 type NavigationProps = {
@@ -19,7 +19,7 @@ const Navigation = ({ openDrawer }: NavigationProps) => {
     if (typeof window !== 'undefined' && mode) {
       // Set a cookie
       const expirationDate = new Date(Date.now() + 1000 * 60 * 60 * 24 * 3); // 3 days
-      cookieCutter.set(ROTHKO_MODE_COOKIE_NAME, mode, { expires: expirationDate, path: '/' });
+      cookieCutter.set(config.preference.themeMode, mode, { expires: expirationDate, path: '/' });
     }
   }, [mode]);
 
@@ -28,7 +28,11 @@ const Navigation = ({ openDrawer }: NavigationProps) => {
       <Flex justifyContent="space-between">
         <Flex alignItems="center" justifyContent="center" columnGap="1rem">
           <FlexItem>
-            <button className={`dflx ${styles.phantomButton}`} onClick={() => openDrawer()}>
+            <button
+              aria-label="menu button"
+              className={`dflx ${styles.phantomButton}`}
+              onClick={() => openDrawer()}
+            >
               <Menu width={24} height={24} />
             </button>
           </FlexItem>

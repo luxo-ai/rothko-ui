@@ -32,14 +32,8 @@ const Radio = ({
     children
   );
   return (
-    <RadioContainerDiv
-      style={style}
-      className={className}
-      aria-disabled={disabled}
-      $disabled={disabled}
-      onClick={onSelect}
-    >
-      <RadioOutlineDiv>
+    <RadioContainerDiv style={style} className={className} $disabled={disabled} onClick={onSelect}>
+      <RadioOutlineDiv role="radio" aria-label="radio" aria-checked={!!selected}>
         <RadioInnerDiv kind={kind} className={clsx({ selected, error, disabled })} />
       </RadioOutlineDiv>
       {renderContent && <div>{renderContent}</div>}

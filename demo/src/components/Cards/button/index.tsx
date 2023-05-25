@@ -75,7 +75,7 @@ const ButtonCard = () => {
     >
       <MaxWidth maxW="55rem">
         <Accordion iconKind="chevron">
-          <AccordionPanel title="Customizations">
+          <AccordionPanel open title="Customizations">
             <Flex marginBottom="0.75rem" flexWrap="wrap-reverse" gap="1rem">
               <FlexItem flexShrink={0}>
                 <MaxWidth maxW="20rem">

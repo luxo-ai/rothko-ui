@@ -7,13 +7,22 @@ type GridProps = Omit<CustomColorCssProperties, 'display'> & {
   as?: keyof JSX.IntrinsicElements;
   children: React.ReactNode;
   className?: string;
+  role?: React.AriaRole;
+  ariaLabel?: string;
 };
 
 const Grid = React.forwardRef<HTMLDivElement, GridProps>(
-  ({ as, children, className, ...styles }, ref) => {
+  ({ as, role, ariaLabel, children, className, ...styles }, ref) => {
     const style = useStyleProps(styles);
     return (
-      <StyledGrid as={as} ref={ref} className={className} style={style}>
+      <StyledGrid
+        aria-label={ariaLabel}
+        role={role}
+        as={as}
+        ref={ref}
+        className={className}
+        style={style}
+      >
         {children}
       </StyledGrid>
     );

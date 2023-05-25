@@ -34,7 +34,7 @@ const DummySearchBar = ({
         </ItemText>
       )}
     </DummySearchTextButton>
-    <SearchButton disabled={disabled || !activeText} onClick={() => onSubmit()} />
+    <SearchButton disabled={disabled || !activeText} onClick={() => onSubmit()} type="button" />
   </PlaceholderWrapperDiv>
 );
 

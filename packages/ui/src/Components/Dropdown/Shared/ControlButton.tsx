@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { PhantomButton } from '../../../Library/PhantomButton';
 
-const ControlButton = styled(PhantomButton)`
+const ControlButton = styled(PhantomButton).attrs({ type: 'button' })`
   display: flex;
   align-items: center;
   top: 0.51rem;

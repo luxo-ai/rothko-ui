@@ -47,6 +47,7 @@ function RadioGroup<V extends Value>({
     <RadioGroupContainerDiv id={id} style={style} className={className}>
       {label && <LabelText>{label}</LabelText>}
       <Grid
+        role="radiogroup"
         flexGrow={1}
         gridTemplateColumns={`repeat(${maxCol}, 1fr)`}
         rowGap={rowGap}

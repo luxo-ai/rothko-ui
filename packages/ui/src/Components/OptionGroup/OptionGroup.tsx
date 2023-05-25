@@ -81,7 +81,13 @@ function OptionGroup<V extends Value>({
 
   return (
     <OptionGroupContainerDiv id={id} style={style} className={className}>
-      <Grid flexGrow={1} gridTemplateColumns={`repeat(${maxCol}, 1fr)`} gap={optionGap}>
+      <Grid
+        role="listbox"
+        ariaLabel="option buttons"
+        flexGrow={1}
+        gridTemplateColumns={`repeat(${maxCol}, 1fr)`}
+        gap={optionGap}
+      >
         {displayableOptions.map(o => {
           const dataOptions = 'data' in o ? o?.data : undefined;
           const isDisabled = Boolean(dataOptions?.disabled);

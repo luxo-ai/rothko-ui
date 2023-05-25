@@ -160,6 +160,9 @@ export const Modal = ({
           (style, item) =>
             item && (
               <AnimatedModalContainer
+                aria-label="modal"
+                aria-modal="true"
+                role="dialog"
                 style={style}
                 className={clsx(`modal-size-${size}`, className)}
                 ref={modalRef}

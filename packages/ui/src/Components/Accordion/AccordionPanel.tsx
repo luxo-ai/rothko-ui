@@ -35,7 +35,7 @@ type AccordionPanelProps = {
   labelProps?: LabelProps;
   title: string | JSX.Element;
   style?: React.CSSProperties;
-  initialOpen?: boolean;
+  open?: boolean;
 };
 
 const AccordionPanel = ({
@@ -44,9 +44,9 @@ const AccordionPanel = ({
   labelProps,
   title,
   style,
-  initialOpen,
+  open: initialOpen,
 }: AccordionPanelProps) => {
-  const { selectedPanels, onClickPanel, bordered, kind, iconKind } = useAccordion();
+  const { selectedPanels, onClickPanel, bordered, kind, iconKind, registerPanel } = useAccordion();
   const panelIdRef = useRef(uuid.v4());
   const isPanelSelected = selectedPanels.has(panelIdRef.current);
 
@@ -56,6 +56,8 @@ const AccordionPanel = ({
   }, [isPanelSelected, iconKind]);
 
   const iconColor = kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-border, #000)';
+
+  registerPanel(panelIdRef.current, !!initialOpen);
 
   return (
     <PanelContainerDiv

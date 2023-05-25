@@ -237,6 +237,7 @@ function Dropdown<V extends Value, T = undefined>({
           <PhantomInput
             onChange={e => setQuery(e.target.value)}
             type="text"
+            aria-label="dropdown search"
             tabIndex={0}
             value={open ? query ?? '' : ''}
             className={clsx({ disabled })}
@@ -286,11 +287,16 @@ function Dropdown<V extends Value, T = undefined>({
           )}
         </TextContainerDiv>
         {!canClear ? (
-          <ControlButton className={clsx({ open, disabled })} onClick={toggleMenu}>
+          <ControlButton
+            aria-label="clear dropdown"
+            className={clsx({ open, disabled })}
+            onClick={toggleMenu}
+          >
             <ChevronDownOutline width="1rem" height="1rem" />
           </ControlButton>
         ) : (
           <ControlButton
+            aria-label="open dropdown"
             className={clsx('open', { disabled })}
             onClick={() => onSelectHandler(null)}
           >

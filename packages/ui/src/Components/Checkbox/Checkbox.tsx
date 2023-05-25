@@ -43,8 +43,8 @@ const Checkbox = ({
   return (
     <CheckboxContainerDiv style={style} className={className}>
       <CheckboxDiv
-        aria-invalid={!!error}
-        aria-required={!!required}
+        aria-label="check box"
+        aria-checked={!!checked}
         className={clsx({ error, checked, ['with-check']: withCheck })}
         id={id}
         kind={kind}

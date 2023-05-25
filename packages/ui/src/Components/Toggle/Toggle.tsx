@@ -32,6 +32,9 @@ const Toggle = ({
   return (
     <ToggleContainerDiv className={className} style={style}>
       <OuterToggleDiv
+        role="switch"
+        aria-checked={!!toggled}
+        aria-label="toggle"
         kind={kind}
         onClick={handleChange}
         onKeyDown={onKeyDown}
