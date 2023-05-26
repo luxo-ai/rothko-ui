@@ -1,5 +1,5 @@
 import { Accordion, AccordionPanel, Box, Typography } from '@rothko-ui/ui';
-import { useIsMobileOrTablet } from './IsMobileOrTabletContext';
+import { useIsMobileOrTablet } from '../hooks/useIsMobileOrTablet';
 
 type AccordionOrBoxProps = {
   boxTitleVariant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -20,7 +20,9 @@ const AccordionOrBox = ({ children, title, boxTitleVariant }: AccordionOrBoxProp
   return (
     <>
       <Header style={{ marginTop: '3rem', marginBottom: '1rem' }}>{title}</Header>
-      <Box padding="2rem">{children}</Box>
+      <Box width="fit-content" padding="2rem">
+        {children}
+      </Box>
     </>
   );
 };

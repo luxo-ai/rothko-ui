@@ -107,12 +107,12 @@
       }
     },
     "box": {
-      "background": { "value": "#fbfbfb" },
+      "background": { "value": "#f8f9fa" },
       "border": { "value": "{base.border}" }
     },
     "accordion": {
       "border": { "value": "{base.border}" },
-      "background": { "value": "#f7f9fc" }
+      "background": { "value": "#f8f9fa" }
     }
   }
 }

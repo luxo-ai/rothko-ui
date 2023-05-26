@@ -1,5 +1,3 @@
-import { createContext, useContext } from 'react';
+import { createContext } from 'react';
 
 export const IsMobileOrTabletContext = createContext(false);
-
-export const useIsMobileOrTablet = () => useContext(IsMobileOrTabletContext);

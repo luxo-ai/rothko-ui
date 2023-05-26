@@ -53,7 +53,7 @@ const AccordionCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: accordionProps, description: accordionCopy.description }}
     >
-      <Accordion mutuallyExclusive>
+      <Accordion mutuallyExclusive bordered>
         <AccordionPanel title="Label 1">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet

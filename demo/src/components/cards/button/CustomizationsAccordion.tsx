@@ -38,20 +38,16 @@ const CustomizationsAccordion = ({
 }: CustomizationsAccordionProps) => {
   return (
     <AccordionOrBox boxTitleVariant="h3" title="Customizations">
-      <Flex padding="0.2rem" marginBottom="0.3rem" flexWrap="wrap-reverse" gap="1rem">
-        <FlexItem flexShrink={0}>
-          <MaxWidth maxW="20rem">
+      <Flex
+        padding="0.2rem"
+        marginBottom="0.3rem"
+        flexWrap="wrap-reverse"
+        columnGap="10rem"
+        rowGap="1.75rem"
+      >
+        <div>
+          <MaxWidth maxW="10rem">
             <RadioGroup
-              kind="secondary"
-              maxCol={2}
-              columnGap="1.5rem"
-              label="size"
-              value={size}
-              onChange={setSize}
-              options={sizeOptions}
-            />
-            <RadioGroup
-              style={{ marginTop: '1rem' }}
               kind="secondary"
               maxCol={2}
               columnGap="1.5rem"
@@ -60,11 +56,21 @@ const CustomizationsAccordion = ({
               onChange={setAppearance}
               options={appearanceOptions}
             />
+            <RadioGroup
+              style={{ marginTop: '1.75rem' }}
+              kind="secondary"
+              maxCol={2}
+              columnGap="1.5rem"
+              label="shape"
+              value={shape}
+              onChange={setShape}
+              options={shapeOptions}
+            />
             <Checkbox
               kind="secondary"
               onChange={setLoading}
               checked={loading}
-              style={{ marginTop: '1rem' }}
+              style={{ marginTop: '1.75rem' }}
             >
               loading
             </Checkbox>
@@ -85,9 +91,9 @@ const CustomizationsAccordion = ({
               <Typography.code>{"() => alert('🧸')"}</Typography.code>
             </Checkbox>
           </MaxWidth>
-        </FlexItem>
-        <FlexItem flexShrink={0}>
-          <MaxWidth maxW="20rem">
+        </div>
+        <div>
+          <MaxWidth maxW="15rem">
             <RadioGroup
               kind="secondary"
               maxCol={2}
@@ -98,17 +104,17 @@ const CustomizationsAccordion = ({
               options={kindOptions}
             />
             <RadioGroup
-              style={{ marginTop: '1rem' }}
               kind="secondary"
               maxCol={2}
               columnGap="1.5rem"
-              label="shape"
-              value={shape}
-              onChange={setShape}
-              options={shapeOptions}
+              label="size"
+              value={size}
+              onChange={setSize}
+              options={sizeOptions}
+              style={{ marginTop: '1.75rem' }}
             />
           </MaxWidth>
-        </FlexItem>
+        </div>
       </Flex>
     </AccordionOrBox>
   );

@@ -28,7 +28,7 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
             textDecoration: 'none',
             width: '100%',
             textAlign: 'inherit',
-            padding: `0.5rem calc(${depth} * 1.25rem)`,
+            padding: `0.5rem calc(${depth} * 0.75rem)`,
           }}
           bold={isSelected}
         >
@@ -39,11 +39,8 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
     );
   }
   return (
-    <List margin="0.5rem" padding="0" kind="none">
-      <ListItem
-        paddingTop={depth !== 0 ? 'calc(1.25rem / 2)' : undefined}
-        paddingLeft={`calc(${depth} * 1.25rem)`}
-      >
+    <List margin={0} padding="0" kind="none">
+      <ListItem paddingTop="0.5rem" paddingLeft={`calc(${depth} * 0.75rem)`}>
         <Typography.label>{item.label.toUpperCase()}</Typography.label>
       </ListItem>
       <List padding="0" kind="none">
@@ -67,7 +64,7 @@ type NavigationListProps = {
 };
 
 const NavigationList = ({ onNavigate, selected }: NavigationListProps) => (
-  <nav>
+  <nav style={{ marginLeft: '0.5rem', marginTop: '-0.5rem' }}>
     {NAVIGATION_LIST.map(item => (
       <ExpandNavList
         item={item}

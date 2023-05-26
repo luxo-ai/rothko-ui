@@ -126,7 +126,7 @@ const AnimatedLife = styled(animated.div)<KindProps>`
     ${({ kind }) =>
       kind ? `var(--rothko-${kind}-transparent-100, #000)` : 'var(--rothko-toast-life-empty, #fff)'}
   );
-  height: 0.25rem;
+  height: 0.2rem;
 `;
 
 export default Toast;

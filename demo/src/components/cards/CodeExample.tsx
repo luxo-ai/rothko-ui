@@ -36,7 +36,7 @@ const CodeExample = ({
         <Container marginTop="1rem" maxWidth="10rem">
           <OptionGroup
             maxCol={2}
-            kind="warning"
+            kind="secondary"
             optionGap="0.5rem"
             size="s"
             value={expanded}

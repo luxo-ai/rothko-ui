@@ -1,4 +1,5 @@
 import type { ButtonAppearance, ButtonShape, RothkoKind, RothkoSize } from '@rothko-ui/ui';
+import { Container } from '@rothko-ui/ui';
 import { Button, MaxWidth } from '@rothko-ui/ui';
 import { useState } from 'react';
 import Card from '../Card';
@@ -6,6 +7,7 @@ import { CodeLanguage } from '../CodeExample';
 import CustomizationsAccordion from './CustomizationsAccordion';
 import buttonCopy from './copy';
 import buttonProps from './props';
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
@@ -36,6 +38,7 @@ const ButtonCard = () => {
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [alertOnClick, setAlertOnClick] = useState(false);
+  const isMobileOrTablet = useIsMobileOrTablet();
 
   return (
     <Card
@@ -61,7 +64,7 @@ const ButtonCard = () => {
           size={size}
         />
       </MaxWidth>
-      <MaxWidth maxW="25rem" style={{ marginTop: '1rem' }}>
+      <Container maxWidth={isMobileOrTablet ? undefined : '25rem'} marginTop="1rem">
         <Button
           kind={kind}
           size={size}
@@ -74,7 +77,7 @@ const ButtonCard = () => {
         >
           Click me
         </Button>
-      </MaxWidth>
+      </Container>
     </Card>
   );
 };
