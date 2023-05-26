@@ -45,7 +45,7 @@ const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   }
 `,
 };
-
+// #f1f5f9
 const AccordionCard = () => {
   return (
     <Card
@@ -53,7 +53,7 @@ const AccordionCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: accordionProps, description: accordionCopy.description }}
     >
-      <Accordion mutuallyExclusive bordered>
+      <Accordion mutuallyExclusive>
         <AccordionPanel title="Label 1">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet

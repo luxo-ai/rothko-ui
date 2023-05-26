@@ -15,6 +15,7 @@ type ExpandNavListProps = {
 const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListProps) => {
   const router = useRouter();
   if (isLeaf(item)) {
+    const isSelected = selected === item.to;
     return (
       <ListItem>
         <Typography.linkButton
@@ -29,8 +30,9 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
             textAlign: 'inherit',
             padding: `0.5rem calc(${depth} * 1.25rem)`,
           }}
-          bold={selected === item.to}
+          bold={isSelected}
         >
+          {isSelected ? '_ ' : ''}
           {item.label}
         </Typography.linkButton>
       </ListItem>

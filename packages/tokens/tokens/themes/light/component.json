@@ -112,7 +112,7 @@
     },
     "accordion": {
       "border": { "value": "{base.border}" },
-      "background": { "value": "#fbfbfb" }
+      "background": { "value": "#f7f9fc" }
     }
   }
 }

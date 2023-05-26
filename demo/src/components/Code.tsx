@@ -29,7 +29,7 @@ const Code = ({ code, darkTheme, lightTheme, language }: CodeProps) => {
               {({ addToast }) => (
                 <CopyToClipboard
                   text={code}
-                  onCopy={() => addToast({ content: 'Added to clipboard!' })}
+                  onCopy={() => addToast({ content: 'Added to clipboard!', withLife: true })}
                 >
                   <button className="phantom-button">
                     <Flex gap="0.25rem">

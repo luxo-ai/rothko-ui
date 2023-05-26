@@ -57,6 +57,8 @@ const CodeExample = ({
             )}
             // optionsWithRadius
             // withoutBorder
+            //darkTheme={themes.jettwaveDark}
+            //lightTheme={themes.jettwaveLight}
           />
         </Container>
       </Container>
@@ -64,7 +66,7 @@ const CodeExample = ({
         <Highlight
           theme={mode === 'dark' ? themes.nightOwl : themes.nightOwlLight}
           code={expanded !== null ? examplesLookup[expanded] : ''}
-          language="tsx"
+          language={expanded === CodeLanguage.TS ? 'tsx' : 'jsx'}
         >
           {({ style, tokens, getLineProps, getTokenProps }) => (
             <>
@@ -81,7 +83,7 @@ const CodeExample = ({
                   {({ addToast }) => (
                     <CopyToClipboard
                       text={expanded !== null ? examplesLookup[expanded] : ''}
-                      onCopy={() => addToast({ content: 'Added to clipboard!' })}
+                      onCopy={() => addToast({ content: 'Added to clipboard!', withLife: true })}
                     >
                       <button className="phantom-button">
                         <Flex gap="0.25rem">
