@@ -23,7 +23,7 @@
     "build:tokens": "lerna --scope=@rothko-ui/tokens run build --stream",
     "build:icons": "lerna --scope=@rothko-ui/icons run build --stream",
     "build:utils": "lerna --scope=@rothko-ui/utils run build --stream",
-    "build:shared": "lerna --scope='{@rothko-ui/ui,@rothko-ui/utils,@rothko-ui/icons}' run build --stream",
+    "build:shared": "lerna --scope='{@rothko-ui/tokens,@rothko-ui/ui,@rothko-ui/utils,@rothko-ui/icons}' run build --stream",
     "build:shared:dev": "lerna --scope='{@rothko-ui/ui,@rothko-ui/utils}' run build:dev --stream",
     "build:ui:dev": "lerna --scope=@rothko-ui/ui run build:dev --stream",
     "lint": "lerna run lint",
