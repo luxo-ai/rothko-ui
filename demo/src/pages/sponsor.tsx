@@ -36,8 +36,8 @@ const SponsorMe = () => {
           <ToastContextProvider>
             <Code
               code={config.ethWallet}
-              darkTheme={themes.jettwaveDark}
-              lightTheme={themes.jettwaveLight}
+              // darkTheme={themes.jettwaveDark}
+              // lightTheme={themes.jettwaveLight}
               language="eth"
             />
           </ToastContextProvider>
