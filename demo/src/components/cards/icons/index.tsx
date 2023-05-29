@@ -11,12 +11,26 @@ import {
 } from '@rothko-ui/ui';
 import FuzzySearch from 'fuzzy-search';
 import { noop } from 'lodash';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import Card from '../Card';
 import CodeExample, { CodeLanguage } from '../CodeExample';
 import iconographyCopy from './copy';
 import { filledIconList, outlineIconList } from './iconsList';
+
+const useIsMounted = () => {
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    isMounted.current = true;
+
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  return useCallback(() => isMounted.current, []);
+};
 
 enum IconKind {
   Outline,
@@ -48,6 +62,7 @@ const IconsCard = () => {
   const [iconKind, setIconKind] = useState<IconKind>(IconKind.Filled);
   const { mode } = useRothko();
   const [openTooltip, setOpenTooltip] = useState<string | null>(null);
+  const isMounted = useIsMounted();
 
   const iconList = useMemo(() => {
     if (!query) {
@@ -144,17 +159,19 @@ const IconsCard = () => {
           </Container>
         )}
       </Container>
-      <ReactTooltip
-        style={{
-          zIndex: 100000,
-          backgroundColor: mode === 'dark' ? '#fff' : '#000',
-          color: mode === 'dark' ? '#000' : '#fff',
-        }}
-        clickable
-        id="my-tooltip"
-        content={openTooltip || ''}
-        openOnClick
-      />
+      {isMounted() && (
+        <ReactTooltip
+          style={{
+            zIndex: 100000,
+            backgroundColor: mode === 'dark' ? '#fff' : '#000',
+            color: mode === 'dark' ? '#000' : '#fff',
+          }}
+          clickable
+          id="my-tooltip"
+          content={openTooltip || ''}
+          openOnClick
+        />
+      )}
     </Card>
   );
 };
