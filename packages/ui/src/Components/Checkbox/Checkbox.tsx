@@ -18,6 +18,7 @@ type CheckboxProps = {
   required?: boolean;
   style?: React.CSSProperties;
   withCheck?: boolean;
+  disabled?: boolean;
 };
 
 const Checkbox = ({

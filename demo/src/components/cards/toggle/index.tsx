@@ -39,7 +39,9 @@ const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
 };
 
 const ToggleCard = () => {
-  const [toggled, setToggled] = useState<boolean>(false);
+  const [toggled1, setToggled1] = useState<boolean>(false);
+  const [toggled2, setToggled2] = useState<boolean>(false);
+
   const isMobileOrTablet = useIsMobileOrTablet();
   const [state, dispatch] = useReducer(customizationsReducer, {
     kind: 'info',
@@ -59,9 +61,16 @@ const ToggleCard = () => {
       <Container maxWidth={isMobileOrTablet ? undefined : '11rem'} marginTop="2rem">
         <Toggle
           kind={withKind ? kind : undefined}
-          toggled={toggled}
-          onChange={v => setToggled(v)}
+          toggled={toggled1}
+          onChange={v => setToggled1(v)}
         />
+        <Toggle
+          kind={withKind ? kind : undefined}
+          toggled={toggled2}
+          onChange={v => setToggled2(v)}
+        >
+          toggle
+        </Toggle>
       </Container>
     </Card>
   );
