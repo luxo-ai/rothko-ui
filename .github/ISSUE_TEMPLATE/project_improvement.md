@@ -1,7 +1,7 @@
 ---
 name: Project improvement
 about: Suggest an improvement
-labels: improvement
+labels: enhancement
 assignees: '@luxo-ai'
 ---
 
