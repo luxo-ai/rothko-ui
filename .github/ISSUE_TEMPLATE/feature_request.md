@@ -2,7 +2,7 @@
 name: Feature request
 about: Suggest a feature
 labels: feature
-assignees: '@luxo-ai'
+assignees: luxo-ai
 ---
 
 # Describe the feature :nail_care:

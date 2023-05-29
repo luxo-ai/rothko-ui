@@ -2,7 +2,7 @@
 name: Bug report
 about: Improve Rothko by reporting a bug
 labels: bug
-assignees: '@luxo-ai'
+assignees: luxo-ai
 ---
 
 # Describe the bug

@@ -2,7 +2,7 @@
 name: Project improvement
 about: Suggest an improvement
 labels: enhancement
-assignees: '@luxo-ai'
+assignees: luxo-ai
 ---
 
 ## Proposed improvement
