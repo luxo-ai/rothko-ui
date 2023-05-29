@@ -33,7 +33,7 @@ const TypographyCard = () => {
     <Card
       copy={typographyCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: typographyProps, description: typographyCopy.description }}
+      propsMeta={{ meta: typographyProps }}
     >
       <Grid
         maxWidth="40rem"

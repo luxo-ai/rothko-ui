@@ -1,21 +1,27 @@
 const skeletonProps = [
   {
-    name: 'to',
-    type: 'string',
+    name: 'backgroundColor',
+    type: 'Color',
     defaultValue: null,
-    description: 'Sets the link of the item',
+    description: 'Background color of the skeleton',
   },
   {
-    name: 'target',
-    type: 'string',
+    name: 'foregroundColor',
+    type: 'Color',
     defaultValue: null,
-    description: 'Sets the target of the link',
+    description: 'Foreground color of the skeleton',
   },
   {
-    name: 'onClick',
-    type: 'string',
+    name: 'gradientProps',
+    type: 'SVGAttributes<SVGLinearGradientElement>',
     defaultValue: null,
-    description: 'Sets the onClick of the link',
+    description: 'Props for the SVG linear gradient element',
+  },
+  {
+    name: 'speed',
+    type: 'number',
+    defaultValue: 1.5,
+    description: 'Speed factor of the skeleton animation in seconds',
   },
 ] as const;
 

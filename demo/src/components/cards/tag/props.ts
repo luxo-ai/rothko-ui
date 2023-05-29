@@ -1,21 +1,21 @@
 const tagProps = [
   {
-    name: 'to',
-    type: 'string',
+    name: 'appearance',
+    type: 'TagAppearance',
     defaultValue: null,
-    description: 'Sets the link of the item',
+    description: 'Appearance style of the tag',
   },
   {
-    name: 'target',
-    type: 'string',
+    name: 'onClose',
+    type: '() => void',
     defaultValue: null,
-    description: 'Sets the target of the link',
+    description: 'Callback function triggered when the tag is closed',
   },
   {
-    name: 'onClick',
-    type: 'string',
+    name: 'kind',
+    type: 'RothkoKind',
     defaultValue: null,
-    description: 'Sets the onClick of the link',
+    description: 'Sets the font and border color semantically',
   },
 ] as const;
 

@@ -53,7 +53,7 @@ const ToggleCard = () => {
     <Card
       copy={toggleCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: toggleProps, description: toggleCopy.description }}
+      propsMeta={{ meta: toggleProps }}
     >
       <MaxWidth maxW="26rem">
         <ToggleCustomizations state={state} dispatch={dispatch} />

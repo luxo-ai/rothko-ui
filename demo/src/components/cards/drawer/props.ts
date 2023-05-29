@@ -1,21 +1,27 @@
 const drawerProps = [
   {
-    name: 'to',
+    name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'Sets the link of the item',
+    description: 'Adds a class to the component',
   },
   {
-    name: 'target',
-    type: 'string',
+    name: 'isOpen',
+    type: 'boolean',
     defaultValue: null,
-    description: 'Sets the target of the link',
+    description: 'Specifies whether the drawer is open',
   },
   {
-    name: 'onClick',
-    type: 'string',
+    name: 'onClose',
+    type: '() => void',
     defaultValue: null,
-    description: 'Sets the onClick of the link',
+    description: 'Drawer close event handler',
+  },
+  {
+    name: 'style',
+    type: 'CSSProperties',
+    defaultValue: null,
+    description: 'Adds a style to the component',
   },
 ] as const;
 

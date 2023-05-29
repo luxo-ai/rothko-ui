@@ -1,21 +1,33 @@
 const toastProps = [
   {
-    name: 'to',
-    type: 'string',
+    name: 'content',
+    type: 'React.ReactNode',
     defaultValue: null,
-    description: 'Sets the link of the item',
+    description: 'The content of the toast',
   },
   {
-    name: 'target',
-    type: 'string',
+    name: 'duration',
+    type: 'number',
     defaultValue: null,
-    description: 'Sets the target of the link',
+    description: 'The duration of the toast in milliseconds',
   },
   {
-    name: 'onClick',
-    type: 'string',
+    name: 'kind',
+    type: 'RothkoKind',
     defaultValue: null,
-    description: 'Sets the onClick of the link',
+    description: 'Sets the font and border color semantically',
+  },
+  {
+    name: 'label',
+    type: 'React.ReactNode',
+    defaultValue: null,
+    description: 'The label of the toast',
+  },
+  {
+    name: 'withLife',
+    type: 'boolean',
+    defaultValue: null,
+    description: 'Specifies whether the toast has a life cycle',
   },
 ] as const;
 

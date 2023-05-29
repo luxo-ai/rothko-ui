@@ -81,7 +81,7 @@ const NestedDropdownCard = () => {
     <Card
       copy={nestedDropdownCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: nestedDropdownProps, description: nestedDropdownCopy.description }}
+      propsMeta={{ meta: nestedDropdownProps }}
     >
       <MaxWidth maxW="26rem">
         <NestedDropdownCustomizations state={state} dispatch={dispatch} />

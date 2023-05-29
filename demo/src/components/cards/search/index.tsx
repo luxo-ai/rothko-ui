@@ -50,7 +50,7 @@ const SearchCard = () => {
     <Card
       copy={searchCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: searchProps, description: searchCopy.description }}
+      propsMeta={{ meta: searchProps }}
     >
       <MaxWidth maxW="26rem">
         <SearchCustomizations state={state} dispatch={dispatch} />

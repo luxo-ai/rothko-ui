@@ -54,7 +54,7 @@ const TabBarCard = () => {
     <Card
       copy={tabBarCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: tabBarProps, description: tabBarCopy.description }}
+      propsMeta={{ meta: tabBarProps }}
     >
       <MaxWidth maxW="26rem">
         <TabBarCustomizations state={state} dispatch={dispatch} />

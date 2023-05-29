@@ -79,7 +79,7 @@ const SingleDropdownCard = () => {
     <Card
       copy={dropdownCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: dropdownProps, description: dropdownCopy.description }}
+      propsMeta={{ meta: dropdownProps }}
     >
       <MaxWidth maxW="26rem">
         <DropdownCustomizations state={state} dispatch={dispatch} />

@@ -52,7 +52,7 @@ const MultiSliderCard = () => {
     <Card
       copy={multiSliderCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: multiSliderProps, description: multiSliderCopy.description }}
+      propsMeta={{ meta: multiSliderProps }}
     >
       <MaxWidth maxW="26rem">
         <MultiSliderCustomizations state={state} dispatch={dispatch} />

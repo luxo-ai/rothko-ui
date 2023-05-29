@@ -51,7 +51,10 @@ const ToastCard = () => {
     <Card
       copy={toastCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: toastProps, description: toastCopy.description }}
+      propsMeta={{
+        meta: toastProps,
+        titleOveride: 'Hook Args',
+      }}
     >
       <MaxWidth maxW="26rem">
         <ToastCustomizations state={state} dispatch={dispatch} />

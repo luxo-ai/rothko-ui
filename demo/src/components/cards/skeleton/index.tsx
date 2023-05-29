@@ -43,7 +43,7 @@ const SkeletonCard = () => {
     <Card
       copy={skeletonCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: skeletonProps, description: skeletonCopy.description }}
+      propsMeta={{ meta: skeletonProps }}
     >
       <Container maxWidth="18rem" marginTop="2rem">
         <SkeletonBoxWithLabel speed={1 / speed} />

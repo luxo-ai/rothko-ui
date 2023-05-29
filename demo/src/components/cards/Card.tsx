@@ -11,7 +11,7 @@ import type { Body, CardCopy, Section as SectionType } from './types';
 type CardProps = {
   children: React.ReactNode;
   copy: CardCopy;
-  propsMeta?: { meta: readonly PropMeta[]; description?: string };
+  propsMeta?: { meta: readonly PropMeta[]; titleOveride?: string };
   codeSnippet?: CodeSnippetProps;
 };
 
@@ -38,12 +38,7 @@ const Card = ({ children, copy, propsMeta, codeSnippet }: CardProps) => {
       )}
       {propsMeta && (
         <Container marginTop="2rem">
-          <Typography.h3>Props</Typography.h3>
-          {propsMeta.description && (
-            <Typography.body className={styles.cardDescription}>
-              {propsMeta.description}
-            </Typography.body>
-          )}
+          <Typography.h3>{propsMeta.titleOveride ?? 'Props'}</Typography.h3>
           <Container marginTop="2rem">
             <PropsTable propsMeta={propsMeta.meta} />
           </Container>

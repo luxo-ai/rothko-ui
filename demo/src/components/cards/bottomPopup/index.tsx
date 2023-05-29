@@ -51,7 +51,7 @@ const BottomPopupCard = () => {
     <Card
       copy={bottomPopupCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: bottomPopupProps, description: bottomPopupCopy.description }}
+      propsMeta={{ meta: bottomPopupProps }}
     >
       <Container maxWidth="11rem">
         <Button

@@ -42,7 +42,7 @@ const DrawerCard = () => {
     <Card
       copy={drawerCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: drawerProps, description: drawerCopy.description }}
+      propsMeta={{ meta: drawerProps }}
     >
       <Container maxWidth="11rem">
         <Button

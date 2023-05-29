@@ -8,10 +8,9 @@ const alertProps = [
   {
     name: 'kind',
     type: 'RothkoKind',
-    defaultValue: null,
+    defaultValue: 'danger',
     description: 'Sets the font and border color semantically',
   },
-
   {
     name: 'style',
     type: 'CSSProperties',

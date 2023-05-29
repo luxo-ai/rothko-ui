@@ -40,7 +40,7 @@ const BreadCrumbsCard = () => {
     <Card
       copy={breadCrumbsCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: breadCrumbsProps, description: breadCrumbsCopy.description }}
+      propsMeta={{ meta: breadCrumbsProps }}
     >
       <BreadCrumbs>
         <BreadCrumbItem to="ok">One</BreadCrumbItem>

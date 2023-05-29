@@ -59,7 +59,7 @@ const AccordionCard = () => {
     <Card
       copy={accordionCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: accordionProps, description: accordionCopy.description }}
+      propsMeta={{ meta: accordionProps }}
     >
       <MaxWidth maxW="55rem">
         <AccordionCustomizations state={state} dispatch={dispatch} />

@@ -71,7 +71,7 @@ const MultiDropdownCard = () => {
     <Card
       copy={multiDropdownCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: multiDropdownProps, description: multiDropdownCopy.description }}
+      propsMeta={{ meta: multiDropdownProps }}
     >
       <MaxWidth maxW="26rem">
         <MultiDropdownCustomizations state={state} dispatch={dispatch} />

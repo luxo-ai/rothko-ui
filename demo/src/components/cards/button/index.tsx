@@ -46,7 +46,7 @@ const ButtonCard = () => {
     <Card
       copy={buttonCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: buttonProps, description: buttonCopy.description }}
+      propsMeta={{ meta: buttonProps }}
     >
       <MaxWidth maxW="55rem">
         <ButtonCustomizations state={state} dispatch={dispatch} />

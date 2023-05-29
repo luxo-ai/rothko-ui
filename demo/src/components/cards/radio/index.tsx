@@ -60,7 +60,7 @@ const RadioCard = () => {
     <Card
       copy={radioCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: radioProps, description: radioCopy.description }}
+      propsMeta={{ meta: radioProps }}
     >
       <MaxWidth maxW="26rem">
         <RadioCustomizations state={state} dispatch={dispatch} />

@@ -1,21 +1,45 @@
 const toggleProps = [
   {
-    name: 'to',
-    type: 'string',
+    name: 'children',
+    type: 'React.ReactNode',
     defaultValue: null,
-    description: 'Sets the link of the item',
+    description: 'The content of the toggle',
   },
   {
-    name: 'target',
+    name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'Sets the target of the link',
+    description: 'Adds a class to the toggle',
   },
   {
-    name: 'onClick',
-    type: 'string',
+    name: 'onChange',
+    type: '(toggled: boolean) => void',
     defaultValue: null,
-    description: 'Sets the onClick of the link',
+    description: 'Event handler for toggle state change',
+  },
+  {
+    name: 'style',
+    type: 'React.CSSProperties',
+    defaultValue: null,
+    description: 'Inline style for the toggle',
+  },
+  {
+    name: 'toggled',
+    type: 'boolean',
+    defaultValue: null,
+    description: 'Specifies if the toggle is toggled or not',
+  },
+  {
+    name: 'onIcon',
+    type: 'JSX.Element',
+    defaultValue: null,
+    description: 'Icon to display when the toggle is on',
+  },
+  {
+    name: 'offIcon',
+    type: 'JSX.Element',
+    defaultValue: null,
+    description: 'Icon to display when the toggle is off',
   },
 ] as const;
 

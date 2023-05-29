@@ -52,7 +52,7 @@ const SliderCard = () => {
     <Card
       copy={sliderCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: sliderProps, description: sliderCopy.description }}
+      propsMeta={{ meta: sliderProps }}
     >
       <MaxWidth maxW="26rem">
         <SliderCustomizations state={state} dispatch={dispatch} />

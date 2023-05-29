@@ -49,7 +49,7 @@ const TagCard = () => {
     <Card
       copy={tagCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: tagProps, description: tagCopy.description }}
+      propsMeta={{ meta: tagProps }}
     >
       <MaxWidth maxW="26rem">
         <TagCustomizations state={state} dispatch={dispatch} />

@@ -50,7 +50,7 @@ const ModalCard = () => {
     <Card
       copy={modalCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: modalProps, description: modalCopy.description }}
+      propsMeta={{ meta: modalProps }}
     >
       <MaxWidth maxW="26rem">
         <ModalCustomizations state={state} dispatch={dispatch} />

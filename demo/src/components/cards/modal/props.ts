@@ -1,21 +1,33 @@
 const modalProps = [
   {
-    name: 'to',
+    name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'Sets the link of the item',
+    description: 'Class name of the modal',
   },
   {
-    name: 'target',
-    type: 'string',
+    name: 'isOpen',
+    type: 'boolean',
     defaultValue: null,
-    description: 'Sets the target of the link',
+    description: 'Indicates whether the modal is open',
   },
   {
-    name: 'onClick',
+    name: 'onClose',
+    type: '() => void',
+    defaultValue: null,
+    description: 'Event handler for closing the modal',
+  },
+  {
+    name: 'size',
+    type: 'RothkoSize',
+    defaultValue: "'m'",
+    description: 'Size of the modal',
+  },
+  {
+    name: 'title',
     type: 'string',
     defaultValue: null,
-    description: 'Sets the onClick of the link',
+    description: 'Title of the modal',
   },
 ] as const;
 

@@ -33,7 +33,7 @@ const AlertCard = () => {
     <Card
       copy={alertCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: alertProps, description: alertCopy.description }}
+      propsMeta={{ meta: alertProps }}
     >
       <Alert kind="danger">Testing</Alert>
     </Card>

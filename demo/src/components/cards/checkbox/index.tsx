@@ -52,7 +52,7 @@ const CheckboxCard = () => {
     <Card
       copy={checkboxCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: checkboxProps, description: checkboxCopy.description }}
+      propsMeta={{ meta: checkboxProps }}
     >
       <MaxWidth maxW="55rem">
         <CheckboxCustomizations state={state} dispatch={dispatch} />
