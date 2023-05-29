@@ -1,18 +1,10 @@
 import { Container, Flex, Typography } from '@rothko-ui/ui';
 import { useRouter } from 'next/router';
-import { themes } from 'prism-react-renderer';
 import React from 'react';
 import Code from '../components/Code';
 import WithNavigation from '../components/WithNavigation';
 
-const BashCode = React.memo(({ code }: { code: string }) => (
-  <Code
-    code={code}
-    darkTheme={themes.jettwaveDark}
-    lightTheme={themes.jettwaveLight}
-    language="bash"
-  />
-));
+const BashCode = React.memo(({ code }: { code: string }) => <Code code={code} language="bash" />);
 
 BashCode.displayName = 'BashCode';
 

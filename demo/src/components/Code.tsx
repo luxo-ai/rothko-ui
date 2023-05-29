@@ -1,21 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CopyOutline } from '@rothko-ui/icons';
 import { Flex, ToastContextConsumer, Typography, useRothko } from '@rothko-ui/ui';
-import { Highlight } from 'prism-react-renderer';
+import { Highlight, themes } from 'prism-react-renderer';
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 type CodeProps = {
   language: string;
-  darkTheme: any;
-  lightTheme: any;
   code: string;
 };
 
-const Code = ({ code, darkTheme, lightTheme, language }: CodeProps) => {
+const Code = ({ code, language }: CodeProps) => {
   const { mode } = useRothko();
   return (
-    <Highlight theme={mode === 'dark' ? darkTheme : lightTheme} code={code} language={language}>
+    <Highlight
+      theme={mode === 'dark' ? themes.jettwaveDark : themes.jettwaveLight}
+      code={code}
+      language={language}
+    >
       {({ style, tokens, getLineProps, getTokenProps }) => (
         <>
           <Flex
