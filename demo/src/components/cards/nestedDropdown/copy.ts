@@ -3,7 +3,6 @@ import type { CardCopy } from '../types';
 const nestedDropdownCopy: CardCopy = {
   title: 'Nested Dropdown',
   description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel neque nec quam convallis rhoncus. Ut sed ipsum urna. Morbi in ligula id massa rutrum tincidunt. Phasellus ex mauris, condimentum eu lobortis dictum, fermentum at felis. Cras mollis ex non erat varius, in pretium ipsum condimentum. Donec mauris erat, gravida non sem mattis, fermentum aliquam lorem. Cras viverra nunc odio, in suscipit sapien condimentum nec.',
+    "Create hierarchical and nested menus or navigation structures with Rothko UI's Nested Dropdown component. Organize complex content and submenus, providing a seamless and intuitive user experience for deep-level interactions.",
 };
-
 export default nestedDropdownCopy;

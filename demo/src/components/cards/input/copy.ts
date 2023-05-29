@@ -3,7 +3,6 @@ import type { CardCopy } from '../types';
 const inputCopy: CardCopy = {
   title: 'Input',
   description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel neque nec quam convallis rhoncus. Ut sed ipsum urna. Morbi in ligula id massa rutrum tincidunt. Phasellus ex mauris, condimentum eu lobortis dictum, fermentum at felis. Cras mollis ex non erat varius, in pretium ipsum condimentum. Donec mauris erat, gravida non sem mattis, fermentum aliquam lorem. Cras viverra nunc odio, in suscipit sapien condimentum nec.',
+    "Collect user input with Rothko UI's Input component. Create text fields, text areas, and other input elements that allow users to enter and edit data effortlessly. Customize styles, validations, and behaviors to match your application's needs.",
 };
-
 export default inputCopy;

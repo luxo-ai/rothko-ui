@@ -3,7 +3,6 @@ import type { CardCopy } from '../types';
 const dropdownCopy: CardCopy = {
   title: 'Dropdown',
   description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel neque nec quam convallis rhoncus. Ut sed ipsum urna. Morbi in ligula id massa rutrum tincidunt. Phasellus ex mauris, condimentum eu lobortis dictum, fermentum at felis. Cras mollis ex non erat varius, in pretium ipsum condimentum. Donec mauris erat, gravida non sem mattis, fermentum aliquam lorem. Cras viverra nunc odio, in suscipit sapien condimentum nec.',
+    "Provide users with a versatile and compact selection interface using Rothko UI's Dropdown component. Display a list of options in a dropdown menu, allowing users to choose from a predefined set of values with ease.",
 };
-
 export default dropdownCopy;

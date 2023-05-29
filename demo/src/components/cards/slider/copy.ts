@@ -3,7 +3,6 @@ import type { CardCopy } from '../types';
 const sliderCopy: CardCopy = {
   title: 'Slider',
   description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel neque nec quam convallis rhoncus. Ut sed ipsum urna. Morbi in ligula id massa rutrum tincidunt. Phasellus ex mauris, condimentum eu lobortis dictum, fermentum at felis. Cras mollis ex non erat varius, in pretium ipsum condimentum. Donec mauris erat, gravida non sem mattis, fermentum aliquam lorem. Cras viverra nunc odio, in suscipit sapien condimentum nec.',
+    "Allow users to select a value from a range with Rothko UI's Slider component. Customize styles, ranges, and behaviors to create interactive and visually appealing sliders, perfect for adjusting settings, filters, and other numerical input scenarios.",
 };
-
 export default sliderCopy;

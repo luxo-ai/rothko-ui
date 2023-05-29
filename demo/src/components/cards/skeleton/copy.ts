@@ -3,7 +3,6 @@ import type { CardCopy } from '../types';
 const skeletonCopy: CardCopy = {
   title: 'Skeleton',
   description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel neque nec quam convallis rhoncus. Ut sed ipsum urna. Morbi in ligula id massa rutrum tincidunt. Phasellus ex mauris, condimentum eu lobortis dictum, fermentum at felis. Cras mollis ex non erat varius, in pretium ipsum condimentum. Donec mauris erat, gravida non sem mattis, fermentum aliquam lorem. Cras viverra nunc odio, in suscipit sapien condimentum nec.',
+    "Enhance the perceived performance of your application by using Rothko UI's Skeleton component. Display placeholder content that mimics the actual data, giving users a visual indication of loading or content areas before they are fully rendered.",
 };
-
 export default skeletonCopy;

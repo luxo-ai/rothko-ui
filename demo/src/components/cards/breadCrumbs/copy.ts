@@ -1,9 +1,8 @@
 import type { CardCopy } from '../types';
 
 const breadCrumbsCopy: CardCopy = {
-  title: 'Bread Crumbs',
+  title: 'Breadcrumbs',
   description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel neque nec quam convallis rhoncus. Ut sed ipsum urna. Morbi in ligula id massa rutrum tincidunt. Phasellus ex mauris, condimentum eu lobortis dictum, fermentum at felis. Cras mollis ex non erat varius, in pretium ipsum condimentum. Donec mauris erat, gravida non sem mattis, fermentum aliquam lorem. Cras viverra nunc odio, in suscipit sapien condimentum nec.',
+    "Guide your users through your application's navigation hierarchy with Rothko UI's Breadcrumbs component. Display a clear and intuitive path, allowing users to easily backtrack or explore different sections, enhancing the overall navigation experience.",
 };
-
 export default breadCrumbsCopy;

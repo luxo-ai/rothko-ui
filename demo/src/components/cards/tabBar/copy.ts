@@ -3,7 +3,6 @@ import type { CardCopy } from '../types';
 const tabBarCopy: CardCopy = {
   title: 'Tab Bar',
   description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel neque nec quam convallis rhoncus. Ut sed ipsum urna. Morbi in ligula id massa rutrum tincidunt. Phasellus ex mauris, condimentum eu lobortis dictum, fermentum at felis. Cras mollis ex non erat varius, in pretium ipsum condimentum. Donec mauris erat, gravida non sem mattis, fermentum aliquam lorem. Cras viverra nunc odio, in suscipit sapien condimentum nec.',
+    "Organize and navigate through content with Rothko UI's Tab Bar component. Create tabbed interfaces that allow users to switch between different sections or views, improving information organization and enhancing the user experience.",
 };
-
 export default tabBarCopy;

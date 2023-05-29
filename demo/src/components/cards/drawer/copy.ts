@@ -3,7 +3,6 @@ import type { CardCopy } from '../types';
 const drawerCopy: CardCopy = {
   title: 'Drawer',
   description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel neque nec quam convallis rhoncus. Ut sed ipsum urna. Morbi in ligula id massa rutrum tincidunt. Phasellus ex mauris, condimentum eu lobortis dictum, fermentum at felis. Cras mollis ex non erat varius, in pretium ipsum condimentum. Donec mauris erat, gravida non sem mattis, fermentum aliquam lorem. Cras viverra nunc odio, in suscipit sapien condimentum nec.',
+    "Maximize screen real estate and improve navigation with Rothko UI's Drawer component. Create hidden side panels or overlays that slide in and out, perfect for menus, filters, or additional content, providing a seamless user experience.",
 };
-
 export default drawerCopy;

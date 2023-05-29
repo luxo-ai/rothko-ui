@@ -3,7 +3,7 @@ import type { CardCopy } from '../types';
 const iconographyCopy: CardCopy = {
   title: 'Iconography',
   description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel neque nec quam convallis rhoncus. Ut sed ipsum urna. Morbi in ligula id massa rutrum tincidunt. Phasellus ex mauris, condimentum eu lobortis dictum, fermentum at felis. Cras mollis ex non erat varius, in pretium ipsum condimentum. Donec mauris erat, gravida non sem mattis, fermentum aliquam lorem. Cras viverra nunc odio, in suscipit sapien condimentum nec.',
+    "Enhance your user interfaces with Rothko UI's extensive collection of high-quality icons. Our comprehensive iconography system provides a wide range of customizable icons to help you convey meaning, improve navigation, and add visual appeal to your web applications.",
 };
 
 export default iconographyCopy;

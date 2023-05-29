@@ -3,7 +3,6 @@ import type { CardCopy } from '../types';
 const checkboxCopy: CardCopy = {
   title: 'Checkbox',
   description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel neque nec quam convallis rhoncus. Ut sed ipsum urna. Morbi in ligula id massa rutrum tincidunt. Phasellus ex mauris, condimentum eu lobortis dictum, fermentum at felis. Cras mollis ex non erat varius, in pretium ipsum condimentum. Donec mauris erat, gravida non sem mattis, fermentum aliquam lorem. Cras viverra nunc odio, in suscipit sapien condimentum nec.',
+    "Allow users to make selections and toggle options effortlessly with Rothko UI's Checkbox component. Present a list of choices and enable multiple selection, ensuring a clear and intuitive user interface for forms, settings, and more.",
 };
-
 export default checkboxCopy;

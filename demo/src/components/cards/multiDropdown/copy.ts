@@ -3,7 +3,6 @@ import type { CardCopy } from '../types';
 const multiDropdownCopy: CardCopy = {
   title: 'Multi Dropdown',
   description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel neque nec quam convallis rhoncus. Ut sed ipsum urna. Morbi in ligula id massa rutrum tincidunt. Phasellus ex mauris, condimentum eu lobortis dictum, fermentum at felis. Cras mollis ex non erat varius, in pretium ipsum condimentum. Donec mauris erat, gravida non sem mattis, fermentum aliquam lorem. Cras viverra nunc odio, in suscipit sapien condimentum nec.',
+    "Enable users to make multiple selections from a list of options effortlessly with Rothko UI's Multi Dropdown component. Streamline the selection process in forms, filters, and other scenarios where multiple choices are required.",
 };
-
 export default multiDropdownCopy;
