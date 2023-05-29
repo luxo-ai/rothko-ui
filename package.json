@@ -10,6 +10,7 @@
   "private": true,
   "scripts": {
     "start:demo": "lerna --scope=demo run dev --stream",
+    "build:demo": "lerna --scope=demo run build --stream",
     "add:all": "lerna add",
     "add:demo": "lerna add $1 --scope=demo",
     "add:ui": "lerna add $1 --scope=@rothko-ui/ui",
