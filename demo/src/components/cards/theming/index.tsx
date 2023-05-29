@@ -1,12 +1,12 @@
-import { Container, Flex } from '@rothko-ui/ui';
 import React from 'react';
 
-import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Code from '../../Code';
 import Card from '../Card';
 import themeCopy from './copy';
 
-const JsonCode = React.memo(({ code }: { code: string }) => <Code language="json" code={code} />);
+const JsonCode = React.memo(({ code }: { code: string }) => (
+  <Code maxHeight="25rem" language="json" code={code} />
+));
 JsonCode.displayName = 'JsonCode';
 
 const typographyJsonOverride = `{
@@ -114,12 +114,8 @@ const componentJsonOverride = `{
 };`;
 
 const ThemeCard = () => {
-  const isMobileOrTablet = useIsMobileOrTablet();
   return (
     <Card copy={themeCopy}>
-      <Container maxWidth={isMobileOrTablet ? undefined : '26rem'} marginTop="2rem">
-        <Flex columnGap="1rem">ok</Flex>
-      </Container>
       <JsonCode code={typographyJsonOverride} />
       <JsonCode code={semanticJsonOverride} />
       <JsonCode code={componentJsonOverride} />

@@ -5,12 +5,12 @@ import { Highlight, themes } from 'prism-react-renderer';
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
-type CodeProps = {
+type CodeProps = React.CSSProperties & {
   language: string;
   code: string;
 };
 
-const Code = ({ code, language }: CodeProps) => {
+const Code = ({ code, language, ...containerStyle }: CodeProps) => {
   const { mode } = useRothko();
   return (
     <Highlight
@@ -47,6 +47,7 @@ const Code = ({ code, language }: CodeProps) => {
           </Flex>
           <pre
             style={{
+              ...containerStyle,
               ...style,
               margin: '0.125rem 0',
               padding: '0.5rem 1rem',

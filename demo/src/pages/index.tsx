@@ -22,7 +22,9 @@ const Page = () => {
             <img src="/logo.svg" width="250rem" height="250rem" alt="Rothko-UI" />
           </div>
           <MaxWidth maxW="34rem">
-            <Typography.titleBig>Powerful for developers. Fast for everyone.</Typography.titleBig>
+            <Typography.titleBig>
+              Elevate web development. Inspire new experiences.
+            </Typography.titleBig>
             <Flex columnGap="0.5rem" maxWidth="20rem" margin="2rem 0">
               <Button onClick={() => router.push('/overview')} kind="info" shape="pill">
                 Get Started
@@ -45,8 +47,8 @@ const Page = () => {
               </Button>
             </Flex>
             <Typography.h6 style={{ margin: '0 auto' }}>
-              Solana is a decentralized blockchain built to enable scalable, user-friendly apps for
-              the world.
+              Rothko UI is a modern component library designed to empower developers with sleek and
+              customizable interfaces for web applications.
             </Typography.h6>
           </MaxWidth>
         </Flex>

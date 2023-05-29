@@ -118,7 +118,7 @@ const title = styled(h1)`
 
 const titleBig = styled(h1)`
   font-family: var(--rothko-typography-body-bold);
-  font-size: clamp(3.8rem, 8vw, 6rem);
+  font-size: clamp(3.5rem, 7.5vw, 6rem);
   line-height: calc(100% + 0.5rem);
   letter-spacing: -0.03rem;
   font-weight: 700;
