@@ -1,5 +1,5 @@
 ---
-name: Project Improvement
+name: Project improvement
 about: Suggest an improvement
 labels: improvement
 assignees: '@luxo-ai'
