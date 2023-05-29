@@ -14,4 +14,6 @@ module.exports = {
     BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     VERSION: process.env.NEXT_PUBLIC_VERSION,
   },
+  // otherwise .next
+  distDir: 'build',
 };
