@@ -105,7 +105,6 @@ const ButtonCustomizations = ({ state, dispatch }: ButtonCustomizationsProps) =>
             <Typography.code>{"() => alert('🧸')"}</Typography.code>
           </Checkbox>
         </MaxWidth>
-
         <MaxWidth maxW="15rem">
           <RadioGroup
             kind="secondary"

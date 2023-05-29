@@ -1,11 +1,13 @@
-import { Toggle } from '@rothko-ui/ui';
-import React, { useState } from 'react';
+import { Container, MaxWidth, Toggle } from '@rothko-ui/ui';
+import React, { useReducer, useState } from 'react';
 
 import { CodeLanguage } from '../CodeExample';
 
 import Card from '../Card';
 import toggleCopy from './copy';
 import toggleProps from './props';
+import ToggleCustomizations, { customizationsReducer } from './Customizations';
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
@@ -38,13 +40,29 @@ const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
 
 const ToggleCard = () => {
   const [toggled, setToggled] = useState<boolean>(false);
+  const isMobileOrTablet = useIsMobileOrTablet();
+  const [state, dispatch] = useReducer(customizationsReducer, {
+    kind: 'info',
+    withKind: false,
+  });
+
+  const { kind, withKind, onIcon, offIcon } = state;
   return (
     <Card
       copy={toggleCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: toggleProps, description: toggleCopy.description }}
     >
-      <Toggle kind="success" toggled={toggled} onChange={v => setToggled(v)} />
+      <MaxWidth maxW="26rem">
+        <ToggleCustomizations state={state} dispatch={dispatch} />
+      </MaxWidth>
+      <Container maxWidth={isMobileOrTablet ? undefined : '11rem'} marginTop="2rem">
+        <Toggle
+          kind={withKind ? kind : undefined}
+          toggled={toggled}
+          onChange={v => setToggled(v)}
+        />
+      </Container>
     </Card>
   );
 };

@@ -1,26 +1,29 @@
 import type { RothkoKind } from '@rothko-ui/ui';
-import { Checkbox } from '@rothko-ui/ui';
-import { Flex, MaxWidth, RadioGroup, Toggle } from '@rothko-ui/ui';
+import { Checkbox, Dropdown, Flex, MaxWidth, RadioGroup } from '@rothko-ui/ui';
 import AccordionOrBox from '../../AccordionOrBox';
 import { kindOptions } from '../../rothkoOptions';
 
 type CutomizationState = {
   kind: RothkoKind;
   withKind: boolean;
-  withLife: boolean;
+  offIcon?: number | null;
+  onIcon?: number | null;
 };
 
 type CustomizationAction =
   | { type: 'SET_KIND'; kind: RothkoKind }
-  | { type: 'TOGGLE_WITH_LIFE' }
+  | { type: 'SET_OFF_ICON'; offIcon?: number | null }
+  | { type: 'SET_ON_ICON'; onIcon?: number | null }
   | { type: 'CHECK_WITH_KIND' };
 
 export const customizationsReducer = (state: CutomizationState, action: CustomizationAction) => {
   switch (action.type) {
     case 'SET_KIND':
       return { ...state, kind: action.kind };
-    case 'TOGGLE_WITH_LIFE':
-      return { ...state, withLife: !state.withLife };
+    case 'SET_OFF_ICON':
+      return { ...state, offIcon: action.offIcon };
+    case 'SET_ON_ICON':
+      return { ...state, onIcon: action.onIcon };
     case 'CHECK_WITH_KIND':
       return { ...state, withKind: !state.withKind };
     default:
@@ -28,13 +31,13 @@ export const customizationsReducer = (state: CutomizationState, action: Customiz
   }
 };
 
-type ToastCustomizationsProps = {
+type ToggleCustomizationsProps = {
   dispatch: React.Dispatch<CustomizationAction>;
   state: CutomizationState;
 };
 
-const ToastCustomizations = ({ state, dispatch }: ToastCustomizationsProps) => {
-  const { kind, withLife, withKind } = state;
+const ToggleCustomizations = ({ state, dispatch }: ToggleCustomizationsProps) => {
+  const { kind, onIcon, offIcon, withKind } = state;
   return (
     <AccordionOrBox boxTitleVariant="h3" title="Customizations">
       <Flex
@@ -60,18 +63,23 @@ const ToastCustomizations = ({ state, dispatch }: ToastCustomizationsProps) => {
             style={{ marginTop: '1.5rem' }}
           />
         </MaxWidth>
-        <MaxWidth maxW="10rem">
-          <Toggle
-            kind="secondary"
-            onChange={() => dispatch({ type: 'TOGGLE_WITH_LIFE' })}
-            toggled={withLife}
-          >
-            withLife
-          </Toggle>
-        </MaxWidth>
       </Flex>
+      <Dropdown
+        value={onIcon}
+        onChange={v => dispatch({ type: 'SET_ON_ICON', onIcon: v as number | null })}
+        options={[]}
+        style={{ marginTop: '1.5rem' }}
+        clearable
+      />
+      <Dropdown
+        value={offIcon}
+        onChange={v => dispatch({ type: 'SET_OFF_ICON', offIcon: v as number | null })}
+        options={[]}
+        style={{ marginTop: '1.5rem' }}
+        clearable
+      />
     </AccordionOrBox>
   );
 };
 
-export default ToastCustomizations;
+export default ToggleCustomizations;

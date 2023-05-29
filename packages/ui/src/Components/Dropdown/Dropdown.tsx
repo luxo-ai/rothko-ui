@@ -64,6 +64,7 @@ type DropdownProps<V extends Value, T> = {
   minimal?: boolean;
   /** prefix of a selected item */
   selectedPrefix?: string;
+  style?: React.CSSProperties;
 };
 
 function Dropdown<V extends Value, T = undefined>({
@@ -89,6 +90,7 @@ function Dropdown<V extends Value, T = undefined>({
   search,
   selectedPrefix = '',
   value,
+  style,
 }: DropdownProps<V, T>) {
   const debug = useDebuggerContext('<Dropdown/>');
 
@@ -222,7 +224,7 @@ function Dropdown<V extends Value, T = undefined>({
   });
 
   return (
-    <div className={className}>
+    <div style={style} className={className}>
       {label && <LabelText>{label}</LabelText>}
       <DropdownContainerDiv
         ref={containerRef}
