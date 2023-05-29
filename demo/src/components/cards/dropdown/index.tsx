@@ -1,7 +1,9 @@
-import { Dropdown } from '@rothko-ui/ui';
-import React, { useState } from 'react';
+import { Container, Dropdown, MaxWidth } from '@rothko-ui/ui';
+import { useReducer, useState } from 'react';
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
 import { CodeLanguage } from '../CodeExample';
+import DropdownCustomizations, { customizationsReducer } from './Customizations';
 import dropdownCopy from './copy';
 import dropdownProps from './props';
 
@@ -51,19 +53,53 @@ const dropdownOptions = [
 
 const SingleDropdownCard = () => {
   const [selected, setSelected] = useState<number>();
+  const isMobileOrTablet = useIsMobileOrTablet();
+  const [state, dispatch] = useReducer(customizationsReducer, {
+    disabled: false,
+    clearable: false,
+    closeOnEsc: true,
+    search: false,
+    menuPosition: 'bottom',
+    minimal: false,
+    placeholder: 'Select an option...',
+  });
+
+  const {
+    disabled,
+    clearable,
+    closeOnEsc,
+    search,
+    menuPosition,
+    minimal,
+    selectedPrefix,
+    placeholder,
+  } = state;
+
   return (
     <Card
       copy={dropdownCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: dropdownProps, description: dropdownCopy.description }}
     >
-      <Dropdown
-        clearable
-        label="Testing"
-        value={selected}
-        onChange={v => setSelected(v as number)}
-        options={dropdownOptions}
-      />
+      <MaxWidth maxW="26rem">
+        <DropdownCustomizations state={state} dispatch={dispatch} />
+      </MaxWidth>
+      <Container maxWidth={isMobileOrTablet ? undefined : '26rem'} marginTop="2rem">
+        <Dropdown
+          clearable={clearable}
+          closeOnEsc={closeOnEsc}
+          disabled={disabled}
+          menuPosition={menuPosition}
+          minimal={minimal}
+          placeholder={placeholder}
+          search={search}
+          selectedPrefix={selectedPrefix}
+          label="Dropdown"
+          value={selected}
+          onChange={v => setSelected(v as number)}
+          options={dropdownOptions}
+        />
+      </Container>
     </Card>
   );
 };

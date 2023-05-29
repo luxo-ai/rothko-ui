@@ -4,9 +4,8 @@ import isString from 'lodash/isString';
 import React from 'react';
 import styled from 'styled-components';
 import type { KindProps, RothkoKind } from '../../Theme/types';
-import Typography from '../Typography/Typography';
 import { keyDownFactory } from '../../utils/keyUtils';
-import { LabelText } from '../../Library/Common';
+import Typography from '../Typography/Typography';
 
 type CheckboxProps = {
   checked?: boolean;
@@ -64,7 +63,7 @@ const CheckboxContainerDiv = styled.div`
   display: flex;
   align-items: center; // for children
   justify-content: flex-start;
-  gap: 0.3rem;
+  gap: 0.5rem;
 `;
 
 const CheckboxDiv = styled.div<KindProps>`

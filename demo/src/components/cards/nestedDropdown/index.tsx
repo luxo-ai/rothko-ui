@@ -1,7 +1,9 @@
-import { NestedDropdown } from '@rothko-ui/ui';
-import React, { useState } from 'react';
+import { Container, MaxWidth, NestedDropdown } from '@rothko-ui/ui';
+import { useReducer, useState } from 'react';
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
 import { CodeLanguage } from '../CodeExample';
+import NestedDropdownCustomizations, { customizationsReducer } from './Customizations';
 import nestedDropdownCopy from './copy';
 import nestedDropdownProps from './props';
 
@@ -62,13 +64,43 @@ const nestedOptions = [
 
 const NestedDropdownCard = () => {
   const [value, setValue] = useState<string | null>(null);
+  const isMobileOrTablet = useIsMobileOrTablet();
+  const [state, dispatch] = useReducer(customizationsReducer, {
+    disabled: false,
+    clearable: false,
+    closeOnEsc: true,
+    menuPosition: 'bottom',
+    minimal: false,
+    placeholder: 'Select an option...',
+  });
+
+  const { disabled, clearable, closeOnEsc, menuPosition, minimal, selectedPrefix, placeholder } =
+    state;
+
   return (
     <Card
       copy={nestedDropdownCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: nestedDropdownProps, description: nestedDropdownCopy.description }}
     >
-      <NestedDropdown value={value} onChange={v => setValue(v)} options={nestedOptions} />
+      <MaxWidth maxW="26rem">
+        <NestedDropdownCustomizations state={state} dispatch={dispatch} />
+      </MaxWidth>
+      <Container maxWidth={isMobileOrTablet ? undefined : '26rem'} marginTop="2rem">
+        <NestedDropdown
+          label="Nested Dropdown"
+          disabled={disabled}
+          closeOnEsc={closeOnEsc}
+          placeholder={placeholder}
+          // menuPosition={menuPosition}
+          // minimal={minimal}
+          // clearable={clearable}
+          // selectedPrefix={selectedPrefix}
+          value={value}
+          onChange={v => setValue(v)}
+          options={nestedOptions}
+        />
+      </Container>
     </Card>
   );
 };

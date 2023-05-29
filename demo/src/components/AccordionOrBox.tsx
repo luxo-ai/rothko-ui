@@ -5,9 +5,10 @@ type AccordionOrBoxProps = {
   boxTitleVariant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   children?: React.ReactNode;
   title: string;
+  fullWidth?: boolean;
 };
 
-const AccordionOrBox = ({ children, title, boxTitleVariant }: AccordionOrBoxProps) => {
+const AccordionOrBox = ({ children, title, boxTitleVariant, fullWidth }: AccordionOrBoxProps) => {
   const isMobileOrTablet = useIsMobileOrTablet();
   if (isMobileOrTablet) {
     return (
@@ -20,7 +21,7 @@ const AccordionOrBox = ({ children, title, boxTitleVariant }: AccordionOrBoxProp
   return (
     <>
       <Header style={{ marginTop: '3rem', marginBottom: '1rem' }}>{title}</Header>
-      <Box width="fit-content" padding="2rem">
+      <Box width={fullWidth ? undefined : 'fit-content'} padding="2rem">
         {children}
       </Box>
     </>

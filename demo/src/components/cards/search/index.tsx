@@ -1,7 +1,9 @@
-import { Search } from '@rothko-ui/ui';
-import React, { useState } from 'react';
+import { Container, MaxWidth, Search } from '@rothko-ui/ui';
+import { useReducer, useState } from 'react';
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
 import { CodeLanguage } from '../CodeExample';
+import SearchCustomizations, { customizationsReducer } from './Customizations';
 import searchCopy from './copy';
 import searchProps from './props';
 
@@ -35,32 +37,46 @@ const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
 };
 
 const SearchCard = () => {
-  const [idk, setIdk] = useState('');
+  const [searchValue, setSearchValue] = useState<string>();
+  const isMobileOrTablet = useIsMobileOrTablet();
+  const [state, dispatch] = useReducer(customizationsReducer, {
+    disabled: false,
+    mode: 'popout',
+  });
+
+  const { disabled, mode } = state;
+
   return (
     <Card
       copy={searchCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: searchProps, description: searchCopy.description }}
     >
-      <Search
-        initialQuery={idk}
-        placeholder={undefined}
-        mode="popout"
-        label="testing"
-        dataFetcher={async () => {
-          return [
-            { id: 1, label: 'One' },
-            { id: 2, label: 'Two' },
-            { id: 3, label: 'Three' },
-            { id: 4, label: 'Four' },
-            { id: 5, label: 'Five' },
-            { id: 6, label: 'Six' },
-            { id: 7, label: 'Seven' },
-            { id: 8, label: 'Eight' },
-          ];
-        }}
-        onSearch={q => setIdk(q)}
-      />
+      <MaxWidth maxW="26rem">
+        <SearchCustomizations state={state} dispatch={dispatch} />
+      </MaxWidth>
+      <Container maxWidth={isMobileOrTablet ? undefined : '26rem'} marginTop="2rem">
+        <Search
+          initialQuery={searchValue}
+          placeholder={undefined}
+          disabled={disabled}
+          mode={mode}
+          label="Search"
+          dataFetcher={async () => {
+            return [
+              { id: 1, label: 'One' },
+              { id: 2, label: 'Two' },
+              { id: 3, label: 'Three' },
+              { id: 4, label: 'Four' },
+              { id: 5, label: 'Five' },
+              { id: 6, label: 'Six' },
+              { id: 7, label: 'Seven' },
+              { id: 8, label: 'Eight' },
+            ];
+          }}
+          onSearch={q => setSearchValue(q)}
+        />
+      </Container>
     </Card>
   );
 };

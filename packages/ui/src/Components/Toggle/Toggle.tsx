@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import { hideChromeBrowserOutline } from '../../Library/Styles';
 import type { KindProps } from '../../Theme/types';
 import { keyDownFactory } from '../../utils/keyUtils';
+import { Typography } from '../Typography';
+import isString from 'lodash/isString';
 
 type ToggleProps = KindProps & {
   children?: React.ReactNode;
@@ -29,6 +31,11 @@ const Toggle = ({
 }: ToggleProps) => {
   const handleChange = () => onChange(!toggled);
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: handleChange });
+  const renderContent = isString(children) ? (
+    <Typography.body>{children}</Typography.body>
+  ) : (
+    children
+  );
   return (
     <ToggleContainerDiv className={className} style={style}>
       <OuterToggleDiv
@@ -45,7 +52,7 @@ const Toggle = ({
           {toggled ? onIcon && <>{onIcon}</> : offIcon && <>{offIcon}</>}
         </InnerToggleDiv>
       </OuterToggleDiv>
-      <div className="flex-1 ml3">{children}</div>
+      <div>{renderContent}</div>
     </ToggleContainerDiv>
   );
 };
@@ -53,6 +60,7 @@ const Toggle = ({
 const ToggleContainerDiv = styled.div`
   display: flex;
   align-items: center;
+  gap: 0.5rem;
 `;
 
 type OuterToogleDivProp = Required<KindProps> & {
@@ -60,6 +68,7 @@ type OuterToogleDivProp = Required<KindProps> & {
 };
 
 const OuterToggleDiv = styled.div<OuterToogleDivProp>`
+  flex: 0 0 auto;
   -webkit-tap-highlight-color: transparent;
   ${hideChromeBrowserOutline}
 

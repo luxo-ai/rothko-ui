@@ -1,13 +1,11 @@
-import type { ButtonAppearance, ButtonShape, RothkoKind, RothkoSize } from '@rothko-ui/ui';
-import { Container } from '@rothko-ui/ui';
-import { Button, MaxWidth } from '@rothko-ui/ui';
-import { useState } from 'react';
+import { Button, Container, MaxWidth } from '@rothko-ui/ui';
+import { useReducer } from 'react';
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
 import { CodeLanguage } from '../CodeExample';
-import CustomizationsAccordion from './CustomizationsAccordion';
+import ButtonCustomizations, { customizationsReducer } from './Customizations';
 import buttonCopy from './copy';
 import buttonProps from './props';
-import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
@@ -31,14 +29,18 @@ const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
 };
 
 const ButtonCard = () => {
-  const [appearance, setAppearance] = useState<ButtonAppearance>('filled');
-  const [shape, setShape] = useState<ButtonShape>('square');
-  const [kind, setKind] = useState<RothkoKind>('primary');
-  const [size, setSize] = useState<RothkoSize>('m');
-  const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(false);
-  const [alertOnClick, setAlertOnClick] = useState(false);
   const isMobileOrTablet = useIsMobileOrTablet();
+  const [state, dispatch] = useReducer(customizationsReducer, {
+    alertOnClick: false,
+    appearance: 'filled',
+    disabled: false,
+    kind: 'primary',
+    loading: false,
+    shape: 'square',
+    size: 'm',
+  });
+
+  const { appearance, shape, loading, disabled, kind, alertOnClick, size } = state;
 
   return (
     <Card
@@ -47,22 +49,7 @@ const ButtonCard = () => {
       propsMeta={{ meta: buttonProps, description: buttonCopy.description }}
     >
       <MaxWidth maxW="55rem">
-        <CustomizationsAccordion
-          alertOnClick={alertOnClick}
-          appearance={appearance}
-          disabled={disabled}
-          kind={kind}
-          loading={loading}
-          setAlertOnClick={setAlertOnClick}
-          setAppearance={setAppearance}
-          setDisabled={setDisabled}
-          setKind={setKind}
-          setLoading={setLoading}
-          setShape={setShape}
-          setSize={setSize}
-          shape={shape}
-          size={size}
-        />
+        <ButtonCustomizations state={state} dispatch={dispatch} />
       </MaxWidth>
       <Container maxWidth={isMobileOrTablet ? undefined : '25rem'} marginTop="1rem">
         <Button

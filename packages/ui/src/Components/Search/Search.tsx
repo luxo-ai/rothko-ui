@@ -12,10 +12,9 @@ import { directionMap } from '../../utils/keyUtils';
 import DummySearchBar from './SearchBar/DummySearchBar';
 import SearchBar from './SearchBar/SearchBar';
 import SearchPopout from './SearchPopout';
+import type { SearchMode } from './types';
 import type { OptionFetcher } from './useSearch';
 import { useSearch } from './useSearch';
-
-type SearchMode = 'dropdown' | 'popout';
 
 const isPopoutMode = (mode: SearchMode) => {
   return mode === 'popout';

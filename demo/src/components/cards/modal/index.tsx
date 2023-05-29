@@ -1,10 +1,12 @@
-import { Button, Container, Modal, Typography } from '@rothko-ui/ui';
-import React from 'react';
+import { ArrowCircleUp } from '@rothko-ui/icons';
+import { Button, Container, MaxWidth, Modal } from '@rothko-ui/ui';
+import { useReducer, useState } from 'react';
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
 import { CodeLanguage } from '../CodeExample';
+import ModalCustomizations, { customizationsReducer } from './Customizations';
 import modalCopy from './copy';
 import modalProps from './props';
-import { ArrowCircleUp } from '@rothko-ui/icons';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
@@ -36,14 +38,24 @@ const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
 };
 
 const ModalCard = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const isMobileOrTablet = useIsMobileOrTablet();
+  const [state, dispatch] = useReducer(customizationsReducer, {
+    size: 'm',
+    title: 'Testing',
+    body: 'Modal',
+  });
+  const { size, body, title } = state;
   return (
     <Card
       copy={modalCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: modalProps, description: modalCopy.description }}
     >
-      <Container maxWidth="11rem">
+      <MaxWidth maxW="26rem">
+        <ModalCustomizations state={state} dispatch={dispatch} />
+      </MaxWidth>
+      <Container maxWidth={isMobileOrTablet ? undefined : '26rem'} marginTop="2rem">
         <Button
           accessoryLeft={({ size, color }) => (
             <ArrowCircleUp
@@ -53,14 +65,14 @@ const ModalCard = () => {
               fill={color}
             />
           )}
-          kind="secondary"
+          kind="danger"
           onClick={() => setOpen(true)}
         >
           Open modal
         </Button>
       </Container>
-      <Modal title="Testing" isOpen={open} onClose={() => setOpen(false)}>
-        <Typography.body>Modal</Typography.body>
+      <Modal size={size} title={title} isOpen={open} onClose={() => setOpen(false)}>
+        {body}
       </Modal>
     </Card>
   );

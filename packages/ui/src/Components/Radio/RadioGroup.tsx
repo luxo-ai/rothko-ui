@@ -8,11 +8,7 @@ import type { KindProps } from '../../Theme';
 import type { EmSize, RemSize } from '../../types';
 import Radio from './Radio';
 
-const RadioGroupContainerDiv = styled.div<{ $disabled?: boolean }>`
-  & > * {
-    cursor: ${({ $disabled }) => ($disabled ? 'default' : 'pointer')};
-  }
-`;
+const RadioGroupContainerDiv = styled.div``;
 
 type RadioGroupProps<V extends Value> = KindProps & {
   className?: string;
@@ -27,6 +23,7 @@ type RadioGroupProps<V extends Value> = KindProps & {
   value?: V | null;
   errors?: Dictionary<V, boolean>;
   label?: string;
+  disabled?: boolean;
 };
 
 function RadioGroup<V extends Value>({
@@ -35,13 +32,14 @@ function RadioGroup<V extends Value>({
   className,
   maxCol = 4,
   options,
-  columnGap,
-  rowGap,
+  columnGap = '0.5rem',
+  rowGap = '0.5rem',
   value,
   kind,
   onChange,
   errors,
   label,
+  disabled,
 }: RadioGroupProps<V>) {
   return (
     <RadioGroupContainerDiv id={id} style={style} className={className}>
@@ -56,7 +54,7 @@ function RadioGroup<V extends Value>({
         {options.map(o => {
           const error = Boolean(errors?.[o.id]);
           const dataOptions = 'data' in o ? o?.data : undefined;
-          const isDisabled = Boolean(dataOptions?.disabled);
+          const isDisabled = Boolean(dataOptions?.disabled) || disabled;
           const isSelected = o.id === value;
           return (
             <Radio

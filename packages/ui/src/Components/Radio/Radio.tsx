@@ -32,8 +32,17 @@ const Radio = ({
     children
   );
   return (
-    <RadioContainerDiv style={style} className={className} $disabled={disabled} onClick={onSelect}>
-      <RadioOutlineDiv role="radio" aria-label="radio" aria-checked={!!selected}>
+    <RadioContainerDiv style={style} className={className}>
+      <RadioOutlineDiv
+        $disabled={disabled}
+        onClick={() => {
+          if (!disabled) onSelect();
+        }}
+        role="radio"
+        aria-label="radio"
+        aria-checked={!!selected}
+        className={clsx({ disabled })}
+      >
         <RadioInnerDiv kind={kind} className={clsx({ selected, error, disabled })} />
       </RadioOutlineDiv>
       {renderContent && <div>{renderContent}</div>}
@@ -41,24 +50,25 @@ const Radio = ({
   );
 };
 
-const RadioContainerDiv = styled.div<{ $disabled?: boolean }>`
+const RadioContainerDiv = styled.div`
   position: relative;
   display: flex;
   align-items: center; // for children
   justify-content: flex-start;
   gap: 0.3rem;
-  & > * {
-    cursor: ${({ $disabled }) => ($disabled ? 'default' : 'pointer')};
-  }
 `;
 
-const RadioOutlineDiv = styled.div`
+const RadioOutlineDiv = styled.div<{ $disabled?: boolean }>`
   -webkit-tap-highlight-color: transparent;
   background-color: var(--rothko-radio-border, #000);
   width: 1.25rem;
   height: 1.25rem;
   border-radius: calc(1.25rem / 2);
   padding: 0.1875rem;
+  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
+  &.disabled {
+    opacity: 0.6;
+  }
 `;
 
 const RadioInnerDiv = styled.div<KindProps>`
@@ -86,7 +96,7 @@ const RadioInnerDiv = styled.div<KindProps>`
   }
 
   &.disabled {
-    opacity: 0.75;
+    opacity: 0.6;
   }
 `;
 

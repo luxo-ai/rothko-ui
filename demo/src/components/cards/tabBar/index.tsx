@@ -1,8 +1,10 @@
-import { TabBar, Typography } from '@rothko-ui/ui';
-import React from 'react';
+import { MaxWidth, TabBar, Typography } from '@rothko-ui/ui';
+import { useReducer } from 'react';
 import { CodeLanguage } from '../CodeExample';
 
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
+import TabBarCustomizations, { customizationsReducer } from './Customizations';
 import tabBarCopy from './copy';
 import tabBarProps from './props';
 
@@ -42,13 +44,22 @@ const tabs = [
 ] as const;
 
 const TabBarCard = () => {
+  const isMobileOrTablet = useIsMobileOrTablet();
+  const [state, dispatch] = useReducer(customizationsReducer, {
+    withKind: false,
+    kind: 'info',
+  });
+  const { kind, withKind } = state;
   return (
     <Card
       copy={tabBarCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: tabBarProps, description: tabBarCopy.description }}
     >
-      <TabBar kind="info" tabs={tabs} />;
+      <MaxWidth maxW="26rem">
+        <TabBarCustomizations state={state} dispatch={dispatch} />
+      </MaxWidth>
+      <TabBar kind={withKind ? kind : undefined} tabs={tabs} />
     </Card>
   );
 };
