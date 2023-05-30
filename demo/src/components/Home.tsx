@@ -52,11 +52,20 @@ const Home = () => {
             <Typography.titleBig>
               Elevate web development. Inspire new experiences.
             </Typography.titleBig>
-            <Flex columnGap="0.75rem" maxWidth="20rem" margin="2rem 0">
-              <Button onClick={() => router.push('/overview')} kind="info">
+            <Flex
+              columnGap={isMobileOrTablet ? '0.5rem' : '0.75rem'}
+              maxWidth="20rem"
+              margin="2rem 0"
+            >
+              <Button
+                onClick={() => router.push('/overview')}
+                kind="info"
+                shape={isMobileOrTablet ? 'pill' : 'square'}
+              >
                 Get Started
               </Button>
               <Button
+                shape={isMobileOrTablet ? 'pill' : 'square'}
                 accessoryLeft={({ size, color }) => (
                   <Github
                     fill={color}
