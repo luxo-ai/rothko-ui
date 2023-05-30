@@ -181,6 +181,21 @@ const linkButton = styled.button<LinkProps>`
   ${linkStyle}
 `;
 
+const externalLinkSmall = styled.a<LinkProps>`
+  ${linkStyle};
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+`;
+
+const linkButtonSmall = styled.button<LinkProps>`
+  ${phantomButtonStyle}
+  // to disregard user-select stuff from phantomButtonStyle
+  user-select: text;
+  ${linkStyle}
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+`;
+
 const inlineBody = styled.span<TextProps>`
   ${textStyle}
   font-weight: normal;
@@ -198,11 +213,12 @@ const code = styled.code<KindProps>`
 `;
 
 export default {
-  // for now
   body,
   bodySmall,
   caption,
+  code,
   externalLink,
+  externalLinkSmall,
   h1,
   h2,
   h3,
@@ -212,8 +228,8 @@ export default {
   inlineBody,
   label,
   linkButton,
+  linkButtonSmall,
   linkStyle,
   title,
   titleBig,
-  code,
 };
