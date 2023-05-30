@@ -142,9 +142,6 @@ const IconsCard = () => {
                     }}
                     ariaLabel={iconName}
                     as="button"
-                    borderWidth={1}
-                    borderStyle="solid"
-                    borderColor="basic"
                     padding="1.25rem"
                     className="phantom-button"
                   >
@@ -163,6 +160,7 @@ const IconsCard = () => {
           </FlexItem>
         )}
       </Flex>
+      {/*
       {isMounted() && (
         <ReactTooltip
           style={{
@@ -175,7 +173,7 @@ const IconsCard = () => {
           content={openTooltip || ''}
           openOnClick
         />
-      )}
+        )}*/}
     </Card>
   );
 };
