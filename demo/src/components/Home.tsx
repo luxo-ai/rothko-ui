@@ -52,22 +52,22 @@ const Home = () => {
             <Typography.titleBig>
               Elevate web development. Inspire new experiences.
             </Typography.titleBig>
-            <Flex columnGap="0.5rem" maxWidth="20rem" margin="2rem 0">
-              <Button onClick={() => router.push('/overview')} kind="info" shape="pill">
+            <Flex columnGap="0.75rem" maxWidth="20rem" margin="2rem 0">
+              <Button onClick={() => router.push('/overview')} kind="info">
                 Get Started
               </Button>
               <Button
                 accessoryLeft={({ size, color }) => (
                   <Github
                     fill={color}
-                    style={{ marginRight: '0.5rem' }}
+                    style={{ marginRight: '0.25rem' }}
                     width={size}
                     height={size}
                   />
                 )}
                 kind="primary"
                 appearance="outline"
-                shape="pill"
+                // shape="pill"
                 onClick={() => window.open(REPO_URL, '_blank')}
               >
                 Github
