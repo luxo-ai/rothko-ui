@@ -109,13 +109,13 @@ const IconsCard = () => {
             />
           </MaxWidth>
         </Container>
-        <Flex margin="0 auto" flexWrap="wrap" gap="3rem">
+        <Flex margin="0 auto" flexWrap="wrap" gap="1.25rem">
           {iconList.map(iconName => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const C = Icons[iconName] as React.FC<any>;
             return (
               <div key={iconName}>
-                <div style={{ display: 'inline-block' }} data-tooltip-id="my-tooltip">
+                <div style={{ display: 'inline-block' }}>
                   <Tooltip content={iconName}>
                     <Container
                       onClick={() => {
