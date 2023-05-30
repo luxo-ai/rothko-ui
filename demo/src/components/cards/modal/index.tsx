@@ -25,7 +25,7 @@ const Example: React.FC<ExampleProps> = ({ title, body }) => {
     <>
       <Button onClick={() => setOpen(true)}>Open modal</Button>
       <Modal size="m" title={title} isOpen={open} onClose={() => setOpen(false)}>
-        {body}
+        <p>{body}</p>
       </Modal>
     </>
   );
@@ -42,7 +42,7 @@ const Example = ({ title, body }) => {
     <>
       <Button onClick={() => setOpen(true)}>Open modal</Button>
       <Modal size="m" title={title} isOpen={open} onClose={() => setOpen(false)}>
-        {body}
+        <p>{body}</p>
       </Modal>
     </>
   );
@@ -77,7 +77,7 @@ const ModalCard = () => {
         </Button>
       </Container>
       <Modal size={size} title={title} isOpen={open} onClose={() => setOpen(false)}>
-        {body}
+        <p>{body}</p>
       </Modal>
       <Container as="section" maxWidth="26rem">
         <ModalCustomizations state={state} dispatch={dispatch} />
