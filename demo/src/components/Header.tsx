@@ -16,7 +16,7 @@ const RothkoHeader = ({
   <Header>
     <title key="title">{title}</title>
     <meta name="description" content={description} key="description" />
-    <meta name="theme-color" content="#03001a" key="theme-color" />
+    <meta name="theme-color" content="#000000" key="theme-color" />
     {/* apple status bar color */}
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     {/**
