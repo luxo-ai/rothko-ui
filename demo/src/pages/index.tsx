@@ -3,13 +3,14 @@ import { Github } from '@rothko-ui/icons';
 import { Button, Flex, MaxWidth, Typography } from '@rothko-ui/ui';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import PaddedNavLayout from '../components/layout/PaddedNavLayout';
 
 const REPO_URL = 'https://github.com/luxo-ai/rothko-ui';
 
-const Page = () => {
+const Home = () => {
   const router = useRouter();
   return (
-    <div>
+    <PaddedNavLayout withoutToggle>
       <MaxWidth maxW="80rem" style={{ padding: '3rem 0', margin: '0 auto' }}>
         <Flex
           flexDirection="row-reverse"
@@ -71,8 +72,8 @@ const Page = () => {
           </MaxWidth>
         </Flex>
       </MaxWidth>
-    </div>
+    </PaddedNavLayout>
   );
 };
 
-export default Page;
+export default Home;

@@ -20,9 +20,11 @@ export type CodeSnippetProps = {
   initial?: CodeLanguage;
   alwaysExpanded?: boolean;
   examplesLookup: Record<CodeLanguage, string>;
+  title?: string;
 };
 
 const CodeExample = ({
+  title = 'Example',
   examplesLookup,
   alwaysExpanded = true,
   initial = CodeLanguage.TS,
@@ -32,7 +34,7 @@ const CodeExample = ({
   return (
     <>
       <Container marginTop="1rem">
-        <Typography.h3>Example</Typography.h3>
+        {title && <Typography.h3>{title}</Typography.h3>}
         <Container marginTop="1rem" maxWidth="10rem">
           <OptionGroup
             maxCol={2}

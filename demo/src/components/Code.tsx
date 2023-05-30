@@ -68,4 +68,9 @@ const Code = ({ code, language, ...containerStyle }: CodeProps) => {
   );
 };
 
+export const BashCode = React.memo(({ code }: Pick<CodeProps, 'code'>) => (
+  <Code code={code} language="bash" />
+));
+BashCode.displayName = 'BashCode';
+
 export default Code;

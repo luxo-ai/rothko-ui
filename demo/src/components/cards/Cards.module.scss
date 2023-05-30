@@ -1,13 +1,10 @@
 .componentCard {
+  display: flex;
+  flex-direction: column;
   max-width: 80rem;
-  .cardTitle {
-  }
+  row-gap: 3rem;
 
-  .cardDescription {
-    margin-top: 1.25rem;
-  }
-
-  .section {
+  .bodySubtext {
     margin-top: 1.25rem;
   }
 }

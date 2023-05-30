@@ -2,16 +2,17 @@ import { Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
 import { Button, Flex, FlexItem, Toggle, Typography, WidthGeqOnly, useRothko } from '@rothko-ui/ui';
 import cookieCutter from 'cookie-cutter';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import config from '../../config';
 import styles from './Navigation.module.scss';
 
 type NavigationProps = {
   openDrawer: () => void;
+  withoutToggle?: boolean;
 };
 
-const Navigation = ({ openDrawer }: NavigationProps) => {
+const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
   const router = useRouter();
   const { mode, toggleMode } = useRothko();
 
@@ -63,14 +64,16 @@ const Navigation = ({ openDrawer }: NavigationProps) => {
               Sponsor
             </Button>
           </WidthGeqOnly>
-          <Toggle
-            kind="info"
-            toggled={mode === 'dark'}
-            onChange={() => toggleMode()}
-            /* make react node or react FC -- same for button */
-            onIcon={<Moon fill="#000" />}
-            offIcon={<Sun fill="#000" />}
-          />
+          {!withoutToggle && (
+            <Toggle
+              kind="info"
+              toggled={mode === 'dark'}
+              onChange={() => toggleMode()}
+              /* make react node or react FC -- same for button */
+              onIcon={<Moon fill="#000" />}
+              offIcon={<Sun fill="#000" />}
+            />
+          )}
         </Flex>
       </Flex>
     </nav>

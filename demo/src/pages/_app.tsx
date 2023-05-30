@@ -32,11 +32,13 @@ const themeOverride: ThemeOverrides = {
 type RothkoAppProps = AppProps & {
   cookies?: Dictionary<string, string>;
   isMobileOrTablet?: boolean;
+  pathname?: string;
 };
 export default function App({
   Component,
   pageProps,
   cookies,
+  pathname,
   isMobileOrTablet = false,
 }: RothkoAppProps) {
   // const router = useRouter();
@@ -56,10 +58,12 @@ export default function App({
     <>
       <RothkoHeader />
       <IsMobileOrTabletContext.Provider value={isMobileOrTablet}>
-        <RothkoProvider themeOverrides={themeOverride} themeMode={mode} debugMode>
-          <PaddedNavLayout>
-            <Component {...pageProps} />
-          </PaddedNavLayout>
+        <RothkoProvider
+          themeOverrides={themeOverride}
+          themeMode={pathname === '/' ? 'dark' : mode}
+          debugMode
+        >
+          <Component {...pageProps} />
         </RothkoProvider>
       </IsMobileOrTabletContext.Provider>
     </>
@@ -70,8 +74,10 @@ App.getInitialProps = async (ctx: AppContext) => {
   const cookieString = ctx.ctx.req?.headers.cookie || '';
   const cookies = cookie.parse(cookieString);
   const mobileDetect = new MobileDetect(ctx.ctx.req?.headers['user-agent'] || '');
+  const pathname = ctx.ctx.req?.url;
   return {
     cookies,
+    pathname,
     isMobileOrTablet: !!mobileDetect.mobile() || !!mobileDetect.tablet(),
   };
 };

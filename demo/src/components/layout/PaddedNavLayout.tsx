@@ -11,9 +11,10 @@ import { useRouter } from 'next/router';
 
 type LayoutProps = {
   children: React.ReactNode;
+  withoutToggle?: boolean;
 };
 
-const PaddedNavLayout = ({ children }: LayoutProps) => {
+const PaddedNavLayout = ({ children, withoutToggle }: LayoutProps) => {
   const router = useRouter();
   const { mode } = useRothko();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -29,7 +30,7 @@ const PaddedNavLayout = ({ children }: LayoutProps) => {
         />
       </Drawer>
       <header>
-        <Navigation openDrawer={openDrawer} />
+        <Navigation withoutToggle={withoutToggle} openDrawer={openDrawer} />
       </header>
       <main>{children}</main>
       <footer>

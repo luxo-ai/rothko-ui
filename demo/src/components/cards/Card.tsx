@@ -19,30 +19,29 @@ const Card = ({ children, copy, propsMeta, codeSnippet }: CardProps) => {
   const { title, description, sections } = copy;
   return (
     <div className={styles.componentCard}>
-      <Typography.h1 className={styles.cardTitle}>{title}</Typography.h1>
-      <Typography.body className={styles.cardDescription}>{description}</Typography.body>
-      {sections && (
-        <Container marginTop="2rem">
-          {Object.values(sections).map(section => (
-            <div className={styles.section} key={section.headerText}>
-              <Section section={section} />
-            </div>
-          ))}
-        </Container>
-      )}
-      <div className={styles.section}>{children}</div>
+      <div>
+        <Typography.h1 className={styles.cardTitle}>{title}</Typography.h1>
+        <Typography.body className={styles.bodySubtext}>{description}</Typography.body>
+      </div>
+      {sections &&
+        Object.values(sections).map(section => (
+          <div key={section.headerText}>
+            <Section section={section} />
+          </div>
+        ))}
+      <>{children}</>
       {codeSnippet && (
-        <Container marginTop="2rem">
+        <div>
           <CodeExample {...codeSnippet} />
-        </Container>
+        </div>
       )}
       {propsMeta && (
-        <Container marginTop="2rem">
+        <div>
           <Typography.h3>{propsMeta.titleOveride ?? 'Props'}</Typography.h3>
           <Container marginTop="2rem">
             <PropsTable propsMeta={propsMeta.meta} />
           </Container>
-        </Container>
+        </div>
       )}
     </div>
   );

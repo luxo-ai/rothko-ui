@@ -6,7 +6,8 @@
   // center content
   margin: 0 auto;
   height: 100%;
-  background: var(--demo-background, '#FFFF');
+  background: var(--demo-nav-background, '#FFFF');
+  backdrop-filter: blur(5px);
   // border-bottom: 1px solid rgb(51, 51, 51);
   & > #nav-title {
     user-select: none;
@@ -27,12 +28,13 @@ $headerBarHeightPx: 60px;
   background: var(--demo-background, '#FFFF');
   // background: #f6f9fc;
   // overflow: hidden;
+
   // Header content
   & > header {
     height: $headerBarHeightPx;
     position: fixed;
     inset: 0 0 auto 0;
-    background: white;
+    // background: white;
     z-index: 999998;
   }
   // Main content
