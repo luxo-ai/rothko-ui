@@ -52,9 +52,6 @@ const ModalCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: modalProps }}
     >
-      <Container as="section" maxWidth="26rem">
-        <ModalCustomizations state={state} dispatch={dispatch} />
-      </Container>
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Button
           accessoryLeft={({ size, color }) => (
@@ -74,6 +71,9 @@ const ModalCard = () => {
       <Modal size={size} title={title} isOpen={open} onClose={() => setOpen(false)}>
         {body}
       </Modal>
+      <Container as="section" maxWidth="26rem">
+        <ModalCustomizations state={state} dispatch={dispatch} />
+      </Container>
     </Card>
   );
 };

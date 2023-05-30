@@ -54,9 +54,6 @@ const SliderCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: sliderProps }}
     >
-      <Container as="section" maxWidth="26rem">
-        <SliderCustomizations state={state} dispatch={dispatch} />
-      </Container>
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Slider
           label="Percent"
@@ -68,6 +65,9 @@ const SliderCard = () => {
           onChange={setValue}
           max={100}
         />
+      </Container>
+      <Container as="section" maxWidth="26rem">
+        <SliderCustomizations state={state} dispatch={dispatch} />
       </Container>
     </Card>
   );

@@ -61,9 +61,6 @@ const RadioCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: radioProps }}
     >
-      <Container as="section" maxWidth="26rem">
-        <RadioCustomizations state={state} dispatch={dispatch} />
-      </Container>
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <RadioGroup
           kind={kind}
@@ -75,6 +72,9 @@ const RadioCard = () => {
           onChange={v => setSelected(v)}
           options={radioOptions}
         />
+      </Container>
+      <Container as="section" maxWidth="26rem">
+        <RadioCustomizations state={state} dispatch={dispatch} />
       </Container>
     </Card>
   );

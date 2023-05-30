@@ -48,9 +48,6 @@ const ButtonCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: buttonProps }}
     >
-      <Container as="section" maxWidth="55rem">
-        <ButtonCustomizations state={state} dispatch={dispatch} />
-      </Container>
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '25rem'}>
         <Button
           kind={kind}
@@ -64,6 +61,9 @@ const ButtonCard = () => {
         >
           Click me
         </Button>
+      </Container>
+      <Container as="section" maxWidth="55rem">
+        <ButtonCustomizations state={state} dispatch={dispatch} />
       </Container>
     </Card>
   );

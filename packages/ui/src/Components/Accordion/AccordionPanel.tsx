@@ -87,6 +87,7 @@ type PanelContentProps = {
   id?: string;
   isOpen?: boolean;
   children: React.ReactNode;
+  className?: string;
 };
 
 const getDefaultOpenStyle = (): React.CSSProperties => ({
@@ -103,7 +104,7 @@ const getDefaultClosedStyle = (): React.CSSProperties => ({
   visibility: 'hidden',
 });
 
-const PanelContent = ({ children, id, isOpen }: PanelContentProps) => {
+const PanelContent = ({ children, id, isOpen, className }: PanelContentProps) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   const style = useSpring({
@@ -124,7 +125,9 @@ const PanelContent = ({ children, id, isOpen }: PanelContentProps) => {
 
   return (
     <animated.section id={id} style={style}>
-      <PanelContentDiv ref={contentRef}>{children}</PanelContentDiv>
+      <PanelContentDiv className={className} ref={contentRef}>
+        {children}
+      </PanelContentDiv>
     </animated.section>
   );
 };
@@ -135,6 +138,8 @@ const PanelContainerDiv = styled.div<KindProps>`
   // var(--rothko-background, transparent);
   padding: 0 0.875rem;
   border-radius: 0.125rem;
+
+  border: 1px solid var(--rothko-accordion-background, #fff);
 
   &.bordered {
     background: var(--rothko-background, transparent);
@@ -155,7 +160,7 @@ const PanelLabelButton = styled.button`
 `;
 
 const PanelContentDiv = styled.div`
-  background: var(--rothko-accordion-background, #fff);
+  // background: var(--rothko-accordion-background, #fff);
   // var(--rothko-background, transparent);
   padding-bottom: 0.875rem;
 `;

@@ -52,9 +52,6 @@ const SearchCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: searchProps }}
     >
-      <Container as="section" maxWidth="26rem">
-        <SearchCustomizations state={state} dispatch={dispatch} />
-      </Container>
       <Container maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Search
           initialQuery={searchValue}
@@ -76,6 +73,9 @@ const SearchCard = () => {
           }}
           onSearch={q => setSearchValue(q)}
         />
+      </Container>
+      <Container as="section" maxWidth="26rem">
+        <SearchCustomizations state={state} dispatch={dispatch} />
       </Container>
     </Card>
   );

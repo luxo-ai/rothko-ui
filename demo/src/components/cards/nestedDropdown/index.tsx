@@ -83,9 +83,6 @@ const NestedDropdownCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: nestedDropdownProps }}
     >
-      <Container as="section" maxWidth="26rem">
-        <NestedDropdownCustomizations state={state} dispatch={dispatch} />
-      </Container>
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <NestedDropdown
           label="Nested Dropdown"
@@ -100,6 +97,9 @@ const NestedDropdownCard = () => {
           onChange={v => setValue(v)}
           options={nestedOptions}
         />
+      </Container>
+      <Container as="section" maxWidth="26rem">
+        <NestedDropdownCustomizations state={state} dispatch={dispatch} />
       </Container>
     </Card>
   );

@@ -73,9 +73,6 @@ const MultiDropdownCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: multiDropdownProps }}
     >
-      <Container as="section" maxWidth="26rem">
-        <MultiDropdownCustomizations state={state} dispatch={dispatch} />
-      </Container>
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Dropdown
           disabled={disabled}
@@ -91,6 +88,9 @@ const MultiDropdownCard = () => {
           onChange={v => setValues(v as number[])}
           options={multiDropdownOptions}
         />
+      </Container>
+      <Container as="section" maxWidth="26rem">
+        <MultiDropdownCustomizations state={state} dispatch={dispatch} />
       </Container>
     </Card>
   );

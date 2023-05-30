@@ -49,7 +49,7 @@ const Example = () => {
 
 const AccordionCard = () => {
   const [state, dispatch] = useReducer(customizationsReducer, {
-    bordered: false,
+    bordered: true,
     withKind: false,
     kind: 'primary',
     mutuallyExclusive: false,
@@ -61,9 +61,6 @@ const AccordionCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: accordionProps }}
     >
-      <Container as="section" maxWidth="55rem">
-        <AccordionCustomizations state={state} dispatch={dispatch} />
-      </Container>
       <section>
         <Accordion
           kind={state.withKind ? state.kind : undefined}
@@ -86,6 +83,9 @@ const AccordionCard = () => {
           </AccordionPanel>
         </Accordion>
       </section>
+      <Container as="section" maxWidth="55rem">
+        <AccordionCustomizations state={state} dispatch={dispatch} />
+      </Container>
     </Card>
   );
 };

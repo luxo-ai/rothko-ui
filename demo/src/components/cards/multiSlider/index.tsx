@@ -54,9 +54,6 @@ const MultiSliderCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: multiSliderProps }}
     >
-      <Container as="section" maxWidth="26rem">
-        <MultiSliderCustomizations state={state} dispatch={dispatch} />
-      </Container>
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <MultiSlider
           disabled={disabled}
@@ -70,6 +67,9 @@ const MultiSliderCard = () => {
           max={100}
           orMore
         />
+      </Container>
+      <Container as="section" maxWidth="26rem">
+        <MultiSliderCustomizations state={state} dispatch={dispatch} />
       </Container>
     </Card>
   );

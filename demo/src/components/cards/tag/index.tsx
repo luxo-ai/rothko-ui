@@ -50,9 +50,6 @@ const TagCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: tagProps }}
     >
-      <Container as="section" maxWidth="26rem">
-        <TagCustomizations state={state} dispatch={dispatch} />
-      </Container>
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Flex columnGap="1rem">
           <Tag appearance="filled" kind={kind}>
@@ -62,6 +59,9 @@ const TagCard = () => {
             closeable tag
           </Tag>
         </Flex>
+      </Container>
+      <Container as="section" maxWidth="26rem">
+        <TagCustomizations state={state} dispatch={dispatch} />
       </Container>
     </Card>
   );

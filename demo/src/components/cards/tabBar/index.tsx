@@ -54,12 +54,12 @@ const TabBarCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: tabBarProps }}
     >
-      <Container as="section" maxWidth="26rem">
-        <TabBarCustomizations state={state} dispatch={dispatch} />
-      </Container>
       <section>
         <TabBar kind={withKind ? kind : undefined} tabs={tabs} />
       </section>
+      <Container as="section" maxWidth="26rem">
+        <TabBarCustomizations state={state} dispatch={dispatch} />
+      </Container>
     </Card>
   );
 };

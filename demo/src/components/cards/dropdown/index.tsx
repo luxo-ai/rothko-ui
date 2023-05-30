@@ -81,9 +81,6 @@ const SingleDropdownCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: dropdownProps }}
     >
-      <Container as="section" maxWidth="26rem">
-        <DropdownCustomizations state={state} dispatch={dispatch} />
-      </Container>
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Dropdown
           clearable={clearable}
@@ -99,6 +96,9 @@ const SingleDropdownCard = () => {
           onChange={v => setSelected(v as number)}
           options={dropdownOptions}
         />
+      </Container>
+      <Container as="section" maxWidth="26rem">
+        <DropdownCustomizations state={state} dispatch={dispatch} />
       </Container>
     </Card>
   );

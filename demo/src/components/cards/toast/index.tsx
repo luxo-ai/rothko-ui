@@ -56,9 +56,6 @@ const ToastCard = () => {
         titleOveride: 'Hook Args',
       }}
     >
-      <Container as="section" maxWidth="26rem">
-        <ToastCustomizations state={state} dispatch={dispatch} />
-      </Container>
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '11rem'}>
         <Button
           onClick={() =>
@@ -73,6 +70,9 @@ const ToastCard = () => {
         >
           Click me
         </Button>
+      </Container>
+      <Container as="section" maxWidth="26rem">
+        <ToastCustomizations state={state} dispatch={dispatch} />
       </Container>
     </Card>
   );
