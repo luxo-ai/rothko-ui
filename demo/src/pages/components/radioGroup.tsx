@@ -4,7 +4,7 @@ import WithNavigation from '../../components/WithNavigation';
 
 const Radio = () => {
   return (
-    <WithNavigation selected="components/radio">
+    <WithNavigation selected="components/radioGroup">
       <RadioGroupCard />
     </WithNavigation>
   );
