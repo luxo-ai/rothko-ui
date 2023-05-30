@@ -1,4 +1,4 @@
-import { Container, Flex, List, ListItem, Typography } from '@rothko-ui/ui';
+import { Container, Flex, List, ListItem, Typography, useRothko } from '@rothko-ui/ui';
 import isString from 'lodash/isString';
 import React from 'react';
 import styles from './Cards.module.scss';
@@ -52,6 +52,7 @@ type SectionProps = {
 };
 
 const Section = ({ section }: SectionProps) => {
+  const { mode } = useRothko();
   const { headerVariant, headerText, body } = section;
 
   const Body = ({ body }: { body: Body }) => {
@@ -85,7 +86,14 @@ const Section = ({ section }: SectionProps) => {
 
   return (
     <div>
-      <Header bold={headerVariant === 'body'}>{headerText}</Header>
+      <Header
+        bold={headerVariant === 'body'}
+        style={
+          headerVariant === 'body' ? { color: mode === 'light' ? '#888' : '#A7A7A7' } : undefined
+        }
+      >
+        {headerText}
+      </Header>
       <Body body={body} />
     </div>
   );

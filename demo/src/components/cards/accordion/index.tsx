@@ -8,42 +8,42 @@ import accordionProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { Accordion, AccordionPanel } from '@rothko-ui/ui';
+import { Accordion, AccordionPanel } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <Accordion>
-        <AccordionPanel title="Label 1">
-          Label 1 content
-        </AccordionPanel>
-        <AccordionPanel title="Label 2">
-          Label 2 content
-        </AccordionPanel>
-        <AccordionPanel title="Label 3">
-          Label 3 content
-        </AccordionPanel>
-      </Accordion> 
-    );
-  }
+const Example = () => {
+  return (
+    <Accordion>
+      <AccordionPanel title="Label 1">
+        Label 1 content
+      </AccordionPanel>
+      <AccordionPanel title="Label 2">
+        Label 2 content
+      </AccordionPanel>
+      <AccordionPanel title="Label 3">
+        Label 3 content
+      </AccordionPanel>
+    </Accordion> 
+  );
+}
 `,
   [CodeLanguage.JS]: `
-  import { Accordion, AccordionPanel } from '@rothko-ui/ui';
+import { Accordion, AccordionPanel } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <Accordion>
-        <AccordionPanel title="Label 1">
-          Label 1 content
-        </AccordionPanel>
-        <AccordionPanel title="Label 2">
-          Label 2 content
-        </AccordionPanel>
-        <AccordionPanel title="Label 3">
-          Label 3 content
-        </AccordionPanel>
-      </Accordion> 
-    );
-  }
+const Example = () => {
+  return (
+    <Accordion>
+      <AccordionPanel title="Label 1">
+        Label 1 content
+      </AccordionPanel>
+      <AccordionPanel title="Label 2">
+        Label 2 content
+      </AccordionPanel>
+      <AccordionPanel title="Label 3">
+        Label 3 content
+      </AccordionPanel>
+    </Accordion> 
+  );
+}
 `,
 };
 
@@ -61,10 +61,10 @@ const AccordionCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: accordionProps }}
     >
-      <MaxWidth maxW="55rem">
+      <Container as="section" maxWidth="55rem">
         <AccordionCustomizations state={state} dispatch={dispatch} />
-      </MaxWidth>
-      <Container marginTop="2.5rem">
+      </Container>
+      <section>
         <Accordion
           kind={state.withKind ? state.kind : undefined}
           mutuallyExclusive={state.mutuallyExclusive}
@@ -85,7 +85,7 @@ const AccordionCard = () => {
             blandit volutpat maecenas volutpat. Amet venenatis urna cursus eget nunc.
           </AccordionPanel>
         </Accordion>
-      </Container>
+      </section>
     </Card>
   );
 };

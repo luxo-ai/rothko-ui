@@ -24,11 +24,13 @@ const overviewCopy: CardCopy = {
           headerText: 'Strong Customization',
           body: "Rothko UI provides extensive customization options to tailor the components to your project's specific needs. From colors and typography to layout and interaction, you have the power to create a unique and personalized UI. The library empowers developers to shape their applications according to their vision.",
         },
+        /*
         {
           headerVariant: 'body',
           headerText: 'Opinionated Default Styling',
           body: "While Rothko UI is strongly customizable, it offers an opinionated default styling. The library's components are meticulously designed to provide a cohesive and visually striking experience out of the box. This opinionated approach saves you time and effort by offering a well-crafted starting point while still allowing room for customization.",
         },
+        */
       ],
     },
   },

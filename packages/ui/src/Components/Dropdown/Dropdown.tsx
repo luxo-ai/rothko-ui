@@ -44,8 +44,6 @@ type DropdownProps<V extends Value, T> = {
   disabled?: boolean;
   /** did an error occurr. alert user when true */
   error?: boolean;
-  /** are options currently loading? */
-  loading?: boolean;
   /** are multiple selections allowed? (value is array) */
   multiple?: boolean;
   /** flag indicating if you can search for options or custom matcher */
@@ -74,7 +72,6 @@ function Dropdown<V extends Value, T = undefined>({
   disabled,
   error,
   label,
-  loading,
   menuPosition = 'bottom',
   minimal,
   multiple,
@@ -212,7 +209,6 @@ function Dropdown<V extends Value, T = undefined>({
 
   const containerClasses = clsx({
     error,
-    loading,
     disabled,
     focus,
     minimal,

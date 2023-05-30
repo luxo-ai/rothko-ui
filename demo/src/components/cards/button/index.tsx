@@ -1,4 +1,4 @@
-import { Button, Container, MaxWidth } from '@rothko-ui/ui';
+import { Button, Container } from '@rothko-ui/ui';
 import { useReducer } from 'react';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
@@ -48,10 +48,10 @@ const ButtonCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: buttonProps }}
     >
-      <MaxWidth maxW="55rem">
+      <Container as="section" maxWidth="55rem">
         <ButtonCustomizations state={state} dispatch={dispatch} />
-      </MaxWidth>
-      <Container maxWidth={isMobileOrTablet ? undefined : '25rem'} marginTop="1rem">
+      </Container>
+      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '25rem'}>
         <Button
           kind={kind}
           size={size}

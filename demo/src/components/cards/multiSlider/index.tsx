@@ -1,11 +1,11 @@
-import { Container, MaxWidth, MultiSlider } from '@rothko-ui/ui';
-import React, { useReducer, useState } from 'react';
+import { Container, MultiSlider } from '@rothko-ui/ui';
+import { useReducer, useState } from 'react';
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
 import { CodeLanguage } from '../CodeExample';
+import MultiSliderCustomizations, { customizationsReducer } from './Customizations';
 import multiSliderCopy from './copy';
 import multiSliderProps from './props';
-import MultiSliderCustomizations, { customizationsReducer } from './Customizations';
-import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
@@ -54,10 +54,10 @@ const MultiSliderCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: multiSliderProps }}
     >
-      <MaxWidth maxW="26rem">
+      <Container as="section" maxWidth="26rem">
         <MultiSliderCustomizations state={state} dispatch={dispatch} />
-      </MaxWidth>
-      <Container maxWidth={isMobileOrTablet ? undefined : '26rem'} marginTop="2rem">
+      </Container>
+      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <MultiSlider
           disabled={disabled}
           kind={withKind ? kind : undefined}

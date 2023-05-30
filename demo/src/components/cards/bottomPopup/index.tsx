@@ -4,7 +4,7 @@ import Card from '../Card';
 import bottomPopupCopy from './copy';
 import { CodeLanguage } from '../CodeExample';
 import bottomPopupProps from './props';
-import { ArrowCircleUp } from '@rothko-ui/icons';
+import { ArrowCircleUp, ArrowUpward } from '@rothko-ui/icons';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
@@ -53,10 +53,10 @@ const BottomPopupCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: bottomPopupProps }}
     >
-      <Container maxWidth="11rem">
+      <Container as="section" maxWidth="11rem">
         <Button
           accessoryLeft={({ size, color }) => (
-            <ArrowCircleUp
+            <ArrowUpward
               style={{ marginRight: '0.5rem' }}
               width={size}
               height={size}

@@ -1,4 +1,4 @@
-import { Button, Container, MaxWidth, useToaster } from '@rothko-ui/ui';
+import { Button, Container, useToaster } from '@rothko-ui/ui';
 import { useReducer } from 'react';
 
 import { CodeLanguage } from '../CodeExample';
@@ -56,10 +56,10 @@ const ToastCard = () => {
         titleOveride: 'Hook Args',
       }}
     >
-      <MaxWidth maxW="26rem">
+      <Container as="section" maxWidth="26rem">
         <ToastCustomizations state={state} dispatch={dispatch} />
-      </MaxWidth>
-      <Container maxWidth={isMobileOrTablet ? undefined : '11rem'} marginTop="2rem">
+      </Container>
+      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '11rem'}>
         <Button
           onClick={() =>
             toast.addToast({

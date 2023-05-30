@@ -35,7 +35,9 @@ const AlertCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: alertProps }}
     >
-      <Alert kind="danger">Testing</Alert>
+      <section>
+        <Alert kind="danger">Testing</Alert>
+      </section>
     </Card>
   );
 };

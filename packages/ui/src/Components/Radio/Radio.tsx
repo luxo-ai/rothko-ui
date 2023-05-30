@@ -34,13 +34,13 @@ const Radio = ({
   return (
     <RadioContainerDiv style={style} className={className}>
       <RadioOutlineDiv
-        $disabled={disabled}
         onClick={() => {
           if (!disabled) onSelect();
         }}
         role="radio"
         aria-label="radio"
         aria-checked={!!selected}
+        aria-disabled={!!disabled}
         className={clsx({ disabled })}
       >
         <RadioInnerDiv kind={kind} className={clsx({ selected, error, disabled })} />
@@ -65,8 +65,10 @@ const RadioOutlineDiv = styled.div<{ $disabled?: boolean }>`
   height: 1.25rem;
   border-radius: calc(1.25rem / 2);
   padding: 0.1875rem;
-  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
+  cursor: pointer;
+
   &.disabled {
+    cursor: not-allowed;
     opacity: 0.6;
   }
 `;

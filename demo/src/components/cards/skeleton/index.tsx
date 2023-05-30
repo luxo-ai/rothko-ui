@@ -1,7 +1,6 @@
 import { Container, MaxWidth, SkeletonBoxWithLabel, Slider } from '@rothko-ui/ui';
 import { useState } from 'react';
 
-import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
 import { CodeLanguage } from '../CodeExample';
 import skeletonCopy from './copy';
@@ -38,17 +37,16 @@ const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
 
 const SkeletonCard = () => {
   const [speed, setSpeed] = useState(1.5);
-  const isMobileOrTablet = useIsMobileOrTablet();
   return (
     <Card
       copy={skeletonCopy}
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: skeletonProps }}
     >
-      <Container maxWidth="18rem" marginTop="2rem">
+      <Container as="section" maxWidth="18rem">
         <SkeletonBoxWithLabel speed={1 / speed} />
       </Container>
-      <MaxWidth style={{ marginTop: '1.5rem' }} maxW="20rem">
+      <MaxWidth as="section" maxW="20rem">
         <Slider label="speed" min={0.1} max={5} value={speed} onChange={v => setSpeed(v)} />
       </MaxWidth>
     </Card>

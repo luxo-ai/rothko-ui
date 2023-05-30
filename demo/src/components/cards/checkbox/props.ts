@@ -36,12 +36,6 @@ const checkboxProps = [
     description: 'Checkbox change event handler',
   },
   {
-    name: 'required',
-    type: 'boolean',
-    defaultValue: null,
-    description: 'Specifies whether the checkbox is required',
-  },
-  {
     name: 'style',
     type: 'CSSProperties',
     defaultValue: null,

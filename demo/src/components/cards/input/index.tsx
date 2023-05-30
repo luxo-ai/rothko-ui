@@ -38,7 +38,9 @@ const InputCard = () => {
 
   return (
     <Card copy={inputCopy} codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}>
-      <Input value={value} onChange={e => setValue(e.currentTarget.value)} />
+      <section>
+        <Input value={value} onChange={e => setValue(e.currentTarget.value)} />
+      </section>
     </Card>
   );
 };

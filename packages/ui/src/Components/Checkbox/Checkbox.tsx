@@ -15,7 +15,6 @@ type CheckboxProps = {
   id?: string;
   kind?: RothkoKind;
   onChange: (val: boolean) => void;
-  required?: boolean;
   style?: React.CSSProperties;
   withCheck?: boolean;
   disabled?: boolean;
@@ -29,12 +28,15 @@ const Checkbox = ({
   id,
   kind,
   onChange,
-  required,
   style,
   withCheck,
+  disabled,
 }: CheckboxProps) => {
-  const handleChange = () => onChange(!checked);
-  const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: handleChange });
+  const clickCheckbox = () => {
+    if (disabled) return;
+    onChange(!checked);
+  };
+  const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: clickCheckbox });
   const renderContent = isString(children) ? (
     <Typography.body>{children}</Typography.body>
   ) : (
@@ -45,11 +47,11 @@ const Checkbox = ({
       <CheckboxDiv
         aria-label="check box"
         aria-checked={!!checked}
-        className={clsx({ error, checked, ['with-check']: withCheck })}
+        aria-disabled={!!disabled}
+        className={clsx({ error, checked, disabled, ['with-check']: withCheck })}
         id={id}
         kind={kind}
-        onChange={handleChange}
-        onClick={handleChange}
+        onClick={() => clickCheckbox()}
         onKeyDown={onKeyDown}
         role="checkbox"
         tabIndex={0}
@@ -101,6 +103,11 @@ const CheckboxDiv = styled.div<KindProps>`
 
   &.error:not(:focus) {
     background-color: var(--rothko-danger-transparent-500);
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 `;
 

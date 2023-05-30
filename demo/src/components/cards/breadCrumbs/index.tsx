@@ -42,11 +42,13 @@ const BreadCrumbsCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: breadCrumbsProps }}
     >
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={noop}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs>
+      <section>
+        <BreadCrumbs>
+          <BreadCrumbItem to="ok">One</BreadCrumbItem>
+          <BreadCrumbItem onClick={noop}>Two</BreadCrumbItem>
+          <BreadCrumbItem>Three</BreadCrumbItem>
+        </BreadCrumbs>
+      </section>
     </Card>
   );
 };

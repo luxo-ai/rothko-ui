@@ -2,15 +2,50 @@
 import { Github } from '@rothko-ui/icons';
 import { Button, Flex, MaxWidth, Typography } from '@rothko-ui/ui';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import { useEffect, useRef, useState } from 'react';
+import * as THREE from 'three';
+import HALO from 'vanta/dist/vanta.halo.min';
 import PaddedNavLayout from '../components/layout/PaddedNavLayout';
+import { useIsMobileOrTablet } from '../hooks/useIsMobileOrTablet';
 
 const REPO_URL = 'https://github.com/luxo-ai/rothko-ui';
 
 const Home = () => {
   const router = useRouter();
+  const isMobileOrTablet = useIsMobileOrTablet();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [vantaEffect, setVantaEffect] = useState<any>(null);
+  const vantaRef = useRef(null);
+  useEffect(() => {
+    if (!vantaEffect) {
+      setVantaEffect(
+        HALO({
+          el: vantaRef.current,
+          THREE,
+          color: 0x14b679,
+          maxDistance: 34.0,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.0,
+          minWidth: 200.0,
+          baseColor: 0x1d3793,
+          backgroundColor: 0x0,
+          amplitudeFactor: 2.0,
+          xOffset: 0.3,
+          yOffset: 0.05,
+          size: isMobileOrTablet ? 0.9 : 1.25,
+        })
+      );
+    }
+    return () => {
+      if (vantaEffect && vantaEffect.destroy) vantaEffect?.destory?.();
+    };
+  }, [vantaEffect, vantaRef]);
+
   return (
-    <PaddedNavLayout withoutToggle>
+    <PaddedNavLayout ref={vantaRef} withoutToggle>
       <MaxWidth maxW="80rem" style={{ padding: '3rem 0', margin: '0 auto' }}>
         <Flex
           flexDirection="row-reverse"
@@ -20,26 +55,6 @@ const Home = () => {
           columnGap="5rem"
           rowGap="2rem"
         >
-          <div
-            style={{
-              // width: 'fit-content',
-              marginTop: -32,
-              // width: 'clamp(64rem, 10vw, 250rem)',
-              //  height: 'clamp(64rem, 10vw, 250rem)',
-            }}
-          >
-            <img
-              src="/logo.svg"
-              //  width="100%"
-              //  height="100%"
-              width="clamp(5rem, 100vw 350rem)"
-              height="clamp(5rem, 100vw, 350rem)"
-              //   width="clamp(64rem, 10vw, 250rem)"
-              //   height="clamp(64rem, 10vw, 250rem)"
-              // style={{ width: 'clamp(64rem, 10vw, 250rem)', height: 'clamp(64rem, 10vw, 250rem)' }}
-              alt="Rothko-UI"
-            />
-          </div>
           <MaxWidth maxW="34rem">
             <Typography.titleBig>
               Elevate web development. Inspire new experiences.

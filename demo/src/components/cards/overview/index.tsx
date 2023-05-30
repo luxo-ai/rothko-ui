@@ -5,33 +5,21 @@ import Card from '../Card';
 import CodeExample, { CodeLanguage } from '../CodeExample';
 import overviewCopy from './copy';
 
+const APP_EXAMPLE = `
+import { RothkoProvider, Typography } from '@rothko-ui/ui';
+
+const App = () => {
+  return (
+    <RothkoProvider themeMode="dark">
+      <Typography.h1>Hello World!</Typography.h1>
+    </RothkoProvider>
+  );
+};
+`;
+
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
-
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
-`,
-  [CodeLanguage.JS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
-
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
-`,
+  [CodeLanguage.TS]: APP_EXAMPLE,
+  [CodeLanguage.JS]: APP_EXAMPLE,
 };
 
 export const OverviewCard = () => {
@@ -61,12 +49,12 @@ export const OverviewCard = () => {
       </section>
       <section>
         <Typography.h3>Rothko Provider</Typography.h3>
-        <Typography.body style={{ marginTop: '1.25rem' }}>
+        <Typography.body style={{ marginTop: '1.25rem', marginBottom: '1.5rem' }}>
           To utilize the full capabilities of Rothko-UI components, it is important to wrap your
           main app with the Rothko-UI Context Provider. This context provider ensures that the
           necessary configuration and state are accessible throughout your application.
         </Typography.body>
-        <CodeExample title="" examplesLookup={EXAMPLE_LOOKUP} />
+        <CodeExample examplesLookup={EXAMPLE_LOOKUP} />
       </section>
       <section>
         <Typography.h3>SSR</Typography.h3>
@@ -78,9 +66,9 @@ export const OverviewCard = () => {
           to style its components. If you are using Rothko UI in a server-side rendered app, you
           will need to ensure that the style sheets are generated correctly. For{' '}
           <Link target="_blank" href="https://nextjs.org/">
-            <Typography.linkButton as="span">Next.js</Typography.linkButton> apps you&apos;ll need
-            to use <code>ServerStyleSheet</code>.
+            <Typography.linkButton as="span">Next.js</Typography.linkButton>
           </Link>{' '}
+          apps you&apos;ll need to use <code>ServerStyleSheet</code>.
         </Typography.body>
       </section>
       <section>

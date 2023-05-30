@@ -1,14 +1,13 @@
-/* eslint-disable no-console */
-import { Container, Flex, MaxWidth, Tag } from '@rothko-ui/ui';
-import React, { useReducer } from 'react';
+import { Container, Flex, Tag } from '@rothko-ui/ui';
+import { useReducer } from 'react';
 
 import { CodeLanguage } from '../CodeExample';
 
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
+import TagCustomizations, { customizationsReducer } from './Customizations';
 import tagCopy from './copy';
 import tagProps from './props';
-import TagCustomizations, { customizationsReducer } from './Customizations';
-import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
@@ -51,10 +50,10 @@ const TagCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: tagProps }}
     >
-      <MaxWidth maxW="26rem">
+      <Container as="section" maxWidth="26rem">
         <TagCustomizations state={state} dispatch={dispatch} />
-      </MaxWidth>
-      <Container maxWidth={isMobileOrTablet ? undefined : '26rem'} marginTop="2rem">
+      </Container>
+      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Flex columnGap="1rem">
           <Tag appearance="filled" kind={kind}>
             my first tag

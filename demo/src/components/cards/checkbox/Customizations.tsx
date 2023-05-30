@@ -75,6 +75,7 @@ const CheckboxCustomizations = ({ state, dispatch }: CheckboxCustomizationsProps
             kind="secondary"
             onChange={() => dispatch({ type: 'TOGGLE_DISABLED' })}
             toggled={disabled}
+            style={{ marginTop: '1.5rem' }}
           >
             disabled
           </Toggle>

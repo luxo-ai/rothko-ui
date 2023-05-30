@@ -1,4 +1,4 @@
-import { Checkbox, Container, MaxWidth } from '@rothko-ui/ui';
+import { Checkbox, Container } from '@rothko-ui/ui';
 import { useReducer, useState } from 'react';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
@@ -43,7 +43,7 @@ const CheckboxCard = () => {
   const [state, dispatch] = useReducer(customizationsReducer, {
     kind: 'info',
     withKind: false,
-    withCheck: false,
+    withCheck: true,
     disabled: false,
   });
 
@@ -54,10 +54,7 @@ const CheckboxCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: checkboxProps }}
     >
-      <MaxWidth maxW="55rem">
-        <CheckboxCustomizations state={state} dispatch={dispatch} />
-      </MaxWidth>
-      <Container maxWidth={isMobileOrTablet ? undefined : '25rem'} marginTop="1rem">
+      <Container maxWidth={isMobileOrTablet ? undefined : '25rem'}>
         <Checkbox
           disabled={disabled}
           kind={withKind ? kind : undefined}
@@ -73,8 +70,11 @@ const CheckboxCard = () => {
           checked={checked2}
           onChange={v => setChecked2(v)}
         >
-          Hello world
+          checkbox with label
         </Checkbox>
+      </Container>
+      <Container as="section" maxWidth="55rem">
+        <CheckboxCustomizations state={state} dispatch={dispatch} />
       </Container>
     </Card>
   );

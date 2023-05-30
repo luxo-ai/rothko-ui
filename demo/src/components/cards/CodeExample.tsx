@@ -18,15 +18,13 @@ export enum CodeLanguage {
 
 export type CodeSnippetProps = {
   initial?: CodeLanguage;
-  alwaysExpanded?: boolean;
   examplesLookup: Record<CodeLanguage, string>;
   title?: string;
 };
 
 const CodeExample = ({
-  title = 'Example',
+  title, // = 'Example',
   examplesLookup,
-  alwaysExpanded = true,
   initial = CodeLanguage.TS,
 }: CodeSnippetProps) => {
   const [expanded, setExpanded] = useState<CodeLanguage | null>(initial || null);
@@ -38,7 +36,6 @@ const CodeExample = ({
         <Container marginTop="1rem" maxWidth="10rem">
           <OptionGroup
             maxCol={2}
-            kind="secondary"
             optionGap="0.5rem"
             size="s"
             value={expanded}
@@ -46,14 +43,7 @@ const CodeExample = ({
               { id: CodeLanguage.TS, label: 'TS' },
               { id: CodeLanguage.JS, label: 'JS' },
             ]}
-            onChange={v => {
-              if (v === expanded) {
-                if (alwaysExpanded) return;
-                setExpanded(null);
-              } else {
-                setExpanded(v);
-              }
-            }}
+            onChange={v => setExpanded(v)}
             accessoryLeft={({ size, color }) => (
               <CodeOutline height={size} width={size} fill={color} />
             )}
@@ -78,7 +68,7 @@ const CodeExample = ({
                 padding="0.5rem 1rem"
                 backgroundColor={style.backgroundColor}
               >
-                <Typography.caption style={{ color: style.color, marginLeft: '0.5rem' }}>
+                <Typography.caption style={{ color: style.color }}>
                   {expanded === CodeLanguage.TS ? 'TypeScript' : 'JavaScript'}
                 </Typography.caption>
                 <ToastContextConsumer>
@@ -103,13 +93,13 @@ const CodeExample = ({
                 style={{
                   ...style,
                   margin: '0.125rem 0',
-                  padding: '0.5rem 0',
+                  padding: '0.5rem 1rem',
                   overflow: 'scroll',
                 }}
               >
                 {tokens.map((line, i) => (
                   <div key={i} {...getLineProps({ line })}>
-                    <span>{i + 1}</span>
+                    <span>{i + 1}</span>&nbsp;
                     {line.map((token, key) => (
                       <span key={key} {...getTokenProps({ token })} />
                     ))}

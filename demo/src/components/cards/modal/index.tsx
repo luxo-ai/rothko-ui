@@ -1,5 +1,5 @@
 import { ArrowCircleUp } from '@rothko-ui/icons';
-import { Button, Container, MaxWidth, Modal } from '@rothko-ui/ui';
+import { Button, Container, Modal } from '@rothko-ui/ui';
 import { useReducer, useState } from 'react';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
@@ -52,10 +52,10 @@ const ModalCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: modalProps }}
     >
-      <MaxWidth maxW="26rem">
+      <Container as="section" maxWidth="26rem">
         <ModalCustomizations state={state} dispatch={dispatch} />
-      </MaxWidth>
-      <Container maxWidth={isMobileOrTablet ? undefined : '26rem'} marginTop="2rem">
+      </Container>
+      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Button
           accessoryLeft={({ size, color }) => (
             <ArrowCircleUp

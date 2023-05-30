@@ -1,13 +1,6 @@
-import React from 'react';
-
-import Code from '../../Code';
+import { JsonCode } from '../../Code';
 import Card from '../Card';
 import themeCopy from './copy';
-
-const JsonCode = React.memo(({ code }: { code: string }) => (
-  <Code maxHeight="25rem" language="json" code={code} />
-));
-JsonCode.displayName = 'JsonCode';
 
 const typographyJsonOverride = `{
   "typography": {

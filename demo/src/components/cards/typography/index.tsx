@@ -7,24 +7,24 @@ import typographyProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { Typography } from '@rothko-ui/ui';
+import { Typography } from '@rothko-ui/ui';
 
-  type ExampleProps = {
-    text: string
-  }
+type ExampleProps = {
+  text: string
+}
 
-  const Example = ({ text }: ExampleProps) => {
-      return (
-        <Typography.h1>{text} in h1!</Typography.h1>
-      );
-  }
+const Example = ({ text }: ExampleProps) => {
+  return (
+    <Typography.h1>{text} in h1!</Typography.h1>
+    );
+}
 `,
   [CodeLanguage.JS]: `
-  import { Typography } from '@rothko-ui/ui';
+import { Typography } from '@rothko-ui/ui';
 
-  const Example = ({ text }) => {
-    return <Typography.h1>{text} in h1!</Typography.h1>
-  }
+const Example = ({ text }) => {
+  return <Typography.h1>{text} in h1!</Typography.h1>
+}
 `,
 };
 

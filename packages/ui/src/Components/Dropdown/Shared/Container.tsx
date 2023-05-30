@@ -23,7 +23,8 @@ export const DropdownContainerDiv = styled.div`
 
   &.disabled {
     cursor: not-allowed;
-    border-color: var(--rothko-basic-transparent-500);
+    opacity: 0.6;
+    // border-color: var(--rothko-basic-transparent-500);
   }
 
   &.empty {
@@ -50,6 +51,6 @@ export const TextContainerDiv = styled.div`
   }
 
   &.disabled {
-    opacity: 0.5;
+    opacity: 0.6;
   }
 `;

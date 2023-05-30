@@ -1,13 +1,12 @@
 import type { Option } from '@rothko-ui/ui';
-import { RadioGroup } from '@rothko-ui/ui';
-import { Container, MaxWidth, Radio } from '@rothko-ui/ui';
-import React, { useReducer, useState } from 'react';
+import { Container, RadioGroup } from '@rothko-ui/ui';
+import { useReducer, useState } from 'react';
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
 import { CodeLanguage } from '../CodeExample';
+import RadioCustomizations, { customizationsReducer } from './Customizations';
 import radioCopy from './copy';
 import radioProps from './props';
-import RadioCustomizations, { customizationsReducer } from './Customizations';
-import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
@@ -62,10 +61,10 @@ const RadioCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: radioProps }}
     >
-      <MaxWidth maxW="26rem">
+      <Container as="section" maxWidth="26rem">
         <RadioCustomizations state={state} dispatch={dispatch} />
-      </MaxWidth>
-      <Container maxWidth={isMobileOrTablet ? undefined : '26rem'} marginTop="2rem">
+      </Container>
+      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <RadioGroup
           kind={kind}
           disabled={disabled}

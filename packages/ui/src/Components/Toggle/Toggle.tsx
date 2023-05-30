@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import keyboardKey from 'keyboard-key';
+import isString from 'lodash/isString';
 import type { CSSProperties } from 'react';
 import React from 'react';
 import styled from 'styled-components';
@@ -7,7 +8,6 @@ import { hideChromeBrowserOutline } from '../../Library/Styles';
 import type { KindProps } from '../../Theme/types';
 import { keyDownFactory } from '../../utils/keyUtils';
 import { Typography } from '../Typography';
-import isString from 'lodash/isString';
 
 type ToggleProps = KindProps & {
   children?: React.ReactNode;
@@ -17,6 +17,7 @@ type ToggleProps = KindProps & {
   toggled?: boolean;
   onIcon?: JSX.Element;
   offIcon?: JSX.Element;
+  disabled?: boolean;
 };
 
 const Toggle = ({
@@ -28,8 +29,12 @@ const Toggle = ({
   toggled,
   onIcon,
   offIcon,
+  disabled,
 }: ToggleProps) => {
-  const handleChange = () => onChange(!toggled);
+  const handleChange = () => {
+    if (disabled) return;
+    onChange(!toggled);
+  };
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: handleChange });
   const renderContent = isString(children) ? (
     <Typography.body>{children}</Typography.body>
@@ -47,6 +52,7 @@ const Toggle = ({
         onKeyDown={onKeyDown}
         tabIndex={0}
         toggled={toggled}
+        className={clsx({ disabled })}
       >
         <InnerToggleDiv className={clsx(toggled && 'active')}>
           {toggled ? onIcon && <>{onIcon}</> : offIcon && <>{offIcon}</>}
@@ -104,6 +110,11 @@ const OuterToggleDiv = styled.div<OuterToogleDivProp>`
       border-radius: 50vmin;
       border: 0.125rem solid ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
     }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 `;
 

@@ -48,27 +48,31 @@ a {
 * {
   box-sizing: border-box;
 }
-/*
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
-}
-*/
 
 :root .dark {
   --demo-background: #000;
   --demo-nav-background: rgba(0, 0, 0, 0.75);
   background: #000;
 }
+.dark ::selection {
+  background: #f81be5;
+}
+.dark ::-moz-selection {
+  background: #f81be5;
+}
+
 :root .light {
   --demo-background: #fff;
   --demo-nav-background: rgba(255, 255, 255, 0.75);
   background: #fff;
+}
+.light ::selection {
+  color: #fff;
+  background: #000;
+}
+.light ::-moz-selection {
+  color: #fff;
+  background: #000;
 }
 
 .phantom-button {

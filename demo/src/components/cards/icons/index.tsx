@@ -1,4 +1,6 @@
 import * as Icons from '@rothko-ui/icons';
+import type { Accessory, Option } from '@rothko-ui/ui';
+import { FlexItem } from '@rothko-ui/ui';
 import {
   Alert,
   Container,
@@ -39,23 +41,42 @@ enum IconKind {
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { ActivityOutline } from '@rothko-ui/icons';
+import { ActivityOutline } from '@rothko-ui/icons';
 
-  const Example = () => {
-    return <ActivityOutline height={20} width={20}/>
-  }
+const Example = () => {
+  return <ActivityOutline height={20} width={20}/>
+}
 `,
   [CodeLanguage.JS]: `
-  import { ActivityOutline } from '@rothko-ui/icons';
+import { ActivityOutline } from '@rothko-ui/icons';
 
-  const Example = () => {
-    return <ActivityOutline height={20} width={20}/>
-  }
+const Example = () => {
+  return <ActivityOutline height={20} width={20}/>
+}
 `,
 };
 
 const outlineIconSearcher = new FuzzySearch([...outlineIconList]);
 const filledIconSearcher = new FuzzySearch([...filledIconList]);
+
+const iconKindOptions: Option<IconKind, { accessoryLeft: Accessory }>[] = [
+  {
+    id: IconKind.Filled,
+    label: 'Filled',
+    data: {
+      accessoryLeft: ({ size, color }) => <Icons.Moon width={size} height={size} fill={color} />,
+    },
+  },
+  {
+    id: IconKind.Outline,
+    label: 'Outline',
+    data: {
+      accessoryLeft: ({ size, color }) => (
+        <Icons.MoonOutline width={size} height={size} fill={color} />
+      ),
+    },
+  },
+];
 
 const IconsCard = () => {
   const [query, setQuery] = useState<string | null>(null);
@@ -76,18 +97,20 @@ const IconsCard = () => {
 
   return (
     <Card copy={iconographyCopy}>
-      <Container marginTop="2rem">
-        <CodeExample alwaysExpanded initial={CodeLanguage.TS} examplesLookup={EXAMPLE_LOOKUP} />
+      <section>
+        <CodeExample initial={CodeLanguage.TS} examplesLookup={EXAMPLE_LOOKUP} />
+      </section>
+      <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Typography.h3>Availabe Icons</Typography.h3>
-        <Container marginTop="2rem">
+        <div>
           <SearchBar
             onQueryChange={q => setQuery(q)}
             onSubmit={noop}
             placeholder="Search for an icon..."
             query={query}
           />
-        </Container>
-        <Container marginTop="2rem">
+        </div>
+        <Container>
           <MaxWidth maxW="13rem">
             <OptionGroup
               withoutBorder
@@ -95,33 +118,14 @@ const IconsCard = () => {
               maxCol={2}
               kind="secondary"
               optionGap="0.75rem"
-              size="s"
+              size="xs"
               value={iconKind}
-              options={[
-                {
-                  id: IconKind.Filled,
-                  label: 'Filled',
-                  data: {
-                    accessoryLeft: ({ size, color }) => (
-                      <Icons.Moon width={size} height={size} fill={color} />
-                    ),
-                  },
-                },
-                {
-                  id: IconKind.Outline,
-                  label: 'Outline',
-                  data: {
-                    accessoryLeft: ({ size, color }) => (
-                      <Icons.MoonOutline width={size} height={size} fill={color} />
-                    ),
-                  },
-                },
-              ]}
+              options={iconKindOptions}
               onChange={v => setIconKind(v)}
             />
           </MaxWidth>
         </Container>
-        <Flex margin="2rem auto" flexWrap="wrap" gap="3rem">
+        <Flex margin="0 auto" flexWrap="wrap" gap="3rem">
           {iconList.map(iconName => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const C = Icons[iconName] as React.FC<any>;
@@ -154,11 +158,11 @@ const IconsCard = () => {
           })}
         </Flex>
         {iconList.length === 0 && (
-          <Container margin="auto" maxWidth="40rem">
+          <FlexItem flex={1} width="100%" margin="auto" maxWidth="40rem">
             <Alert style={{ textAlign: 'center' }}>No results. Please try another search...</Alert>
-          </Container>
+          </FlexItem>
         )}
-      </Container>
+      </Flex>
       {isMounted() && (
         <ReactTooltip
           style={{

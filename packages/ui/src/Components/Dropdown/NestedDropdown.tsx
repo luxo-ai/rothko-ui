@@ -16,7 +16,7 @@ import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } f
 import type { StackOption } from './useNestedOptions';
 import useNestedOptions from './useNestedOptions';
 
-type NestedDropdownProps<V extends Value, T> = {
+type NestedDropdownProps<V extends Value> = {
   id?: string;
   /** Current value of dropdown or value array if multiple */
   value?: V | null;
@@ -38,8 +38,6 @@ type NestedDropdownProps<V extends Value, T> = {
   disabled?: boolean;
   /** did an error occurr. alert user when true */
   error?: boolean;
-  /** are options currently loading? */
-  loading?: boolean;
   /** custom method for rendering option */
   renderOption?: RenderOption<V, { hasMore: boolean }>;
   /* class names of outer wrapper */
@@ -48,7 +46,7 @@ type NestedDropdownProps<V extends Value, T> = {
   label?: string;
 };
 
-function NestedDropdown<V extends Value, T = undefined>({
+function NestedDropdown<V extends Value>({
   id,
   value,
   options,
@@ -59,12 +57,11 @@ function NestedDropdown<V extends Value, T = undefined>({
   closeOnEsc = true,
   disabled,
   error,
-  loading,
   className,
   renderOption: RenderOpt = DefaultRenderOption,
   placeholder = 'Select',
   label,
-}: NestedDropdownProps<V, T>) {
+}: NestedDropdownProps<V>) {
   const debug = useDebuggerContext('<NestedDropdown />');
 
   const {
@@ -153,7 +150,6 @@ function NestedDropdown<V extends Value, T = undefined>({
 
   const containerClasses = clsx({
     error,
-    loading,
     disabled,
     focus,
     empty: !hasOptions,

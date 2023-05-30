@@ -41,6 +41,12 @@ const toggleProps = [
     defaultValue: null,
     description: 'Icon to display when the toggle is off',
   },
+  {
+    name: 'disabled',
+    type: 'boolean',
+    defaultValue: null,
+    description: 'Disables the checkbox',
+  },
 ] as const;
 
 export default toggleProps;

@@ -19,12 +19,12 @@ const AccordionOrBox = ({ children, title, boxTitleVariant, fullWidth }: Accordi
   }
   const Header = Typography[boxTitleVariant];
   return (
-    <>
-      <Header style={{ marginTop: '3rem', marginBottom: '1rem' }}>{title}</Header>
-      <Box width={fullWidth ? undefined : 'fit-content'} padding="2rem">
+    <div>
+      <Header>{title}</Header>
+      <Box marginTop="1.25rem" width={fullWidth ? undefined : 'fit-content'} padding="2rem">
         {children}
       </Box>
-    </>
+    </div>
   );
 };
 

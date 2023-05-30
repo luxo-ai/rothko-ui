@@ -1,4 +1,4 @@
-import { Container, MaxWidth, Search } from '@rothko-ui/ui';
+import { Container, Search } from '@rothko-ui/ui';
 import { useReducer, useState } from 'react';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
@@ -52,10 +52,10 @@ const SearchCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: searchProps }}
     >
-      <MaxWidth maxW="26rem">
+      <Container as="section" maxWidth="26rem">
         <SearchCustomizations state={state} dispatch={dispatch} />
-      </MaxWidth>
-      <Container maxWidth={isMobileOrTablet ? undefined : '26rem'} marginTop="2rem">
+      </Container>
+      <Container maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Search
           initialQuery={searchValue}
           placeholder={undefined}

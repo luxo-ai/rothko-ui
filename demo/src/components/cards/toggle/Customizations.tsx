@@ -1,4 +1,5 @@
 import type { RothkoKind } from '@rothko-ui/ui';
+import { Toggle } from '@rothko-ui/ui';
 import { Checkbox, Dropdown, Flex, MaxWidth, RadioGroup } from '@rothko-ui/ui';
 import AccordionOrBox from '../../AccordionOrBox';
 import { kindOptions } from '../../rothkoOptions';
@@ -8,12 +9,14 @@ type CutomizationState = {
   withKind: boolean;
   offIcon?: number | null;
   onIcon?: number | null;
+  disabled: boolean;
 };
 
 type CustomizationAction =
   | { type: 'SET_KIND'; kind: RothkoKind }
   | { type: 'SET_OFF_ICON'; offIcon?: number | null }
   | { type: 'SET_ON_ICON'; onIcon?: number | null }
+  | { type: 'TOGGLE_DISABLED' }
   | { type: 'CHECK_WITH_KIND' };
 
 export const customizationsReducer = (state: CutomizationState, action: CustomizationAction) => {
@@ -26,6 +29,8 @@ export const customizationsReducer = (state: CutomizationState, action: Customiz
       return { ...state, onIcon: action.onIcon };
     case 'CHECK_WITH_KIND':
       return { ...state, withKind: !state.withKind };
+    case 'TOGGLE_DISABLED':
+      return { ...state, disabled: !state.disabled };
     default:
       return state;
   }
@@ -37,7 +42,7 @@ type ToggleCustomizationsProps = {
 };
 
 const ToggleCustomizations = ({ state, dispatch }: ToggleCustomizationsProps) => {
-  const { kind, onIcon, offIcon, withKind } = state;
+  const { kind, onIcon, offIcon, withKind, disabled } = state;
   return (
     <AccordionOrBox boxTitleVariant="h3" title="Customizations">
       <Flex
@@ -64,6 +69,13 @@ const ToggleCustomizations = ({ state, dispatch }: ToggleCustomizationsProps) =>
           />
         </MaxWidth>
       </Flex>
+      <Toggle
+        toggled={disabled}
+        onChange={() => dispatch({ type: 'TOGGLE_DISABLED' })}
+        style={{ marginTop: '1.5rem' }}
+      >
+        disabled
+      </Toggle>
       <Dropdown
         value={onIcon}
         onChange={v => dispatch({ type: 'SET_ON_ICON', onIcon: v as number | null })}

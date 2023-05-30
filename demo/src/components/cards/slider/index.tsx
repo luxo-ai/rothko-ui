@@ -1,12 +1,12 @@
-import { Container, MaxWidth, Slider } from '@rothko-ui/ui';
-import React, { useReducer, useState } from 'react';
+import { Container, Slider } from '@rothko-ui/ui';
+import { useReducer, useState } from 'react';
 
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
 import { CodeLanguage } from '../CodeExample';
+import SliderCustomizations, { customizationsReducer } from './Customizations';
 import sliderCopy from './copy';
 import sliderProps from './props';
-import SliderCustomizations, { customizationsReducer } from './Customizations';
-import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
@@ -54,10 +54,10 @@ const SliderCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: sliderProps }}
     >
-      <MaxWidth maxW="26rem">
+      <Container as="section" maxWidth="26rem">
         <SliderCustomizations state={state} dispatch={dispatch} />
-      </MaxWidth>
-      <Container maxWidth={isMobileOrTablet ? undefined : '26rem'} marginTop="2rem">
+      </Container>
+      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Slider
           label="Percent"
           postfix={postfix}

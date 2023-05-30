@@ -1,4 +1,4 @@
-import { Container, Dropdown, MaxWidth } from '@rothko-ui/ui';
+import { Container, Dropdown } from '@rothko-ui/ui';
 import { useReducer, useState } from 'react';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
@@ -81,10 +81,10 @@ const SingleDropdownCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: dropdownProps }}
     >
-      <MaxWidth maxW="26rem">
+      <Container as="section" maxWidth="26rem">
         <DropdownCustomizations state={state} dispatch={dispatch} />
-      </MaxWidth>
-      <Container maxWidth={isMobileOrTablet ? undefined : '26rem'} marginTop="2rem">
+      </Container>
+      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Dropdown
           clearable={clearable}
           closeOnEsc={closeOnEsc}

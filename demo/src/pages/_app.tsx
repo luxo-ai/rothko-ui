@@ -4,9 +4,9 @@ import type { Dictionary } from '@rothko-ui/utils';
 import cookie from 'cookie';
 import MobileDetect from 'mobile-detect';
 import type { AppContext, AppProps } from 'next/app';
+import { useEffect } from 'react';
 import RothkoHeader from '../components/Header';
 import { IsMobileOrTabletContext } from '../components/IsMobileOrTabletContext';
-import PaddedNavLayout from '../components/layout/PaddedNavLayout';
 import config from '../config';
 import '../styles/globals.css';
 
@@ -52,17 +52,28 @@ export default function App({
   //  router.events.on('routeChangeError', handleComplete);
   // }, [router, setPageLoading]);
 
+  useEffect(() => {
+    const threeScript = document.createElement('script');
+    threeScript.setAttribute('id', 'threeScript');
+    threeScript.setAttribute(
+      'src',
+      'https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'
+    );
+    document.getElementsByTagName('head')[0].appendChild(threeScript);
+    return () => {
+      if (threeScript) {
+        threeScript.remove();
+      }
+    };
+  }, []);
+
   const mode = (cookies?.[config.preference.themeMode] || 'dark') as 'dark' | 'light';
 
   return (
     <>
       <RothkoHeader />
       <IsMobileOrTabletContext.Provider value={isMobileOrTablet}>
-        <RothkoProvider
-          themeOverrides={themeOverride}
-          themeMode={pathname === '/' ? 'dark' : mode}
-          debugMode
-        >
+        <RothkoProvider themeOverrides={themeOverride} themeMode={mode}>
           <Component {...pageProps} />
         </RothkoProvider>
       </IsMobileOrTabletContext.Provider>

@@ -3,7 +3,7 @@ export type { ButtonAppearance, ButtonShape } from './Components/Button/types';
 export * from './Helpers';
 export * from './Hooks';
 export * from './Layout';
-export type { Option } from './Library/types';
+export type { Option, Accessory } from './Library/types';
 export * from './RothkoProvider';
 export type { RothkoKind, RothkoSize, ThemeOverrides } from './Theme';
 export type { EmSize, PercentSize, RemSize, ViewportSize } from './types';

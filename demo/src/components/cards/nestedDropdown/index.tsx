@@ -1,4 +1,4 @@
-import { Container, MaxWidth, NestedDropdown } from '@rothko-ui/ui';
+import { Container, NestedDropdown } from '@rothko-ui/ui';
 import { useReducer, useState } from 'react';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
@@ -83,10 +83,10 @@ const NestedDropdownCard = () => {
       codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
       propsMeta={{ meta: nestedDropdownProps }}
     >
-      <MaxWidth maxW="26rem">
+      <Container as="section" maxWidth="26rem">
         <NestedDropdownCustomizations state={state} dispatch={dispatch} />
-      </MaxWidth>
-      <Container maxWidth={isMobileOrTablet ? undefined : '26rem'} marginTop="2rem">
+      </Container>
+      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <NestedDropdown
           label="Nested Dropdown"
           disabled={disabled}
