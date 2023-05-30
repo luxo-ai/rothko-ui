@@ -1,5 +1,3 @@
-import type { ThemeOverrides } from '@rothko-ui/ui';
-import { RothkoProvider } from '@rothko-ui/ui';
 import type { Dictionary } from '@rothko-ui/utils';
 import cookie from 'cookie';
 import MobileDetect from 'mobile-detect';
@@ -7,51 +5,20 @@ import type { AppContext, AppProps } from 'next/app';
 import { useEffect } from 'react';
 import RothkoHeader from '../components/Header';
 import { IsMobileOrTabletContext } from '../components/IsMobileOrTabletContext';
+import WithProviders from '../components/WithProviders';
 import config from '../config';
 import '../styles/globals.css';
-
-const themeOverride: ThemeOverrides = {
-  typography: {
-    body: {
-      regular: {
-        value: "'Soehne-Buch', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif",
-      },
-      // regular: { value: `"Helvetica Neue", "Helvetica", Arial, sans-serif` },
-      bold: { value: "'LabGrotesque-Bold'" },
-      italic: { value: "'LabGrotesque-Italic'" },
-      light: { value: "'LabGrotesque-Light'" },
-    },
-    header: { value: "'LabGrotesque-Regular'" },
-    /* header: {
-      value: "'Soehne-Buch', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif",
-    },
-    */
-  },
-};
 
 type RothkoAppProps = AppProps & {
   cookies?: Dictionary<string, string>;
   isMobileOrTablet?: boolean;
-  pathname?: string;
 };
 export default function App({
   Component,
   pageProps,
   cookies,
-  pathname,
   isMobileOrTablet = false,
 }: RothkoAppProps) {
-  // const router = useRouter();
-  // const [pageLoading, setPageLoading] = useState(false);
-
-  // useEffect(() => {
-  // const handleStart = () => setPageLoading(true);
-  //  const handleComplete = () => setPageLoading(false);
-  //  router.events.on('routeChangeStart', handleStart);
-  //  router.events.on('routeChangeComplete', handleComplete);
-  //  router.events.on('routeChangeError', handleComplete);
-  // }, [router, setPageLoading]);
-
   useEffect(() => {
     const threeScript = document.createElement('script');
     threeScript.setAttribute('id', 'threeScript');
@@ -73,9 +40,9 @@ export default function App({
     <>
       <RothkoHeader />
       <IsMobileOrTabletContext.Provider value={isMobileOrTablet}>
-        <RothkoProvider themeOverrides={themeOverride} themeMode={mode}>
+        <WithProviders themeMode={mode}>
           <Component {...pageProps} />
-        </RothkoProvider>
+        </WithProviders>
       </IsMobileOrTabletContext.Provider>
     </>
   );
@@ -85,10 +52,8 @@ App.getInitialProps = async (ctx: AppContext) => {
   const cookieString = ctx.ctx.req?.headers.cookie || '';
   const cookies = cookie.parse(cookieString);
   const mobileDetect = new MobileDetect(ctx.ctx.req?.headers['user-agent'] || '');
-  const pathname = ctx.ctx.req?.url;
   return {
     cookies,
-    pathname,
     isMobileOrTablet: !!mobileDetect.mobile() || !!mobileDetect.tablet(),
   };
 };
