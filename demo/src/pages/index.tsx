@@ -1,10 +1,9 @@
 import Home from '../components/Home';
 import WithProviders from '../components/WithProviders';
-import type { PageProps } from '../types';
 
-const HomePage = ({ themeMode }: PageProps) => {
+const HomePage = () => {
   return (
-    <WithProviders themeMode={themeMode}>
+    <WithProviders themeMode="dark">
       <Home />
     </WithProviders>
   );

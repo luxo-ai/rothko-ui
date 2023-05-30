@@ -10,6 +10,7 @@
   "license": "MIT",
   "author": "luxo-ai <luxo.ai@proton.me>",
   "dependencies": {
+    "@nextui-org/react": "^1.0.0-beta.13",
     "@rothko-ui/icons": "^1.0.0",
     "@rothko-ui/ui": "^1.0.0",
     "@types/cookie": "^0.5.1",
@@ -36,7 +37,6 @@
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "18.2.0",
     "react-responsive": "^9.0.2",
-    "react-tooltip": "^5.13.1",
     "sass": "^1.56.1",
     "styled-components": "^5.3.6",
     "three": "^0.152.2",

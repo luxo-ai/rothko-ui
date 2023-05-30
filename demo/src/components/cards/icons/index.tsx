@@ -1,10 +1,11 @@
+import { Tooltip } from '@nextui-org/react';
 import * as Icons from '@rothko-ui/icons';
 import type { Accessory, Option } from '@rothko-ui/ui';
-import { FlexItem } from '@rothko-ui/ui';
 import {
   Alert,
   Container,
   Flex,
+  FlexItem,
   MaxWidth,
   OptionGroup,
   SearchBar,
@@ -13,26 +14,11 @@ import {
 } from '@rothko-ui/ui';
 import FuzzySearch from 'fuzzy-search';
 import { noop } from 'lodash';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Tooltip as ReactTooltip } from 'react-tooltip';
+import React, { useMemo, useState } from 'react';
 import Card from '../Card';
 import CodeExample, { CodeLanguage } from '../CodeExample';
 import iconographyCopy from './copy';
 import { filledIconList, outlineIconList } from './iconsList';
-
-const useIsMounted = () => {
-  const isMounted = useRef(false);
-
-  useEffect(() => {
-    isMounted.current = true;
-
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
-
-  return useCallback(() => isMounted.current, []);
-};
 
 enum IconKind {
   Outline,
@@ -81,9 +67,7 @@ const iconKindOptions: Option<IconKind, { accessoryLeft: Accessory }>[] = [
 const IconsCard = () => {
   const [query, setQuery] = useState<string | null>(null);
   const [iconKind, setIconKind] = useState<IconKind>(IconKind.Filled);
-  const { mode } = useRothko();
   const [openTooltip, setOpenTooltip] = useState<string | null>(null);
-  const isMounted = useIsMounted();
 
   const iconList = useMemo(() => {
     if (!query) {
@@ -132,23 +116,25 @@ const IconsCard = () => {
             return (
               <div key={iconName}>
                 <div style={{ display: 'inline-block' }} data-tooltip-id="my-tooltip">
-                  <Container
-                    onClick={() => {
-                      if (openTooltip === iconName) {
-                        setOpenTooltip(null);
-                      } else {
-                        setOpenTooltip(iconName);
-                      }
-                    }}
-                    ariaLabel={iconName}
-                    as="button"
-                    padding="1.25rem"
-                    className="phantom-button"
-                  >
-                    <Flex flexDirection="column" alignItems="center" gap="1rem">
-                      <C width={32} height={32} />
-                    </Flex>
-                  </Container>
+                  <Tooltip content={iconName}>
+                    <Container
+                      onClick={() => {
+                        if (openTooltip === iconName) {
+                          setOpenTooltip(null);
+                        } else {
+                          setOpenTooltip(iconName);
+                        }
+                      }}
+                      ariaLabel={iconName}
+                      as="button"
+                      padding="1.25rem"
+                      className="phantom-button"
+                    >
+                      <Flex flexDirection="column" alignItems="center" gap="1rem">
+                        <C width={32} height={32} />
+                      </Flex>
+                    </Container>
+                  </Tooltip>
                 </div>
               </div>
             );
@@ -160,20 +146,6 @@ const IconsCard = () => {
           </FlexItem>
         )}
       </Flex>
-      {/*
-      {isMounted() && (
-        <ReactTooltip
-          style={{
-            zIndex: 100000,
-            backgroundColor: mode === 'dark' ? '#fff' : '#000',
-            color: mode === 'dark' ? '#000' : '#fff',
-          }}
-          clickable
-          id="my-tooltip"
-          content={openTooltip || ''}
-          openOnClick
-        />
-        )}*/}
     </Card>
   );
 };
