@@ -35,7 +35,7 @@ const Home = () => {
           amplitudeFactor: 2.0,
           xOffset: 0.3,
           yOffset: 0.05,
-          size: isMobileOrTablet ? 0.9 : 1.25,
+          size: isMobileOrTablet ? 0.9 : 1.5,
         })
       );
     }
@@ -47,14 +47,7 @@ const Home = () => {
   return (
     <PaddedNavLayout ref={vantaRef} withoutToggle>
       <MaxWidth maxW="80rem" style={{ padding: '3rem 0', margin: '0 auto' }}>
-        <Flex
-          flexDirection="row-reverse"
-          alignItems="center"
-          justifyContent="center"
-          flexWrap="wrap"
-          columnGap="5rem"
-          rowGap="2rem"
-        >
+        <Flex alignItems="center">
           <MaxWidth maxW="34rem">
             <Typography.titleBig>
               Elevate web development. Inspire new experiences.
