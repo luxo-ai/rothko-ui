@@ -16,10 +16,28 @@ const Page = () => {
           alignItems="center"
           justifyContent="center"
           flexWrap="wrap"
-          gap="2rem"
+          columnGap="5rem"
+          rowGap="2rem"
         >
-          <div style={{ width: 'fit-content' }}>
-            <img src="/logo.svg" width="250rem" height="250rem" alt="Rothko-UI" />
+          <div
+            style={{
+              // width: 'fit-content',
+              marginTop: -32,
+              // width: 'clamp(64rem, 10vw, 250rem)',
+              //  height: 'clamp(64rem, 10vw, 250rem)',
+            }}
+          >
+            <img
+              src="/logo.svg"
+              //  width="100%"
+              //  height="100%"
+              width="clamp(5rem, 100vw 350rem)"
+              height="clamp(5rem, 100vw, 350rem)"
+              //   width="clamp(64rem, 10vw, 250rem)"
+              //   height="clamp(64rem, 10vw, 250rem)"
+              // style={{ width: 'clamp(64rem, 10vw, 250rem)', height: 'clamp(64rem, 10vw, 250rem)' }}
+              alt="Rothko-UI"
+            />
           </div>
           <MaxWidth maxW="34rem">
             <Typography.titleBig>
@@ -46,7 +64,7 @@ const Page = () => {
                 Github
               </Button>
             </Flex>
-            <Typography.h6 style={{ margin: '0 auto' }}>
+            <Typography.h6 style={{ margin: '0 auto', fontSize: 'clamp(1rem,2vw,1.25rem)' }}>
               Rothko UI is a modern component library designed to empower developers with sleek and
               customizable interfaces for web applications.
             </Typography.h6>

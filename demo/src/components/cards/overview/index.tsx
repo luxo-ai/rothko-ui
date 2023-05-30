@@ -45,7 +45,7 @@ export const OverviewCard = () => {
       <Typography.body style={{ marginTop: '1rem' }}>
         Check out the{' '}
         <Typography.linkButton onClick={() => router.push('/theming')} as="span">
-          themeing
+          theming
         </Typography.linkButton>{' '}
         section, to better understand how to customize Rothko UI to your needs.
       </Typography.body>

@@ -13,12 +13,19 @@ import '../styles/globals.css';
 const themeOverride: ThemeOverrides = {
   typography: {
     body: {
-      regular: { value: `"Helvetica Neue", "Helvetica", Arial, sans-serif` },
+      regular: {
+        value: "'Soehne-Buch', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif",
+      },
+      // regular: { value: `"Helvetica Neue", "Helvetica", Arial, sans-serif` },
       bold: { value: "'LabGrotesque-Bold'" },
       italic: { value: "'LabGrotesque-Italic'" },
       light: { value: "'LabGrotesque-Light'" },
     },
     header: { value: "'LabGrotesque-Regular'" },
+    /* header: {
+      value: "'Soehne-Buch', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif",
+    },
+    */
   },
 };
 

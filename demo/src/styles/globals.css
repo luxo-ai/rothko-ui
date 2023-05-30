@@ -19,6 +19,18 @@
   src: url('/fonts/LabGrotesque/LabGrotesque-Light.woff');
   font-display: swap;
 }
+@font-face {
+  font-family: 'Soehne-Buch';
+  src: url('/fonts/Soehne/soehne-buch.woff2');
+}
+@font-face {
+  font-family: 'Soehne-Halbfett';
+  src: url('/fonts/Soehne/soehne-halbfett.woff2');
+}
+@font-face {
+  font-family: 'Soehne-Mono-Buch';
+  src: url('/fonts/Soehne/soehne-mono-buch.woff2');
+}
 
 html,
 body {

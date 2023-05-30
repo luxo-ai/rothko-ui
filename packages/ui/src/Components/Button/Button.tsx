@@ -173,7 +173,8 @@ export const buttonStyle = css<BaseButtonProps>`
     `
   )}
 
-  border-radius: 0.125rem;
+  // border-radius: 0.125rem;
+  border-radius: 0;
 
   &.btn-pill {
     border-radius: 50vmin;

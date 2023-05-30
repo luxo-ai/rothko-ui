@@ -176,6 +176,8 @@ const externalLink = styled.a<LinkProps>`
 
 const linkButton = styled.button<LinkProps>`
   ${phantomButtonStyle}
+  // to disregard user-select stuff from phantomButtonStyle
+  user-select: text;
   ${linkStyle}
 `;
 
