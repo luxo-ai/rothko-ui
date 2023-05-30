@@ -46,7 +46,7 @@ const Home = () => {
 
   return (
     <PaddedNavLayout ref={vantaRef} withoutToggle>
-      <MaxWidth maxW="80rem" style={{ padding: '3rem 0', margin: '0 auto' }}>
+      <MaxWidth maxW="75rem" style={{ padding: '3rem 0', margin: '0 auto' }}>
         <Flex alignItems="center">
           <MaxWidth maxW="34rem">
             <Typography.titleBig>
