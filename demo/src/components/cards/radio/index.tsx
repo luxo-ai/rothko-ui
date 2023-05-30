@@ -58,7 +58,7 @@ export const radioOptions: Option<number>[] = ['one', 'two', 'three', 'four', 'f
   })
 );
 
-const RadioCard = () => {
+const RadioGroupCard = () => {
   const [selected, setSelected] = useState(1);
   const isMobileOrTablet = useIsMobileOrTablet();
   const [state, dispatch] = useReducer(customizationsReducer, {
@@ -94,4 +94,4 @@ const RadioCard = () => {
   );
 };
 
-export default RadioCard;
+export default RadioGroupCard;
