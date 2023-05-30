@@ -36,7 +36,13 @@ const AlertCard = () => {
       propsMeta={{ meta: alertProps }}
     >
       <section>
-        <Alert kind="danger">Testing</Alert>
+        <Alert kind="danger">Error!</Alert>
+        <Alert style={{ marginTop: '1.5rem' }} kind="warning">
+          Warning
+        </Alert>
+        <Alert style={{ marginTop: '1.5rem' }} kind="success">
+          Success
+        </Alert>
       </section>
     </Card>
   );

@@ -9,30 +9,46 @@ import tabBarProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React from 'react';
+import { TabBar, Typography } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const tabs = [
+  { 
+    title: 'One',
+    key: 'one',
+    render: () => <>{/* Screen one */}</> 
+  },
+  { 
+    title: 'Two',
+    key: 'two', 
+    render: () => <>{/* Screen two */}</> 
+  },
+] as const;
+
+const Example: React.FC = () => {
+  return <TabBar tabs={tabs} />
+}
 `,
   [CodeLanguage.JS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React from 'react';
+import { TabBar, Typography } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const tabs = [
+  { 
+    title: 'One',
+    key: 'one',
+    render: () => <>{/* Screen one */}</> 
+  },
+  { 
+    title: 'Two', 
+    key: 'two', 
+    render: () => <>{/* Screen two */}</>  
+  },
+];
+
+const Example = () => {
+  return <TabBar tabs={tabs} />
+}
 `,
 };
 

@@ -8,23 +8,72 @@ import buttonCopy from './copy';
 import buttonProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-  import { Button } from '@rothko-ui/ui';
-
-  const Example = () => {
-    return (
-      <Button>Click me</Button>
-    );
-  }
-`,
   [CodeLanguage.JS]: `
-  import { Button } from '@rothko-ui/ui';
-
-  const Example = () => {
-    return (
-      <Button>Click me</Button>
-    );
-  }
+import { useState } from 'react';
+import { Button } from '@rothko-ui/ui';
+    
+    
+const Example = ({ disabed, onClick }: ExampleProps) => {
+  const [loading, setLoading] = useState(false);
+    
+  const click = () => {
+    setLoading(true);
+    setTimeout(() => {
+      onClick?.();
+      setLoading(false);
+    }, 1000);
+  };
+    
+  return (
+    <Button
+      accessoryLeft={({ size }) => <span style={{ width: size, height: 'auto' }}>🧸</span>}
+      size="m"
+      appearance="filled"
+      kind="primary"
+      disabled={disabed}
+      loading={loading}
+      onClick={click}
+    >
+      Click me
+    </Button>
+  );
+};
+`,
+  [CodeLanguage.TS]: `
+import React from 'react';
+import { useState } from 'react';
+import { Button } from '@rothko-ui/ui';
+  
+type ExampleProps = {
+  disabed?: boolean;
+  onClick?: () => void;
+};
+  
+const Example: React.FC<ExampleProps> = ({ disabed, onClick }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  
+  const click = () => {
+    setLoading(true);
+    setTimeout(() => {
+      onClick?.();
+      setLoading(false);
+    }, 1000);
+  };
+  
+  return (
+    <Button
+      accessoryLeft={({ size }) => <span style={{ width: size, height: 'auto' }}>🧸</span>}
+      size="m"
+      appearance="filled"
+      kind="primary"
+      disabled={disabed}
+      loading={loading}
+      onClick={click}
+    >
+      Click me
+    </Button>
+  );
+};
 `,
 };
 

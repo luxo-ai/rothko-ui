@@ -198,6 +198,23 @@ const ModalContainerDiv = styled.div`
   transition-property: transform, opacity;
   transition-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
 
+  & > h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  code {
+    margin-top: 0;
+    color: var(--rothko-color, #000);
+  }
+
+  & > svg {
+    fill: var(--rothko-color, #000);
+  }
+
   ${Object.entries(bodyStyleMap).map(
     ([key, value]) => css`
       &.modal-size-${key} {

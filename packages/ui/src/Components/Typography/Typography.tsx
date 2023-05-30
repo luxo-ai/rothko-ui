@@ -188,6 +188,13 @@ const inlineBody = styled.span<TextProps>`
 
 const code = styled.code<KindProps>`
   color: ${({ kind }) => (kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)')};
+  // padding: 0.125rem 0.25rem;
+  // border-radius: 0.125rem;
+  // background: #ffe5f8;
+  // font-family: var(--rothko-fonts-mono);
+  // font-size:
+  white-space: pre-wrap;
+  transition: opacity 0.25s ease 0s;
 `;
 
 export default {

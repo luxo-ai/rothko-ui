@@ -1,6 +1,4 @@
 import { BreadCrumbItem, BreadCrumbs } from '@rothko-ui/ui';
-import { noop } from 'lodash';
-import React from 'react';
 import Card from '../Card';
 import { CodeLanguage } from '../CodeExample';
 import breadCrumbsCopy from './copy';
@@ -8,30 +6,33 @@ import breadCrumbsProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React from 'react';
+import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example: React.FC = () => {
+  return (
+    <BreadCrumbs>
+      <BreadCrumbItem to="/">Home</BreadCrumbItem>
+      <BreadCrumbItem onClick={() => alert('🧸')}>Alert</BreadCrumbItem>
+      <BreadCrumbItem target="_blank" to="https://rothko-ui.com">External</BreadCrumbItem>
+      <BreadCrumbItem>Last Step</BreadCrumbItem>
+    </BreadCrumbs> 
+  );
+}
 `,
   [CodeLanguage.JS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example = () => {
+  return (
+    <BreadCrumbs>
+      <BreadCrumbItem to="/">Home</BreadCrumbItem>
+      <BreadCrumbItem onClick={() => alert('🧸')}>Alert</BreadCrumbItem>
+      <BreadCrumbItem target="_blank" to="https://rothko-ui.com">External</BreadCrumbItem>
+      <BreadCrumbItem>Last Step</BreadCrumbItem>
+    </BreadCrumbs> 
+  );
+}
 `,
 };
 
@@ -44,9 +45,12 @@ const BreadCrumbsCard = () => {
     >
       <section>
         <BreadCrumbs>
-          <BreadCrumbItem to="ok">One</BreadCrumbItem>
-          <BreadCrumbItem onClick={noop}>Two</BreadCrumbItem>
-          <BreadCrumbItem>Three</BreadCrumbItem>
+          <BreadCrumbItem to="/">Home</BreadCrumbItem>
+          <BreadCrumbItem onClick={() => alert('🧸')}>Alert</BreadCrumbItem>
+          <BreadCrumbItem target="_blank" to="https://rothko-ui.com">
+            External
+          </BreadCrumbItem>
+          <BreadCrumbItem>Last Step</BreadCrumbItem>
         </BreadCrumbs>
       </section>
     </Card>

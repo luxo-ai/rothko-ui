@@ -1,4 +1,4 @@
-import { Accordion, AccordionPanel, Container, MaxWidth } from '@rothko-ui/ui';
+import { Accordion, AccordionPanel, Container } from '@rothko-ui/ui';
 import { useReducer } from 'react';
 import Card from '../Card';
 import { CodeLanguage } from '../CodeExample';
@@ -8,9 +8,10 @@ import accordionProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
+import React from 'react';
 import { Accordion, AccordionPanel } from '@rothko-ui/ui';
 
-const Example = () => {
+const Example: React.FC = () => {
   return (
     <Accordion>
       <AccordionPanel title="Label 1">

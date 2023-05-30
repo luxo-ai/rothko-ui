@@ -6,8 +6,14 @@
   // center content
   margin: 0 auto;
   height: 100%;
-  background: var(--demo-nav-background, '#FFFF');
-  backdrop-filter: blur(5px);
+
+  background: var(--demo-background, #000);
+
+  &.blurry {
+    background: var(--demo-nav-background, #000);
+    backdrop-filter: blur(5px);
+  }
+
   // border-bottom: 1px solid rgb(51, 51, 51);
   & > #nav-title {
     user-select: none;
@@ -25,7 +31,7 @@ $headerBarHeightPx: 60px;
   padding-top: $headerBarHeightPx;
   display: flex;
   flex-direction: column;
-  background: var(--demo-background, '#FFFF');
+  background: var(--demo-background, #000);
   // background: #f6f9fc;
   // overflow: hidden;
 
@@ -47,7 +53,7 @@ $headerBarHeightPx: 60px;
 
   // Footer content
   & > footer {
-    margin: 8rem auto 2rem auto;
+    margin: 12rem auto 2rem auto;
   }
 }
 

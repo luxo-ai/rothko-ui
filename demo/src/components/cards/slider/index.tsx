@@ -10,30 +10,44 @@ import sliderProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React, { useState } from 'react';
+import { Slider } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example: React.FC = () => {
+  const [value, setValue] = useState<number>(0);
+
+  return (
+    <Slider
+      label="Percent"
+      kind="primary"
+      showValue
+      value={value}
+      onChange={setValue}
+      min={0}
+      max={100}
+    />
+  );
+};
 `,
   [CodeLanguage.JS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React, { useState } from 'react';
+import { Slider } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example = () => {
+  const [value, setValue] = useState(0);
+
+  return (
+    <Slider
+      label="Percent"
+      kind="primary"
+      showValue
+      value={value}
+      onChange={setValue}
+      min={0}
+      max={100}
+    />
+  );
+};
 `,
 };
 

@@ -9,30 +9,46 @@ import dropdownProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React, { useState } from 'react';
+import { Dropdown, Option } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example: React.FC = () => {
+  const [selected, setSelected] = useState<number | null>(null);
+  const dropdownOptions: Option<number>[] = [...]; // Define your options here
+
+  return (
+    <Dropdown
+      clearable
+      search
+      menuPosition="top"
+      value={selected}
+      onChange={v => setSelected(v as number)}
+      options={dropdownOptions}
+    />
+  );
+}
+
+export default Example;
 `,
   [CodeLanguage.JS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React, { useState } from 'react';
+import { Dropdown } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example = () => {
+  const [selected, setSelected] = useState(null);
+  const dropdownOptions = [...]; // Define your options here
+
+  return (
+    <Dropdown
+      clearable
+      search
+      menuPosition="top"
+      value={selected}
+      onChange={v => setSelected(v)}
+      options={dropdownOptions}
+    />
+  );
+}
 `,
 };
 

@@ -9,30 +9,40 @@ import nestedDropdownProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React, { useState } from 'react';
+import { NestedDropdown, NestedOption } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example: React.FC = () => {
+  const [value, setValue] = useState<number | null>(null);
+  const nestedOptions: NestedOption<number>[] = [...]; // Define your options here
+
+  return (
+    <NestedDropdown
+      placeholder={placeholder}
+      value={value}
+      onChange={v => setValue(v)}
+      options={nestedOptions}
+    />
+  );
+};
 `,
   [CodeLanguage.JS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React, { useState } from 'react';
+import { NestedDropdown, NestedOption } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example = () => {
+  const [value, setValue] = useState(null);
+  const nestedOptions = [...]; // Define your options here
+
+  return (
+    <NestedDropdown
+      placeholder={placeholder}
+      value={value}
+      onChange={v => setValue(v)}
+      options={nestedOptions}
+    />
+  );
+};
 `,
 };
 

@@ -25,7 +25,7 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
   }, [mode]);
 
   return (
-    <nav className={styles.nav}>
+    <nav className={router.pathname === '/' ? `${styles.nav} ${styles.blurry}` : styles.nav}>
       <Flex justifyContent="space-between">
         <Flex alignItems="center" justifyContent="center" columnGap="1rem">
           <FlexItem>
@@ -56,9 +56,7 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
               kind="warning"
               style={{ height: '100%' }}
               // style={{ background: 'white', color: 'black' }}
-              accessoryLeft={({ size }) => (
-                <Heart style={{ marginRight: '0.5rem' }} fill="black" height={size} width={size} />
-              )}
+              accessoryLeft={({ size }) => <Heart fill="black" height={size} width={size} />}
               onClick={() => router.push('/sponsor')}
             >
               Sponsor

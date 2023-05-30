@@ -11,30 +11,32 @@ import tagProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React from 'react';
+import { Tag } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example: React.FC = () => {
+  const [closed, setClosed] = useState<boolean>(false);
+
+  return (
+    <Tag onClose={() => setClosed(true)} appearance="filled" kind="danger">
+      example tag
+    </Tag>
+  );
+}
 `,
   [CodeLanguage.JS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React from 'react';
+import { Tag } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example = () => {
+  const [closed, setClosed] = useState(false);
+
+  return (
+    <Tag onClose={() => setClosed(true)} appearance="filled" kind="danger">
+      example tag
+    </Tag>
+  );
+}
 `,
 };
 
@@ -53,7 +55,10 @@ const TagCard = () => {
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Flex columnGap="1rem">
           <Tag appearance="filled" kind={kind}>
-            my first tag
+            filled tag
+          </Tag>
+          <Tag appearance="outline" kind={kind}>
+            outline tag
           </Tag>
           <Tag onClose={() => alert('close')} appearance="filled" kind={kind}>
             closeable tag

@@ -9,30 +9,46 @@ import multiSliderProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React, { useState } from 'react';
+import { MultiSlider } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example: React.FC = () => {
+  const [value, setValue] = useState<[number, number]>([0, 50]);
+
+  return (
+    <MultiSlider
+      kind="secondary"
+      showRange
+      value={value}
+      onChange={setValue}
+      precision={2}
+      min={0}
+      max={100}
+      orMore
+    />
+  );
+};
 `,
   [CodeLanguage.JS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React, { useState } from 'react';
+import { MultiSlider } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example = ({ postfix, kind, showRange, disabled }) => {
+  const [value, setValue] = useState([0, 50]);
+
+  return (
+    <MultiSlider
+      kind="secondary"
+      showRange
+      value={value}
+      onChange={setValue}
+      precision={2}
+      min={0}
+      max={100}
+      orMore
+    />
+  );
+};
 `,
 };
 

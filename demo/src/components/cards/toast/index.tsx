@@ -11,30 +11,56 @@ import toastProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React from 'react';
+import { Button, useToaster, RothkoKind } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+type ExampleProps = {
+  kind?: RothkoKind;
+}
+
+const Example: React.FC<ExampeProps> = ({ kind }) => {
+  const toaster = useToaster();
+
+  const handleClick = () => {
+    toaster.addToast({
+      content: 'This is a toast message',
+      label: 'Alert!',
+      kind,
+      withLife: true,
+      duration: 4000,
+    });
+  };
+
+  return (
+    <Button onClick={handleClick}>
+      Click me
+    </Button>
+  );
+};
 `,
   [CodeLanguage.JS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React from 'react';
+import { Button, useToaster } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example = ({ kind }) => {
+  const toaster = useToaster();
+
+  const handleClick = () => {
+    toaster.addToast({
+      content: 'This is a toast message',
+      label: 'Alert!',
+      kind,
+      withLife: true,
+      duration: 4000,
+    });
+  };
+
+  return (
+    <Button onClick={handleClick}>
+      Click me
+    </Button>
+  );
+};
 `,
 };
 
@@ -60,11 +86,11 @@ const ToastCard = () => {
         <Button
           onClick={() =>
             toast.addToast({
-              content: 'Hello',
-              label: 'Hello world!!!!!!!!',
+              content: 'This is a toast message',
+              label: 'Alert!',
               kind: withKind ? kind : undefined,
               withLife,
-              duration: 5000,
+              duration: 4000,
             })
           }
         >

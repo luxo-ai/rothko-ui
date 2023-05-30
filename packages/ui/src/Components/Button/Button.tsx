@@ -86,7 +86,7 @@ const Button: React.FC<ButtonProps> = ({
   tabIndex,
   type = 'button',
 }) => {
-  const childrenContainerRef = useRef<HTMLSpanElement | null>(null);
+  const childrenContainerRef = useRef<HTMLDivElement | null>(null);
   const [childrenHeight, setChildrenHeight] = useState<number | null>(null);
 
   const appearanceClasses = {
@@ -104,7 +104,7 @@ const Button: React.FC<ButtonProps> = ({
     if (!childrenContainerRef.current) return;
     const { height } = childrenContainerRef.current.getBoundingClientRect();
     setChildrenHeight(height - 0); // figure out this value later was 4
-  }, [setChildrenHeight, childrenContainerRef]);
+  }, [setChildrenHeight, childrenContainerRef, size]);
 
   return (
     <StyledButton
@@ -118,20 +118,40 @@ const Button: React.FC<ButtonProps> = ({
       type={type}
       role="button"
     >
-      {Left && <Left size={accessorySizeMap[size]} color={iconColor} />}
-      {loading ? (
-        <InlineSpinnerLoader
-          style={childrenHeight ? { width: childrenHeight, height: childrenHeight } : undefined}
-          color={iconColor}
-          size="s"
-        />
-      ) : (
-        <span ref={childrenContainerRef}>{children}</span>
-      )}
-      {Right && <Right size={accessorySizeMap[size]} color={iconColor} />}
+      <ContainerDiv ref={childrenContainerRef}>
+        {!loading && Left && (
+          <div style={{ marginRight: '0.25rem', display: 'flex' }}>
+            <Left size={accessorySizeMap[size]} color={iconColor} />
+          </div>
+        )}
+        {loading ? (
+          <InlineSpinnerLoader
+            style={
+              childrenHeight
+                ? { width: childrenHeight, height: childrenHeight, margin: 'auto' }
+                : { margin: 'auto' }
+            }
+            color={iconColor}
+            size="s"
+          />
+        ) : (
+          <span>{children}</span>
+        )}
+        {!loading && Right && (
+          <div style={{ marginLeft: '0.25rem', display: 'flex' }}>
+            <Right size={accessorySizeMap[size]} color={iconColor} />
+          </div>
+        )}
+      </ContainerDiv>
     </StyledButton>
   );
 };
+
+const ContainerDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 type BaseButtonProps = Required<KindProps> & { appearance: ButtonAppearance };
 

@@ -1,21 +1,16 @@
 import type { RothkoKind } from '@rothko-ui/ui';
-import { Toggle } from '@rothko-ui/ui';
-import { Checkbox, Dropdown, Flex, MaxWidth, RadioGroup } from '@rothko-ui/ui';
+import { Checkbox, Flex, MaxWidth, RadioGroup, Toggle } from '@rothko-ui/ui';
 import AccordionOrBox from '../../AccordionOrBox';
 import { kindOptions } from '../../rothkoOptions';
 
 type CutomizationState = {
   kind: RothkoKind;
   withKind: boolean;
-  offIcon?: number | null;
-  onIcon?: number | null;
   disabled: boolean;
 };
 
 type CustomizationAction =
   | { type: 'SET_KIND'; kind: RothkoKind }
-  | { type: 'SET_OFF_ICON'; offIcon?: number | null }
-  | { type: 'SET_ON_ICON'; onIcon?: number | null }
   | { type: 'TOGGLE_DISABLED' }
   | { type: 'CHECK_WITH_KIND' };
 
@@ -23,10 +18,6 @@ export const customizationsReducer = (state: CutomizationState, action: Customiz
   switch (action.type) {
     case 'SET_KIND':
       return { ...state, kind: action.kind };
-    case 'SET_OFF_ICON':
-      return { ...state, offIcon: action.offIcon };
-    case 'SET_ON_ICON':
-      return { ...state, onIcon: action.onIcon };
     case 'CHECK_WITH_KIND':
       return { ...state, withKind: !state.withKind };
     case 'TOGGLE_DISABLED':
@@ -42,7 +33,7 @@ type ToggleCustomizationsProps = {
 };
 
 const ToggleCustomizations = ({ state, dispatch }: ToggleCustomizationsProps) => {
-  const { kind, onIcon, offIcon, withKind, disabled } = state;
+  const { kind, withKind, disabled } = state;
   return (
     <AccordionOrBox boxTitleVariant="h3" title="Customizations">
       <Flex
@@ -76,20 +67,6 @@ const ToggleCustomizations = ({ state, dispatch }: ToggleCustomizationsProps) =>
       >
         disabled
       </Toggle>
-      <Dropdown
-        value={onIcon}
-        onChange={v => dispatch({ type: 'SET_ON_ICON', onIcon: v as number | null })}
-        options={[]}
-        style={{ marginTop: '1.5rem' }}
-        clearable
-      />
-      <Dropdown
-        value={offIcon}
-        onChange={v => dispatch({ type: 'SET_OFF_ICON', offIcon: v as number | null })}
-        options={[]}
-        style={{ marginTop: '1.5rem' }}
-        clearable
-      />
     </AccordionOrBox>
   );
 };

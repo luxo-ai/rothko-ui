@@ -9,30 +9,40 @@ import checkboxProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React from 'react';
+import { Checkbox } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example: React.FC = () => {
+  const [checked, setChecked] = useState<boolean>(false);
+  
+  return (
+    <Checkbox
+      kind="primary"
+      withCheck
+      checked={checked}
+      onChange={v => setChecked(v)}
+    >
+      example
+    </Checkbox>
+  );
+}
 `,
   [CodeLanguage.JS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import { Checkbox } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example = () => {
+  const [checked, setChecked] = useState(false);
+  
+  return (
+    <Checkbox
+      kind="primary"
+      checked={checked}
+      onChange={v => setChecked(v)}
+    >
+      example
+    </Checkbox>
+  );
+}
 `,
 };
 

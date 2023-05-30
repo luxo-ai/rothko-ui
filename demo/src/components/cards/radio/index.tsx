@@ -10,30 +10,44 @@ import radioProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React, { useState } from 'react';
+import { RadioGroup, Option } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example: React.FC<ExampleProps> = ({ radioOptions }) => {
+  const [selected, setSelected] = useState<string>('');
+  const radioOptions: Option<string> = [...]; // Define your options here
+
+  return (
+    <RadioGroup
+      maxCol={2}
+      columnGap="1rem"
+      label="Radio Group"
+      value={selected}
+      onChange={v => setSelected(v)}
+      options={radioOptions}
+    />
+  );
+};
 `,
   [CodeLanguage.JS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React, { useState } from 'react';
+import { RadioGroup } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example = ({ radioOptions }) => {
+  const [selected, setSelected] = useState('');
+  const radioOptions = [...]; // Define your options here
+
+  return (
+    <RadioGroup
+      maxCol={2}
+      columnGap="1rem"
+      label="Radio Group"
+      value={selected}
+      onChange={v => setSelected(v)}
+      options={radioOptions}
+    />
+  );
+};
 `,
 };
 
@@ -67,7 +81,7 @@ const RadioCard = () => {
           disabled={disabled}
           maxCol={maxCol}
           columnGap="1.5rem"
-          label="kind"
+          label="Radio Group"
           value={selected}
           onChange={v => setSelected(v)}
           options={radioOptions}

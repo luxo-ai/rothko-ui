@@ -10,30 +10,43 @@ import modalProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React, { useState } from 'react';
+import { Button, Modal } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+type ExampleProps {
+  title: string;
+  body: string;
+}
+
+const Example: React.FC<ExampleProps> = ({ title, body }) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open modal</Button>
+      <Modal size="m" title={title} isOpen={open} onClose={() => setOpen(false)}>
+        {body}
+      </Modal>
+    </>
+  );
+};
 `,
   [CodeLanguage.JS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React, { useState } from 'react';
+import { Button, Modal } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example = ({ title, body }) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open modal</Button>
+      <Modal size="m" title={title} isOpen={open} onClose={() => setOpen(false)}>
+        {body}
+      </Modal>
+    </>
+  );
+};
 `,
 };
 
@@ -55,12 +68,7 @@ const ModalCard = () => {
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Button
           accessoryLeft={({ size, color }) => (
-            <ArrowCircleUp
-              style={{ marginRight: '0.5rem' }}
-              width={size}
-              height={size}
-              fill={color}
-            />
+            <ArrowCircleUp width={size} height={size} fill={color} />
           )}
           kind="danger"
           onClick={() => setOpen(true)}

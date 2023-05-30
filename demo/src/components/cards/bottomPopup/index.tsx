@@ -1,10 +1,10 @@
+import { ArrowUpward } from '@rothko-ui/icons';
 import { BottomPopup, Button, Container, Typography } from '@rothko-ui/ui';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Card from '../Card';
-import bottomPopupCopy from './copy';
 import { CodeLanguage } from '../CodeExample';
+import bottomPopupCopy from './copy';
 import bottomPopupProps from './props';
-import { ArrowCircleUp, ArrowUpward } from '@rothko-ui/icons';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
@@ -15,7 +15,7 @@ const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
     content: string;
   }
 
-  const Example = ({ url }: ExampleProps) => {
+  const Example: React.FC<ExampleProps> = ({ url }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
@@ -28,7 +28,7 @@ const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   }
 `,
   [CodeLanguage.JS]: `
-  import React, { useState } from 'react';
+  import { useState } from 'react';
   import { BottomPopup } from '@rothko-ui/ui';
 
   const Example = ({ content }) => {
@@ -56,12 +56,7 @@ const BottomPopupCard = () => {
       <Container as="section" maxWidth="11rem">
         <Button
           accessoryLeft={({ size, color }) => (
-            <ArrowUpward
-              style={{ marginRight: '0.5rem' }}
-              width={size}
-              height={size}
-              fill={color}
-            />
+            <ArrowUpward width={size} height={size} fill={color} />
           )}
           kind="secondary"
           onClick={() => setIsOpen(true)}

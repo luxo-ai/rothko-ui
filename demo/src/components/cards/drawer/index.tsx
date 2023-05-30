@@ -8,30 +8,41 @@ import { ArrowCircleRight } from '@rothko-ui/icons';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React from 'react';
+import { Button, Drawer, Typography } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example: React.FC = () => {
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+
+  return (
+    <>
+      <Button onClick={() => setDrawerOpen(true)}>
+        Open Drawer
+      </Button>
+      <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)}>
+        <Typography.body>Hello world</Typography.body>
+      </Drawer>
+    </>
+  );
+}
 `,
   [CodeLanguage.JS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import { Button, Drawer, Typography } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example = () => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setDrawerOpen(true)}>
+        Open Drawer
+      </Button>
+      <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)}>
+        <Typography.body>Hello world</Typography.body>
+      </Drawer>
+    </>
+  );
+}
 `,
 };
 
@@ -47,12 +58,7 @@ const DrawerCard = () => {
       <Container maxWidth="11rem">
         <Button
           accessoryLeft={({ size, color }) => (
-            <ArrowCircleRight
-              style={{ marginRight: '0.5rem' }}
-              width={size}
-              height={size}
-              fill={color}
-            />
+            <ArrowCircleRight width={size} height={size} fill={color} />
           )}
           kind="secondary"
           onClick={() => setDrawerOpen(true)}

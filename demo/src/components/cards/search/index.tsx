@@ -9,30 +9,48 @@ import searchProps from './props';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React, { useState } from 'react';
+import { Search, Option } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example: React.FC = () => {
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearch = async (query: string): Promise<Option[]> => { 
+    // Perform any additional logic or API calls
+  };
+
+  return (
+    <Search
+      label="Example"
+      placeholder="Search..."
+      mode="popout"
+      dataFetcher={asyncFetch}
+      onSearch={query => alert('Searching for: ' + query)')}
+    />
+  );
+};
 `,
   [CodeLanguage.JS]: `
-  import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+import React, { useState } from 'react';
+import { Search } from '@rothko-ui/ui';
 
-  const Example = () => {
-    return (
-      <BreadCrumbs>
-        <BreadCrumbItem to="ok">One</BreadCrumbItem>
-        <BreadCrumbItem onClick={() => console.log('two clicked!')}>Two</BreadCrumbItem>
-        <BreadCrumbItem>Three</BreadCrumbItem>
-      </BreadCrumbs> 
-    );
-  }
+const Example = () => {
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearch = async (query) => {
+    // Perform any additional logic or API calls
+  };
+
+  return (
+    <Search
+      label="Example"
+      placeholder="Search..."
+      mode="popout"
+      dataFetcher={asyncFetch}
+      onSearch={query => alert('Searching for: ' + query)')}
+    />
+  );
+};
 `,
 };
 
