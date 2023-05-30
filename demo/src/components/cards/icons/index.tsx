@@ -10,7 +10,6 @@ import {
   OptionGroup,
   SearchBar,
   Typography,
-  useRothko,
 } from '@rothko-ui/ui';
 import FuzzySearch from 'fuzzy-search';
 import { noop } from 'lodash';
@@ -109,7 +108,7 @@ const IconsCard = () => {
             />
           </MaxWidth>
         </Container>
-        <Flex margin="0 auto" flexWrap="wrap" gap="1.25rem">
+        <Flex margin="0 auto" flexWrap="wrap" gap="1rem">
           {iconList.map(iconName => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const C = Icons[iconName] as React.FC<any>;
@@ -131,7 +130,7 @@ const IconsCard = () => {
                       className="phantom-button"
                     >
                       <Flex flexDirection="column" alignItems="center" gap="1rem">
-                        <C width={32} height={32} />
+                        <C width={30} height={30} />
                       </Flex>
                     </Container>
                   </Tooltip>
