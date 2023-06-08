@@ -1,7 +1,5 @@
-import { flatCompact } from '@rothko-ui/utils';
+import { flatCompact, isFunction, isNil } from '@rothko-ui/utils';
 import { Set as ImSet } from 'immutable';
-import isFunction from 'lodash/isFunction';
-import isNil from 'lodash/isNil';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDebuggerContext } from '../../Library/DebuggerContext';
 import useOptions from '../../Library/Hooks/useOptions';

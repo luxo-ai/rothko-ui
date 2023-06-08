@@ -1,7 +1,5 @@
+import { isArray, isEmpty, memoize } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
-import isArray from 'lodash/isArray';
-import isEmpty from 'lodash/isEmpty';
-import memoize from 'lodash/memoize';
 import type { ReactElement, ReactNode } from 'react';
 import React from 'react';
 

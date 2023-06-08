@@ -1,5 +1,4 @@
-import { classes } from '@rothko-ui/utils';
-import times from 'lodash/times';
+import { classes, times } from '@rothko-ui/utils';
 import React, { useEffect, useMemo, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';

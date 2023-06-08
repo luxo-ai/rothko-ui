@@ -1,7 +1,6 @@
 import { ChevronDownOutline, ChevronRightOutline } from '@rothko-ui/icons';
-import { classes } from '@rothko-ui/utils';
+import { classes, isNil } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
-import isNil from 'lodash/isNil';
 import React, { useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { ItemText, LabelText } from '../../Library/Common';

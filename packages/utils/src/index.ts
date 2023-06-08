@@ -1,9 +1,9 @@
-import capitalize from 'lodash/capitalize';
-import compact from 'lodash/compact';
-import flatten from 'lodash/flatten';
+import { capitalize, compact, flatten } from './lodashProxy';
 import type { Nullable } from './types';
 
 export * from './hooks';
+export * from './lodashProxy';
+
 export type {
   DeepPartial,
   Dictionary,

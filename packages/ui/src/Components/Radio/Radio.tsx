@@ -1,5 +1,4 @@
-import { classes } from '@rothko-ui/utils';
-import isString from 'lodash/isString';
+import { classes, isString } from '@rothko-ui/utils';
 import React from 'react';
 import styled from 'styled-components';
 import type { KindProps, RothkoKind } from '../../Theme';

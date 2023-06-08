@@ -1,4 +1,4 @@
-import noop from 'lodash/noop';
+import { noop } from '@rothko-ui/utils';
 import { createContext, useContext } from 'react';
 
 type IDrawerContext = {

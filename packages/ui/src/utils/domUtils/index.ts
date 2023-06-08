@@ -1,6 +1,5 @@
 import type { Nullable } from '@rothko-ui/utils';
-import { kebabToCamelCase } from '@rothko-ui/utils';
-import parseInt from 'lodash/parseInt';
+import { kebabToCamelCase, parseInt } from '@rothko-ui/utils';
 import type React from 'react';
 import type { RemSize } from '../../types';
 import { findBy } from '../utils';

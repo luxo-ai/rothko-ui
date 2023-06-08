@@ -1,8 +1,7 @@
 import { animated, useTransition } from '@react-spring/web';
 import { CloseOutline } from '@rothko-ui/icons';
-import { classes } from '@rothko-ui/utils';
+import { classes, noop } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
-import noop from 'lodash/noop';
 import React, { useEffect, useRef } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';

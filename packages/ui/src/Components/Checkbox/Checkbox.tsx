@@ -1,6 +1,5 @@
-import { classes } from '@rothko-ui/utils';
+import { classes, isString } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
-import isString from 'lodash/isString';
 import React from 'react';
 import styled from 'styled-components';
 import type { KindProps, RothkoKind } from '../../Theme/types';

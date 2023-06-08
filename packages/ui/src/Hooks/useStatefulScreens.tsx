@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import cloneDeep from 'lodash/cloneDeep';
-import isFunction from 'lodash/isFunction';
-import last from 'lodash/last';
-import React, { useReducer } from 'react';
 import type { Obj } from '@rothko-ui/utils';
+import { cloneDeep, isFunction, last } from '@rothko-ui/utils';
+import React, { useReducer } from 'react';
 import { useDebuggerContext } from '../Library/DebuggerContext';
 
 type Dispatch<Event extends keyof any, Ctx> = (e: Event, updater?: (ctx: Ctx) => Ctx) => void;
