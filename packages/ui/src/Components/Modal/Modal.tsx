@@ -1,6 +1,6 @@
 import { animated, useTransition } from '@react-spring/web';
 import { CloseOutline } from '@rothko-ui/icons';
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import noop from 'lodash/noop';
 import React, { useEffect, useRef } from 'react';
@@ -155,7 +155,7 @@ export const Modal = ({
 
   return (
     <DomPortal wrapperId={`modal-portal-${size}`}>
-      <ModalBackdrop className={clsx({ ['backdrop-open']: isOpen })} onClick={onBackdropClick}>
+      <ModalBackdrop className={classes({ ['backdrop-open']: isOpen })} onClick={onBackdropClick}>
         {transition(
           (style, item) =>
             item && (
@@ -164,7 +164,7 @@ export const Modal = ({
                 aria-modal="true"
                 role="dialog"
                 style={style}
-                className={clsx(`modal-size-${size}`, className)}
+                className={classes(`modal-size-${size}`, className)}
                 ref={modalRef}
               >
                 <ModalCloseButton onClick={() => onClose()}>

@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import isString from 'lodash/isString';
 import React from 'react';
 import styled from 'styled-components';
@@ -41,9 +41,9 @@ const Radio = ({
         aria-label="radio"
         aria-checked={!!selected}
         aria-disabled={!!disabled}
-        className={clsx({ disabled })}
+        className={classes({ disabled })}
       >
-        <RadioInnerDiv kind={kind} className={clsx({ selected, error, disabled })} />
+        <RadioInnerDiv kind={kind} className={classes({ selected, error, disabled })} />
       </RadioOutlineDiv>
       {renderContent && <div>{renderContent}</div>}
     </RadioContainerDiv>

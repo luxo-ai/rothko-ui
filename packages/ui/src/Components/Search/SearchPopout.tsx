@@ -1,5 +1,5 @@
 import { CloseOutline } from '@rothko-ui/icons';
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
@@ -9,10 +9,10 @@ import { PhantomButton } from '../../Library/PhantomButton';
 import { DomPortal } from '../../Library/Portal';
 import {
   addEvent,
+  clearAllBodyScrollLocks,
   disableBodyScroll,
   enableBodyScroll,
   removeEvent,
-  clearAllBodyScrollLocks,
 } from '../../utils/domUtils';
 import SearchBar from './SearchBar/SearchBar';
 
@@ -66,7 +66,10 @@ const SearchPopout = React.forwardRef<HTMLDivElement, SearchPopoutProps>(
 
     return (
       <DomPortal wrapperId="search-portal">
-        <ShadedBackdrop className={clsx({ ['backdrop-open']: isOpen })} onClick={onBackdropClick}>
+        <ShadedBackdrop
+          className={classes({ ['backdrop-open']: isOpen })}
+          onClick={onBackdropClick}
+        >
           {isOpen && (
             <FullScreenContainerDiv ref={searchPopoutRef}>
               <Grid marginBottom="1rem" padding="0 1rem" gridTemplateColumns="1.75rem 1fr 1.75rem">

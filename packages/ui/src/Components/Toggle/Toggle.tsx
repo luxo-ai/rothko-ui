@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import isString from 'lodash/isString';
 import type { CSSProperties } from 'react';
@@ -52,9 +52,9 @@ const Toggle = ({
         onKeyDown={onKeyDown}
         tabIndex={0}
         toggled={toggled}
-        className={clsx({ disabled })}
+        className={classes({ disabled })}
       >
-        <InnerToggleDiv className={clsx(toggled && 'active')}>
+        <InnerToggleDiv className={classes(toggled && 'active')}>
           {toggled ? onIcon && <>{onIcon}</> : offIcon && <>{offIcon}</>}
         </InnerToggleDiv>
       </OuterToggleDiv>

@@ -1,6 +1,6 @@
 import { animated, useTransition } from '@react-spring/web';
 import { Close } from '@rothko-ui/icons';
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import noop from 'lodash/noop';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
@@ -85,7 +85,10 @@ const Drawer = ({
   return (
     <DrawerContext.Provider value={{ isOpen, closeDrawer }}>
       <DomPortal wrapperId={`drawer-portal-${id || 'unknown'}`}>
-        <DrawerBackdrop className={clsx({ ['backdrop-open']: isOpen })} onClick={onBackdropClick}>
+        <DrawerBackdrop
+          className={classes({ ['backdrop-open']: isOpen })}
+          onClick={onBackdropClick}
+        >
           {transition(
             (style, item) =>
               item && (

@@ -1,6 +1,6 @@
 import { animated, useTransition } from '@react-spring/web';
 import { CloseOutline } from '@rothko-ui/icons';
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { ShadedBackdrop } from '../../Library/Common';
@@ -80,7 +80,7 @@ const BottomPopup: React.FC<PopupProps> = ({ id, onClose, isOpen, className, chi
 
   return (
     <DomPortal wrapperId="bottom-popup-portal">
-      <ShadedBackdrop onClick={onBackdropClick} className={clsx({ ['backdrop-open']: isOpen })}>
+      <ShadedBackdrop onClick={onBackdropClick} className={classes({ ['backdrop-open']: isOpen })}>
         {transition(
           (style, item) =>
             item && (

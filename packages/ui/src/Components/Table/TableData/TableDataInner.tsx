@@ -1,8 +1,8 @@
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import React from 'react';
 import { TableContextConsumer } from '../TableContext';
-import type { TableDataProps } from './types';
 import { isStringHeader } from '../helpers';
+import type { TableDataProps } from './types';
 
 type TableDataInnerProps = TableDataProps & {
   columnIndex: number;
@@ -15,7 +15,7 @@ const TableDataInner = ({ children, style, className, columnIndex }: TableDataIn
         const header = headers[columnIndex];
 
         return (
-          <td className={clsx(className, 'pivoted')} style={style}>
+          <td className={classes(className, 'pivoted')} style={style}>
             {header && (
               <div className="tdBefore">{isStringHeader(header) ? header : header.content}</div>
             )}

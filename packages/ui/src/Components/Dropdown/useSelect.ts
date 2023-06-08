@@ -1,5 +1,5 @@
 import { flatCompact } from '@rothko-ui/utils';
-import { Set } from 'immutable';
+import { Set as ImSet } from 'immutable';
 import isFunction from 'lodash/isFunction';
 import isNil from 'lodash/isNil';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -30,7 +30,7 @@ const useSelect = <V extends Value, T = undefined>(args: HookArgs<V, T>) => {
   const [query, setQueryInner] = useState<string | null>(null);
   // important to useMemo here because otherwise the useEffect below will go into
   // an infinite loop...
-  const selectedValues = useMemo(() => Set(flatCompact(value)), [value]);
+  const selectedValues = useMemo(() => ImSet(flatCompact(value)), [value]);
 
   const matchesQuery = useCallback(
     (o: Option<V, T>) => {

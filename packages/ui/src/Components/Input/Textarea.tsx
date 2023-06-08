@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import React from 'react';
 import styled from 'styled-components';
 import { baseInputStyle } from './styles';
@@ -11,7 +11,7 @@ export type TextareaProps = {
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ size = 'm', className, disabled, tabIndex, ...props }, ref) => {
-    const baseClasses = clsx(`inpt_size_${size}`, className);
+    const baseClasses = classes(`inpt_size_${size}`, className);
     return (
       <StyledTextarea
         ref={ref}

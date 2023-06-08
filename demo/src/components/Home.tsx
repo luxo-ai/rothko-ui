@@ -2,7 +2,7 @@
 import { Github } from '@rothko-ui/icons';
 import { Button, Flex, MaxWidth, Typography } from '@rothko-ui/ui';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import HALO from 'vanta/dist/vanta.halo.min';
 import PaddedNavLayout from '../components/layout/PaddedNavLayout';
@@ -15,34 +15,34 @@ const Home = () => {
   const isMobileOrTablet = useIsMobileOrTablet();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [vantaEffect, setVantaEffect] = useState<any>(null);
+  // const [vantaEffect, setVantaEffect] = useState<any>(null);
   const vantaRef = useRef(null);
+
   useEffect(() => {
-    if (!vantaEffect) {
-      setVantaEffect(
-        HALO({
-          el: vantaRef.current,
-          THREE,
-          color: 0x14b679,
-          maxDistance: 34.0,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200.0,
-          minWidth: 200.0,
-          baseColor: 0x1d3793,
-          backgroundColor: 0x0,
-          amplitudeFactor: 2.0,
-          xOffset: 0.3,
-          yOffset: 0.05,
-          size: isMobileOrTablet ? 0.9 : 1.5,
-        })
-      );
-    }
+    const vantaEffect = HALO({
+      el: vantaRef.current,
+      THREE,
+      color: 0x14b679,
+      maxDistance: 34.0,
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.0,
+      minWidth: 200.0,
+      baseColor: 0x1d3793,
+      backgroundColor: 0x0,
+      amplitudeFactor: 2.0,
+      xOffset: 0.3,
+      yOffset: 0.05,
+      size: isMobileOrTablet ? 0.9 : 1.5,
+    });
+
     return () => {
-      if (vantaEffect && vantaEffect.destroy) vantaEffect?.destory?.();
+      if (vantaEffect) {
+        vantaEffect?.destory?.();
+      }
     };
-  }, [vantaEffect, vantaRef]);
+  }, [vantaRef]);
 
   return (
     <PaddedNavLayout ref={vantaRef} withoutToggle>

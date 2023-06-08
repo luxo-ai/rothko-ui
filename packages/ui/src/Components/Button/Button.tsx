@@ -1,10 +1,10 @@
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import React, { useEffect, useRef, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import type { KindProps, RothkoKind, RothkoSize } from '../../Theme';
 import InlineSpinnerLoader from '../../Library/Loader/InlineSpinnerLoader';
 import type { Accessory } from '../../Library/types';
+import type { KindProps, RothkoKind, RothkoSize } from '../../Theme';
 import type { ButtonAppearance, ButtonShape } from './types';
 
 type HtmlButtonProps = {
@@ -109,7 +109,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <StyledButton
       appearance={appearance}
-      className={clsx(appearanceClasses, `btn-size-${size}`, className)}
+      className={classes(appearanceClasses, `btn-size-${size}`, className)}
       disabled={disabled}
       kind={kind}
       onClick={onClick}

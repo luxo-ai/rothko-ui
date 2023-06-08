@@ -1,6 +1,6 @@
 import { animated, useSpring } from '@react-spring/web';
 import { ChevronDownOutline, ChevronUpOutline, MinusOutline, PlusOutline } from '@rothko-ui/icons';
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import React, { useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import * as uuid from 'uuid';
@@ -57,7 +57,7 @@ const AccordionPanel = ({ children, className, labelProps, title, style }: Accor
     <PanelContainerDiv
       kind={kind}
       id={panelIdRef.current}
-      className={clsx(className, { bordered })}
+      className={classes(className, { bordered })}
       style={style}
     >
       <header>

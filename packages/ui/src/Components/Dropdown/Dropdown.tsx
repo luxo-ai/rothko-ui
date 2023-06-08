@@ -1,5 +1,5 @@
 import { ChevronDownOutline, CloseOutline } from '@rothko-ui/icons';
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import isArray from 'lodash/isArray';
 import isNil from 'lodash/isNil';
@@ -13,11 +13,10 @@ import { DefaultRenderOption } from '../../Library/RenderOption';
 import { hideChromeBrowserOutline } from '../../Library/Styles';
 import type { FocusHandler, Option, RenderOption, Value } from '../../Library/types';
 import { directionMap } from '../../utils/keyUtils';
-import { textStyle } from '../Typography/Typography';
+import Typography, { textStyle } from '../Typography/Typography';
 import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } from './Shared';
 import type { QueryMatchFn } from './types';
 import useSelect from './useSelect';
-import Typography from '../Typography/Typography';
 
 type DropdownProps<V extends Value, T> = {
   /** Current value of dropdown or value array if multiple */
@@ -207,7 +206,7 @@ function Dropdown<V extends Value, T = undefined>({
     scrollIntoView(`#option-${scrollIdx}`);
   }, [optIdx, openReverse, open]);
 
-  const containerClasses = clsx({
+  const containerClasses = classes({
     error,
     disabled,
     focus,
@@ -215,7 +214,7 @@ function Dropdown<V extends Value, T = undefined>({
     empty: !hasOptions,
   });
 
-  const dropdownMenuClasses = clsx({
+  const dropdownMenuClasses = classes({
     ['open-reverse']: openReverse,
   });
 
@@ -238,11 +237,11 @@ function Dropdown<V extends Value, T = undefined>({
             aria-label="dropdown search"
             tabIndex={0}
             value={open ? query ?? '' : ''}
-            className={clsx({ disabled })}
+            className={classes({ disabled })}
           />
         )}
         <TextContainerDiv
-          className={clsx({
+          className={classes({
             hidden: query?.length && (hasOptions || open),
             disabled,
             multiple,
@@ -287,7 +286,7 @@ function Dropdown<V extends Value, T = undefined>({
         {!canClear ? (
           <ControlButton
             aria-label="clear dropdown"
-            className={clsx({ open, disabled })}
+            className={classes({ open, disabled })}
             onClick={toggleMenu}
           >
             <ChevronDownOutline width="1rem" height="1rem" />
@@ -295,7 +294,7 @@ function Dropdown<V extends Value, T = undefined>({
         ) : (
           <ControlButton
             aria-label="open dropdown"
-            className={clsx('open', { disabled })}
+            className={classes('open', { disabled })}
             onClick={() => onSelectHandler(null)}
           >
             <CloseOutline width="1rem" height="1rem" />
@@ -319,7 +318,7 @@ function Dropdown<V extends Value, T = undefined>({
                       aria-disabled={option.disabled}
                       aria-label={option.label}
                       aria-selected={selected}
-                      className={clsx({ selected })}
+                      className={classes({ selected })}
                       id={`option-${option.id}`}
                       key={`option-${option.id}`}
                       role="option"

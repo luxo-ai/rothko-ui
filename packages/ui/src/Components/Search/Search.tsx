@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
@@ -172,7 +172,7 @@ function Search<V extends Value, T = undefined>({
       <SearchMenu
         ref={menuRef}
         tabIndex={-1}
-        className={clsx({
+        className={classes({
           ['pop-out']: showPopout,
         })}
       >
@@ -184,7 +184,7 @@ function Search<V extends Value, T = undefined>({
                 aria-disabled={false}
                 aria-label={option.label}
                 aria-selected={selected}
-                className={clsx({ selected })}
+                className={classes({ selected })}
                 id={`option-${idx}`}
                 key={option.id}
                 role="option"
@@ -209,7 +209,7 @@ function Search<V extends Value, T = undefined>({
     scrollIntoView(`#option-${optIdx}`);
   }, [optIdx]);
 
-  const formClasses = clsx(className, {
+  const formClasses = classes(className, {
     error,
     loading,
     disabled,

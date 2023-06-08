@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Map as ImmutableMap } from 'immutable';
-import moment from 'moment';
 import { useCallback, useRef } from 'react';
 import { useDebuggerContext } from '../DebuggerContext';
 import useInterval from './useInterval';
@@ -11,7 +10,7 @@ const VACUUM_DELAY_SECONDS_DEFAULT = 2 * 60; // 2 min
 const CACHE_MAX_DEFAULT = 10;
 
 type DataFecher<T, Arg = undefined> = (arg: Arg) => Promise<T> | T;
-type Metadata = { lastFetchedAt: string };
+type Metadata = { lastFetchedAt: number };
 type CacheValue<T> = { data: T; metadata: Metadata };
 type Cache<T> = ImmutableMap<string, CacheValue<T>>;
 
@@ -41,7 +40,7 @@ export const useLRUCache = <T, Arg = undefined>({
 
     const expiredKeys = [...currCache.entries()].reduce((acc, [key, value]) => {
       const { lastFetchedAt } = value.metadata;
-      const isValueExpired = moment().diff(lastFetchedAt, 'seconds') > expiresSeconds;
+      const isValueExpired = Date.now() - lastFetchedAt > expiresSeconds * ONE_MS;
       return isValueExpired ? [...acc, key] : acc;
     }, [] as string[]);
 
@@ -52,7 +51,7 @@ export const useLRUCache = <T, Arg = undefined>({
   const fetchWithCache = useCallback(
     async (a: Arg): Promise<T | null> => {
       const metadata: Metadata = {
-        lastFetchedAt: moment().format(),
+        lastFetchedAt: Date.now(),
       };
       const key = keyGenerator(a);
       const cacheValue = cache.current.get(key);
@@ -87,7 +86,7 @@ const evictLeastUsed = <T>(cache: Cache<T>) => {
   for (const [k, v] of cache) {
     const { lastFetchedAt } = v.metadata;
     const currLastUsed = cache.get(LRUKey)?.metadata?.lastFetchedAt;
-    const isLeastUsed = !currLastUsed || moment(lastFetchedAt).isBefore(currLastUsed);
+    const isLeastUsed = !currLastUsed || currLastUsed > lastFetchedAt;
     if (isLeastUsed) {
       LRUKey = k;
     }

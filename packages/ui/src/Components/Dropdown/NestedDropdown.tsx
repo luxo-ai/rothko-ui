@@ -1,5 +1,5 @@
 import { ChevronDownOutline, ChevronRightOutline } from '@rothko-ui/icons';
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import isNil from 'lodash/isNil';
 import React, { useEffect, useMemo } from 'react';
@@ -148,7 +148,7 @@ function NestedDropdown<V extends Value>({
 
   const hasOptions = Boolean(options.length);
 
-  const containerClasses = clsx({
+  const containerClasses = classes({
     error,
     disabled,
     focus,
@@ -168,7 +168,7 @@ function NestedDropdown<V extends Value>({
         onKeyDown={onKeyDown}
         className={containerClasses}
       >
-        <TextContainerDiv className={clsx({ disabled })} tabIndex={-1}>
+        <TextContainerDiv className={classes({ disabled })} tabIndex={-1}>
           {isNil(value) && <ItemText className="placeholder">{placeholder}</ItemText>}
           {!isNil(value) && (
             <ItemText>{pathToCurrentOption.map(o => o.label).join(' / ')}</ItemText>
@@ -176,7 +176,7 @@ function NestedDropdown<V extends Value>({
         </TextContainerDiv>
         <ControlButton
           aria-label="open nested dropdown"
-          className={clsx({ open, disabled })}
+          className={classes({ open, disabled })}
           onClick={toggleMenu}
         >
           <ChevronDownOutline width="1rem" height="1rem" />
@@ -204,7 +204,7 @@ function NestedDropdown<V extends Value>({
                 const selected = optIdx === idx;
                 return (
                   <li
-                    className={clsx('option', { selected })}
+                    className={classes('option', { selected })}
                     id={`option-${idx}`}
                     key={option.id}
                     role="option"

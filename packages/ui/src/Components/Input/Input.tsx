@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import React from 'react';
 import styled from 'styled-components';
 import { baseInputStyle } from './styles';
@@ -16,7 +16,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {...props}
         aria-label="input"
         ref={ref}
-        className={clsx(`inpt_size_${size}`, className)}
+        className={classes(`inpt_size_${size}`, className)}
         disabled={disabled}
         tabIndex={disabled ? -1 : tabIndex}
       />

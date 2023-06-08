@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import React from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
@@ -13,7 +13,7 @@ type SimpleInlineSpinnerProps = {
 };
 
 const InlineSpinnerLoader = ({ className, color, size = 'm', style }: SimpleInlineSpinnerProps) => (
-  <SpinnerSpan style={style} $color={color} className={clsx(`spinner-size-${size}`, className)}>
+  <SpinnerSpan style={style} $color={color} className={classes(`spinner-size-${size}`, className)}>
     loading...
   </SpinnerSpan>
 );

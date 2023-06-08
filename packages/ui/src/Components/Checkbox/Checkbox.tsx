@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import isString from 'lodash/isString';
 import React from 'react';
@@ -48,7 +48,7 @@ const Checkbox = ({
         aria-label="check box"
         aria-checked={!!checked}
         aria-disabled={!!disabled}
-        className={clsx({ error, checked, disabled, ['with-check']: withCheck })}
+        className={classes({ error, checked, disabled, ['with-check']: withCheck })}
         id={id}
         kind={kind}
         onClick={() => clickCheckbox()}

@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { classes } from '@rothko-ui/utils';
 import times from 'lodash/times';
 import React, { useEffect, useMemo, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
@@ -99,7 +99,7 @@ function OptionGroup<V extends Value>({
             ? `var(--rothko-button-${kind}-color, #000)`
             : `var(--rothko-${kind}-500, #000)`;
 
-          const classes = {
+          const classNames = {
             disabled: isDisabled,
             selected: isSelected,
             ['with-radius']: optionsWithRadius,
@@ -111,7 +111,7 @@ function OptionGroup<V extends Value>({
 
           return (
             <OptionButton
-              className={clsx(classes, `opt-size-${size}`)}
+              className={classes(classNames, `opt-size-${size}`)}
               key={o.id}
               kind={kind}
               onClick={isDisabled ? undefined : () => onChange(o.id)}
