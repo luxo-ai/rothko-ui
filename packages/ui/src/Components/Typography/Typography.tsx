@@ -198,7 +198,12 @@ const linkButtonSmall = styled.button<LinkProps>`
 
 const inlineBody = styled.span<TextProps>`
   ${textStyle}
-  font-weight: normal;
+`;
+
+const inlineBodySmall = styled.span<TextProps>`
+  ${textStyle}
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 `;
 
 const code = styled.code<KindProps>`
@@ -226,6 +231,7 @@ export default {
   h5,
   h6,
   inlineBody,
+  inlineBodySmall,
   label,
   linkButton,
   linkButtonSmall,

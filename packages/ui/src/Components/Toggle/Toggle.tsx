@@ -1,4 +1,4 @@
-import { classes, isString } from '@rothko-ui/utils';
+import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import type { CSSProperties } from 'react';
 import React from 'react';
@@ -9,55 +9,50 @@ import { keyDownFactory } from '../../utils/keyUtils';
 import { Typography } from '../Typography';
 
 type ToggleProps = KindProps & {
-  children?: React.ReactNode;
+  children?: string;
   className?: string;
+  disabled?: boolean;
+  offIcon?: JSX.Element;
   onChange: (toggled: boolean) => void;
+  onIcon?: JSX.Element;
   style?: CSSProperties;
   toggled?: boolean;
-  onIcon?: JSX.Element;
-  offIcon?: JSX.Element;
-  disabled?: boolean;
 };
 
 const Toggle = ({
   children,
   className,
+  disabled,
   kind = 'primary',
+  offIcon,
   onChange,
+  onIcon,
   style,
   toggled,
-  onIcon,
-  offIcon,
-  disabled,
 }: ToggleProps) => {
   const handleChange = () => {
     if (disabled) return;
     onChange(!toggled);
   };
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: handleChange });
-  const renderContent = isString(children) ? (
-    <Typography.body>{children}</Typography.body>
-  ) : (
-    children
-  );
   return (
     <ToggleContainerDiv className={className} style={style}>
       <OuterToggleDiv
-        role="switch"
+        $toggled={toggled}
         aria-checked={!!toggled}
         aria-label="toggle"
+        className={classes({ disabled })}
         kind={kind}
         onClick={handleChange}
         onKeyDown={onKeyDown}
+        role="switch"
         tabIndex={0}
-        toggled={toggled}
-        className={classes({ disabled })}
       >
         <InnerToggleDiv className={classes(toggled && 'active')}>
           {toggled ? onIcon && <>{onIcon}</> : offIcon && <>{offIcon}</>}
         </InnerToggleDiv>
       </OuterToggleDiv>
-      <div>{renderContent}</div>
+      {children && <Typography.body>{children}</Typography.body>}
     </ToggleContainerDiv>
   );
 };
@@ -69,7 +64,7 @@ const ToggleContainerDiv = styled.div`
 `;
 
 type OuterToogleDivProp = Required<KindProps> & {
-  toggled?: boolean;
+  $toggled?: boolean;
 };
 
 const OuterToggleDiv = styled.div<OuterToogleDivProp>`
@@ -92,8 +87,8 @@ const OuterToggleDiv = styled.div<OuterToogleDivProp>`
   border: 1px solid var(--rothko-basic-300);
   border-radius: 50vmin;
 
-  background-color: ${({ toggled, kind }) =>
-    toggled ? `var(--rothko-${kind}-400, #000)` : 'rgba(143, 155, 179, 0.16)'};
+  background-color: ${({ $toggled, kind }) =>
+    $toggled ? `var(--rothko-${kind}-400, #000)` : 'rgba(143, 155, 179, 0.16)'};
 
   -webkit-transition: background-color 0.5s ease;
   -moz-transition: background-color 0.5s ease;

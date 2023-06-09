@@ -1,7 +1,7 @@
 const toggleProps = [
   {
     name: 'children',
-    type: 'React.ReactNode',
+    type: 'string',
     defaultValue: null,
     description: 'The content of the toggle',
   },

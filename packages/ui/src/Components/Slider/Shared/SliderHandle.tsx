@@ -2,6 +2,7 @@ import type { Nullable } from '@rothko-ui/utils';
 import { useIsMounted } from '@rothko-ui/utils';
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { hideChromeBrowserOutline } from '../../../Library/Styles';
 import type { KindProps, RothkoKind } from '../../../Theme';
 import type { DragDelta, DragEvent } from '../../../utils/domUtils';
 import {
@@ -14,7 +15,6 @@ import {
   removeEvent,
 } from '../../../utils/domUtils';
 import { getOffsetFactory } from '../sliderUtils';
-import { hideChromeBrowserOutline } from '../../../Library/Styles';
 
 type DraggableEvents = {
   start: string;
@@ -34,10 +34,7 @@ const mouseEvents: DraggableEvents = {
   stop: 'mouseup',
 };
 
-type SliderHandleProps = Pick<
-  React.HTMLProps<HTMLButtonElement>,
-  'id' | 'style' | 'className' | 'tabIndex'
-> & {
+type SliderHandleProps = {
   onChange: (v: number) => void;
   onDrag?: (e: DragEvent) => void;
   onMouseDown?: (e: DragEvent) => void;
@@ -51,10 +48,6 @@ type SliderHandleProps = Pick<
 };
 
 export const SliderHandle = ({
-  id,
-  style,
-  className,
-  tabIndex,
   disabled,
   vertical,
   value,
@@ -219,11 +212,6 @@ export const SliderHandle = ({
     ? { bottom: offset, top: 'auto' }
     : { left: offset, right: 'auto' };
 
-  const elStyle = {
-    ...style,
-    ...positionStyle,
-  };
-
   return (
     <HandleButton
       aria-disabled={!!disabled}
@@ -231,9 +219,7 @@ export const SliderHandle = ({
       aria-valuemax={max}
       aria-valuemin={min}
       aria-valuenow={value}
-      className={className}
       disabled={disabled}
-      id={id}
       kind={kind}
       onMouseDown={e => handleDragStart(e, false)}
       onMouseUp={e => handleDragStop(e, false)}
@@ -248,8 +234,7 @@ export const SliderHandle = ({
       }}
       ref={handleRef}
       role="slider"
-      style={elStyle}
-      tabIndex={tabIndex}
+      style={positionStyle}
       vertical={vertical}
     />
   );
@@ -289,7 +274,7 @@ const HandleButton = styled.button.attrs({ type: 'button' })<KindProps & { verti
     }
   }
   :disabled {
-    opacity: 0.8;
+    // opacity: 0.8;
     &:hover {
       cursor: not-allowed;
     }

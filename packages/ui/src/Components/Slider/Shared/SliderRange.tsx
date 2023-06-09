@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import type { KindProps } from '../../../Theme/types';
 
-const SliderRangeDiv = styled.div<KindProps>`
+const SliderRangeDiv = styled.div<KindProps & { $disabled?: boolean }>`
   position: absolute;
   height: 0.25rem;
   margin: 0;
@@ -13,6 +13,11 @@ const SliderRangeDiv = styled.div<KindProps>`
   overflow: hidden;
   user-select: none;
   z-index: 2;
+  ${({ $disabled }) =>
+    $disabled &&
+    css`
+      opacity: 0.75;
+    `}
 `;
 
 export default SliderRangeDiv;

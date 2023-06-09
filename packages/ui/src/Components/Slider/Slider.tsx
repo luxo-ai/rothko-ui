@@ -61,7 +61,7 @@ const Slider = ({
           </Typography.label>
         )}
       </SliderLegendContainerDiv>
-      <SliderTrackDiv>
+      <SliderTrackDiv $disabled={disabled}>
         <SliderHandle
           ariaLabel="slider handle value"
           disabled={disabled}
@@ -71,7 +71,7 @@ const Slider = ({
           onChange={v => onChange(v)}
           value={localVal}
         />
-        <SliderRangeDiv kind={kind} style={{ width: getOffset(localVal) }} />
+        <SliderRangeDiv $disabled={disabled} kind={kind} style={{ width: getOffset(localVal) }} />
       </SliderTrackDiv>
     </SliderContainerDiv>
   );

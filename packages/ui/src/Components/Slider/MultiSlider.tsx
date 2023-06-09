@@ -65,7 +65,7 @@ const MultiSlider = ({
           </Typography.label>
         )}
       </SliderLegendContainerDiv>
-      <SliderTrackDiv>
+      <SliderTrackDiv $disabled={disabled}>
         <SliderHandle
           ariaLabel="slider min value"
           disabled={disabled}
@@ -79,6 +79,7 @@ const MultiSlider = ({
           }}
         />
         <SliderRangeDiv
+          $disabled={disabled}
           kind={kind}
           style={{
             left: getOffset(lower),

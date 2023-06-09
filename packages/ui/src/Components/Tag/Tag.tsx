@@ -20,7 +20,7 @@ const Tag = ({ appearance = 'filled', children, kind, onClose }: TagProps) => {
   return (
     <TagContainerDiv appearance={appearance} kind={kind}>
       {typeof children === 'string' ? (
-        <Typography.inlineBody style={{ margin: 0 }}>{children}</Typography.inlineBody>
+        <Typography.inlineBodySmall style={{ margin: 0 }}>{children}</Typography.inlineBodySmall>
       ) : (
         <div>{children}</div>
       )}

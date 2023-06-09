@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const SliderTrackDiv = styled.div`
+const SliderTrackDiv = styled.div<{ $disabled?: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -9,6 +9,11 @@ const SliderTrackDiv = styled.div`
   border-radius: 2px;
   user-select: none;
   z-index: 0;
+  ${({ $disabled }) =>
+    $disabled &&
+    css`
+      opacity: 0.75;
+    `}
 `;
 
 export default SliderTrackDiv;
