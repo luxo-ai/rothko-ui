@@ -35,6 +35,12 @@ const accordionProps = [
     defaultValue: null,
     description: 'Overrides the default icon',
   },
+  {
+    name: 'spaced',
+    type: 'boolean',
+    defaultValue: 'true',
+    description: 'Adds spacing between cards',
+  },
 ] as const;
 
 export default accordionProps;

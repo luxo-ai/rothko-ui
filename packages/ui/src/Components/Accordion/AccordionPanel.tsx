@@ -1,7 +1,6 @@
 import { animated, useSpring } from '@react-spring/web';
-import { classes } from '@rothko-ui/utils';
 import React, { useRef } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import * as uuid from 'uuid';
 import { phantomButtonStyle } from '../../Library/PhantomButton';
 import { unselectableStyle } from '../../Library/Styles';
@@ -20,13 +19,12 @@ type AccordionPanelProps = {
   children: React.ReactNode;
   className?: string;
   labelProps?: LabelProps;
-  open?: boolean;
   style?: React.CSSProperties;
   title: string | JSX.Element;
 };
 
 const AccordionPanel = ({ children, className, labelProps, style, title }: AccordionPanelProps) => {
-  const { selectedPanels, onClickPanel, bordered, kind, iconOverride } = useAccordion();
+  const { selectedPanels, onClickPanel, bordered, kind, iconOverride, spaced } = useAccordion();
 
   const panelIdRef = useRef(uuid.v4());
   const isPanelSelected = selectedPanels.has(panelIdRef.current);
@@ -37,9 +35,11 @@ const AccordionPanel = ({ children, className, labelProps, style, title }: Accor
 
   return (
     <PanelContainerDiv
+      $spaced={spaced}
+      $bordered={bordered}
       kind={kind}
       id={panelIdRef.current}
-      className={classes(className, { bordered })}
+      className={className}
       style={style}
     >
       <header>
@@ -50,11 +50,15 @@ const AccordionPanel = ({ children, className, labelProps, style, title }: Accor
             onClickPanel(panelIdRef.current);
           }}
         >
-          <AccordionIcon open={isPanelSelected} color={iconColor} iconOverride={iconOverride} />
-          {typeof title === 'string' ? <DefaultLabelText>{title}</DefaultLabelText> : <>{title}</>}
+          <AccordionIcon isOpen={isPanelSelected} color={iconColor} iconOverride={iconOverride} />
+          {typeof title === 'string' ? (
+            <DefaultLabelText kind={kind}>{title}</DefaultLabelText>
+          ) : (
+            <>{title}</>
+          )}
         </PanelLabelButton>
       </header>
-      <PanelContent id={`${panelIdRef.current}-content`} open={isPanelSelected}>
+      <PanelContent id={`${panelIdRef.current}-content`} isOpen={isPanelSelected}>
         {typeof children === 'string' ? (
           <DefaultBodyText>{children}</DefaultBodyText>
         ) : (
@@ -69,7 +73,7 @@ type PanelContentProps = {
   children: React.ReactNode;
   className?: string;
   id?: string;
-  open?: boolean;
+  isOpen?: boolean;
 };
 
 const getDefaultOpenStyle = (): React.CSSProperties => ({
@@ -86,12 +90,12 @@ const getDefaultClosedStyle = (): React.CSSProperties => ({
   visibility: 'hidden',
 });
 
-const PanelContent = ({ children, className, id, open }: PanelContentProps) => {
+const PanelContent = ({ children, className, id, isOpen }: PanelContentProps) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   const style = useSpring({
     to: async next => {
-      if (open) {
+      if (isOpen) {
         const contentHeight = getElementFullHeight(contentRef.current);
         await next({ overflow: 'hidden', visibility: 'initial', immediate: true });
         await next({ height: contentHeight, opacity: 1 });
@@ -102,7 +106,7 @@ const PanelContent = ({ children, className, id, open }: PanelContentProps) => {
         await next(getDefaultClosedStyle());
       }
     },
-    from: open ? getDefaultOpenStyle() : getDefaultClosedStyle(),
+    from: isOpen ? getDefaultOpenStyle() : getDefaultClosedStyle(),
   });
 
   return (
@@ -114,7 +118,12 @@ const PanelContent = ({ children, className, id, open }: PanelContentProps) => {
   );
 };
 
-const PanelContainerDiv = styled.div<KindProps>`
+type PanelContainerDivProps = KindProps & {
+  $bordered?: boolean;
+  $spaced?: boolean;
+};
+
+const PanelContainerDiv = styled.div<PanelContainerDivProps>`
   overflow: hidden;
   background: var(--rothko-accordion-background, #fff);
 
@@ -123,11 +132,32 @@ const PanelContainerDiv = styled.div<KindProps>`
 
   border: 1px solid var(--rothko-accordion-background, #fff);
 
-  &.bordered {
-    background: var(--rothko-background, transparent);
-    border: 1px solid
-      ${({ kind }) => (kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-border, #000)')};
-  }
+  ${({ $bordered, kind }) =>
+    $bordered &&
+    css`
+      background: var(--rothko-background, transparent);
+      border: 1px solid ${kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-border, #000)'};
+    `}
+
+  ${({ $spaced }) =>
+    $spaced
+      ? css`
+          border-radius: 0.125rem;
+        `
+      : css`
+          border-radius: 0;
+          &:last-of-type {
+            border-bottom-left-radius: 0.125rem;
+            border-bottom-right-radius: 0.125rem;
+          }
+          &:first-of-type {
+            border-top-left-radius: 0.125rem;
+            border-top-right-radius: 0.125rem;
+          }
+          &:not(:last-of-type) {
+            border-bottom: none;
+          }
+        `}
 `;
 
 const PanelLabelButton = styled.button`

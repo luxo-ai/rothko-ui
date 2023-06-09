@@ -9,6 +9,7 @@ type IAccordionContext = {
   kind?: RothkoKind;
   onClickPanel: (id: string) => void;
   selectedPanels: ImSet<string>;
+  spaced?: boolean;
 };
 
 export const AccordionContext = createContext<IAccordionContext | null>(null);

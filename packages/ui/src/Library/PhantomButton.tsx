@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components';
 
-export const phantomButtonStyle = css`
+type PhantomButtonProps = {
+  $displayBlock?: boolean;
+  $displayFlex?: boolean;
+};
+
+export const phantomButtonStyle = css<PhantomButtonProps>`
   // use font smoothing to make text/svgs clearer
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
@@ -13,18 +18,25 @@ export const phantomButtonStyle = css`
   padding: 0;
   cursor: pointer;
   z-index: 1;
-  &.db {
-    display: block;
-  }
-  &.dflx {
-    display: flex;
-  }
+
+  ${({ $displayBlock }) =>
+    $displayBlock &&
+    css`
+      display: block;
+    `};
+
+  ${({ $displayFlex }) =>
+    $displayFlex &&
+    css`
+      display: flex;
+    `};
+
   :disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
 `;
 
-export const PhantomButton = styled.button`
+export const PhantomButton = styled.button<PhantomButtonProps>`
   ${phantomButtonStyle}
 `;

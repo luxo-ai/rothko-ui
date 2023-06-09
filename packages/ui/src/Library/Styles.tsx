@@ -17,3 +17,17 @@ export const hideChromeBrowserOutline = css`
     outline: none;
   }
 `;
+
+export const textChildrenStyle = css`
+  & > h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  code {
+    color: var(--rothko-color, #000);
+  }
+`;

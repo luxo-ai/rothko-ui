@@ -1,7 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../../../Library/PhantomButton';
 
-const ControlButton = styled.button.attrs({ type: 'button' })`
+type ControlButtonProps = {
+  $rotateOnOpen?: boolean;
+  $open?: boolean;
+};
+
+const ControlButton = styled.button.attrs({ type: 'button' })<ControlButtonProps>`
   ${phantomButtonStyle}
   display: flex;
   align-items: center;
@@ -15,15 +20,12 @@ const ControlButton = styled.button.attrs({ type: 'button' })`
   // otherwise hidden under input padding and cursor pointer doesn't work
   z-index: 9;
 
-  &:not(.open) {
-    transform: rotate(0deg);
-    transition: transform 0.125s linear;
-  }
-
-  &.open {
-    transform: rotate(180deg);
-    transition: transform 0.125s linear;
-  }
+  ${({ $rotateOnOpen, $open }) =>
+    $rotateOnOpen &&
+    css`
+      transform: rotate(${($open && '180deg') || '0deg'});
+      transition: transform 0.125s linear;
+    `}
 
   &.disabled {
     opacity: 0.5;

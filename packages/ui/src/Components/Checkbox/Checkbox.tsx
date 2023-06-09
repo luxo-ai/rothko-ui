@@ -1,4 +1,4 @@
-import { classes, isString } from '@rothko-ui/utils';
+import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import React from 'react';
 import styled from 'styled-components';
@@ -7,46 +7,43 @@ import { keyDownFactory } from '../../utils/keyUtils';
 import Typography from '../Typography/Typography';
 
 type CheckboxProps = {
+  ariaLabel?: string;
   checked?: boolean;
-  children?: React.ReactNode;
+  children?: string;
   className?: string;
+  disabled?: boolean;
   error?: boolean;
   id?: string;
   kind?: RothkoKind;
   onChange: (val: boolean) => void;
   style?: React.CSSProperties;
   withCheck?: boolean;
-  disabled?: boolean;
 };
 
 const Checkbox = ({
+  ariaLabel = 'check box',
   checked,
   children,
   className,
+  disabled,
   error,
   id,
   kind,
   onChange,
   style,
   withCheck,
-  disabled,
 }: CheckboxProps) => {
   const clickCheckbox = () => {
     if (disabled) return;
     onChange(!checked);
   };
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: clickCheckbox });
-  const renderContent = isString(children) ? (
-    <Typography.body>{children}</Typography.body>
-  ) : (
-    children
-  );
   return (
     <CheckboxContainerDiv style={style} className={className}>
       <CheckboxDiv
-        aria-label="check box"
         aria-checked={!!checked}
         aria-disabled={!!disabled}
+        aria-label={ariaLabel}
         className={classes({ error, checked, disabled, ['with-check']: withCheck })}
         id={id}
         kind={kind}
@@ -55,7 +52,7 @@ const Checkbox = ({
         role="checkbox"
         tabIndex={0}
       />
-      {renderContent && <div>{renderContent}</div>}
+      {children && <Typography.body>{children}</Typography.body>}
     </CheckboxContainerDiv>
   );
 };

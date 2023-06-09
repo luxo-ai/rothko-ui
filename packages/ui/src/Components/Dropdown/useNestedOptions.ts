@@ -6,8 +6,9 @@ import type { NestedOption, Option, Value } from '../../Library/types';
 
 type HookArgs<V extends Value> = {
   options: NestedOption<V>[];
-  onChange: (id: V) => void;
+  onChange: (id: V | null) => void;
   initialIdx?: number;
+  reverse?: boolean;
 };
 
 export type StackOption<V extends Value> = Option<V, { hasMore: boolean }>;
@@ -17,24 +18,30 @@ export type StackValue<V extends Value> = {
   options: StackOption<V>[];
 };
 
-const useNestedOptions = <V extends Value>({ options, onChange, initialIdx = -1 }: HookArgs<V>) => {
+const useNestedOptions = <V extends Value>({
+  options,
+  onChange,
+  reverse,
+  initialIdx = -1,
+}: HookArgs<V>) => {
   const debug = useDebuggerContext('useNestedOptions');
   const [optIdx, setOptIdx] = useState<number>(initialIdx);
 
   const [optionStack, setOptionStack] = useState<Stack<StackValue<V>>>([
-    optionsToStackValue(options),
+    optionsToStackValue(reverse ? reverseOptions(options) : options),
   ]);
 
   const { options: currOptions, title: currTitle } =
     useMemo(() => stackPeak(optionStack), [optionStack]) ?? {};
 
   const reset = useCallback(() => {
-    setOptionStack([optionsToStackValue(options)]);
+    setOptionStack([optionsToStackValue(reverse ? reverseOptions(options) : options)]);
     setOptIdx(initialIdx);
   }, [setOptionStack, setOptIdx, initialIdx, options]);
 
   const selectOne = useCallback(
-    (opt: StackOption<V>) => {
+    (opt: StackOption<V> | null) => {
+      if (opt === null) return onChange(null);
       const { hasMore } = opt.data;
       if (!hasMore) return onChange(opt.id);
       /* if has more push the next options on the stack */
@@ -97,6 +104,14 @@ const optionsToStackValue = <V extends Value>(
       data: { hasMore: !!o.subcategories },
     })),
   };
+};
+
+const reverseOptions = <V>(options: NestedOption<V>[]) => {
+  const result: NestedOption<V>[] = [];
+  for (let i = options.length - 1; i >= 0; i--) {
+    result.push(options[i]);
+  }
+  return result;
 };
 
 export default useNestedOptions;

@@ -5,6 +5,7 @@ import { kindOptions } from '../../rothkoOptions';
 
 type CutomizationState = {
   bordered: boolean;
+  spaced: boolean;
   withKind: boolean;
   kind: RothkoKind;
   mutuallyExclusive: boolean;
@@ -12,7 +13,7 @@ type CutomizationState = {
 
 type CustomizationAction =
   | {
-      type: 'TOGGLE_BORDERED' | 'TOGGLE_WITH_KIND' | 'TOGGLE_MUTUALLY_EXCLUSIVE';
+      type: 'TOGGLE_BORDERED' | 'TOGGLE_WITH_KIND' | 'TOGGLE_MUTUALLY_EXCLUSIVE' | 'TOGGLE_SPACED';
     }
   | { type: 'SET_KIND'; kind: RothkoKind };
 
@@ -20,6 +21,8 @@ export const customizationsReducer = (state: CutomizationState, action: Customiz
   switch (action.type) {
     case 'TOGGLE_BORDERED':
       return { ...state, bordered: !state.bordered };
+    case 'TOGGLE_SPACED':
+      return { ...state, spaced: !state.spaced };
     case 'TOGGLE_WITH_KIND':
       return { ...state, withKind: !state.withKind };
     case 'TOGGLE_MUTUALLY_EXCLUSIVE':
@@ -37,7 +40,7 @@ type AccordionCustomizationsProps = {
 };
 
 const AccordionCustomizations = ({ dispatch, state }: AccordionCustomizationsProps) => {
-  const { bordered, mutuallyExclusive, withKind, kind } = state;
+  const { bordered, mutuallyExclusive, withKind, kind, spaced } = state;
   return (
     <AccordionOrBox boxTitleVariant="h3" title="Customizations">
       <Flex padding="0.2rem" marginBottom="0.3rem" flexWrap="wrap" columnGap="4rem" rowGap="2rem">
@@ -68,6 +71,14 @@ const AccordionCustomizations = ({ dispatch, state }: AccordionCustomizationsPro
             toggled={bordered}
           >
             boredered
+          </Toggle>
+          <Toggle
+            kind="secondary"
+            onChange={() => dispatch({ type: 'TOGGLE_SPACED' })}
+            toggled={spaced}
+            style={{ marginTop: '1rem' }}
+          >
+            spaced
           </Toggle>
           <Toggle
             kind="secondary"

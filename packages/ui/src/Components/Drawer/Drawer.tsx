@@ -20,8 +20,8 @@ type DrawerProps = {
   children?: React.ReactNode;
   className?: string;
   id?: string;
-  isOpen?: boolean;
   onClose?: () => void;
+  open?: boolean;
   style?: React.CSSProperties;
 };
 
@@ -29,8 +29,8 @@ const Drawer = ({
   children,
   className,
   id,
-  isOpen = false,
   onClose: closeDrawer = noop,
+  open: isOpen = false,
   style: styleProp = {},
 }: DrawerProps) => {
   const drawerRef = useRef<HTMLDivElement | null>(null);
@@ -83,7 +83,7 @@ const Drawer = ({
 
   return (
     <DrawerContext.Provider value={{ isOpen, closeDrawer }}>
-      <DomPortal wrapperId={`drawer-portal-${id || 'unknown'}`}>
+      <DomPortal wrapperId={`rothko-drawer-portal-${id || 'unknown'}`}>
         <DrawerBackdrop
           className={classes({ ['backdrop-open']: isOpen })}
           onClick={onBackdropClick}

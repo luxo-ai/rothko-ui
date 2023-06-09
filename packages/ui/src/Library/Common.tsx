@@ -18,10 +18,10 @@ export const ShadedBackdrop = styled.div`
     inset: 0;
     z-index: 999999;
 
-    -webkit-transition: opacity 70ms linear;
-    -moz-transition: opacity 70ms linear;
-    -ms-transition: opacity 70ms linear;
-    transition: opacity 70ms linear;
+    -webkit-transition: opacity 80ms ease-in-out;
+    -moz-transition: opacity 80ms ease-in-out;
+    -ms-transition: opacity 80ms ease-in-out;
+    transition: opacity 80ms ease-in-out;
   }
 `;
 

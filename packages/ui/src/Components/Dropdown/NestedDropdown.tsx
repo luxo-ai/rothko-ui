@@ -1,4 +1,4 @@
-import { ChevronDownOutline, ChevronRightOutline } from '@rothko-ui/icons';
+import { ChevronDownOutline, ChevronRightOutline, CloseOutline } from '@rothko-ui/icons';
 import { classes, isNil } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import React, { useEffect, useMemo } from 'react';
@@ -43,25 +43,38 @@ type NestedDropdownProps<V extends Value> = {
   className?: string;
   /** if the dropdown has a label */
   label?: string;
+  /** is this a minimal dropdown */
+  minimal?: boolean;
+  clearable?: boolean;
+  /** prefix of a selected item */
+  selectedPrefix?: string;
+  /** open dropdown position */
+  menuPosition?: 'top' | 'bottom' | 'auto';
 };
 
 function NestedDropdown<V extends Value>({
-  id,
-  value,
-  options,
-  onChange,
-  onBlur,
-  onFocus,
-  onOpen,
+  className,
+  clearable,
   closeOnEsc = true,
   disabled,
   error,
-  className,
-  renderOption: RenderOpt = DefaultRenderOption,
-  placeholder = 'Select',
+  id,
   label,
+  menuPosition = 'bottom',
+  minimal,
+  onBlur,
+  onChange,
+  onFocus,
+  onOpen,
+  options,
+  placeholder = 'Select',
+  renderOption: RenderOpt = DefaultRenderOption,
+  selectedPrefix = '',
+  value,
 }: NestedDropdownProps<V>) {
   const debug = useDebuggerContext('<NestedDropdown />');
+
+  const openReverse = menuPosition === 'top';
 
   const {
     currentOptions,
@@ -72,7 +85,7 @@ function NestedDropdown<V extends Value>({
     goToPrevCategory,
     moveOptionIdx,
     reset,
-  } = useNestedOptions({ options, onChange });
+  } = useNestedOptions({ options, onChange, reverse: openReverse });
 
   const {
     containerRef,
@@ -91,15 +104,18 @@ function NestedDropdown<V extends Value>({
     disabled,
   });
 
+  const hasOptions = Boolean(options.length);
+  const hasValue = !isNil(value);
+  const canClear = clearable && hasValue && !disabled;
+
   const pathToCurrentOption = useMemo(
     () => (!isNil(value) ? findPathToOptionMatch(value, options) : []),
     [value, options]
   );
 
-  const onSelect = (option: StackOption<V>) => {
-    const { hasMore } = option.data;
+  const onSelect = (option: StackOption<V> | null) => {
     selectOne(option);
-    if (!hasMore) {
+    if (option === null || !option.data.hasMore) {
       closeMenu();
       reset();
     }
@@ -141,17 +157,20 @@ function NestedDropdown<V extends Value>({
 
   useEffect(() => {
     if (!open) return;
-    const scrollIdx = optIdx < 0 ? 0 : optIdx;
+    const scrollIdx = optIdx < 0 && openReverse ? options.length - 1 : optIdx;
     scrollIntoView(`#option-${scrollIdx}`);
-  }, [optIdx, optIdx, open]);
-
-  const hasOptions = Boolean(options.length);
+  }, [optIdx, optIdx, open, openReverse]);
 
   const containerClasses = classes({
     error,
     disabled,
     focus,
+    minimal,
     empty: !hasOptions,
+  });
+
+  const dropdownMenuClasses = classes({
+    ['open-reverse']: openReverse,
   });
 
   return (
@@ -168,22 +187,37 @@ function NestedDropdown<V extends Value>({
         className={containerClasses}
       >
         <TextContainerDiv className={classes({ disabled })} tabIndex={-1}>
-          {isNil(value) && <ItemText className="placeholder">{placeholder}</ItemText>}
+          {isNil(value) && <ItemText placeHolder>{placeholder}</ItemText>}
           {!isNil(value) && (
-            <ItemText>{pathToCurrentOption.map(o => o.label).join(' / ')}</ItemText>
+            <ItemText>
+              {selectedPrefix}
+              {pathToCurrentOption.map(o => o.label).join(' / ')}
+            </ItemText>
           )}
         </TextContainerDiv>
-        <ControlButton
-          aria-label="open nested dropdown"
-          className={classes({ open, disabled })}
-          onClick={toggleMenu}
-        >
-          <ChevronDownOutline width="1rem" height="1rem" />
-        </ControlButton>
+        {!canClear ? (
+          <ControlButton
+            $open={open}
+            $rotateOnOpen
+            aria-label="open nested dropdown"
+            className={classes({ disabled })}
+            onClick={toggleMenu}
+          >
+            <ChevronDownOutline width="1rem" height="1rem" />
+          </ControlButton>
+        ) : (
+          <ControlButton
+            aria-label="clear item"
+            className={classes({ disabled })}
+            onClick={() => onSelect(null)}
+          >
+            <CloseOutline width="1rem" height="1rem" />
+          </ControlButton>
+        )}
         {open && (
           <DropdownMenu
             ref={menuRef}
-            id="dropdown-menu"
+            className={dropdownMenuClasses}
             tabIndex={-1}
             data-rothko-body-scroll-lock-ignore
           >
@@ -211,10 +245,10 @@ function NestedDropdown<V extends Value>({
                     aria-label={option.label}
                     aria-selected={selected}
                     tabIndex={-1}
-                    onClick={e => {
-                      e.preventDefault();
+                    onClick={() => {
+                      // e.preventDefault();
                       onSelect(option);
-                      containerRef.current?.focus();
+                      containerRef.current?.blur();
                     }}
                   >
                     <NestedOptionContainerDiv>

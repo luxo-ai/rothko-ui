@@ -8,6 +8,7 @@ import type { KindProps, RothkoKind, RothkoSize } from '../../Theme';
 import type { ButtonAppearance, ButtonShape } from './types';
 
 type HtmlButtonProps = {
+  ariaLabel?: string;
   className?: string;
   disabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -73,6 +74,7 @@ const Button: React.FC<ButtonProps> = ({
   accessoryLeft: Left,
   accessoryRight: Right,
   appearance = 'filled',
+  ariaLabel,
   children,
   className,
   disabled,
@@ -109,20 +111,21 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <StyledButton
       appearance={appearance}
+      aria-label={ariaLabel}
       className={classes(appearanceClasses, `btn-size-${size}`, className)}
       disabled={disabled}
       kind={kind}
       onClick={onClick}
+      role="button"
       style={style}
       tabIndex={disabled ? -1 : tabIndex}
       type={type}
-      role="button"
     >
       <ContainerDiv ref={childrenContainerRef}>
         {!loading && Left && (
-          <div style={{ marginRight: '0.25rem', display: 'flex' }}>
+          <AccessoryContainerDiv $kind="left">
             <Left size={accessorySizeMap[size]} color={iconColor} />
-          </div>
+          </AccessoryContainerDiv>
         )}
         {loading ? (
           <InlineSpinnerLoader
@@ -138,9 +141,9 @@ const Button: React.FC<ButtonProps> = ({
           <span>{children}</span>
         )}
         {!loading && Right && (
-          <div style={{ marginLeft: '0.25rem', display: 'flex' }}>
+          <AccessoryContainerDiv $kind="right">
             <Right size={accessorySizeMap[size]} color={iconColor} />
-          </div>
+          </AccessoryContainerDiv>
         )}
       </ContainerDiv>
     </StyledButton>
@@ -151,6 +154,19 @@ const ContainerDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const AccessoryContainerDiv = styled.div<{ $kind: 'left' | 'right' }>`
+  display: flex;
+  ${({ $kind }) => {
+    return $kind === 'left'
+      ? css`
+          margin-right: 0.25rem;
+        `
+      : css`
+          margin-left: 0.25rem;
+        `;
+  }}
 `;
 
 type BaseButtonProps = Required<KindProps> & { appearance: ButtonAppearance };

@@ -7,19 +7,19 @@ const SIZE = '1rem';
 type AccordionIconProps = {
   color: string;
   iconOverride?: IconOverride;
-  open?: boolean;
+  isOpen?: boolean;
 };
 
 const AccordionIcon = React.memo(
-  ({ color, iconOverride: IconOverride, open }: AccordionIconProps) => {
+  ({ color, iconOverride: IconOverride, isOpen }: AccordionIconProps) => {
     if (IconOverride) {
       return typeof IconOverride === 'function' ? (
-        <IconOverride open={open} color={color} size={SIZE} />
+        <IconOverride open={isOpen} color={color} size={SIZE} />
       ) : (
         <>{IconOverride}</>
       );
     }
-    return open ? (
+    return isOpen ? (
       <MinusOutline fill={color} width={SIZE} height={SIZE} />
     ) : (
       <PlusOutline fill={color} width={SIZE} height={SIZE} />

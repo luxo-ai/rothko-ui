@@ -66,7 +66,7 @@ const DrawerCard = () => {
           Open Drawer
         </Button>
       </Container>
-      <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)}>
+      <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <Typography.body>Hello world</Typography.body>
       </Drawer>
     </Card>

@@ -3,19 +3,19 @@ import type { Value } from '../../Library/types';
 import DropdownInner from './DropdownInner';
 import type { DropdownInnerProps } from './types';
 
-type DropdownProps<V extends Value, T> = Omit<
+type MultiDropdownProps<V extends Value, T> = Omit<
   DropdownInnerProps<V, T>,
-  'multiple' | 'value' | 'onChange'
+  'multiple' | 'value' | 'onChange' | 'search'
 > & {
   /** Current value of dropdown or value array if multiple */
-  value?: V | null;
+  value?: V[] | null;
   /** event handler for value change */
-  onChange: (v: V | null) => void;
+  onChange: (v: V[] | null) => void;
 };
 
-function Dropdown<V extends Value, T>({ onChange, value, ...props }: DropdownProps<V, T>) {
+function MutiDropdown<V extends Value, T>({ onChange, value, ...props }: MultiDropdownProps<V, T>) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return <DropdownInner {...props} value={value} onChange={onChange as any} multiple={false} />;
+  return <DropdownInner {...props} value={value} onChange={onChange as any} multiple />;
 }
 
-export default Dropdown;
+export default MutiDropdown;

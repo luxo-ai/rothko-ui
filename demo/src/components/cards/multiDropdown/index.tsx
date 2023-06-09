@@ -1,4 +1,4 @@
-import { Container, Dropdown } from '@rothko-ui/ui';
+import { Container, MultiDropdown } from '@rothko-ui/ui';
 import { useReducer, useState } from 'react';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Card from '../Card';
@@ -90,7 +90,7 @@ const MultiDropdownCard = () => {
       propsMeta={{ meta: multiDropdownProps }}
     >
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
-        <Dropdown
+        <MultiDropdown
           disabled={disabled}
           closeOnEsc={closeOnEsc}
           menuPosition={menuPosition}
@@ -101,7 +101,7 @@ const MultiDropdownCard = () => {
           clearable={clearable}
           label="Mutli Dropdown"
           value={values}
-          onChange={v => setValues(v as number[])}
+          onChange={v => setValues(v)}
           options={multiDropdownOptions}
         />
       </Container>

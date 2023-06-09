@@ -46,7 +46,7 @@ const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
 };
 
 const BottomPopupCard = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   return (
     <Card
       copy={bottomPopupCopy}
@@ -58,13 +58,12 @@ const BottomPopupCard = () => {
           accessoryLeft={({ size, color }) => (
             <ArrowUpward width={size} height={size} fill={color} />
           )}
-          kind="secondary"
-          onClick={() => setIsOpen(true)}
+          onClick={() => setOpen(true)}
         >
           Open popup
         </Button>
       </Container>
-      <BottomPopup isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <BottomPopup open={open} onClose={() => setOpen(false)}>
         <Typography.body>Hello world</Typography.body>
       </BottomPopup>
     </Card>

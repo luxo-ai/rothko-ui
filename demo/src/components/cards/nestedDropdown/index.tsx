@@ -99,10 +99,10 @@ const NestedDropdownCard = () => {
           disabled={disabled}
           closeOnEsc={closeOnEsc}
           placeholder={placeholder}
-          // menuPosition={menuPosition}
-          // minimal={minimal}
-          // clearable={clearable}
-          // selectedPrefix={selectedPrefix}
+          menuPosition={menuPosition}
+          minimal={minimal}
+          clearable={clearable}
+          selectedPrefix={selectedPrefix}
           value={value}
           onChange={v => setValue(v)}
           options={nestedOptions}

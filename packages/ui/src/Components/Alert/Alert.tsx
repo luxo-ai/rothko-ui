@@ -1,6 +1,7 @@
 import { isString } from '@rothko-ui/utils';
 import React from 'react';
 import styled from 'styled-components';
+import { textChildrenStyle } from '../../Library/Styles';
 import type { KindProps, RothkoKind } from '../../Theme/types';
 import Typography from '../Typography/Typography';
 
@@ -13,14 +14,9 @@ type AlertProps = {
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   ({ children, kind, className, style }, ref) => {
-    const renderContent = isString(children) ? (
-      <Typography.body>{children}</Typography.body>
-    ) : (
-      children
-    );
     return (
       <AlertContainerDiv style={style} className={className} kind={kind} ref={ref}>
-        {renderContent}
+        {isString(children) ? <Typography.body>{children}</Typography.body> : children}
       </AlertContainerDiv>
     );
   }
@@ -29,6 +25,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
 Alert.displayName = 'Alert';
 
 const AlertContainerDiv = styled.div<KindProps>`
+  ${textChildrenStyle}
   background-color: ${({ kind = 'danger' }) => `var(--rothko-${kind}-transparent-300)`};
   padding: 1rem 1.25rem;
   font-size: 1rem;

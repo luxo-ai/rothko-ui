@@ -1,6 +1,6 @@
 import { Set as ImSet } from 'immutable';
 import React, { useCallback, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import type { RothkoKind } from '../../Theme/types';
 import { AccordionContext } from './AccordionContext';
 import type { IconOverride } from './types';
@@ -12,6 +12,7 @@ type AccordionProps = {
   iconOverride?: IconOverride;
   kind?: RothkoKind;
   mutuallyExclusive?: boolean;
+  spaced?: boolean;
   style?: React.CSSProperties;
 };
 
@@ -22,6 +23,7 @@ const Accordion = ({
   iconOverride,
   kind,
   mutuallyExclusive,
+  spaced = true,
   style,
 }: AccordionProps) => {
   const [selectedPanels, setSelectedPanels] = useState(ImSet<string>());
@@ -45,19 +47,25 @@ const Accordion = ({
         kind,
         onClickPanel,
         selectedPanels,
+        spaced,
       }}
     >
-      <AccordionGroupDiv style={style} className={className}>
+      <AccordionGroupDiv $spaced={spaced} style={style} className={className}>
         {children}
       </AccordionGroupDiv>
     </AccordionContext.Provider>
   );
 };
 
-const AccordionGroupDiv = styled.div`
+const AccordionGroupDiv = styled.div<{ $spaced?: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+
+  ${({ $spaced }) =>
+    $spaced &&
+    css`
+      gap: 0.75rem;
+    `}
 `;
 
 export default Accordion;

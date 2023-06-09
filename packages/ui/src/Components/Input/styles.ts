@@ -52,7 +52,7 @@ export const baseInputStyle = css`
     border-color: var(--rothko-danger-500);
   }
 
-  :not(:disabled) {
+  :not(:disabled):not(.disabled) {
     &.focus:not(:disabled),
     &:focus:not(:disabled),
     &:active:not(:disabled) {

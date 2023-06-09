@@ -12,18 +12,19 @@ import {
   enableBodyScroll,
 } from '../../utils/domUtils';
 
-type ContainerProps = Pick<React.HTMLProps<HTMLDivElement>, 'className' | 'id'>;
-
-type PopupProps = ContainerProps & {
-  onClose: () => void;
-  isOpen: boolean;
+type PopupProps = {
   children: React.ReactNode;
+  className?: string;
+  id?: string;
+  onClose: () => void;
+  open: boolean;
 };
 
-const BottomPopup: React.FC<PopupProps> = ({ id, onClose, isOpen, className, children }) => {
+const BottomPopup: React.FC<PopupProps> = ({ children, className, id, onClose, open: isOpen }) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
 
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (!popupRef.current || !popupRef.current.contains(e.target as any)) {
       onClose();
     }
@@ -79,7 +80,7 @@ const BottomPopup: React.FC<PopupProps> = ({ id, onClose, isOpen, className, chi
   }, [isOpen, popupRef]);
 
   return (
-    <DomPortal wrapperId="bottom-popup-portal">
+    <DomPortal wrapperId={`rothko-bottom-popup-${id || 'unknown'}`}>
       <ShadedBackdrop onClick={onBackdropClick} className={classes({ ['backdrop-open']: isOpen })}>
         {transition(
           (style, item) =>

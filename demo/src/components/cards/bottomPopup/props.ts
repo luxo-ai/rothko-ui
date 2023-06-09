@@ -6,7 +6,7 @@ const bottomPopupProps = [
     description: 'Callback function to close the popup',
   },
   {
-    name: 'isOpen',
+    name: 'open',
     type: 'boolean',
     defaultValue: 'false',
     description: 'Sets the popup to open',

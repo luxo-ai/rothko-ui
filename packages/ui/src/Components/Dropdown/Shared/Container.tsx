@@ -32,8 +32,8 @@ export const DropdownContainerDiv = styled.div`
   }
 
   &.minimal {
-    background: transparent;
-    border: none;
+    // background: transparent;
+    border-color: var(--rothko-basic-transparent-100);
   }
 `;
 
