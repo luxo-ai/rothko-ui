@@ -3,26 +3,26 @@ import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import type { RothkoKind } from '../../Theme/types';
 import { AccordionContext } from './AccordionContext';
-import type { IconKind } from './types';
+import type { IconOverride } from './types';
 
 type AccordionProps = {
   bordered?: boolean;
   children: React.ReactNode;
   className?: string;
+  iconOverride?: IconOverride;
   kind?: RothkoKind;
   mutuallyExclusive?: boolean;
   style?: React.CSSProperties;
-  iconKind?: IconKind;
 };
 
 const Accordion = ({
+  bordered,
   children,
+  className,
+  iconOverride,
+  kind,
   mutuallyExclusive,
   style,
-  className,
-  kind,
-  bordered,
-  iconKind = 'standard',
 }: AccordionProps) => {
   const [selectedPanels, setSelectedPanels] = useState(ImSet<string>());
 
@@ -40,11 +40,11 @@ const Accordion = ({
   return (
     <AccordionContext.Provider
       value={{
-        selectedPanels,
-        kind,
         bordered,
+        iconOverride,
+        kind,
         onClickPanel,
-        iconKind,
+        selectedPanels,
       }}
     >
       <AccordionGroupDiv style={style} className={className}>

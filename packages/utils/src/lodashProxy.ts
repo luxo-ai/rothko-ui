@@ -3,6 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import compact from 'lodash/compact';
 import debounce from 'lodash/debounce';
 import flatten from 'lodash/flatten';
+// EVENTUALY REPLACE WITH INTERNAL IMPLEMENTATION
 import identityFn from 'lodash/identity';
 import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';

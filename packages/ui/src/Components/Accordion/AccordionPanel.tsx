@@ -1,28 +1,15 @@
 import { animated, useSpring } from '@react-spring/web';
-import { ChevronDownOutline, ChevronUpOutline, MinusOutline, PlusOutline } from '@rothko-ui/icons';
 import { classes } from '@rothko-ui/utils';
-import React, { useMemo, useRef } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import * as uuid from 'uuid';
 import { phantomButtonStyle } from '../../Library/PhantomButton';
 import { unselectableStyle } from '../../Library/Styles';
-import type { Accessory } from '../../Library/types';
 import type { KindProps } from '../../Theme';
 import { getElementFullHeight } from '../../utils/domUtils/dimensions';
 import Typography from '../Typography/Typography';
 import { useAccordion } from './AccordionContext';
-import type { IconKind } from './types';
-
-const ICON_KIND_TO_ICONS: Record<IconKind, { open: Accessory; closed: Accessory }> = {
-  standard: {
-    open: p => <MinusOutline fill={p.color} width={p.size} height={p.size} />,
-    closed: p => <PlusOutline fill={p.color} width={p.size} height={p.size} />,
-  },
-  chevron: {
-    open: p => <ChevronUpOutline fill={p.color} width="1.5rem" height="1.5rem" />,
-    closed: p => <ChevronDownOutline fill={p.color} width="1.5rem" height="1.5rem" />,
-  },
-};
+import AccordionIcon from './AccordionIcon';
 
 type LabelProps = {
   className?: string;
@@ -33,25 +20,20 @@ type AccordionPanelProps = {
   children: React.ReactNode;
   className?: string;
   labelProps?: LabelProps;
-  title: string | JSX.Element;
-  style?: React.CSSProperties;
   open?: boolean;
+  style?: React.CSSProperties;
+  title: string | JSX.Element;
 };
 
-const AccordionPanel = ({ children, className, labelProps, title, style }: AccordionPanelProps) => {
-  const { selectedPanels, onClickPanel, bordered, kind, iconKind } = useAccordion();
+const AccordionPanel = ({ children, className, labelProps, style, title }: AccordionPanelProps) => {
+  const { selectedPanels, onClickPanel, bordered, kind, iconOverride } = useAccordion();
+
   const panelIdRef = useRef(uuid.v4());
   const isPanelSelected = selectedPanels.has(panelIdRef.current);
-
-  const Icon = useMemo(() => {
-    const { open, closed } = ICON_KIND_TO_ICONS[iconKind];
-    return isPanelSelected ? open : closed;
-  }, [isPanelSelected, iconKind]);
 
   const iconColor = kind
     ? `var(--rothko-${kind}-500, #000)`
     : 'var(--rothko-accordion-border, #000)';
-  // : 'var(--rothko-border, #000)';
 
   return (
     <PanelContainerDiv
@@ -68,11 +50,11 @@ const AccordionPanel = ({ children, className, labelProps, title, style }: Accor
             onClickPanel(panelIdRef.current);
           }}
         >
-          <Icon color={iconColor} size="1rem" />
+          <AccordionIcon open={isPanelSelected} color={iconColor} iconOverride={iconOverride} />
           {typeof title === 'string' ? <DefaultLabelText>{title}</DefaultLabelText> : <>{title}</>}
         </PanelLabelButton>
       </header>
-      <PanelContent id={`${panelIdRef.current}-content`} isOpen={isPanelSelected}>
+      <PanelContent id={`${panelIdRef.current}-content`} open={isPanelSelected}>
         {typeof children === 'string' ? (
           <DefaultBodyText>{children}</DefaultBodyText>
         ) : (
@@ -84,10 +66,10 @@ const AccordionPanel = ({ children, className, labelProps, title, style }: Accor
 };
 
 type PanelContentProps = {
-  id?: string;
-  isOpen?: boolean;
   children: React.ReactNode;
   className?: string;
+  id?: string;
+  open?: boolean;
 };
 
 const getDefaultOpenStyle = (): React.CSSProperties => ({
@@ -104,12 +86,12 @@ const getDefaultClosedStyle = (): React.CSSProperties => ({
   visibility: 'hidden',
 });
 
-const PanelContent = ({ children, id, isOpen, className }: PanelContentProps) => {
+const PanelContent = ({ children, className, id, open }: PanelContentProps) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   const style = useSpring({
     to: async next => {
-      if (isOpen) {
+      if (open) {
         const contentHeight = getElementFullHeight(contentRef.current);
         await next({ overflow: 'hidden', visibility: 'initial', immediate: true });
         await next({ height: contentHeight, opacity: 1 });
@@ -120,7 +102,7 @@ const PanelContent = ({ children, id, isOpen, className }: PanelContentProps) =>
         await next(getDefaultClosedStyle());
       }
     },
-    from: isOpen ? getDefaultOpenStyle() : getDefaultClosedStyle(),
+    from: open ? getDefaultOpenStyle() : getDefaultClosedStyle(),
   });
 
   return (
@@ -135,7 +117,7 @@ const PanelContent = ({ children, id, isOpen, className }: PanelContentProps) =>
 const PanelContainerDiv = styled.div<KindProps>`
   overflow: hidden;
   background: var(--rothko-accordion-background, #fff);
-  // var(--rothko-background, transparent);
+
   padding: 0 0.875rem;
   border-radius: 0.125rem;
 
@@ -160,8 +142,6 @@ const PanelLabelButton = styled.button`
 `;
 
 const PanelContentDiv = styled.div`
-  // background: var(--rothko-accordion-background, #fff);
-  // var(--rothko-background, transparent);
   padding-bottom: 0.875rem;
 `;
 

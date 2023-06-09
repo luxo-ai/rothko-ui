@@ -14,4 +14,10 @@ export type RenderOption<V, T = undefined> = (props: { option: Option<V, T> }) =
 
 export type FocusHandler = (e: React.FocusEvent<HTMLElement>) => void;
 
-export type Accessory = (props: { size: number | RemSize | EmSize; color: string }) => JSX.Element;
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type Accessory<Props = {}> = (
+  props: {
+    size: number | RemSize | EmSize;
+    color: string;
+  } & Props
+) => JSX.Element;

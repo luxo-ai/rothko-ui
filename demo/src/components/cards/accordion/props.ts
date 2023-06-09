@@ -29,6 +29,12 @@ const accordionProps = [
     defaultValue: null,
     description: 'Adds a style to the component',
   },
+  {
+    name: 'iconOverride',
+    type: 'React.ReactNode | Accessory<{ open?: boolean }>',
+    defaultValue: null,
+    description: 'Overrides the default icon',
+  },
 ] as const;
 
 export default accordionProps;
