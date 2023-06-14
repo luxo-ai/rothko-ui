@@ -95,9 +95,6 @@ const componentJsonOverride = `{
     "danger": {
       "color": { "value": '#000' },
     },
-    "basic": {
-      "color": { "value": '#000' },
-    },
   },
   "radio": {
     "border": { "value": '#000' },

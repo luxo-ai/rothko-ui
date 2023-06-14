@@ -7,7 +7,7 @@ const toggleProps = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'React.ReactNode',
     defaultValue: null,
     description: 'Adds a class to the toggle',
   },

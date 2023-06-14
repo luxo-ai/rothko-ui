@@ -11,7 +11,6 @@ export const sizeOptions: Option<RothkoSize>[] = [
 ];
 
 export const kindOptions: Option<RothkoKind>[] = [
-  { id: 'basic', label: 'basic' },
   { id: 'danger', label: 'danger' },
   { id: 'info', label: 'info' },
   { id: 'primary', label: 'primary' },

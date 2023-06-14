@@ -27,8 +27,8 @@ export const SkeletonBuilder = ({
   const clipId = `${uuidRef.current}-clip`;
   const gradientId = `${uuidRef.current}-gradient`;
 
-  const backgroundColor = bgColorProp || 'var(--rothko-basic-300)';
-  const foregroundColor = fgColorProp || 'var(--rothko-basic-200)';
+  const backgroundColor = bgColorProp || 'var(--rothko-skeleton-background)';
+  const foregroundColor = fgColorProp || 'var(--rothko-skeleton-foreground)';
   const animationDuration = `${speed}s`;
 
   return (

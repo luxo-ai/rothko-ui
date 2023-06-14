@@ -45,7 +45,7 @@ export const DropdownContainerDiv = styled.div`
 
   &.disabled {
     cursor: not-allowed;
-    border-color: var(--rothko-basic-transparent-500);
+    opacity: 0.6;
   }
 
   &.empty {

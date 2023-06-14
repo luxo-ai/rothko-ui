@@ -2,14 +2,14 @@ import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import type { CSSProperties } from 'react';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { hideChromeBrowserOutline } from '../../Library/Styles';
 import type { KindProps } from '../../Theme/types';
 import { keyDownFactory } from '../../utils/keyUtils';
 import { Typography } from '../Typography';
 
 type ToggleProps = KindProps & {
-  children?: string;
+  children?: React.ReactNode;
   className?: string;
   disabled?: boolean;
   offIcon?: JSX.Element;
@@ -24,7 +24,7 @@ const Toggle = ({
   children,
   className,
   disabled,
-  kind = 'primary',
+  kind,
   offIcon,
   onChange,
   onIcon,
@@ -65,7 +65,7 @@ const ToggleContainerDiv = styled.div`
   gap: 0.5rem;
 `;
 
-type OuterToogleDivProp = Required<KindProps> & {
+type OuterToogleDivProp = KindProps & {
   $toggled?: boolean;
 };
 
@@ -86,11 +86,16 @@ const OuterToggleDiv = styled.div<OuterToogleDivProp>`
   width: 3rem;
   height: calc(1.4rem + 2px);
 
-  border: 1px solid var(--rothko-basic-300);
+  border: 1px solid var(--rothko-toggle-border);
   border-radius: 50vmin;
 
-  background-color: ${({ $toggled, kind }) =>
-    $toggled ? `var(--rothko-${kind}-400, #000)` : 'rgba(143, 155, 179, 0.16)'};
+  background-color: ${({ $toggled, kind }) => {
+    const unselected = css`var(--rothko-toggle-background, #dee7f5)`;
+    if (!kind) {
+      return $toggled ? 'var(--rothko-toggle-background_selected, #000)' : unselected;
+    }
+    return $toggled ? `var(--rothko-${kind}-400, #000)` : unselected;
+  }}
 
   -webkit-transition: background-color 0.5s ease;
   -moz-transition: background-color 0.5s ease;

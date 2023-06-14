@@ -135,7 +135,6 @@ const labelStyle = css<TextProps>`
   font-weight: bold;
   letter-spacing: 0.0625rem;
   line-height: 0.9375rem;
-  // color: var(--rothko-basic-700);
 `;
 
 const label = styled(body)`
@@ -166,7 +165,7 @@ const linkStyle = css<LinkProps>`
   }
 
   :disabled {
-    color: var(--rothko-basic-500);
+    opacity: 0.7;
   }
 `;
 

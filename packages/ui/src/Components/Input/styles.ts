@@ -23,10 +23,10 @@ export const baseInputStyle = css`
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  background: var(--rothko-basic-transparent-300);
+  background: var(--rothko-input-background);
 
   font-family: var(--rothko-typography-body-regular);
-  color: var(--rothko-color, #000);
+  color: var(--rothko-input-color, #000);
   display: inline-block;
   box-sizing: border-box;
   line-height: 20px;
@@ -36,7 +36,6 @@ export const baseInputStyle = css`
   // text-overflow: ellipsis;
 
   border: none;
-  // border: 1px solid var(--color-border, #000); // #8a8a8a; // var(--basic-500);
   border-radius: 0.125rem; // 2px
 
   ${Object.entries(sizeMap).map(
@@ -61,12 +60,10 @@ export const baseInputStyle = css`
       border-color: var(--rothko-border, #000); // var(--info-500); // var(--info-300);
     }
     :hover:not(:focus):not(.focus) {
-      // background: var(--basic-300);
     }
   }
   :disabled {
     cursor: not-allowed;
-    background: var(--rothko-basic-transparent-200);
-    border-color: var(--rothko-basic-transparent-500);
+    opacity: 0.6;
   }
 `;

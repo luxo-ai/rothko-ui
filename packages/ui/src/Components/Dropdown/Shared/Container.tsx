@@ -5,7 +5,6 @@ import { hideChromeBrowserOutline } from '../../../Library/Styles';
 export const DropdownContainerDiv = styled.div`
   -webkit-tap-highlight-color: transparent;
   ${baseInputStyle} // causing issues before, this helped
-  background: var(--rothko-basic-transparent-100);
 
   position: relative;
   display: flex;
@@ -24,7 +23,6 @@ export const DropdownContainerDiv = styled.div`
   &.disabled {
     cursor: not-allowed;
     opacity: 0.6;
-    // border-color: var(--rothko-basic-transparent-500);
   }
 
   &.empty {
@@ -33,7 +31,7 @@ export const DropdownContainerDiv = styled.div`
 
   &.minimal {
     // background: transparent;
-    border-color: var(--rothko-basic-transparent-100);
+    border-color: var(--rothko-dropdown-border_minimal);
   }
 `;
 

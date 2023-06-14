@@ -7,7 +7,7 @@ const checkboxProps = [
   },
   {
     name: 'children',
-    type: 'string',
+    type: 'React.ReactNode',
     defaultValue: null,
     description: 'Content to be rendered beside the checkbox',
   },

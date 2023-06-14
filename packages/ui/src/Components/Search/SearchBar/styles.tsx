@@ -14,7 +14,6 @@ const searchBarWrapperStyle = css`
   -moz-appearance: none;
   appearance: none;
 
-  background: var(--rothko-basic-transparent-300);
   border-radius: 0.125rem;
 
   &.error:not(:focus):not(.focus) {
@@ -23,7 +22,6 @@ const searchBarWrapperStyle = css`
 
   &.disabled {
     cursor: not-allowed;
-    background: var(--rothko-basic-transparent-200);
     opacity: 0.8;
 
     > input,

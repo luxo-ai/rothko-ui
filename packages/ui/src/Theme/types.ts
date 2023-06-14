@@ -1,7 +1,7 @@
 import type { DeepPartial } from '@rothko-ui/utils';
 
 // ~~ THEME ~~
-const semanticNames = ['success', 'info', 'warning', 'danger', 'basic'] as const;
+const semanticNames = ['success', 'info', 'warning', 'danger'] as const;
 const brandName = ['primary', 'secondary'] as const;
 
 export const rothkoKinds = [...semanticNames, ...brandName] as const;
@@ -114,9 +114,6 @@ type ComponentOverrides = DeepPartial<{
       color: { [TERMINAL_KEY]: string };
     };
     danger: {
-      color: { [TERMINAL_KEY]: string };
-    };
-    basic: {
       color: { [TERMINAL_KEY]: string };
     };
   };

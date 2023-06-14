@@ -24,6 +24,7 @@
     },
     "dropdown": {
       "background": { "value": "#141414" },
+      "border_minimal": { "value": "rgba(188, 199, 223, 0.08)" },
       "multiselect": {
         "text": { "value": "#c42317" },
         "background": { "value": "#000" }
@@ -59,9 +60,6 @@
       },
       "danger": {
         "color": { "value": "#FFF" }
-      },
-      "basic": {
-        "color": { "value": "#000" }
       }
     },
     "radio": {
@@ -101,9 +99,6 @@
       },
       "danger": {
         "color": { "value": "{component.button.danger.color}" }
-      },
-      "basic": {
-        "color": { "value": "{component.button.basic.color}" }
       }
     },
     "box": {
@@ -113,6 +108,23 @@
     "accordion": {
       "border": { "value": "{base.border}" },
       "background": { "value": "#141414" }
+    },
+    "checkbox": {
+      "background": { "value": "#DEE7F5" },
+      "background_selected": { "value": "#c42317" }
+    },
+    "input": {
+      "background": { "value": "rgba(188, 199, 223, 0.24)" },
+      "color": { "value": "{base.color}" }
+    },
+    "skeleton": {
+      "background": { "value": "#DEE7F5" },
+      "foreground": { "value": "#EBF2FB" }
+    },
+    "toggle": {
+      "border": { "value": "#DEE7F5" },
+      "background": { "value": "rgba(143, 155, 179, 0.16)" },
+      "background_selected": { "value": "green" }
     }
   }
 }

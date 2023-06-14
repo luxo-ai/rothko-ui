@@ -9,7 +9,7 @@ import Typography from '../Typography/Typography';
 type CheckboxProps = {
   ariaLabel?: string;
   checked?: boolean;
-  children?: string;
+  children?: React.ReactNode;
   className?: string;
   disabled?: boolean;
   error?: boolean;
@@ -64,7 +64,7 @@ const CheckboxContainerDiv = styled.div`
 
 const CheckboxDiv = styled.div<KindProps>`
   -webkit-tap-highlight-color: transparent;
-  background-color: var(--rothko-basic-300, #dee7f5);
+  background-color: var(--rothko-checkbox-background, #dee7f5);
   cursor: pointer;
 
   width: 1.125rem;
