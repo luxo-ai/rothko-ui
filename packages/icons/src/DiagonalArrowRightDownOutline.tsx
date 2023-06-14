@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { SVGProps, Ref, forwardRef } from 'react';
-
 const SvgDiagonalArrowRightDownOutline = (
   props: SVGProps<SVGSVGElement>,
   ref: Ref<SVGSVGElement>
@@ -10,7 +9,6 @@ const SvgDiagonalArrowRightDownOutline = (
     viewBox="0 0 24 24"
     width="1em"
     height="1em"
-    role="img"
     ref={ref}
     {...props}
   >
@@ -22,6 +20,5 @@ const SvgDiagonalArrowRightDownOutline = (
     </g>
   </svg>
 );
-
 const ForwardRef = forwardRef(SvgDiagonalArrowRightDownOutline);
 export default ForwardRef;

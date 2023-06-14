@@ -1,13 +1,11 @@
 import * as React from 'react';
 import { SVGProps, Ref, forwardRef } from 'react';
-
 const SvgEyeOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     width="1em"
     height="1em"
-    role="img"
     ref={ref}
     {...props}
   >
@@ -15,6 +13,5 @@ const SvgEyeOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) 
     <path d="M12 8.5a3.5 3.5 0 1 0 3.5 3.5A3.5 3.5 0 0 0 12 8.5zm0 5a1.5 1.5 0 1 1 1.5-1.5 1.5 1.5 0 0 1-1.5 1.5z" />
   </svg>
 );
-
 const ForwardRef = forwardRef(SvgEyeOutline);
 export default ForwardRef;

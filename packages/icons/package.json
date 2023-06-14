@@ -6,6 +6,9 @@
     "url": "https://github.com/luxo-ai/rothko-ui",
     "directory": "packages/icons"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "private": false,
   "license": "MIT",
   "author": "luxo-ai <luxo.ai@proton.me>",
@@ -38,5 +41,6 @@
     "rimraf": "^3.0.2",
     "run-s": "^0.0.0",
     "typescript": "^4.7.4"
-  }
+  },
+  "gitHead": "7e8155c87a8039c04c23cc13b268dbb5825c5428"
 }

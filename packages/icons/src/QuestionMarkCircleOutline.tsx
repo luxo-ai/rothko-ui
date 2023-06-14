@@ -1,13 +1,11 @@
 import * as React from 'react';
 import { SVGProps, Ref, forwardRef } from 'react';
-
 const SvgQuestionMarkCircleOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     width="1em"
     height="1em"
-    role="img"
     ref={ref}
     {...props}
   >
@@ -16,6 +14,5 @@ const SvgQuestionMarkCircleOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<S
     <circle cx={12} cy={17} r={1} />
   </svg>
 );
-
 const ForwardRef = forwardRef(SvgQuestionMarkCircleOutline);
 export default ForwardRef;
