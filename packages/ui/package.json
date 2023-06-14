@@ -26,8 +26,8 @@
   "dependencies": {
     "@react-spring/web": "^9.5.2",
     "@rothko-ui/icons": "^1.0.7",
-    "@rothko-ui/tokens": "^1.0.0",
-    "@rothko-ui/utils": "^1.0.0",
+    "@rothko-ui/tokens": "workspace:*",
+    "@rothko-ui/utils": "workspace:*",
     "immutable": "^4.0.0-rc.15",
     "keyboard-key": "^1.1.0",
     "react": "18.2.0",
