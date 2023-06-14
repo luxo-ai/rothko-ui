@@ -8,14 +8,14 @@ type MultiDropdownProps<V extends Value, T> = Omit<
   'multiple' | 'value' | 'onChange' | 'search' | 'noResultsMessage'
 > & {
   /** Current value of dropdown or value array if multiple */
-  value?: V[] | null;
+  values?: V[] | null;
   /** event handler for value change */
   onChange: (v: V[] | null) => void;
 };
 
 function MutiDropdown<V extends Value, T = undefined>({
   onChange,
-  value,
+  values: value,
   ...props
 }: MultiDropdownProps<V, T>) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

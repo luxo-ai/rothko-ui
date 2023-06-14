@@ -4,7 +4,7 @@ import React from 'react';
 export type PropMeta = Readonly<{
   name: string;
   type: string;
-  defaultValue: string | number | null;
+  defaultValue: string | number | null | boolean;
   description: string;
 }>;
 

@@ -17,13 +17,11 @@ const Example: React.FC = () => {
   const multiDropdownOptions: Option<number>[] = [...]; // Define your options here
 
   return (
-    <Dropdown
+    <MultiDropdown
       clearable
-      search
       menuPosition="bottom"
-      multiple
-      value={values}
-      onChange={v => setValues(v as number[])}
+      values={values}
+      onChange={v => setValues(v)}
       options={multiDropdownOptions}
     />
   );
@@ -38,12 +36,10 @@ const Example = () => {
   const multiDropdownOptions = [...]; // Define your options here
 
   return (
-    <Dropdown
+    <MultiDropdown
       clearable
-      search
       menuPosition="bottom"
-      multiple
-      value={values}
+      values={values}
       onChange={v => setValues(v)}
       options={multiDropdownOptions}
     />
@@ -106,7 +102,7 @@ const MultiDropdownCard = () => {
           selectedPostfix={selectedPostfix}
           clearable={clearable}
           label="Mutli Dropdown"
-          value={values}
+          values={values}
           onChange={v => setValues(v)}
           options={multiDropdownOptions}
         />
