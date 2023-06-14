@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/luxo-ai/rothko-ui",
+    "url": "https://github.com/rothko-ui/rothko-ui",
     "directory": "packages/tokens"
   },
   "private": true,

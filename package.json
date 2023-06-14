@@ -1,9 +1,9 @@
 {
   "name": "rothko-ui",
   "version": "1.0.0",
-  "repository": "github:luxo-ai/rothko-ui",
+  "repository": "github:rothko-ui/rothko-ui",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@luxo-ai"
+    "registry": "https://npm.pkg.github.com/@rothko-ui"
   },
   "license": "MIT",
   "author": "luxo-ai <luxo.ai@proton.me>",
