@@ -11,11 +11,11 @@
   "scripts": {
     "start:demo": "lerna --scope=demo run dev --stream",
     "build:demo": "yarn build:shared && yarn && lerna --scope=demo run build --stream",
-    "add:demo": "yarn add $1 -w demo",
-    "add:ui": "yarn add $1 -w @rothko-ui/ui",
-    "add:utils": "yarn add $1 -w @rothko-ui/utils",
-    "add:icons": "yarn add $1 -w @rothko-ui/icons",
-    "add:tokens": "yarn add $1 -w @rothko-ui/tokens",
+    "add:demo": "yarn workspace demo add $1",
+    "add:ui": "yarn workspace @rothko-ui/ui add $1",
+    "add:utils": "yarn workspace @rothko-ui/utils add $1",
+    "add:icons": "yarn workspace @rothko-ui/icons add $1",
+    "add:tokens": "yarn workspace @rothko-ui/tokens add $1",
     "build:ui": "lerna --scope=@rothko-ui/ui run build --stream",
     "build:tokens": "lerna --scope=@rothko-ui/tokens run build --stream",
     "build:icons": "lerna --scope=@rothko-ui/icons run build --stream",
@@ -33,9 +33,9 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.10",
-    "lerna": "^6.6.2",
+    "lerna": "^7.0.1",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.3.2",
-    "run-s": "^0.0.0",
     "ts-node": "^10.2.1"
   },
   "workspaces": {
