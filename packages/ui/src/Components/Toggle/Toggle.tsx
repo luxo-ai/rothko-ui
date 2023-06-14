@@ -95,7 +95,7 @@ const OuterToggleDiv = styled.div<OuterToogleDivProp>`
       return $toggled ? 'var(--rothko-toggle-background_selected, #000)' : unselected;
     }
     return $toggled ? `var(--rothko-${kind}-400, #000)` : unselected;
-  }}
+  }};
 
   -webkit-transition: background-color 0.5s ease;
   -moz-transition: background-color 0.5s ease;
