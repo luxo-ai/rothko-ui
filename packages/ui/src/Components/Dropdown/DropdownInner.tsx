@@ -55,6 +55,7 @@ function DropdownInner<V extends Value, T = undefined>({
     selectOne,
     setQuery,
   } = useSelect({
+    disabled,
     multiple,
     onChange,
     onDelete,

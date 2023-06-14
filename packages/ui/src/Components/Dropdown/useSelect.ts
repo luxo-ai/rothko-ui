@@ -11,6 +11,7 @@ type HookArgs<V, T> = {
   onChange: (v: V | V[] | null) => void;
   value?: V | V[] | null;
   multiple?: boolean;
+  disabled?: boolean;
   search?: boolean | QueryMatchFn<V, T>;
   openReverse?: boolean;
   onDelete?: (v: V) => void;
@@ -18,7 +19,7 @@ type HookArgs<V, T> = {
 
 const useSelect = <V extends Value, T = undefined>(args: HookArgs<V, T>) => {
   const debug = useDebuggerContext('useSelect');
-  const { multiple, onChange, onDelete, search, value } = args;
+  const { multiple, onChange, onDelete, search, value, disabled } = args;
 
   const { optIdx, moveOptionIdx, options, resetOptionIdx, setOptions } = useOptions({
     reverse: args.openReverse,
@@ -61,12 +62,13 @@ const useSelect = <V extends Value, T = undefined>(args: HookArgs<V, T>) => {
 
   const deleteOne = useCallback(
     (toDelete: V) => {
+      if (disabled) return;
       debug('deleteOne');
       const newValue = multiple ? [...selectedValues].filter(v => v !== toDelete) : null;
       onChange(newValue);
       onDelete?.(toDelete);
     },
-    [onChange, onDelete, multiple, selectedValues, args.options]
+    [onChange, onDelete, multiple, selectedValues, args.options, disabled]
   );
 
   const optionLookup = useMemo(

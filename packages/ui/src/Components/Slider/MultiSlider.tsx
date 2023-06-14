@@ -74,6 +74,7 @@ const MultiSlider = ({
           min={min}
           value={lower}
           onChange={v => {
+            if (disabled) return;
             if (v + BUFFER >= upper) return;
             onChange([v, upper]);
           }}
@@ -94,6 +95,7 @@ const MultiSlider = ({
           min={min}
           value={upper}
           onChange={v => {
+            if (disabled) return;
             if (v - BUFFER <= lower) return;
             onChange([lower, v]);
           }}

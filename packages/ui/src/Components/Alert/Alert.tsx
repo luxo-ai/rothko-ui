@@ -26,7 +26,7 @@ Alert.displayName = 'Alert';
 
 const AlertContainerDiv = styled.div<KindProps>`
   ${textChildrenStyle}
-  background-color: ${({ kind = 'danger' }) => `var(--rothko-${kind}-transparent-300)`};
+  background-color: ${({ kind = 'danger' }) => `var(--rothko-${kind}-400)`};
   padding: 1rem 1.25rem;
   font-size: 1rem;
 `;

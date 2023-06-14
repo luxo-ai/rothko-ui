@@ -68,7 +68,10 @@ const Slider = ({
           kind={kind}
           max={max}
           min={min}
-          onChange={v => onChange(v)}
+          onChange={v => {
+            if (disabled) return;
+            onChange(v);
+          }}
           value={localVal}
         />
         <SliderRangeDiv $disabled={disabled} kind={kind} style={{ width: getOffset(localVal) }} />
