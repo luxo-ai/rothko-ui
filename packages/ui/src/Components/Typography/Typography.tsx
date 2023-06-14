@@ -213,7 +213,7 @@ const code = styled.code<KindProps>`
   // background: #ffe5f8;
   // font-family: var(--rothko-fonts-mono);
   // font-size:
-  white-space: pre-wrap;
+  white-space: nowrap;
   transition: opacity 0.25s ease 0s;
 `;
 
