@@ -3,11 +3,9 @@ import AccordionOrBox from '../../AccordionOrBox';
 
 type CutomizationState = {
   clearable: boolean;
-  closeOnEsc: boolean;
   disabled: boolean;
   menuPosition: 'top' | 'bottom' | 'auto';
-  minimal: boolean;
-  selectedPrefix?: string;
+  bordered: boolean;
   placeholder?: string;
 };
 
@@ -18,26 +16,21 @@ type CustomizationAction =
         | 'CHECK_CLOSE_ON_ESC'
         | 'CHECK_DISABLED'
         | 'CHECK_SEARCH'
-        | 'CHECK_MINIMAL';
+        | 'CHECK_BORDERED';
     }
   | { type: 'SET_MENU_POSITION'; menuPosition: 'top' | 'bottom' | 'auto' }
-  | { type: 'SET_SELECTED_PREFIX'; selectedPrefix: string }
   | { type: 'SET_PLACEHOLDER'; placeholder: string };
 
 export const customizationsReducer = (state: CutomizationState, action: CustomizationAction) => {
   switch (action.type) {
     case 'CHECK_CLEARABLE':
       return { ...state, clearable: !state.clearable };
-    case 'CHECK_CLOSE_ON_ESC':
-      return { ...state, closeOnEsc: !state.closeOnEsc };
     case 'CHECK_DISABLED':
       return { ...state, disabled: !state.disabled };
-    case 'CHECK_MINIMAL':
-      return { ...state, minimal: !state.minimal };
+    case 'CHECK_BORDERED':
+      return { ...state, bordered: !state.bordered };
     case 'SET_MENU_POSITION':
       return { ...state, menuPosition: action.menuPosition };
-    case 'SET_SELECTED_PREFIX':
-      return { ...state, selectedPrefix: action.selectedPrefix };
     case 'SET_PLACEHOLDER':
       return { ...state, placeholder: action.placeholder };
     default:
@@ -51,8 +44,7 @@ type MultiDropdownCustomizationsProps = {
 };
 
 const MultiDropdownCustomizations = ({ dispatch, state }: MultiDropdownCustomizationsProps) => {
-  const { clearable, closeOnEsc, disabled, minimal, menuPosition, selectedPrefix, placeholder } =
-    state;
+  const { clearable, disabled, bordered, menuPosition, placeholder } = state;
   return (
     <AccordionOrBox fullWidth boxTitleVariant="h3" title="Customizations">
       <Flex padding="0.2rem" marginBottom="0.3rem" flexWrap="wrap" columnGap="4rem" rowGap="2rem">
@@ -74,19 +66,11 @@ const MultiDropdownCustomizations = ({ dispatch, state }: MultiDropdownCustomiza
           </Checkbox>
           <Checkbox
             kind="secondary"
-            onChange={() => dispatch({ type: 'CHECK_CLOSE_ON_ESC' })}
-            checked={closeOnEsc}
+            onChange={() => dispatch({ type: 'CHECK_BORDERED' })}
+            checked={bordered}
             style={{ marginTop: '1rem' }}
           >
-            closeOnEsc
-          </Checkbox>
-          <Checkbox
-            kind="secondary"
-            onChange={() => dispatch({ type: 'CHECK_MINIMAL' })}
-            checked={minimal}
-            style={{ marginTop: '1rem' }}
-          >
-            minimal
+            bordered
           </Checkbox>
         </MaxWidth>
         <MaxWidth maxW="15rem">
@@ -115,14 +99,6 @@ const MultiDropdownCustomizations = ({ dispatch, state }: MultiDropdownCustomiza
           label="placeholder"
           onChange={e => dispatch({ type: 'SET_PLACEHOLDER', placeholder: e.currentTarget.value })}
           value={placeholder}
-        />
-        <Typography.label style={{ marginTop: '1.5rem' }}>Selected Prefix</Typography.label>
-        <Input
-          label="selectedPrefix"
-          onChange={e =>
-            dispatch({ type: 'SET_SELECTED_PREFIX', selectedPrefix: e.currentTarget.value })
-          }
-          value={selectedPrefix}
         />
       </MaxWidth>
     </AccordionOrBox>

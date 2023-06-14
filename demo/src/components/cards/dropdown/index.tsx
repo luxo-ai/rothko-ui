@@ -68,26 +68,25 @@ const dropdownOptions = [
 ];
 
 const SingleDropdownCard = () => {
-  const [selected, setSelected] = useState<number>();
+  const [selected, setSelected] = useState<number | null>(null);
   const isMobileOrTablet = useIsMobileOrTablet();
   const [state, dispatch] = useReducer(customizationsReducer, {
     disabled: false,
     clearable: false,
-    closeOnEsc: true,
     search: false,
     menuPosition: 'bottom',
-    minimal: false,
+    bordered: true,
     placeholder: 'Select an option...',
   });
 
   const {
     disabled,
     clearable,
-    closeOnEsc,
     search,
     menuPosition,
-    minimal,
+    bordered,
     selectedPrefix,
+    selectedPostfix,
     placeholder,
   } = state;
 
@@ -100,16 +99,16 @@ const SingleDropdownCard = () => {
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Dropdown
           clearable={clearable}
-          closeOnEsc={closeOnEsc}
           disabled={disabled}
           menuPosition={menuPosition}
-          minimal={minimal}
+          bordered={bordered}
           placeholder={placeholder}
           search={search}
           selectedPrefix={selectedPrefix}
+          selectedPostfix={selectedPostfix}
           label="Dropdown"
           value={selected}
-          onChange={v => setSelected(v as number)}
+          onChange={v => setSelected(v)}
           options={dropdownOptions}
         />
       </Container>

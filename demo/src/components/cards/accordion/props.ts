@@ -36,6 +36,12 @@ const accordionProps = [
     description: 'Overrides the default icon',
   },
   {
+    name: 'withIcons',
+    type: 'boolean',
+    defaultValue: 'true',
+    description: 'Adds icons to the component',
+  },
+  {
     name: 'spaced',
     type: 'boolean',
     defaultValue: 'true',

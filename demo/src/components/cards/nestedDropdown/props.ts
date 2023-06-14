@@ -41,12 +41,7 @@ const nestedDropdownProps = [
     defaultValue: null,
     description: 'OnFocus handler',
   },
-  {
-    name: 'closeOnEsc',
-    type: 'boolean',
-    defaultValue: 'true',
-    description: 'Whether or not to close dropdown on ESC (escape)',
-  },
+
   {
     name: 'disabled',
     type: 'boolean',
@@ -76,6 +71,12 @@ const nestedDropdownProps = [
     type: 'string',
     defaultValue: null,
     description: 'If the dropdown has a label',
+  },
+  {
+    name: 'bordered',
+    type: 'boolean',
+    defaultValue: true,
+    description: 'Is this a minimal dropdown',
   },
 ] as const;
 

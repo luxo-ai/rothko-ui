@@ -6,6 +6,7 @@ import type { IconOverride } from './types';
 type IAccordionContext = {
   bordered?: boolean;
   iconOverride?: IconOverride;
+  withIcons?: boolean;
   kind?: RothkoKind;
   onClickPanel: (id: string) => void;
   selectedPanels: ImSet<string>;

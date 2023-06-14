@@ -53,12 +53,7 @@ const multiDropdownProps = [
     defaultValue: null,
     description: 'Can you clear the selection',
   },
-  {
-    name: 'closeOnEsc',
-    type: 'boolean',
-    defaultValue: 'true',
-    description: 'Whether or not to close dropdown on ESC (escape)',
-  },
+
   {
     name: 'disabled',
     type: 'boolean',
@@ -76,12 +71,6 @@ const multiDropdownProps = [
     type: 'RenderOption<V, T>',
     defaultValue: null,
     description: 'Custom method for rendering option',
-  },
-  {
-    name: 'noResultsMessage',
-    type: 'React.ReactNode',
-    defaultValue: "'No results'",
-    description: 'Message to display when there are no results',
   },
   {
     name: 'className',
@@ -102,16 +91,22 @@ const multiDropdownProps = [
     description: 'Open dropdown position',
   },
   {
-    name: 'minimal',
+    name: 'bordered',
     type: 'boolean',
-    defaultValue: null,
+    defaultValue: true,
     description: 'Is this a minimal dropdown',
   },
   {
     name: 'selectedPrefix',
     type: 'string',
-    defaultValue: null,
+    defaultValue: "''",
     description: 'Prefix of a selected item',
+  },
+  {
+    name: 'selectedPostfix',
+    type: 'string',
+    defaultValue: "''",
+    description: 'Postfix of a selected item',
   },
   {
     name: 'style',

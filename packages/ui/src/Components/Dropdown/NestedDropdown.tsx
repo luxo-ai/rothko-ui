@@ -7,61 +7,50 @@ import { ItemText, LabelText } from '../../Library/Common';
 import { useDebuggerContext } from '../../Library/DebuggerContext';
 import useDropdownMenu from '../../Library/Hooks/useMenu';
 import { DefaultRenderOption } from '../../Library/RenderOption';
-import type { FocusHandler, NestedOption, Option, RenderOption, Value } from '../../Library/types';
+import type { NestedOption, Option, RenderOption, Value } from '../../Library/types';
 import { directionMap } from '../../utils/keyUtils';
 import BackLinkButton from '../Button/BackLinkButton';
 import Typography from '../Typography/Typography';
 import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } from './Shared';
+import type { DropdownInnerProps } from './types';
 import type { StackOption } from './useNestedOptions';
 import useNestedOptions from './useNestedOptions';
 
-type NestedDropdownProps<V extends Value> = {
-  id?: string;
+type NestedDropdownProps<V extends Value> = Pick<
+  DropdownInnerProps<V, undefined>,
+  | 'placeholder'
+  | 'bordered'
+  | 'menuPosition'
+  | 'label'
+  | 'style'
+  | 'noResultsMessage'
+  | 'onOpen'
+  | 'error'
+  | 'onFocus'
+  | 'onBlur'
+  | 'onDelete'
+  | 'clearable'
+  | 'className'
+  | 'disabled'
+> & {
   /** Current value of dropdown or value array if multiple */
   value?: V | null;
-  /** placeholder in input */
-  placeholder?: string;
   /** dropdown options */
   options: NestedOption<V>[];
   /** event handler for value change */
   onChange: (v: V | null) => void;
-  /** onBlur handler  */
-  onBlur?: FocusHandler;
-  /** onOpen handler */
-  onOpen?: () => void;
-  /** onFocus handler */
-  onFocus?: FocusHandler;
-  /** whether or not to close dropdown on ESC (escape) */
-  closeOnEsc?: boolean;
-  /** is the dropdown disabled */
-  disabled?: boolean;
-  /** did an error occurr. alert user when true */
-  error?: boolean;
   /** custom method for rendering option */
   renderOption?: RenderOption<V, { hasMore: boolean }>;
-  /* class names of outer wrapper */
-  className?: string;
-  /** if the dropdown has a label */
-  label?: string;
-  /** is this a minimal dropdown */
-  minimal?: boolean;
-  clearable?: boolean;
-  /** prefix of a selected item */
-  selectedPrefix?: string;
-  /** open dropdown position */
-  menuPosition?: 'top' | 'bottom' | 'auto';
 };
 
 function NestedDropdown<V extends Value>({
   className,
   clearable,
-  closeOnEsc = true,
   disabled,
   error,
-  id,
   label,
   menuPosition = 'bottom',
-  minimal,
+  bordered = true,
   onBlur,
   onChange,
   onFocus,
@@ -69,7 +58,6 @@ function NestedDropdown<V extends Value>({
   options,
   placeholder = 'Select',
   renderOption: RenderOpt = DefaultRenderOption,
-  selectedPrefix = '',
   value,
 }: NestedDropdownProps<V>) {
   const debug = useDebuggerContext('<NestedDropdown />');
@@ -145,7 +133,7 @@ function NestedDropdown<V extends Value>({
       return onSelect(option);
     }
     if (code === keyboardKey.Escape) {
-      if (!closeOnEsc) return;
+      // if (!closeOnEsc) return;
       e.preventDefault();
       return closeMenu();
     }
@@ -165,7 +153,7 @@ function NestedDropdown<V extends Value>({
     error,
     disabled,
     focus,
-    minimal,
+    minimal: !bordered,
     empty: !hasOptions,
   });
 
@@ -177,7 +165,6 @@ function NestedDropdown<V extends Value>({
     <div className={className}>
       {label && <LabelText>{label}</LabelText>}
       <DropdownContainerDiv
-        id={id}
         ref={containerRef}
         tabIndex={0}
         onFocus={onFocusHandler}
@@ -189,10 +176,7 @@ function NestedDropdown<V extends Value>({
         <TextContainerDiv className={classes({ disabled })} tabIndex={-1}>
           {isNil(value) && <ItemText placeHolder>{placeholder}</ItemText>}
           {!isNil(value) && (
-            <ItemText>
-              {selectedPrefix}
-              {pathToCurrentOption.map(o => o.label).join(' / ')}
-            </ItemText>
+            <ItemText>{pathToCurrentOption.map(o => o.label).join(' / ')}</ItemText>
           )}
         </TextContainerDiv>
         {!canClear ? (

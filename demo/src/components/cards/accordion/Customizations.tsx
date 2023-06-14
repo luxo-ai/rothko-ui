@@ -7,13 +7,19 @@ type CutomizationState = {
   bordered: boolean;
   spaced: boolean;
   withKind: boolean;
+  withIcons: boolean;
   kind: RothkoKind;
   mutuallyExclusive: boolean;
 };
 
 type CustomizationAction =
   | {
-      type: 'TOGGLE_BORDERED' | 'TOGGLE_WITH_KIND' | 'TOGGLE_MUTUALLY_EXCLUSIVE' | 'TOGGLE_SPACED';
+      type:
+        | 'TOGGLE_BORDERED'
+        | 'TOGGLE_WITH_KIND'
+        | 'TOGGLE_MUTUALLY_EXCLUSIVE'
+        | 'TOGGLE_SPACED'
+        | 'TOGGLE_WITH_ICONS';
     }
   | { type: 'SET_KIND'; kind: RothkoKind };
 
@@ -25,6 +31,8 @@ export const customizationsReducer = (state: CutomizationState, action: Customiz
       return { ...state, spaced: !state.spaced };
     case 'TOGGLE_WITH_KIND':
       return { ...state, withKind: !state.withKind };
+    case 'TOGGLE_WITH_ICONS':
+      return { ...state, withIcons: !state.withIcons };
     case 'TOGGLE_MUTUALLY_EXCLUSIVE':
       return { ...state, mutuallyExclusive: !state.mutuallyExclusive };
     case 'SET_KIND':
@@ -40,7 +48,7 @@ type AccordionCustomizationsProps = {
 };
 
 const AccordionCustomizations = ({ dispatch, state }: AccordionCustomizationsProps) => {
-  const { bordered, mutuallyExclusive, withKind, kind, spaced } = state;
+  const { bordered, mutuallyExclusive, withKind, kind, spaced, withIcons } = state;
   return (
     <AccordionOrBox boxTitleVariant="h3" title="Customizations">
       <Flex padding="0.2rem" marginBottom="0.3rem" flexWrap="wrap" columnGap="4rem" rowGap="2rem">
@@ -87,6 +95,14 @@ const AccordionCustomizations = ({ dispatch, state }: AccordionCustomizationsPro
             style={{ marginTop: '1rem' }}
           >
             mutuallyExclusive
+          </Toggle>
+          <Toggle
+            kind="secondary"
+            onChange={() => dispatch({ type: 'TOGGLE_WITH_ICONS' })}
+            toggled={withIcons}
+            style={{ marginTop: '1rem' }}
+          >
+            withIcons
           </Toggle>
         </MaxWidth>
       </Flex>

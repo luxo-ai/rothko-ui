@@ -14,6 +14,7 @@ type AccordionProps = {
   mutuallyExclusive?: boolean;
   spaced?: boolean;
   style?: React.CSSProperties;
+  withIcons?: boolean;
 };
 
 const Accordion = ({
@@ -25,6 +26,7 @@ const Accordion = ({
   mutuallyExclusive,
   spaced = true,
   style,
+  withIcons = true,
 }: AccordionProps) => {
   const [selectedPanels, setSelectedPanels] = useState(ImSet<string>());
 
@@ -48,6 +50,7 @@ const Accordion = ({
         onClickPanel,
         selectedPanels,
         spaced,
+        withIcons,
       }}
     >
       <AccordionGroupDiv $spaced={spaced} style={style} className={className}>

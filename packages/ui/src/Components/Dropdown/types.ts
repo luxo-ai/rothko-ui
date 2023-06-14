@@ -22,8 +22,6 @@ export type DropdownInnerProps<V extends Value, T> = {
   onDelete?: (v: V) => void;
   /** can you clear the selection */
   clearable?: boolean;
-  /** whether or not to close dropdown on ESC (escape) */
-  closeOnEsc?: boolean;
   /** is the dropdown disabled */
   disabled?: boolean;
   /** did an error occurr. alert user when true */
@@ -42,9 +40,12 @@ export type DropdownInnerProps<V extends Value, T> = {
   label?: string;
   /** open dropdown position */
   menuPosition?: 'top' | 'bottom' | 'auto';
-  /** is this a minimal dropdown */
-  minimal?: boolean;
+  /** does the dropdown have a border, default: true */
+  bordered?: boolean;
   /** prefix of a selected item */
   selectedPrefix?: string;
+  /** postfix of a selected item */
+  selectedPostfix?: string;
+  /** inline style overrides */
   style?: React.CSSProperties;
 };

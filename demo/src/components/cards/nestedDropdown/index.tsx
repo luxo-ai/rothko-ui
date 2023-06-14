@@ -78,14 +78,12 @@ const NestedDropdownCard = () => {
   const [state, dispatch] = useReducer(customizationsReducer, {
     disabled: false,
     clearable: false,
-    closeOnEsc: true,
     menuPosition: 'bottom',
-    minimal: false,
+    bordered: true,
     placeholder: 'Select an option...',
   });
 
-  const { disabled, clearable, closeOnEsc, menuPosition, minimal, selectedPrefix, placeholder } =
-    state;
+  const { disabled, clearable, menuPosition, bordered, placeholder } = state;
 
   return (
     <Card
@@ -97,12 +95,10 @@ const NestedDropdownCard = () => {
         <NestedDropdown
           label="Nested Dropdown"
           disabled={disabled}
-          closeOnEsc={closeOnEsc}
           placeholder={placeholder}
           menuPosition={menuPosition}
-          minimal={minimal}
+          bordered={bordered}
           clearable={clearable}
-          selectedPrefix={selectedPrefix}
           value={value}
           onChange={v => setValue(v)}
           options={nestedOptions}

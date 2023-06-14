@@ -21,13 +21,23 @@ type AccordionPanelProps = {
   labelProps?: LabelProps;
   style?: React.CSSProperties;
   title: string | JSX.Element;
+  withIcon?: boolean;
 };
 
-const AccordionPanel = ({ children, className, labelProps, style, title }: AccordionPanelProps) => {
-  const { selectedPanels, onClickPanel, bordered, kind, iconOverride, spaced } = useAccordion();
+const AccordionPanel = ({
+  children,
+  className,
+  labelProps,
+  style,
+  title,
+  withIcon: withIconProp,
+}: AccordionPanelProps) => {
+  const { bordered, iconOverride, kind, onClickPanel, selectedPanels, spaced, withIcons } =
+    useAccordion();
 
   const panelIdRef = useRef(uuid.v4());
   const isPanelSelected = selectedPanels.has(panelIdRef.current);
+  const withIcon = withIconProp || withIcons;
 
   const iconColor = kind
     ? `var(--rothko-${kind}-500, #000)`
@@ -50,7 +60,9 @@ const AccordionPanel = ({ children, className, labelProps, style, title }: Accor
             onClickPanel(panelIdRef.current);
           }}
         >
-          <AccordionIcon isOpen={isPanelSelected} color={iconColor} iconOverride={iconOverride} />
+          {withIcon && (
+            <AccordionIcon isOpen={isPanelSelected} color={iconColor} iconOverride={iconOverride} />
+          )}
           {typeof title === 'string' ? (
             <DefaultLabelText kind={kind}>{title}</DefaultLabelText>
           ) : (

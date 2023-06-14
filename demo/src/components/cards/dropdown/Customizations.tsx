@@ -3,44 +3,40 @@ import AccordionOrBox from '../../AccordionOrBox';
 
 type CutomizationState = {
   clearable: boolean;
-  closeOnEsc: boolean;
   disabled: boolean;
   search: boolean;
   menuPosition: 'top' | 'bottom' | 'auto';
-  minimal: boolean;
+  bordered: boolean;
   selectedPrefix?: string;
+  selectedPostfix?: string;
   placeholder?: string;
 };
 
 type CustomizationAction =
   | {
-      type:
-        | 'CHECK_CLEARABLE'
-        | 'CHECK_CLOSE_ON_ESC'
-        | 'CHECK_DISABLED'
-        | 'CHECK_SEARCH'
-        | 'CHECK_MINIMAL';
+      type: 'CHECK_CLEARABLE' | 'CHECK_DISABLED' | 'CHECK_SEARCH' | 'CHECK_BORDERED';
     }
   | { type: 'SET_MENU_POSITION'; menuPosition: 'top' | 'bottom' | 'auto' }
   | { type: 'SET_SELECTED_PREFIX'; selectedPrefix: string }
+  | { type: 'SET_SELECTED_POSTFIX'; selectedPostfix: string }
   | { type: 'SET_PLACEHOLDER'; placeholder: string };
 
 export const customizationsReducer = (state: CutomizationState, action: CustomizationAction) => {
   switch (action.type) {
     case 'CHECK_CLEARABLE':
       return { ...state, clearable: !state.clearable };
-    case 'CHECK_CLOSE_ON_ESC':
-      return { ...state, closeOnEsc: !state.closeOnEsc };
     case 'CHECK_DISABLED':
       return { ...state, disabled: !state.disabled };
     case 'CHECK_SEARCH':
       return { ...state, search: !state.search };
-    case 'CHECK_MINIMAL':
-      return { ...state, minimal: !state.minimal };
+    case 'CHECK_BORDERED':
+      return { ...state, bordered: !state.bordered };
     case 'SET_MENU_POSITION':
       return { ...state, menuPosition: action.menuPosition };
     case 'SET_SELECTED_PREFIX':
       return { ...state, selectedPrefix: action.selectedPrefix };
+    case 'SET_SELECTED_POSTFIX':
+      return { ...state, selectedPostfix: action.selectedPostfix };
     case 'SET_PLACEHOLDER':
       return { ...state, placeholder: action.placeholder };
     default:
@@ -56,12 +52,12 @@ type DropdownCustomizationsProps = {
 const DropdownCustomizations = ({ dispatch, state }: DropdownCustomizationsProps) => {
   const {
     clearable,
-    closeOnEsc,
     disabled,
     search,
-    minimal,
+    bordered,
     menuPosition,
     selectedPrefix,
+    selectedPostfix,
     placeholder,
   } = state;
   return (
@@ -85,14 +81,6 @@ const DropdownCustomizations = ({ dispatch, state }: DropdownCustomizationsProps
           </Checkbox>
           <Checkbox
             kind="secondary"
-            onChange={() => dispatch({ type: 'CHECK_CLOSE_ON_ESC' })}
-            checked={closeOnEsc}
-            style={{ marginTop: '1rem' }}
-          >
-            closeOnEsc
-          </Checkbox>
-          <Checkbox
-            kind="secondary"
             onChange={() => dispatch({ type: 'CHECK_SEARCH' })}
             checked={search}
             style={{ marginTop: '1rem' }}
@@ -101,11 +89,11 @@ const DropdownCustomizations = ({ dispatch, state }: DropdownCustomizationsProps
           </Checkbox>
           <Checkbox
             kind="secondary"
-            onChange={() => dispatch({ type: 'CHECK_MINIMAL' })}
-            checked={minimal}
+            onChange={() => dispatch({ type: 'CHECK_BORDERED' })}
+            checked={bordered}
             style={{ marginTop: '1rem' }}
           >
-            minimal
+            bordered
           </Checkbox>
         </MaxWidth>
         <MaxWidth maxW="15rem">
@@ -142,6 +130,14 @@ const DropdownCustomizations = ({ dispatch, state }: DropdownCustomizationsProps
             dispatch({ type: 'SET_SELECTED_PREFIX', selectedPrefix: e.currentTarget.value })
           }
           value={selectedPrefix}
+        />
+        <Typography.label style={{ marginTop: '1.5rem' }}>Selected Postfix</Typography.label>
+        <Input
+          label="selectedPostfix"
+          onChange={e =>
+            dispatch({ type: 'SET_SELECTED_POSTFIX', selectedPostfix: e.currentTarget.value })
+          }
+          value={selectedPostfix}
         />
       </MaxWidth>
     </AccordionOrBox>

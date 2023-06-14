@@ -17,14 +17,13 @@ import type { DropdownInnerProps } from './types';
 import useSelect from './useSelect';
 
 function DropdownInner<V extends Value, T = undefined>({
+  bordered = true,
   className,
   clearable,
-  closeOnEsc = true,
   disabled,
   error,
   label,
   menuPosition = 'bottom',
-  minimal,
   multiple,
   noResultsMessage = 'No results',
   onBlur,
@@ -36,6 +35,7 @@ function DropdownInner<V extends Value, T = undefined>({
   placeholder = 'Select',
   renderOption: RenderOpt = DefaultRenderOption,
   search,
+  selectedPostfix = '',
   selectedPrefix = '',
   style,
   value,
@@ -137,7 +137,7 @@ function DropdownInner<V extends Value, T = undefined>({
     }
 
     if (code === keyboardKey.Escape) {
-      if (!closeOnEsc) return;
+      // if (!closeOnEsc) return;
       e.preventDefault();
       return closeMenu();
     }
@@ -166,7 +166,7 @@ function DropdownInner<V extends Value, T = undefined>({
     error,
     disabled,
     focus,
-    minimal,
+    minimal: !bordered,
     empty: !hasOptions,
   });
 
@@ -211,7 +211,11 @@ function DropdownInner<V extends Value, T = undefined>({
                 const opt = optionLookup[v];
                 return (
                   <MultiSelectLabelDiv tabIndex={-1} key={opt.id}>
-                    <MultiSelectItemText>{opt.label}</MultiSelectItemText>
+                    <MultiSelectItemText>
+                      {selectedPrefix}
+                      {opt.label}
+                      {selectedPostfix}
+                    </MultiSelectItemText>
                     <PhantomButton
                       $displayFlex
                       type="button"
@@ -236,6 +240,7 @@ function DropdownInner<V extends Value, T = undefined>({
             <ItemText>
               {selectedPrefix}
               {optionLookup[value].label}
+              {selectedPostfix}
             </ItemText>
           )}
         </TextContainerDiv>

@@ -5,7 +5,7 @@ import type { DropdownInnerProps } from './types';
 
 type MultiDropdownProps<V extends Value, T> = Omit<
   DropdownInnerProps<V, T>,
-  'multiple' | 'value' | 'onChange' | 'search'
+  'multiple' | 'value' | 'onChange' | 'search' | 'noResultsMessage'
 > & {
   /** Current value of dropdown or value array if multiple */
   value?: V[] | null;
@@ -13,7 +13,11 @@ type MultiDropdownProps<V extends Value, T> = Omit<
   onChange: (v: V[] | null) => void;
 };
 
-function MutiDropdown<V extends Value, T>({ onChange, value, ...props }: MultiDropdownProps<V, T>) {
+function MutiDropdown<V extends Value, T = undefined>({
+  onChange,
+  value,
+  ...props
+}: MultiDropdownProps<V, T>) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return <DropdownInner {...props} value={value} onChange={onChange as any} multiple />;
 }

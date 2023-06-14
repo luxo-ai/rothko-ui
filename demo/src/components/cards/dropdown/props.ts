@@ -108,16 +108,22 @@ const dropdownProps = [
     description: 'Open dropdown position',
   },
   {
-    name: 'minimal',
+    name: 'bordered',
     type: 'boolean',
-    defaultValue: null,
+    defaultValue: true,
     description: 'Is this a minimal dropdown',
   },
   {
     name: 'selectedPrefix',
     type: 'string',
-    defaultValue: null,
+    defaultValue: "''",
     description: 'Prefix of a selected item',
+  },
+  {
+    name: 'selectedPostfix',
+    type: 'string',
+    defaultValue: "''",
+    description: 'Postfix of a selected item',
   },
   {
     name: 'style',

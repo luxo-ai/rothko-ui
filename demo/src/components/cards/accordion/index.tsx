@@ -55,6 +55,7 @@ const AccordionCard = () => {
     kind: 'primary',
     mutuallyExclusive: false,
     spaced: true,
+    withIcons: true,
   });
 
   return (
@@ -65,10 +66,12 @@ const AccordionCard = () => {
     >
       <section>
         <Accordion
+          iconOverride={null}
           kind={state.withKind ? state.kind : undefined}
           mutuallyExclusive={state.mutuallyExclusive}
           bordered={state.bordered}
           spaced={state.spaced}
+          withIcons={state.withIcons}
         >
           <AccordionPanel title="Label 1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor

@@ -34,7 +34,7 @@ import React, { useState } from 'react';
 import { Dropdown } from '@rothko-ui/ui';
 
 const Example = () => {
-  const [values, setValues] = useState([]);
+  const [values, setValues] = useState(null);
   const multiDropdownOptions = [...]; // Define your options here
 
   return (
@@ -68,20 +68,27 @@ const multiDropdownOptions = [
 ];
 
 const MultiDropdownCard = () => {
-  const [values, setValues] = useState<number[]>([]);
+  const [values, setValues] = useState<number[] | null>([]);
 
   const isMobileOrTablet = useIsMobileOrTablet();
+
   const [state, dispatch] = useReducer(customizationsReducer, {
     disabled: false,
     clearable: false,
-    closeOnEsc: true,
     menuPosition: 'bottom',
-    minimal: false,
+    bordered: true,
     placeholder: 'Select an option...',
   });
 
-  const { disabled, clearable, closeOnEsc, menuPosition, minimal, selectedPrefix, placeholder } =
-    state;
+  const {
+    disabled,
+    clearable,
+    menuPosition,
+    bordered,
+    selectedPrefix,
+    selectedPostfix,
+    placeholder,
+  } = state;
 
   return (
     <Card
@@ -92,12 +99,11 @@ const MultiDropdownCard = () => {
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <MultiDropdown
           disabled={disabled}
-          closeOnEsc={closeOnEsc}
           menuPosition={menuPosition}
-          minimal={minimal}
+          bordered={bordered}
           placeholder={placeholder}
           selectedPrefix={selectedPrefix}
-          multiple
+          selectedPostfix={selectedPostfix}
           clearable={clearable}
           label="Mutli Dropdown"
           value={values}

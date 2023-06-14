@@ -13,7 +13,11 @@ type DropdownProps<V extends Value, T> = Omit<
   onChange: (v: V | null) => void;
 };
 
-function Dropdown<V extends Value, T>({ onChange, value, ...props }: DropdownProps<V, T>) {
+function Dropdown<V extends Value, T = undefined>({
+  onChange,
+  value,
+  ...props
+}: DropdownProps<V, T>) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return <DropdownInner {...props} value={value} onChange={onChange as any} multiple={false} />;
 }
