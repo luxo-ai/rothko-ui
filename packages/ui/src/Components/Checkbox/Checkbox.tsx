@@ -13,7 +13,6 @@ type CheckboxProps = {
   className?: string;
   disabled?: boolean;
   error?: boolean;
-  id?: string;
   kind?: RothkoKind;
   onChange: (val: boolean) => void;
   style?: React.CSSProperties;
@@ -27,7 +26,6 @@ const Checkbox = ({
   className,
   disabled,
   error,
-  id,
   kind,
   onChange,
   style,
@@ -45,7 +43,6 @@ const Checkbox = ({
         aria-disabled={!!disabled}
         aria-label={ariaLabel}
         className={classes({ error, checked, disabled, ['with-check']: withCheck })}
-        id={id}
         kind={kind}
         onClick={() => clickCheckbox()}
         onKeyDown={onKeyDown}

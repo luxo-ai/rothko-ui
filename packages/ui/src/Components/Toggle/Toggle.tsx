@@ -17,6 +17,7 @@ type ToggleProps = KindProps & {
   onIcon?: JSX.Element;
   style?: CSSProperties;
   toggled?: boolean;
+  error?: boolean;
 };
 
 const Toggle = ({
@@ -29,6 +30,7 @@ const Toggle = ({
   onIcon,
   style,
   toggled,
+  error,
 }: ToggleProps) => {
   const handleChange = () => {
     if (disabled) return;
@@ -41,7 +43,7 @@ const Toggle = ({
         $toggled={toggled}
         aria-checked={!!toggled}
         aria-label="toggle"
-        className={classes({ disabled })}
+        className={classes({ disabled, error })}
         kind={kind}
         onClick={handleChange}
         onKeyDown={onKeyDown}
@@ -104,6 +106,10 @@ const OuterToggleDiv = styled.div<OuterToogleDivProp>`
       border-radius: 50vmin;
       border: 0.125rem solid ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
     }
+  }
+
+  &.error:not(:focus):not(.focus) {
+    background-color: var(--rothko-danger-transparent-500);
   }
 
   &.disabled {

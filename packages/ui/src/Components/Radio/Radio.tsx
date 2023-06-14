@@ -40,7 +40,7 @@ const Radio = ({
         aria-label="radio"
         aria-checked={!!selected}
         aria-disabled={!!disabled}
-        className={classes({ disabled })}
+        className={classes({ disabled, error })}
       >
         <RadioInnerDiv kind={kind} className={classes({ selected, error, disabled })} />
       </RadioOutlineDiv>
@@ -93,7 +93,8 @@ const RadioInnerDiv = styled.div<KindProps>`
   }
 
   &.error {
-    background-color: var(--rothko-error-500, #e60000);
+    background: var(--rothko-danger-300);
+    border-color: var(--rothko-danger-500);
   }
 
   &.disabled {

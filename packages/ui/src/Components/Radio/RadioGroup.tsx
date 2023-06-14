@@ -1,4 +1,3 @@
-import type { Dictionary } from '@rothko-ui/utils';
 import React from 'react';
 import styled from 'styled-components';
 import { Grid } from '../../Layout';
@@ -21,7 +20,7 @@ type RadioGroupProps<V extends Value> = KindProps & {
   options: Option<V, { disabled?: boolean } | undefined>[];
   style?: React.CSSProperties;
   value?: V | null;
-  errors?: Dictionary<V, boolean>;
+  error?: boolean;
   label?: string;
   disabled?: boolean;
 };
@@ -37,7 +36,7 @@ function RadioGroup<V extends Value>({
   value,
   kind,
   onChange,
-  errors,
+  error,
   label,
   disabled,
 }: RadioGroupProps<V>) {
@@ -52,7 +51,6 @@ function RadioGroup<V extends Value>({
         columnGap={columnGap}
       >
         {options.map(o => {
-          const error = Boolean(errors?.[o.id]);
           const dataOptions = 'data' in o ? o?.data : undefined;
           const isDisabled = Boolean(dataOptions?.disabled) || disabled;
           const isSelected = o.id === value;
