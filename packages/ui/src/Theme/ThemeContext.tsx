@@ -21,7 +21,7 @@ const pathToCssVariable = (path: string[], prefix: string = CSS_VARIABLE_PREFIX)
 };
 // END TEMPORARY HACKs
 
-const createThemeOverrideStyle = (overrides: Nullable<ThemeOverrides[ThemeMode]>) => {
+const createThemeOverrideStyle = (overrides?: ThemeOverrides[ThemeMode]) => {
   if (!overrides) return overrides;
 
   const recursiveCollect = (
@@ -88,7 +88,10 @@ export const ThemeContextProvider = ({
       <div
         id="theme-root"
         className={mode}
-        style={inlineOverrides?.reduce((acc, curr) => ({ ...acc, ...curr }))}
+        style={inlineOverrides?.reduce(
+          (acc, curr) => ({ ...acc, ...curr }),
+          {} as React.CSSProperties
+        )}
       >
         {children}
       </div>
