@@ -17,8 +17,8 @@
   "types": "dist/index.d.ts",
   "source": "src/index.tsx",
   "scripts": {
-    "build": "tsup src --dts",
-    "build:dev": "pnpm build:fast -- --watch",
+    "build": "microbundle --jsx React.createElement --format modern,cjs",
+    "build:dev": "microbundle watch --no-compress --jsx React.createElement --format modern,cjs",
     "prepare": "run-s build",
     "lint": "eslint ./src --ext .js,.ts,.jsx,.tsx",
     "lint:fix": "eslint ./src --ext .js,.ts,.jsx,.tsx --fix"
@@ -48,7 +48,6 @@
     "@types/uuid": "^9.0.1",
     "microbundle": "^0.13.3",
     "npm-run-all": "^4.1.5",
-    "tsup": "^6.7.0",
     "typescript": "^4.4.2"
   },
   "tsup": {
