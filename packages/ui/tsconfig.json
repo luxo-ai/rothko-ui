@@ -19,6 +19,6 @@
     "lib": ["dom"]
   },
   "compileOnSave": true,
-  "exclude": ["**/*.spec.ts", "node_modules", "dist"],
+  "exclude": ["**/*.spec.ts", "node_modules", "dist", "*.md"],
   "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx"]
 }
