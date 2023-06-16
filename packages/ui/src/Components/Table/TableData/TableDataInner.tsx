@@ -1,4 +1,4 @@
-import { classes } from 'utils';
+import { classes } from '@rothko-ui/utils';
 import React from 'react';
 import { TableContextConsumer } from '../TableContext';
 import { isStringHeader } from '../helpers';

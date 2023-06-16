@@ -1,5 +1,5 @@
 import { CloseOutline } from '@rothko-ui/icons';
-import { classes } from 'utils';
+import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';

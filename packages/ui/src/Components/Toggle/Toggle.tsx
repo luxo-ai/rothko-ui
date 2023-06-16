@@ -1,4 +1,4 @@
-import { classes } from 'utils';
+import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import type { CSSProperties } from 'react';
 import React from 'react';

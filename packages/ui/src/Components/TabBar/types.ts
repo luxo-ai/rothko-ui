@@ -1,4 +1,4 @@
-import type { KeyLike } from 'utils';
+import type { KeyLike } from '@rothko-ui/utils';
 
 export type RenderTab = () => JSX.Element;
 

@@ -1,4 +1,4 @@
-import { classes, times } from 'utils';
+import { classes, times } from '@rothko-ui/utils';
 import React, { useEffect, useMemo, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';

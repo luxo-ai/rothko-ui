@@ -1,5 +1,5 @@
 import { ChevronDownOutline, CloseOutline } from '@rothko-ui/icons';
-import { classes, isArray, isNil } from 'utils';
+import { classes, isArray, isNil } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';

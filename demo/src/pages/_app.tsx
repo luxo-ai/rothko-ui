@@ -1,4 +1,4 @@
-import type { Dictionary } from 'utils';
+import type { Dictionary } from '@rothko-ui/utils';
 import cookie from 'cookie';
 import MobileDetect from 'mobile-detect';
 import type { AppContext, AppProps } from 'next/app';

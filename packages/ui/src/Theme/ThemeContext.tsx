@@ -1,4 +1,4 @@
-import type { NestedRecord, Nullable } from 'utils';
+import type { NestedRecord, Nullable } from '@rothko-ui/utils';
 import React, {
   createContext,
   useCallback,

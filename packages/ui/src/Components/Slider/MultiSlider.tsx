@@ -1,4 +1,4 @@
-import type { Nullable } from 'utils';
+import type { Nullable } from '@rothko-ui/utils';
 import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import type { RothkoKind } from '../../Theme';

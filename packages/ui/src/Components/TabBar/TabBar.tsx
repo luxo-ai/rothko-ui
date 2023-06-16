@@ -1,4 +1,4 @@
-import type { KeyLike } from 'utils';
+import type { KeyLike } from '@rothko-ui/utils';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import type { KindProps } from '../../Theme/types';

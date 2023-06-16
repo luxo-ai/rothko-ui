@@ -1,4 +1,4 @@
-import { isString } from 'utils';
+import { isString } from '@rothko-ui/utils';
 import React from 'react';
 import styled from 'styled-components';
 import { textChildrenStyle } from '../../Library/Styles';

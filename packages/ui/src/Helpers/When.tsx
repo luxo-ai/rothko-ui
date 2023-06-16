@@ -1,4 +1,4 @@
-import type { Obj } from 'utils';
+import type { Obj } from '@rothko-ui/utils';
 import React from 'react';
 
 type TruthyValues = Obj | unknown[] | boolean | number | string | symbol;

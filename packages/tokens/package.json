@@ -6,7 +6,7 @@
     "url": "https://github.com/rothko-ui/rothko-ui",
     "directory": "packages/tokens"
   },
-  "private": true,
+  "private": false,
   "license": "MIT",
   "author": "luxo-ai <luxo.ai@proton.me>",
   "description": "style tokens for rothko-ui",

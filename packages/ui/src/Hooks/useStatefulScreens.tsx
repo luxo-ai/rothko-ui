@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Obj } from 'utils';
-import { cloneDeep, isFunction, last } from 'utils';
+import type { Obj } from '@rothko-ui/utils';
+import { cloneDeep, isFunction, last } from '@rothko-ui/utils';
 import React, { useReducer } from 'react';
 import { useDebuggerContext } from '../Library/DebuggerContext';
 

@@ -6,7 +6,7 @@
     "url": "https://github.com/rothko-ui/rothko-ui",
     "directory": "packages/utils"
   },
-  "private": true,
+  "private": false,
   "license": "MIT",
   "author": "luxo-ai <luxo.ai@proton.me>",
   "main": "dist/index.js",

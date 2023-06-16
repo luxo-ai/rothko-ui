@@ -1,5 +1,5 @@
-import type { Nullable } from 'utils';
-import { useIsMounted } from 'utils';
+import type { Nullable } from '@rothko-ui/utils';
+import { useIsMounted } from '@rothko-ui/utils';
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { hideChromeBrowserOutline } from '../../../Library/Styles';

@@ -1,4 +1,4 @@
-import { debounce, identityFn } from 'utils';
+import { debounce, identityFn } from '@rothko-ui/utils';
 import { useCallback, useEffect, useState } from 'react';
 import { useLRUCache } from '../../Library/Hooks/useCache';
 import useOptions from '../../Library/Hooks/useOptions';

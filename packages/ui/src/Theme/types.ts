@@ -1,4 +1,4 @@
-import type { DeepPartial } from 'utils';
+import type { DeepPartial } from '@rothko-ui/utils';
 
 // ~~ THEME ~~
 const semanticNames = ['success', 'info', 'warning', 'danger'] as const;
