@@ -1,6 +1,6 @@
 import { animated, useTransition } from '@react-spring/web';
 import { CloseOutline } from '@rothko-ui/icons';
-import { classes } from '@rothko-ui/utils';
+import { classes } from 'utils';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { ShadedBackdrop } from '../../Library/Common';

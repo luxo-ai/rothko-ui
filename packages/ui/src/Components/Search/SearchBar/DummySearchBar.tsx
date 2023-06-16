@@ -1,4 +1,4 @@
-import type { Nullable } from '@rothko-ui/utils';
+import type { Nullable } from 'utils';
 import React from 'react';
 import styled from 'styled-components';
 import { ItemText } from '../../../Library/Common';

@@ -1,4 +1,4 @@
-import { classes } from '@rothko-ui/utils';
+import { classes } from 'utils';
 import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import styled from 'styled-components';

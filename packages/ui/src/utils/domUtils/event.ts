@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Nullable, Obj } from '@rothko-ui/utils';
+import type { Nullable, Obj } from 'utils';
 import type React from 'react';
 
 const touchesKeys = ['touches', 'targetTouches', 'changedTouches'] as const;

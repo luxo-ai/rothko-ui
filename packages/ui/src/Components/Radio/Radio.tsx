@@ -1,4 +1,4 @@
-import { classes, isString } from '@rothko-ui/utils';
+import { classes, isString } from 'utils';
 import React from 'react';
 import styled from 'styled-components';
 import type { KindProps, RothkoKind } from '../../Theme';

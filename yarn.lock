@@ -2433,12 +2433,6 @@
   dependencies:
     style-dictionary "^3.7.1"
 
-"@rothko-ui/utils@file:packages/utils":
-  version "1.0.0"
-  dependencies:
-    lodash "^4.17.21"
-    react "17.0.2"
-
 "@sigstore/protobuf-specs@^0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@sigstore/protobuf-specs/-/protobuf-specs-0.1.0.tgz#957cb64ea2f5ce527cc9cf02a096baeb0d2b99b4"
@@ -8968,6 +8962,12 @@ util@^0.10.3:
   integrity sha512-0Pm9hTQ3se5ll1XihRic3FDIku70C+iHUdT/W926rSgHV5QgXsYbKZN8MSC3tJtSkhuROzvsQjAaFENRXr+19A==
   dependencies:
     inherits "2.0.3"
+
+"utils@file:packages/utils":
+  version "1.0.0"
+  dependencies:
+    lodash "^4.17.21"
+    react "17.0.2"
 
 uuid@^9.0.0:
   version "9.0.0"

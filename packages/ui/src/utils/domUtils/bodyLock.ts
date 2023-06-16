@@ -3,8 +3,8 @@
  * Adaption of: https://github.com/willmcpo/body-scroll-lock
  * The decision to adapt was to get more control and fix mobie issues found in the original solution
  */
-import type { Nullable } from '@rothko-ui/utils';
-import { isNil } from '@rothko-ui/utils';
+import type { Nullable } from 'utils';
+import { isNil } from 'utils';
 import type React from 'react';
 import { parseDecimal } from '../utils';
 import { getStyle, scrollBarWidth } from './dimensions';
