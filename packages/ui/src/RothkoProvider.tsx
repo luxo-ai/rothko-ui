@@ -15,7 +15,7 @@ type RothkoProviderProps = {
   themeOverrides?: ThemeOverrides;
 };
 
-// proxy provider for theme and debugger contexts
+// proxy provider for theme and debugger contextss
 export const RothkoProvider = ({
   children,
   debugMode,
