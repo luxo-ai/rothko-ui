@@ -12,6 +12,7 @@ import {
   enableBodyScroll,
 } from '../../utils/domUtils';
 import { DrawerContext } from './DrawerContext';
+import { textChildrenStyle } from '../../Library/Styles';
 
 const TABLET_OR_MOBILE_MAX_WIDTH_PX = 750;
 const DEFAULT_DRAWER_WIDTH_PX = 350;
@@ -120,6 +121,8 @@ const AnimatedDrawerContainerDiv = animated(styled.div`
   z-index: 999999;
   width: ${DEFAULT_DRAWER_WIDTH_PX}px;
   overflow-y: auto;
+
+  ${textChildrenStyle}
 
   @media only screen and (max-width: ${TABLET_OR_MOBILE_MAX_WIDTH_PX}px) {
     width: calc(100% - 2 * 1.5rem);

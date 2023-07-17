@@ -95,7 +95,7 @@ function OptionGroup<V extends Value>({
           const localAccessoryRight = dataOptions?.accessoryRight;
 
           const svgColor = isSelected
-            ? `var(--rothko-button-${kind}-color, #000)`
+            ? `var(--rothko-${kind}-color, #000)`
             : `var(--rothko-${kind}-500, #000)`;
 
           const classNames = {
@@ -207,12 +207,12 @@ const OptionButton = styled.button<Required<KindProps>>`
   }
 
   // fix later to work with theming
-  background: #ffffff;
+  // background: #ffffff;
   color: ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
 
   &.selected {
     background: ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
-    color: ${({ kind }) => `var(--rothko-button-${kind}-color, #000)`};
+    color: ${({ kind }) => `var(--rothko-${kind}-color, #000)`};
   }
 
   &.with-radius {

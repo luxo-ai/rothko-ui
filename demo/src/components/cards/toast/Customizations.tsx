@@ -45,7 +45,12 @@ const ToastCustomizations = ({ state, dispatch }: ToastCustomizationsProps) => {
         rowGap="1.75rem"
       >
         <MaxWidth maxW="15rem">
-          <Checkbox onChange={() => dispatch({ type: 'CHECK_WITH_KIND' })} checked={withKind}>
+          <Checkbox
+            kind="secondary"
+            withCheck
+            onChange={() => dispatch({ type: 'CHECK_WITH_KIND' })}
+            checked={withKind}
+          >
             with kind
           </Checkbox>
           <RadioGroup

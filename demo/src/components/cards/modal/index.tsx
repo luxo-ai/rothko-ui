@@ -1,4 +1,4 @@
-import { ArrowCircleUp } from '@rothko-ui/icons';
+import { ArrowCircleUp, ArrowUpOutline } from '@rothko-ui/icons';
 import { Button, Container, Modal } from '@rothko-ui/ui';
 import { useReducer, useState } from 'react';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
@@ -68,9 +68,9 @@ const ModalCard = () => {
       <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
         <Button
           accessoryLeft={({ size, color }) => (
-            <ArrowCircleUp width={size} height={size} fill={color} />
+            <ArrowUpOutline width={size} height={size} fill={color} />
           )}
-          kind="danger"
+          kind="primary"
           onClick={() => setOpen(true)}
         >
           Open modal

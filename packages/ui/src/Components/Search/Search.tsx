@@ -275,6 +275,7 @@ const SearchMenu = styled(MenuBase)`
   background-color: var(--rothko-search-background, #141414);
 
   & li {
+    padding: 1rem;
     &:hover,
     &:focus,
     &.selected {

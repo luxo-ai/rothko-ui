@@ -1,6 +1,9 @@
 import { css } from 'styled-components';
+import { baseInputStyle } from '../../Input/styles';
 
 const searchBarWrapperStyle = css`
+  -webkit-tap-highlight-color: transparent;
+  ${baseInputStyle} // causing issues before, this helped
   position: relative;
 
   display: flex;

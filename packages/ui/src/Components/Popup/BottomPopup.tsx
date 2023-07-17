@@ -11,6 +11,7 @@ import {
   disableBodyScroll,
   enableBodyScroll,
 } from '../../utils/domUtils';
+import { textChildrenStyle } from '../../Library/Styles';
 
 type PopupProps = {
   children: React.ReactNode;
@@ -116,6 +117,8 @@ const PopupContainerDiv = styled.div`
   will-change: transform, opacity, height;
   transition-property: transform;
   transition-timing-function: ease-out;
+
+  ${textChildrenStyle}
 `;
 
 const AnimatedPopupContainer = animated(PopupContainerDiv);

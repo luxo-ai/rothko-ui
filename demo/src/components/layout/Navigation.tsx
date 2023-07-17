@@ -53,10 +53,10 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
           <WidthGeqOnly threshold={750}>
             <Button
               size="s"
-              kind="warning"
+              kind="primary"
               style={{ height: '100%' }}
               // style={{ background: 'white', color: 'black' }}
-              accessoryLeft={({ size }) => <Heart fill="black" height={size} width={size} />}
+              accessoryLeft={({ size, color }) => <Heart fill={color} height={size} width={size} />}
               onClick={() => router.push('/sponsor')}
             >
               Sponsor
@@ -64,7 +64,7 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
           </WidthGeqOnly>
           {!withoutToggle && (
             <Toggle
-              kind="info"
+              kind="success"
               toggled={mode === 'dark'}
               onChange={() => toggleMode()}
               /* make react node or react FC -- same for button */

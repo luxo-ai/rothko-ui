@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { phantomButtonStyle } from '../../Library/PhantomButton';
 import type { KindProps } from '../../Theme/types';
 import { Typography } from '../Typography';
+import { semanticTextChildrenStyle, textChildrenStyle } from '../../Library/Styles';
 
 type TagAppearance = 'filled' | 'outline';
 
@@ -13,9 +14,11 @@ type TagProps = KindProps & {
   onClose?: () => void;
 };
 
-const Tag = ({ appearance = 'filled', children, kind, onClose }: TagProps) => {
+const Tag = ({ appearance = 'filled', children, kind = 'info', onClose }: TagProps) => {
   const iconColor =
-    appearance === 'outline' ? `var(--rothko-${kind}-500, #000)` : `var(--rothko-color, #FFF)`;
+    appearance === 'outline'
+      ? `var(--rothko-${kind}-500, #000)`
+      : `var(--rothko-${kind}-color, #FFF)`;
 
   return (
     <TagContainerDiv appearance={appearance} kind={kind}>
@@ -33,7 +36,7 @@ const Tag = ({ appearance = 'filled', children, kind, onClose }: TagProps) => {
   );
 };
 
-type ContainerProps = KindProps & {
+type ContainerProps = Required<KindProps> & {
   appearance: TagAppearance;
 };
 
@@ -55,13 +58,12 @@ const TagContainerDiv = styled.div<ContainerProps>`
     }
     return appearance === 'filled' ? `var(--rothko-background, #FFF)` : 'transparent';
   }};
-  color: ${({ kind, appearance }) => {
+
+  ${({ kind, appearance }) => {
     if (kind) {
-      return appearance === 'filled'
-        ? `var(--rothko-color, #000)`
-        : `var(--rothko-${kind}-500, #000)`;
+      return appearance === 'filled' ? semanticTextChildrenStyle : textChildrenStyle;
     }
-    return `var(--rothko-color, #000)`;
+    return textChildrenStyle;
   }};
 
   border: 1px solid

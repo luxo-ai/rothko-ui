@@ -40,7 +40,7 @@ const ModalCustomizations = ({ dispatch, state }: ModalCustomizationsProps) => {
         <MaxWidth maxW="15rem">
           <RadioGroup
             maxCol={2}
-            kind="info"
+            kind="secondary"
             label="Size"
             onChange={size =>
               dispatch({

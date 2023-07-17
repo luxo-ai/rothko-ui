@@ -4,7 +4,7 @@ import Card from '../Card';
 import { CodeLanguage } from '../CodeExample';
 import drawerCopy from './copy';
 import drawerProps from './props';
-import { ArrowCircleRight } from '@rothko-ui/icons';
+import { ArrowCircleRight, ArrowRightOutline } from '@rothko-ui/icons';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `
@@ -58,9 +58,9 @@ const DrawerCard = () => {
       <Container maxWidth="11rem">
         <Button
           accessoryLeft={({ size, color }) => (
-            <ArrowCircleRight width={size} height={size} fill={color} />
+            <ArrowRightOutline width={size} height={size} fill={color} />
           )}
-          kind="secondary"
+          kind="primary"
           onClick={() => setDrawerOpen(true)}
         >
           Open Drawer

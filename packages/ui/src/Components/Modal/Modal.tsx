@@ -17,6 +17,7 @@ import {
   removeEvent,
 } from '../../utils/domUtils';
 import Typography from '../Typography/Typography';
+import { textChildrenStyle } from '../../Library/Styles';
 
 const bodyStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
@@ -197,18 +198,7 @@ const ModalContainerDiv = styled.div`
   transition-property: transform, opacity;
   transition-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
 
-  & > h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  span,
-  code {
-    margin-top: 0;
-    color: var(--rothko-color, #000);
-  }
+  ${textChildrenStyle}
 
   & > svg {
     fill: var(--rothko-color, #000);

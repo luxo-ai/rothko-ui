@@ -53,7 +53,11 @@ const MultiSliderCustomizations = ({ state, dispatch }: MultiSliderCustomization
         rowGap="1.75rem"
       >
         <MaxWidth maxW="10rem">
-          <Toggle onChange={() => dispatch({ type: 'TOGGLE_WITH_KIND' })} toggled={withKind}>
+          <Toggle
+            kind="secondary"
+            onChange={() => dispatch({ type: 'TOGGLE_WITH_KIND' })}
+            toggled={withKind}
+          >
             with kind
           </Toggle>
           <RadioGroup
@@ -68,6 +72,7 @@ const MultiSliderCustomizations = ({ state, dispatch }: MultiSliderCustomization
             style={{ marginTop: '1.5rem' }}
           />
           <Checkbox
+            withCheck
             kind="secondary"
             checked={disabled}
             style={{ marginTop: '1rem' }}
@@ -76,6 +81,7 @@ const MultiSliderCustomizations = ({ state, dispatch }: MultiSliderCustomization
             disabled
           </Checkbox>
           <Checkbox
+            withCheck
             kind="secondary"
             checked={showValue}
             style={{ marginTop: '1rem' }}

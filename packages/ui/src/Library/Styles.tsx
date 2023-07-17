@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+import type { KindProps } from '../Theme';
 
 export const unselectableStyle = css`
   -webkit-touch-callout: none; /* iOS Safari */
@@ -29,5 +30,19 @@ export const textChildrenStyle = css`
   span,
   code {
     color: var(--rothko-color, #000);
+  }
+`;
+
+export const semanticTextChildrenStyle = css<Required<KindProps>>`
+  & > h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  code {
+    color: ${({ kind }) => `var(--rothko-${kind}-color, #000)`};
   }
 `;

@@ -1,4 +1,4 @@
-import { ArrowUpward } from '@rothko-ui/icons';
+import { ArrowUpward, ArrowUpOutline } from '@rothko-ui/icons';
 import { BottomPopup, Button, Container, Typography } from '@rothko-ui/ui';
 import { useState } from 'react';
 import Card from '../Card';
@@ -56,7 +56,7 @@ const BottomPopupCard = () => {
       <Container as="section" maxWidth="11rem">
         <Button
           accessoryLeft={({ size, color }) => (
-            <ArrowUpward width={size} height={size} fill={color} />
+            <ArrowUpOutline width={size} height={size} fill={color} />
           )}
           onClick={() => setOpen(true)}
         >

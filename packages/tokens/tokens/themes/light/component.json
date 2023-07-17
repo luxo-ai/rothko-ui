@@ -42,26 +42,6 @@
     "tabBar": {
       "border": { "value": "#000" }
     },
-    "button": {
-      "primary": {
-        "color": { "value": "#000" }
-      },
-      "secondary": {
-        "color": { "value": "#FFF" }
-      },
-      "success": {
-        "color": { "value": "{base.color}" }
-      },
-      "info": {
-        "color": { "value": "#FFF" }
-      },
-      "warning": {
-        "color": { "value": "#000" }
-      },
-      "danger": {
-        "color": { "value": "#FFF" }
-      }
-    },
     "radio": {
       "border": { "value": "#DEE7F5" },
       "background": { "value": "#EBF2FB" },

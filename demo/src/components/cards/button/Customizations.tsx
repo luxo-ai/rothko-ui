@@ -81,6 +81,7 @@ const ButtonCustomizations = ({ state, dispatch }: ButtonCustomizationsProps) =>
             options={shapeOptions}
           />
           <Checkbox
+            withCheck
             kind="secondary"
             onChange={() => dispatch({ type: 'CHECK_LOADING' })}
             checked={loading}
@@ -89,6 +90,7 @@ const ButtonCustomizations = ({ state, dispatch }: ButtonCustomizationsProps) =>
             loading
           </Checkbox>
           <Checkbox
+            withCheck
             kind="secondary"
             onChange={() => dispatch({ type: 'CHECK_DISABLED' })}
             checked={disabled}
@@ -97,6 +99,7 @@ const ButtonCustomizations = ({ state, dispatch }: ButtonCustomizationsProps) =>
             disabled
           </Checkbox>
           <Checkbox
+            withCheck
             kind="secondary"
             onChange={() => dispatch({ type: 'CHECK_ALERT_ON_CLICK' })}
             checked={alertOnClick}

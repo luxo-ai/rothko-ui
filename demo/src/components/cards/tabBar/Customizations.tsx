@@ -45,7 +45,11 @@ const TabBarCustomizations = ({ state, dispatch }: TabBarCustomizationsProps) =>
         rowGap="1.75rem"
       >
         <MaxWidth maxW="10rem">
-          <Toggle onChange={() => dispatch({ type: 'TOGGLE_WITH_KIND' })} toggled={withKind}>
+          <Toggle
+            kind="secondary"
+            onChange={() => dispatch({ type: 'TOGGLE_WITH_KIND' })}
+            toggled={withKind}
+          >
             with kind
           </Toggle>
           <RadioGroup

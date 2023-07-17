@@ -100,7 +100,7 @@ const Button: React.FC<ButtonProps> = ({
   const iconColor =
     appearance === 'outline'
       ? (`var(--rothko-${kind}-500, #000)` as const)
-      : (`var(--rothko-button-${kind}-color, #000)` as const);
+      : (`var(--rothko-${kind}-color, #000)` as const);
 
   useEffect(() => {
     if (!childrenContainerRef.current) return;
@@ -186,7 +186,7 @@ export const buttonStyle = css<BaseButtonProps>`
   color: ${({ appearance, kind }) =>
     appearance === 'outline'
       ? `var(--rothko-${kind}-500, #000)`
-      : `var(--rothko-button-${kind}-color, #000)`};
+      : `var(--rothko-${kind}-color, #000)`};
 
   display: inline-flex;
   align-items: center;

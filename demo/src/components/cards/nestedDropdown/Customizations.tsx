@@ -50,6 +50,7 @@ const MultiDropdownCustomizations = ({ dispatch, state }: MultiDropdownCustomiza
       <Flex padding="0.2rem" marginBottom="0.3rem" flexWrap="wrap" columnGap="4rem" rowGap="2rem">
         <MaxWidth maxW="15rem">
           <Checkbox
+            withCheck
             kind="secondary"
             onChange={() => dispatch({ type: 'CHECK_DISABLED' })}
             checked={disabled}
@@ -57,6 +58,7 @@ const MultiDropdownCustomizations = ({ dispatch, state }: MultiDropdownCustomiza
             disabled
           </Checkbox>
           <Checkbox
+            withCheck
             kind="secondary"
             onChange={() => dispatch({ type: 'CHECK_CLEARABLE' })}
             checked={clearable}
@@ -65,6 +67,7 @@ const MultiDropdownCustomizations = ({ dispatch, state }: MultiDropdownCustomiza
             clearable
           </Checkbox>
           <Checkbox
+            withCheck
             kind="secondary"
             onChange={() => dispatch({ type: 'CHECK_BORDERED' })}
             checked={bordered}
@@ -76,7 +79,7 @@ const MultiDropdownCustomizations = ({ dispatch, state }: MultiDropdownCustomiza
         <MaxWidth maxW="15rem">
           <RadioGroup
             maxCol={2}
-            kind="info"
+            kind="secondary"
             label="menu Position"
             onChange={menuPosition =>
               dispatch({

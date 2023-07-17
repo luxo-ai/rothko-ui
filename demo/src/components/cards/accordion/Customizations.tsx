@@ -54,6 +54,7 @@ const AccordionCustomizations = ({ dispatch, state }: AccordionCustomizationsPro
       <Flex padding="0.2rem" marginBottom="0.3rem" flexWrap="wrap" columnGap="4rem" rowGap="2rem">
         <MaxWidth maxW="15rem">
           <Checkbox
+            withCheck
             kind="secondary"
             onChange={() => dispatch({ type: 'TOGGLE_WITH_KIND' })}
             checked={withKind}

@@ -65,6 +65,7 @@ const DropdownCustomizations = ({ dispatch, state }: DropdownCustomizationsProps
       <Flex padding="0.2rem" marginBottom="0.3rem" flexWrap="wrap" columnGap="4rem" rowGap="2rem">
         <MaxWidth maxW="15rem">
           <Checkbox
+            withCheck
             kind="secondary"
             onChange={() => dispatch({ type: 'CHECK_DISABLED' })}
             checked={disabled}
@@ -72,6 +73,7 @@ const DropdownCustomizations = ({ dispatch, state }: DropdownCustomizationsProps
             disabled
           </Checkbox>
           <Checkbox
+            withCheck
             kind="secondary"
             onChange={() => dispatch({ type: 'CHECK_CLEARABLE' })}
             checked={clearable}
@@ -80,6 +82,7 @@ const DropdownCustomizations = ({ dispatch, state }: DropdownCustomizationsProps
             clearable
           </Checkbox>
           <Checkbox
+            withCheck
             kind="secondary"
             onChange={() => dispatch({ type: 'CHECK_SEARCH' })}
             checked={search}
@@ -88,6 +91,7 @@ const DropdownCustomizations = ({ dispatch, state }: DropdownCustomizationsProps
             search
           </Checkbox>
           <Checkbox
+            withCheck
             kind="secondary"
             onChange={() => dispatch({ type: 'CHECK_BORDERED' })}
             checked={bordered}
@@ -99,7 +103,7 @@ const DropdownCustomizations = ({ dispatch, state }: DropdownCustomizationsProps
         <MaxWidth maxW="15rem">
           <RadioGroup
             maxCol={2}
-            kind="info"
+            kind="secondary"
             label="menu Position"
             onChange={menuPosition =>
               dispatch({

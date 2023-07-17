@@ -68,6 +68,7 @@ const RadioCustomizations = ({ state, dispatch }: RadioCustomizationsProps) => {
       </Flex>
       <MaxWidth maxW="10rem" style={{ marginTop: '1.5rem' }}>
         <Dropdown
+          bordered={false}
           label="maxCol"
           onChange={v => dispatch({ type: 'SET_MAX_COL', maxCol: v as number })}
           options={[1, 2, 3, 4, 5].map(v => ({ id: v, label: String(v) }))}

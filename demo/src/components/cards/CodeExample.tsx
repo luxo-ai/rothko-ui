@@ -37,6 +37,7 @@ const CodeExample = ({
           <OptionGroup
             maxCol={2}
             optionGap="0.5rem"
+            kind="primary"
             size="s"
             value={expanded}
             options={[

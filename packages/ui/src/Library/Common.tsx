@@ -80,7 +80,8 @@ export const MenuBase = styled.div`
   }
 
   &.pop-out {
-    margin: 0 0 2rem 0;
+    // margin: 0 0 2rem 0;
+    margin: 0;
     height: 100%;
     max-height: 100vh;
   }

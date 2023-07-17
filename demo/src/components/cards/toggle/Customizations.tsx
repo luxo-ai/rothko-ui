@@ -44,7 +44,12 @@ const ToggleCustomizations = ({ state, dispatch }: ToggleCustomizationsProps) =>
         rowGap="1.75rem"
       >
         <MaxWidth maxW="15rem">
-          <Checkbox onChange={() => dispatch({ type: 'CHECK_WITH_KIND' })} checked={withKind}>
+          <Checkbox
+            kind="secondary"
+            withCheck
+            onChange={() => dispatch({ type: 'CHECK_WITH_KIND' })}
+            checked={withKind}
+          >
             with kind
           </Checkbox>
           <RadioGroup
@@ -61,6 +66,7 @@ const ToggleCustomizations = ({ state, dispatch }: ToggleCustomizationsProps) =>
         </MaxWidth>
       </Flex>
       <Toggle
+        kind="secondary"
         toggled={disabled}
         onChange={() => dispatch({ type: 'TOGGLE_DISABLED' })}
         style={{ marginTop: '1.5rem' }}
