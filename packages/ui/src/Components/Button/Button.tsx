@@ -252,12 +252,8 @@ const StyledButton = styled.button<BaseButtonProps>`
   }
 
   :disabled {
-    background: ${({ appearance, kind }) =>
-      appearance === 'outline' ? css`transparent` : `var(--rothko-${kind}-transparent-500, #000)`};
-    border-color: ${({ appearance, kind }) =>
-      appearance !== 'outline' ? css`transparent` : `var(--rothko-${kind}-transparent-500, #000)`};
     cursor: not-allowed;
-    opacity: 0.75;
+    opacity: 0.65;
   }
 `;
 
