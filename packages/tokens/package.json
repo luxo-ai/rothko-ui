@@ -50,5 +50,6 @@
   "files": [
     "dist/index.js",
     "build/*.css"
-  ]
+  ],
+  "gitHead": "30bb22ae12f98cb5da2743d4d3a82bc01e3ed502"
 }

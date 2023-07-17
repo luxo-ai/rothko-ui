@@ -1,7 +1,6 @@
 import { capitalize, compact, flatten } from './lodashProxy';
 import type { Nullable } from './types';
 
-export * from './hooks';
 export * from './lodashProxy';
 
 export type {
