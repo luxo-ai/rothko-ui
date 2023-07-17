@@ -21,7 +21,7 @@ const Card = ({ children, copy, propsMeta, codeSnippet }: CardProps) => {
     <div className={styles.componentCard}>
       <div>
         <Typography.h1 className={styles.cardTitle}>{title}</Typography.h1>
-        <Typography.body className={styles.bodySubtext}>{description}</Typography.body>
+        <Typography.body className={styles.bodySubtext}>{description} </Typography.body>
       </div>
       {sections &&
         Object.values(sections).map(section => (
