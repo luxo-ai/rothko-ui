@@ -10,6 +10,6 @@ export type Section = {
   body: Body;
 };
 
-export type Body = string | string[] | Section | Section[];
+export type Body = string | string[] | React.ReactElement | Section | Section[];
 
 export type HeaderVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body';

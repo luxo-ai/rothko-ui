@@ -59,6 +59,9 @@ const Section = ({ section }: SectionProps) => {
     if (isString(body)) {
       return <Typography.body>{body}</Typography.body>;
     }
+    if (React.isValidElement(body)) {
+      return <>{body}</>;
+    }
     if (Array.isArray(body)) {
       if (typeof body[0] !== 'string') {
         return (
@@ -79,7 +82,7 @@ const Section = ({ section }: SectionProps) => {
         </List>
       );
     }
-    return <Section section={body} />;
+    return <Section section={body as any} />;
   };
 
   const Header = Typography[headerVariant];

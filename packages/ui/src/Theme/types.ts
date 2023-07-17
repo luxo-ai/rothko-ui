@@ -5,7 +5,7 @@ const semanticNames = ['success', 'info', 'warning', 'danger'] as const;
 const brandName = ['primary', 'secondary'] as const;
 
 export const rothkoKinds = [...semanticNames, ...brandName] as const;
-export type RothkoKind = typeof rothkoKinds[number];
+export type RothkoKind = (typeof rothkoKinds)[number];
 
 export type KindProps = {
   kind?: RothkoKind;
@@ -34,14 +34,6 @@ type SemanticColorOverrides = DeepPartial<{
     700: { [TERMINAL_KEY]: string };
     800: { [TERMINAL_KEY]: string };
     900: { [TERMINAL_KEY]: string };
-    transparent: {
-      100: { [TERMINAL_KEY]: string };
-      200: { [TERMINAL_KEY]: string };
-      300: { [TERMINAL_KEY]: string };
-      400: { [TERMINAL_KEY]: string };
-      500: { [TERMINAL_KEY]: string };
-      600: { [TERMINAL_KEY]: string };
-    };
   };
 }>;
 
@@ -65,6 +57,7 @@ type ComponentOverrides = DeepPartial<{
     fill: { [TERMINAL_KEY]: string };
     stroke: { [TERMINAL_KEY]: string };
   };
+
   link: { [TERMINAL_KEY]: string };
   slider: {
     handle: {
@@ -80,47 +73,64 @@ type ComponentOverrides = DeepPartial<{
   };
   dropdown: {
     background: { [TERMINAL_KEY]: string };
+    border_minimal: { [TERMINAL_KEY]: string };
     multiselect: {
       text: { [TERMINAL_KEY]: string };
       background: { [TERMINAL_KEY]: string };
     };
     option: {
-      ['background_selected']: { [TERMINAL_KEY]: string };
+      background_selected: { [TERMINAL_KEY]: string };
     };
   };
   search: {
     background: { [TERMINAL_KEY]: string };
     option: {
-      ['background_selected']: { [TERMINAL_KEY]: string };
+      background_selected: { [TERMINAL_KEY]: string };
     };
   };
   tabBar: {
     border: { [TERMINAL_KEY]: string };
   };
-  button: {
-    primary: {
-      color: { [TERMINAL_KEY]: string };
-    };
-    secondary: {
-      color: { [TERMINAL_KEY]: string };
-    };
-    success: {
-      color: { [TERMINAL_KEY]: string };
-    };
-    info: {
-      color: { [TERMINAL_KEY]: string };
-    };
-    warning: {
-      color: { [TERMINAL_KEY]: string };
-    };
-    danger: {
-      color: { [TERMINAL_KEY]: string };
-    };
-  };
   radio: {
     border: { [TERMINAL_KEY]: string };
     background: { [TERMINAL_KEY]: string };
-    ['background_selected']: { [TERMINAL_KEY]: string };
+    background_selected: { [TERMINAL_KEY]: string };
+  };
+  table: {
+    header: {
+      background: { [TERMINAL_KEY]: string };
+    };
+    row: {
+      border: { [TERMINAL_KEY]: string };
+    };
+  };
+  toast: {
+    color: { [TERMINAL_KEY]: string };
+    background: { [TERMINAL_KEY]: string };
+    life: {
+      filled: { [TERMINAL_KEY]: string };
+      empty: { [TERMINAL_KEY]: string };
+    };
+  };
+  box: {
+    background: { [TERMINAL_KEY]: string };
+    border: { [TERMINAL_KEY]: string };
+  };
+  accordion: {
+    border: { [TERMINAL_KEY]: string };
+    background: { [TERMINAL_KEY]: string };
+  };
+  checkbox: {
+    background: { [TERMINAL_KEY]: string };
+    background_selected: { [TERMINAL_KEY]: string };
+  };
+  input: {
+    background: { [TERMINAL_KEY]: string };
+    color: { [TERMINAL_KEY]: string };
+  };
+  skeleton: {
+    background: { [TERMINAL_KEY]: string };
+    foreground: { [TERMINAL_KEY]: string };
   };
 }>;
 

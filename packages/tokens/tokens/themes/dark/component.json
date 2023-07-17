@@ -61,24 +61,6 @@
       "life": {
         "filled": { "value": "#e93c2f" },
         "empty": { "value": "transparent" }
-      },
-      "primary": {
-        "color": { "value": "{component.button.primary.color}" }
-      },
-      "secondary": {
-        "color": { "value": "{component.button.secondary.color}" }
-      },
-      "success": {
-        "color": { "value": "{component.button.success.color}" }
-      },
-      "info": {
-        "color": { "value": "{component.button.info.color}" }
-      },
-      "warning": {
-        "color": { "value": "{component.button.warning.color}" }
-      },
-      "danger": {
-        "color": { "value": "{component.button.danger.color}" }
       }
     },
     "box": {
