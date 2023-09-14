@@ -6,9 +6,6 @@
     "url": "https://github.com/rothko-ui/rothko-ui",
     "directory": "packages/ui"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "private": false,
   "license": "MIT",
   "author": "luxo-ai <luxo.ai@proton.me>",
