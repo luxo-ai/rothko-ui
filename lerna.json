@@ -1,12 +1,11 @@
 {
-  "packages": ["packages/*", "demo"],
+  "packages": ["packages/*", "demo/*"],
   "version": "independent",
   "npmClient": "yarn",
   "command": {
     "publish": {
       "conventionalCommits": true,
       "message": "chore(release): publish",
-      "registry": "https://npm.pkg.github.com",
       "allowBranch": "main"
     }
   }
