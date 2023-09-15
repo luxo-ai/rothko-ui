@@ -1,6 +1,6 @@
 {
   "name": "@rothko-ui/tokens",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "repository": {
     "type": "git",
     "url": "https://github.com/rothko-ui/rothko-ui",
@@ -54,5 +54,5 @@
     "dist/index.js",
     "build/*.css"
   ],
-  "gitHead": "4809c74c7ed0f9899c19dbd8741472f206890b03"
+  "gitHead": "5ae04820d0b2951e6b554d11e3218f19fa44c72b"
 }

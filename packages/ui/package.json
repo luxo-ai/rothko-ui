@@ -1,6 +1,6 @@
 {
   "name": "@rothko-ui/ui",
-  "version": "1.0.26",
+  "version": "1.0.27",
   "repository": {
     "type": "git",
     "url": "https://github.com/rothko-ui/rothko-ui",
@@ -25,9 +25,9 @@
   },
   "dependencies": {
     "@react-spring/web": "^9.5.2",
-    "@rothko-ui/icons": "^1.0.14",
-    "@rothko-ui/tokens": "^1.0.9",
-    "@rothko-ui/utils": "^1.0.9",
+    "@rothko-ui/icons": "^1.0.15",
+    "@rothko-ui/tokens": "^1.0.10",
+    "@rothko-ui/utils": "^1.0.10",
     "immutable": "^4.0.0-rc.15",
     "keyboard-key": "^1.1.0",
     "react": "18.2.0",
@@ -61,5 +61,5 @@
   "files": [
     "dist"
   ],
-  "gitHead": "4809c74c7ed0f9899c19dbd8741472f206890b03"
+  "gitHead": "5ae04820d0b2951e6b554d11e3218f19fa44c72b"
 }

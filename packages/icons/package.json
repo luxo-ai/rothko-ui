@@ -1,6 +1,6 @@
 {
   "name": "@rothko-ui/icons",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "repository": {
     "type": "git",
     "url": "https://github.com/rothko-ui/rothko-ui",
@@ -42,5 +42,5 @@
     "rimraf": "^3.0.2",
     "typescript": "^4.7.4"
   },
-  "gitHead": "4809c74c7ed0f9899c19dbd8741472f206890b03"
+  "gitHead": "5ae04820d0b2951e6b554d11e3218f19fa44c72b"
 }
