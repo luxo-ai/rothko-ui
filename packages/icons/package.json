@@ -1,10 +1,13 @@
 {
   "name": "@rothko-ui/icons",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "repository": {
     "type": "git",
     "url": "https://github.com/rothko-ui/rothko-ui",
     "directory": "packages/icons"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "private": false,
   "license": "MIT",
@@ -39,5 +42,5 @@
     "rimraf": "^3.0.2",
     "typescript": "^4.7.4"
   },
-  "gitHead": "a397eb8d96ac351335cb1c4f865de7a530f1f257"
+  "gitHead": "4809c74c7ed0f9899c19dbd8741472f206890b03"
 }
