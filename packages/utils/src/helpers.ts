@@ -157,7 +157,7 @@ export const isTruthy = <T>(value: T | Falsy): value is T => {
  * isEmpty({})
  * // => true
  */
-export const isEmpty = (v: any) => {
+export const isEmpty = (v: any): boolean => {
   if (v == null) {
     return true;
   }
@@ -187,7 +187,7 @@ export const isEmpty = (v: any) => {
  * capitalize('rothko-ui')
  * // => 'Rothko-ui'
  */
-export const capitalize = (str: string) => {
+export const capitalize = (str: string): string => {
   if (typeof str !== 'string') return '';
   if (str === '') return str;
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -203,7 +203,7 @@ export const capitalize = (str: string) => {
  * kebabToCamelCase('rothko-ui-component')
  * // => 'rothkoUiComponent'
  */
-export const kebabToCamelCase = (str: string) => {
+export const kebabToCamelCase = (str: string): string => {
   const camelCaps = str
     .split('-')
     .filter(s => s.length)
@@ -245,7 +245,7 @@ export const compact = <T>(arr: (T | Falsy)[]): T[] => {
  * asCompactedArray('hello')
  * // => ['hello']
  */
-export const asCompactedArray = <T>(v: Nilable<T> | T[]) => {
+export const asCompactedArray = <T>(v: Nilable<T> | T[]): T[] => {
   return compact(isArray(v) ? v : [v]);
 };
 
@@ -254,7 +254,6 @@ export const asCompactedArray = <T>(v: Nilable<T> | T[]) => {
  *
  * @param {Function} func The function to debounce.
  * @param {number} delay The delay in milliseconds.
- * @returns {Function} Returns the debounced function.
  * @example
  *
  * const debounced = debounce(() => console.log('Hello'), 300);
@@ -275,7 +274,6 @@ export const debounce = <T extends Func>(func: T, delay: number) => {
  * Creates a memoized version of the provided function.
  *
  * @param {Function} func The function to have its output memoized.
- * @returns {Function} Returns the new memoized function.
  * @example
  *
  * const memoizedAdd = memoize((x, y) => x + y);
@@ -307,7 +305,7 @@ export const memoize = <T extends Func>(func: T) => {
  * last([1, 2, 3])
  * // => 3
  */
-export const last = <T>(arr: T[]) => {
+export const last = <T>(arr: T[]): T | null => {
   return arr.length <= 0 ? null : arr[arr.length - 1];
 };
 
@@ -321,7 +319,7 @@ export const last = <T>(arr: T[]) => {
  * first([1, 2, 3])
  * // => 1
  */
-export const first = <T>(arr: T[]) => {
+export const first = <T>(arr: T[]): T | null => {
   return arr.length <= 0 ? null : arr[0];
 };
 
@@ -336,7 +334,7 @@ export const first = <T>(arr: T[]) => {
  * omit({ a: 1, b: 2, c: 3 }, ['a', 'c'])
  * // => { b: 2 }
  */
-export const omit = <T, K extends keyof T>(obj: T, keysToOmit: K[]) => {
+export const omit = <T, K extends keyof T>(obj: T, keysToOmit: K[]): Omit<T, K> => {
   let result: Omit<T, K> = { ...obj };
   for (const key of keysToOmit) {
     const { [key]: _, ...rest } = result;
@@ -366,7 +364,7 @@ export const noop = () => {};
  * identity(5)
  * // => 5
  */
-export const identity = <T>(v: T) => {
+export const identity = <T>(v: T): T => {
   return v;
 };
 
@@ -381,7 +379,7 @@ export const identity = <T>(v: T) => {
  * parseInt('100', 2)
  * // => 4
  */
-export const parseInt = (string: string, radix = 10) => {
+export const parseInt = (string: string, radix = 10): number => {
   return root.parseInt(String(string).trim(), radix);
 };
 
@@ -396,7 +394,7 @@ export const parseInt = (string: string, radix = 10) => {
  * times(3, n => n * 2)
  * // => [0, 2, 4]
  */
-export const times = <T>(count: number, fn: (n: number) => T) => {
+export const times = <T>(count: number, fn: (n: number) => T): T[] => {
   const result: T[] = [];
   for (let i = 0; i < count; i++) {
     result.push(fn(i));
@@ -420,7 +418,7 @@ export const times = <T>(count: number, fn: (n: number) => T) => {
  * findBy([1, 2, 3, 4], x => x > 4)
  * // => undefined
  */
-export const findBy = <T>(arr: ArrLike<T>, pred: (v: T) => boolean) => {
+export const findBy = <T>(arr: ArrLike<T>, pred: (v: T) => boolean): T | undefined => {
   for (let i = 0; i < arr.length; i++) {
     const val = arr[i];
     if (pred(val)) return val;
