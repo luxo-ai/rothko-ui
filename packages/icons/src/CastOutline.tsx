@@ -1,6 +1,5 @@
 import * as React from 'react';
-import type { SVGProps, Ref } from 'react';
-import { forwardRef } from 'react';
+import { SVGProps, Ref, forwardRef } from 'react';
 const SvgCastOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
