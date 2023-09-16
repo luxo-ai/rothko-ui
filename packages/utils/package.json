@@ -17,7 +17,7 @@
   "types": "dist/index.d.ts",
   "source": "src/index.ts",
   "scripts": {
-    "build": "microbundle --format modern",
+    "build": "microbundle --format modern --no-sourcemap",
     "build:dev": "microbundle watch --no-compress --format modern",
     "prepare": "run-s build",
     "lint": "eslint ./src --ext .js,.ts",
@@ -36,5 +36,5 @@
   "files": [
     "dist"
   ],
-  "gitHead": "328fb08708987e267d65f7b1d04a1dfcd931db74"
+  "gitHead": "fa0338bf50f574c0a42d143d3bd317a40a6e3fb9"
 }

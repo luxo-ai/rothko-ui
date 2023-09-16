@@ -24,7 +24,7 @@
   },
   "scripts": {
     "prebuild": "yarn clean",
-    "build": "microbundle --format modern && ts-node-esm --skip-project ./src/build.ts",
+    "build": "microbundle --format modern --no-sourcemap && ts-node-esm --skip-project ./src/build.ts",
     "clean": "rimraf build",
     "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "eslint ./src --ext .js,.ts --fix"
@@ -54,5 +54,5 @@
     "dist/index.js",
     "build/*.css"
   ],
-  "gitHead": "328fb08708987e267d65f7b1d04a1dfcd931db74"
+  "gitHead": "fa0338bf50f574c0a42d143d3bd317a40a6e3fb9"
 }
