@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.15](https://github.com/rothko-ui/rothko-ui/compare/@rothko-ui/utils@1.0.14...@rothko-ui/utils@1.0.15) (2023-09-16)
+
+**Note:** Version bump only for package @rothko-ui/utils
+
+
+
+
+
 ## [1.0.14](https://github.com/rothko-ui/rothko-ui/compare/@rothko-ui/utils@1.0.13...@rothko-ui/utils@1.0.14) (2023-09-16)
 
 **Note:** Version bump only for package @rothko-ui/utils
