@@ -1,6 +1,6 @@
 {
   "name": "@rothko-ui/icons",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "repository": {
     "type": "git",
     "url": "https://github.com/luxo-ai/rothko-ui",
@@ -28,8 +28,8 @@
   ],
   "peerDependencies": {
     "@types/react": "^18.0.0",
-    "react-dom": "^18.2.0",
-    "react": "^18.0.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@svgr/cli": "^6.2.1",
