@@ -11,7 +11,7 @@ const keys = [
   keyboardKey.Tab,
 ] as const;
 
-type Key = typeof keys[number];
+type Key = (typeof keys)[number];
 type Handler<T> = (e: React.KeyboardEvent<T>) => void;
 
 export const directionMap: Record<number, -1 | 1> = {

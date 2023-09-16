@@ -1,19 +1,55 @@
-# UI Library
+# @rothko-ui/ui
 
-This sub repo contains various common UI React components and hooks. It also contains the theme library.
+Welcome to the `@rothko-ui/ui` package. This is the primary package for the Rothko-UI project, encompassing a comprehensive set of UI components to build modern web applications with a consistent design language.
 
-Of particular importance are the [Elements/\*.tsx](src/Elements) files. These contain all the UI component elements like `Dropdown.tsx` and `DatePicker.tsx`.
+## Overview
 
-Try to keep this package light and _only_ code that's shared.
+The `@rothko-ui/ui` package is a collection of React components, utilities, hooks, and themes that offer a streamlined development experience for creating web interfaces. It's built on top of other foundational packages like `@rothko-ui/icons` and `@rothko-ui/tokens`.
 
-## Bundler
+## Installation
 
-This package uses [microbundle](https://github.com/developit/microbundle) bundle and package the goods. You can build the package using via: `yarn build`. If you want to build and watch the files for new changes, use: `yarn build:dev`.
+To integrate Rothko-UI components into your project, install the package using npm:
 
-## For contributers
+```
+npm install @rothko-ui/ui
+```
 
-Keep the dependency list extremely lean, please 🙏.
+Or with yarn:
 
-## Questions?
+```
+yarn add @rothko-ui/ui
+```
 
-Consult [@luserazo](https://github.com/luserazo)
+## Usage
+
+Once installed, you can import and utilize the components in your application:
+
+```javascript
+import { ComponentName } from '@rothko-ui/ui';
+
+// Use the component in your JSX
+```
+
+Replace `ComponentName` with the desired component's name.
+
+## Key Directories & Components
+
+- `Components`: Contains core UI components like buttons, modals, inputs, etc.
+- `Hooks`: Offers custom hooks to enhance functionality and interactivity.
+- `Layout`: Components and utilities for page and component layouts.
+- `Theme`: Design tokens and theming utilities for consistent styling.
+
+## Development
+
+To work on the `@rothko-ui/ui` package or contribute:
+
+- `yarn build`: Bundles the components.
+- `yarn lint`: Lints the source files.
+
+## Licensing
+
+The `@rothko-ui/ui` package is licensed under the terms of the [LICENSE.txt](LICENSE.txt) file.
+
+## Questions & Support
+
+For inquiries, clarifications, or support regarding the `@rothko-ui/ui` package, please raise an issue in the [repository](https://github.com/luxo-ai/rothko-ui) or reach out to the author at `luxo@rothko-ui.com`.

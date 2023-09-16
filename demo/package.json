@@ -3,12 +3,12 @@
   "version": "1.0.2",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rothko-ui/rothko-ui",
+    "url": "https://github.com/luxo-ai/rothko-ui",
     "directory": "demo"
   },
   "private": true,
   "license": "MIT",
-  "author": "luxo-ai <luxo.ai@proton.me>",
+  "author": "luxo-ai <luxo@rothko-ui.com>",
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.13",
     "@types/cookie": "^0.5.1",

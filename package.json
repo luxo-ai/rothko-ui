@@ -1,32 +1,31 @@
 {
   "name": "rothko-ui",
   "version": "1.0.0",
-  "repository": "github:rothko-ui/rothko-ui",
+  "repository": "github:luxo-ai/rothko-ui",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@rothko-ui"
   },
   "license": "MIT",
-  "author": "luxo-ai <luxo.ai@proton.me>",
+  "author": "luxo-ai <luxo@rothko-ui.com>",
   "private": true,
   "scripts": {
-    "add:ui": "yarn workspace @rothko-ui/ui add $1",
-    "add:utils": "yarn workspace @rothko-ui/utils add $1",
     "add:icons": "yarn workspace @rothko-ui/icons add $1",
     "add:tokens": "yarn workspace @rothko-ui/tokens add $1",
-    "remove:demo": "yarn workspace demo remove $1",
-    "remove:ui": "yarn workspace @rothko-ui/ui remove $1",
-    "remove:utils": "yarn workspace @rothko-ui/utils remove $1",
+    "add:ui": "yarn workspace @rothko-ui/ui add $1",
+    "add:utils": "yarn workspace @rothko-ui/utils add $1",
     "remove:icons": "yarn workspace @rothko-ui/icons remove $1",
     "remove:tokens": "yarn workspace @rothko-ui/tokens remove $1",
-    "build:ui": "lerna --scope=@rothko-ui/ui run build --stream",
-    "build:tokens": "lerna --scope=@rothko-ui/tokens run build --stream",
-    "build:icons": "lerna --scope=@rothko-ui/icons run build --stream",
-    "build:utils": "lerna --scope=@rothko-ui/utils run build --stream",
-    "build:shared": "lerna --scope='{@rothko-ui/tokens,@rothko-ui/ui,@rothko-ui/utils,@rothko-ui/icons}' run build --stream",
-    "build:shared:dev": "lerna --scope='{@rothko-ui/ui,@rothko-ui/utils}' run build:dev --stream",
-    "build:ui:dev": "lerna --scope=@rothko-ui/ui run build:dev --stream",
+    "remove:ui": "yarn workspace @rothko-ui/ui remove $1",
+    "remove:utils": "yarn workspace @rothko-ui/utils remove $1",
+    "build:icons": "lerna run build --scope=@rothko-ui/icons --stream",
+    "build:tokens": "lerna run build --scope=@rothko-ui/tokens --stream",
+    "build:ui": "lerna run build --scope=@rothko-ui/ui --stream",
+    "build:ui:dev": "lerna run build:dev --scope=@rothko-ui/ui --stream",
+    "build:utils": "lerna run build --scope=@rothko-ui/utils --stream",
+    "build": "lerna run build --stream",
+    "clean": "lerna clean",
     "lint": "lerna run lint",
-    "lint:fix": "lerna run lint:fix"
+    "test": "lerna run test"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.30.0",
@@ -37,8 +36,7 @@
     "eslint-plugin-react": "^7.31.10",
     "lerna": "^7.0.1",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.3.2",
-    "ts-node": "^10.2.1"
+    "prettier": "^2.3.2"
   },
   "workspaces": {
     "packages": [
@@ -47,6 +45,9 @@
     ]
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }

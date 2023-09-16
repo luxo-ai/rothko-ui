@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { SVGProps, Ref, forwardRef } from 'react';
+import type { SVGProps, Ref } from 'react';
+import { forwardRef } from 'react';
 const SvgDiagonalArrowLeftDownOutline = (
   props: SVGProps<SVGSVGElement>,
   ref: Ref<SVGSVGElement>

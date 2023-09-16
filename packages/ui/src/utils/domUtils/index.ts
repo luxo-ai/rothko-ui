@@ -11,7 +11,7 @@ export * from './dimensions';
 export * from './event';
 
 export const browserPrefixes = ['-moz', '-webkit', '-o', '-ms'] as const;
-export type BrowserPrefix = typeof browserPrefixes[number];
+export type BrowserPrefix = (typeof browserPrefixes)[number];
 
 export const getCssKeyWithBrowserPrefix = (cssKey: string) => {
   if (typeof window === 'undefined') return cssKey;
