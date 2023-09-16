@@ -1,6 +1,6 @@
 {
   "name": "@rothko-ui/icons",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "repository": {
     "type": "git",
     "url": "https://github.com/rothko-ui/rothko-ui",
@@ -18,7 +18,7 @@
   "source": "src/index.ts",
   "scripts": {
     "prebuild": "rimraf src && rimraf dist && yarn run svgr",
-    "build": "microbundle --jsx React.createElement --format modern --no-sourcemap",
+    "build": "microbundle --jsx React.createElement --format modern,cjs --no-sourcemap",
     "svgr": "svgr --icon --typescript --ref -d src -- assets",
     "prepare": "run-s build",
     "lint": "eslint ./src --ext .js,.ts,.jsx,.tsx",
