@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import root from './root';
-import type { Nilable } from './types';
+import type { Nil, Nilable, Falsy } from './types';
 
 type Func = (...args: any[]) => any;
 
@@ -60,7 +60,7 @@ export const isString = (value: any): value is string => {
  * isFunction(() => {})
  * // => true
  */
-export const isFunction = (value: any) => {
+export const isFunction = (value: any): value is Func => {
   return typeof value === 'function';
 };
 
@@ -74,7 +74,7 @@ export const isFunction = (value: any) => {
  * isNil(null)
  * // => true
  */
-export const isNil = <T>(value: Nilable<T>): value is Nilable<T> => {
+export const isNil = <T>(value: Nilable<T>): value is Nil => {
   return value == null;
 };
 
@@ -97,6 +97,54 @@ export const isNil = <T>(value: Nilable<T>): value is Nilable<T> => {
  */
 export const isNotNil = <T>(value: Nilable<T>): value is T => {
   return !isNil(value);
+};
+
+/**
+ * Checks if the given value is falsy.
+ *
+ * @param {any} value - The value to check.
+ * @returns {boolean} Returns `true` if the value is falsy, else `false`.
+ * @typeparam Falsy - Represents all falsy values in JavaScript, including `false`, `0`, `""`, `null`, `undefined`, and `NaN`.
+ *
+ * @example
+ *
+ * isFalsy(0)
+ * // => true
+ *
+ * isFalsy("hello")
+ * // => false
+ *
+ * isFalsy(null)
+ * // => true
+ */
+export const isFalsy = (value: any): value is Falsy => {
+  return !value;
+};
+
+/**
+ * Checks if the given value is not falsy (truthy).
+ *
+ * @param {T | Falsy} value - The value to check.
+ * @returns {boolean} Returns `true` if the value is truthy (not falsy), else `false`.
+ * @typeparam T - Represents any type.
+ * @typeparam Falsy - Represents all falsy values in JavaScript, including `false`, `0`, `""`, `null`, `undefined`, and `NaN`.
+ *
+ * @example
+ *
+ * isTruthy(0)
+ * // => false
+ *
+ * isTruthy("hello")
+ * // => true
+ *
+ * isTruthy(null)
+ * // => false
+ *
+ * isTruthy({ key: "value" })
+ * // => true
+ */
+export const isTruthy = <T>(value: T | Falsy): value is T => {
+  return !isFalsy(value);
 };
 
 /**
@@ -160,7 +208,7 @@ export const kebabToCamelCase = (str: string) => {
     .split('-')
     .filter(s => s.length)
     .map(capitalize)
-    .join();
+    .join('');
   return `${camelCaps.slice(0, 1).toLowerCase()}${camelCaps.slice(1)}`;
 };
 
@@ -174,9 +222,9 @@ export const kebabToCamelCase = (str: string) => {
  * compact([0, 1, false, '', 'hello'])
  * // => [1, 'hello']
  */
-export const compact = <T>(arr: Nilable<T>[]): T[] => {
-  if (!Array.isArray(arr)) return [];
-  return arr.filter(isNotNil);
+export const compact = <T>(arr: (T | Falsy)[]): T[] => {
+  if (!isArray(arr)) return [];
+  return arr.filter(isTruthy);
 };
 
 /**

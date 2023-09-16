@@ -1,4 +1,4 @@
-import { debounce, identityFn } from '@rothko-ui/utils';
+import { debounce, identity } from '@rothko-ui/utils';
 import { useCallback, useEffect, useState } from 'react';
 import { useLRUCache } from '../../Library/Hooks/useCache';
 import useOptions from '../../Library/Hooks/useOptions';
@@ -26,7 +26,7 @@ export function useSearch<V, T = undefined>({
   const [query, setQuery] = useState<string | null>(initialQuery || null);
   const { options, setOptions, moveOptionIdx, optIdx } = useOptions<V, T>({ options: [] });
 
-  const cachedFetch = useLRUCache({ dataFetcher, keyGenerator: identityFn });
+  const cachedFetch = useLRUCache({ dataFetcher, keyGenerator: identity });
 
   const onSetQuery = useCallback(
     debounce(async (query: string) => {

@@ -22,6 +22,7 @@
     "build:ui": "lerna run build --scope=@rothko-ui/ui --stream",
     "build:ui:dev": "lerna run build:dev --scope=@rothko-ui/ui --stream",
     "build:utils": "lerna run build --scope=@rothko-ui/utils --stream",
+    "test:utils": "lerna run test --scope=@rothko-ui/utils",
     "build": "lerna run build --stream",
     "clean": "lerna clean",
     "lint": "lerna run lint",

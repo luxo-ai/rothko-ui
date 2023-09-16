@@ -24,3 +24,5 @@ export type NestedRecord<T = string> = { [k: KeyLike]: NestedRecord | T };
 export type Dictionary<K extends KeyLike, T> = Partial<Record<K, T>>;
 
 export type Map<K extends KeyLike, T> = Record<K, T | null>;
+
+export type Falsy = false | 0 | '' | null | undefined;
