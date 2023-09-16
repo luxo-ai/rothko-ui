@@ -1,6 +1,6 @@
 <img src="./assets/logo.png" alt="rothko-ui"/>
 
-# rothko-ui
+# Rothko-UI
 
 Welcome to Rothko-UI, a comprehensive UI component library designed with flexibility and ease of use in mind. This monorepo contains various packages, with `@rothko-ui/ui` and `@rothko-ui/icons` being the primary ones for external use.
 
