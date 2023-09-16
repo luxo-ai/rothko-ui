@@ -17,8 +17,8 @@
   "types": "dist/index.d.ts",
   "source": "src/index.tsx",
   "scripts": {
-    "build": "microbundle --jsx React.createElement --format modern,cjs --no-sourcemap",
-    "build:dev": "microbundle watch --no-compress --jsx React.createElement --format modern,cjs",
+    "build": "microbundle --jsx React.createElement --format modern --no-sourcemap",
+    "build:dev": "microbundle watch --no-compress --jsx React.createElement --format modern",
     "prepare": "run-s build",
     "lint": "eslint ./src --ext .js,.ts,.jsx,.tsx",
     "lint:fix": "eslint ./src --ext .js,.ts,.jsx,.tsx --fix"

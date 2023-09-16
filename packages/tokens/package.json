@@ -24,7 +24,7 @@
   },
   "scripts": {
     "prebuild": "yarn clean",
-    "build": "microbundle --format modern,cjs && ts-node-esm --skip-project ./src/build.ts",
+    "build": "microbundle --format modern && ts-node-esm --skip-project ./src/build.ts",
     "clean": "rimraf build",
     "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "eslint ./src --ext .js,.ts --fix"

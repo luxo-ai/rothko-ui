@@ -17,8 +17,8 @@
   "types": "dist/index.d.ts",
   "source": "src/index.ts",
   "scripts": {
-    "build": "microbundle --format modern,cjs",
-    "build:dev": "microbundle watch --no-compress --format modern,cjs",
+    "build": "microbundle --format modern",
+    "build:dev": "microbundle watch --no-compress --format modern",
     "prepare": "run-s build",
     "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "eslint ./src --ext .js,.ts --fix"
