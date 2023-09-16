@@ -38,9 +38,7 @@ const Home = () => {
     });
 
     return () => {
-      if (vantaEffect) {
-        vantaEffect?.destory?.();
-      }
+      vantaEffect?.destory?.();
     };
   }, [vantaRef]);
 

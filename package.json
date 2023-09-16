@@ -9,9 +9,6 @@
   "author": "luxo-ai <luxo.ai@proton.me>",
   "private": true,
   "scripts": {
-    "start:demo": "lerna --scope=demo run dev --stream",
-    "build:demo": "yarn build:shared && yarn && lerna --scope=demo run build --stream",
-    "add:demo": "yarn workspace demo add $1",
     "add:ui": "yarn workspace @rothko-ui/ui add $1",
     "add:utils": "yarn workspace @rothko-ui/utils add $1",
     "add:icons": "yarn workspace @rothko-ui/icons add $1",
