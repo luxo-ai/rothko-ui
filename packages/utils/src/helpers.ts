@@ -394,13 +394,22 @@ export const parseInt = (string: string, radix = 10): number => {
  * times(3, n => n * 2)
  * // => [0, 2, 4]
  */
-export const times = <T>(count: number, fn: (n: number) => T): T[] => {
+// Overload signature when fn is not provided (returns number[])
+export function times(count: number): number[];
+
+// Overload signature when fn is provided (returns T[])
+export function times<T>(count: number, fn: (n: number) => T): T[];
+
+// Implementation of the function
+export function times<T>(count: number, fn?: (n: number) => T): T[] {
   const result: T[] = [];
   for (let i = 0; i < count; i++) {
-    result.push(fn(i));
+    // Cast i to any type to satisfy the compiler.
+    // This is safe because of the function overloads.
+    result.push(fn ? fn(i) : (i as any as T));
   }
   return result;
-};
+}
 
 /**
  * Iterates over elements of `arr`, returning the first element `pred` returns truthy for.
