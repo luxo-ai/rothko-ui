@@ -1,8 +1,7 @@
 import type { Nullable } from '@rothko-ui/utils';
-import { kebabToCamelCase, parseInt } from '@rothko-ui/utils';
+import { kebabToCamelCase, parseInt, findBy } from '@rothko-ui/utils';
 import type React from 'react';
 import type { RemSize } from '../../types';
-import { findBy } from '../utils';
 import { innerHeight, innerWidth, outerHeight, outerWidth } from './dimensions';
 import { isMouseEvent } from './event';
 

@@ -1,5 +1,5 @@
 import type { Nullable } from '@rothko-ui/utils';
-import { parseDecimal } from '../utils';
+import { parseInt } from '@rothko-ui/utils';
 
 export const innerHeight = (el: HTMLElement) => {
   const height = el.clientHeight;
@@ -8,8 +8,8 @@ export const innerHeight = (el: HTMLElement) => {
     return 0;
   }
   const computedStyle = ownerWindow.getComputedStyle(el);
-  const paddingTop = parseDecimal(computedStyle.paddingTop) || 0;
-  const paddingBottom = parseDecimal(computedStyle.paddingBottom) || 0;
+  const paddingTop = parseInt(computedStyle.paddingTop) || 0;
+  const paddingBottom = parseInt(computedStyle.paddingBottom) || 0;
   return height - paddingTop - paddingBottom;
 };
 
@@ -20,8 +20,8 @@ export const innerWidth = (el: HTMLElement) => {
     return 0;
   }
   const computedStyle = ownerWindow.getComputedStyle(el);
-  const paddingLeft = parseDecimal(computedStyle.paddingLeft) || 0;
-  const paddingRight = parseDecimal(computedStyle.paddingRight) || 0;
+  const paddingLeft = parseInt(computedStyle.paddingLeft) || 0;
+  const paddingRight = parseInt(computedStyle.paddingRight) || 0;
   return width - paddingLeft - paddingRight;
 };
 
@@ -33,8 +33,8 @@ export const outerWidth = (el: HTMLElement) => {
     return 0;
   }
   const computedStyle = ownerWindow.getComputedStyle(el);
-  const borderLeftWidth = parseDecimal(computedStyle.borderLeftWidth) || 0;
-  const borderRightWidth = parseDecimal(computedStyle.borderRightWidth) || 0;
+  const borderLeftWidth = parseInt(computedStyle.borderLeftWidth) || 0;
+  const borderRightWidth = parseInt(computedStyle.borderRightWidth) || 0;
   return width + borderLeftWidth + borderRightWidth;
 };
 
@@ -45,8 +45,8 @@ export const outerHeight = (el: HTMLElement) => {
     return 0;
   }
   const computedStyle = ownerWindow.getComputedStyle(el);
-  const borderTopWidth = parseDecimal(computedStyle.borderTopWidth) || 0;
-  const borderBottomWidth = parseDecimal(computedStyle.borderBottomWidth) || 0;
+  const borderTopWidth = parseInt(computedStyle.borderTopWidth) || 0;
+  const borderBottomWidth = parseInt(computedStyle.borderBottomWidth) || 0;
   return height + borderTopWidth + borderBottomWidth;
 };
 
@@ -58,10 +58,10 @@ export const scrollBarWidth = () => {
   // borders, margins, and
   const { documentElement } = document;
   const documentStyle = ownerWindow.getComputedStyle(documentElement);
-  const borderLeftWidth = parseDecimal(documentStyle.borderLeftWidth) || 0;
-  const borderRightWidth = parseDecimal(documentStyle.borderRightWidth) || 0;
-  const marginLeft = parseDecimal(documentStyle.marginLeft) || 0;
-  const marginRight = parseDecimal(documentStyle.marginRight) || 0;
+  const borderLeftWidth = parseInt(documentStyle.borderLeftWidth) || 0;
+  const borderRightWidth = parseInt(documentStyle.borderRightWidth) || 0;
+  const marginLeft = parseInt(documentStyle.marginLeft) || 0;
+  const marginRight = parseInt(documentStyle.marginRight) || 0;
 
   const windowWidth = ownerWindow.innerWidth;
 

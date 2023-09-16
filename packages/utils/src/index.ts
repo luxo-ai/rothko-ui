@@ -1,7 +1,4 @@
-import { capitalize, compact, flatten } from './lodashProxy';
-import type { Nullable } from './types';
-
-export * from './lodashProxy';
+export * from './helpers';
 
 export type {
   DeepPartial,
@@ -10,24 +7,11 @@ export type {
   Map,
   NestedRecord,
   Nil,
-  Nullable,
+  Nilable as Nullable,
   Obj,
   WithData,
   WithKey,
 } from './types';
-
-export const kebabToCamelCase = (str: string) => {
-  const camelCaps = str
-    .split('-')
-    .filter(s => s.length)
-    .map(capitalize)
-    .join();
-  return `${camelCaps.slice(0, 1).toLowerCase()}${camelCaps.slice(1)}`;
-};
-
-export const flatCompact = <T>(v: Nullable<T> | T[]) => {
-  return flatten(compact([v]));
-};
 
 /**
  * based on https://www.npmjs.com/package/clsx

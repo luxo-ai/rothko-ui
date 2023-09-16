@@ -1,7 +1,5 @@
-import { isArray, isEmpty, memoize } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
-import type { ReactElement, ReactNode } from 'react';
-import React from 'react';
+import type React from 'react';
 
 const keys = [
   keyboardKey.Enter,
@@ -30,27 +28,3 @@ export const keyDownFactory = <T>(handlerMap: { [k in Key]?: Handler<T> }) => {
     }
   };
 };
-
-export const findFirstTextChild = memoize((root: ReactNode) => {
-  const isDiscoverable = (v: any): v is string | number | ReactElement | any[] => {
-    return typeof v === 'string' || typeof v === 'number' || React.isValidElement(v) || isArray(v);
-  };
-
-  let asArray = React.Children.toArray(root).filter(isDiscoverable);
-  // bfs
-  while (!isEmpty(asArray)) {
-    const [node, ...rest] = asArray;
-    asArray = rest;
-
-    if (typeof node === 'string') {
-      return node;
-    }
-    if (typeof node === 'number') {
-      return String(node);
-    }
-    if (isDiscoverable(node)) {
-      const children = (isArray(node) ? node : [node.props?.children]).filter(isDiscoverable);
-      asArray.push(...children);
-    }
-  }
-});

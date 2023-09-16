@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export type Nullable<T> = T | undefined | null;
 export type Nil = undefined | null;
+export type Nilable<T> = T | Nil;
 
 export type KeyLike = string | number | symbol;
 

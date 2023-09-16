@@ -4,9 +4,8 @@
  * The decision to adapt was to get more control and fix mobie issues found in the original solution
  */
 import type { Nullable } from '@rothko-ui/utils';
-import { isNil } from '@rothko-ui/utils';
+import { isNil, parseInt } from '@rothko-ui/utils';
 import type React from 'react';
-import { parseDecimal } from '../utils';
 import { getStyle, scrollBarWidth } from './dimensions';
 import type { WithTouches } from './event';
 import { addEvent, hasTouches, removeEvent } from './event';
@@ -74,7 +73,7 @@ const setOverflowHidden = ({ reserveScrollBarGap }: Opts = {}) => {
 
   if (scrollWidth && scrollWidth > 0) {
     const rawPaddingRight = getStyle(document.body, 'paddingRight');
-    const paddingRight = rawPaddingRight ? parseDecimal(rawPaddingRight) : 0;
+    const paddingRight = rawPaddingRight ? parseInt(rawPaddingRight) : 0;
     const existingPaddingRight = document.body.style.paddingRight;
     prevStyle = { overflow: existingOverflow, paddingRight: existingPaddingRight };
     document.body.style.overflow = 'hidden';
@@ -142,8 +141,8 @@ const setPositionFixed = () =>
 
 const restorePositionSetting = () => {
   if (!isNil(iosPrevStyle)) {
-    const y = -parseDecimal(document.body.style.top);
-    const x = -parseDecimal(document.body.style.left);
+    const y = -parseInt(document.body.style.top);
+    const x = -parseInt(document.body.style.left);
 
     document.body.style.position = iosPrevStyle.position;
     document.body.style.top = iosPrevStyle.top;
