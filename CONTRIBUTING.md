@@ -1,6 +1,6 @@
-# Contributing to rothko-ui
+# Contributing to Rothko-UI
 
-Thank you for considering contributing to our project! We welcome contributions from the community to help make rothko-ui better.
+Thank you for considering contributing to our project! We welcome contributions from the community to help make Rothko-UI better.
 
 ## Getting Started
 
