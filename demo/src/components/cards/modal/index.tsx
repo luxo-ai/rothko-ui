@@ -1,4 +1,4 @@
-import { ArrowCircleUp, ArrowUpOutline } from '@rothko-ui/icons';
+import { ArrowUpOutline } from '@rothko-ui/icons';
 import { Button, Container, Modal } from '@rothko-ui/ui';
 import { useReducer, useState } from 'react';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';

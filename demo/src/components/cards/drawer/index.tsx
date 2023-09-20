@@ -1,10 +1,10 @@
+import { ArrowRightOutline } from '@rothko-ui/icons';
 import { Button, Container, Drawer, Typography } from '@rothko-ui/ui';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Card from '../Card';
 import { CodeLanguage } from '../CodeExample';
 import drawerCopy from './copy';
 import drawerProps from './props';
-import { ArrowCircleRight, ArrowRightOutline } from '@rothko-ui/icons';
 
 const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   [CodeLanguage.TS]: `

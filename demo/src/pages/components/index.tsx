@@ -29,7 +29,7 @@ const COMPONENTS = [
   'toggle',
 ] as const;
 
-const COMPONENTS_COPY: Record<typeof COMPONENTS[number], string> = {
+const COMPONENTS_COPY: Record<(typeof COMPONENTS)[number], string> = {
   accordion: 'A component for displaying collapsible content sections.',
   alert: 'A component for displaying informative or warning messages.',
   bottomPopup: 'A component for displaying content in a popup that appears from the bottom.',

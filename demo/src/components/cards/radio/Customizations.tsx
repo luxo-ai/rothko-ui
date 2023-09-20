@@ -1,7 +1,5 @@
 import type { RothkoKind } from '@rothko-ui/ui';
-import { Dropdown } from '@rothko-ui/ui';
-import { Slider } from '@rothko-ui/ui';
-import { Flex, MaxWidth, RadioGroup, Toggle } from '@rothko-ui/ui';
+import { Dropdown, Flex, MaxWidth, RadioGroup, Toggle } from '@rothko-ui/ui';
 import AccordionOrBox from '../../AccordionOrBox';
 import { kindOptions } from '../../rothkoOptions';
 

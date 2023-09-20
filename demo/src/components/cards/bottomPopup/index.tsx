@@ -1,4 +1,4 @@
-import { ArrowUpward, ArrowUpOutline } from '@rothko-ui/icons';
+import { ArrowUpOutline } from '@rothko-ui/icons';
 import { BottomPopup, Button, Container, Typography } from '@rothko-ui/ui';
 import { useState } from 'react';
 import Card from '../Card';
