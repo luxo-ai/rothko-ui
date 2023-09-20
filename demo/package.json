@@ -10,7 +10,6 @@
   "license": "MIT",
   "author": "luxo-ai <luxo@rothko-ui.com>",
   "dependencies": {
-    "@nextui-org/react": "^1.0.0-beta.13",
     "@rothko-ui/icons": "*",
     "@rothko-ui/ui": "*",
     "@types/cookie": "^0.5.1",

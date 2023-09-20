@@ -1,4 +1,3 @@
-import { Tooltip } from '@nextui-org/react';
 import * as Icons from '@rothko-ui/icons';
 import type { Accessory, Option } from '@rothko-ui/ui';
 import {
@@ -9,6 +8,7 @@ import {
   MaxWidth,
   OptionGroup,
   SearchBar,
+  ToastContextConsumer,
   Typography,
 } from '@rothko-ui/ui';
 import FuzzySearch from 'fuzzy-search';
@@ -18,6 +18,8 @@ import Card from '../Card';
 import CodeExample, { CodeLanguage } from '../CodeExample';
 import iconographyCopy from './copy';
 import { filledIconList, outlineIconList } from './iconsList';
+import styles from './icons.module.scss';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 enum IconKind {
   Outline,
@@ -66,7 +68,6 @@ const iconKindOptions: Option<IconKind, { accessoryLeft: Accessory }>[] = [
 const IconsCard = () => {
   const [query, setQuery] = useState<string | null>(null);
   const [iconKind, setIconKind] = useState<IconKind>(IconKind.Filled);
-  const [openTooltip, setOpenTooltip] = useState<string | null>(null);
 
   const iconList = useMemo(() => {
     if (!query) {
@@ -99,7 +100,8 @@ const IconsCard = () => {
               withoutBorder
               optionsWithRadius
               maxCol={2}
-              kind="secondary"
+              kind="primary"
+              // kind="secondary"
               optionGap="0.75rem"
               size="xs"
               value={iconKind}
@@ -108,37 +110,38 @@ const IconsCard = () => {
             />
           </MaxWidth>
         </Container>
-        <Flex margin="0 auto" flexWrap="wrap" gap="1rem">
-          {iconList.map(iconName => {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const C = Icons[iconName] as React.FC<any>;
-            return (
-              <div key={iconName}>
-                <div style={{ display: 'inline-block' }}>
-                  <Tooltip content={iconName}>
-                    <Container
-                      onClick={() => {
-                        if (openTooltip === iconName) {
-                          setOpenTooltip(null);
-                        } else {
-                          setOpenTooltip(iconName);
-                        }
-                      }}
-                      ariaLabel={iconName}
-                      as="button"
-                      padding="1.25rem"
-                      className="phantom-button"
-                    >
-                      <Flex flexDirection="column" alignItems="center" gap="1rem">
-                        <C width={30} height={30} />
-                      </Flex>
-                    </Container>
-                  </Tooltip>
+        <div style={{ position: 'relative' }}>
+          <div className={styles.icons}>
+            {iconList.map(iconName => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const C = Icons[iconName] as React.FC<any>;
+              return (
+                <div className={styles.icon} key={iconName}>
+                  <ToastContextConsumer>
+                    {({ addToast }) => (
+                      <CopyToClipboard
+                        text={`<${iconName} width={20} height={20} />`}
+                        onCopy={() => addToast({ content: 'Added to clipboard!', withLife: true })}
+                      >
+                        <Container
+                          cursor="pointer"
+                          ariaLabel={iconName}
+                          as="button"
+                          padding="2rem 1rem"
+                        >
+                          <Flex flexDirection="column" alignItems="center" gap="1rem">
+                            <C width={30} height={30} />
+                            <Typography.bodySmall>{iconName}</Typography.bodySmall>
+                          </Flex>
+                        </Container>
+                      </CopyToClipboard>
+                    )}
+                  </ToastContextConsumer>
                 </div>
-              </div>
-            );
-          })}
-        </Flex>
+              );
+            })}
+          </div>
+        </div>
         {iconList.length === 0 && (
           <FlexItem flex={1} width="100%" margin="auto" maxWidth="40rem">
             <Alert style={{ textAlign: 'center' }}>No results. Please try another search...</Alert>

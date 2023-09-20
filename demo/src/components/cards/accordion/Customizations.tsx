@@ -55,7 +55,7 @@ const AccordionCustomizations = ({ dispatch, state }: AccordionCustomizationsPro
         <MaxWidth maxW="15rem">
           <Checkbox
             withCheck
-            kind="secondary"
+            kind="primary"
             onChange={() => dispatch({ type: 'TOGGLE_WITH_KIND' })}
             checked={withKind}
           >
@@ -63,7 +63,7 @@ const AccordionCustomizations = ({ dispatch, state }: AccordionCustomizationsPro
           </Checkbox>
           <RadioGroup
             disabled={!withKind}
-            kind="secondary"
+            kind="primary"
             maxCol={2}
             columnGap="1.5rem"
             label="kind"
@@ -75,14 +75,14 @@ const AccordionCustomizations = ({ dispatch, state }: AccordionCustomizationsPro
         </MaxWidth>
         <MaxWidth maxW="10rem">
           <Toggle
-            kind="secondary"
+            kind="primary"
             onChange={() => dispatch({ type: 'TOGGLE_BORDERED' })}
             toggled={bordered}
           >
             boredered
           </Toggle>
           <Toggle
-            kind="secondary"
+            kind="primary"
             onChange={() => dispatch({ type: 'TOGGLE_SPACED' })}
             toggled={spaced}
             style={{ marginTop: '1rem' }}
@@ -90,7 +90,7 @@ const AccordionCustomizations = ({ dispatch, state }: AccordionCustomizationsPro
             spaced
           </Toggle>
           <Toggle
-            kind="secondary"
+            kind="primary"
             onChange={() => dispatch({ type: 'TOGGLE_MUTUALLY_EXCLUSIVE' })}
             toggled={mutuallyExclusive}
             style={{ marginTop: '1rem' }}
@@ -98,7 +98,7 @@ const AccordionCustomizations = ({ dispatch, state }: AccordionCustomizationsPro
             mutuallyExclusive
           </Toggle>
           <Toggle
-            kind="secondary"
+            kind="primary"
             onChange={() => dispatch({ type: 'TOGGLE_WITH_ICONS' })}
             toggled={withIcons}
             style={{ marginTop: '1rem' }}

@@ -12,9 +12,9 @@ const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   const Example: React.FC = () => {
     return (
       <>
-        <Alert>Error!</Alert>
-        <Alert kind="warning">Warning</Alert>
         <Alert kind="success">Success</Alert>
+        <Alert kind="warning">Warning</Alert>
+        <Alert>Error!</Alert>
       </>
     );
   }
@@ -25,9 +25,9 @@ const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
   const Example = () => {
     return (
       <>
-        <Alert>Error!</Alert>
-        <Alert kind="warning">Warning</Alert>
         <Alert kind="success">Success</Alert>
+        <Alert kind="warning">Warning</Alert>
+        <Alert>Error!</Alert> 
       </>
     );
   }
@@ -42,9 +42,9 @@ const AlertCard = () => {
       propsMeta={{ meta: alertProps }}
     >
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
-        <Alert kind="danger">Error!</Alert>
-        <Alert kind="warning">Warning</Alert>
         <Alert kind="success">Success</Alert>
+        <Alert kind="warning">Warning</Alert>
+        <Alert kind="danger">Error!</Alert>
       </Flex>
     </Card>
   );

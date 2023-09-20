@@ -9,6 +9,8 @@ import PaddedNavLayout from '../components/layout/PaddedNavLayout';
 import { useIsMobileOrTablet } from '../hooks/useIsMobileOrTablet';
 import config from '../config';
 
+const withHalo = true;
+
 const Home = () => {
   const router = useRouter();
   const isMobileOrTablet = useIsMobileOrTablet();
@@ -18,7 +20,7 @@ const Home = () => {
   const vantaRef = useRef(null);
 
   useEffect(() => {
-    if (!vantaEffect) {
+    if (!vantaEffect && withHalo) {
       setVantaEffect(
         HALO({
           el: vantaRef.current,
@@ -44,7 +46,7 @@ const Home = () => {
         vantaEffect?.destroy();
       }
     };
-  }, [vantaEffect, vantaRef]);
+  }, [vantaEffect, vantaRef, isMobileOrTablet]);
 
   return (
     <PaddedNavLayout ref={vantaRef} withoutToggle>
