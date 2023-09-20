@@ -1,4 +1,4 @@
-import { Container, Flex, List, ListItem, Typography, useRothko } from '@rothko-ui/ui';
+import { Flex, List, ListItem, Typography, useRothko } from '@rothko-ui/ui';
 import isString from 'lodash/isString';
 import React from 'react';
 import styles from './Cards.module.scss';
@@ -38,9 +38,9 @@ const Card = ({ children, copy, propsMeta, codeSnippet }: CardProps) => {
       {propsMeta && (
         <div>
           <Typography.h3>{propsMeta.titleOveride ?? 'Props'}</Typography.h3>
-          <Container marginTop="2rem">
+          <div className={styles.propsContainer}>
             <PropsTable propsMeta={propsMeta.meta} />
-          </Container>
+          </div>
         </div>
       )}
     </div>

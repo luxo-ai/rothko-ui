@@ -48,11 +48,15 @@
       "background_selected": { "value": "#c42317" }
     },
     "table": {
+      "background": { "value": "#080808" },
       "header": {
-        "background": { "value": "#3B3B3B" }
+        "background": { "value": "#141414" }
       },
       "row": {
-        "border": { "value": "#585858" }
+        "border": { "value": "#000" },
+        "minimized": {
+          "background": { "value": "#141414" }
+        }
       }
     },
     "toast": {

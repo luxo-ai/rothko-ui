@@ -1,5 +1,10 @@
 import React from 'react';
-import type { TableDataProps } from './types';
+
+type TableDataProps = {
+  style?: React.CSSProperties;
+  className?: string;
+  children?: React.ReactNode;
+};
 
 const TableData = ({ children, style, className }: TableDataProps) => {
   return (

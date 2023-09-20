@@ -51,11 +51,13 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
         </Flex>
         <Flex justifyContent="center" alignItems="center" columnGap="1.75rem">
           {!withoutToggle && (
-            <div>
-              <button onClick={() => toggleMode()} className="phantom-button">
-                {mode === 'dark' ? <Moon width={25} height={25} /> : <Sun width={28} height={28} />}
-              </button>
-            </div>
+            <button onClick={() => toggleMode()} className={styles.phantomButton}>
+              {mode === 'dark' ? (
+                <Sun fill="#ffbb00" width={28} height={28} />
+              ) : (
+                <Moon fill="#4833e0" width={27} height={27} />
+              )}
+            </button>
           )}
           <WidthGeqOnly threshold={750} style={{ height: '100%' }}>
             <Button

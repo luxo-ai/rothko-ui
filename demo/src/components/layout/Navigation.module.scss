@@ -54,7 +54,7 @@ $headerBarHeightPx: 60px;
 
   // Footer content
   & > footer {
-    margin: 12rem auto 2rem auto;
+    margin: 9rem auto 2rem auto;
   }
 }
 
@@ -70,4 +70,10 @@ $headerBarHeightPx: 60px;
   cursor: pointer;
   z-index: 1;
   display: flex;
+
+  :hover {
+    @media screen and (min-width: 750px) {
+      opacity: 0.8;
+    }
+  }
 }

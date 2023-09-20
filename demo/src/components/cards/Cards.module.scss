@@ -8,3 +8,11 @@
     margin-top: 1.25rem;
   }
 }
+
+.propsContainer {
+  margin-top: 2rem;
+
+  @media screen and (max-width: 40rem) {
+    margin-top: 1rem;
+  }
+}

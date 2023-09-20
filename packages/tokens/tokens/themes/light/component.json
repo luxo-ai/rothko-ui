@@ -1,6 +1,6 @@
 {
   "base": {
-    "background": { "value": "#FFF" },
+    "background": { "value": "#fff" },
     "border": { "value": "#000" },
     "color": { "value": "#000" },
     "svg": {
@@ -48,11 +48,15 @@
       "background_selected": { "value": "{semanticColor.info.500}" }
     },
     "table": {
+      "background": { "value": "#fff" },
       "header": {
-        "background": { "value": "#EEE" }
+        "background": { "value": "#f8f9fa" }
       },
       "row": {
-        "border": { "value": "#eaeaea" }
+        "border": { "value": "#f3f3f5" },
+        "minimized": {
+          "background": { "value": "#f8f9fa" }
+        }
       }
     },
     "toast": {

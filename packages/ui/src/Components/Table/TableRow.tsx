@@ -1,5 +1,8 @@
+import { classes } from '@rothko-ui/utils';
 import React from 'react';
-import TableDataInner from './TableData/TableDataInner';
+import TableContext from './TableContext';
+import TableData from './TableData';
+import { isStringHeader } from './helpers';
 
 type TableRowProps = {
   style?: React.CSSProperties;
@@ -10,7 +13,32 @@ type TableRowProps = {
 const TableRow = ({ children, style, className }: TableRowProps) => (
   <tr style={style} className={className}>
     {React.Children.map(children, (child, idx) => {
-      return <TableDataInner {...child.props} columnIndex={idx} key={idx} />;
+      // Check if the child is a <td> tag
+      // Check if the child is a TableData component
+      const isTableDataTag = child && (child.type === TableData || child.type === 'td');
+      if (!isTableDataTag) {
+        throw new Error('Table.Row only accepts Table.Data as children');
+      }
+      // Extract the children of the <td> tag if it is one
+      const innerContent = isTableDataTag ? child.props.children : child;
+      const className = child?.props?.className;
+      const style = child?.props?.style;
+
+      return (
+        <TableContext.Consumer>
+          {({ headers }) => {
+            const header = headers[idx];
+            return (
+              <td className={classes(className, 'pivoted')} style={style}>
+                {header && (
+                  <div className="tdBefore">{isStringHeader(header) ? header : header.content}</div>
+                )}
+                {innerContent ? <div>{innerContent}</div> : <div>&nbsp;</div>}
+              </td>
+            );
+          }}
+        </TableContext.Consumer>
+      );
     })}
   </tr>
 );

@@ -67,10 +67,10 @@ const TabList = styled.ul<{ tabCount: number }>`
 
   margin: 0;
   // padding betweeb list and underline
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   // tablet and mobile
   @media only screen and (max-width: 700px) {
-    padding: 0.5rem 0;
+    padding: 0.25rem 0;
   }
 `;
 

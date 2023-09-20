@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { textStyle } from '../Typography/Typography';
 import TableBody from './TableBody';
-import { TableContextProvider } from './TableContext';
+import TableContext from './TableContext';
 import TableHeader from './TableHeader';
 import TableHeaders from './TableHeaders';
 import { isStringHeader } from './helpers';
@@ -16,8 +16,8 @@ type TableProps = {
 };
 
 const Table = React.forwardRef<HTMLTableElement, TableProps>(
-  ({ headers, children, style, className }, ref) => (
-    <TableContextProvider headers={headers}>
+  ({ headers = [], children, style, className }, ref) => (
+    <TableContext.Provider value={{ headers }}>
       <StyledTable style={style} className={className} ref={ref}>
         {headers && (
           <TableHeaders>
@@ -38,7 +38,7 @@ const Table = React.forwardRef<HTMLTableElement, TableProps>(
         )}
         <TableBody>{children}</TableBody>
       </StyledTable>
-    </TableContextProvider>
+    </TableContext.Provider>
   )
 );
 
@@ -48,7 +48,7 @@ const StyledTable = styled.table`
   width: 100%;
   font-variant-numeric: tabular-nums;
   border-collapse: collapse;
-  background: var(--rothko-background, transparent);
+  background: var(--rothko-table-background, transparent);
   color: var(--rothko-color, #000);
   // width: 100%;
 
@@ -73,7 +73,7 @@ const StyledTable = styled.table`
   & td {
     ${textStyle}
     font-family: var(--rothko-typography-body-light);
-    padding: 1rem 1.25rem;
+    padding: 1.25rem;
   }
 
   & td .tdBefore {
@@ -96,8 +96,17 @@ const StyledTable = styled.table`
       left: -9999px;
     }
 
+    & tr:not(:last-of-type) {
+      border-bottom-style: none;
+    }
+
+    & tr {
+      background: var(--rothko-table-row-minimized-background, transparent);
+      margin-bottom: 0.3rem;
+    }
+
     & td {
-      padding: 0.3rem 0.125rem;
+      padding: 0.75rem 0.5rem;
     }
 
     & tbody tr {
@@ -105,7 +114,8 @@ const StyledTable = styled.table`
     }
 
     & {
-      border: 0.1rem solid var(--rothko-table-row-border, #000);
+      background: unset;
+      // border: 0.1rem solid var(--rothko-table-row-border, #000);
     }
 
     & td.pivoted {
