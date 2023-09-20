@@ -7,9 +7,6 @@ type TableHeadersProps = {
 };
 
 const TableHeaders = ({ children, style, className }: TableHeadersProps) => {
-  React.Children.forEach(children, child => {
-    child;
-  });
   return (
     <thead style={style} className={className}>
       {children}
