@@ -123,17 +123,12 @@ const IconsCard = () => {
                         text={`<${iconName} width={20} height={20} />`}
                         onCopy={() => addToast({ content: 'Added to clipboard!', withLife: true })}
                       >
-                        <Container
-                          cursor="pointer"
-                          ariaLabel={iconName}
-                          as="button"
-                          padding="2rem 1rem"
-                        >
+                        <button aria-label={iconName}>
                           <Flex flexDirection="column" alignItems="center" gap="1rem">
                             <C width={30} height={30} />
                             <Typography.bodySmall>{iconName}</Typography.bodySmall>
                           </Flex>
-                        </Container>
+                        </button>
                       </CopyToClipboard>
                     )}
                   </ToastContextConsumer>

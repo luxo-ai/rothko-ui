@@ -1,5 +1,5 @@
 import { Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
-import { Button, Flex, FlexItem, Toggle, Typography, WidthGeqOnly, useRothko } from '@rothko-ui/ui';
+import { Button, Flex, FlexItem, Typography, WidthGeqOnly, useRothko } from '@rothko-ui/ui';
 import cookieCutter from 'cookie-cutter';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -49,8 +49,15 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
             </Flex>
           </FlexItem>
         </Flex>
-        <Flex columnGap="1.25rem">
-          <WidthGeqOnly threshold={750}>
+        <Flex justifyContent="center" alignItems="center" columnGap="1.75rem">
+          {!withoutToggle && (
+            <div>
+              <button onClick={() => toggleMode()} className="phantom-button">
+                {mode === 'dark' ? <Moon width={25} height={25} /> : <Sun width={28} height={28} />}
+              </button>
+            </div>
+          )}
+          <WidthGeqOnly threshold={750} style={{ height: '100%' }}>
             <Button
               size="s"
               kind="primary"
@@ -62,20 +69,22 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
               Sponsor
             </Button>
           </WidthGeqOnly>
-          {!withoutToggle && (
-            <Toggle
-              kind="success"
-              toggled={mode === 'dark'}
-              onChange={() => toggleMode()}
-              /* make react node or react FC -- same for button */
-              onIcon={<Moon fill="#000" />}
-              offIcon={<Sun fill="#000" />}
-            />
-          )}
         </Flex>
       </Flex>
     </nav>
   );
 };
+
+/*
+            <Toggle
+              kind="success"
+              toggled={mode === 'dark'}
+              onChange={() => toggleMode()}
+              onIcon={<Moon fill="#000" />}
+              offIcon={<Sun fill="#000" />}
+
+          
+            />
+          */
 
 export default Navigation;
