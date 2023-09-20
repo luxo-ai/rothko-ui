@@ -28,6 +28,7 @@ $headerBarHeightPx: 60px;
 
 .paddedNavContainer {
   height: 100%;
+  min-height: 100vh; // key for pushing footer to bottom (along w flex: 1 on main content)
   padding-top: $headerBarHeightPx;
   display: flex;
   flex-direction: column;
@@ -45,7 +46,7 @@ $headerBarHeightPx: 60px;
   }
   // Main content
   & > main {
-    flex: 1 0 auto;
+    flex: 1;
     padding: 1rem;
     height: 100%;
     //  overflow: auto;

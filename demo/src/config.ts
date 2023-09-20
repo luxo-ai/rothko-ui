@@ -5,5 +5,5 @@ export default {
   preference: { themeMode: 'rothko-theme-mode' },
   contactEmail: 'luis@rothko-ui.com',
   ethWallet: '0x7A67fF6354d983B6cfc3a7f7C5BA93f73C864b32',
-  version: process.env.VERSION || '1.0.0',
+  version: process.env.VERSION || '1.0.34',
 } as const;

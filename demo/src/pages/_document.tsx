@@ -34,26 +34,51 @@ class MyDocument extends Document {
           {/* ---- LAB GROTESQUE ---- */}
           <link
             rel="preload"
-            href="/fonts/LabGrotesque/LabGrotesque-Light.woff"
-            as="font"
-            crossOrigin=""
-          />
-          <link
-            rel="preload"
             href="/fonts/LabGrotesque/LabGrotesque-Regular.woff"
             as="font"
+            type="font/woff"
             crossOrigin=""
           />
           <link
             rel="preload"
             href="/fonts/LabGrotesque/LabGrotesque-Italic.woff"
             as="font"
+            type="font/woff"
             crossOrigin=""
           />
           <link
             rel="preload"
             href="/fonts/LabGrotesque/LabGrotesque-Bold.woff"
             as="font"
+            type="font/woff"
+            crossOrigin=""
+          />
+          <link
+            rel="preload"
+            href="/fonts/LabGrotesque/LabGrotesque-Light.woff"
+            as="font"
+            type="font/woff"
+            crossOrigin=""
+          />
+          <link
+            rel="preload"
+            href="/fonts/Soehne/soehne-buch.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin=""
+          />
+          <link
+            rel="preload"
+            href="/fonts/Soehne/soehne-halbfett.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin=""
+          />
+          <link
+            rel="preload"
+            href="/fonts/Soehne/soehne-mono-buch.woff2"
+            as="font"
+            type="font/woff2"
             crossOrigin=""
           />
         </Head>

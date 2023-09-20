@@ -25,6 +25,7 @@
     "build:ui:dev": "lerna run build:dev --scope=@rothko-ui/ui --stream",
     "build:utils": "lerna run build --scope=@rothko-ui/utils --stream",
     "build:demo": "yarn build && yarn workspace demo build",
+    "dev:demo": "yarn workspace demo dev",
     "test:utils": "lerna run test --scope=@rothko-ui/utils",
     "build": "lerna run build --stream",
     "clean": "lerna clean",

@@ -7,7 +7,8 @@ import RothkoHeader from '../components/Header';
 import { IsMobileOrTabletContext } from '../components/IsMobileOrTabletContext';
 import WithProviders from '../components/WithProviders';
 import config from '../config';
-import '../styles/globals.css';
+import '../../public/fonts/style.css';
+import '../globals.css';
 
 type RothkoAppProps = AppProps & {
   cookies?: Dictionary<string, string>;

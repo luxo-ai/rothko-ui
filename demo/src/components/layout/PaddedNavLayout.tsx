@@ -1,4 +1,3 @@
-// 'use client';
 import { Email, Github, Heart, Twitter } from '@rothko-ui/icons';
 import { Drawer, Flex, Typography, useRothko } from '@rothko-ui/ui';
 import Link from 'next/link';
