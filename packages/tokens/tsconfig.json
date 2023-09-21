@@ -14,6 +14,6 @@
     "resolveJsonModule": true
   },
   "compileOnSave": true,
-  "exclude": ["**/*.spec.ts", "node_modules", "dist", "build"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "node_modules", "dist", "build"],
   "include": ["index.ts", "**/*.ts"]
 }
