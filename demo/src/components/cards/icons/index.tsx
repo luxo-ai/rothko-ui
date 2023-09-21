@@ -18,7 +18,7 @@ import Card from '../Card';
 import CodeExample, { CodeLanguage } from '../CodeExample';
 import iconographyCopy from './copy';
 import { filledIconList, outlineIconList } from './iconsList';
-import styles from './icons.module.scss';
+import styles from './Icons.module.scss';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 enum IconKind {
