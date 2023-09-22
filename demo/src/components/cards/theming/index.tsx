@@ -364,9 +364,9 @@ const ThemeCard = () => {
         <JsonCode code={componentJsonOverride} />
       </div>
       <div>
-        <Typography.h6>Overriding Semanticc Colors</Typography.h6>
+        <Typography.h6>Overriding Semantic Colors</Typography.h6>
         <Typography.body>
-          You can overridde the system&apos;s semantic colorss using the <code>overrides</code> prop
+          You can overridde the system&apos;s semantic colors using the <code>overrides</code> prop
           on the <code>RothkoProvider</code>.
         </Typography.body>
         <div style={{ marginTop: '1rem' }}>
