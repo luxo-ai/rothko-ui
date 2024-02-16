@@ -2,8 +2,8 @@ import { classes } from '@rothko-ui/utils';
 import React, { useEffect, useRef, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import InlineSpinnerLoader from '../../Library/Loader/InlineSpinnerLoader';
-import type { Accessory } from '../../Library/types';
+import InlineSpinnerLoader from '../../Libraryy/Loader/InlineSpinnerLoader';
+import type { Accessory } from '../../Libraryy/types';
 import type { KindProps, RothkoKind, RothkoSize } from '../../Theme';
 import type { ButtonAppearance, ButtonShape } from './types';
 

@@ -1,7 +1,7 @@
 import type { Nullable } from '@rothko-ui/utils';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { phantomInputStyle } from '../../../Library/PhantomInput';
+import { phantomInputStyle } from '../../../Libraryy/PhantomInput';
 import type { TextProps } from '../../Typography/Typography';
 import { textStyle } from '../../Typography/Typography';
 import SearchButton from './SearchButton';

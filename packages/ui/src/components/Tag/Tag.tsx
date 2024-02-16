@@ -1,10 +1,10 @@
 import { CloseOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
-import { phantomButtonStyle } from '../../Library/PhantomButton';
+import { phantomButtonStyle } from '../../Libraryy/PhantomButton';
 import type { KindProps } from '../../Theme/types';
 import { Typography } from '../Typography';
-import { semanticTextChildrenStyle, textChildrenStyle } from '../../Library/Styles';
+import { semanticTextChildrenStyle, textChildrenStyle } from '../../Libraryy/Styles';
 
 type TagAppearance = 'filled' | 'outline';
 

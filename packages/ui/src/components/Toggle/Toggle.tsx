@@ -3,7 +3,7 @@ import keyboardKey from 'keyboard-key';
 import type { CSSProperties } from 'react';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { hideChromeBrowserOutline } from '../../Library/Styles';
+import { hideChromeBrowserOutline } from '../../Libraryy/Styles';
 import type { KindProps } from '../../Theme/types';
 import { keyDownFactory } from '../../utils/keyUtils';
 import { Typography } from '../Typography';

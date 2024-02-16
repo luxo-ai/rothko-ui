@@ -3,8 +3,8 @@ import '@rothko-ui/tokens/web/global.css';
 import '@rothko-ui/tokens/web/light.css';
 
 import React from 'react';
-import { DebuggerContextProvider } from './Library/DebuggerContext';
-import { PORTAL_ROOT_ID } from './Library/Portal';
+import { DebuggerContextProvider } from './Libraryy/DebuggerContext';
+import { PORTAL_ROOT_ID } from './Libraryy/Portal';
 import type { ThemeMode, ThemeOverrides } from './Theme';
 import { ThemeContextProvider, useTheme } from './Theme';
 

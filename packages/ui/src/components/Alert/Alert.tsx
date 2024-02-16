@@ -1,7 +1,7 @@
 import { isString } from '@rothko-ui/utils';
 import React from 'react';
 import styled from 'styled-components';
-import { semanticTextChildrenStyle } from '../../Library/Styles';
+import { semanticTextChildrenStyle } from '../../Libraryy/Styles';
 import type { KindProps, RothkoKind } from '../../Theme/types';
 import Typography from '../Typography/Typography';
 

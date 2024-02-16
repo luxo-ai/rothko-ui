@@ -1,9 +1,9 @@
 import React from 'react';
 import type { CSSProperties } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { useStyleProps } from '../../Layout/Container';
-import Flex from '../../Layout/Flex/Flex';
-import FlexItem from '../../Layout/Flex/FlexItem';
+import { useStyleProps } from '../../Layoutt/Container';
+import Flex from '../../Layoutt/Flex/Flex';
+import FlexItem from '../../Layoutt/Flex/FlexItem';
 import Typography from '../Typography/Typography';
 
 type ListItemProps = CSSProperties & {

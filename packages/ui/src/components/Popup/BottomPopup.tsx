@@ -3,15 +3,15 @@ import { CloseOutline } from '@rothko-ui/icons';
 import { classes } from '@rothko-ui/utils';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { ShadedBackdrop } from '../../Library/Common';
-import { phantomButtonStyle } from '../../Library/PhantomButton';
-import { DomPortal } from '../../Library/Portal';
+import { ShadedBackdrop } from '../../Libraryy/Common';
+import { phantomButtonStyle } from '../../Libraryy/PhantomButton';
+import { DomPortal } from '../../Libraryy/Portal';
 import {
   BODY_SCROLL_LOCK_IGNORE_ID,
   disableBodyScroll,
   enableBodyScroll,
 } from '../../utils/domUtils';
-import { textChildrenStyle } from '../../Library/Styles';
+import { textChildrenStyle } from '../../Libraryy/Styles';
 
 type PopupProps = {
   children: React.ReactNode;

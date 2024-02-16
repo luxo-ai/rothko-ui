@@ -1,7 +1,7 @@
 import { Set as ImSet } from 'immutable';
 import React, { useCallback, useState } from 'react';
 import styled, { css } from 'styled-components';
-import type { RothkoKind } from '../../Theme/types';
+import type { RothkoKind } from '../../Themee/types';
 import { AccordionContext } from './AccordionContext';
 import type { IconOverride } from './types';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import type { CustomColorCssProperties } from '../Layout/Container';
-import { useStyleProps } from '../Layout/Container';
+import type { CustomColorCssProperties } from '../Layoutt/Container';
+import { useStyleProps } from '../Layoutt/Container';
 import { hideChromeBrowserOutline } from './Styles';
 
 export const phantomInputStyle = css`

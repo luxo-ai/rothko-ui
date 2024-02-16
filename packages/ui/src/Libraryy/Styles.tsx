@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import type { KindProps } from '../Theme';
+import type { KindProps } from '../Themee';
 
 export const unselectableStyle = css`
   -webkit-touch-callout: none; /* iOS Safari */

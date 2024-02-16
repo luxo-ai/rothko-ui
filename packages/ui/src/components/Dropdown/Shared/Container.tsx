@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { baseInputStyle } from '../../Input/styles';
-import { hideChromeBrowserOutline } from '../../../Library/Styles';
+import { hideChromeBrowserOutline } from '../../../Libraryy/Styles';
 
 export const DropdownContainerDiv = styled.div`
   -webkit-tap-highlight-color: transparent;

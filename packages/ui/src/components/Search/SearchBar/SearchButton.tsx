@@ -1,7 +1,7 @@
 import { SearchOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
-import { PhantomButton } from '../../../Library/PhantomButton';
+import { PhantomButton } from '../../../Libraryy/PhantomButton';
 
 type SearchButtonProps = {
   disabled?: boolean;
