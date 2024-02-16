@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import styled from 'styled-components';
-import Typography from '../Componentsss/Typography/Typography';
+import Typography from '../components/Typography/Typography';
 import type { RenderOption } from './types';
 
 export const DefaultRenderOption: RenderOption<any> = ({ option }) => (
