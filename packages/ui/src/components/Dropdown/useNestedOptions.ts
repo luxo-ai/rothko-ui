@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from 'react';
-import { useDebuggerContext } from '../../Libraryy/DebuggerContext';
-import type { Stack } from '../../Libraryy/dataStructures';
-import { stackPeak, stackPop, stackPush } from '../../Libraryy/dataStructures';
-import type { NestedOption, Option, Value } from '../../Libraryy/types';
+import { useDebuggerContext } from '../../library/DebuggerContext';
+import type { Stack } from '../../library/dataStructures';
+import { stackPeak, stackPop, stackPush } from '../../library/dataStructures';
+import type { NestedOption, Option, Value } from '../../library/types';
 
 type HookArgs<V extends Value> = {
   options: NestedOption<V>[];

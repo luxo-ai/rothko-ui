@@ -2,7 +2,7 @@ import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import React from 'react';
 import styled from 'styled-components';
-import type { KindProps, RothkoKind } from '../../Theme/types';
+import type { KindProps, RothkoKind } from '../../theme/types';
 import { keyDownFactory } from '../../utils/keyUtils';
 import Typography from '../Typography/Typography';
 

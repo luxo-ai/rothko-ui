@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid } from '../../Layoutt';
-import { LabelText } from '../../Libraryy/Common';
-import type { Option, Value } from '../../Libraryy/types';
-import type { KindProps } from '../../Theme';
+import { Grid } from '../../layout';
+import { LabelText } from '../../library/Common';
+import type { Option, Value } from '../../library/types';
+import type { KindProps } from '../../theme';
 import type { EmSize, RemSize } from '../../types';
 import Radio from './Radio';
 

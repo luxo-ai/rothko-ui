@@ -2,11 +2,11 @@ import { classes, times } from '@rothko-ui/utils';
 import React, { useEffect, useMemo, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { Flex, FlexItem } from '../../Layoutt';
-import Grid from '../../Layoutt/Grid/Grid';
-import { phantomButtonStyle } from '../../Libraryy/PhantomButton';
-import type { Accessory, Option, Value } from '../../Libraryy/types';
-import type { KindProps, RothkoSize } from '../../Theme';
+import { Flex, FlexItem } from '../../layout';
+import Grid from '../../layout/Grid/Grid';
+import { phantomButtonStyle } from '../../library/PhantomButton';
+import type { Accessory, Option, Value } from '../../library/types';
+import type { KindProps, RothkoSize } from '../../theme';
 import type { EmSize, RemSize } from '../../types';
 import Typography from '../Typography/Typography';
 

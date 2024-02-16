@@ -1,8 +1,8 @@
 import { isString } from '@rothko-ui/utils';
 import React from 'react';
 import styled from 'styled-components';
-import { semanticTextChildrenStyle } from '../../Libraryy/Styles';
-import type { KindProps, RothkoKind } from '../../Theme/types';
+import { semanticTextChildrenStyle } from '../../library/Styles';
+import type { KindProps, RothkoKind } from '../../theme/types';
 import Typography from '../Typography/Typography';
 
 type AlertProps = {

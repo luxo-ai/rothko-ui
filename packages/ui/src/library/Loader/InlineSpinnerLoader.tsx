@@ -2,7 +2,7 @@ import { classes } from '@rothko-ui/utils';
 import React from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { isRothkoKind } from '../../Theme';
+import { isRothkoKind } from '../../theme';
 import type { LoaderColor, SpinnerSize } from './types';
 
 type SimpleInlineSpinnerProps = {

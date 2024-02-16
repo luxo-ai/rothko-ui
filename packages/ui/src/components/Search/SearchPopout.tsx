@@ -3,10 +3,10 @@ import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Grid } from '../../Layoutt/Grid';
-import { ShadedBackdrop } from '../../Libraryy/Common';
-import { PhantomButton } from '../../Libraryy/PhantomButton';
-import { DomPortal } from '../../Libraryy/Portal';
+import { Grid } from '../../layout/Grid';
+import { ShadedBackdrop } from '../../library/Common';
+import { PhantomButton } from '../../library/PhantomButton';
+import { DomPortal } from '../../library/Portal';
 import {
   addEvent,
   clearAllBodyScrollLocks,

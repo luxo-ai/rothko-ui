@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Value } from '../../Libraryy/types';
+import type { Value } from '../../library/types';
 import DropdownInner from './DropdownInner';
 import type { DropdownInnerProps } from './types';
 

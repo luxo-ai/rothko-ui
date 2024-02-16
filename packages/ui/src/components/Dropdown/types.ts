@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { FocusHandler, Option, RenderOption, Value } from '../../Libraryy/types';
+import type { FocusHandler, Option, RenderOption, Value } from '../../library/types';
 
 export type QueryMatchFn<V, T = undefined> = (query: string, opt: Option<V, T>) => boolean;
 

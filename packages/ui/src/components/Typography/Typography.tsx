@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { phantomButtonStyle } from '../../Libraryy/PhantomButton';
-import type { KindProps, RothkoKind } from '../../Theme';
+import { phantomButtonStyle } from '../../library/PhantomButton';
+import type { KindProps, RothkoKind } from '../../theme';
 
 export type TextProps = {
   light?: boolean;

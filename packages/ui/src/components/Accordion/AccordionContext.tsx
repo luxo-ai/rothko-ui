@@ -1,6 +1,6 @@
 import type { Set as ImSet } from 'immutable';
 import { createContext, useContext } from 'react';
-import type { RothkoKind } from '../../Theme';
+import type { RothkoKind } from '../../theme';
 import type { IconOverride } from './types';
 
 type IAccordionContext = {

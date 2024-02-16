@@ -3,8 +3,8 @@ import { animated } from '@react-spring/web';
 import { CloseOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
-import { PhantomButton } from '../../Libraryy/PhantomButton';
-import type { KindProps, RothkoKind } from '../../Theme';
+import { PhantomButton } from '../../library/PhantomButton';
+import type { KindProps, RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
 import type { ToastDetails } from './types';
 

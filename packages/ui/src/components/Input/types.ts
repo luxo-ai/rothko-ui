@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { RothkoSize } from '../../Theme';
+import type { RothkoSize } from '../../theme';
 
 export type InputSize = Extract<RothkoSize, 's' | 'm' | 'l'>;
 

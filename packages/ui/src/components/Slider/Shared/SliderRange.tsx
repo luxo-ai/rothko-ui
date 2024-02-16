@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import type { KindProps } from '../../../Theme/types';
+import type { KindProps } from '../../../theme/types';
 
 const SliderRangeDiv = styled.div<KindProps & { $disabled?: boolean }>`
   position: absolute;

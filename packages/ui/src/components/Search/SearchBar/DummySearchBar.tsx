@@ -1,9 +1,9 @@
 import type { Nullable } from '@rothko-ui/utils';
 import React from 'react';
 import styled from 'styled-components';
-import { ItemText } from '../../../Libraryy/Common';
-import { PhantomButton } from '../../../Libraryy/PhantomButton';
-import { PhantomInput } from '../../../Libraryy/PhantomInput';
+import { ItemText } from '../../../library/Common';
+import { PhantomButton } from '../../../library/PhantomButton';
+import { PhantomInput } from '../../../library/PhantomInput';
 import SearchButton from './SearchButton';
 import styles from './styles';
 

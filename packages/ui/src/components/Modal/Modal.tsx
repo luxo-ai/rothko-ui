@@ -5,10 +5,10 @@ import keyboardKey from 'keyboard-key';
 import React, { useEffect, useRef } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { ShadedBackdrop } from '../../Libraryy/Common';
-import { phantomButtonStyle } from '../../Libraryy/PhantomButton';
-import { DomPortal } from '../../Libraryy/Portal';
-import type { RothkoSize } from '../../Theme';
+import { ShadedBackdrop } from '../../library/Common';
+import { phantomButtonStyle } from '../../library/PhantomButton';
+import { DomPortal } from '../../library/Portal';
+import type { RothkoSize } from '../../theme';
 import {
   BODY_SCROLL_LOCK_IGNORE_ID,
   addEvent,
@@ -17,7 +17,7 @@ import {
   removeEvent,
 } from '../../utils/domUtils';
 import Typography from '../Typography/Typography';
-import { textChildrenStyle } from '../../Libraryy/Styles';
+import { textChildrenStyle } from '../../library/Styles';
 
 const bodyStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`

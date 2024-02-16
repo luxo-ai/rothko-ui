@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { phantomButtonStyle } from '../../../Libraryy/PhantomButton';
+import { phantomButtonStyle } from '../../../library/PhantomButton';
 
 type ControlButtonProps = {
   $rotateOnOpen?: boolean;

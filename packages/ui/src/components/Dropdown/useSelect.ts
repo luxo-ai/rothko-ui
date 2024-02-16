@@ -1,9 +1,9 @@
 import { asCompactedArray, isFunction, isNil } from '@rothko-ui/utils';
 import { Set as ImSet } from 'immutable';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useDebuggerContext } from '../../Libraryy/DebuggerContext';
-import useOptions from '../../Libraryy/Hooks/useOptions';
-import type { Option, Value } from '../../Libraryy/types';
+import { useDebuggerContext } from '../../library/DebuggerContext';
+import useOptions from '../../library/Hooks/useOptions';
+import type { Option, Value } from '../../library/types';
 import type { QueryMatchFn } from './types';
 
 type HookArgs<V, T> = {

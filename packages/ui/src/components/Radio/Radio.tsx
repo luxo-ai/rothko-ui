@@ -1,7 +1,7 @@
 import { classes, isString } from '@rothko-ui/utils';
 import React from 'react';
 import styled from 'styled-components';
-import type { KindProps, RothkoKind } from '../../Theme';
+import type { KindProps, RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
 
 type RadioProps = {

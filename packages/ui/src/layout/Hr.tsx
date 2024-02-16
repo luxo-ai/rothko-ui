@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import type { HexColor, RGBColor, RothkoKind } from '../Theme';
-import { isRothkoKind } from '../Theme';
+import type { HexColor, RGBColor, RothkoKind } from '../theme';
+import { isRothkoKind } from '../theme';
 import type { EmSize, RemSize } from '../types';
 
 type HrProps = {

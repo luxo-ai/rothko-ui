@@ -3,10 +3,10 @@ import '@rothko-ui/tokens/web/global.css';
 import '@rothko-ui/tokens/web/light.css';
 
 import React from 'react';
-import { DebuggerContextProvider } from './Libraryy/DebuggerContext';
-import { PORTAL_ROOT_ID } from './Libraryy/Portal';
-import type { ThemeMode, ThemeOverrides } from './Theme';
-import { ThemeContextProvider, useTheme } from './Theme';
+import { DebuggerContextProvider } from './library/DebuggerContext';
+import { PORTAL_ROOT_ID } from './library/Portal';
+import type { ThemeMode, ThemeOverrides } from './theme';
+import { ThemeContextProvider, useTheme } from './theme';
 
 type RothkoProviderProps = {
   children: React.ReactNode;

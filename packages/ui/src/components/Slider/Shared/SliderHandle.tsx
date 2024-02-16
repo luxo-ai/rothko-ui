@@ -1,8 +1,8 @@
 import type { Nullable } from '@rothko-ui/utils';
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { hideChromeBrowserOutline } from '../../../Libraryy/Styles';
-import type { KindProps, RothkoKind } from '../../../Theme';
+import { hideChromeBrowserOutline } from '../../../library/Styles';
+import type { KindProps, RothkoKind } from '../../../theme';
 import type { DragDelta, DragEvent } from '../../../utils/domUtils';
 import {
   addEvent,
@@ -14,7 +14,7 @@ import {
   removeEvent,
 } from '../../../utils/domUtils';
 import { getOffsetFactory } from '../sliderUtils';
-import useIsMounted from '../../../Libraryy/Hooks/useIsMounted';
+import useIsMounted from '../../../library/Hooks/useIsMounted';
 
 type DraggableEvents = {
   start: string;
