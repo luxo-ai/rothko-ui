@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { baseInputStyle } from '../Components/Input/styles';
-import Typography from '../Components/Typography/Typography';
+import { baseInputStyle } from '../Componentsss/Input/styles';
+import Typography from '../Componentsss/Typography/Typography';
 
 /* ATTN: ~~ DO NOT EXPORT IN index.tsx (for internal use only) ~~ */
 

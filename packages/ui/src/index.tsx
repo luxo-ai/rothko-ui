@@ -1,5 +1,5 @@
-export * from './Components';
-export type { ButtonAppearance, ButtonShape } from './Components/Button/types';
+export * from './Componentsss';
+export type { ButtonAppearance, ButtonShape } from './Componentsss/Button/types';
 export * from './Layout';
 export type { Option, Accessory, NestedOption } from './Library/types';
 export * from './RothkoProvider';
