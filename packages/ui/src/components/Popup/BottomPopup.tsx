@@ -1,8 +1,10 @@
-import { animated, useTransition } from '@react-spring/web';
-import { CloseOutline } from '@rothko-ui/icons';
-import { classes } from '@rothko-ui/utils';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { animated, useTransition } from '@react-spring/web';
+
+import { CloseOutline } from '@rothko-ui/icons';
+import { classes } from '@rothko-ui/utils';
+
 import { ShadedBackdrop } from '../../library/Common';
 import { phantomButtonStyle } from '../../library/PhantomButton';
 import { DomPortal } from '../../library/Portal';
@@ -12,12 +14,18 @@ import {
   enableBodyScroll,
 } from '../../utils/domUtils';
 import { textChildrenStyle } from '../../library/Styles';
+import { textStyle } from '../Typography/Typography';
 
 type PopupProps = {
+  /** The content to be displayed within the popup. */
   children: React.ReactNode;
+  /** Optional CSS class name for custom styling. */
   className?: string;
+  /** Optional ID attribute for the popup element. */
   id?: string;
+  /** Callback function invoked when the popup is closed. */
   onClose: () => void;
+  /** Boolean flag indicating whether the popup is open or closed. */
   open: boolean;
 };
 
@@ -86,14 +94,12 @@ const BottomPopup: React.FC<PopupProps> = ({ children, className, id, onClose, o
         {transition(
           (style, item) =>
             item && (
-              <div style={{ position: 'relative' }}>
-                <AnimatedPopupContainer id={id} style={style} ref={popupRef} className={className}>
-                  <PopupCloseButton onClick={() => onClose()}>
-                    <CloseOutline width="1.5rem" height="1.5rem" />
-                  </PopupCloseButton>
-                  {children}
-                </AnimatedPopupContainer>
-              </div>
+              <AnimatedPopupContainer id={id} style={style} ref={popupRef} className={className}>
+                <PopupCloseButton onClick={() => onClose()}>
+                  <CloseOutline width="1.5rem" height="1.5rem" />
+                </PopupCloseButton>
+                <PopupContentContainerDiv>{children}</PopupContentContainerDiv>
+              </AnimatedPopupContainer>
             )
         )}
       </ShadedBackdrop>
@@ -117,8 +123,14 @@ const PopupContainerDiv = styled.div`
   will-change: transform, opacity, height;
   transition-property: transform;
   transition-timing-function: ease-out;
+`;
 
+const PopupContentContainerDiv = styled.div`
   ${textChildrenStyle}
+  ${textStyle}
+  margin: 0;
+  padding: 0;
+  user-select: text;
 `;
 
 const AnimatedPopupContainer = animated(PopupContainerDiv);

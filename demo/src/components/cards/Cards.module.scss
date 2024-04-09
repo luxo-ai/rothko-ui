@@ -2,15 +2,15 @@
   display: flex;
   flex-direction: column;
   max-width: 80rem;
-  row-gap: 2.5rem;
+  row-gap: 3.5rem;
 
   .bodySubtext {
-    margin-top: 1.25rem;
+    margin-top: 1rem;
   }
 }
 
 .propsContainer {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 
   @media screen and (max-width: 40rem) {
     margin-top: 1rem;

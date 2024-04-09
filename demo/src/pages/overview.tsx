@@ -1,5 +1,5 @@
 import WithNavigation from '../components/WithNavigation';
-import { OverviewCard } from '../components/cards/overview';
+import OverviewCard from '../components/cards/overview';
 
 const Overview = () => {
   return (

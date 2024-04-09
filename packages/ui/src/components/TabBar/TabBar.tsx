@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import type { KindProps } from '../../theme/types';
 import Typography from '../Typography/Typography';
-import type { RenderTab, Tab } from './types';
+import type { Tab } from './types';
+import { Container, Flex, FlexItem } from '../../layout';
 
 type TabBarProps<Key extends KeyLike> = KindProps & {
   className?: string;
@@ -11,6 +12,7 @@ type TabBarProps<Key extends KeyLike> = KindProps & {
   onSelect?: (tab: Key) => void;
   style?: React.CSSProperties;
   tabs: ReadonlyArray<Tab<Key>>;
+  containerStyle?: React.CSSProperties;
 };
 
 function TabBar<Key extends KeyLike>({
@@ -20,32 +22,39 @@ function TabBar<Key extends KeyLike>({
   onSelect,
   style,
   tabs,
+  containerStyle = {},
 }: TabBarProps<Key>) {
   const tabCount = tabs.length;
   const initialIdx = tabs.findIndex(t => t.key === initialTab);
   const [tabIdx, setTabIdx] = useState(initialIdx >= 0 ? initialIdx : 0);
-  const TabComponent: RenderTab = tabs[tabIdx].render;
   return (
     <>
       <TabListContainerDiv className={className} style={style}>
         <TabList aria-label="tablist" role="tablist" tabCount={tabCount}>
           {tabs.map((t, idx) => (
-            <TabItem
-              aria-label={t.title}
-              key={`${String(t.key)}-${idx}`}
+            <Flex
+              as="li"
               role="tab"
               onClick={() => {
                 setTabIdx(idx);
                 onSelect?.(t.key);
               }}
+              key={`${String(t.key)}-${idx}`}
+              margin="0 auto"
+              alignItems="center"
+              columnGap="0.5rem"
+              cursor="pointer"
+              // aria-label={t.title}
             >
-              {t.title}
-            </TabItem>
+              <FlexItem>{t.leftIcon}</FlexItem>
+              <TabItem aria-label={t.title}>{t.title}</TabItem>
+              <FlexItem>{t.rightIcon}</FlexItem>
+            </Flex>
           ))}
         </TabList>
         <UnderLineDiv kind={kind} tabCount={tabCount} currentTabIdx={tabIdx} />
       </TabListContainerDiv>
-      <TabComponent />
+      <Container {...containerStyle}>{tabs[tabIdx].render}</Container>
     </>
   );
 }
@@ -74,11 +83,15 @@ const TabList = styled.ul<{ tabCount: number }>`
   }
 `;
 
-const TabItem = styled(Typography.body).attrs({ as: 'li' })`
+const TabItem = styled(Typography.body)`
+  // .attrs({ as: 'li' })
   -webkit-tap-highlight-color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  margin: 0;
+  user-select: none;
 
   cursor: pointer;
 `;

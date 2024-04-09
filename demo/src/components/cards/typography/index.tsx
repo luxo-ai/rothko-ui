@@ -1,40 +1,31 @@
-import { Grid, Tag, Typography } from '@rothko-ui/ui';
-import React from 'react';
+import { Container, Flex, Grid, Tag, Typography } from '@rothko-ui/ui';
+
+import { BASIC } from './usage/sourceCode';
+import { TSCode } from '../../Code';
+import Basic from './usage/Basic';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeExample';
+import Example from '../Example';
+import Props from '../Props';
 import typographyCopy from './copy';
 import typographyProps from './props';
 
-const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-import { Typography } from '@rothko-ui/ui';
+const GITHUB_URL =
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Typography';
 
-type ExampleProps = {
-  text: string
-}
-
-const Example = ({ text }: ExampleProps) => {
-  return (
-    <Typography.h1>{text} in h1!</Typography.h1>
-    );
-}
-`,
-  [CodeLanguage.JS]: `
-import { Typography } from '@rothko-ui/ui';
-
-const Example = ({ text }) => {
-  return <Typography.h1>{text} in h1!</Typography.h1>
-}
-`,
-};
+const IMPORT = "import { Typography } from '@rothko-ui/ui';";
 
 const TypographyCard = () => {
   return (
-    <Card
-      copy={typographyCopy}
-      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: typographyProps }}
-    >
+    <Card codeUrl={GITHUB_URL} copy={typographyCopy}>
+      <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Typography.h3>Usage</Typography.h3>
+        <Container maxWidth="32rem">
+          <TSCode sourceCode={IMPORT} />
+        </Container>
+        <Example sourceCode={BASIC}>
+          <Basic />
+        </Example>
+      </Flex>
       <Grid
         maxWidth="40rem"
         gridTemplateColumns="1fr 1fr"
@@ -85,6 +76,7 @@ const TypographyCard = () => {
         </Tag>
         <Typography.caption>caption</Typography.caption>
       </Grid>
+      <Props copy={{ props: typographyProps }} />
     </Card>
   );
 };

@@ -13,6 +13,7 @@ import {
 } from '../../utils/domUtils';
 import { DrawerContext } from './DrawerContext';
 import { textChildrenStyle } from '../../library/Styles';
+import { textStyle } from '../Typography/Typography';
 
 const TABLET_OR_MOBILE_MAX_WIDTH_PX = 750;
 const DEFAULT_DRAWER_WIDTH_PX = 350;
@@ -101,7 +102,7 @@ const Drawer = ({
                   <PhantomButton style={{ marginBottom: '1rem' }} onClick={() => closeDrawer()}>
                     <Close width={28} height={28} />
                   </PhantomButton>
-                  {children}
+                  <DrawerContentContainerDiv>{children} </DrawerContentContainerDiv>
                 </AnimatedDrawerContainerDiv>
               )
           )}
@@ -122,12 +123,19 @@ const AnimatedDrawerContainerDiv = animated(styled.div`
   width: ${DEFAULT_DRAWER_WIDTH_PX}px;
   overflow-y: auto;
 
-  ${textChildrenStyle}
-
   @media only screen and (max-width: ${TABLET_OR_MOBILE_MAX_WIDTH_PX}px) {
     width: calc(100% - 2 * 1.5rem);
   }
+
+  user-select: text;
 `);
+
+const DrawerContentContainerDiv = styled.div`
+  ${textChildrenStyle}
+  ${textStyle}
+  margin: 0;
+  padding: 0;
+`;
 
 const DrawerBackdrop = styled(ShadedBackdrop)`
   -webkit-backface-visibility: hidden;

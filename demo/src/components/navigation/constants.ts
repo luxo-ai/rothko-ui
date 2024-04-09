@@ -23,7 +23,6 @@ const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
   { label: 'Input' },
   { label: 'Modal' },
   { label: 'Radio Group' },
-  { label: 'Search' },
   { label: 'Skeleton' },
   {
     label: 'Slider',

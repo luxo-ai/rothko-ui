@@ -1,22 +1,47 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Highlight, themes } from 'prism-react-renderer';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import React from 'react';
+
 import { CopyOutline } from '@rothko-ui/icons';
 import { Flex, ToastContextConsumer, Typography, useRothko } from '@rothko-ui/ui';
-import { Highlight, themes } from 'prism-react-renderer';
-import React from 'react';
-import CopyToClipboard from 'react-copy-to-clipboard';
+
+export type Language = 'bash' | 'jsx' | 'json' | 'text' | 'typescript';
+
+const THEMES = {
+  jetwave: {
+    dark: themes.jettwaveDark,
+    light: themes.jettwaveLight,
+  },
+  nightOwl: {
+    dark: themes.nightOwl,
+    light: themes.nightOwlLight,
+  },
+} as const;
 
 type CodeProps = React.CSSProperties & {
-  language: string;
-  code: string;
+  sourceCode: string;
+  displayLanguage?: boolean;
+  displayLineNumbers?: boolean;
+  language: Language;
+  themeOverride?: keyof typeof THEMES;
 };
 
-const Code = ({ code, language, ...containerStyle }: CodeProps) => {
+export const Code = ({
+  sourceCode,
+  language,
+  displayLanguage,
+  displayLineNumbers,
+  themeOverride,
+  ...containerStyle
+}: CodeProps) => {
   const { mode } = useRothko();
+  const defaultTheme = language === 'jsx' ? 'nightOwl' : 'jetwave';
+  const theme = THEMES[themeOverride || defaultTheme];
   return (
-    <div>
+    <div style={containerStyle}>
       <Highlight
-        theme={mode === 'dark' ? themes.jettwaveDark : themes.jettwaveLight}
-        code={code}
+        theme={mode === 'dark' ? theme.dark : theme.light}
+        code={sourceCode}
         language={language}
       >
         {({ style, tokens, getLineProps, getTokenProps }) => (
@@ -27,11 +52,13 @@ const Code = ({ code, language, ...containerStyle }: CodeProps) => {
               padding="0.5rem 1rem"
               backgroundColor={style.backgroundColor}
             >
-              <Typography.caption style={{ color: style.color }}>{language}</Typography.caption>
+              {displayLanguage && (
+                <Typography.caption style={{ color: style.color }}>{language}</Typography.caption>
+              )}
               <ToastContextConsumer>
                 {({ addToast }) => (
                   <CopyToClipboard
-                    text={code}
+                    text={sourceCode}
                     onCopy={() => addToast({ content: 'Added to clipboard!', withLife: true })}
                   >
                     <button className="phantom-button">
@@ -48,8 +75,8 @@ const Code = ({ code, language, ...containerStyle }: CodeProps) => {
             </Flex>
             <pre
               style={{
-                ...containerStyle,
                 ...style,
+                ...containerStyle,
                 margin: '0.125rem 0',
                 padding: '0.5rem 1rem',
                 overflow: 'scroll',
@@ -57,6 +84,7 @@ const Code = ({ code, language, ...containerStyle }: CodeProps) => {
             >
               {tokens.map((line, i) => (
                 <div key={i} {...getLineProps({ line })}>
+                  {displayLineNumbers && <span>{i + 1}&nbsp;</span>}
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token })} />
                   ))}
@@ -70,14 +98,40 @@ const Code = ({ code, language, ...containerStyle }: CodeProps) => {
   );
 };
 
-export const BashCode = React.memo(({ code }: Pick<CodeProps, 'code'>) => (
-  <Code maxHeight="25rem" code={code} language="bash" />
-));
-BashCode.displayName = 'BashCode';
+export const TextCode = ({ sourceCode, maxWidth }: Pick<CodeProps, 'sourceCode' | 'maxWidth'>) => (
+  <Code maxHeight="25rem" language="text" sourceCode={sourceCode} maxWidth={maxWidth} />
+);
 
-export const JsonCode = React.memo(({ code }: Pick<CodeProps, 'code'>) => (
-  <Code maxHeight="25rem" language="json" code={code} />
-));
-JsonCode.displayName = 'JsonCode';
+export const BashCode = ({ sourceCode, maxWidth }: Pick<CodeProps, 'sourceCode' | 'maxWidth'>) => (
+  <Code
+    displayLanguage
+    maxHeight="25rem"
+    sourceCode={sourceCode}
+    language="bash"
+    maxWidth={maxWidth}
+  />
+);
 
-export default Code;
+export const JsonCode = ({ sourceCode, maxWidth }: Pick<CodeProps, 'sourceCode' | 'maxWidth'>) => (
+  <Code
+    displayLanguage
+    maxHeight="25rem"
+    language="json"
+    sourceCode={sourceCode}
+    maxWidth={maxWidth}
+  />
+);
+
+export const TSCode = ({ sourceCode, maxWidth }: Pick<CodeProps, 'sourceCode' | 'maxWidth'>) => (
+  <Code
+    displayLanguage
+    maxHeight="25rem"
+    language="typescript"
+    sourceCode={sourceCode}
+    maxWidth={maxWidth}
+  />
+);
+
+export const JSXCode = ({ sourceCode, maxWidth }: Pick<CodeProps, 'sourceCode' | 'maxWidth'>) => (
+  <Code displayLineNumbers language="jsx" sourceCode={sourceCode} maxWidth={maxWidth} />
+);

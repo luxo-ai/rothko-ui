@@ -1,58 +1,34 @@
-import { BreadCrumbItem, BreadCrumbs } from '@rothko-ui/ui';
-import Card from '../Card';
-import { CodeLanguage } from '../CodeExample';
+import { Container, Flex, Typography } from '@rothko-ui/ui';
+
+import { BASIC } from './usage/sourceCode';
+import { TSCode } from '../../Code';
+import Basic from './usage/Basic';
+import breadCrumbItemProps from './props';
 import breadCrumbsCopy from './copy';
-import breadCrumbsProps from './props';
+import Card from '../Card';
+import Example from '../Example';
+import Props from '../Props';
 
-const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-import React from 'react';
-import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
+const IMPORT = "import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';";
 
-const Example: React.FC = () => {
-  return (
-    <BreadCrumbs>
-      <BreadCrumbItem to="/">Home</BreadCrumbItem>
-      <BreadCrumbItem onClick={() => alert('🧸')}>Alert</BreadCrumbItem>
-      <BreadCrumbItem target="_blank" to="https://rothko-ui.com">External</BreadCrumbItem>
-      <BreadCrumbItem>Last Step</BreadCrumbItem>
-    </BreadCrumbs> 
-  );
-}
-`,
-  [CodeLanguage.JS]: `
-import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';
-
-const Example = () => {
-  return (
-    <BreadCrumbs>
-      <BreadCrumbItem to="/">Home</BreadCrumbItem>
-      <BreadCrumbItem onClick={() => alert('🧸')}>Alert</BreadCrumbItem>
-      <BreadCrumbItem target="_blank" to="https://rothko-ui.com">External</BreadCrumbItem>
-      <BreadCrumbItem>Last Step</BreadCrumbItem>
-    </BreadCrumbs> 
-  );
-}
-`,
-};
+const GITHUB_URL =
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/BreadCrumbs';
 
 const BreadCrumbsCard = () => {
   return (
-    <Card
-      copy={breadCrumbsCopy}
-      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: breadCrumbsProps }}
-    >
-      <section>
-        <BreadCrumbs>
-          <BreadCrumbItem to="/">Home</BreadCrumbItem>
-          <BreadCrumbItem onClick={() => alert('🧸')}>Alert</BreadCrumbItem>
-          <BreadCrumbItem target="_blank" to="https://rothko-ui.com">
-            External
-          </BreadCrumbItem>
-          <BreadCrumbItem>Last Step</BreadCrumbItem>
-        </BreadCrumbs>
-      </section>
+    <Card codeUrl={GITHUB_URL} copy={breadCrumbsCopy}>
+      <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Typography.h3>Usage</Typography.h3>
+        <Container maxWidth="32rem">
+          <TSCode code={IMPORT} />
+        </Container>
+        <Example sourceCode={BASIC}>
+          <Container maxWidth="15rem">
+            <Basic />
+          </Container>
+        </Example>
+      </Flex>
+      <Props copy={{ props: breadCrumbItemProps }} />
     </Card>
   );
 };

@@ -173,7 +173,11 @@ export const Modal = ({
                 {title && (
                   <ModalHeaderText className={`modal-header-size-${size}`}>{title}</ModalHeaderText>
                 )}
-                {children}
+                {typeof children === 'string' ? (
+                  <Typography.body>{children}</Typography.body>
+                ) : (
+                  children
+                )}
               </AnimatedModalContainer>
             )
         )}
@@ -193,6 +197,7 @@ const ModalContainerDiv = styled.div`
   overflow: scroll;
   scrollbar-width: thin;
   z-index: 2;
+  user-select: text;
 
   will-change: transform, opacity;
   transition-property: transform, opacity;

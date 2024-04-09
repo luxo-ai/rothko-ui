@@ -1,21 +1,13 @@
-import { classes } from '@rothko-ui/utils';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
+
+import { classes } from '@rothko-ui/utils';
+
 import InlineSpinnerLoader from '../../library/Loader/InlineSpinnerLoader';
 import type { Accessory } from '../../library/types';
 import type { KindProps, RothkoKind, RothkoSize } from '../../theme';
 import type { ButtonAppearance, ButtonShape } from './types';
-
-type HtmlButtonProps = {
-  ariaLabel?: string;
-  className?: string;
-  disabled?: boolean;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  style?: React.CSSProperties;
-  tabIndex?: number;
-  type?: 'button' | 'submit' | 'reset';
-};
 
 const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
@@ -28,7 +20,7 @@ const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   `,
   m: css`
     padding: 0.5rem 0.75rem;
-    font-size: 1rem;
+    font-size: 1rem; // 0.875rem; // was 1rem
   `,
   l: css`
     padding: 0.625rem 0.94rem;
@@ -45,43 +37,67 @@ const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
 const accessorySizeMap: Record<RothkoSize, number> = {
   xs: 10,
   s: 17,
-  m: 23,
+  m: 20,
   l: 30,
   xl: 35,
 };
 
 type ButtonProps = {
-  /** the semantic kind of the button */
-  kind?: RothkoKind;
-  /** does the button appear filled or outlined */
-  appearance?: ButtonAppearance;
-  /** button size */
-  size?: RothkoSize;
-  /** render an accessory to the left of the button content */
-  accessoryLeft?: Accessory;
-  /** render an accessory to the right of the button content  */
-  accessoryRight?: Accessory;
-  /** the button shaped */
-  shape?: ButtonShape;
-  /** is content loading from this target */
-  loading?: boolean;
-  /** make the width fit the button content */
-  fitContent?: boolean;
+  /** The ARIA label for the button. */
+  'aria-label'?: string;
+  /** ID of the element(s) that the button controls. */
+  'aria-controls'?: string;
+  /** Indicates whether the controlled element is expanded or collapsed. */
+  'aria-expanded'?: boolean;
+  /** Determines if the button is disabled. Default is false. */
+  disabled?: boolean;
+  /** Click event handler. */
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  /** Keydown event handler. */
+  onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
+  /** The content of the button. */
   children?: React.ReactNode;
-} & HtmlButtonProps;
+  /** CSS class name for custom styling. */
+  className?: string;
+  /** Is content loading from this target. Default is false. */
+  loading?: boolean;
+  /** Make the width fit the button content. Default is false. */
+  fitContent?: boolean;
+  /** Inline styles for the button. */
+  style?: React.CSSProperties;
+  /** The semantic kind of the button. Default is 'primary'. */
+  kind?: RothkoKind;
+  /** Does the button appear filled or outlined. Default is 'filled'. */
+  appearance?: ButtonAppearance;
+  /** Button size. Default is 'm'. */
+  size?: RothkoSize;
+  /** Render an accessory to the left of the button content. */
+  accessoryLeft?: Accessory;
+  /** Render an accessory to the right of the button content. */
+  accessoryRight?: Accessory;
+  /** The button shape. */
+  shape?: ButtonShape;
+  /** Tab index of the button. */
+  tabIndex?: number;
+  /** Type of the button. Default is 'button'. */
+  type?: 'button' | 'submit' | 'reset';
+};
 
 const Button: React.FC<ButtonProps> = ({
   accessoryLeft: Left,
   accessoryRight: Right,
   appearance = 'filled',
-  ariaLabel,
+  'aria-label': ariaLabel,
+  'aria-controls': ariaControls,
+  'aria-expanded': ariaExpanded,
   children,
   className,
   disabled,
   fitContent,
   kind = 'primary',
   loading,
-  onClick,
+  onClick: onClickProp,
+  onKeyDown: onKeyDownProp,
   shape,
   size = 'm',
   style,
@@ -89,7 +105,7 @@ const Button: React.FC<ButtonProps> = ({
   type = 'button',
 }) => {
   const childrenContainerRef = useRef<HTMLDivElement | null>(null);
-  const [childrenHeight, setChildrenHeight] = useState<number | null>(null);
+  const [childrenHeight, setChildrenHeight] = useState<number | null>(18); // was null before. How do we do this better?
 
   const appearanceClasses = {
     ['btn-pill']: shape === 'pill',
@@ -102,6 +118,28 @@ const Button: React.FC<ButtonProps> = ({
       ? (`var(--rothko-${kind}-500, #000)` as const)
       : (`var(--rothko-${kind}-color, #000)` as const);
 
+  const { onClick, onKeyDown } = useMemo(
+    () => ({
+      onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        if (loading || disabled) {
+          e.preventDefault();
+          e.stopPropagation();
+        } else {
+          onClickProp?.(e);
+        }
+      },
+      onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => {
+        if (loading || disabled) {
+          e.preventDefault();
+          e.stopPropagation();
+        } else {
+          onKeyDownProp?.(e);
+        }
+      },
+    }),
+    [loading, disabled, onClickProp, onKeyDownProp]
+  );
+
   useEffect(() => {
     if (!childrenContainerRef.current) return;
     const { height } = childrenContainerRef.current.getBoundingClientRect();
@@ -112,10 +150,14 @@ const Button: React.FC<ButtonProps> = ({
     <StyledButton
       appearance={appearance}
       aria-label={ariaLabel}
+      aria-disabled={disabled}
+      aria-controls={ariaControls}
+      aria-expanded={ariaExpanded}
       className={classes(appearanceClasses, `btn-size-${size}`, className)}
       disabled={disabled}
       kind={kind}
       onClick={onClick}
+      onKeyDown={onKeyDown}
       role="button"
       style={style}
       tabIndex={disabled ? -1 : tabIndex}
@@ -158,6 +200,7 @@ const ContainerDiv = styled.div`
 
 const AccessoryContainerDiv = styled.div<{ $kind: 'left' | 'right' }>`
   display: flex;
+  align-items: center;
   ${({ $kind }) => {
     return $kind === 'left'
       ? css`

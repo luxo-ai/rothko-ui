@@ -1,24 +1,26 @@
+import { createContext } from 'react';
 import type { Set as ImSet } from 'immutable';
-import { createContext, useContext } from 'react';
+
 import type { RothkoKind } from '../../theme';
 import type { IconOverride } from './types';
 
 type IAccordionContext = {
+  /** If `true`, borders are added around each accordion item. Default is `false`. */
   bordered?: boolean;
+  /** Adds spacing around items for better separation. Default is `true`. */
+  compact?: boolean;
+  /** If `true`, borders are added around each accordion item. Default is `false`. */
   iconOverride?: IconOverride;
-  withIcons?: boolean;
+  /** Specifies the accordion's style kind. */
   kind?: RothkoKind;
+  /** Function to handle clicks on accordion panels, triggering open/close state changes. */
   onClickPanel: (id: string) => void;
+  /** Function to handle clicks on accordion panels, triggering open/close state changes. */
   selectedPanels: ImSet<string>;
-  spaced?: boolean;
+  /** Adds spacing around items for better separation. Default is `true`. */
+  withIcon?: boolean;
 };
 
-export const AccordionContext = createContext<IAccordionContext | null>(null);
+const AccordionContext = createContext<IAccordionContext | null>(null);
 
-export const useAccordion = () => {
-  const ctx = useContext(AccordionContext);
-  if (!ctx) {
-    throw new Error('useAccordion called outside of context');
-  }
-  return ctx;
-};
+export default AccordionContext;

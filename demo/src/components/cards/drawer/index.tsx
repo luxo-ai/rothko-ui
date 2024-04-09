@@ -1,74 +1,34 @@
-import { ArrowRightOutline } from '@rothko-ui/icons';
-import { Button, Container, Drawer, Typography } from '@rothko-ui/ui';
-import { useState } from 'react';
+import { Container, Flex, Typography } from '@rothko-ui/ui';
+
+import { BASIC } from './usage/sourceCode';
+import { TSCode } from '../../Code';
+import Basic from './usage/Basic';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeExample';
 import drawerCopy from './copy';
 import drawerProps from './props';
+import Example from '../Example';
+import Props from '../Props';
 
-const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-import React from 'react';
-import { Button, Drawer, Typography } from '@rothko-ui/ui';
+const GITHUB_URL =
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Drawer';
 
-const Example: React.FC = () => {
-  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-
-  return (
-    <>
-      <Button onClick={() => setDrawerOpen(true)}>
-        Open Drawer
-      </Button>
-      <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)}>
-        <Typography.body>Hello world</Typography.body>
-      </Drawer>
-    </>
-  );
-}
-`,
-  [CodeLanguage.JS]: `
-import { Button, Drawer, Typography } from '@rothko-ui/ui';
-
-const Example = () => {
-  const [drawerOpen, setDrawerOpen] = useState(false);
-
-  return (
-    <>
-      <Button onClick={() => setDrawerOpen(true)}>
-        Open Drawer
-      </Button>
-      <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)}>
-        <Typography.body>Hello world</Typography.body>
-      </Drawer>
-    </>
-  );
-}
-`,
-};
+const IMPORT = "import { Drawer } from '@rothko-ui/ui';";
 
 const DrawerCard = () => {
-  const [drawerOpen, setDrawerOpen] = useState(false);
-
   return (
-    <Card
-      copy={drawerCopy}
-      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: drawerProps }}
-    >
-      <Container maxWidth="11rem">
-        <Button
-          accessoryLeft={({ size, color }) => (
-            <ArrowRightOutline width={size} height={size} fill={color} />
-          )}
-          kind="primary"
-          onClick={() => setDrawerOpen(true)}
-        >
-          Open Drawer
-        </Button>
-      </Container>
-      <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-        <Typography.body>Hello world</Typography.body>
-      </Drawer>
+    <Card codeUrl={GITHUB_URL} copy={drawerCopy}>
+      <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Typography.h3>Usage</Typography.h3>
+        <Container maxWidth="32rem">
+          <TSCode code={IMPORT} />
+        </Container>
+        <Example sourceCode={BASIC}>
+          <Container maxWidth="15rem">
+            <Basic />
+          </Container>
+        </Example>
+      </Flex>
+      <Props copy={{ props: drawerProps }} />
     </Card>
   );
 };

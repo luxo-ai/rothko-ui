@@ -1,44 +1,38 @@
-import { Container, MaxWidth, SkeletonBoxWithLabel, Slider } from '@rothko-ui/ui';
-import { useState } from 'react';
+import { Container, Flex, Typography } from '@rothko-ui/ui';
 
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
+import { TSCode } from '../../Code';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeExample';
+import Example from '../Example';
 import skeletonCopy from './copy';
 import skeletonProps from './props';
+import Basic from './usage/Basic';
+import { BASIC } from './usage/sourceCode';
+import Props from '../Props';
 
-const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-import React from 'react';
-import { SkeletonBoxWithLabel } from '@rothko-ui/ui';
+const GITHUB_URL =
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Skeleton';
 
-const Example: React.FC = () => {
-  return <SkeletonBoxWithLabel speed={2} />;
-};
-`,
-  [CodeLanguage.JS]: `
-import React from 'react';
-import { SkeletonBoxWithLabel } from '@rothko-ui/ui';
-
-const Example = () => {
-  return <SkeletonBoxWithLabel speed={2} />;
-};
-`,
-};
+const IMPORT = "import { SkeletonBoxWithLabel } from '@rothko-ui/ui';";
 
 const SkeletonCard = () => {
-  const [speed, setSpeed] = useState(1.5);
+  const isMobileOrTablet = useIsMobileOrTablet();
+  const maxWith = isMobileOrTablet ? undefined : '26rem';
+
   return (
-    <Card
-      copy={skeletonCopy}
-      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: skeletonProps }}
-    >
-      <Container as="section" maxWidth="18rem">
-        <SkeletonBoxWithLabel speed={1 / speed} />
-      </Container>
-      <MaxWidth as="section" maxW="20rem">
-        <Slider label="speed" min={0.1} max={5} value={speed} onChange={v => setSpeed(v)} />
-      </MaxWidth>
+    <Card codeUrl={GITHUB_URL} copy={skeletonCopy}>
+      <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Typography.h3>Usage</Typography.h3>
+        <Container maxWidth="32rem">
+          <TSCode code={IMPORT} />
+        </Container>
+        <Example sourceCode={BASIC}>
+          <Container maxWidth={maxWith}>
+            <Basic />
+          </Container>
+        </Example>
+      </Flex>
+      <Props copy={{ props: skeletonProps }} />
     </Card>
   );
 };

@@ -1,44 +1,71 @@
-import { Set as ImSet } from 'immutable';
 import React, { useCallback, useState } from 'react';
+import { Set as ImSet } from 'immutable';
 import styled, { css } from 'styled-components';
+
 import type { RothkoKind } from '../../theme/types';
-import { AccordionContext } from './AccordionContext';
+import AccordionContext from './AccordionContext';
 import type { IconOverride } from './types';
 
 type AccordionProps = {
+  /** ARIA label for the accordion, providing additional context for accessibility. */
+  'aria-describedby'?: string;
+  'aria-details'?: string;
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  /** If `true`, borders are added around each accordion item. Default is `false`. */
   bordered?: boolean;
+  /** The content of the accordion, required. */
   children: React.ReactNode;
+  /** CSS class name for custom styling. */
   className?: string;
+  /** Adds spacing around items for better separation. Default is `false`. */
+  compact?: boolean;
+  /** Custom icons for accordion state indicators. */
   iconOverride?: IconOverride;
+  /** Specifies the accordion's style kind. */
   kind?: RothkoKind;
-  mutuallyExclusive?: boolean;
-  spaced?: boolean;
+  /** If `true`, only one accordion item can be open at a time. Default is `false`. */
+  multiple?: boolean;
+  /** Inline styles for the accordion. */
   style?: React.CSSProperties;
-  withIcons?: boolean;
+  /** If `true`, icons are shown next to items. Default is `true`. */
+  withIcon?: boolean;
+  /** The list of selected panels by key */
+  selectedPanelKeys?: string[];
+  /** Callback when a panel is opened or closed. */
+  onPanelChange?: (isOpen: boolean, panelKey: string) => void;
 };
 
 const Accordion = ({
+  'aria-describedby': ariaDescribedBy,
+  'aria-details': ariaDetails,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
   bordered,
   children,
   className,
+  compact,
   iconOverride,
   kind,
-  mutuallyExclusive,
-  spaced = true,
+  multiple,
+  onPanelChange,
+  selectedPanelKeys = [],
   style,
-  withIcons = true,
+  withIcon: withIcon = true,
 }: AccordionProps) => {
-  const [selectedPanels, setSelectedPanels] = useState(ImSet<string>());
+  const [selectedPanels, setSelectedPanels] = useState(ImSet<string>(selectedPanelKeys || []));
 
   const onClickPanel = useCallback(
-    (id: string) => {
+    (panelKey: string) => {
       setSelectedPanels(selected => {
-        const hasId = selected.has(id);
-        if (hasId) return selected.remove(id);
-        return mutuallyExclusive ? ImSet([id]) : selected.add(id);
+        const isOpen = selected.has(panelKey);
+        onPanelChange?.(!isOpen, panelKey);
+
+        if (isOpen) return selected.remove(panelKey);
+        return multiple ? selected.add(panelKey) : ImSet([panelKey]);
       });
     },
-    [setSelectedPanels, mutuallyExclusive]
+    [setSelectedPanels, multiple, onPanelChange]
   );
 
   return (
@@ -49,11 +76,19 @@ const Accordion = ({
         kind,
         onClickPanel,
         selectedPanels,
-        spaced,
-        withIcons,
+        compact,
+        withIcon,
       }}
     >
-      <AccordionGroupDiv $spaced={spaced} style={style} className={className}>
+      <AccordionGroupDiv
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
+        aria-details={ariaDetails}
+        $spaced={!compact}
+        style={style}
+        className={className}
+      >
         {children}
       </AccordionGroupDiv>
     </AccordionContext.Provider>

@@ -1,5 +1,13 @@
 import { Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
-import { Button, Flex, FlexItem, Typography, WidthGeqOnly, useRothko } from '@rothko-ui/ui';
+import {
+  Button,
+  Flex,
+  FlexItem,
+  Typography,
+  WidthGeqOnly,
+  WidthLeqOnly,
+  useRothko,
+} from '@rothko-ui/ui';
 import cookieCutter from 'cookie-cutter';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -28,15 +36,17 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
     <nav className={router.pathname === '/' ? `${styles.nav} ${styles.blurry}` : styles.nav}>
       <Flex justifyContent="space-between">
         <Flex alignItems="center" justifyContent="center" columnGap="1rem">
-          <FlexItem>
-            <button
-              aria-label="menu button"
-              className={`dflx ${styles.phantomButton}`}
-              onClick={() => openDrawer()}
-            >
-              <Menu width={28} height={28} />
-            </button>
-          </FlexItem>
+          <WidthLeqOnly threshold={750}>
+            <FlexItem>
+              <button
+                aria-label="menu button"
+                className={`dflx ${styles.phantomButton}`}
+                onClick={() => openDrawer()}
+              >
+                <Menu width={28} height={28} />
+              </button>
+            </FlexItem>
+          </WidthLeqOnly>
           <FlexItem>
             <Flex
               onClick={() => router.push('/')}

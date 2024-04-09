@@ -1,91 +1,190 @@
+import React, { useCallback, useRef } from 'react';
 import { animated, useSpring } from '@react-spring/web';
-import React, { useRef } from 'react';
 import styled, { css } from 'styled-components';
 import * as uuid from 'uuid';
+import keyboardKey from 'keyboard-key';
+
 import { phantomButtonStyle } from '../../library/PhantomButton';
 import { unselectableStyle } from '../../library/Styles';
 import type { KindProps } from '../../theme';
 import { getElementFullHeight } from '../../utils/domUtils/dimensions';
 import Typography from '../Typography/Typography';
-import { useAccordion } from './AccordionContext';
 import AccordionIcon from './AccordionIcon';
+import { Flex, FlexItem } from '../../layout';
+import type { IconOverride } from './types';
+import useAccordion from './useAccordion';
+import { useDebuggerContext } from '../../library/DebuggerContext';
 
-type LabelProps = {
-  className?: string;
-  style?: React.CSSProperties;
-};
+// TODO make thhe padding a variable
 
 type AccordionPanelProps = {
+  /** ARIA label for the accordion panel, enhancing accessibility. */
+  'aria-label'?: string;
+  /** Content of the accordion panel, required. */
   children: React.ReactNode;
+  /** CSS class for custom styling of the panel container. */
   className?: string;
-  labelProps?: LabelProps;
+  /** CSS class for custom styling of the panel content area. */
+  contentClassName?: string;
+  /** Inline styles for the panel content area. */
+  contentStyle?: React.CSSProperties;
+  /** If `true`, the panel is disabled and cannot be interacted with. */
+  disabled?: boolean;
+  /** Custom icons for the accordion state indicators, overriding default icons. */
+  iconOverride?: IconOverride;
+  /** CSS class for custom styling of the panel label. */
+  labelClassName?: string;
+  /** Inline styles for the panel label. */
+  labelStyle?: React.CSSProperties;
+  /** Callback function triggered on click events. */
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  /** Callback function triggered on keydown events. */
+  onKeyDown?: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
+  /** Unique key for identifying the panel, necessary for managing open state in a collection. */
+  panelKey?: React.Key;
+  /** Inline styles for the panel container. */
   style?: React.CSSProperties;
+  /** Subtitle content for the panel, can be a string or JSX element. */
+  subtitle?: string | JSX.Element;
+  /** Title content for the panel, required, can be a string or JSX element. */
   title: string | JSX.Element;
-  withIcon?: boolean;
 };
 
-const AccordionPanel = ({
-  children,
-  className,
-  labelProps,
-  style,
-  title,
-  withIcon: withIconProp,
-}: AccordionPanelProps) => {
-  const { bordered, iconOverride, kind, onClickPanel, selectedPanels, spaced, withIcons } =
-    useAccordion();
+const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
+  (
+    {
+      'aria-label': ariaLabel,
+      children,
+      className,
+      contentClassName,
+      contentStyle,
+      disabled,
+      iconOverride: iconOverrideLocal,
+      labelClassName,
+      labelStyle,
+      onClick: onClickProp,
+      onKeyDown: onKeyDownProp,
+      panelKey,
+      style,
+      subtitle,
+      title,
+    },
+    ref
+  ) => {
+    const debug = useDebuggerContext('<AccordionPanel />');
 
-  const panelIdRef = useRef(uuid.v4());
-  const isPanelSelected = selectedPanels.has(panelIdRef.current);
-  const withIcon = withIconProp || withIcons;
+    const { bordered, iconOverride, kind, onClickPanel, selectedPanels, compact, withIcon } =
+      useAccordion();
 
-  const iconColor = kind
-    ? `var(--rothko-${kind}-500, #000)`
-    : 'var(--rothko-accordion-border, #000)';
+    const panelIdRef = useRef(typeof panelKey !== 'undefined' ? String(panelKey) : uuid.v4());
+    const isPanelSelected = selectedPanels.has(panelIdRef.current);
 
-  return (
-    <PanelContainerDiv
-      $spaced={spaced}
-      $bordered={bordered}
-      kind={kind}
-      id={panelIdRef.current}
-      className={className}
-      style={style}
-    >
-      <header>
-        <PanelLabelButton
-          style={labelProps?.style}
-          className={labelProps?.className}
-          onClick={() => {
+    const iconColor = kind
+      ? `var(--rothko-${kind}-500, #000)`
+      : 'var(--rothko-accordion-border, #000)';
+
+    const onKeyDown = useCallback(
+      (e: React.KeyboardEvent<HTMLButtonElement>) => {
+        debug('onKeydown');
+        const code = keyboardKey.getCode(e);
+        if (code === keyboardKey.Enter) {
+          e.preventDefault();
+          if (!disabled) {
+            onKeyDownProp?.(e);
             onClickPanel(panelIdRef.current);
-          }}
+          }
+        }
+      },
+      [onClickPanel, onKeyDownProp, panelIdRef, disabled, debug]
+    );
+
+    const onClick = useCallback(
+      (e: React.MouseEvent<HTMLButtonElement>) => {
+        if (!disabled) {
+          onClickProp?.(e);
+          onClickPanel(panelIdRef.current);
+        }
+      },
+      [onClickPanel, onClickProp, panelIdRef, disabled]
+    );
+
+    const contentId = `${panelIdRef.current}-content`;
+
+    return (
+      <PanelContainerDiv
+        $spaced={!compact}
+        $bordered={bordered}
+        $disabled={disabled}
+        kind={kind}
+        id={panelIdRef.current}
+        className={className}
+        style={style}
+        ref={ref}
+      >
+        <header>
+          <PanelLabelButton
+            type="button"
+            $disabled={disabled}
+            aria-disabled={disabled}
+            aria-label={ariaLabel}
+            // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded
+            aria-controls={contentId}
+            aria-expanded={isPanelSelected}
+            className={labelClassName}
+            disabled={disabled}
+            onKeyDown={onKeyDown}
+            style={labelStyle}
+            // TODO: is this right?
+            tabIndex={disabled ? -1 : 0}
+            onClick={onClick}
+          >
+            {withIcon && (
+              <AccordionIcon
+                open={isPanelSelected}
+                disabled={!!disabled}
+                color={iconColor}
+                iconOverride={iconOverrideLocal || iconOverride}
+              />
+            )}
+            <Flex flexDirection="column" rowGap="0.1rem" alignItems="start">
+              {typeof title === 'string' ? (
+                <DefaultTitleText kind={kind}>{title}</DefaultTitleText>
+              ) : (
+                <FlexItem>{title}</FlexItem>
+              )}
+              {typeof subtitle === 'string' ? (
+                <DefaultSubtitleText kind={kind}>{subtitle}</DefaultSubtitleText>
+              ) : (
+                <FlexItem>{subtitle}</FlexItem>
+              )}
+            </Flex>
+          </PanelLabelButton>
+        </header>
+        <PanelContent
+          id={contentId}
+          style={contentStyle}
+          className={contentClassName}
+          isOpen={isPanelSelected}
         >
-          {withIcon && (
-            <AccordionIcon isOpen={isPanelSelected} color={iconColor} iconOverride={iconOverride} />
-          )}
-          {typeof title === 'string' ? (
-            <DefaultLabelText kind={kind}>{title}</DefaultLabelText>
+          {typeof children === 'string' ? (
+            <DefaultBodyText>{children}</DefaultBodyText>
           ) : (
-            <>{title}</>
+            <>{children}</>
           )}
-        </PanelLabelButton>
-      </header>
-      <PanelContent id={`${panelIdRef.current}-content`} isOpen={isPanelSelected}>
-        {typeof children === 'string' ? (
-          <DefaultBodyText>{children}</DefaultBodyText>
-        ) : (
-          <>{children}</>
-        )}
-      </PanelContent>
-    </PanelContainerDiv>
-  );
-};
+        </PanelContent>
+      </PanelContainerDiv>
+    );
+  }
+);
+
+AccordionPanel.displayName = 'AccordionPanel';
 
 type PanelContentProps = {
   children: React.ReactNode;
   className?: string;
   id?: string;
   isOpen?: boolean;
+  style?: React.CSSProperties;
 };
 
 const getDefaultOpenStyle = (): React.CSSProperties => ({
@@ -102,10 +201,10 @@ const getDefaultClosedStyle = (): React.CSSProperties => ({
   visibility: 'hidden',
 });
 
-const PanelContent = ({ children, className, id, isOpen }: PanelContentProps) => {
+const PanelContent = ({ children, className, style, isOpen, id }: PanelContentProps) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
 
-  const style = useSpring({
+  const springStyle = useSpring({
     to: async next => {
       if (isOpen) {
         const contentHeight = getElementFullHeight(contentRef.current);
@@ -122,8 +221,8 @@ const PanelContent = ({ children, className, id, isOpen }: PanelContentProps) =>
   });
 
   return (
-    <animated.section id={id} style={style}>
-      <PanelContentDiv className={className} ref={contentRef}>
+    <animated.section id={id} style={springStyle}>
+      <PanelContentDiv style={style} className={className} ref={contentRef}>
         {children}
       </PanelContentDiv>
     </animated.section>
@@ -133,13 +232,14 @@ const PanelContent = ({ children, className, id, isOpen }: PanelContentProps) =>
 type PanelContainerDivProps = KindProps & {
   $bordered?: boolean;
   $spaced?: boolean;
+  $disabled?: boolean;
 };
 
 const PanelContainerDiv = styled.div<PanelContainerDivProps>`
-  overflow: hidden;
+  // overflow: hidden; do we need this? (messes with the onFous outline)
   background: var(--rothko-accordion-background, #fff);
 
-  padding: 0 0.875rem;
+  // padding: 0 0.875rem;
   border-radius: 0.125rem;
 
   border: 1px solid var(--rothko-accordion-background, #fff);
@@ -170,21 +270,32 @@ const PanelContainerDiv = styled.div<PanelContainerDivProps>`
             border-bottom: none;
           }
         `}
+
+  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
+  pointer-events: ${({ $disabled }) => ($disabled ? 'none' : 'auto')};
 `;
 
-const PanelLabelButton = styled.button`
+const PanelLabelButton = styled.button<{ $disabled?: boolean }>`
   ${unselectableStyle}
   ${phantomButtonStyle}
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  cursor: pointer;
-  padding: 1rem 0;
+  gap: 0.5rem;
+  padding: 1rem 0.875rem;
+
+  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
+  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
+
+  // https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible
+  &:focus-visible {
+    // --rothko-foucs doesn't exist yet
+    outline: 1px solid var(--rothko-focus, #000);
+  }
 `;
 
 const PanelContentDiv = styled.div`
-  padding-bottom: 0.875rem;
+  padding: 0 0.875rem 0.875rem;
 `;
 
 const DefaultBodyText = styled(Typography.body)`
@@ -192,9 +303,15 @@ const DefaultBodyText = styled(Typography.body)`
   padding: 0;
 `;
 
-const DefaultLabelText = styled(Typography.body).attrs({ bold: true })`
+const DefaultTitleText = styled(Typography.body).attrs({ bold: true })`
   margin: 0;
   padding: 0;
+`;
+
+const DefaultSubtitleText = styled(Typography.bodySmall).attrs({ light: true })`
+  margin: 0;
+  padding: 0;
+  opacity: 0.8;
 `;
 
 export default AccordionPanel;

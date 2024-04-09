@@ -1,71 +1,34 @@
-import { ArrowUpOutline } from '@rothko-ui/icons';
-import { BottomPopup, Button, Container, Typography } from '@rothko-ui/ui';
-import { useState } from 'react';
-import Card from '../Card';
-import { CodeLanguage } from '../CodeExample';
+import { Container, Flex, Typography } from '@rothko-ui/ui';
+
+import { BASIC } from './usage/sourceCode';
+import { TSCode } from '../../Code';
+import Basic from './usage/Basic';
 import bottomPopupCopy from './copy';
 import bottomPopupProps from './props';
+import Card from '../Card';
+import Example from '../Example';
+import Props from '../Props';
 
-const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-  import React, { useState } from 'react';
-  import { BottomPopup } from '@rothko-ui/ui';
+const GITHUB_URL =
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Popup';
 
-  type ExampleProps = {
-    content: string;
-  }
-
-  const Example: React.FC<ExampleProps> = ({ url }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    return (
-      <>
-        <button onClick={() => setIsOpen(true)}>Open popup</button>
-        <BottomPopup isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          {content}
-        </BottomPopup>
-      </> 
-    );
-  }
-`,
-  [CodeLanguage.JS]: `
-  import { useState } from 'react';
-  import { BottomPopup } from '@rothko-ui/ui';
-
-  const Example = ({ content }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    return (
-      <>
-        <button onClick={() => setIsOpen(true)}>Open popup</button>
-        <BottomPopup isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          {content}
-        </BottomPopup>
-      </>
-    ) 
-  }
-`,
-};
+const IMPORT = "import { BottomPopup } from '@rothko-ui/ui';";
 
 const BottomPopupCard = () => {
-  const [open, setOpen] = useState(false);
   return (
-    <Card
-      copy={bottomPopupCopy}
-      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: bottomPopupProps }}
-    >
-      <Container as="section" maxWidth="11rem">
-        <Button
-          accessoryLeft={({ size, color }) => (
-            <ArrowUpOutline width={size} height={size} fill={color} />
-          )}
-          onClick={() => setOpen(true)}
-        >
-          Open popup
-        </Button>
-      </Container>
-      <BottomPopup open={open} onClose={() => setOpen(false)}>
-        <Typography.body>Hello world</Typography.body>
-      </BottomPopup>
+    <Card codeUrl={GITHUB_URL} copy={bottomPopupCopy}>
+      <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Typography.h3>Usage</Typography.h3>
+        <Container maxWidth="32rem">
+          <TSCode code={IMPORT} />
+        </Container>
+        <Example sourceCode={BASIC}>
+          <Container maxWidth="15rem">
+            <Basic />
+          </Container>
+        </Example>
+      </Flex>
+      <Props copy={{ props: bottomPopupProps }} />
     </Card>
   );
 };

@@ -8,13 +8,21 @@ type FlexProps = Omit<CustomColorCssProperties, 'display'> & {
   as?: keyof JSX.IntrinsicElements;
   children: React.ReactNode;
   className?: string;
+  role?: React.AriaRole;
 };
 
 const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
-  ({ as, children, className, onClick, ...styles }, ref) => {
+  ({ as, children, className, role, onClick, ...styles }, ref) => {
     const style = useStyleProps(styles);
     return (
-      <StyledFlexDiv as={as} ref={ref} onClick={onClick} className={className} style={style}>
+      <StyledFlexDiv
+        role={role}
+        as={as}
+        ref={ref}
+        onClick={onClick}
+        className={className}
+        style={style}
+      >
         {children}
       </StyledFlexDiv>
     );

@@ -1,95 +1,50 @@
-import type { Option } from '@rothko-ui/ui';
-import { Container, RadioGroup } from '@rothko-ui/ui';
-import { useReducer, useState } from 'react';
+import { Container, Flex, Typography } from '@rothko-ui/ui';
+
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
+import { TSCode } from '../../Code';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeExample';
-import RadioCustomizations, { customizationsReducer } from './Customizations';
+import Example from '../Example';
 import radioCopy from './copy';
 import radioProps from './props';
+import Basic from './usage/Basic';
+import Disabled from './usage/Disabled';
+import MaxColumn from './usage/MaxColumn';
+import { BASIC, DISABLED, MAX_COLUMN } from './usage/sourceCode';
+import Props from '../Props';
 
-const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-import React, { useState } from 'react';
-import { RadioGroup, Option } from '@rothko-ui/ui';
+const GITHUB_URL =
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Radio';
 
-const Example: React.FC<ExampleProps> = ({ radioOptions }) => {
-  const [selected, setSelected] = useState<string>('');
-  const radioOptions: Option<string> = [...]; // Define your options here
-
-  return (
-    <RadioGroup
-      maxCol={2}
-      columnGap="1rem"
-      label="Radio Group"
-      value={selected}
-      onChange={v => setSelected(v)}
-      options={radioOptions}
-    />
-  );
-};
-`,
-  [CodeLanguage.JS]: `
-import React, { useState } from 'react';
-import { RadioGroup } from '@rothko-ui/ui';
-
-const Example = ({ radioOptions }) => {
-  const [selected, setSelected] = useState('');
-  const radioOptions = [...]; // Define your options here
-
-  return (
-    <RadioGroup
-      maxCol={2}
-      columnGap="1rem"
-      label="Radio Group"
-      value={selected}
-      onChange={v => setSelected(v)}
-      options={radioOptions}
-    />
-  );
-};
-`,
-};
-
-export const radioOptions: Option<number>[] = ['one', 'two', 'three', 'four', 'five'].map(
-  (label, id) => ({
-    id,
-    label,
-  })
-);
+const IMPORT = "import { RadioGroup } from '@rothko-ui/ui';";
 
 const RadioGroupCard = () => {
-  const [selected, setSelected] = useState(1);
   const isMobileOrTablet = useIsMobileOrTablet();
-  const [state, dispatch] = useReducer(customizationsReducer, {
-    disabled: false,
-    kind: 'primary',
-    maxCol: 2,
-  });
-
-  const { disabled, kind, maxCol } = state;
+  const maxWidth = isMobileOrTablet ? undefined : '26rem';
 
   return (
-    <Card
-      copy={radioCopy}
-      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: radioProps }}
-    >
-      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
-        <RadioGroup
-          kind={kind}
-          disabled={disabled}
-          maxCol={maxCol}
-          columnGap="1.5rem"
-          label="Radio Group"
-          value={selected}
-          onChange={v => setSelected(v)}
-          options={radioOptions}
-        />
-      </Container>
-      <Container as="section" maxWidth="26rem">
-        <RadioCustomizations state={state} dispatch={dispatch} />
-      </Container>
+    <Card codeUrl={GITHUB_URL} copy={radioCopy}>
+      <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Typography.h3>Usage</Typography.h3>
+        <Container maxWidth="32rem">
+          <TSCode code={IMPORT} />
+        </Container>
+        <Example sourceCode={BASIC}>
+          <Container maxWidth={maxWidth}>
+            <Basic />
+          </Container>
+        </Example>
+        <Example title="Disabled" sourceCode={DISABLED}>
+          <Container maxWidth={maxWidth}>
+            <Disabled />
+          </Container>
+        </Example>
+        <Example title="Menu Position" sourceCode={MAX_COLUMN}>
+          <Container maxWidth={maxWidth}>
+            <MaxColumn />
+          </Container>
+        </Example>
+      </Flex>
+      <Props copy={{ props: radioProps }} />
     </Card>
   );
 };

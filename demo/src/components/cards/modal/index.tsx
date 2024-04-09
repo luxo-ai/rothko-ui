@@ -1,87 +1,38 @@
-import { ArrowUpOutline } from '@rothko-ui/icons';
-import { Button, Container, Modal } from '@rothko-ui/ui';
-import { useReducer, useState } from 'react';
+import { Container, Flex, Typography } from '@rothko-ui/ui';
+
+import { BASIC } from './usage/sourceCode';
+import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
+import Basic from './usage/Basic';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeExample';
-import ModalCustomizations, { customizationsReducer } from './Customizations';
+import Example from '../Example';
 import modalCopy from './copy';
 import modalProps from './props';
+import Props from '../Props';
 
-const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-import React, { useState } from 'react';
-import { Button, Modal } from '@rothko-ui/ui';
+const GITHUB_URL =
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Modal';
 
-type ExampleProps {
-  title: string;
-  body: string;
-}
-
-const Example: React.FC<ExampleProps> = ({ title, body }) => {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Open modal</Button>
-      <Modal size="m" title={title} isOpen={open} onClose={() => setOpen(false)}>
-        <p>{body}</p>
-      </Modal>
-    </>
-  );
-};
-`,
-  [CodeLanguage.JS]: `
-import React, { useState } from 'react';
-import { Button, Modal } from '@rothko-ui/ui';
-
-const Example = ({ title, body }) => {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Open modal</Button>
-      <Modal size="m" title={title} isOpen={open} onClose={() => setOpen(false)}>
-        <p>{body}</p>
-      </Modal>
-    </>
-  );
-};
-`,
-};
+const IMPORT = "import { Modal } from '@rothko-ui/ui';";
 
 const ModalCard = () => {
-  const [open, setOpen] = useState(false);
   const isMobileOrTablet = useIsMobileOrTablet();
-  const [state, dispatch] = useReducer(customizationsReducer, {
-    size: 'm',
-    title: 'Testing',
-    body: 'Modal',
-  });
-  const { size, body, title } = state;
+  const maxWith = isMobileOrTablet ? undefined : '30rem';
+
   return (
-    <Card
-      copy={modalCopy}
-      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: modalProps }}
-    >
-      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
-        <Button
-          accessoryLeft={({ size, color }) => (
-            <ArrowUpOutline width={size} height={size} fill={color} />
-          )}
-          kind="primary"
-          onClick={() => setOpen(true)}
-        >
-          Open modal
-        </Button>
-      </Container>
-      <Modal size={size} title={title} isOpen={open} onClose={() => setOpen(false)}>
-        <p>{body}</p>
-      </Modal>
-      <Container as="section" maxWidth="26rem">
-        <ModalCustomizations state={state} dispatch={dispatch} />
-      </Container>
+    <Card codeUrl={GITHUB_URL} copy={modalCopy}>
+      <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Typography.h3>Usage</Typography.h3>
+        <Container maxWidth="32rem">
+          <TSCode code={IMPORT} />
+        </Container>
+        <Example sourceCode={BASIC}>
+          <Container maxWidth={maxWith}>
+            <Basic />
+          </Container>
+        </Example>
+      </Flex>
+      <Props copy={{ props: modalProps }} />
     </Card>
   );
 };

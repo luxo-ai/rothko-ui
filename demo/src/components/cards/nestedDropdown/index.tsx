@@ -1,112 +1,56 @@
-import { Container, NestedDropdown } from '@rothko-ui/ui';
-import { useReducer, useState } from 'react';
+import { Container, Flex, Typography } from '@rothko-ui/ui';
+
+import { BASIC, CLEARABLE, DISABLED, MENU_POSITION } from './usage/sourceCode';
+import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
+import Basic from './usage/Basic';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeExample';
-import NestedDropdownCustomizations, { customizationsReducer } from './Customizations';
+import Clearable from './usage/Clearable';
+import Disabled from './usage/Disabled';
+import Example from '../Example';
+import MenuPosition from './usage/MenuPosition';
 import nestedDropdownCopy from './copy';
 import nestedDropdownProps from './props';
+import Props from '../Props';
 
-const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-import React, { useState } from 'react';
-import { NestedDropdown, NestedOption } from '@rothko-ui/ui';
+const GITHUB_URL =
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Dropdown';
 
-const Example: React.FC = () => {
-  const [value, setValue] = useState<number | null>(null);
-  const nestedOptions: NestedOption<number>[] = [...]; // Define your options here
-
-  return (
-    <NestedDropdown
-      placeholder={placeholder}
-      value={value}
-      onChange={v => setValue(v)}
-      options={nestedOptions}
-    />
-  );
-};
-`,
-  [CodeLanguage.JS]: `
-import React, { useState } from 'react';
-import { NestedDropdown, NestedOption } from '@rothko-ui/ui';
-
-const Example = () => {
-  const [value, setValue] = useState(null);
-  const nestedOptions = [...]; // Define your options here
-
-  return (
-    <NestedDropdown
-      placeholder={placeholder}
-      value={value}
-      onChange={v => setValue(v)}
-      options={nestedOptions}
-    />
-  );
-};
-`,
-};
-
-const nestedOptions = [
-  {
-    id: '0',
-    label: 'Sub',
-    subcategories: [
-      {
-        id: '01',
-        label: 'Sub-One',
-      },
-      {
-        id: '02',
-        label: 'Sub-Two',
-      },
-      { id: '03', label: 'Sub-Three' },
-    ],
-  },
-  {
-    id: '1',
-    label: 'Two',
-  },
-  {
-    id: '2',
-    label: 'Three',
-  },
-];
+const IMPORT = "import { NestedDropdown } from '@rothko-ui/ui';";
 
 const NestedDropdownCard = () => {
-  const [value, setValue] = useState<string | null>(null);
   const isMobileOrTablet = useIsMobileOrTablet();
-  const [state, dispatch] = useReducer(customizationsReducer, {
-    disabled: false,
-    clearable: false,
-    menuPosition: 'bottom',
-    bordered: true,
-    placeholder: 'Select an option...',
-  });
-
-  const { disabled, clearable, menuPosition, bordered, placeholder } = state;
+  const maxWidth = isMobileOrTablet ? undefined : '26rem';
 
   return (
-    <Card
-      copy={nestedDropdownCopy}
-      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: nestedDropdownProps }}
-    >
-      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
-        <NestedDropdown
-          label="Nested Dropdown"
-          disabled={disabled}
-          placeholder={placeholder}
-          menuPosition={menuPosition}
-          bordered={bordered}
-          clearable={clearable}
-          value={value}
-          onChange={v => setValue(v)}
-          options={nestedOptions}
-        />
-      </Container>
-      <Container as="section" maxWidth="26rem">
-        <NestedDropdownCustomizations state={state} dispatch={dispatch} />
-      </Container>
+    <Card codeUrl={GITHUB_URL} copy={nestedDropdownCopy}>
+      <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Typography.h3>Usage</Typography.h3>
+        <Container maxWidth="32rem">
+          <TSCode code={IMPORT} />
+        </Container>
+        <Example sourceCode={BASIC}>
+          <Container maxWidth={maxWidth}>
+            <Basic />
+          </Container>
+        </Example>
+        <Example title="Disabled" sourceCode={DISABLED}>
+          <Container maxWidth={maxWidth}>
+            <Disabled />
+          </Container>
+        </Example>
+        <Example title="Clearable" sourceCode={CLEARABLE}>
+          <Container maxWidth={maxWidth}>
+            <Clearable />
+          </Container>
+        </Example>
+        <Example title="Menu Position" sourceCode={MENU_POSITION}>
+          <Container maxWidth={maxWidth}>
+            <MenuPosition />
+          </Container>
+        </Example>
+      </Flex>
+      <Props copy={{ props: nestedDropdownProps }} />
     </Card>
   );
 };

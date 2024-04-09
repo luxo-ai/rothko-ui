@@ -1,73 +1,56 @@
-import { Container, Flex, Tag } from '@rothko-ui/ui';
-import { useReducer } from 'react';
+import { Container, Flex, Typography } from '@rothko-ui/ui';
 
-import { CodeLanguage } from '../CodeExample';
-
+import { APPEARANCE } from '../button/usage/sourceCode';
+import { BASIC, CLOSEABLE, WITH_KIND } from './usage/sourceCode';
+import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
+import Appearance from './usage/Appearance';
+import Basic from './usage/Basic';
 import Card from '../Card';
-import TagCustomizations, { customizationsReducer } from './Customizations';
+import Closeable from './usage/Closeable';
+import Example from '../Example';
+import Props from '../Props';
 import tagCopy from './copy';
 import tagProps from './props';
+import WithKind from './usage/WithKind';
 
-const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-import React from 'react';
-import { Tag } from '@rothko-ui/ui';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Tag';
 
-const Example: React.FC = () => {
-  const [closed, setClosed] = useState<boolean>(false);
-
-  return (
-    <Tag onClose={() => setClosed(true)} appearance="filled" kind="danger">
-      example tag
-    </Tag>
-  );
-}
-`,
-  [CodeLanguage.JS]: `
-import React from 'react';
-import { Tag } from '@rothko-ui/ui';
-
-const Example = () => {
-  const [closed, setClosed] = useState(false);
-
-  return (
-    <Tag onClose={() => setClosed(true)} appearance="filled" kind="danger">
-      example tag
-    </Tag>
-  );
-}
-`,
-};
+const IMPORT = "import { Tag } from '@rothko-ui/ui';";
 
 const TagCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();
-  const [state, dispatch] = useReducer(customizationsReducer, {
-    kind: 'info',
-  });
-  const { kind } = state;
+  const maxWidth = isMobileOrTablet ? undefined : '26rem';
+
   return (
-    <Card
-      copy={tagCopy}
-      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: tagProps }}
-    >
-      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
-        <Flex columnGap="1rem">
-          <Tag appearance="filled" kind={kind}>
-            filled tag
-          </Tag>
-          <Tag appearance="outline" kind={kind}>
-            outline tag
-          </Tag>
-          <Tag onClose={() => alert('close')} appearance="filled" kind={kind}>
-            closeable tag
-          </Tag>
-        </Flex>
-      </Container>
-      <Container as="section" maxWidth="26rem">
-        <TagCustomizations state={state} dispatch={dispatch} />
-      </Container>
+    <Card codeUrl={GITHUB_URL} copy={tagCopy}>
+      <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Typography.h3>Usage</Typography.h3>
+        <Container maxWidth="32rem">
+          <TSCode code={IMPORT} />
+        </Container>
+        <Example sourceCode={BASIC}>
+          <Container maxWidth={maxWidth}>
+            <Basic />
+          </Container>
+        </Example>
+        <Example title="Appearance" sourceCode={APPEARANCE}>
+          <Container maxWidth={maxWidth}>
+            <Appearance />
+          </Container>
+        </Example>
+        <Example title="Closeable" sourceCode={CLOSEABLE}>
+          <Container maxWidth={maxWidth}>
+            <Closeable />
+          </Container>
+        </Example>
+        <Example title="With Kind" sourceCode={WITH_KIND}>
+          <Container maxWidth={maxWidth}>
+            <WithKind />
+          </Container>
+        </Example>
+      </Flex>
+      <Props copy={{ props: tagProps }} />
     </Card>
   );
 };

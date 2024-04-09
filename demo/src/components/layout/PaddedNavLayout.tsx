@@ -35,8 +35,10 @@ const PaddedNavLayout = React.forwardRef<HTMLDivElement, LayoutProps>(
         <main>{children}</main>
         <footer>
           <Typography.bodySmall style={{ marginBottom: '0.5rem' }}>
-            Built with{' '}
-            <span>{<Heart style={{ marginBottom: -2 }} width={16} height={16} fill="red" />}</span>{' '}
+            Built with {/* <title>I &lt;3 Brooklyn</title> in SVG? */}
+            <span>
+              {<Heart style={{ marginBottom: -2 }} width={16} height={16} fill="red" />}
+            </span>{' '}
             in Brooklyn
           </Typography.bodySmall>
           <Flex columnGap="1rem" justifyContent="center" alignItems="center">

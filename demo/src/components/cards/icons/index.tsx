@@ -1,3 +1,8 @@
+import { noop } from 'lodash';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import FuzzySearch from 'fuzzy-search';
+import React, { useMemo, useState } from 'react';
+
 import * as Icons from '@rothko-ui/icons';
 import type { Accessory, Option } from '@rothko-ui/ui';
 import {
@@ -11,37 +16,20 @@ import {
   ToastContextConsumer,
   Typography,
 } from '@rothko-ui/ui';
-import FuzzySearch from 'fuzzy-search';
-import { noop } from 'lodash';
-import React, { useMemo, useState } from 'react';
-import Card from '../Card';
-import CodeExample, { CodeLanguage } from '../CodeExample';
-import iconographyCopy from './copy';
+
+import { BASIC } from './usage/sourceCode';
 import { filledIconList, outlineIconList } from './iconsList';
+import { JSXCode } from '../../Code';
+import Card from '../Card';
+import iconographyCopy from './copy';
 import styles from './Icons.module.scss';
-import CopyToClipboard from 'react-copy-to-clipboard';
+
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/icons';
 
 enum IconKind {
   Outline,
   Filled,
 }
-
-const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-import { ActivityOutline } from '@rothko-ui/icons';
-
-const Example = () => {
-  return <ActivityOutline height={20} width={20}/>
-}
-`,
-  [CodeLanguage.JS]: `
-import { ActivityOutline } from '@rothko-ui/icons';
-
-const Example = () => {
-  return <ActivityOutline height={20} width={20}/>
-}
-`,
-};
 
 const outlineIconSearcher = new FuzzySearch([...outlineIconList]);
 const filledIconSearcher = new FuzzySearch([...filledIconList]);
@@ -80,9 +68,9 @@ const IconsCard = () => {
   }, [query, iconKind]);
 
   return (
-    <Card copy={iconographyCopy}>
+    <Card codeUrl={GITHUB_URL} copy={iconographyCopy}>
       <section>
-        <CodeExample initial={CodeLanguage.TS} examplesLookup={EXAMPLE_LOOKUP} />
+        <JSXCode code={BASIC} />
       </section>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Typography.h3>Availabe Icons</Typography.h3>

@@ -147,7 +147,7 @@ function NestedDropdown<V extends Value>({
     if (!open) return;
     const scrollIdx = optIdx < 0 && openReverse ? options.length - 1 : optIdx;
     scrollIntoView(`#option-${scrollIdx}`);
-  }, [optIdx, optIdx, open, openReverse]);
+  }, [optIdx, open, openReverse, options.length, scrollIntoView]);
 
   const containerClasses = classes({
     error,

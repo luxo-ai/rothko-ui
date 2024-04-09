@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useCallback, useContext, useEffect } from 'react';
 
 const DebuggerContext = createContext<boolean>(false);
 
@@ -23,10 +23,15 @@ export const DebuggerContextProvider = ({
 
 export const useDebuggerContext = (module?: string) => {
   const debuggerActive = useContext(DebuggerContext);
-  return (...argz: (string | Record<string, unknown> | symbol | number)[]) => {
-    if (debuggerActive) {
-      // eslint-disable-next-line no-console
-      console.log(`[rokthko-ui${module ? `:${module}` : ''}]`, ...argz);
-    }
-  };
+  const debug = useCallback(
+    (...argz: (string | Record<string, unknown> | symbol | number)[]) => {
+      if (debuggerActive) {
+        // eslint-disable-next-line no-console
+        console.log(`[rokthko-ui${module ? `:${module}` : ''}]`, ...argz);
+      }
+    },
+    [debuggerActive, module]
+  );
+
+  return debug;
 };

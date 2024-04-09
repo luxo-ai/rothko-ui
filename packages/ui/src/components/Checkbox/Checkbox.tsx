@@ -7,20 +7,20 @@ import { keyDownFactory } from '../../utils/keyUtils';
 import Typography from '../Typography/Typography';
 
 type CheckboxProps = {
-  ariaLabel?: string;
+  'aria-label'?: string;
   checked?: boolean;
   children?: React.ReactNode;
   className?: string;
   disabled?: boolean;
   error?: boolean;
   kind?: RothkoKind;
-  onChange: (val: boolean) => void;
+  onChange?: (val: boolean) => void;
   style?: React.CSSProperties;
   withCheck?: boolean;
 };
 
 const Checkbox = ({
-  ariaLabel = 'check box',
+  'aria-label': ariaLabel,
   checked,
   children,
   className,
@@ -33,7 +33,7 @@ const Checkbox = ({
 }: CheckboxProps) => {
   const clickCheckbox = () => {
     if (disabled) return;
-    onChange(!checked);
+    onChange?.(!checked);
   };
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: clickCheckbox });
   return (
