@@ -30,7 +30,7 @@ const useOptions = <V, T>({ initialIdx = -1, reverse, options: optionsRaw }: Hoo
         return Math.min(Math.max(newIdx, lowerBound), upperBound);
       });
     },
-    [setOptIdx, options]
+    [setOptIdx, options, debug]
   );
 
   const resetOptionIdx = useCallback(() => {
@@ -51,7 +51,7 @@ const useOptions = <V, T>({ initialIdx = -1, reverse, options: optionsRaw }: Hoo
       }
       if (resetIdx) setOptIdx(initialIdx);
     },
-    [setOptionsInner, setOptIdx, initialIdx, reverse]
+    [setOptionsInner, setOptIdx, initialIdx, reverse, debug]
   );
 
   return {

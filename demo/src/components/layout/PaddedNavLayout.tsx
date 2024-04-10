@@ -21,7 +21,15 @@ const PaddedNavLayout = React.forwardRef<HTMLDivElement, LayoutProps>(
     const closeDrawer = useCallback(() => setIsDrawerOpen(false), [setIsDrawerOpen]);
     const openDrawer = useCallback(() => setIsDrawerOpen(true), [setIsDrawerOpen]);
     return (
-      <div ref={ref} style={{ flex: 1 }} className={styles.paddedNavContainer}>
+      <div
+        ref={ref}
+        style={{ flex: 1 }}
+        className={
+          router.pathname === '/'
+            ? styles.paddedNavContainer
+            : `${styles.paddedNavContainer} ${styles.centered}`
+        }
+      >
         <Drawer open={isDrawerOpen} onClose={closeDrawer}>
           <NavigationList
             // too lazy to fix this, remove starting '/' in path

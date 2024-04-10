@@ -75,7 +75,7 @@ export const isFunction = (value: any): value is Func => {
  * // => true
  */
 export const isNil = <T>(value: Nilable<T>): value is Nil => {
-  return value == null;
+  return value === null || value === undefined;
 };
 
 /**
@@ -272,6 +272,28 @@ export const compact = <T>(arr: (T | Falsy)[]): T[] => {
  */
 export const asCompactedArray = <T>(v: Nilable<T> | T[]): T[] => {
   return compact(isArray(v) ? v : [v]);
+};
+
+/**
+ * Ensures the input is an array, and then filters out any nil (null or undefined) values from the array.
+ * If the input is not already an array, it is first wrapped in one.
+ *
+ * @param {Nilable<T> | T[]} v The value or array to filter.
+ * @returns {T[]} Returns an array with nil values filtered out.
+ * @typeparam T The type of the values.
+ * @example
+ *
+ * asNonNilArray(null)
+ * // => []
+ *
+ * asNonNilArray([1, 2, null, undefined, 3])
+ * // => [1, 2, 3]
+ *
+ * asNonNilArray('hello')
+ * // => ['hello']
+ */
+export const asNonNilArray = <T>(v: Nilable<T> | T[]): T[] => {
+  return (isArray(v) ? v : [v]).filter(isNotNil);
 };
 
 /**

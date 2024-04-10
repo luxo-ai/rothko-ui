@@ -1,4 +1,4 @@
-import { asCompactedArray, isFunction, isNil } from '@rothko-ui/utils';
+import { asNonNilArray, isFunction, isNil } from '@rothko-ui/utils';
 import { Set as ImSet } from 'immutable';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDebuggerContext } from '../../library/DebuggerContext';
@@ -29,7 +29,7 @@ const useSelect = <V extends Value, T = undefined>(args: HookArgs<V, T>) => {
   const [query, setQueryInner] = useState<string | null>(null);
   // important to useMemo here because otherwise the useEffect below will go into
   // an infinite loop...
-  const selectedValues = useMemo(() => ImSet(asCompactedArray(value)), [value]);
+  const selectedValues = useMemo(() => ImSet(asNonNilArray(value)), [value]);
 
   const matchesQuery = useCallback(
     (o: Option<V, T>) => {
@@ -57,7 +57,7 @@ const useSelect = <V extends Value, T = undefined>(args: HookArgs<V, T>) => {
       onChange(newValue);
       setQueryInner(null);
     },
-    [selectedValues, multiple, onChange, setQueryInner, resetOptionIdx, setOptions]
+    [selectedValues, multiple, onChange, setQueryInner, debug]
   );
 
   const deleteOne = useCallback(
@@ -68,7 +68,7 @@ const useSelect = <V extends Value, T = undefined>(args: HookArgs<V, T>) => {
       onChange(newValue);
       onDelete?.(toDelete);
     },
-    [onChange, onDelete, multiple, selectedValues, args.options, disabled]
+    [onChange, onDelete, multiple, selectedValues, disabled, debug]
   );
 
   const optionLookup = useMemo(
@@ -85,7 +85,7 @@ const useSelect = <V extends Value, T = undefined>(args: HookArgs<V, T>) => {
       setOptions(args.options);
     }
     // careful. addting options to the dependency array causes an infinite loop
-  }, [search, query, matchesQuery, setOptions, args.options]);
+  }, [search, query, matchesQuery, setOptions, args.options, options.length]);
 
   useEffect(() => {
     if (!multiple) return;

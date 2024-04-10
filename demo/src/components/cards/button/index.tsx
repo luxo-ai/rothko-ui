@@ -38,7 +38,7 @@ const ButtonCard = () => {
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Typography.h3>Usage</Typography.h3>
         <Container maxWidth="32rem">
-          <TSCode code={IMPORT} />
+          <TSCode sourceCode={IMPORT} />
         </Container>
         <Example title="With Kind" sourceCode={WITH_KIND}>
           <Grid gridTemplateColumns={gridTemplateColumns} rowGap="1rem" columnGap="0.75rem">

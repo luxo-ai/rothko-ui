@@ -86,7 +86,7 @@ function DropdownInner<V extends Value, T = undefined>({
   const hasValue = !isNil(value) && (!isArray(value) || value.length > 0);
   const canClear = clearable && hasValue && !disabled;
 
-  // add these to the menu hook...
+  // TODO: add these to the menu hook...
   const openDropdownMenu = () => {
     if (open || disabled) return;
     if (isNil(value)) reset();
@@ -161,7 +161,7 @@ function DropdownInner<V extends Value, T = undefined>({
     if (!open) return;
     const scrollIdx = optIdx < 0 && openReverse ? options.length - 1 : optIdx;
     scrollIntoView(`#option-${scrollIdx}`);
-  }, [optIdx, openReverse, open]);
+  }, [optIdx, openReverse, open, scrollIntoView, options.length]);
 
   const containerClasses = classes({
     error,

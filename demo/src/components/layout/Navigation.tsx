@@ -1,4 +1,4 @@
-import { Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
+import { Github, Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
 import {
   Button,
   Flex,
@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 
 import config from '../../config';
 import styles from './Navigation.module.scss';
+import Link from 'next/link';
 
 type NavigationProps = {
   openDrawer: () => void;
@@ -60,15 +61,25 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
           </FlexItem>
         </Flex>
         <Flex justifyContent="center" alignItems="center" columnGap="1.75rem">
-          {!withoutToggle && (
-            <button onClick={() => toggleMode()} className={styles.phantomButton}>
-              {mode === 'dark' ? (
-                <Sun fill="#ffbb00" width={28} height={28} />
-              ) : (
-                <Moon fill="#4833e0" width={27} height={27} />
-              )}
-            </button>
-          )}
+          <Flex justifyContent="center" alignItems="center" columnGap="1rem">
+            <Link
+              target="_blank"
+              href={config.repoUrl}
+              className={styles.phantomButton}
+              rel="noreferrer"
+            >
+              <Github fill={mode === 'dark' ? '#fff' : '#000'} width={28} height={28} />
+            </Link>
+            {!withoutToggle && (
+              <button onClick={() => toggleMode()} className={styles.phantomButton}>
+                {mode === 'dark' ? (
+                  <Sun fill="#ffbb00" width={28} height={28} />
+                ) : (
+                  <Moon fill="#4833e0" width={27} height={27} />
+                )}
+              </button>
+            )}
+          </Flex>
           <WidthGeqOnly threshold={750} style={{ height: '100%' }}>
             <Button
               size="s"

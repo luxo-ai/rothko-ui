@@ -34,7 +34,7 @@ const SponsorMe = () => {
               </FlexItem>
             </Flex>
             <ToastContextProvider>
-              <TextCode code={config.ethWallet} />
+              <TextCode sourceCode={config.ethWallet} />
             </ToastContextProvider>
           </FlexItem>
         </Flex>

@@ -1,5 +1,8 @@
 .nav {
-  padding: 0 1.5rem;
+  & > div {
+    // 04/09/24
+    padding: 0 1.5rem;
+  }
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,6 +13,9 @@
   background: var(--demo-background, #000);
 
   &.blurry {
+    & > div {
+      padding: 0; // 04/09/24
+    }
     background: var(--demo-nav-background, #000);
     backdrop-filter: blur(5px);
   }
@@ -44,6 +50,18 @@ $headerBarHeightPx: 60px;
     // background: white;
     z-index: 999998;
   }
+
+  // 04/09/24 -------
+  & header > nav > div {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 75rem;
+    @media screen and (max-width: 50rem) {
+      margin: 0;
+    }
+  }
+  // ---------------
+
   // Main content
   & > main {
     flex: 1;
@@ -51,6 +69,16 @@ $headerBarHeightPx: 60px;
     height: 100%;
     //  overflow: auto;
   }
+
+  // 04/09/24 ------
+  &.centered > main {
+    margin: 0 auto;
+    max-width: 75rem;
+    @media screen and (max-width: 50rem) {
+      margin: 0;
+    }
+  }
+  // ---------------
 
   // Footer content
   & > footer {

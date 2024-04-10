@@ -27,7 +27,7 @@ const NestedDropdownCard = () => {
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Typography.h3>Usage</Typography.h3>
         <Container maxWidth="32rem">
-          <TSCode code={IMPORT} />
+          <TSCode sourceCode={IMPORT} />
         </Container>
         <Example sourceCode={BASIC}>
           <Container maxWidth={maxWidth}>
