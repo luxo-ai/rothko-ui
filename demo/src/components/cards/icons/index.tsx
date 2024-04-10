@@ -1,4 +1,4 @@
-import { noop } from 'lodash';
+import { noop, truncate } from 'lodash';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import FuzzySearch from 'fuzzy-search';
 import React, { useMemo, useState } from 'react';
@@ -114,7 +114,9 @@ const IconsCard = () => {
                         <button aria-label={iconName}>
                           <Flex flexDirection="column" alignItems="center" gap="1rem">
                             <C width={30} height={30} />
-                            <Typography.bodySmall>{iconName}</Typography.bodySmall>
+                            <Typography.bodySmall>
+                              {truncate(iconName, { length: 18 })}
+                            </Typography.bodySmall>
                           </Flex>
                         </button>
                       </CopyToClipboard>

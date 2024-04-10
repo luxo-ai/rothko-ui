@@ -2,7 +2,8 @@
   // margin="0 auto" flexWrap="wrap" gap="1rem"
   // display: flex;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, 160px); // repeat(5, 1fr);
+  grid-template-rows: 120px;
   place-items: stretch;
   -webkit-box-align: stretch;
   margin: 0 auto;
@@ -10,26 +11,30 @@
   gap: 1.125rem;
 
   @media screen and (max-width: 1440px) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 160px); // repeat(4, 1fr);
   }
 
-  @media screen and (max-width: 1200px) {
-    grid-template-columns: repeat(3, 1fr);
+  @media screen and (max-width: 1155px) {
+    grid-template-columns: repeat(4, 180px); // repeat(3, 1fr);
+    grid-template-rows: 150px;
   }
 
   @media screen and (max-width: 1024px) {
     gap: 0.75rem;
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: unset;
   }
 
   @media screen and (max-width: 485px) {
     gap: 0.75rem;
     grid-template-columns: repeat(2, 210px);
+    grid-template-rows: unset;
   }
 
   @media screen and (max-width: 458px) {
     gap: 0.75rem;
     grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: unset;
   }
 
   .icon {

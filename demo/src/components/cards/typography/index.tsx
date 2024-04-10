@@ -1,14 +1,11 @@
 import { Container, Flex, Grid, Tag, Typography } from '@rothko-ui/ui';
 
-import { BASIC } from './usage/sourceCode';
 import { TSCode } from '../../Code';
-import Basic from './usage/Basic';
 import Card from '../Card';
-import Example from '../Example';
 import Props from '../Props';
+import Usage from '../Usage';
 import typographyCopy from './copy';
 import typographyProps from './props';
-import Usage from '../Usage';
 
 const GITHUB_URL =
   'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Typography';
@@ -23,9 +20,6 @@ const TypographyCard = () => {
         <Container maxWidth="32rem">
           <TSCode sourceCode={IMPORT} />
         </Container>
-        <Example sourceCode={BASIC}>
-          <Basic />
-        </Example>
       </Flex>
       <Grid
         maxWidth="40rem"
