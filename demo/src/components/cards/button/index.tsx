@@ -1,4 +1,4 @@
-import { Container, Flex, Grid, Typography } from '@rothko-ui/ui';
+import { Container, Flex, Grid } from '@rothko-ui/ui';
 
 import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
@@ -23,6 +23,7 @@ import {
   WITH_KIND,
 } from './usage/sourceCode';
 import Props from '../Props';
+import Usage from '../Usage';
 
 const IMPORT = "import { Button } from '@rothko-ui/ui';";
 
@@ -36,7 +37,7 @@ const ButtonCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={buttonCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
-        <Typography.h3>Usage</Typography.h3>
+        <Usage />
         <Container maxWidth="32rem">
           <TSCode sourceCode={IMPORT} />
         </Container>

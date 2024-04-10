@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import type { RothkoKind } from '@rothko-ui/ui';
-import { Container, Flex, FlexItem, RadioGroup, Typography } from '@rothko-ui/ui';
+import { Container, Flex, FlexItem, RadioGroup } from '@rothko-ui/ui';
 
 import accordionCopy from './copy';
 import Basic from './usage/Basic';
@@ -29,6 +29,7 @@ import { TSCode } from '../../Code';
 import Props from '../Props';
 import propsCopy from './props';
 import { insertKind } from '../helpers';
+import Usage from '../Usage';
 
 const GITHUB_URL =
   'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Accordion';
@@ -41,7 +42,7 @@ const AccordionCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={accordionCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
-        <Typography.h3>Usage</Typography.h3>
+        <Usage />
         <Container maxWidth="32rem">
           <TSCode sourceCode={IMPORT} />
         </Container>

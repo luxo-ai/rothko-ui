@@ -1,4 +1,4 @@
-import { Container, Flex, Typography } from '@rothko-ui/ui';
+import { Container, Flex } from '@rothko-ui/ui';
 
 import { BASIC } from './usage/sourceCode';
 import { TSCode } from '../../Code';
@@ -8,6 +8,7 @@ import drawerCopy from './copy';
 import drawerProps from './props';
 import Example from '../Example';
 import Props from '../Props';
+import Usage from '../Usage';
 
 const GITHUB_URL =
   'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Drawer';
@@ -18,7 +19,7 @@ const DrawerCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={drawerCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
-        <Typography.h3>Usage</Typography.h3>
+        <Usage />
         <Container maxWidth="32rem">
           <TSCode sourceCode={IMPORT} />
         </Container>

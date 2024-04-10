@@ -25,7 +25,7 @@ const TagCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={tagCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
-        <Typography.h3>Usage</Typography.h3>
+        <Usage />
         <Container maxWidth="32rem">
           <TSCode sourceCode={IMPORT} />
         </Container>

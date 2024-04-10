@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import type { RothkoKind } from '@rothko-ui/ui';
-import { Container, Flex, FlexItem, RadioGroup, Typography } from '@rothko-ui/ui';
+import { Container, Flex, FlexItem, RadioGroup } from '@rothko-ui/ui';
 
 import { BASIC, DISABLED, WITH_KIND } from './usage/sourceCode';
 import { kindOptions } from '../../rothkoOptions';
@@ -16,6 +16,7 @@ import sliderCopy from './copy';
 import sliderProps from './props';
 import WithKind from './usage/WithKind';
 import { insertKind } from '../helpers';
+import Usage from '../Usage';
 
 const GITHUB_URL =
   'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Slider';
@@ -30,7 +31,7 @@ const SliderCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={sliderCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
-        <Typography.h3>Usage</Typography.h3>
+        <Usage />
         <Container maxWidth="32rem">
           <TSCode sourceCode={IMPORT} />
         </Container>

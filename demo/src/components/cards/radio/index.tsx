@@ -1,4 +1,4 @@
-import { Container, Flex, Typography } from '@rothko-ui/ui';
+import { Container, Flex } from '@rothko-ui/ui';
 
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import { TSCode } from '../../Code';
@@ -11,6 +11,7 @@ import Disabled from './usage/Disabled';
 import MaxColumn from './usage/MaxColumn';
 import { BASIC, DISABLED, MAX_COLUMN } from './usage/sourceCode';
 import Props from '../Props';
+import Usage from '../Usage';
 
 const GITHUB_URL =
   'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Radio';
@@ -24,7 +25,7 @@ const RadioGroupCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={radioCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
-        <Typography.h3>Usage</Typography.h3>
+        <Usage />
         <Container maxWidth="32rem">
           <TSCode sourceCode={IMPORT} />
         </Container>

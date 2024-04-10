@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import type { RothkoKind } from '@rothko-ui/ui';
-import { Container, Flex, FlexItem, RadioGroup, Typography } from '@rothko-ui/ui';
+import { Container, Flex, FlexItem, RadioGroup } from '@rothko-ui/ui';
 
 import { BASIC, WITH_KIND } from './usage/sourceCode';
 import { insertKind } from '../helpers';
@@ -15,6 +15,7 @@ import Props from '../Props';
 import tabBarCopy from './copy';
 import tabBarProps from './props';
 import WithKind from './usage/WithKind';
+import Usage from '../Usage';
 
 const GITHUB_URL =
   'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/TabBar';
@@ -29,7 +30,7 @@ const TabBarCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={tabBarCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
-        <Typography.h3>Usage</Typography.h3>
+        <Usage />
         <Container maxWidth="32rem">
           <TSCode sourceCode={IMPORT} />
         </Container>

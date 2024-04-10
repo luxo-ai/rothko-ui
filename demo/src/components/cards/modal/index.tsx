@@ -1,4 +1,4 @@
-import { Container, Flex, Typography } from '@rothko-ui/ui';
+import { Container, Flex } from '@rothko-ui/ui';
 
 import { BASIC } from './usage/sourceCode';
 import { TSCode } from '../../Code';
@@ -9,6 +9,7 @@ import Example from '../Example';
 import modalCopy from './copy';
 import modalProps from './props';
 import Props from '../Props';
+import Usage from '../Usage';
 
 const GITHUB_URL =
   'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Modal';
@@ -22,7 +23,7 @@ const ModalCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={modalCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
-        <Typography.h3>Usage</Typography.h3>
+        <Usage />
         <Container maxWidth="32rem">
           <TSCode sourceCode={IMPORT} />
         </Container>

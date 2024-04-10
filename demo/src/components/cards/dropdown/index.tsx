@@ -1,4 +1,4 @@
-import { Container, Flex, Typography } from '@rothko-ui/ui';
+import { Container, Flex } from '@rothko-ui/ui';
 
 import { BASIC, CLEARABLE, DISABLED, MENU_POSITION, SEARCHABLE } from './usage/sourceCode';
 import { TSCode } from '../../Code';
@@ -13,6 +13,7 @@ import Example from '../Example';
 import MenuPosition from './usage/MenuPosition';
 import Props from '../Props';
 import Seachable from './usage/Searchable';
+import Usage from '../Usage';
 
 const GITHUB_URL =
   'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Dropdown';
@@ -28,7 +29,7 @@ const SingleDropdownCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={dropdownCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
-        <Typography.h3>Usage</Typography.h3>
+        <Usage />
         <Container maxWidth="32rem">
           <TSCode sourceCode={IMPORT} />
         </Container>

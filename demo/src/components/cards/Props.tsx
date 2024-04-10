@@ -2,6 +2,8 @@ import { Flex, FlexItem, Table, TableData, TableRow, Typography } from '@rothko-
 import React from 'react';
 import styles from './Cards.module.scss';
 import type { ComponentProperty } from './types';
+import { toKebabCase } from '@rothko-ui/utils';
+import Link from 'next/link';
 
 type PropsTableProps = {
   props: readonly ComponentProperty[];
@@ -39,8 +41,12 @@ const Props = ({ copy }: { copy: PropsCopy | Required<PropsCopy>[] }) => {
   const Title = Typography['h3'];
   if (Array.isArray(copy)) {
     return (
-      <div>
-        <Title>Props</Title>
+      <section>
+        <Title className={styles.headerIdk} id="props">
+          <Link href="#props" scroll>
+            Props
+          </Link>
+        </Title>
         <Flex className={styles.propsContainer} flexDirection="column" rowGap="3rem">
           {copy.map(propsCopy => (
             <FlexItem key={propsCopy.title}>
@@ -49,16 +55,24 @@ const Props = ({ copy }: { copy: PropsCopy | Required<PropsCopy>[] }) => {
             </FlexItem>
           ))}
         </Flex>
-      </div>
+      </section>
     );
   }
+
+  const title = copy.title || 'Props';
+  const titleAsKebab = title && toKebabCase(title);
+
   return (
-    <div>
-      <Title>{copy.title || 'Props'}</Title>
+    <section>
+      <Title className={styles.headerIdk} id={titleAsKebab}>
+        <Link href={`#${titleAsKebab}`} scroll>
+          {title}
+        </Link>
+      </Title>
       <div className={styles.propsContainer}>
         <PropsTable props={copy.props} />
       </div>
-    </div>
+    </section>
   );
 };
 
