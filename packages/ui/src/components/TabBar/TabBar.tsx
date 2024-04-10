@@ -39,6 +39,7 @@ function TabBar<Key extends KeyLike>({
                 setTabIdx(idx);
                 onSelect?.(t.key);
               }}
+              // style={{ '-webkit-tap-highlight-color': 'transparent' }}
               key={`${String(t.key)}-${idx}`}
               margin="0 auto"
               alignItems="center"
@@ -80,6 +81,10 @@ const TabList = styled.ul<{ tabCount: number }>`
   // tablet and mobile
   @media only screen and (max-width: 700px) {
     padding: 0.25rem 0;
+  }
+
+  & > li {
+    -webkit-tap-highlight-color: transparent;
   }
 `;
 

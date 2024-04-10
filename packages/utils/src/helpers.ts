@@ -213,6 +213,31 @@ export const kebabToCamelCase = (str: string): string => {
 };
 
 /**
+ * Converts any string to kebab-case.
+ *
+ * @param {string} str The string to convert.
+ * @returns {string} Returns the kebab-case string.
+ * @example
+ *
+ * toKebabCase('Rothko UI')
+ * // => 'rothko-ui'
+ */
+export const toKebabCase = (str: string): string => {
+  return (
+    str
+      .replace(/\s+/g, '-')
+      .replace(/([A-Z])/g, match => `-${match.toLowerCase()}`)
+      // special characters
+      .replace(/[^a-zA-Z0-9-]/g, '')
+      // duplicate hyphens to single hyphen
+      .replace(/-+/g, '-')
+      // leading hyphen
+      .replace(/^-/, '')
+      .toLowerCase()
+  );
+};
+
+/**
  * Removes all falsy values from an array.
  *
  * @param {T[]} arr The array to compact.

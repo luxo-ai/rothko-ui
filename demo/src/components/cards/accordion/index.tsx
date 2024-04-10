@@ -43,9 +43,9 @@ const AccordionCard = () => {
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Typography.h3>Usage</Typography.h3>
         <Container maxWidth="32rem">
-          <TSCode code={IMPORT} />
+          <TSCode sourceCode={IMPORT} />
         </Container>
-        <Flex flexDirection="column" rowGap="3rem">
+        <Flex flexDirection="column" rowGap="2.5rem">
           <Example sourceCode={BASIC}>
             <Basic />
           </Example>

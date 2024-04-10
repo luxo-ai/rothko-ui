@@ -9,92 +9,75 @@ const themeCopy: CardCopy = {
   sections: [
     {
       variant: 'h5',
-      title: 'Dark Mode Support',
-      body: 'Rothko UI provides built-in support for dark mode. This allows you to create visually striking and accessible interfaces. With a simple toggle, you can switch between light and dark themes seamlessly, enhancing the user experience and adapting to user preferences. Your preference can be set via the `themeMode` prop on the `RothkoProvider`',
-    },
-    {
-      variant: 'h5',
       title: 'Style Overrides',
       subtitle:
         'You can easily override specific component styles by targeting their respective keys in the theme object. This allows you to fine-tune the appearance and behavior of individual components to align with your design vision.',
       body: [
         {
           variant: 'h6',
-          title: 'Overriding Typography',
+          title: 'Typography',
+          subtitle:
+            "You can overridde the system's typography using the `overrides` prop on the `RothkoProvider`.",
           body: [
             {
-              body: "You can overridde the system's typography using the `overrides` prop on the `RothkoProvider`.",
+              kind: 'code',
+              language: 'jsx',
+              code: TYPOGRAPHY_OVERRIDE,
             },
             {
-              body: {
-                kind: 'code',
-                language: 'jsx',
-                code: TYPOGRAPHY_OVERRIDE,
-              },
-            },
-            {
-              variant: 'body',
-              title: 'All overridable elements',
-              body: {
-                kind: 'code',
-                language: 'json',
-                code: overrides.typographyJson,
-              },
+              text: 'Below is a list of all overridable elements in the typography object.',
+              kind: 'code',
+              language: 'json',
+              code: overrides.typographyJson,
             },
           ],
         },
         {
           variant: 'h6',
-          title: 'Overriding Component Colors',
+          title: 'Component Overrides',
+          subtitle:
+            "You can overridde the system's component colors using the `overrides` prop on the `RothkoProvider`.",
           body: [
             {
-              body: "You can overridde the system's component colorss using the `overrides` prop on the `RothkoProvider`.",
+              kind: 'code',
+              language: 'jsx',
+              code: COMPONENT_OVERRIDE,
             },
             {
-              body: {
-                kind: 'code',
-                language: 'jsx',
-                code: COMPONENT_OVERRIDE,
-              },
-            },
-            {
-              variant: 'body',
-              title: 'All overridable elements',
-              body: {
-                kind: 'code',
-                language: 'json',
-                code: overrides.componentJson,
-              },
+              text: 'Below is a list of all overridable elements in the components object.',
+              kind: 'code',
+              language: 'json',
+              code: overrides.componentJson,
             },
           ],
         },
         {
           variant: 'h6',
-          title: 'Overriding Semantic Colors',
+          title: 'Semantic Colors Overrides',
+          subtitle:
+            "You can override the system's semantic colors using the `overrides` prop on the `RothkoProvider`.",
           body: [
             {
-              body: "You can overridde the system's semantic colorss using the `overrides` prop on the `RothkoProvider`.",
+              kind: 'code',
+              language: 'jsx',
+              code: SEMANTIC_OVERRIDE,
             },
             {
-              body: {
-                kind: 'code',
-                language: 'jsx',
-                code: SEMANTIC_OVERRIDE,
-              },
-            },
-            {
-              variant: 'body',
-              title: 'All overridable elements',
-              body: {
-                kind: 'code',
-                language: 'json',
-                code: overrides.semanticJson,
-              },
+              text: 'Below is a list of all overridable elements in the semantic color object.',
+              kind: 'code',
+              language: 'json',
+              code: overrides.semanticJson,
             },
           ],
         },
       ],
     },
+    {
+      variant: 'h5',
+      title: 'Dark Mode Support',
+      body: 'Rothko UI provides built-in support for dark mode. This allows you to create visually striking and accessible interfaces. With a simple toggle, you can switch between light and dark themes seamlessly, enhancing the user experience and adapting to user preferences. Your preference can be set via the `themeMode` prop on the `RothkoProvider`',
+    },
   ],
 };
+
 export default themeCopy;

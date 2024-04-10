@@ -70,7 +70,7 @@ const IconsCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={iconographyCopy}>
       <section>
-        <JSXCode code={BASIC} />
+        <JSXCode sourceCode={BASIC} />
       </section>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Typography.h3>Availabe Icons</Typography.h3>

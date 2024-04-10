@@ -38,7 +38,7 @@ export const Code = ({
   const defaultTheme = language === 'jsx' ? 'nightOwl' : 'jetwave';
   const theme = THEMES[themeOverride || defaultTheme];
   return (
-    <div style={containerStyle}>
+    <div style={{ maxWidth: containerStyle.maxWidth }}>
       <Highlight
         theme={mode === 'dark' ? theme.dark : theme.light}
         code={sourceCode}

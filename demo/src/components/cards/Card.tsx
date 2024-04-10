@@ -3,11 +3,21 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Github } from '@rothko-ui/icons';
-import { Container, Flex, List, ListItem, TabBar, Typography, useRothko } from '@rothko-ui/ui';
+import {
+  Container,
+  Flex,
+  FlexItem,
+  List,
+  ListItem,
+  TabBar,
+  Typography,
+  useRothko,
+} from '@rothko-ui/ui';
+import { asCompactedArray, toKebabCase } from '@rothko-ui/utils';
 
 import { Code } from '../Code';
 import styles from './Cards.module.scss';
-import type { Body as BodyType, CardCopy, Section as SectionType } from './types';
+import type { Body as BodyType, CCode, CardCopy, Section as SectionType } from './types';
 import Markdown from './Markdown';
 
 type CardProps = {
@@ -28,6 +38,7 @@ const Card = ({ children, copy, codeUrl }: CardProps) => {
           <Container marginTop="1.5rem">
             <Link
               style={{
+                cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 columnGap: '0.4rem',
@@ -35,6 +46,7 @@ const Card = ({ children, copy, codeUrl }: CardProps) => {
               }}
               href={codeUrl}
               target="_bank"
+              // fixes mobile flashing issue
               className="phantom-button"
             >
               <Github width={23} height={23} fill={mode === 'dark' ? '#fff' : undefined} />
@@ -43,26 +55,36 @@ const Card = ({ children, copy, codeUrl }: CardProps) => {
           </Container>
         )}
       </header>
-      {sections && sections.map(section => <Section key={section.title} section={section} />)}
+      {sections &&
+        sections.map((section, idx) => {
+          const sectionKey = section.title || `${title}_${idx}`;
+          return <Section sectionKey={sectionKey} key={sectionKey} section={section} />;
+        })}
       {children && <>{children}</>}
     </div>
   );
 };
 
 type SectionProps = {
+  style?: React.CSSProperties;
+  sectionKey: string;
   section: SectionType;
 };
 
-const Section = ({ section }: SectionProps) => {
-  const { variant: headerVariant = 'h3', title: headerText, subtitle, body } = section;
+const Section = ({ sectionKey, section }: SectionProps) => {
+  const { variant: headerVariant = 'h3', title, subtitle, body } = section;
 
   const Body = ({ body }: { body: BodyType }) => {
     // string
     if (isString(body)) {
-      return <Markdown>{body}</Markdown>;
+      return (
+        <div style={{ marginTop: '0.5rem' }}>
+          <Markdown>{body}</Markdown>
+        </div>
+      );
     }
     // string[]
-    if (Array.isArray(body) && typeof body[0] === 'string') {
+    if (Array.isArray(body) && body.every(isString)) {
       return (
         <List>
           {body.map(item => (
@@ -71,19 +93,42 @@ const Section = ({ section }: SectionProps) => {
         </List>
       );
     }
-    // Section
-    if (!('kind' in body) && !Array.isArray(body)) {
-      return <Section section={body} />;
-    }
-    // Section[]
-    if (!('kind' in body) && Array.isArray(body)) {
+    // Code[]
+    if (Array.isArray(body) && body.every((v): v is CCode => 'kind' in v && v.kind === 'code')) {
       return (
-        <Flex marginTop="1rem" flexDirection="column" rowGap="1.5rem">
-          {body.map((item, idx) => (
-            <div key={`${headerText || 'NONE'}_${idx}`}>
-              <Section section={item as SectionType} />
-            </div>
-          ))}
+        <Flex flexDirection="column" rowGap="1rem">
+          {asCompactedArray(body).map((item, idx) => {
+            const subSectionKey = `${sectionKey}_${idx}`;
+            return (
+              <FlexItem key={subSectionKey}>
+                {item.text && (
+                  <div style={{ marginTop: '0.5rem', marginBottom: '1rem' }}>
+                    <Markdown>{item.text}</Markdown>
+                  </div>
+                )}
+                <Code
+                  marginTop="1rem"
+                  maxWidth={!['jsx', 'json'].includes(item.language) ? '28rem' : undefined}
+                  maxHeight={item.language !== 'jsx' ? '25rem' : undefined}
+                  language={item.language}
+                  displayLanguage={item.language !== 'jsx'}
+                  displayLineNumbers={item.language === 'jsx'}
+                  sourceCode={item.code}
+                />
+              </FlexItem>
+            );
+          })}
+        </Flex>
+      );
+    }
+    // Section || Section[]
+    if (!('kind' in body)) {
+      return (
+        <Flex marginTop="1rem" flexDirection="column" rowGap="1.75rem">
+          {asCompactedArray(body).map((item, idx) => {
+            const subSectionKey = item.title || `${sectionKey}_${idx}`;
+            return <Section sectionKey={subSectionKey} key={subSectionKey} section={item} />;
+          })}
         </Flex>
       );
     }
@@ -95,24 +140,37 @@ const Section = ({ section }: SectionProps) => {
     // Code
     if (body.kind === 'code' && !Array.isArray(body.code)) {
       return (
-        <Code
-          maxWidth={!['jsx', 'json'].includes(body.language) ? '28rem' : undefined}
-          maxHeight={body.language !== 'jsx' ? '25rem' : undefined}
-          language={body.language}
-          displayLanguage={body.language !== 'jsx'}
-          displayLineNumbers={body.language === 'jsx'}
-          sourceCode={body.code}
-        />
+        <>
+          {body.text && (
+            <div style={{ marginTop: '0.5rem', marginBottom: '1rem' }}>
+              <Markdown>{body.text}</Markdown>
+            </div>
+          )}
+          <Code
+            marginTop="1rem"
+            maxWidth={!['jsx', 'json'].includes(body.language) ? '28rem' : undefined}
+            maxHeight={body.language !== 'jsx' ? '25rem' : undefined}
+            language={body.language}
+            displayLanguage={body.language !== 'jsx'}
+            displayLineNumbers={body.language === 'jsx'}
+            sourceCode={body.code}
+          />
+        </>
       );
     }
     // Code[]
     if (body.kind === 'code' && Array.isArray(body.code)) {
       return (
         <>
+          {body.text && (
+            <div style={{ marginTop: '0.5rem', marginBottom: '1rem' }}>
+              <Markdown>{body.text}</Markdown>
+            </div>
+          )}
           <TabBar
             kind="success"
             initialTab="Example"
-            style={{ maxWidth: '10rem' }}
+            style={{ maxWidth: '10rem', margin: '0' }}
             containerStyle={{ margin: '1rem 0 1rem 0' }}
             tabs={body.code.map(({ tag, text, icon: Icon }) => ({
               leftIcon: Icon && <Icon />,
@@ -137,14 +195,27 @@ const Section = ({ section }: SectionProps) => {
   };
 
   const Header = Typography[headerVariant];
+  const titleAsKebab = title && toKebabCase(title);
 
   return (
     <section>
-      {headerText && (
-        <Container marginBottom="1rem">
-          <Header bold={headerVariant === 'body'}>{headerText}</Header>
-          {subtitle && <Typography.body style={{ margin: '0.5rem 0' }}>{subtitle}</Typography.body>}
-        </Container>
+      {title && headerVariant !== 'body' && (
+        <Header
+          className={styles.headerIdk}
+          id={titleAsKebab}
+          // for nav
+          style={{ scrollMarginTop: 80 }}
+        >
+          <Link href={`#${titleAsKebab}`} scroll style={{ textDecoration: 'none' }}>
+            {title}
+          </Link>
+        </Header>
+      )}
+      {title && headerVariant === 'body' && <Header bold>{title}</Header>}
+      {subtitle && (
+        <div style={{ marginTop: '0.5rem', marginBottom: '1rem' }}>
+          <Markdown>{subtitle}</Markdown>
+        </div>
       )}
       <Body body={body} />
     </section>

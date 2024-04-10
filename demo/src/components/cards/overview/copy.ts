@@ -9,6 +9,31 @@ const overviewCopy: CardCopy = {
     'Welcome to Rothko UI, a cutting-edge and lightweight UI component library designed to elevate your web development projects. Rothko UI stands out from the crowd by offering a sleek and modern design aesthetic that aligns perfectly with the latest trends in UI/UX.',
   sections: [
     {
+      title: 'Setup',
+      body: {
+        variant: 'h6',
+        title: 'Installing Rothko UI',
+        subtitle:
+          'Rothko UI is available on npm as `@rothko-ui/ui`. This single package contains all Rothko UI components. The iconography library is separately available as `@rothko-ui/icons`.',
+        body: {
+          kind: 'code',
+          language: 'bash',
+          code: [
+            {
+              icon: lazy(() => import('./NpmSvg')),
+              tag: 'npm',
+              text: 'npm install @rothko-ui/ui @rothko-ui/icons',
+            },
+            {
+              icon: lazy(() => import('./YarnSvg')),
+              tag: 'yarn',
+              text: 'yarn add @rothko-ui/ui @rothko-ui/icons',
+            },
+          ],
+        },
+      },
+    },
+    {
       title: 'Features',
       body: [
         {
@@ -25,34 +50,6 @@ const overviewCopy: CardCopy = {
           variant: 'body',
           title: 'Strong Customization',
           body: "Rothko UI provides extensive customization options to tailor the components to your project's specific needs. From colors and typography to layout and interaction, you have the power to create a unique and personalized UI. The library empowers developers to shape their applications according to their vision.",
-        },
-      ],
-    },
-    {
-      title: 'Setup',
-      body: [
-        {
-          variant: 'h6',
-          title: 'Installing Rothko UI',
-          body: 'Rothko UI is available on npm as `@rothko-ui/ui`. This single package contains all Rothko UI components. The iconography library is separately available as `@rothko-ui/icons`.',
-        },
-        {
-          body: {
-            kind: 'code',
-            language: 'bash',
-            code: [
-              {
-                icon: lazy(() => import('./NpmSvg')),
-                tag: 'npm',
-                text: 'npm install @rothko-ui/ui @rothko-ui/icons',
-              },
-              {
-                icon: lazy(() => import('./YarnSvg')),
-                tag: 'yarn',
-                text: 'yarn add @rothko-ui/ui @rothko-ui/icons',
-              },
-            ],
-          },
         },
       ],
     },
