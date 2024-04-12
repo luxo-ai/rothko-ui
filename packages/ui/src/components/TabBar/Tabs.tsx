@@ -2,7 +2,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
-import type { KindProps } from '../../theme/types';
+import type { RothkoKind } from '../../theme/types';
 import Typography from '../Typography/Typography';
 
 type HookArgs<Key> = {
@@ -111,7 +111,8 @@ const useTabs = <Key extends React.Key>({ initialTab, onSelect, children }: Hook
   };
 };
 
-type TabsProps<Key extends React.Key> = KindProps & {
+type TabsProps<Key extends React.Key> = {
+  kind?: RothkoKind;
   className?: string;
   initialTab?: Key;
   onSelect?: (tab: Key) => void; // Key
@@ -154,7 +155,8 @@ function Tabs<Key extends React.Key>({
   );
 }
 
-type UnderlineDivProps = KindProps & {
+type UnderlineDivProps = {
+  kind?: RothkoKind;
   currentTabIdx: number;
   tabCount: number;
 };

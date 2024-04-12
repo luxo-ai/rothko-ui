@@ -35,7 +35,7 @@ const SearchPopout = React.forwardRef<HTMLDivElement, SearchPopoutProps>(
         enableBodyScroll(searchPopoutRef.current);
       }
       onClose();
-    }, [onClose, searchPopoutRef.current]);
+    }, [onClose]);
 
     const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
       if (!searchPopoutRef.current || !searchPopoutRef.current.contains(e.target as Node)) {

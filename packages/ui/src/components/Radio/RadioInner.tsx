@@ -4,7 +4,7 @@ import keyboardKey from 'keyboard-key';
 
 import { classes } from '@rothko-ui/utils';
 
-import type { KindProps, RothkoKind } from '../../theme';
+import type { RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
 import useId from '../../library/hooks/useId';
 import type { WithAriaControls, WithAriaErrorMessage, WithAriaLabeling } from '../../types';
@@ -127,7 +127,9 @@ const RadioOutlineDiv = styled.div<{ $disabled?: boolean }>`
   }
 `;
 
-const RadioInnerDiv = styled.div<KindProps>`
+const RadioInnerDiv = styled.div<{
+  kind?: RothkoKind;
+}>`
   -webkit-tap-highlight-color: transparent;
   background-color: var(--rothko-radio-background, #ccc);
 

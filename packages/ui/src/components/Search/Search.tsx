@@ -207,7 +207,7 @@ function Search<V extends Value, T = undefined>({
   useEffect(() => {
     // if (mobile) return;
     scrollIntoView(`#option-${optIdx}`);
-  }, [optIdx]);
+  }, [optIdx, scrollIntoView]);
 
   const formClasses = classes(className, {
     error,

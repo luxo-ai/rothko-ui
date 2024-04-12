@@ -1,5 +1,5 @@
 import { debounce, identity } from '@rothko-ui/utils';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLRUCache } from '../../library/hooks/useCache';
 import useOptions from '../../library/hooks/useOptions';
 import type { Option } from '../../library/types';
@@ -28,29 +28,30 @@ export function useSearch<V, T = undefined>({
 
   const cachedFetch = useLRUCache({ dataFetcher, keyGenerator: identity });
 
-  const onSetQuery = useCallback(
-    debounce(async (query: string) => {
-      if (!query || query.length < 2) return;
-      try {
-        setLoading(true);
-        const options = await cachedFetch(query);
-        if (options) {
-          setOptions(options.length > limit ? options.slice(0, limit) : options);
+  const onSetQuery = useMemo(
+    () =>
+      debounce(async (query: string) => {
+        if (!query || query.length < 2) return;
+        try {
+          setLoading(true);
+          const options = await cachedFetch(query);
+          if (options) {
+            setOptions(options.length > limit ? options.slice(0, limit) : options);
+          }
+        } catch (e) {
+          setError(String(e));
+          throw e;
+        } finally {
+          setLoading(false);
         }
-      } catch (e) {
-        setError(String(e));
-        throw e;
-      } finally {
-        setLoading(false);
-      }
-    }, DEBOUNCE_WAIT_MS),
-    [setOptions, setError, setLoading, options]
+      }, DEBOUNCE_WAIT_MS),
+    [setOptions, setError, setLoading, limit, cachedFetch]
   );
 
   useEffect(() => {
     if (!query) return;
     onSetQuery(query);
-  }, [query]);
+  }, [query, onSetQuery]);
 
   return { loading, options, error, setQuery, query, moveOptionIdx, optIdx };
 }

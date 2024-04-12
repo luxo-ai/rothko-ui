@@ -2,7 +2,7 @@ import { classes, isString } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import React from 'react';
 import styled from 'styled-components';
-import type { KindProps, RothkoKind } from '../../theme/types';
+import type { RothkoKind } from '../../theme/types';
 import { keyDownFactory } from '../../library/utils/keyUtils';
 import Typography from '../Typography/Typography';
 import type {
@@ -101,8 +101,8 @@ const Checkbox = ({
   style,
   withCheck,
   errorText = 'Invalid',
-  required,
-}: CheckboxProps) => {
+}: // required,
+CheckboxProps) => {
   const errorMessageId = useId();
   const labelId = useId();
 
@@ -160,7 +160,9 @@ const CheckboxContainerDiv = styled.div`
   gap: 0.5rem;
 `;
 
-const CheckboxDiv = styled.div<KindProps>`
+const CheckboxDiv = styled.div<{
+  kind?: RothkoKind;
+}>`
   flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
   background-color: var(--rothko-checkbox-background, #dee7f5);

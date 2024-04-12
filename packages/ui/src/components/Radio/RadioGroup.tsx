@@ -121,8 +121,8 @@ function RadioGroup<K extends string>({
   label,
   disabled,
   children,
-  required,
-}: RadioGroupProps<K>) {
+}: // required,
+RadioGroupProps<K>) {
   const labelId = useId();
   const errorMessageId = useId();
 

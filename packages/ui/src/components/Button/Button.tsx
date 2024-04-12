@@ -6,7 +6,7 @@ import { classes } from '@rothko-ui/utils';
 
 import InlineSpinnerLoader from '../../library/loaders/InlineSpinnerLoader';
 import type { Accessory } from '../../library/types';
-import type { KindProps, RothkoKind, RothkoSize } from '../../theme';
+import type { RothkoKind, RothkoSize } from '../../theme';
 import type { ButtonAppearance, ButtonShape } from './types';
 import type {
   WithAriaControls,
@@ -284,7 +284,10 @@ const AccessoryContainerDiv = styled.div<{ $kind: 'left' | 'right' }>`
   }}
 `;
 
-type BaseButtonProps = Required<KindProps> & { appearance: ButtonAppearance };
+type BaseButtonProps = {
+  kind: RothkoKind;
+  appearance: ButtonAppearance;
+};
 
 export const buttonStyle = css<BaseButtonProps>`
   // use font smoothing to make text more readable

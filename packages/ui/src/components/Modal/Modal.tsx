@@ -112,7 +112,7 @@ type ModalProps = WithAria<{
   title?: string;
 }>;
 
-export const Modal = ({
+const Modal = ({
   id,
   children,
   className,
@@ -294,3 +294,5 @@ const ModalCloseButton = styled.button.attrs({ type: 'button' })`
   top: 14px;
   right: 17px;
 `;
+
+export default Modal;

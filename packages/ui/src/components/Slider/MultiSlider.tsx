@@ -100,7 +100,7 @@ const MultiSlider = ({
   minWidth,
   onChange,
   orMore,
-  valueFormat,
+  // valueFormat,
   precision = 0,
   showRange,
   value,

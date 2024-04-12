@@ -1,7 +1,9 @@
-import type { KeyLike } from '@rothko-ui/utils';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import type { KindProps } from '../../theme/types';
+
+import type { KeyLike } from '@rothko-ui/utils';
+
+import type { RothkoKind } from '../../theme/types';
 import Typography from '../Typography/Typography';
 import type { Tab } from './types';
 import { Container, Flex, FlexItem } from '../../layout';
@@ -9,16 +11,16 @@ import type { WithAriaLabeling } from '../../types';
 
 type WithAria<T> = WithAriaLabeling<T>;
 
-type TabBarProps<Key extends KeyLike> = KindProps &
-  WithAria<{
-    id?: string;
-    className?: string;
-    initialTab?: Key;
-    onSelect?: (tab: Key) => void;
-    style?: React.CSSProperties;
-    tabs: ReadonlyArray<Tab<Key>>;
-    containerStyle?: React.CSSProperties;
-  }>;
+type TabBarProps<Key extends KeyLike> = WithAria<{
+  id?: string;
+  kind?: RothkoKind;
+  className?: string;
+  initialTab?: Key;
+  onSelect?: (tab: Key) => void;
+  style?: React.CSSProperties;
+  tabs: ReadonlyArray<Tab<Key>>;
+  containerStyle?: React.CSSProperties;
+}>;
 
 function TabBar<Key extends KeyLike>({
   className,
@@ -66,7 +68,8 @@ function TabBar<Key extends KeyLike>({
   );
 }
 
-type UnderlineDivProps = KindProps & {
+type UnderlineDivProps = {
+  kind?: RothkoKind;
   currentTabIdx: number;
   tabCount: number;
 };

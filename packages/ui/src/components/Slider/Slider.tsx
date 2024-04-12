@@ -96,7 +96,7 @@ const Slider = ({
   minWidth,
   onChange,
   orMore,
-  valueFormat,
+  // valueFormat,
   precision = 0,
   showValue,
   value,

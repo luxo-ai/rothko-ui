@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import type { KindProps } from '../../../theme/types';
+import type { RothkoKind } from '../../../theme/types';
 
-const SliderRangeDiv = styled.div<KindProps & { $disabled?: boolean }>`
+const SliderRangeDiv = styled.div<{ kind?: RothkoKind; $disabled?: boolean }>`
   position: absolute;
   height: 0.25rem;
   margin: 0;

@@ -7,7 +7,7 @@ import { CloseOutline } from '@rothko-ui/icons';
 import { isString } from '@rothko-ui/utils';
 
 import { PhantomButton } from '../../library/PhantomButton';
-import type { KindProps, RothkoKind } from '../../theme';
+import type { RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
 import type { ToastDetails } from './types';
 import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
@@ -109,7 +109,9 @@ const ToastCloseButton = styled(PhantomButton)`
   margin-left: auto;
 `;
 
-const ToastAnimatedContainerDiv = styled.div<KindProps>`
+const ToastAnimatedContainerDiv = styled.div<{
+  kind?: RothkoKind;
+}>`
   flex-wrap: wrap-reverse;
   display: flex;
   gap: 0.5rem;
@@ -155,7 +157,9 @@ const ToastContentContainerDiv = styled.div`
   gap: 0.1rem;
 `;
 
-const AnimatedLife = styled(animated.div)<KindProps>`
+const AnimatedLife = styled(animated.div)<{
+  kind?: RothkoKind;
+}>`
   position: absolute;
   bottom: 0;
   left: 0px;

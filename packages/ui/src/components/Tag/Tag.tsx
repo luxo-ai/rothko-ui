@@ -5,7 +5,7 @@ import { CloseOutline } from '@rothko-ui/icons';
 import { isString } from '@rothko-ui/utils';
 
 import { phantomButtonStyle } from '../../library/PhantomButton';
-import type { KindProps, RothkoKind } from '../../theme/types';
+import type { RothkoKind } from '../../theme/types';
 import { Typography } from '../Typography';
 import { semanticTextChildrenStyle, textChildrenStyle } from '../../library/Styles';
 import type { WithAriaLabeling, WithAriaSelected } from '../../types';
@@ -96,7 +96,8 @@ const Tag = ({
   );
 };
 
-type ContainerProps = Required<KindProps> & {
+type ContainerProps = {
+  kind: RothkoKind;
   appearance: TagAppearance;
 };
 

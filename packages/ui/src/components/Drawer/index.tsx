@@ -1,4 +1,8 @@
-import Drawer from './Drawer';
+import { useContext } from 'react';
 
-export { useDrawerContext } from './DrawerContext';
-export { Drawer };
+import Drawer from './Drawer';
+import DrawerContext from './DrawerContext';
+
+const useDrawerContext = () => useContext(DrawerContext);
+
+export { Drawer, useDrawerContext };

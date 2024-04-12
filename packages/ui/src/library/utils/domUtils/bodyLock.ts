@@ -4,7 +4,7 @@
  * The decision to adapt was to get more control and fix mobie issues found in the original solution
  */
 import type { Nullable } from '@rothko-ui/utils';
-import { isNil, isNotNil, parseInt } from '@rothko-ui/utils';
+import { isNil, parseInt } from '@rothko-ui/utils';
 import type React from 'react';
 import { getStyle, scrollBarWidth } from './dimensions';
 import type { WithTouches } from './event';

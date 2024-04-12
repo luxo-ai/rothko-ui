@@ -2,7 +2,7 @@ import type { Nullable } from '@rothko-ui/utils';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import { hideChromeBrowserOutline } from '../../../library/Styles';
-import type { KindProps, RothkoKind } from '../../../theme';
+import type { RothkoKind } from '../../../theme';
 import type { DragDelta, DragEvent } from '../../../library/utils/domUtils';
 import {
   addEvent,
@@ -264,7 +264,10 @@ export const SliderHandle = ({
   );
 };
 
-const HandleButton = styled.button.attrs({ type: 'button' })<KindProps & { vertical?: boolean }>`
+const HandleButton = styled.button.attrs({ type: 'button' })<{
+  kind?: RothkoKind;
+  vertical?: boolean;
+}>`
   ${hideChromeBrowserOutline}
   -webkit-tap-highlight-color: transparent;
   position: absolute;

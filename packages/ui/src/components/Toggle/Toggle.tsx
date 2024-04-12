@@ -4,7 +4,7 @@ import type { CSSProperties } from 'react';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { hideChromeBrowserOutline } from '../../library/Styles';
-import type { KindProps, RothkoKind } from '../../theme/types';
+import type { RothkoKind } from '../../theme/types';
 import { keyDownFactory } from '../../library/utils/keyUtils';
 import { Typography } from '../Typography';
 import type {
@@ -108,8 +108,8 @@ const Toggle = ({
   'aria-required': ariaRequired,
   'aria-errormessage': ariaErrorMessage,
   id,
-  required,
-}: ToggleProps) => {
+}: // required,
+ToggleProps) => {
   const labelId = useId();
   const errorMessageId = useId();
 
@@ -170,7 +170,8 @@ const ToggleContainerDiv = styled.div`
   gap: 0.5rem;
 `;
 
-type OuterToogleDivProp = KindProps & {
+type OuterToogleDivProp = {
+  kind?: RothkoKind;
   $toggled?: boolean;
 };
 

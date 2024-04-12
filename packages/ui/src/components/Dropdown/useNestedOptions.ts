@@ -37,7 +37,7 @@ const useNestedOptions = <V extends Value>({
   const reset = useCallback(() => {
     setOptionStack([optionsToStackValue(reverse ? reverseOptions(options) : options)]);
     setOptIdx(initialIdx);
-  }, [setOptionStack, setOptIdx, initialIdx, options]);
+  }, [setOptionStack, setOptIdx, initialIdx, options, reverse]);
 
   const selectOne = useCallback(
     (opt: StackOption<V> | null) => {
@@ -77,7 +77,7 @@ const useNestedOptions = <V extends Value>({
         return Math.min(Math.max(newIdx, lowerBound), upperBound);
       });
     },
-    [setOptIdx, currOptions]
+    [setOptIdx, currOptions, debug]
   );
 
   return {

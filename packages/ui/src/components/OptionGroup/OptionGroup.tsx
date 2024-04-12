@@ -6,7 +6,7 @@ import { Flex, FlexItem } from '../../layout';
 import Grid from '../../layout/Grid/Grid';
 import { phantomButtonStyle } from '../../library/PhantomButton';
 import type { Accessory, Option, Value } from '../../library/types';
-import type { KindProps, RothkoSize } from '../../theme';
+import type { RothkoKind, RothkoSize } from '../../theme';
 import type { EmSize, RemSize } from '../../types';
 import Typography from '../Typography/Typography';
 
@@ -24,7 +24,8 @@ type OptionArgs = {
   accessoryRight?: Accessory;
 };
 
-type OptionGroupProps<V extends Value> = KindProps & {
+type OptionGroupProps<V extends Value> = {
+  kind?: RothkoKind;
   children?: React.ReactNode;
   className?: string;
   id?: string;
@@ -73,7 +74,7 @@ function OptionGroup<V extends Value>({
 
   useEffect(() => {
     if (expanded) onExpand?.();
-  }, [expanded]);
+  }, [expanded, onExpand]);
 
   const fillRemainingSpace = Boolean(children);
   const remainingSpace = (maxCol - (displayableOptions.length % maxCol)) % maxCol;
@@ -179,7 +180,9 @@ const OptionGroupContainerDiv = styled.div`
   flex-direction: row;
 `;
 
-const OptionButton = styled.button<Required<KindProps>>`
+const OptionButton = styled.button<{
+  kind: RothkoKind;
+}>`
   -webkit-tap-highlight-color: transparent;
   ${phantomButtonStyle}
   font-family: var(--rothko-typography-body-bold); // was reg

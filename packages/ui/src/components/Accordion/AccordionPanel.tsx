@@ -7,7 +7,7 @@ import { isString } from '@rothko-ui/utils';
 
 import { phantomButtonStyle } from '../../library/PhantomButton';
 import { unselectableStyle } from '../../library/Styles';
-import type { KindProps } from '../../theme';
+import type { RothkoKind } from '../../theme';
 import { getElementFullHeight } from '../../library/utils/domUtils/dimensions';
 import Typography from '../Typography/Typography';
 import { Flex, FlexItem } from '../../layout';
@@ -264,7 +264,8 @@ const PanelContent = ({
   );
 };
 
-type PanelContainerDivProps = KindProps & {
+type PanelContainerDivProps = {
+  kind?: RothkoKind;
   $bordered?: boolean;
   $spaced?: boolean;
   $disabled?: boolean;

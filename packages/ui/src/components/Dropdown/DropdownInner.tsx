@@ -41,7 +41,7 @@ function DropdownInner<V extends Value, T = undefined>({
   placeholder = 'Select',
   renderOption: RenderOpt = DefaultRenderOption,
   search,
-  selectedFormat,
+  // selectedFormat,
   style,
   value,
   errorText = 'Invalid',

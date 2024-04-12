@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { phantomButtonStyle } from '../../library/PhantomButton';
-import type { KindProps, RothkoKind } from '../../theme';
+import type { RothkoKind } from '../../theme';
 
 export type TextProps = {
   light?: boolean;
@@ -205,7 +205,9 @@ const inlineBodySmall = styled.span<TextProps>`
   line-height: 1.25rem;
 `;
 
-const code = styled.code<KindProps>`
+const code = styled.code<{
+  kind?: RothkoKind;
+}>`
   color: ${({ kind }) => (kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)')};
   // padding: 0.125rem 0.25rem;
   // border-radius: 0.125rem;
