@@ -5,9 +5,32 @@ import styled from 'styled-components';
 import type { KindProps, RothkoKind } from '../../theme/types';
 import { keyDownFactory } from '../../utils/keyUtils';
 import Typography from '../Typography/Typography';
+import type {
+  WithAriaControls,
+  WithAriaDisabled,
+  WithAriaExpanded,
+  WithAriaHasPopup,
+  WithAriaHidden,
+  WithAriaInvalid,
+  WithAriaLabeling,
+  WithAriaRequired,
+  WithAriaErrorMessage,
+} from '../../types';
+import useId from '../../library/Hooks/useId';
 
-type CheckboxProps = {
-  'aria-label'?: string;
+type WithAria<T> = WithAriaErrorMessage<
+  WithAriaRequired<
+    WithAriaHasPopup<
+      WithAriaExpanded<
+        WithAriaHidden<WithAriaDisabled<WithAriaInvalid<WithAriaControls<WithAriaLabeling<T>>>>>
+      >
+    >
+  >
+>;
+
+type CheckboxProps = WithAria<{
+  id?: string;
+  required?: boolean;
   checked?: boolean;
   children?: React.ReactNode;
   className?: string;
@@ -17,10 +40,23 @@ type CheckboxProps = {
   onChange?: (val: boolean) => void;
   style?: React.CSSProperties;
   withCheck?: boolean;
-};
+  errorText?: string;
+}>;
 
 const Checkbox = ({
+  id: idProp,
   'aria-label': ariaLabel,
+  'aria-describedby': ariaDescribedBy,
+  'aria-details': ariaDetails,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-hidden': ariaHidden,
+  'aria-controls': ariaControls,
+  'aria-haspopup': ariaHasPopup,
+  'aria-expanded': ariaExpanded,
+  'aria-disabled': ariaDisabled,
+  'aria-invalid': ariaInvalid,
+  'aria-required': ariaRequired,
+  'aria-errormessage': ariaErrorMessage,
   checked,
   children,
   className,
@@ -30,18 +66,37 @@ const Checkbox = ({
   onChange,
   style,
   withCheck,
+  errorText = 'Invalid',
+  required,
 }: CheckboxProps) => {
+  const id = useId(idProp);
+  const errorMessageId = `${id}-error-text`;
+  const labelId = `${id}-label`;
+
   const clickCheckbox = () => {
     if (disabled) return;
     onChange?.(!checked);
   };
+
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: clickCheckbox });
+
   return (
     <CheckboxContainerDiv style={style} className={className}>
       <CheckboxDiv
+        id={id}
+        aria-describedby={ariaDescribedBy}
+        aria-details={ariaDetails}
+        aria-labelledby={!ariaLabelledBy && children ? labelId : ariaLabelledBy}
+        aria-hidden={ariaHidden}
+        aria-controls={ariaControls}
+        aria-haspopup={ariaHasPopup}
+        aria-expanded={ariaExpanded}
+        aria-invalid={ariaInvalid || error}
+        aria-required={ariaRequired}
         aria-checked={!!checked}
-        aria-disabled={!!disabled}
+        aria-disabled={ariaDisabled || disabled}
         aria-label={ariaLabel}
+        aria-errormessage={!ariaErrorMessage && error ? errorMessageId : ariaErrorMessage}
         className={classes({ error, checked, disabled, ['with-check']: withCheck })}
         kind={kind}
         onClick={() => clickCheckbox()}
@@ -49,7 +104,17 @@ const Checkbox = ({
         role="checkbox"
         tabIndex={0}
       />
-      {children && <Typography.body>{children}</Typography.body>}
+      {children &&
+        (typeof children === 'string' ? (
+          <Typography.body id={labelId}>{children}</Typography.body>
+        ) : (
+          <div id={labelId}>{children}</div>
+        ))}
+      {error && (
+        <Typography.body id={errorMessageId} kind="danger">
+          {errorText}
+        </Typography.body>
+      )}
     </CheckboxContainerDiv>
   );
 };

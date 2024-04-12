@@ -1,11 +1,11 @@
 import type { SVGAttributes } from 'react';
-import React, { useRef } from 'react';
-import * as uuid from 'uuid';
+import React from 'react';
 import type { Color } from '../../theme';
+import useId from '../../library/Hooks/useId';
 
 const ANIMATION_KEY_TIMES = '0;0.5;1';
 
-export type SkeletonBuilderProps = SVGAttributes<SVGElement> & {
+export type SkeletonBuilderProps = Omit<SVGAttributes<SVGElement>, 'role'> & {
   backgroundColor?: Color;
   children: React.ReactNode;
   foregroundColor?: Color;
@@ -21,18 +21,18 @@ export const SkeletonBuilder = ({
   speed = 1.5,
   ...svgProps
 }: SkeletonBuilderProps) => {
-  const uuidRef = useRef(uuid.v4());
+  const id = useId();
 
-  const ariaId = `${uuidRef.current}-aria`;
-  const clipId = `${uuidRef.current}-clip`;
-  const gradientId = `${uuidRef.current}-gradient`;
+  const ariaId = `${id}-aria`;
+  const clipId = `${id}-clip`;
+  const gradientId = `${id}-gradient`;
 
   const backgroundColor = bgColorProp || 'var(--rothko-skeleton-background)';
   const foregroundColor = fgColorProp || 'var(--rothko-skeleton-foreground)';
   const animationDuration = `${speed}s`;
 
   return (
-    <svg {...svgProps} aria-labelledby={ariaId} role="img">
+    <svg aria-labelledby={ariaId} role="img" {...svgProps}>
       <title id={ariaId}>Loading...</title>
       <rect
         role="presentation"

@@ -33,7 +33,7 @@ const Example = ({ title, sourceCode, subTitle, children }: CodeSnippetProps) =>
             {
               title: 'Code',
               key: 'Code',
-              render: <JSXCode sourceCode={sourceCode} />,
+              render: <JSXCode maxWidth="52rem" sourceCode={sourceCode} />,
             },
           ]}
         />

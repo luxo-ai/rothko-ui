@@ -1,5 +1,5 @@
 import type { Nullable } from '@rothko-ui/utils';
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import type { RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
 import { SliderContainerDiv, SliderRangeDiv, SliderTrackDiv } from './Shared';
@@ -7,9 +7,20 @@ import { SliderLegendContainerDiv } from './Shared/SliderContainer';
 import { SliderHandle } from './Shared/SliderHandle';
 import { getOffsetFactory } from './sliderUtils';
 import type { SliderWidth } from './types';
+import type {
+  WithAriaControls,
+  WithAriaInvalid,
+  WithAriaLabeling,
+  WithAriaRequired,
+} from '../../types';
+import useId from '../../library/Hooks/useId';
 
-type SliderProps = {
+type WithAria<T> = WithAriaRequired<WithAriaInvalid<WithAriaControls<WithAriaLabeling<T>>>>;
+
+type SliderProps = WithAria<{
+  id?: string;
   className?: string;
+  style?: React.CSSProperties;
   disabled?: boolean;
   kind?: RothkoKind;
   label?: string;
@@ -23,7 +34,7 @@ type SliderProps = {
   precision?: number;
   value?: Nullable<number>;
   showValue?: boolean;
-};
+}>;
 
 const Slider = ({
   className,
@@ -40,8 +51,20 @@ const Slider = ({
   precision = 0,
   showValue,
   value,
+  id,
+  style,
+  'aria-describedby': ariaDescribedBy,
+  'aria-details': ariaDetails,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-label': ariaLabel,
+  'aria-controls': ariaControls,
+  'aria-invalid': ariaInvalid,
+  'aria-required': ariaRequired,
 }: SliderProps) => {
-  const getOffset = useCallback(getOffsetFactory({ min, max }), [min, max]);
+  const trackId = useId();
+  const labelId = useId();
+
+  const getOffset = useMemo(() => getOffsetFactory({ min, max }), [min, max]);
 
   const localVal = useMemo(() => {
     return value || min;
@@ -50,9 +73,19 @@ const Slider = ({
   const maxReached = localVal >= max;
 
   return (
-    <SliderContainerDiv $maxWidth={maxWidth} $minWidth={minWidth || maxWidth} className={className}>
+    <SliderContainerDiv
+      id={id}
+      $maxWidth={maxWidth}
+      $minWidth={minWidth || maxWidth}
+      className={className}
+      style={style}
+    >
       <SliderLegendContainerDiv>
-        {label && <Typography.label light>{label}</Typography.label>}
+        {label && (
+          <Typography.label id={labelId} light>
+            {label}
+          </Typography.label>
+        )}
         {showValue && (
           <Typography.label light>
             {localVal.toFixed(precision)}
@@ -61,9 +94,21 @@ const Slider = ({
           </Typography.label>
         )}
       </SliderLegendContainerDiv>
-      <SliderTrackDiv $disabled={disabled}>
+      <SliderTrackDiv
+        id={trackId}
+        aria-label={ariaLabel}
+        aria-describedby={ariaDescribedBy}
+        aria-details={ariaDetails}
+        aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
+        aria-invalid={ariaInvalid}
+        aria-required={ariaRequired}
+        aria-disabled={disabled}
+        aria-orientation="horizontal"
+        $disabled={disabled}
+      >
         <SliderHandle
-          ariaLabel="slider handle value"
+          aria-controls={ariaControls}
+          aria-label="Slider"
           disabled={disabled}
           kind={kind}
           max={max}

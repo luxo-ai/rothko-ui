@@ -8,6 +8,16 @@ import InlineSpinnerLoader from '../../library/Loader/InlineSpinnerLoader';
 import type { Accessory } from '../../library/types';
 import type { KindProps, RothkoKind, RothkoSize } from '../../theme';
 import type { ButtonAppearance, ButtonShape } from './types';
+import type {
+  WithAriaControls,
+  WithAriaDisabled,
+  WithAriaExpanded,
+  WithAriaHasPopup,
+  WithAriaHidden,
+  WithAriaLabeling,
+  WithAriaLive,
+  WithAriaPressed,
+} from '../../types';
 
 const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
@@ -42,13 +52,18 @@ const accessorySizeMap: Record<RothkoSize, number> = {
   xl: 35,
 };
 
-type ButtonProps = {
-  /** The ARIA label for the button. */
-  'aria-label'?: string;
-  /** ID of the element(s) that the button controls. */
-  'aria-controls'?: string;
-  /** Indicates whether the controlled element is expanded or collapsed. */
-  'aria-expanded'?: boolean;
+type WithAria<T> = WithAriaDisabled<
+  WithAriaLive<
+    WithAriaPressed<
+      WithAriaHidden<
+        WithAriaExpanded<WithAriaHasPopup<WithAriaControls<WithAriaHidden<WithAriaLabeling<T>>>>>
+      >
+    >
+  >
+>;
+
+type ButtonProps = WithAria<{
+  id?: string;
   /** Determines if the button is disabled. Default is false. */
   disabled?: boolean;
   /** Click event handler. */
@@ -81,15 +96,25 @@ type ButtonProps = {
   tabIndex?: number;
   /** Type of the button. Default is 'button'. */
   type?: 'button' | 'submit' | 'reset';
-};
+  /** Aria role of the button. */
+  role?: React.AriaRole;
+}>;
 
 const Button: React.FC<ButtonProps> = ({
+  id,
   accessoryLeft: Left,
   accessoryRight: Right,
   appearance = 'filled',
   'aria-label': ariaLabel,
+  'aria-describedby': ariaDescribedBy,
+  'aria-details': ariaDetails,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-hidden': ariaHidden,
   'aria-controls': ariaControls,
+  'aria-haspopup': ariaHasPopup,
   'aria-expanded': ariaExpanded,
+  'aria-pressed': ariaPressed,
+  'aria-disabled': ariaDisabled,
   children,
   className,
   disabled,
@@ -103,6 +128,7 @@ const Button: React.FC<ButtonProps> = ({
   style,
   tabIndex,
   type = 'button',
+  role = 'button',
 }) => {
   const childrenContainerRef = useRef<HTMLDivElement | null>(null);
   const [childrenHeight, setChildrenHeight] = useState<number | null>(18); // was null before. How do we do this better?
@@ -148,17 +174,25 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <StyledButton
+      id={id}
       appearance={appearance}
       aria-label={ariaLabel}
-      aria-disabled={disabled}
+      aria-disabled={ariaDisabled || disabled}
       aria-controls={ariaControls}
       aria-expanded={ariaExpanded}
+      aria-describedby={ariaDescribedBy}
+      aria-details={ariaDetails}
+      aria-haspopup={ariaHasPopup}
+      aria-hidden={ariaHidden}
+      aria-labelledby={ariaLabelledBy}
+      aria-pressed={ariaPressed}
+      aria-busy={loading}
       className={classes(appearanceClasses, `btn-size-${size}`, className)}
       disabled={disabled}
       kind={kind}
       onClick={onClick}
       onKeyDown={onKeyDown}
-      role="button"
+      role={role}
       style={style}
       tabIndex={disabled ? -1 : tabIndex}
       type={type}
@@ -166,11 +200,12 @@ const Button: React.FC<ButtonProps> = ({
       <ContainerDiv ref={childrenContainerRef}>
         {!loading && Left && (
           <AccessoryContainerDiv $kind="left">
-            <Left size={accessorySizeMap[size]} color={iconColor} />
+            <Left aria-hidden size={accessorySizeMap[size]} color={iconColor} />
           </AccessoryContainerDiv>
         )}
         {loading ? (
           <InlineSpinnerLoader
+            aria-label="Loading"
             style={
               childrenHeight
                 ? { width: childrenHeight, height: childrenHeight, margin: 'auto' }
@@ -184,7 +219,7 @@ const Button: React.FC<ButtonProps> = ({
         )}
         {!loading && Right && (
           <AccessoryContainerDiv $kind="right">
-            <Right size={accessorySizeMap[size]} color={iconColor} />
+            <Right aria-hidden size={accessorySizeMap[size]} color={iconColor} />
           </AccessoryContainerDiv>
         )}
       </ContainerDiv>

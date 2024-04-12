@@ -6,10 +6,12 @@ import { isString } from '@rothko-ui/utils';
 import { semanticTextChildrenStyle } from '../../library/Styles';
 import type { KindProps, RothkoKind } from '../../theme/types';
 import Typography from '../Typography/Typography';
+import type { WithAriaHidden, WithAriaLabeling, WithAriaLive } from '../../types';
 
-type AlertProps = {
-  /** ARIA label for the alert, enhancing accessibility. */
-  'aria-label'?: string;
+type WithAria<T> = WithAriaHidden<WithAriaLabeling<WithAriaLive<T>>>;
+
+type AlertProps = WithAria<{
+  id?: string;
   /** The content of the alert. */
   children: React.ReactNode;
   /** CSS class name for custom styling. */
@@ -18,14 +20,36 @@ type AlertProps = {
   kind?: RothkoKind;
   /** Inline styles for the alert. */
   style?: React.CSSProperties;
-};
+}>;
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  ({ 'aria-label': ariaLabel, children, kind = 'danger', className, style }, ref) => {
+  (
+    {
+      'aria-describedby': ariaDescribedBy,
+      'aria-details': ariaDetails,
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy,
+      'aria-live': ariaLive,
+      'aria-hidden': ariaHidden,
+      children,
+      kind = 'danger',
+      className,
+      style,
+      id,
+    },
+    ref
+  ) => {
     return (
       <AlertContainerDiv
+        id={id}
         role="alert"
         aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
+        aria-details={ariaDetails}
+        aria-hidden={ariaHidden}
+        //  aria-atomic={ariaAtomic}
+        aria-live={ariaLive}
         className={className}
         kind={kind}
         ref={ref}

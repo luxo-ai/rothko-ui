@@ -1,11 +1,10 @@
 import { useState } from 'react';
 
 import type { RothkoKind } from '@rothko-ui/ui';
-import { Container, Flex, FlexItem, RadioGroup } from '@rothko-ui/ui';
+import { Container, Flex, FlexItem } from '@rothko-ui/ui';
 
 import { BASIC, WITH_KIND } from './usage/sourceCode';
 import { insertKind } from '../helpers';
-import { kindOptions } from '../../rothkoOptions';
 import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Basic from './usage/Basic';
@@ -16,6 +15,7 @@ import tabBarCopy from './copy';
 import tabBarProps from './props';
 import WithKind from './usage/WithKind';
 import Usage from '../Usage';
+import KindRadioGroup from '../KindRadioGroup';
 
 const GITHUB_URL =
   'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/TabBar';
@@ -45,16 +45,7 @@ const TabBarCard = () => {
               <WithKind kind={kind} />
             </Container>
           </Example>
-          <RadioGroup
-            kind="secondary"
-            maxCol={3}
-            columnGap="1.5rem"
-            label="kind"
-            value={kind}
-            onChange={k => setKind(k)}
-            options={kindOptions}
-            style={{ maxWidth: '25rem' }}
-          />
+          <KindRadioGroup kind={kind} setKind={setKind} />
         </FlexItem>
       </Flex>
       <Props copy={{ props: tabBarProps }} />

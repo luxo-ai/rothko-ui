@@ -5,31 +5,65 @@ import { phantomButtonStyle } from '../../library/PhantomButton';
 import type { KindProps } from '../../theme/types';
 import { Typography } from '../Typography';
 import { semanticTextChildrenStyle, textChildrenStyle } from '../../library/Styles';
+import type { WithAriaLabeling, WithAriaSelected } from '../../types';
 
 type TagAppearance = 'filled' | 'outline';
 
-type TagProps = KindProps & {
-  appearance?: TagAppearance;
-  children?: React.ReactNode;
-  onClose?: () => void;
-};
+type WithAria<T> = WithAriaSelected<WithAriaLabeling<T>>;
 
-const Tag = ({ appearance = 'filled', children, kind = 'info', onClose }: TagProps) => {
+type TagProps = KindProps &
+  WithAria<{
+    id?: string;
+    appearance?: TagAppearance;
+    children?: React.ReactNode;
+    onClose?: () => void;
+    className?: string;
+    style?: React.CSSProperties;
+    role?: React.AriaRole;
+  }>;
+
+const Tag = ({
+  id,
+  className,
+  style,
+  appearance = 'filled',
+  children,
+  kind = 'info',
+  onClose,
+  role,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-describedby': ariaDescribedBy,
+  'aria-details': ariaDetails,
+  'aria-selected': ariaSelected,
+}: TagProps) => {
   const iconColor =
     appearance === 'outline'
       ? `var(--rothko-${kind}-500, #000)`
       : `var(--rothko-${kind}-color, #FFF)`;
 
   return (
-    <TagContainerDiv appearance={appearance} kind={kind}>
+    <TagContainerDiv
+      id={id}
+      role={role}
+      className={className}
+      style={style}
+      appearance={appearance}
+      kind={kind}
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledBy}
+      aria-describedby={ariaDescribedBy}
+      aria-details={ariaDetails}
+      aria-selected={ariaSelected}
+    >
       {typeof children === 'string' ? (
         <Typography.inlineBodySmall style={{ margin: 0 }}>{children}</Typography.inlineBodySmall>
       ) : (
         <div>{children}</div>
       )}
       {onClose && (
-        <TagCloseButton>
-          <CloseOutline onClick={onClose} fill={iconColor} width={16} height={16} />
+        <TagCloseButton aria-label="Close">
+          <CloseOutline aria-hidden onClick={onClose} fill={iconColor} width={16} height={16} />
         </TagCloseButton>
       )}
     </TagContainerDiv>

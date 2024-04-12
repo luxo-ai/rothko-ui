@@ -18,6 +18,8 @@ import {
 } from '../../utils/domUtils';
 import Typography from '../Typography/Typography';
 import { textChildrenStyle } from '../../library/Styles';
+import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
+import useId from '../../library/Hooks/useId';
 
 const bodyStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
@@ -72,23 +74,35 @@ const headerStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   `,
 };
 
-type ModalProps = {
+type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
+
+type ModalProps = WithAria<{
+  id?: string;
   children: React.ReactNode;
   className?: string;
   isOpen?: boolean;
   onClose?: () => void;
   size?: RothkoSize;
   title?: string;
-};
+  style?: React.CSSProperties;
+}>;
 
 export const Modal = ({
+  id: idProp,
   children,
   className,
   isOpen = false,
   onClose = noop,
   size = 'm',
   title,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  style: styleProp = {},
 }: ModalProps) => {
+  const id = useId(idProp);
+  const titleId = `${id}-title`;
+  const modalContentId = `${id}-content`;
+
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -155,28 +169,36 @@ export const Modal = ({
 
   return (
     <DomPortal wrapperId={`modal-portal-${size}`}>
-      <ModalBackdrop className={classes({ ['backdrop-open']: isOpen })} onClick={onBackdropClick}>
+      <ModalBackdrop
+        aria-hidden
+        className={classes({ ['backdrop-open']: isOpen })}
+        onClick={onBackdropClick}
+      >
         {transition(
           (style, item) =>
             item && (
               <AnimatedModalContainer
-                aria-label="modal"
-                aria-modal="true"
+                aria-label={ariaLabel}
+                aria-labelledby={title && !ariaLabelledBy ? titleId : ariaLabelledBy}
+                aria-describedby={modalContentId}
+                aria-modal
                 role="dialog"
-                style={style}
+                style={{ ...styleProp, ...style }}
                 className={classes(`modal-size-${size}`, className)}
                 ref={modalRef}
               >
-                <ModalCloseButton onClick={() => onClose()}>
-                  <CloseOutline width="1.5rem" height="1.5rem" />
+                <ModalCloseButton aria-label="Close" onClick={() => onClose()}>
+                  <CloseOutline aria-hidden width="1.5rem" height="1.5rem" />
                 </ModalCloseButton>
                 {title && (
-                  <ModalHeaderText className={`modal-header-size-${size}`}>{title}</ModalHeaderText>
+                  <ModalHeaderText id={titleId} className={`modal-header-size-${size}`}>
+                    {title}
+                  </ModalHeaderText>
                 )}
                 {typeof children === 'string' ? (
-                  <Typography.body>{children}</Typography.body>
+                  <Typography.body id={modalContentId}>{children}</Typography.body>
                 ) : (
-                  children
+                  <div id={modalContentId}>children</div>
                 )}
               </AnimatedModalContainer>
             )

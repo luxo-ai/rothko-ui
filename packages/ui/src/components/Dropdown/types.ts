@@ -1,9 +1,21 @@
 import type React from 'react';
 import type { FocusHandler, Option, RenderOption, Value } from '../../library/types';
+import type {
+  WithAriaDisabled,
+  WithAriaErrorMessage,
+  WithAriaInvalid,
+  WithAriaLabeling,
+  WithAriaRequired,
+} from '../../types';
 
 export type QueryMatchFn<V, T = undefined> = (query: string, opt: Option<V, T>) => boolean;
 
-export type DropdownInnerProps<V extends Value, T> = {
+type WithAria<T> = WithAriaErrorMessage<
+  WithAriaRequired<WithAriaInvalid<WithAriaDisabled<WithAriaLabeling<T>>>>
+>;
+
+export type DropdownInnerProps<V extends Value, T> = WithAria<{
+  id?: string;
   /** Current value of dropdown or value array if multiple */
   value?: V | V[] | null;
   /** placeholder in input */
@@ -48,4 +60,5 @@ export type DropdownInnerProps<V extends Value, T> = {
   selectedPostfix?: string;
   /** inline style overrides */
   style?: React.CSSProperties;
-};
+  errorText?: string;
+}>;

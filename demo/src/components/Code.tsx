@@ -38,7 +38,7 @@ export const Code = ({
   const defaultTheme = language === 'jsx' ? 'nightOwl' : 'jetwave';
   const theme = THEMES[themeOverride || defaultTheme];
   return (
-    <div style={{ maxWidth: containerStyle.maxWidth }}>
+    <div style={{ maxWidth: containerStyle.maxWidth, width: containerStyle.width }}>
       <Highlight
         theme={mode === 'dark' ? theme.dark : theme.light}
         code={sourceCode}
@@ -79,7 +79,8 @@ export const Code = ({
                 ...containerStyle,
                 margin: '0.125rem 0',
                 padding: '0.5rem 1rem',
-                overflow: 'scroll',
+                //  overflow: 'scroll',
+                overflow: 'auto',
               }}
             >
               {tokens.map((line, i) => (
@@ -132,6 +133,16 @@ export const TSCode = ({ sourceCode, maxWidth }: Pick<CodeProps, 'sourceCode' | 
   />
 );
 
-export const JSXCode = ({ sourceCode, maxWidth }: Pick<CodeProps, 'sourceCode' | 'maxWidth'>) => (
-  <Code displayLineNumbers language="jsx" sourceCode={sourceCode} maxWidth={maxWidth} />
+export const JSXCode = ({
+  sourceCode,
+  maxWidth,
+  width,
+}: Pick<CodeProps, 'sourceCode' | 'maxWidth' | 'width'>) => (
+  <Code
+    displayLineNumbers
+    language="jsx"
+    sourceCode={sourceCode}
+    width={width}
+    maxWidth={maxWidth}
+  />
 );

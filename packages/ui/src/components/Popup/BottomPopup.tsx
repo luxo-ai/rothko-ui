@@ -15,8 +15,12 @@ import {
 } from '../../utils/domUtils';
 import { textChildrenStyle } from '../../library/Styles';
 import { textStyle } from '../Typography/Typography';
+import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
+import useId from '../../library/Hooks/useId';
 
-type PopupProps = {
+type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
+
+type PopupProps = WithAria<{
   /** The content to be displayed within the popup. */
   children: React.ReactNode;
   /** Optional CSS class name for custom styling. */
@@ -27,10 +31,22 @@ type PopupProps = {
   onClose: () => void;
   /** Boolean flag indicating whether the popup is open or closed. */
   open: boolean;
-};
+  style?: React.CSSProperties;
+}>;
 
-const BottomPopup: React.FC<PopupProps> = ({ children, className, id, onClose, open: isOpen }) => {
+const BottomPopup: React.FC<PopupProps> = ({
+  id: idProp,
+  children,
+  className,
+  onClose,
+  open: isOpen,
+  style: styleProp = {},
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+}) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
+  const id = useId(idProp);
+  const contentId = `${id}-content`;
 
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -90,15 +106,27 @@ const BottomPopup: React.FC<PopupProps> = ({ children, className, id, onClose, o
 
   return (
     <DomPortal wrapperId={`rothko-bottom-popup-${id || 'unknown'}`}>
-      <ShadedBackdrop onClick={onBackdropClick} className={classes({ ['backdrop-open']: isOpen })}>
+      <ShadedBackdrop
+        aria-hidden
+        onClick={onBackdropClick}
+        className={classes({ ['backdrop-open']: isOpen })}
+      >
         {transition(
           (style, item) =>
             item && (
-              <AnimatedPopupContainer id={id} style={style} ref={popupRef} className={className}>
-                <PopupCloseButton onClick={() => onClose()}>
-                  <CloseOutline width="1.5rem" height="1.5rem" />
+              <AnimatedPopupContainer
+                aria-label={ariaLabel}
+                aria-labelledby={ariaLabelledBy}
+                aria-describedby={contentId}
+                id={id}
+                style={{ ...styleProp, style }}
+                ref={popupRef}
+                className={className}
+              >
+                <PopupCloseButton aria-label="Close" onClick={() => onClose()}>
+                  <CloseOutline aria-hidden width="1.5rem" height="1.5rem" />
                 </PopupCloseButton>
-                <PopupContentContainerDiv>{children}</PopupContentContainerDiv>
+                <PopupContentContainerDiv id={contentId}>{children}</PopupContentContainerDiv>
               </AnimatedPopupContainer>
             )
         )}

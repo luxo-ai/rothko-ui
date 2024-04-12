@@ -1,7 +1,6 @@
 import React, { useCallback, useRef } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import styled, { css } from 'styled-components';
-import * as uuid from 'uuid';
 import keyboardKey from 'keyboard-key';
 
 import { phantomButtonStyle } from '../../library/PhantomButton';
@@ -14,46 +13,51 @@ import { Flex, FlexItem } from '../../layout';
 import type { IconOverride } from './types';
 import useAccordion from './useAccordion';
 import { useDebuggerContext } from '../../library/DebuggerContext';
+import type { WithAriaHidden, WithAriaLabel, WithAriaLabelledBy } from '../../types';
+import useId from '../../library/Hooks/useId';
 
 // TODO make thhe padding a variable
 
-type AccordionPanelProps = {
-  /** ARIA label for the accordion panel, enhancing accessibility. */
-  'aria-label'?: string;
-  /** Content of the accordion panel, required. */
-  children: React.ReactNode;
-  /** CSS class for custom styling of the panel container. */
-  className?: string;
-  /** CSS class for custom styling of the panel content area. */
-  contentClassName?: string;
-  /** Inline styles for the panel content area. */
-  contentStyle?: React.CSSProperties;
-  /** If `true`, the panel is disabled and cannot be interacted with. */
-  disabled?: boolean;
-  /** Custom icons for the accordion state indicators, overriding default icons. */
-  iconOverride?: IconOverride;
-  /** CSS class for custom styling of the panel label. */
-  labelClassName?: string;
-  /** Inline styles for the panel label. */
-  labelStyle?: React.CSSProperties;
-  /** Callback function triggered on click events. */
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  /** Callback function triggered on keydown events. */
-  onKeyDown?: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
-  /** Unique key for identifying the panel, necessary for managing open state in a collection. */
-  panelKey?: React.Key;
-  /** Inline styles for the panel container. */
-  style?: React.CSSProperties;
-  /** Subtitle content for the panel, can be a string or JSX element. */
-  subtitle?: string | JSX.Element;
-  /** Title content for the panel, required, can be a string or JSX element. */
-  title: string | JSX.Element;
-};
+type AccordionPanelProps = WithAriaHidden<
+  WithAriaLabel<{
+    id?: string;
+    /** Content of the accordion panel, required. */
+    children: React.ReactNode;
+    /** CSS class for custom styling of the panel container. */
+    className?: string;
+    /** CSS class for custom styling of the panel content area. */
+    contentClassName?: string;
+    /** Inline styles for the panel content area. */
+    contentStyle?: React.CSSProperties;
+    /** If `true`, the panel is disabled and cannot be interacted with. */
+    disabled?: boolean;
+    /** Custom icons for the accordion state indicators, overriding default icons. */
+    iconOverride?: IconOverride;
+    /** CSS class for custom styling of the panel label. */
+    labelClassName?: string;
+    /** Inline styles for the panel label. */
+    labelStyle?: React.CSSProperties;
+    /** Callback function triggered on click events. */
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    /** Callback function triggered on keydown events. */
+    onKeyDown?: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
+    /** Unique key for identifying the panel, necessary for managing open state in a collection. */
+    $key?: string;
+    /** Inline styles for the panel container. */
+    style?: React.CSSProperties;
+    /** Subtitle content for the panel, can be a string or JSX element. */
+    subtitle?: string | JSX.Element;
+    /** Title content for the panel, required, can be a string or JSX element. */
+    title: string | JSX.Element;
+  }>
+>;
 
 const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
   (
     {
+      id: idProp,
       'aria-label': ariaLabel,
+      'aria-hidden': ariaHidden,
       children,
       className,
       contentClassName,
@@ -64,7 +68,7 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
       labelStyle,
       onClick: onClickProp,
       onKeyDown: onKeyDownProp,
-      panelKey,
+      $key: panelKeyProp,
       style,
       subtitle,
       title,
@@ -76,8 +80,12 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
     const { bordered, iconOverride, kind, onClickPanel, selectedPanels, compact, withIcon } =
       useAccordion();
 
-    const panelIdRef = useRef(typeof panelKey !== 'undefined' ? String(panelKey) : uuid.v4());
-    const isPanelSelected = selectedPanels.has(panelIdRef.current);
+    const id = useId(idProp);
+    const contentId = `${id}-content`;
+    const toggleId = `${id}-toggle`;
+
+    const panelKey = useId(panelKeyProp);
+    const isPanelSelected = selectedPanels.has(panelKey);
 
     const iconColor = kind
       ? `var(--rothko-${kind}-500, #000)`
@@ -91,24 +99,22 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
           e.preventDefault();
           if (!disabled) {
             onKeyDownProp?.(e);
-            onClickPanel(panelIdRef.current);
+            onClickPanel(panelKey);
           }
         }
       },
-      [onClickPanel, onKeyDownProp, panelIdRef, disabled, debug]
+      [onClickPanel, onKeyDownProp, panelKey, disabled, debug]
     );
 
     const onClick = useCallback(
       (e: React.MouseEvent<HTMLButtonElement>) => {
         if (!disabled) {
           onClickProp?.(e);
-          onClickPanel(panelIdRef.current);
+          onClickPanel(panelKey);
         }
       },
-      [onClickPanel, onClickProp, panelIdRef, disabled]
+      [onClickPanel, onClickProp, panelKey, disabled]
     );
-
-    const contentId = `${panelIdRef.current}-content`;
 
     return (
       <PanelContainerDiv
@@ -116,13 +122,15 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
         $bordered={bordered}
         $disabled={disabled}
         kind={kind}
-        id={panelIdRef.current}
+        id={id}
         className={className}
         style={style}
         ref={ref}
       >
         <header>
           <PanelLabelButton
+            id={toggleId}
+            role="tab" // for accordion button
             type="button"
             $disabled={disabled}
             aria-disabled={disabled}
@@ -130,6 +138,8 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
             // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded
             aria-controls={contentId}
             aria-expanded={isPanelSelected}
+            aria-selected={isPanelSelected}
+            aria-hidden={ariaHidden}
             className={labelClassName}
             disabled={disabled}
             onKeyDown={onKeyDown}
@@ -165,6 +175,7 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
           style={contentStyle}
           className={contentClassName}
           isOpen={isPanelSelected}
+          aria-labelledby={toggleId}
         >
           {typeof children === 'string' ? (
             <DefaultBodyText>{children}</DefaultBodyText>
@@ -179,13 +190,13 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
 
 AccordionPanel.displayName = 'AccordionPanel';
 
-type PanelContentProps = {
+type PanelContentProps = WithAriaLabelledBy<{
   children: React.ReactNode;
   className?: string;
   id?: string;
   isOpen?: boolean;
   style?: React.CSSProperties;
-};
+}>;
 
 const getDefaultOpenStyle = (): React.CSSProperties => ({
   height: 'initial',
@@ -201,7 +212,14 @@ const getDefaultClosedStyle = (): React.CSSProperties => ({
   visibility: 'hidden',
 });
 
-const PanelContent = ({ children, className, style, isOpen, id }: PanelContentProps) => {
+const PanelContent = ({
+  children,
+  className,
+  style,
+  isOpen,
+  id,
+  'aria-labelledby': ariaLabelledBy,
+}: PanelContentProps) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   const springStyle = useSpring({
@@ -221,7 +239,12 @@ const PanelContent = ({ children, className, style, isOpen, id }: PanelContentPr
   });
 
   return (
-    <animated.section id={id} style={springStyle}>
+    <animated.section
+      id={id}
+      role="tabpanel" // for accordion content
+      aria-labelledby={ariaLabelledBy}
+      style={springStyle}
+    >
       <PanelContentDiv style={style} className={className} ref={contentRef}>
         {children}
       </PanelContentDiv>

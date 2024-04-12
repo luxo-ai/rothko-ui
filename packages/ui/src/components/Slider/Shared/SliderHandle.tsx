@@ -1,5 +1,5 @@
 import type { Nullable } from '@rothko-ui/utils';
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import { hideChromeBrowserOutline } from '../../../library/Styles';
 import type { KindProps, RothkoKind } from '../../../theme';
@@ -15,6 +15,7 @@ import {
 } from '../../../utils/domUtils';
 import { getOffsetFactory } from '../sliderUtils';
 import useIsMounted from '../../../library/Hooks/useIsMounted';
+import type { WithAriaControls, WithAriaLabel } from '../../../types';
 
 type DraggableEvents = {
   start: string;
@@ -34,7 +35,9 @@ const mouseEvents: DraggableEvents = {
   stop: 'mouseup',
 };
 
-type SliderHandleProps = {
+type WithAria<T> = WithAriaControls<WithAriaLabel<T>>;
+
+type SliderHandleProps = WithAria<{
   onChange: (v: number) => void;
   onDrag?: (e: DragEvent) => void;
   onMouseDown?: (e: DragEvent) => void;
@@ -44,8 +47,7 @@ type SliderHandleProps = {
   value: number;
   min?: number;
   max: number;
-  ariaLabel?: string;
-};
+}>;
 
 export const SliderHandle = ({
   disabled,
@@ -53,11 +55,12 @@ export const SliderHandle = ({
   value,
   min = 0,
   max,
-  ariaLabel,
   kind,
   onDrag,
   onMouseDown,
   onChange,
+  'aria-label': ariaLabel,
+  'aria-controls': ariaControls,
 }: SliderHandleProps) => {
   const isMounted = useIsMounted();
 
@@ -67,7 +70,7 @@ export const SliderHandle = ({
   const touchIdentifierRef = useRef<Nullable<number>>(null);
   const deltaRef = useRef<DragDelta>({ xDel: 0, yDel: 0 });
 
-  const getOffset = useCallback(getOffsetFactory({ min, max }), [min, max]);
+  const getOffset = useMemo(() => getOffsetFactory({ min, max }), [min, max]);
 
   /*
    * Awful hack in order to get updates to "onChange" to reflect in the drag handlers.
@@ -77,34 +80,78 @@ export const SliderHandle = ({
     onChangeRef.current = onChange;
   }, [onChange]);
 
-  const focus = () => {
+  const focus = useCallback(() => {
     handleRef.current?.focus();
-  };
-
-  const blur = () => {
-    handleRef.current?.blur();
-  };
-
-  useEffect(() => {
-    if (!handleRef.current) return;
-    /*
-     * added on mount so can be added w passive = false. Allows for cancel
-     * https://developers.google.com/web/updates/2017/01/scrolling-intervention
-     */
-    addEvent(handleRef.current, touchEvents.start, e => handleDragStart(e, true), {
-      passive: false,
-    });
-    // unmount
-    return () => {
-      if (!handleRef.current) return;
-      const { ownerDocument } = handleRef.current;
-      removeEvent(ownerDocument, mouseEvents.move, handleDrag);
-      removeEvent(ownerDocument, touchEvents.move, handleDrag);
-      removeEvent(ownerDocument, mouseEvents.stop, handleDragStop);
-      removeEvent(ownerDocument, touchEvents.stop, handleDragStop);
-      removeEvent(handleRef.current, touchEvents.start, (e: DragEvent) => handleDragStart(e, true));
-    };
   }, [handleRef]);
+
+  const blur = useCallback(() => {
+    handleRef.current?.blur();
+  }, [handleRef]);
+
+  const handleDrag = useCallback(
+    (evt: DragEvent) => {
+      if (!isDraggingRef.current || !isMounted()) return;
+
+      const handle = handleRef.current;
+      if (!handle) {
+        throw new Error('Handle not mounted');
+      }
+
+      const { rawX, rawY, width, height } = calculateXYDragPosn({
+        evt,
+        forElement: handle,
+        dragDelta: deltaRef.current,
+        touchIdentifier: touchIdentifierRef.current,
+      });
+
+      // adjust for the CSS translate property on the button
+      // honestly... idk.. im using the golden ratio below...lol
+      const adjustment = (1.61803398 * (vertical ? handle.offsetHeight : handle.clientWidth)) / 4;
+
+      // calculate the value
+      const sliderPxLen = (vertical ? height : width) + adjustment;
+      const pxOffset = (vertical ? rawY : rawX) + adjustment;
+
+      const ratio = Math.min(Math.max(pxOffset, 0), sliderPxLen) / sliderPxLen;
+      const value = vertical ? (1 - ratio) * (max - min) + min : ratio * (max - min) + min;
+
+      onChangeRef.current(value);
+      onDrag?.(evt);
+    },
+    [
+      touchIdentifierRef,
+      isDraggingRef,
+      handleRef,
+      onChangeRef,
+      onDrag,
+      min,
+      vertical,
+      max,
+      isMounted,
+    ]
+  );
+
+  const handleDragStop = useCallback(
+    (_: DragEvent, isTouch?: boolean) => {
+      if (!isDraggingRef.current || !isMounted()) return;
+
+      const handle = handleRef.current;
+      if (!handle) {
+        throw new Error('Handle not mounted');
+      }
+
+      isDraggingRef.current = false;
+      blur();
+      // Remove event handlers
+      removeEvent(handle.ownerDocument, isTouch ? touchEvents.move : mouseEvents.move, handleDrag);
+      removeEvent(
+        handle.ownerDocument,
+        isTouch ? touchEvents.stop : mouseEvents.stop,
+        handleDragStop
+      );
+    },
+    [handleRef, isDraggingRef, isMounted, blur, handleDrag]
+  );
 
   const handleDragStart = useCallback(
     (evt: DragEvent, isTouch?: boolean) => {
@@ -149,63 +196,39 @@ export const SliderHandle = ({
       addEvent(handle.ownerDocument, isTouch ? touchEvents.move : mouseEvents.move, handleDrag);
       addEvent(handle.ownerDocument, isTouch ? touchEvents.stop : mouseEvents.stop, handleDragStop);
     },
-    [onMouseDown, touchIdentifierRef, isMounted, handleRef, disabled]
+    [
+      onMouseDown,
+      touchIdentifierRef,
+      isMounted,
+      handleRef,
+      disabled,
+      focus,
+      handleDrag,
+      handleDragStop,
+    ]
   );
 
-  const handleDrag = useCallback(
-    (evt: DragEvent) => {
-      if (!isDraggingRef.current || !isMounted()) return;
-
-      const handle = handleRef.current;
-      if (!handle) {
-        throw new Error('Handle not mounted');
-      }
-
-      const { rawX, rawY, width, height } = calculateXYDragPosn({
-        evt,
-        forElement: handle,
-        dragDelta: deltaRef.current,
-        touchIdentifier: touchIdentifierRef.current,
-      });
-
-      // adjust for the CSS translate property on the button
-      // honestly... idk.. im using the golden ratio below...lol
-      const adjustment = (1.61803398 * (vertical ? handle.offsetHeight : handle.clientWidth)) / 4;
-
-      // calculate the value
-      const sliderPxLen = (vertical ? height : width) + adjustment;
-      const pxOffset = (vertical ? rawY : rawX) + adjustment;
-
-      const ratio = Math.min(Math.max(pxOffset, 0), sliderPxLen) / sliderPxLen;
-      const value = vertical ? (1 - ratio) * (max - min) + min : ratio * (max - min) + min;
-
-      onChangeRef.current(value);
-      onDrag?.(evt);
-    },
-    [touchIdentifierRef, isDraggingRef, handleRef, onChangeRef, onDrag]
-  );
-
-  const handleDragStop = useCallback(
-    (_: DragEvent, isTouch?: boolean) => {
-      if (!isDraggingRef.current || !isMounted()) return;
-
-      const handle = handleRef.current;
-      if (!handle) {
-        throw new Error('Handle not mounted');
-      }
-
-      isDraggingRef.current = false;
-      blur();
-      // Remove event handlers
-      removeEvent(handle.ownerDocument, isTouch ? touchEvents.move : mouseEvents.move, handleDrag);
-      removeEvent(
-        handle.ownerDocument,
-        isTouch ? touchEvents.stop : mouseEvents.stop,
-        handleDragStop
-      );
-    },
-    [handleRef, isDraggingRef]
-  );
+  useEffect(() => {
+    if (!handleRef.current) return;
+    /*
+     * added on mount so can be added w passive = false. Allows for cancel
+     * https://developers.google.com/web/updates/2017/01/scrolling-intervention
+     */
+    const handle = handleRef.current;
+    addEvent(handle, touchEvents.start, e => handleDragStart(e, true), {
+      passive: false,
+    });
+    // unmount
+    return () => {
+      if (!handle) return;
+      const { ownerDocument } = handle;
+      removeEvent(ownerDocument, mouseEvents.move, handleDrag);
+      removeEvent(ownerDocument, touchEvents.move, handleDrag);
+      removeEvent(ownerDocument, mouseEvents.stop, handleDragStop);
+      removeEvent(ownerDocument, touchEvents.stop, handleDragStop);
+      removeEvent(handle, touchEvents.start, (e: DragEvent) => handleDragStart(e, true));
+    };
+  }, [handleRef, handleDragStart, handleDrag, handleDragStop]);
 
   const offset = getOffset(value);
   const positionStyle = vertical
@@ -219,6 +242,7 @@ export const SliderHandle = ({
       aria-valuemax={max}
       aria-valuemin={min}
       aria-valuenow={value}
+      aria-controls={ariaControls}
       disabled={disabled}
       kind={kind}
       onMouseDown={e => handleDragStart(e, false)}

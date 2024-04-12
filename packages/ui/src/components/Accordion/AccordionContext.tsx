@@ -4,7 +4,7 @@ import type { Set as ImSet } from 'immutable';
 import type { RothkoKind } from '../../theme';
 import type { IconOverride } from './types';
 
-type IAccordionContext = {
+type AccordionContextType = {
   /** If `true`, borders are added around each accordion item. Default is `false`. */
   bordered?: boolean;
   /** Adds spacing around items for better separation. Default is `true`. */
@@ -21,6 +21,6 @@ type IAccordionContext = {
   withIcon?: boolean;
 };
 
-const AccordionContext = createContext<IAccordionContext | null>(null);
+const AccordionContext = createContext<AccordionContextType | null>(null);
 
 export default AccordionContext;

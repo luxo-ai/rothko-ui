@@ -23,9 +23,9 @@ const AccordionIcon = React.memo(
       );
     }
     return open ? (
-      <MinusOutline fill={color} width={SIZE} height={SIZE} />
+      <MinusOutline aria-hidden fill={color} width={SIZE} height={SIZE} />
     ) : (
-      <PlusOutline fill={color} width={SIZE} height={SIZE} />
+      <PlusOutline aria-hidden fill={color} width={SIZE} height={SIZE} />
     );
   }
 );

@@ -14,27 +14,35 @@ import {
 import { DrawerContext } from './DrawerContext';
 import { textChildrenStyle } from '../../library/Styles';
 import { textStyle } from '../Typography/Typography';
+import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
+import useId from '../../library/Hooks/useId';
 
 const TABLET_OR_MOBILE_MAX_WIDTH_PX = 750;
 const DEFAULT_DRAWER_WIDTH_PX = 350;
 
-type DrawerProps = {
+type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
+
+type DrawerProps = WithAria<{
   children?: React.ReactNode;
   className?: string;
   id?: string;
   onClose?: () => void;
   open?: boolean;
   style?: React.CSSProperties;
-};
+}>;
 
 const Drawer = ({
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
   children,
   className,
-  id,
+  id: idProp,
   onClose: closeDrawer = noop,
   open: isOpen = false,
   style: styleProp = {},
 }: DrawerProps) => {
+  const id = useId(idProp);
+  const drawerContentId = `${id}-content`;
   const drawerRef = useRef<HTMLDivElement | null>(null);
 
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -85,8 +93,9 @@ const Drawer = ({
 
   return (
     <DrawerContext.Provider value={{ isOpen, closeDrawer }}>
-      <DomPortal wrapperId={`rothko-drawer-portal-${id || 'unknown'}`}>
+      <DomPortal wrapperId={`rothko-drawer-portal-${id}`}>
         <DrawerBackdrop
+          aria-hidden
           className={classes({ ['backdrop-open']: isOpen })}
           onClick={onBackdropClick}
         >
@@ -94,15 +103,26 @@ const Drawer = ({
             (style, item) =>
               item && (
                 <AnimatedDrawerContainerDiv
+                  aria-label={ariaLabel}
+                  aria-labelledby={ariaLabelledBy}
+                  aria-describedby={drawerContentId}
+                  role="dialog"
                   className={className}
                   id={id}
                   ref={drawerRef}
                   style={{ ...styleProp, ...style }}
                 >
-                  <PhantomButton style={{ marginBottom: '1rem' }} onClick={() => closeDrawer()}>
-                    <Close width={28} height={28} />
+                  <PhantomButton
+                    type="button"
+                    aria-label="Close"
+                    style={{ marginBottom: '1rem' }}
+                    onClick={() => closeDrawer()}
+                  >
+                    <Close aria-hidden width={28} height={28} />
                   </PhantomButton>
-                  <DrawerContentContainerDiv>{children} </DrawerContentContainerDiv>
+                  <DrawerContentContainerDiv id={drawerContentId}>
+                    {children}{' '}
+                  </DrawerContentContainerDiv>
                 </AnimatedDrawerContainerDiv>
               )
           )}

@@ -5,15 +5,20 @@ import type { KindProps } from '../../theme/types';
 import Typography from '../Typography/Typography';
 import type { Tab } from './types';
 import { Container, Flex, FlexItem } from '../../layout';
+import type { WithAriaLabeling } from '../../types';
 
-type TabBarProps<Key extends KeyLike> = KindProps & {
-  className?: string;
-  initialTab?: Key;
-  onSelect?: (tab: Key) => void;
-  style?: React.CSSProperties;
-  tabs: ReadonlyArray<Tab<Key>>;
-  containerStyle?: React.CSSProperties;
-};
+type WithAria<T> = WithAriaLabeling<T>;
+
+type TabBarProps<Key extends KeyLike> = KindProps &
+  WithAria<{
+    id?: string;
+    className?: string;
+    initialTab?: Key;
+    onSelect?: (tab: Key) => void;
+    style?: React.CSSProperties;
+    tabs: ReadonlyArray<Tab<Key>>;
+    containerStyle?: React.CSSProperties;
+  }>;
 
 function TabBar<Key extends KeyLike>({
   className,
@@ -23,13 +28,14 @@ function TabBar<Key extends KeyLike>({
   style,
   tabs,
   containerStyle = {},
+  id,
 }: TabBarProps<Key>) {
   const tabCount = tabs.length;
   const initialIdx = tabs.findIndex(t => t.key === initialTab);
   const [tabIdx, setTabIdx] = useState(initialIdx >= 0 ? initialIdx : 0);
   return (
     <>
-      <TabListContainerDiv className={className} style={style}>
+      <TabListContainerDiv id={id} className={className} style={style}>
         <TabList aria-label="tablist" role="tablist" tabCount={tabCount}>
           {tabs.map((t, idx) => (
             <Flex

@@ -4,16 +4,34 @@ import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { isRothkoKind } from '../../theme';
 import type { LoaderColor, SpinnerSize } from './types';
+import type { WithAriaLabel } from '../../types';
 
-type SimpleInlineSpinnerProps = {
+type SimpleInlineSpinnerProps = WithAriaLabel<{
+  id?: string;
+  role?: React.AriaRole;
   className?: string;
   color?: LoaderColor;
   size?: SpinnerSize;
   style?: React.CSSProperties;
-};
+}>;
 
-const InlineSpinnerLoader = ({ className, color, size = 'm', style }: SimpleInlineSpinnerProps) => (
-  <SpinnerSpan style={style} $color={color} className={classes(`spinner-size-${size}`, className)}>
+const InlineSpinnerLoader = ({
+  id,
+  'aria-label': ariaLabel = 'Loading',
+  className,
+  color,
+  size = 'm',
+  style,
+  role = 'alert',
+}: SimpleInlineSpinnerProps) => (
+  <SpinnerSpan
+    id={id}
+    role={role}
+    style={style}
+    $color={color}
+    aria-label={ariaLabel}
+    className={classes(`spinner-size-${size}`, className)}
+  >
     loading...
   </SpinnerSpan>
 );

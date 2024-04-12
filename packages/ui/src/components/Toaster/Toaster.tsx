@@ -7,6 +7,10 @@ import { PhantomButton } from '../../library/PhantomButton';
 import type { KindProps, RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
 import type { ToastDetails } from './types';
+import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
+import useId from '../../library/Hooks/useId';
+
+type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
 
 type AnimatedStyle = {
   height?: SpringValue<number>;
@@ -14,12 +18,13 @@ type AnimatedStyle = {
   opacity?: SpringValue<number>;
 };
 
-type ToastProps = Pick<ToastDetails, 'label' | 'content' | 'withLife'> & {
-  animatedStyle?: AnimatedStyle;
-  kind?: RothkoKind;
-  onClose?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  style?: React.CSSProperties;
-};
+type ToastProps = Pick<ToastDetails, 'label' | 'content' | 'withLife'> &
+  WithAria<{
+    animatedStyle?: AnimatedStyle;
+    kind?: RothkoKind;
+    onClose?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    style?: React.CSSProperties;
+  }>;
 
 const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
   const {
@@ -30,20 +35,32 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
     onClose,
     style = {},
     withLife,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
   } = props;
+  const labelId = useId();
   return (
     <AnimatedWhiteBackdrop
+      aria-hidden
       style={{ ...style, opacity: animatedStyle.opacity, height: animatedStyle.height }}
     >
-      <ToastAnimatedContainerDiv ref={ref} kind={kind}>
+      <ToastAnimatedContainerDiv
+        role="alert"
+        aria-live={kind === 'danger' ? 'assertive' : 'polite'}
+        aria-atomic
+        aria-label={ariaLabel}
+        aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
+        ref={ref}
+        kind={kind}
+      >
         <ToastContentContainerDiv>
           {label &&
             (typeof label === 'string' ? (
-              <Typography.body bold className="rothko-toast-text">
+              <Typography.body id={labelId} bold className="rothko-toast-text">
                 {label}
               </Typography.body>
             ) : (
-              <div>{label}</div>
+              <div id={labelId}>{label}</div>
             ))}
           {content && typeof content === 'string' ? (
             <Typography.body className="rothko-toast-text">{content}</Typography.body>
@@ -51,11 +68,16 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
             <div>{content}</div>
           )}
         </ToastContentContainerDiv>
-        <ToastCloseButton onClick={onClose}>
-          <CloseOutline className="rothko-toast-icon" width="1.125rem" height="1.125rem" />
+        <ToastCloseButton aria-label="Close" onClick={onClose}>
+          <CloseOutline
+            aria-hidden
+            className="rothko-toast-icon"
+            width="1.125rem"
+            height="1.125rem"
+          />
         </ToastCloseButton>
       </ToastAnimatedContainerDiv>
-      {withLife && <AnimatedLife style={{ right: life }} kind={kind} />}
+      {withLife && <AnimatedLife aria-hidden style={{ right: life }} kind={kind} />}
     </AnimatedWhiteBackdrop>
   );
 });

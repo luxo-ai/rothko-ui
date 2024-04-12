@@ -15,8 +15,12 @@ import Typography, { textStyle } from '../Typography/Typography';
 import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } from './Shared';
 import type { DropdownInnerProps } from './types';
 import useSelect from './useSelect';
+import useId from '../../library/Hooks/useId';
+
+// TODO - Think about aria role for searachable dropdown?
 
 function DropdownInner<V extends Value, T = undefined>({
+  id: idProp,
   bordered = true,
   className,
   clearable,
@@ -39,7 +43,21 @@ function DropdownInner<V extends Value, T = undefined>({
   selectedPrefix = '',
   style,
   value,
+  errorText,
+  'aria-label': ariaLabel,
+  'aria-describedby': ariaDescribedBy,
+  'aria-details': ariaDetails,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-disabled': ariaDisabled,
+  'aria-required': ariaRequired,
+  'aria-invalid': ariaInvalid,
+  'aria-errormessage': ariaErrorMessage,
 }: DropdownInnerProps<V, T>) {
+  const id = useId(idProp);
+  const dropdownMenuId = `${id}-dropdown-menu`;
+  const labelId = `${id}-label`;
+  const errorMessageId = `${id}-error-text`;
+
   const debug = useDebuggerContext('<Dropdown/>');
 
   const openReverse = menuPosition === 'top';
@@ -177,21 +195,38 @@ function DropdownInner<V extends Value, T = undefined>({
 
   return (
     <div style={style} className={className}>
-      {label && <LabelText>{label}</LabelText>}
+      {label && <LabelText id={labelId}>{label}</LabelText>}
       <DropdownContainerDiv
+        id={id}
+        aria-invalid={ariaInvalid || error}
+        aria-required={ariaRequired}
+        aria-disabled={ariaDisabled}
+        aria-errormessage={
+          !ariaErrorMessage && error && errorText ? errorMessageId : ariaErrorMessage
+        }
+        aria-controls="dropdown-list-id-both-container-and-ul?" // when expanded
+        aria-label={ariaLabel}
+        aria-describedby={ariaDescribedBy}
+        aria-details={ariaDetails}
+        role={search ? 'combobox' : 'listbox'} // multi isn't searchable tho?
+        aria-haspopup={search ? 'listbox' : undefined}
+        aria-expanded={open}
         ref={containerRef}
         className={containerClasses}
         onBlur={onBlurHandler}
         onClick={openDropdownMenu}
         onFocus={onFocusHandler}
         onKeyDown={onKeyDown}
+        aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
         tabIndex={0}
       >
         {search && !disabled && (
           <PhantomInput
+            aria-autocomplete="list"
+            aria-controls="dropdown-list"
             onChange={e => setQuery(e.target.value)}
             type="text"
-            aria-label="dropdown search"
+            aria-label="Search"
             tabIndex={0}
             value={open ? query ?? '' : ''}
             className={classes({ disabled })}
@@ -218,6 +253,7 @@ function DropdownInner<V extends Value, T = undefined>({
                       {selectedPostfix}
                     </MultiSelectItemText>
                     <PhantomButton
+                      aria-label={`Delete ${opt.label}`}
                       $displayFlex
                       type="button"
                       tabIndex={-1}
@@ -227,6 +263,7 @@ function DropdownInner<V extends Value, T = undefined>({
                       }}
                     >
                       <CloseOutline
+                        aria-hidden
                         fill="var(--rothko-dropdown-multiselect-text, #000)"
                         width={16}
                         height={16}
@@ -249,23 +286,25 @@ function DropdownInner<V extends Value, T = undefined>({
           <ControlButton
             $open={open}
             $rotateOnOpen
-            aria-label="open dropdown"
+            aria-label="Open Menu"
             className={classes({ disabled })}
             onClick={toggleMenu}
           >
-            <ChevronDownOutline width="1rem" height="1rem" />
+            <ChevronDownOutline aria-hidden width="1rem" height="1rem" />
           </ControlButton>
         ) : (
           <ControlButton
-            aria-label="clear item"
+            aria-label="Clear Selection"
             className={classes({ disabled })}
             onClick={() => onSelectHandler(null)}
           >
-            <CloseOutline width="1rem" height="1rem" />
+            <CloseOutline aria-hidden width="1rem" height="1rem" />
           </ControlButton>
         )}
         {open && (
           <DropdownMenu
+            id={dropdownMenuId}
+            role={search ? 'listbox' : undefined}
             ref={menuRef}
             className={dropdownMenuClasses}
             tabIndex={-1}
@@ -274,7 +313,12 @@ function DropdownInner<V extends Value, T = undefined>({
             {!hasOptions ? (
               <NoResultsText>{noResultsMessage}</NoResultsText>
             ) : (
-              <ul role="listbox" tabIndex={-1}>
+              <ul
+                aria-multiselectable={multiple}
+                aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
+                role={!search ? 'listbox' : undefined}
+                tabIndex={-1}
+              >
                 {options.map((option, idx) => {
                   const selected = optIdx === idx;
                   return (
@@ -302,6 +346,7 @@ function DropdownInner<V extends Value, T = undefined>({
           </DropdownMenu>
         )}
       </DropdownContainerDiv>
+      error && errorText <Typography.body id={errorMessageId}>{errorText}</Typography.body>
     </div>
   );
 }

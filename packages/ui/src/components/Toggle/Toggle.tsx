@@ -7,18 +7,44 @@ import { hideChromeBrowserOutline } from '../../library/Styles';
 import type { KindProps } from '../../theme/types';
 import { keyDownFactory } from '../../utils/keyUtils';
 import { Typography } from '../Typography';
+import type {
+  WithAriaControls,
+  WithAriaDisabled,
+  WithAriaErrorMessage,
+  WithAriaExpanded,
+  WithAriaHasPopup,
+  WithAriaHidden,
+  WithAriaInvalid,
+  WithAriaLabeling,
+  WithAriaRequired,
+} from '../../types';
+import useId from '../../library/Hooks/useId';
 
-type ToggleProps = KindProps & {
-  children?: React.ReactNode;
-  className?: string;
-  disabled?: boolean;
-  offIcon?: JSX.Element;
-  onChange: (toggled: boolean) => void;
-  onIcon?: JSX.Element;
-  style?: CSSProperties;
-  toggled?: boolean;
-  error?: boolean;
-};
+type WithAria<T> = WithAriaErrorMessage<
+  WithAriaRequired<
+    WithAriaHasPopup<
+      WithAriaExpanded<
+        WithAriaHidden<WithAriaDisabled<WithAriaInvalid<WithAriaControls<WithAriaLabeling<T>>>>>
+      >
+    >
+  >
+>;
+
+type ToggleProps = KindProps &
+  WithAria<{
+    id?: string;
+    children?: React.ReactNode;
+    className?: string;
+    disabled?: boolean;
+    offIcon?: JSX.Element;
+    onChange: (toggled: boolean) => void;
+    onIcon?: JSX.Element;
+    style?: CSSProperties;
+    toggled?: boolean;
+    error?: boolean;
+    errorText?: string;
+    required?: boolean;
+  }>;
 
 const Toggle = ({
   children,
@@ -31,18 +57,50 @@ const Toggle = ({
   style,
   toggled,
   error,
+  errorText = 'Invalid',
+  'aria-label': ariaLabel,
+  'aria-describedby': ariaDescribedBy,
+  'aria-details': ariaDetails,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-hidden': ariaHidden,
+  'aria-controls': ariaControls,
+  'aria-haspopup': ariaHasPopup,
+  'aria-expanded': ariaExpanded,
+  'aria-disabled': ariaDisabled,
+  'aria-invalid': ariaInvalid,
+  'aria-required': ariaRequired,
+  'aria-errormessage': ariaErrorMessage,
+  id,
+  required,
 }: ToggleProps) => {
+  const labelId = useId();
+  const errorMessageId = useId();
+
   const handleChange = () => {
     if (disabled) return;
     onChange(!toggled);
   };
+
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: handleChange });
+
   return (
     <ToggleContainerDiv className={className} style={style}>
       <OuterToggleDiv
-        $toggled={toggled}
+        id={id}
+        aria-describedby={ariaDescribedBy}
+        aria-details={ariaDetails}
+        aria-labelledby={!ariaLabelledBy && children ? labelId : ariaLabelledBy}
+        aria-hidden={ariaHidden}
+        aria-controls={ariaControls}
+        aria-haspopup={ariaHasPopup}
+        aria-expanded={ariaExpanded}
+        aria-invalid={ariaInvalid || error}
+        aria-required={ariaRequired}
         aria-checked={!!toggled}
-        aria-label="toggle"
+        aria-disabled={ariaDisabled || disabled}
+        aria-label={ariaLabel}
+        aria-errormessage={!ariaErrorMessage && error ? errorMessageId : ariaErrorMessage}
+        $toggled={toggled}
         className={classes({ disabled, error })}
         kind={kind}
         onClick={handleChange}
@@ -50,11 +108,21 @@ const Toggle = ({
         role="switch"
         tabIndex={0}
       >
-        <InnerToggleDiv className={classes(toggled && 'active')}>
+        <InnerToggleDiv aria-hidden className={classes(toggled && 'active')}>
           {toggled ? onIcon && <>{onIcon}</> : offIcon && <>{offIcon}</>}
         </InnerToggleDiv>
       </OuterToggleDiv>
-      {children && <Typography.body>{children}</Typography.body>}
+      {children &&
+        (typeof children === 'string' ? (
+          <Typography.body id={labelId}>{children}</Typography.body>
+        ) : (
+          <div id={labelId}>{children}</div>
+        ))}
+      {error && (
+        <Typography.body id={errorMessageId} kind="danger">
+          {errorText}
+        </Typography.body>
+      )}
     </ToggleContainerDiv>
   );
 };

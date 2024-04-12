@@ -6,14 +6,14 @@ const CONTENT =
 
 const App = () => {
   return (
-    <Accordion selectedPanelKeys={['panel1', 'panel3']}>
-      <AccordionPanel panelKey="panel1" title="Label 1">
+    <Accordion selectedKeys={['panel1', 'panel3']}>
+      <AccordionPanel $key="panel1" title="Label 1">
         {CONTENT}
       </AccordionPanel>
-      <AccordionPanel panelKey="panel2" title="Label 2">
+      <AccordionPanel $key="panel2" title="Label 2">
         {CONTENT}
       </AccordionPanel>
-      <AccordionPanel panelKey="panel3" title="Label 3">
+      <AccordionPanel $key="panel3" title="Label 3">
         {CONTENT}
       </AccordionPanel>
     </Accordion>

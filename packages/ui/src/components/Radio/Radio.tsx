@@ -1,105 +1,69 @@
-import { classes, isString } from '@rothko-ui/utils';
 import React from 'react';
-import styled from 'styled-components';
-import type { KindProps, RothkoKind } from '../../theme';
-import Typography from '../Typography/Typography';
+import type { RadioInnerProps } from './RadioInner';
+import RadioInner from './RadioInner';
+import useRadioGroup from './useRadioGroup';
 
-type RadioProps = {
-  children?: React.ReactNode;
-  className?: string;
-  disabled?: boolean;
-  error?: boolean;
-  kind?: RothkoKind;
-  onSelect: () => void;
-  selected?: boolean;
-  style?: React.CSSProperties;
+type RadioProps = Pick<
+  RadioInnerProps,
+  | 'id'
+  | 'children'
+  | 'className'
+  | 'disabled'
+  | 'style'
+  | 'aria-label'
+  | 'aria-describedby'
+  | 'aria-details'
+  | 'aria-labelledby'
+  | 'aria-controls'
+  | 'aria-errormessage'
+> & {
+  $key: string;
 };
 
 const Radio = ({
+  id,
+  $key,
   children,
   className,
   disabled,
-  error,
-  kind,
-  onSelect,
-  selected,
   style,
+  'aria-label': ariaLabel,
+  'aria-describedby': ariaDescribedBy,
+  'aria-details': ariaDetails,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-controls': ariaControls,
+  'aria-errormessage': ariaErrorMessage,
 }: RadioProps) => {
-  const renderContent = isString(children) ? (
-    <Typography.body>{children}</Typography.body>
-  ) : (
-    children
-  );
+  const childrenStringLabel = typeof children === 'string' ? children : undefined;
+  const {
+    radioGroupErrorId,
+    selectedValue,
+    onChange,
+    error,
+    disabled: groupDisabled,
+    kind,
+  } = useRadioGroup();
+
   return (
-    <RadioContainerDiv style={style} className={className}>
-      <RadioOutlineDiv
-        onClick={() => {
-          if (!disabled) onSelect();
-        }}
-        role="radio"
-        aria-label="radio"
-        aria-checked={!!selected}
-        aria-disabled={!!disabled}
-        className={classes({ disabled, error })}
-      >
-        <RadioInnerDiv kind={kind} className={classes({ selected, error, disabled })} />
-      </RadioOutlineDiv>
-      {renderContent && <div>{renderContent}</div>}
-    </RadioContainerDiv>
+    <RadioInner
+      aria-controls={ariaControls}
+      aria-describedby={ariaDescribedBy}
+      aria-details={ariaDetails}
+      aria-errormessage={!ariaErrorMessage && error ? radioGroupErrorId : ariaErrorMessage}
+      aria-label={ariaLabel || childrenStringLabel}
+      aria-labelledby={ariaLabelledBy}
+      className={className}
+      disabled={disabled || groupDisabled}
+      error={error}
+      id={id}
+      kind={kind}
+      onSelect={() => onChange($key)}
+      selected={$key === selectedValue}
+      style={style}
+    >
+      {children}
+    </RadioInner>
   );
 };
-
-const RadioContainerDiv = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center; // for children
-  justify-content: flex-start;
-  gap: 0.3rem;
-`;
-
-const RadioOutlineDiv = styled.div<{ $disabled?: boolean }>`
-  -webkit-tap-highlight-color: transparent;
-  background-color: var(--rothko-radio-border, #000);
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: calc(1.25rem / 2);
-  padding: 0.1875rem;
-  cursor: pointer;
-
-  &.disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-`;
-
-const RadioInnerDiv = styled.div<KindProps>`
-  -webkit-tap-highlight-color: transparent;
-  background-color: var(--rothko-radio-background, #ccc);
-
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-
-  -webkit-transition: background-color 0.1s ease;
-  -moz-transition: background-color 0.1s ease;
-  -ms-transition: background-color 0.1s ease;
-  transition: background-color 0.1s ease;
-
-  &.selected {
-    background-color: ${({ kind }) =>
-      kind
-        ? `var(--rothko-${kind}-500, #281D75)`
-        : `var(--rothko-radio-background_selected, #281D75)`};
-  }
-
-  &.error {
-    background: var(--rothko-danger-300);
-    border-color: var(--rothko-danger-500);
-  }
-
-  &.disabled {
-    opacity: 0.6;
-  }
-`;
 
 export default Radio;
