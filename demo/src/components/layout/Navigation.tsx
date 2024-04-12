@@ -1,11 +1,20 @@
-import { Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
-import { Button, Flex, FlexItem, Typography, WidthGeqOnly, useRothko } from '@rothko-ui/ui';
+import { Github, Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
+import {
+  Button,
+  Flex,
+  FlexItem,
+  Typography,
+  WidthGeqOnly,
+  WidthLeqOnly,
+  useRothko,
+} from '@rothko-ui/ui';
 import cookieCutter from 'cookie-cutter';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import config from '../../config';
 import styles from './Navigation.module.scss';
+import Link from 'next/link';
 
 type NavigationProps = {
   openDrawer: () => void;
@@ -28,15 +37,17 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
     <nav className={router.pathname === '/' ? `${styles.nav} ${styles.blurry}` : styles.nav}>
       <Flex justifyContent="space-between">
         <Flex alignItems="center" justifyContent="center" columnGap="1rem">
-          <FlexItem>
-            <button
-              aria-label="menu button"
-              className={`dflx ${styles.phantomButton}`}
-              onClick={() => openDrawer()}
-            >
-              <Menu width={28} height={28} />
-            </button>
-          </FlexItem>
+          <WidthLeqOnly threshold={750}>
+            <FlexItem>
+              <button
+                aria-label="menu button"
+                className={`dflx ${styles.phantomButton}`}
+                onClick={() => openDrawer()}
+              >
+                <Menu width={28} height={28} />
+              </button>
+            </FlexItem>
+          </WidthLeqOnly>
           <FlexItem>
             <Flex
               onClick={() => router.push('/')}
@@ -50,15 +61,25 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
           </FlexItem>
         </Flex>
         <Flex justifyContent="center" alignItems="center" columnGap="1.75rem">
-          {!withoutToggle && (
-            <button onClick={() => toggleMode()} className={styles.phantomButton}>
-              {mode === 'dark' ? (
-                <Sun fill="#ffbb00" width={28} height={28} />
-              ) : (
-                <Moon fill="#4833e0" width={27} height={27} />
-              )}
-            </button>
-          )}
+          <Flex justifyContent="center" alignItems="center" columnGap="1rem">
+            <Link
+              target="_blank"
+              href={config.repoUrl}
+              className={styles.phantomButton}
+              rel="noreferrer"
+            >
+              <Github fill={mode === 'dark' ? '#fff' : '#000'} width={28} height={28} />
+            </Link>
+            {!withoutToggle && (
+              <button onClick={() => toggleMode()} className={styles.phantomButton}>
+                {mode === 'dark' ? (
+                  <Sun fill="#ffbb00" width={28} height={28} />
+                ) : (
+                  <Moon fill="#4833e0" width={27} height={27} />
+                )}
+              </button>
+            )}
+          </Flex>
           <WidthGeqOnly threshold={750} style={{ height: '100%' }}>
             <Button
               size="s"

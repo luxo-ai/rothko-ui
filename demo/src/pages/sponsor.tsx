@@ -1,6 +1,6 @@
 import { Globe2 } from '@rothko-ui/icons';
 import { Flex, FlexItem, ToastContextProvider, Typography } from '@rothko-ui/ui';
-import Code from '../components/Code';
+import { TextCode } from '../components/Code';
 import PaddedNavLayout from '../components/layout/PaddedNavLayout';
 import config from '../config';
 
@@ -34,12 +34,7 @@ const SponsorMe = () => {
               </FlexItem>
             </Flex>
             <ToastContextProvider>
-              <Code
-                code={config.ethWallet}
-                // darkTheme={themes.jettwaveDark}
-                // lightTheme={themes.jettwaveLight}
-                language="eth"
-              />
+              <TextCode sourceCode={config.ethWallet} />
             </ToastContextProvider>
           </FlexItem>
         </Flex>

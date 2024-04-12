@@ -1,124 +1,60 @@
-import { Container, Flex, Toggle } from '@rothko-ui/ui';
-import { useReducer, useState } from 'react';
+import { useState } from 'react';
 
-import { CodeLanguage } from '../CodeExample';
+import type { RothkoKind } from '@rothko-ui/ui';
+import { Container, Flex, FlexItem } from '@rothko-ui/ui';
 
-import { Video, VideoOff } from '@rothko-ui/icons';
+import { BASIC, WITH_ICON, WITH_KIND } from './usage/sourceCode';
+import { insertKind } from '../helpers';
+import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
+import Basic from './usage/Basic';
 import Card from '../Card';
-import ToggleCustomizations, { customizationsReducer } from './Customizations';
+import Example from '../Example';
+import Props from '../Props';
 import toggleCopy from './copy';
 import toggleProps from './props';
+import WithIcon from './usage/WithIcon';
+import WithKind from './usage/WithKind';
+import Usage from '../Usage';
+import KindRadioGroup from '../KindRadioGroup';
 
-const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-import React, { useState } from 'react';
-import { Toggle, RothkoKind } from '@rothko-ui/ui';
-import { Video, VideoOff } from '@rothko-ui/icons';
+const GITHUB_URL =
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Toggle';
 
-type ExampleProps = {
-  kind?: RothkoKind;
-}
-
-const Example: React.FC<ExampleProps> = ({ kind }) => {
-  const [toggled, setToggled] = useState<boolean>(false);
-
-  const handleChange = (t: boolean) => {
-    setToggled(t);
-  };
-
-  return (
-    <Toggle
-      onIcon={<Video fill="#000" />}
-      offIcon={<VideoOff fill="#000" />}
-      kind={kind}
-      toggled={toggled}
-      onChange={handleChange}
-    >
-      example
-    </Toggle>
-  );
-};
-`,
-  [CodeLanguage.JS]: `
-import React, { useState } from 'react';
-import { Toggle } from '@rothko-ui/ui';
-import { Video, VideoOff } from '@rothko-ui/icons';
-
-const Example = ({ kind }) => {
-  const [toggled, setToggled] = useState(false);
-
-  const handleChange = (t) => {
-    setToggled(t);
-  };
-
-  return (
-    <Toggle
-      onIcon={<Video fill="#000" />}
-      offIcon={<VideoOff fill="#000" />} 
-      kind={kind}
-      toggled={toggled}
-      onChange={handleChange}
-    >
-      example
-    </Toggle>
-  );
-};
-`,
-};
+const IMPORT = "import { Toggle } from '@rothko-ui/ui';";
 
 const ToggleCard = () => {
-  const [toggled1, setToggled1] = useState<boolean>(false);
-  const [toggled2, setToggled2] = useState<boolean>(false);
-  const [toggled3, setToggled3] = useState<boolean>(false);
-
+  const [kind, setKind] = useState<RothkoKind>('primary');
   const isMobileOrTablet = useIsMobileOrTablet();
-  const [state, dispatch] = useReducer(customizationsReducer, {
-    kind: 'info',
-    withKind: false,
-    disabled: false,
-  });
+  const maxWidth = isMobileOrTablet ? undefined : '26rem';
 
-  const { kind, withKind, disabled } = state;
   return (
-    <Card
-      copy={toggleCopy}
-      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: toggleProps }}
-    >
-      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '15rem'}>
-        <Flex flexDirection="column" rowGap="1rem">
-          <Toggle
-            disabled={disabled}
-            kind={withKind ? kind : undefined}
-            toggled={toggled1}
-            onChange={v => setToggled1(v)}
-          />
-          <Toggle
-            disabled={disabled}
-            kind={withKind ? kind : undefined}
-            toggled={toggled2}
-            onChange={v => setToggled2(v)}
-            style={{ marginTop: '0.5rem' }}
-          >
-            toggle with label
-          </Toggle>
-          <Toggle
-            onIcon={<Video fill="#000" />}
-            offIcon={<VideoOff fill="#000" />}
-            disabled={disabled}
-            kind={withKind ? kind : undefined}
-            toggled={toggled3}
-            onChange={v => setToggled3(v)}
-            style={{ marginTop: '0.5rem' }}
-          >
-            toggle with on/off icons
-          </Toggle>
-        </Flex>
-      </Container>
-      <Container as="section" maxWidth="26rem">
-        <ToggleCustomizations state={state} dispatch={dispatch} />
-      </Container>
+    <Card codeUrl={GITHUB_URL} copy={toggleCopy}>
+      <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Usage />
+        <Container maxWidth="32rem">
+          <TSCode sourceCode={IMPORT} />
+        </Container>
+        <Example sourceCode={BASIC}>
+          <Container maxWidth={maxWidth}>
+            <Basic />
+          </Container>
+        </Example>
+        <Example title="With Icon" sourceCode={WITH_ICON}>
+          <Container maxWidth={maxWidth}>
+            <WithIcon />
+          </Container>
+        </Example>
+        <FlexItem>
+          <Example title="With Kind" sourceCode={insertKind(WITH_KIND, kind)}>
+            <Container maxWidth={maxWidth}>
+              <WithKind kind={kind} />
+            </Container>
+          </Example>
+          <KindRadioGroup kind={kind} setKind={setKind} />
+        </FlexItem>
+      </Flex>
+      <Props copy={{ props: toggleProps }} />
     </Card>
   );
 };

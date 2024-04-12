@@ -1,120 +1,65 @@
-import { Container, Dropdown } from '@rothko-ui/ui';
-import { useReducer, useState } from 'react';
+import { Container, Flex } from '@rothko-ui/ui';
+
+import { BASIC, CLEARABLE, DISABLED, MENU_POSITION, SEARCHABLE } from './usage/sourceCode';
+import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
+import Basic from './usage/Basic';
 import Card from '../Card';
-import { CodeLanguage } from '../CodeExample';
-import DropdownCustomizations, { customizationsReducer } from './Customizations';
+import Clearable from './usage/Clearable';
+import Disabled from './usage/Disabled';
 import dropdownCopy from './copy';
 import dropdownProps from './props';
+import Example from '../Example';
+import MenuPosition from './usage/MenuPosition';
+import Props from '../Props';
+import Seachable from './usage/Searchable';
+import Usage from '../Usage';
 
-const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-import React, { useState } from 'react';
-import { Dropdown, Option } from '@rothko-ui/ui';
+const GITHUB_URL =
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Dropdown';
 
-const Example: React.FC = () => {
-  const [selected, setSelected] = useState<number | null>(null);
-  const dropdownOptions: Option<number>[] = [...]; // Define your options here
+const IMPORT = "import { Dropdown } from '@rothko-ui/ui';";
 
-  return (
-    <Dropdown
-      clearable
-      search
-      menuPosition="top"
-      value={selected}
-      onChange={v => setSelected(v as number)}
-      options={dropdownOptions}
-    />
-  );
-}
-
-export default Example;
-`,
-  [CodeLanguage.JS]: `
-import React, { useState } from 'react';
-import { Dropdown } from '@rothko-ui/ui';
-
-const Example = () => {
-  const [selected, setSelected] = useState(null);
-  const dropdownOptions = [...]; // Define your options here
-
-  return (
-    <Dropdown
-      clearable
-      search
-      menuPosition="top"
-      value={selected}
-      onChange={v => setSelected(v)}
-      options={dropdownOptions}
-    />
-  );
-}
-`,
-};
-
-const dropdownOptions = [
-  {
-    id: 0,
-    label: 'Zero',
-  },
-  {
-    id: 1,
-    label: 'One',
-  },
-  {
-    id: 2,
-    label: 'Two',
-  },
-];
+// change postfix/prefix with "onRenderSelected"
 
 const SingleDropdownCard = () => {
-  const [selected, setSelected] = useState<number | null>(null);
   const isMobileOrTablet = useIsMobileOrTablet();
-  const [state, dispatch] = useReducer(customizationsReducer, {
-    disabled: false,
-    clearable: false,
-    search: false,
-    menuPosition: 'bottom',
-    bordered: true,
-    placeholder: 'Select an option...',
-  });
-
-  const {
-    disabled,
-    clearable,
-    search,
-    menuPosition,
-    bordered,
-    selectedPrefix,
-    selectedPostfix,
-    placeholder,
-  } = state;
+  const maxWith = isMobileOrTablet ? undefined : '26rem';
 
   return (
-    <Card
-      copy={dropdownCopy}
-      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: dropdownProps }}
-    >
-      <Container as="section" maxWidth={isMobileOrTablet ? undefined : '26rem'}>
-        <Dropdown
-          clearable={clearable}
-          disabled={disabled}
-          menuPosition={menuPosition}
-          bordered={bordered}
-          placeholder={placeholder}
-          search={search}
-          selectedPrefix={selectedPrefix}
-          selectedPostfix={selectedPostfix}
-          label="Dropdown"
-          value={selected}
-          onChange={v => setSelected(v)}
-          options={dropdownOptions}
-        />
-      </Container>
-      <Container as="section" maxWidth="26rem">
-        <DropdownCustomizations state={state} dispatch={dispatch} />
-      </Container>
+    <Card codeUrl={GITHUB_URL} copy={dropdownCopy}>
+      <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Usage />
+        <Container maxWidth="32rem">
+          <TSCode sourceCode={IMPORT} />
+        </Container>
+        <Example sourceCode={BASIC}>
+          <Container maxWidth={maxWith}>
+            <Basic />
+          </Container>
+        </Example>
+        <Example title="Disabled" sourceCode={DISABLED}>
+          <Container maxWidth={maxWith}>
+            <Disabled />
+          </Container>
+        </Example>
+        <Example title="Searchable" sourceCode={SEARCHABLE}>
+          <Container maxWidth={maxWith}>
+            <Seachable />
+          </Container>
+        </Example>
+        <Example title="Clearable" sourceCode={CLEARABLE}>
+          <Container maxWidth={maxWith}>
+            <Clearable />
+          </Container>
+        </Example>
+        <Example title="Menu Position" sourceCode={MENU_POSITION}>
+          <Container maxWidth={maxWith}>
+            <MenuPosition />
+          </Container>
+        </Example>
+      </Flex>
+      <Props copy={{ props: dropdownProps }} />
     </Card>
   );
 };

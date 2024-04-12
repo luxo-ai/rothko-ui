@@ -1,51 +1,33 @@
-import { Alert, Flex } from '@rothko-ui/ui';
-import Card from '../Card';
-import { CodeLanguage } from '../CodeExample';
+import { Container, Flex } from '@rothko-ui/ui';
+
+import { BASIC } from './usage/sourceCode';
+import { TSCode } from '../../Code';
 import alertCopy from './copy';
 import alertProps from './props';
+import Basic from './usage/Basic';
+import Card from '../Card';
+import Example from '../Example';
+import Props from '../Props';
+import Usage from '../Usage';
 
-const EXAMPLE_LOOKUP: Record<CodeLanguage, string> = {
-  [CodeLanguage.TS]: `
-  import React from 'react';
-  import { Alert } from '@rothko-ui/ui';
+const GITHUB_URL =
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Alert';
 
-  const Example: React.FC = () => {
-    return (
-      <>
-        <Alert kind="success">Success</Alert>
-        <Alert kind="warning">Warning</Alert>
-        <Alert>Error!</Alert>
-      </>
-    );
-  }
-`,
-  [CodeLanguage.JS]: `
-  import { Alert } from '@rothko-ui/ui';
-
-  const Example = () => {
-    return (
-      <>
-        <Alert kind="success">Success</Alert>
-        <Alert kind="warning">Warning</Alert>
-        <Alert>Error!</Alert> 
-      </>
-    );
-  }
-`,
-};
+const IMPORT = "import { Alert } from '@rothko-ui/ui';";
 
 const AlertCard = () => {
   return (
-    <Card
-      copy={alertCopy}
-      codeSnippet={{ examplesLookup: EXAMPLE_LOOKUP }}
-      propsMeta={{ meta: alertProps }}
-    >
+    <Card codeUrl={GITHUB_URL} copy={alertCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
-        <Alert kind="success">Success</Alert>
-        <Alert kind="warning">Warning</Alert>
-        <Alert kind="danger">Error!</Alert>
+        <Usage />
+        <Container maxWidth="32rem">
+          <TSCode sourceCode={IMPORT} />
+        </Container>
+        <Example sourceCode={BASIC}>
+          <Basic />
+        </Example>
       </Flex>
+      <Props copy={{ props: alertProps }} />
     </Card>
   );
 };

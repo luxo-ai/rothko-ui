@@ -11,6 +11,25 @@ a {
   text-decoration: none;
 }
 
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  background-color: rgb(153 161 179 / 0.1);
+  border-radius: 0.375rem;
+  /* this is a nice color #582cff (secondary dark theme?) */
+}
+
+:root .dark code {
+  color: var(--rothko-secondary-500, #5327fb);
+}
+
+:root .light code {
+  color: #5327fb;
+}
+
 * {
   box-sizing: border-box;
 }

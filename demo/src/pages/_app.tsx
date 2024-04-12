@@ -41,7 +41,7 @@ export default function App({
     <>
       <RothkoHeader />
       <IsMobileOrTabletContext.Provider value={isMobileOrTablet}>
-        <WithProviders themeMode={mode}>
+        <WithProviders theme={mode}>
           <Component {...pageProps} />
         </WithProviders>
       </IsMobileOrTabletContext.Provider>

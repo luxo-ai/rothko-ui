@@ -3,7 +3,7 @@ import WithProviders from '../components/WithProviders';
 
 const HomePage = () => {
   return (
-    <WithProviders themeMode="dark">
+    <WithProviders theme="dark">
       <Home />
     </WithProviders>
   );
