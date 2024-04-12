@@ -1,10 +1,12 @@
-import { classes } from '@rothko-ui/utils';
 import React from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { isRothkoKind } from '../../theme';
+
+import { classes } from '@rothko-ui/utils';
+
 import type { LoaderColor, SpinnerSize } from './types';
 import type { WithAriaLabel } from '../../types';
+import { isRothkoKind } from '../utils';
 
 type SimpleInlineSpinnerProps = WithAriaLabel<{
   id?: string;

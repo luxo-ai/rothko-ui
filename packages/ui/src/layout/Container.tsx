@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 import type { CSSProperties } from 'styled-components';
 import styled from 'styled-components';
+
 import type { RothkoKind } from '../theme';
-import { isRothkoKind } from '../theme';
+import { isRothkoKind } from '../library/utils';
 
 export type CustomColorCssProperties = Omit<
   CSSProperties,
@@ -86,7 +87,16 @@ export const useStyleProps = ({
       baseStyle = { ...baseStyle, ...rest };
     }
     return baseStyle;
-  }, [backgroundColor, borderColor, color, rest]);
+  }, [
+    backgroundColor,
+    borderColor,
+    color,
+    rest,
+    borderBottomColor,
+    borderTopColor,
+    borderLeftColor,
+    borderRightColor,
+  ]);
 
   return style;
 };

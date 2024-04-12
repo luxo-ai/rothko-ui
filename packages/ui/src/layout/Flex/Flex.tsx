@@ -4,10 +4,10 @@ import type { CustomColorCssProperties } from '../Container';
 import { useStyleProps } from '../Container';
 
 type FlexProps = Omit<CustomColorCssProperties, 'display'> & {
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
   as?: keyof JSX.IntrinsicElements;
   children: React.ReactNode;
   className?: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
   role?: React.AriaRole;
 };
 
