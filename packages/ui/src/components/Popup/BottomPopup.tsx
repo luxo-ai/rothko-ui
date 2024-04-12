@@ -21,21 +21,31 @@ import useId from '../../library/hooks/useId';
 type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
 
 type PopupProps = WithAria<{
-  /** The content to be displayed within the popup. */
-  children: React.ReactNode;
-  /** Optional CSS class name for custom styling. */
-  className?: string;
-  /** Optional ID attribute for the popup element. */
   id?: string;
-  /** Callback function invoked when the popup is closed. */
+  /**
+   * The content of the popup.
+   */
+  children: React.ReactNode;
+  /**
+   * The CSS class name for the popup.
+   */
+  className?: string;
+  /**
+   * Callback function to be called when the popup is closed.
+   */
   onClose: () => void;
-  /** Boolean flag indicating whether the popup is open or closed. */
+  /**
+   * Determines whether the popup is open or closed.
+   */
   open: boolean;
+  /**
+   * The inline style for the popup.
+   */
   style?: React.CSSProperties;
 }>;
 
 const BottomPopup: React.FC<PopupProps> = ({
-  id: idProp,
+  id,
   children,
   className,
   onClose,
@@ -45,8 +55,7 @@ const BottomPopup: React.FC<PopupProps> = ({
   'aria-labelledby': ariaLabelledBy,
 }) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
-  const id = useId(idProp);
-  const contentId = `${id}-content`;
+  const contentId = useId();
 
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -105,7 +114,7 @@ const BottomPopup: React.FC<PopupProps> = ({
   }, [isOpen, popupRef]);
 
   return (
-    <DomPortal wrapperId={`rothko-bottom-popup-${id || 'unknown'}`}>
+    <DomPortal wrapperId="rothko-bottom-popup">
       <ShadedBackdrop
         aria-hidden
         onClick={onBackdropClick}
@@ -119,7 +128,7 @@ const BottomPopup: React.FC<PopupProps> = ({
                 aria-labelledby={ariaLabelledBy}
                 aria-describedby={contentId}
                 id={id}
-                style={{ ...styleProp, style }}
+                style={{ ...styleProp, ...style }}
                 ref={popupRef}
                 className={className}
               >

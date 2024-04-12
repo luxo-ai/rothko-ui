@@ -1,5 +1,6 @@
 import type { SVGAttributes } from 'react';
 import React from 'react';
+
 import type { Color } from '../../theme';
 import useId from '../../library/hooks/useId';
 
@@ -13,7 +14,7 @@ export type SkeletonBuilderProps = Omit<SVGAttributes<SVGElement>, 'role'> & {
   speed?: number;
 };
 
-export const SkeletonBuilder = ({
+const SkeletonBuilder = ({
   backgroundColor: bgColorProp,
   children,
   foregroundColor: fgColorProp,
@@ -78,3 +79,5 @@ export const SkeletonBuilder = ({
     </svg>
   );
 };
+
+export default SkeletonBuilder;

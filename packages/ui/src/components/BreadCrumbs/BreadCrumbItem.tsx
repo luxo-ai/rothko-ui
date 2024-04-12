@@ -17,34 +17,42 @@ type WithAria<T> = WithAriaHasPopup<
 
 type BreadCrumbItemProps = WithAria<{
   id?: string;
-  /** The text content of the breadcrumb item. */
+  /**
+   * The content of the breadcrumb item.
+   */
   children: string;
-  /** Optional callback function invoked when the breadcrumb item is clicked. */
+  /**
+   * The function to be called when the breadcrumb item is clicked.
+   */
   onClick?: () => void;
-  /** Optional target attribute for the breadcrumb link. */
+  /**
+   * The target of the breadcrumb item link.
+   */
   target?: string;
-  /** Optional URL to navigate to when the breadcrumb item is clicked. */
+  /**
+   * The URL to navigate to when the breadcrumb item is clicked.
+   */
   to?: string;
 }>;
 
 const BreadCrumbItem = ({
-  to,
-  target,
-  onClick,
-  children,
-  'aria-label': ariaLabel,
-  'aria-current': ariaCurrent,
-  'aria-controls': ariaControls,
-  'aria-selected': ariaSelected,
-  'aria-labelledby': ariaLabelledBy,
-  'aria-haspopup': ariaHasPopup,
   id,
+  'aria-controls': ariaControls,
+  'aria-current': ariaCurrent,
+  'aria-haspopup': ariaHasPopup,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-selected': ariaSelected,
+  children,
+  onClick,
+  target,
+  to,
 }: BreadCrumbItemProps) => {
   if (to) {
     return (
       <BreadCrumbsItemContainerSpan
-        role="link"
         id={id}
+        role="link"
         aria-label={ariaLabel}
         aria-current={ariaCurrent}
         aria-controls={ariaControls}
@@ -61,8 +69,8 @@ const BreadCrumbItem = ({
   if (onClick) {
     return (
       <BreadCrumbsItemContainerSpan
-        role="link"
         id={id}
+        role="link"
         aria-label={ariaLabel}
         aria-current={ariaCurrent}
         aria-controls={ariaControls}
@@ -79,7 +87,6 @@ const BreadCrumbItem = ({
   return (
     <BreadCrumbsItemContainerSpan
       id={id}
-      // no aria role for current item
       aria-label={ariaLabel}
       aria-current={ariaCurrent}
       aria-controls={ariaControls}

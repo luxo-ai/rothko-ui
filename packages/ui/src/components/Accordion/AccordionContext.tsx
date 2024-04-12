@@ -2,23 +2,38 @@ import { createContext } from 'react';
 import type { Set as ImSet } from 'immutable';
 
 import type { RothkoKind } from '../../theme';
-import type { IconOverride } from './types';
+import type { Icon } from './types';
 
 type AccordionContextType = {
-  /** If `true`, borders are added around each accordion item. Default is `false`. */
+  /**
+   * Determines whether the Accordion should have a border.
+   */
   bordered?: boolean;
-  /** Adds spacing around items for better separation. Default is `true`. */
+  /**
+   * Determines whether the Accordion should have a compact layout.
+   */
   compact?: boolean;
-  /** If `true`, borders are added around each accordion item. Default is `false`. */
-  iconOverride?: IconOverride;
-  /** Specifies the accordion's style kind. */
+  /**
+   * Overrides the default icon for the Accordion.
+   */
+  iconOverride?: Icon;
+  /**
+   * Determines the kind of Accordion.
+   */
   kind?: RothkoKind;
-  /** Function to handle clicks on accordion panels, triggering open/close state changes. */
+  /**
+   * Callback function triggered when a panel is clicked.
+   * @param id - The ID of the clicked panel.
+   */
   onClickPanel: (id: string) => void;
-  /** Function to handle clicks on accordion panels, triggering open/close state changes. */
+  /**
+   * Set of IDs for the selected panels.
+   */
   selectedPanels: ImSet<string>;
-  /** Adds spacing around items for better separation. Default is `true`. */
-  withIcon?: boolean;
+  /**
+   * Determines whether the Accordion should hide the icon.
+   */
+  hideIcon?: boolean;
 };
 
 const AccordionContext = createContext<AccordionContextType | null>(null);

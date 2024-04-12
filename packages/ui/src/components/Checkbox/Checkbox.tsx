@@ -1,4 +1,4 @@
-import { classes } from '@rothko-ui/utils';
+import { classes, isString } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import React from 'react';
 import styled from 'styled-components';
@@ -30,21 +30,55 @@ type WithAria<T> = WithAriaErrorMessage<
 
 type CheckboxProps = WithAria<{
   id?: string;
-  required?: boolean;
+  /**
+   * Specifies whether the checkbox is checked.
+   */
   checked?: boolean;
+  /**
+   * The content to be displayed inside the checkbox.
+   */
   children?: React.ReactNode;
+  /**
+   * The CSS class name for the checkbox.
+   */
   className?: string;
+  /**
+   * Specifies whether the checkbox is disabled.
+   */
   disabled?: boolean;
+  /**
+   * Specifies whether there is an error with the checkbox.
+   */
   error?: boolean;
-  kind?: RothkoKind;
-  onChange?: (val: boolean) => void;
-  style?: React.CSSProperties;
-  withCheck?: boolean;
+  /**
+   * The error text to be displayed when there is an error.
+   * @default: 'Invalid'
+   */
   errorText?: string;
+  /**
+   * The visual style of the checkbox.
+   */
+  kind?: RothkoKind;
+  /**
+   * The callback function called when the checkbox value changes.
+   */
+  onChange?: (val: boolean) => void;
+  /**
+   * Specifies whether the checkbox is required.
+   */
+  required?: boolean;
+  /**
+   * The inline style for the checkbox.
+   */
+  style?: React.CSSProperties;
+  /**
+   * Specifies whether to display a checkmark icon with the checkbox.
+   */
+  withCheck?: boolean;
 }>;
 
 const Checkbox = ({
-  id: idProp,
+  id,
   'aria-label': ariaLabel,
   'aria-describedby': ariaDescribedBy,
   'aria-details': ariaDetails,
@@ -69,9 +103,8 @@ const Checkbox = ({
   errorText = 'Invalid',
   required,
 }: CheckboxProps) => {
-  const id = useId(idProp);
-  const errorMessageId = `${id}-error-text`;
-  const labelId = `${id}-label`;
+  const errorMessageId = useId();
+  const labelId = useId();
 
   const clickCheckbox = () => {
     if (disabled) return;
@@ -105,7 +138,7 @@ const Checkbox = ({
         tabIndex={0}
       />
       {children &&
-        (typeof children === 'string' ? (
+        (isString(children) ? (
           <Typography.body id={labelId}>{children}</Typography.body>
         ) : (
           <div id={labelId}>{children}</div>

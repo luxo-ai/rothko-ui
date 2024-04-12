@@ -1,8 +1,10 @@
-import { ChevronDownOutline, ChevronRightOutline, CloseOutline } from '@rothko-ui/icons';
-import { classes, isNil } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import React, { useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
+
+import { ChevronDownOutline, ChevronRightOutline, CloseOutline } from '@rothko-ui/icons';
+import { classes, isNil } from '@rothko-ui/utils';
+
 import { ItemText, LabelText } from '../../library/Common';
 import { useDebuggerContext } from '../../library/DebuggerContext';
 import useDropdownMenu from '../../library/hooks/useMenu';
@@ -15,9 +17,11 @@ import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } f
 import type { DropdownInnerProps } from './types';
 import type { StackOption } from './useNestedOptions';
 import useNestedOptions from './useNestedOptions';
+import useId from '../../library/hooks/useId';
 
 type NestedDropdownProps<V extends Value> = Pick<
   DropdownInnerProps<V, undefined>,
+  | 'id'
   | 'placeholder'
   | 'bordered'
   | 'menuPosition'
@@ -32,6 +36,15 @@ type NestedDropdownProps<V extends Value> = Pick<
   | 'clearable'
   | 'className'
   | 'disabled'
+  | 'aria-label'
+  | 'aria-describedby'
+  | 'aria-details'
+  | 'aria-labelledby'
+  | 'aria-disabled'
+  | 'aria-required'
+  | 'aria-invalid'
+  | 'aria-errormessage'
+  | 'errorText'
 > & {
   /** Current value of dropdown or value array if multiple */
   value?: V | null;
@@ -44,10 +57,12 @@ type NestedDropdownProps<V extends Value> = Pick<
 };
 
 function NestedDropdown<V extends Value>({
+  id,
   className,
   clearable,
   disabled,
   error,
+  errorText = 'Invalid',
   label,
   menuPosition = 'bottom',
   bordered = true,
@@ -59,7 +74,18 @@ function NestedDropdown<V extends Value>({
   placeholder = 'Select',
   renderOption: RenderOpt = DefaultRenderOption,
   value,
+  'aria-label': ariaLabel,
+  'aria-describedby': ariaDescribedBy,
+  'aria-details': ariaDetails,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-disabled': ariaDisabled,
+  'aria-required': ariaRequired,
+  'aria-invalid': ariaInvalid,
+  'aria-errormessage': ariaErrorMessage,
 }: NestedDropdownProps<V>) {
+  const labelId = useId();
+  const errorMessageId = useId();
+
   const debug = useDebuggerContext('<NestedDropdown />');
 
   const openReverse = menuPosition === 'top';
@@ -163,14 +189,27 @@ function NestedDropdown<V extends Value>({
 
   return (
     <div className={className}>
-      {label && <LabelText>{label}</LabelText>}
+      {label && <LabelText id={labelId}>{label}</LabelText>}
       <DropdownContainerDiv
+        id={id}
+        aria-invalid={ariaInvalid || error}
+        aria-required={ariaRequired}
+        aria-disabled={ariaDisabled}
+        aria-errormessage={
+          !ariaErrorMessage && error && errorText ? errorMessageId : ariaErrorMessage
+        }
+        aria-controls="dropdown-list-id-both-container-and-ul?" // when expanded
+        aria-label={ariaLabel}
+        aria-describedby={ariaDescribedBy}
+        aria-details={ariaDetails}
+        aria-expanded={open}
         ref={containerRef}
         tabIndex={0}
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
         onClick={openMenu}
         onKeyDown={onKeyDown}
+        aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
         className={containerClasses}
       >
         <TextContainerDiv className={classes({ disabled })} tabIndex={-1}>
@@ -183,19 +222,19 @@ function NestedDropdown<V extends Value>({
           <ControlButton
             $open={open}
             $rotateOnOpen
-            aria-label="open nested dropdown"
+            aria-label="Open"
             className={classes({ disabled })}
             onClick={toggleMenu}
           >
-            <ChevronDownOutline width="1rem" height="1rem" />
+            <ChevronDownOutline aria-hidden width="1rem" height="1rem" />
           </ControlButton>
         ) : (
           <ControlButton
-            aria-label="clear item"
+            aria-label="Clear Selection"
             className={classes({ disabled })}
             onClick={() => onSelect(null)}
           >
-            <CloseOutline width="1rem" height="1rem" />
+            <CloseOutline aria-hidden width="1rem" height="1rem" />
           </ControlButton>
         )}
         {open && (
@@ -216,7 +255,11 @@ function NestedDropdown<V extends Value>({
               </ButtonContainerDiv>
             )}
             {title && <TitleText>{title}</TitleText>}
-            <ul role="listbox" tabIndex={-1}>
+            <ul
+              aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
+              role="listbox"
+              tabIndex={-1}
+            >
               {currentOptions.map((option, idx) => {
                 const selected = optIdx === idx;
                 return (
@@ -246,6 +289,7 @@ function NestedDropdown<V extends Value>({
           </DropdownMenu>
         )}
       </DropdownContainerDiv>
+      {error && errorText && <Typography.body id={errorMessageId}>{errorText}</Typography.body>}
     </div>
   );
 }

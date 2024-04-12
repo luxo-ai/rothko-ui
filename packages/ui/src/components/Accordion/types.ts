@@ -1,3 +1,3 @@
 import type { Accessory } from '../../library/types';
 
-export type IconOverride = React.ReactNode | Accessory<{ open: boolean; disabled: boolean }>;
+export type Icon = React.ReactNode | Accessory<{ open: boolean; disabled: boolean }>;

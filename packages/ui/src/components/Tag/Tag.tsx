@@ -1,8 +1,11 @@
-import { CloseOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
+
+import { CloseOutline } from '@rothko-ui/icons';
+import { isString } from '@rothko-ui/utils';
+
 import { phantomButtonStyle } from '../../library/PhantomButton';
-import type { KindProps } from '../../theme/types';
+import type { KindProps, RothkoKind } from '../../theme/types';
 import { Typography } from '../Typography';
 import { semanticTextChildrenStyle, textChildrenStyle } from '../../library/Styles';
 import type { WithAriaLabeling, WithAriaSelected } from '../../types';
@@ -11,16 +14,39 @@ type TagAppearance = 'filled' | 'outline';
 
 type WithAria<T> = WithAriaSelected<WithAriaLabeling<T>>;
 
-type TagProps = KindProps &
-  WithAria<{
-    id?: string;
-    appearance?: TagAppearance;
-    children?: React.ReactNode;
-    onClose?: () => void;
-    className?: string;
-    style?: React.CSSProperties;
-    role?: React.AriaRole;
-  }>;
+type TagProps = WithAria<{
+  id?: string;
+  /**
+   * The appearance style of the tag.
+   * @default 'filled'
+   */
+  appearance?: TagAppearance;
+  /**
+   * The content of the tag.
+   */
+  children?: React.ReactNode;
+  /**
+   * The CSS class name for the tag.
+   */
+  className?: string;
+  /**
+   * The kind of tag, which affects the color.
+   * @default 'info'
+   */
+  kind?: RothkoKind;
+  /**
+   * The callback function when the tag is closed.
+   */
+  onClose?: () => void;
+  /**
+   * The ARIA role for the tag.
+   */
+  role?: React.AriaRole;
+  /**
+   * The inline style for the tag.
+   */
+  style?: React.CSSProperties;
+}>;
 
 const Tag = ({
   id,
@@ -56,7 +82,7 @@ const Tag = ({
       aria-details={ariaDetails}
       aria-selected={ariaSelected}
     >
-      {typeof children === 'string' ? (
+      {isString(children) ? (
         <Typography.inlineBodySmall style={{ margin: 0 }}>{children}</Typography.inlineBodySmall>
       ) : (
         <div>{children}</div>

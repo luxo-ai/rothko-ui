@@ -1,5 +1,6 @@
-import { noop } from '@rothko-ui/utils';
 import { createContext, useContext } from 'react';
+
+import { noop } from '@rothko-ui/utils';
 
 type IDrawerContext = {
   isOpen: boolean;

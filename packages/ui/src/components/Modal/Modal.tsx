@@ -1,10 +1,12 @@
 import { animated, useTransition } from '@react-spring/web';
-import { CloseOutline } from '@rothko-ui/icons';
-import { classes, noop } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
+
+import { CloseOutline } from '@rothko-ui/icons';
+import { classes, isString } from '@rothko-ui/utils';
+
 import { ShadedBackdrop } from '../../library/Common';
 import { phantomButtonStyle } from '../../library/PhantomButton';
 import { DomPortal } from '../../library/Portal';
@@ -78,36 +80,62 @@ type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
 
 type ModalProps = WithAria<{
   id?: string;
+  /**
+   * The content of the modal.
+   */
   children: React.ReactNode;
+  /**
+   * The CSS class name for the modal.
+   */
   className?: string;
-  isOpen?: boolean;
+  /**
+   * The callback function called when the modal is closed.
+   */
   onClose?: () => void;
+  /**
+   * Whether the modal is open or closed.
+   * @default false
+   */
+  open?: boolean;
+  /**
+   * The size of the modal.
+   * @default 'm'
+   */
   size?: RothkoSize;
-  title?: string;
+  /**
+   * The inline style for the modal.
+   */
   style?: React.CSSProperties;
+  /**
+   * The title of the modal.
+   */
+  title?: string;
 }>;
 
 export const Modal = ({
-  id: idProp,
+  id,
   children,
   className,
-  isOpen = false,
-  onClose = noop,
+  open: isOpen = false,
+  onClose,
   size = 'm',
   title,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   style: styleProp = {},
 }: ModalProps) => {
-  const id = useId(idProp);
-  const titleId = `${id}-title`;
-  const modalContentId = `${id}-content`;
+  const titleId = useId();
+  const modalContentId = useId();
 
   const modalRef = useRef<HTMLDivElement | null>(null);
 
+  const closeModal = useCallback(() => {
+    onClose?.();
+  }, [onClose]);
+
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!modalRef.current || !modalRef.current.contains(e.target as Node)) {
-      onClose();
+      closeModal();
     }
   };
 
@@ -160,12 +188,12 @@ export const Modal = ({
       if (!code) return;
       if (code === keyboardKey.Escape) {
         e.preventDefault();
-        onClose();
+        closeModal();
       }
     };
     addEvent(document.body, 'keydown', closeOnEsc);
     return () => removeEvent(document.body, 'keydown', closeOnEsc);
-  }, [onClose]);
+  }, [closeModal]);
 
   return (
     <DomPortal wrapperId={`modal-portal-${size}`}>
@@ -178,6 +206,7 @@ export const Modal = ({
           (style, item) =>
             item && (
               <AnimatedModalContainer
+                id={id}
                 aria-label={ariaLabel}
                 aria-labelledby={title && !ariaLabelledBy ? titleId : ariaLabelledBy}
                 aria-describedby={modalContentId}
@@ -187,7 +216,7 @@ export const Modal = ({
                 className={classes(`modal-size-${size}`, className)}
                 ref={modalRef}
               >
-                <ModalCloseButton aria-label="Close" onClick={() => onClose()}>
+                <ModalCloseButton aria-label="Close" onClick={() => closeModal()}>
                   <CloseOutline aria-hidden width="1.5rem" height="1.5rem" />
                 </ModalCloseButton>
                 {title && (
@@ -195,7 +224,7 @@ export const Modal = ({
                     {title}
                   </ModalHeaderText>
                 )}
-                {typeof children === 'string' ? (
+                {isString(children) ? (
                   <Typography.body id={modalContentId}>{children}</Typography.body>
                 ) : (
                   <div id={modalContentId}>children</div>

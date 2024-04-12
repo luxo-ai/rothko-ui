@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { isString } from '@rothko-ui/utils';
+
 import type { RadioInnerProps } from './RadioInner';
 import RadioInner from './RadioInner';
 import useRadioGroup from './useRadioGroup';
@@ -34,7 +37,7 @@ const Radio = ({
   'aria-controls': ariaControls,
   'aria-errormessage': ariaErrorMessage,
 }: RadioProps) => {
-  const childrenStringLabel = typeof children === 'string' ? children : undefined;
+  const childrenStringLabel = isString(children) ? children : undefined;
   const {
     radioGroupErrorId,
     selectedValue,

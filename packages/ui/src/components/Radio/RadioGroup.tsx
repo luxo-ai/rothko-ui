@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid } from '../../layout';
 import { LabelText } from '../../library/Common';
-import type { KindProps } from '../../theme';
+import type { RothkoKind } from '../../theme';
 import type {
   EmSize,
   RemSize,
@@ -27,27 +27,77 @@ type WithAria<T> = WithAriaErrorMessage<
   >
 >;
 
-type RadioGroupProps<K extends string> = KindProps &
-  WithAria<{
-    required?: boolean;
-    className?: string;
-    id?: string;
-    maxCol?: number;
-    onChange: ($key: K) => void;
-    columnGap?: RemSize | EmSize | number;
-    rowGap?: RemSize | EmSize | number;
-    gap?: RemSize | EmSize | number;
-    style?: React.CSSProperties;
-    value?: K | null;
-    error?: boolean;
-    errorText?: string;
-    label?: string;
-    disabled?: boolean;
-    children: React.ReactNode;
-  }>;
+type RadioGroupProps<K extends string> = WithAria<{
+  id?: string;
+  /**
+   * The content to be rendered inside the RadioGroup.
+   */
+  children: React.ReactNode;
+  /**
+   * The CSS class name for the RadioGroup.
+   */
+  className?: string;
+  /**
+   * The gap between columns in the RadioGroup.
+   * @default '0.5rem'
+   */
+  columnGap?: RemSize | EmSize | number;
+  /**
+   * Specifies whether the RadioGroup is disabled.
+   */
+  disabled?: boolean;
+  /**
+   * Specifies whether the RadioGroup has an error state.
+   */
+  error?: boolean;
+  /**
+   * The error message to be displayed when the RadioGroup has an error state.
+   * @default 'Invalid'
+   */
+  errorText?: string;
+  /**
+   * The gap between elements in the RadioGroup.
+   */
+  gap?: RemSize | EmSize | number;
+  /**
+   * The visual style of the RadioGroup.
+   */
+  kind?: RothkoKind;
+  /**
+   * The label for the RadioGroup.
+   */
+  label?: string;
+  /**
+   * The maximum number of columns in the RadioGroup.
+   * @default 4
+   */
+  maxCol?: number;
+  /**
+   * The callback function called when the value of the RadioGroup changes.
+   * @param $key - The new value of the RadioGroup.
+   */
+  onChange: ($key: K) => void;
+  /**
+   * Specifies whether the RadioGroup is required.
+   */
+  required?: boolean;
+  /**
+   * The gap between rows in the RadioGroup.
+   * @default '0.5rem'
+   */
+  rowGap?: RemSize | EmSize | number;
+  /**
+   * The inline style for the RadioGroup.
+   */
+  style?: React.CSSProperties;
+  /**
+   * The current value of the RadioGroup.
+   */
+  value?: K | null;
+}>;
 
 function RadioGroup<K extends string>({
-  id: idProp,
+  id,
   'aria-label': ariaLabel,
   'aria-describedby': ariaDescribedBy,
   'aria-details': ariaDetails,
@@ -73,9 +123,8 @@ function RadioGroup<K extends string>({
   children,
   required,
 }: RadioGroupProps<K>) {
-  const id = useId(idProp);
-  const labelId = `${id}-label`;
-  const errorMessageId = `${id}-error-text`;
+  const labelId = useId();
+  const errorMessageId = useId();
 
   const contextValue = React.useMemo(
     () => ({

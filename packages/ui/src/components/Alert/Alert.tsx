@@ -12,13 +12,22 @@ type WithAria<T> = WithAriaHidden<WithAriaLabeling<WithAriaLive<T>>>;
 
 type AlertProps = WithAria<{
   id?: string;
-  /** The content of the alert. */
+  /**
+   * The content of the Alert component.
+   */
   children: React.ReactNode;
-  /** CSS class name for custom styling. */
+  /**
+   * The class name for the Alert component.
+   */
   className?: string;
-  /** Specifies the alert's style kind. Default is 'danger'. */
+  /**
+   * The kind of Alert component.
+   * @default: 'danger'
+   */
   kind?: RothkoKind;
-  /** Inline styles for the alert. */
+  /**
+   * The inline style for the Alert component.
+   */
   style?: React.CSSProperties;
 }>;
 
@@ -48,7 +57,6 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         aria-describedby={ariaDescribedBy}
         aria-details={ariaDetails}
         aria-hidden={ariaHidden}
-        //  aria-atomic={ariaAtomic}
         aria-live={ariaLive}
         className={className}
         kind={kind}

@@ -1,7 +1,9 @@
 import React from 'react';
+
 import type { SkeletonBuilderProps } from './SkeletonBuilder';
-import { SkeletonBuilder } from './SkeletonBuilder';
-export { SkeletonBuilder } from './SkeletonBuilder';
+import SkeletonBuilder from './SkeletonBuilder';
+
+export { SkeletonBuilder };
 
 type Props = Pick<
   SkeletonBuilderProps,

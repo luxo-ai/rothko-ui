@@ -64,40 +64,77 @@ type WithAria<T> = WithAriaDisabled<
 
 type ButtonProps = WithAria<{
   id?: string;
-  /** Determines if the button is disabled. Default is false. */
-  disabled?: boolean;
-  /** Click event handler. */
-  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  /** Keydown event handler. */
-  onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
-  /** The content of the button. */
-  children?: React.ReactNode;
-  /** CSS class name for custom styling. */
-  className?: string;
-  /** Is content loading from this target. Default is false. */
-  loading?: boolean;
-  /** Make the width fit the button content. Default is false. */
-  fitContent?: boolean;
-  /** Inline styles for the button. */
-  style?: React.CSSProperties;
-  /** The semantic kind of the button. Default is 'primary'. */
-  kind?: RothkoKind;
-  /** Does the button appear filled or outlined. Default is 'filled'. */
-  appearance?: ButtonAppearance;
-  /** Button size. Default is 'm'. */
-  size?: RothkoSize;
-  /** Render an accessory to the left of the button content. */
+  /**
+   * The left accessory component.
+   */
   accessoryLeft?: Accessory;
-  /** Render an accessory to the right of the button content. */
+  /**
+   * The right accessory component.
+   */
   accessoryRight?: Accessory;
-  /** The button shape. */
-  shape?: ButtonShape;
-  /** Tab index of the button. */
-  tabIndex?: number;
-  /** Type of the button. Default is 'button'. */
-  type?: 'button' | 'submit' | 'reset';
-  /** Aria role of the button. */
+  /**
+   * The appearance style of the button.
+   * @default 'filled'
+   */
+  appearance?: ButtonAppearance;
+  /**
+   * The content of the button.
+   */
+  children?: React.ReactNode;
+  /**
+   * The class name for styling purposes.
+   */
+  className?: string;
+  /**
+   * Whether the button is disabled.
+   */
+  disabled?: boolean;
+  /**
+   * Whether the button should fit its content.
+   */
+  fitContent?: boolean;
+  /**
+   * The kind of button.
+   * @default 'primary'
+   */
+  kind?: RothkoKind;
+  /**
+   * Whether the button is in a loading state.
+   */
+  loading?: boolean;
+  /**
+   * The click event handler.
+   */
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  /**
+   * The keydown event handler.
+   */
+  onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
+  /**
+   * The role of the button.
+   */
   role?: React.AriaRole;
+  /**
+   * The shape of the button.
+   */
+  shape?: ButtonShape;
+  /**
+   * The size of the button.
+   * @default 'm'
+   */
+  size?: RothkoSize;
+  /**
+   * The inline style for the button.
+   */
+  style?: React.CSSProperties;
+  /**
+   * The tab index of the button.
+   */
+  tabIndex?: number;
+  /**
+   * The type of the button.
+   */
+  type?: 'button' | 'submit' | 'reset';
 }>;
 
 const Button: React.FC<ButtonProps> = ({

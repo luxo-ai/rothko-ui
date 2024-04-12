@@ -16,49 +16,98 @@ type WithAria<T> = WithAriaErrorMessage<
 
 export type DropdownInnerProps<V extends Value, T> = WithAria<{
   id?: string;
-  /** Current value of dropdown or value array if multiple */
-  value?: V | V[] | null;
-  /** placeholder in input */
-  placeholder?: string;
-  /** dropdown options */
-  options: Option<V, T>[];
-  /** event handler for value change */
-  onChange: (v: V | V[] | null) => void;
-  /** onOpen handler */
-  onOpen?: () => void;
-  /** onBlur handler  */
-  onBlur?: FocusHandler;
-  /** onFocus handler */
-  onFocus?: FocusHandler;
-  /** callback triggered on deletion */
-  onDelete?: (v: V) => void;
-  /** can you clear the selection */
-  clearable?: boolean;
-  /** is the dropdown disabled */
-  disabled?: boolean;
-  /** did an error occurr. alert user when true */
-  error?: boolean;
-  /** are multiple selections allowed? (value is array) */
-  multiple?: boolean;
-  /** flag indicating if you can search for options or custom matcher */
-  search?: boolean | QueryMatchFn<V, T>;
-  /** custom method for rendering option */
-  renderOption?: RenderOption<V, T>;
-  /** Message to display when there are no results. */
-  noResultsMessage?: React.ReactNode;
-  /* class names of outer wrapper */
-  className?: string;
-  /** if the dropdown has a label */
-  label?: string;
-  /** open dropdown position */
-  menuPosition?: 'top' | 'bottom' | 'auto';
-  /** does the dropdown have a border, default: true */
+  /**
+   * Whether the dropdown should have a border.
+   * @default: true
+   */
   bordered?: boolean;
-  /** prefix of a selected item */
-  selectedPrefix?: string;
-  /** postfix of a selected item */
-  selectedPostfix?: string;
-  /** inline style overrides */
-  style?: React.CSSProperties;
+  /**
+   * Additional class name for the dropdown.
+   */
+  className?: string;
+  /**
+   * Whether the dropdown is clearable.
+   */
+  clearable?: boolean;
+  /**
+   * Whether the dropdown is disabled.
+   */
+  disabled?: boolean;
+  /**
+   * Whether the dropdown has an error state.
+   */
+  error?: boolean;
+  /**
+   * The error message to display when the dropdown has an error state.
+   * @default: 'Invalid'
+   */
   errorText?: string;
+  /**
+   * The label for the dropdown.
+   */
+  label?: string;
+  /**
+   * The position of the dropdown menu.
+   * @default: 'bottom'
+   */
+  menuPosition?: 'top' | 'bottom' | 'auto';
+  /**
+   * Whether the dropdown allows multiple selections.
+   */
+  multiple?: boolean;
+  /**
+   * The message to display when there are no search results.
+   * @default: 'No results'
+   */
+  noResultsMessage?: React.ReactNode;
+  /**
+   * Event handler for when the dropdown loses focus.
+   */
+  onBlur?: FocusHandler;
+  /**
+   * Event handler for when the dropdown value changes.
+   */
+  onChange: (v: V | V[] | null) => void;
+  /**
+   * Event handler for when an option is deleted in multiple selection mode.
+   */
+  onDelete?: (v: V) => void;
+  /**
+   * Event handler for when the dropdown gains focus.
+   */
+  onFocus?: FocusHandler;
+  /**
+   * Event handler for when the dropdown is opened.
+   */
+  onOpen?: () => void;
+  /**
+   * The options for the dropdown.
+   */
+  options: Option<V, T>[];
+  /**
+   * The placeholder text for the dropdown.
+   * @default: 'Select'
+   */
+  placeholder?: string;
+  /**
+   * Custom rendering function for dropdown options.
+   */
+  renderOption?: RenderOption<V, T>;
+  /**
+   * Whether to enable search functionality in the dropdown.
+   * Can be a boolean or a custom query matching function.
+   */
+  search?: boolean | QueryMatchFn<V, T>;
+  /**
+   * The format for displaying selected values.
+   */
+  selectedFormat?: string;
+  /**
+   * Custom styles for the dropdown.
+   */
+  style?: React.CSSProperties;
+  /**
+   * The value(s) of the dropdown.
+   */
+  value?: V | V[] | null;
 }>;

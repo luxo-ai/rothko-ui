@@ -19,21 +19,70 @@ type WithAria<T> = WithAriaRequired<WithAriaInvalid<WithAriaControls<WithAriaLab
 
 type SliderProps = WithAria<{
   id?: string;
+  /**
+   * The class name for the Slider component.
+   */
   className?: string;
-  style?: React.CSSProperties;
+  /**
+   * Specifies whether the Slider component is disabled.
+   */
   disabled?: boolean;
+  /**
+   * The kind of Slider component.
+   */
   kind?: RothkoKind;
+  /**
+   * The label for the Slider component.
+   */
   label?: string;
+  /**
+   * The maximum value of the Slider component.
+   */
   max: number;
+  /**
+   * The maximum width of the Slider component.
+   */
   maxWidth?: SliderWidth;
+  /**
+   * The minimum value of the Slider component.
+   * @default 0
+   */
   min?: number;
+  /**
+   * The minimum width of the Slider component.
+   * @default '100%'
+   */
   minWidth?: SliderWidth;
+  /**
+   * The callback function that is called when the value of the Slider component changes.
+   * @param v - The new value of the Slider component.
+   */
   onChange: (v: number) => void;
+  /**
+   * Specifies whether the Slider component can have a value greater than the maximum value.
+   */
   orMore?: boolean;
-  postfix?: string;
+  /**
+   * The format of the value displayed by the Slider component.
+   */
+  valueFormat?: string;
+  /**
+   * The precision of the value displayed by the Slider component.
+   * @default 0
+   */
   precision?: number;
-  value?: Nullable<number>;
+  /**
+   * Specifies whether to show the value of the Slider component.
+   */
   showValue?: boolean;
+  /**
+   * The inline style for the Slider component.
+   */
+  style?: React.CSSProperties;
+  /**
+   * The current value of the Slider component.
+   */
+  value?: Nullable<number>;
 }>;
 
 const Slider = ({
@@ -47,7 +96,7 @@ const Slider = ({
   minWidth,
   onChange,
   orMore,
-  postfix,
+  valueFormat,
   precision = 0,
   showValue,
   value,
@@ -89,7 +138,6 @@ const Slider = ({
         {showValue && (
           <Typography.label light>
             {localVal.toFixed(precision)}
-            {postfix ?? ''}
             {maxReached && orMore ? '+' : ''}
           </Typography.label>
         )}

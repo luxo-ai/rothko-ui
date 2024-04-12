@@ -2,37 +2,52 @@ import React from 'react';
 
 import { MinusOutline, PlusOutline } from '@rothko-ui/icons';
 
-import type { IconOverride } from './types';
+import type { Icon } from './types';
 import type { RothkoKind } from '../../theme';
+import { isFunctionalComponent } from '../../library/utils';
 
-const SIZE = '1rem';
+const ICON_SIZE = '1rem';
 
 type AccordionIconProps = {
+  /**
+   * Determines if the AccordionIcon is disabled.
+   */
+  disabled?: boolean;
+  /**
+   * Overrides the default icon component.
+   */
+  iconOverride?: Icon;
+  /**
+   * The kind of Rothko theme to apply to the AccordionIcon.
+   */
   kind?: RothkoKind;
-  disabled: boolean;
-  iconOverride?: IconOverride;
-  open: boolean;
+  /**
+   * Determines if the AccordionIcon is open.
+   */
+  open?: boolean;
 };
-
-function isFunctionalComponent<T>(v: React.ReactNode | React.FC<T>): v is React.FC<T> {
-  return typeof v === 'function';
-}
 
 const AccordionIcon = React.memo(
   ({ kind, iconOverride: IconOverride, open, disabled }: AccordionIconProps) => {
     const color = kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-accordion-border, #000)';
 
     if (IconOverride) {
-      return typeof IconOverride === 'function' ? (
-        <IconOverride open={open} disabled={disabled} color={color} size={SIZE} />
+      return isFunctionalComponent(IconOverride) ? (
+        <IconOverride
+          aria-hidden
+          open={Boolean(open)}
+          disabled={Boolean(disabled)}
+          color={color}
+          size={ICON_SIZE}
+        />
       ) : (
         <>{IconOverride}</>
       );
     }
     return open ? (
-      <MinusOutline aria-hidden fill={color} width={SIZE} height={SIZE} />
+      <MinusOutline aria-hidden fill={color} width={ICON_SIZE} height={ICON_SIZE} />
     ) : (
-      <PlusOutline aria-hidden fill={color} width={SIZE} height={SIZE} />
+      <PlusOutline aria-hidden fill={color} width={ICON_SIZE} height={ICON_SIZE} />
     );
   }
 );

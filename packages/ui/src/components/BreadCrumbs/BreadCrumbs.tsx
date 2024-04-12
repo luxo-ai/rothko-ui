@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import type { WithAriaControls, WithAriaHidden, WithAriaLabeling } from '../../types';
 
 type WithAria<T> = WithAriaControls<WithAriaHidden<WithAriaLabeling<T>>>;
 
 type BreadCrumbsProps = WithAria<{
   id?: string;
+  /**
+   * The content to be displayed as the children of the BreadCrumbs component.
+   */
   children: React.ReactNode;
 }>;
 

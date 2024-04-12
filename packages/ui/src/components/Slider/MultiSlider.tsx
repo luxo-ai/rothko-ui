@@ -23,21 +23,70 @@ type WithAria<T> = WithAriaRequired<WithAriaInvalid<WithAriaControls<WithAriaLab
 
 type MultiSliderProps = WithAria<{
   id?: string;
+  /**
+   * The CSS class name for the MultiSlider component.
+   */
   className?: string;
-  style?: React.CSSProperties;
+  /**
+   * Specifies whether the MultiSlider component is disabled.
+   */
   disabled?: boolean;
+  /**
+   * The kind of MultiSlider component.
+   */
   kind?: RothkoKind;
+  /**
+   * The label for the MultiSlider component.
+   */
   label?: string;
+  /**
+   * The maximum value of the MultiSlider component.
+   */
   max: number;
+  /**
+   * The maximum width of the MultiSlider component.
+   * @default '100%'
+   */
   maxWidth?: SliderWidth;
+  /**
+   * The minimum value of the MultiSlider component.
+   * @default 0
+   */
   min?: number;
+  /**
+   * The minimum width of the MultiSlider component.
+   */
   minWidth?: SliderWidth;
+  /**
+   * The callback function that is called when the value of the MultiSlider component changes.
+   * @param r The range of the MultiSlider component.
+   */
   onChange: (r: Range) => void;
+  /**
+   * Specifies whether the MultiSlider component allows values greater than the maximum value.
+   */
   orMore?: boolean;
-  postfix?: string;
+  /**
+   * The the format of the range values displayed.
+   */
+  valueFormat?: string;
+  /**
+   * The precision of the range values displayed.
+   * @default 0
+   */
   precision?: number;
-  value?: Nullable<Range>;
+  /**
+   * Specifies whether to show the range values.
+   */
   showRange?: boolean;
+  /**
+   * The inline style for the MultiSlider component.
+   */
+  style?: React.CSSProperties;
+  /**
+   * The current value of the MultiSlider component.
+   */
+  value?: Nullable<Range>;
 }>;
 
 const MultiSlider = ({
@@ -51,7 +100,7 @@ const MultiSlider = ({
   minWidth,
   onChange,
   orMore,
-  postfix,
+  valueFormat,
   precision = 0,
   showRange,
   value,
@@ -93,7 +142,6 @@ const MultiSlider = ({
         {showRange && (
           <Typography.label light>
             {lower.toFixed(precision)} - {upper.toFixed(precision)}
-            {postfix ?? ''}
             {maxReached && orMore ? '+' : ''}
           </Typography.label>
         )}

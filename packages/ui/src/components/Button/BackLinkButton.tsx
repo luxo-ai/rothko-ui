@@ -15,9 +15,22 @@ type WithAria<T> = WithAriaDisabled<
 >;
 
 type BackLinkProps = WithAria<{
+  id?: string;
+  /**
+   * Additional class name for the button.
+   */
   className?: string;
+  /**
+   * Specifies whether the button is disabled.
+   */
   disabled?: boolean;
+  /**
+   * Event handler for the button click event.
+   */
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  /**
+   * Inline style for the button.
+   */
   style?: React.CSSProperties;
 }>;
 

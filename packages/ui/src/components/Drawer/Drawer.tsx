@@ -1,8 +1,10 @@
 import { animated, useTransition } from '@react-spring/web';
-import { Close } from '@rothko-ui/icons';
-import { classes, noop } from '@rothko-ui/utils';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+
+import { Close } from '@rothko-ui/icons';
+import { classes } from '@rothko-ui/utils';
+
 import { ShadedBackdrop } from '../../library/Common';
 import { PhantomButton } from '../../library/PhantomButton';
 import { DomPortal } from '../../library/Portal';
@@ -23,27 +25,46 @@ const DEFAULT_DRAWER_WIDTH_PX = 350;
 type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
 
 type DrawerProps = WithAria<{
-  children?: React.ReactNode;
-  className?: string;
   id?: string;
+  /**
+   * The content to be rendered inside the Drawer.
+   */
+  children?: React.ReactNode;
+  /**
+   * The CSS class name for the Drawer.
+   */
+  className?: string;
+  /**
+   * Callback function called when the Drawer is closed.
+   */
   onClose?: () => void;
+  /**
+   * Determines whether the Drawer is open or closed.
+   * @default false
+   */
   open?: boolean;
+  /**
+   * The inline style for the Drawer.
+   */
   style?: React.CSSProperties;
 }>;
 
 const Drawer = ({
+  id,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   children,
   className,
-  id: idProp,
-  onClose: closeDrawer = noop,
+  onClose,
   open: isOpen = false,
   style: styleProp = {},
 }: DrawerProps) => {
-  const id = useId(idProp);
-  const drawerContentId = `${id}-content`;
+  const drawerContentId = useId();
   const drawerRef = useRef<HTMLDivElement | null>(null);
+
+  const closeDrawer = () => {
+    onClose?.();
+  };
 
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!drawerRef.current || !drawerRef.current.contains(e.target as Node)) {

@@ -1,8 +1,10 @@
-import { ChevronDownOutline, CloseOutline } from '@rothko-ui/icons';
-import { classes, isArray, isNil } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+
+import { ChevronDownOutline, CloseOutline } from '@rothko-ui/icons';
+import { classes, isArray, isNil } from '@rothko-ui/utils';
+
 import { ItemText, LabelText } from '../../library/Common';
 import { useDebuggerContext } from '../../library/DebuggerContext';
 import useDropdownMenu from '../../library/hooks/useMenu';
@@ -20,7 +22,7 @@ import useId from '../../library/hooks/useId';
 // TODO - Think about aria role for searachable dropdown?
 
 function DropdownInner<V extends Value, T = undefined>({
-  id: idProp,
+  id,
   bordered = true,
   className,
   clearable,
@@ -39,11 +41,10 @@ function DropdownInner<V extends Value, T = undefined>({
   placeholder = 'Select',
   renderOption: RenderOpt = DefaultRenderOption,
   search,
-  selectedPostfix = '',
-  selectedPrefix = '',
+  selectedFormat,
   style,
   value,
-  errorText,
+  errorText = 'Invalid',
   'aria-label': ariaLabel,
   'aria-describedby': ariaDescribedBy,
   'aria-details': ariaDetails,
@@ -53,10 +54,9 @@ function DropdownInner<V extends Value, T = undefined>({
   'aria-invalid': ariaInvalid,
   'aria-errormessage': ariaErrorMessage,
 }: DropdownInnerProps<V, T>) {
-  const id = useId(idProp);
-  const dropdownMenuId = `${id}-dropdown-menu`;
-  const labelId = `${id}-label`;
-  const errorMessageId = `${id}-error-text`;
+  const dropdownMenuId = useId();
+  const labelId = useId();
+  const errorMessageId = useId();
 
   const debug = useDebuggerContext('<Dropdown/>');
 
@@ -208,7 +208,7 @@ function DropdownInner<V extends Value, T = undefined>({
         aria-label={ariaLabel}
         aria-describedby={ariaDescribedBy}
         aria-details={ariaDetails}
-        role={search ? 'combobox' : 'listbox'} // multi isn't searchable tho?
+        role={search ? 'combobox' : undefined} // multi isn't searchable tho? undefined?
         aria-haspopup={search ? 'listbox' : undefined}
         aria-expanded={open}
         ref={containerRef}
@@ -247,11 +247,7 @@ function DropdownInner<V extends Value, T = undefined>({
                 const opt = optionLookup[v];
                 return (
                   <MultiSelectLabelDiv tabIndex={-1} key={opt.id}>
-                    <MultiSelectItemText>
-                      {selectedPrefix}
-                      {opt.label}
-                      {selectedPostfix}
-                    </MultiSelectItemText>
+                    <MultiSelectItemText>{opt.label}</MultiSelectItemText>
                     <PhantomButton
                       aria-label={`Delete ${opt.label}`}
                       $displayFlex
@@ -275,18 +271,14 @@ function DropdownInner<V extends Value, T = undefined>({
             </MultiSelectContainerDiv>
           )}
           {!multiple && !isNil(value) && !isArray(value) && (
-            <ItemText>
-              {selectedPrefix}
-              {optionLookup[value].label}
-              {selectedPostfix}
-            </ItemText>
+            <ItemText>{optionLookup[value].label}</ItemText>
           )}
         </TextContainerDiv>
         {!canClear ? (
           <ControlButton
             $open={open}
             $rotateOnOpen
-            aria-label="Open Menu"
+            aria-label="Open"
             className={classes({ disabled })}
             onClick={toggleMenu}
           >
@@ -346,7 +338,7 @@ function DropdownInner<V extends Value, T = undefined>({
           </DropdownMenu>
         )}
       </DropdownContainerDiv>
-      error && errorText <Typography.body id={errorMessageId}>{errorText}</Typography.body>
+      {error && errorText && <Typography.body id={errorMessageId}>{errorText}</Typography.body>}
     </div>
   );
 }

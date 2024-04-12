@@ -1,4 +1,9 @@
+import { useContext } from 'react';
 import Toast from './Toaster';
+import ToasterContext from './ToasterContext';
+import ToasterContextProvider from './ToasterContextProvider';
 
-export { ToastContextConsumer, ToastContextProvider, useToaster } from './ToasterContext';
-export { Toast };
+const ToasterContextConsumer = ToasterContext.Consumer;
+const useToaster = () => useContext(ToasterContext);
+
+export { Toast, ToasterContextConsumer, useToaster, ToasterContextProvider };

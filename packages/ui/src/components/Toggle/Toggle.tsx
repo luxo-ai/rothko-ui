@@ -1,10 +1,10 @@
-import { classes } from '@rothko-ui/utils';
+import { classes, isString } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import type { CSSProperties } from 'react';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { hideChromeBrowserOutline } from '../../library/Styles';
-import type { KindProps } from '../../theme/types';
+import type { KindProps, RothkoKind } from '../../theme/types';
 import { keyDownFactory } from '../../library/utils/keyUtils';
 import { Typography } from '../Typography';
 import type {
@@ -30,21 +30,58 @@ type WithAria<T> = WithAriaErrorMessage<
   >
 >;
 
-type ToggleProps = KindProps &
-  WithAria<{
-    id?: string;
-    children?: React.ReactNode;
-    className?: string;
-    disabled?: boolean;
-    offIcon?: JSX.Element;
-    onChange: (toggled: boolean) => void;
-    onIcon?: JSX.Element;
-    style?: CSSProperties;
-    toggled?: boolean;
-    error?: boolean;
-    errorText?: string;
-    required?: boolean;
-  }>;
+type ToggleProps = WithAria<{
+  id?: string;
+  /**
+   * The content to be rendered inside the Toggle component.
+   */
+  children?: React.ReactNode;
+  /**
+   * The CSS class name to be applied to the Toggle component.
+   */
+  className?: string;
+  /**
+   * Specifies whether the Toggle component is disabled.
+   */
+  disabled?: boolean;
+  /**
+   * Specifies whether the Toggle component has an error state.
+   */
+  error?: boolean;
+  /**
+   * The error text to be displayed when the Toggle component is in an error state.
+   * @default 'Invalid'
+   */
+  errorText?: string;
+  /**
+   * The visual style of the Toggle component.
+   */
+  kind?: RothkoKind;
+  /**
+   * The icon element to be displayed when the Toggle component is in the "off" state.
+   */
+  offIcon?: JSX.Element;
+  /**
+   * The event handler called when the Toggle component's value changes.
+   */
+  onChange: (toggled: boolean) => void;
+  /**
+   * The icon element to be displayed when the Toggle component is in the "on" state.
+   */
+  onIcon?: JSX.Element;
+  /**
+   * Specifies whether the Toggle component is required.
+   */
+  required?: boolean;
+  /**
+   * The inline style object to be applied to the Toggle component.
+   */
+  style?: CSSProperties;
+  /**
+   * Specifies whether the Toggle component is toggled.
+   */
+  toggled?: boolean;
+}>;
 
 const Toggle = ({
   children,
@@ -113,7 +150,7 @@ const Toggle = ({
         </InnerToggleDiv>
       </OuterToggleDiv>
       {children &&
-        (typeof children === 'string' ? (
+        (isString(children) ? (
           <Typography.body id={labelId}>{children}</Typography.body>
         ) : (
           <div id={labelId}>{children}</div>

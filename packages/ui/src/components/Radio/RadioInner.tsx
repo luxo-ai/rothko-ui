@@ -1,29 +1,55 @@
-import { classes } from '@rothko-ui/utils';
 import React from 'react';
 import styled from 'styled-components';
+import keyboardKey from 'keyboard-key';
+
+import { classes } from '@rothko-ui/utils';
+
 import type { KindProps, RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
 import useId from '../../library/hooks/useId';
 import type { WithAriaControls, WithAriaErrorMessage, WithAriaLabeling } from '../../types';
 import { keyDownFactory } from '../../library/utils/keyUtils';
-import keyboardKey from 'keyboard-key';
 
 type WithAria<T> = WithAriaErrorMessage<WithAriaControls<WithAriaLabeling<T>>>;
 
 export type RadioInnerProps = WithAria<{
   id?: string;
+  /**
+   * The content to be rendered inside the radio component.
+   */
   children?: React.ReactNode;
+  /**
+   * The CSS class name for the radio component.
+   */
   className?: string;
+  /**
+   * Specifies whether the radio component is disabled.
+   */
   disabled?: boolean;
+  /**
+   * Specifies whether the radio component has an error.
+   */
   error?: boolean;
+  /**
+   * The visual style of the radio component.
+   */
   kind?: RothkoKind;
+  /**
+   * The callback function to be called when the radio component is selected.
+   */
   onSelect: () => void;
+  /**
+   * Specifies whether the radio component is selected.
+   */
   selected?: boolean;
+  /**
+   * The inline style for the radio component.
+   */
   style?: React.CSSProperties;
 }>;
 
 const RadioInner = ({
-  id: idProp,
+  id,
   'aria-label': ariaLabel,
   'aria-describedby': ariaDescribedBy,
   'aria-details': ariaDetails,
@@ -39,8 +65,7 @@ const RadioInner = ({
   selected,
   style,
 }: RadioInnerProps) => {
-  const id = useId(idProp);
-  const labelId = `${id}-label`;
+  const labelId = useId();
 
   const clickRadio = () => {
     if (disabled) return;

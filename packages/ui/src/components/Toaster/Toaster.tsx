@@ -1,8 +1,11 @@
 import type { SpringValue } from '@react-spring/web';
 import { animated } from '@react-spring/web';
-import { CloseOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
+
+import { CloseOutline } from '@rothko-ui/icons';
+import { isString } from '@rothko-ui/utils';
+
 import { PhantomButton } from '../../library/PhantomButton';
 import type { KindProps, RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
@@ -20,14 +23,29 @@ type AnimatedStyle = {
 
 type ToastProps = Pick<ToastDetails, 'label' | 'content' | 'withLife'> &
   WithAria<{
+    id?: string;
+    /**
+     * The animated style for the toast.
+     */
     animatedStyle?: AnimatedStyle;
+    /**
+     * The kind of toast.
+     */
     kind?: RothkoKind;
+    /**
+     * Callback function called when the toast is closed.
+     * @param e - The mouse event.
+     */
     onClose?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    /**
+     * The style for the toast.
+     */
     style?: React.CSSProperties;
   }>;
 
 const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
   const {
+    id,
     animatedStyle: { life, ...animatedStyle } = {},
     content,
     kind,
@@ -45,6 +63,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
       style={{ ...style, opacity: animatedStyle.opacity, height: animatedStyle.height }}
     >
       <ToastAnimatedContainerDiv
+        id={id}
         role="alert"
         aria-live={kind === 'danger' ? 'assertive' : 'polite'}
         aria-atomic
@@ -55,7 +74,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
       >
         <ToastContentContainerDiv>
           {label &&
-            (typeof label === 'string' ? (
+            (isString(label) ? (
               <Typography.body id={labelId} bold className="rothko-toast-text">
                 {label}
               </Typography.body>

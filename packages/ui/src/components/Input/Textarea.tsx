@@ -18,6 +18,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         className={baseClasses}
         disabled={disabled}
         tabIndex={disabled ? -1 : tabIndex}
+        role="textbox"
         {...props}
       />
     );
