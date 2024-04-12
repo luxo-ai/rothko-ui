@@ -12,7 +12,7 @@ type WithAria<T> = WithAriaHidden<WithAriaLabeling<T>>;
 type AccordionProps = WithAria<{
   id?: string;
   /**
-   * If `true`, borders are added around each accordion item. Default is `false`.
+   * If `true`, borders are added around each accordion item.
    */
   bordered?: boolean;
   /**
@@ -24,19 +24,19 @@ type AccordionProps = WithAria<{
    */
   className?: string;
   /**
-   * Adds spacing around items for better separation. Default is `false`.
+   * Adds spacing around items for better separation.
    */
   compact?: boolean;
   /**
    * Custom icons for accordion state indicators.
    */
-  iconOverride?: Icon;
+  icon?: Icon;
   /**
    * Specifies the accordion's style kind.
    */
   kind?: RothkoKind;
   /**
-   * If `true`, only one accordion item can be open at a time. Default is `false`.
+   * If `true`, only one accordion item can be open at a time.
    */
   multiple?: boolean;
   /**
@@ -69,7 +69,7 @@ const Accordion = ({
   children,
   className,
   compact,
-  iconOverride,
+  icon: iconOverride,
   kind,
   multiple,
   onPanelChange,

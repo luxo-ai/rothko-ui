@@ -5,7 +5,7 @@ import { RothkoProvider } from '@rothko-ui/ui';
 const App = ({ children }: { children?: React.ReactNode }) => {
   return (
     <RothkoProvider
-      themeOverrides={{
+      overrides={{
         dark: {
           success: {
             500: { value: '#276c27' },

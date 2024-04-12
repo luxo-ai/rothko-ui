@@ -84,7 +84,7 @@ const Section = ({ sectionKey, section }: SectionProps) => {
       );
     }
     // string[]
-    if (Array.isArray(body) && body.every(isString)) {
+    if (Array.isArray(body) && typeof body[0] === 'string') {
       return (
         <List>
           {body.map(item => (
@@ -94,10 +94,15 @@ const Section = ({ sectionKey, section }: SectionProps) => {
       );
     }
     // Code[]
-    if (Array.isArray(body) && body.every((v): v is CCode => 'kind' in v && v.kind === 'code')) {
+    if (
+      Array.isArray(body) &&
+      typeof body[0] !== 'string' &&
+      'kind' in body[0] &&
+      body[0].kind === 'code'
+    ) {
       return (
         <Flex flexDirection="column" rowGap="1rem">
-          {asCompactedArray(body).map((item, idx) => {
+          {asCompactedArray(body as CCode[]).map((item, idx) => {
             const subSectionKey = `${sectionKey}_${idx}`;
             return (
               <FlexItem key={subSectionKey}>
@@ -125,7 +130,7 @@ const Section = ({ sectionKey, section }: SectionProps) => {
     if (!('kind' in body)) {
       return (
         <Flex marginTop="1rem" flexDirection="column" rowGap="1.75rem">
-          {asCompactedArray(body).map((item, idx) => {
+          {asCompactedArray(body as SectionType | SectionType[]).map((item, idx) => {
             const subSectionKey = item.title || `${sectionKey}_${idx}`;
             return <Section sectionKey={subSectionKey} key={subSectionKey} section={item} />;
           })}

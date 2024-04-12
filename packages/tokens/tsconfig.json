@@ -13,6 +13,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true
   },
+  "ts-node": {
+    "esm": true
+  },
   "compileOnSave": true,
   "exclude": ["**/*.spec.ts", "**/*.test.ts", "node_modules", "dist", "build"],
   "include": ["index.ts", "**/*.ts"]

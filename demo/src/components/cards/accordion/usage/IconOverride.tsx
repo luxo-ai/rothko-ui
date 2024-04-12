@@ -11,7 +11,7 @@ const CONTENT =
 const App = () => {
   return (
     <Accordion
-      iconOverride={({ open }) =>
+      icon={({ open }) =>
         open ? (
           <ArrowIosDownward width={ARROW_ICON_SIZE} height={ARROW_ICON_SIZE} />
         ) : (
@@ -22,7 +22,7 @@ const App = () => {
     >
       <AccordionPanel title="Label 1">{CONTENT}</AccordionPanel>
       <AccordionPanel
-        iconOverride={({ open }) =>
+        icon={({ open }) =>
           open ? (
             <RadioButtonOn width={RADIO_ICON_SIZE} height={RADIO_ICON_SIZE} />
           ) : (

@@ -5,7 +5,7 @@ import { RothkoProvider } from '@rothko-ui/ui';
 const App = ({ children }: { children?: React.ReactNode }) => {
   return (
     <RothkoProvider
-      themeOverrides={{
+      overrides={{
         typography: {
           body: {
             regular: {

@@ -1,4 +1,4 @@
-import { Container, Flex, Typography } from '@rothko-ui/ui';
+import { Container, Flex } from '@rothko-ui/ui';
 
 import { APPEARANCE } from '../button/usage/sourceCode';
 import { BASIC, CLOSEABLE, WITH_KIND } from './usage/sourceCode';
