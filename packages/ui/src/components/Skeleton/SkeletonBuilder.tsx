@@ -1,7 +1,7 @@
 import type { SVGAttributes } from 'react';
 import React from 'react';
 import type { Color } from '../../theme';
-import useId from '../../library/Hookz/useId';
+import useId from '../../library/hooks/useId';
 
 const ANIMATION_KEY_TIMES = '0;0.5;1';
 

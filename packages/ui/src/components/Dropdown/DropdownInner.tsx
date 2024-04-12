@@ -5,17 +5,17 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { ItemText, LabelText } from '../../library/Common';
 import { useDebuggerContext } from '../../library/DebuggerContext';
-import useDropdownMenu from '../../library/Hookz/useMenu';
+import useDropdownMenu from '../../library/hooks/useMenu';
 import { PhantomButton } from '../../library/PhantomButton';
 import { DefaultRenderOption } from '../../library/RenderOption';
 import { hideChromeBrowserOutline } from '../../library/Styles';
 import type { Value } from '../../library/types';
-import { directionMap } from '../../utils/keyUtils';
+import { directionMap } from '../../library/utils/keyUtils';
 import Typography, { textStyle } from '../Typography/Typography';
 import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } from './Shared';
 import type { DropdownInnerProps } from './types';
 import useSelect from './useSelect';
-import useId from '../../library/Hookz/useId';
+import useId from '../../library/hooks/useId';
 
 // TODO - Think about aria role for searachable dropdown?
 

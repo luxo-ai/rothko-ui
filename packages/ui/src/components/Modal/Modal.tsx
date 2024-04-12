@@ -15,11 +15,11 @@ import {
   disableBodyScroll,
   enableBodyScroll,
   removeEvent,
-} from '../../utils/domUtils';
+} from '../../library/utils/domUtils';
 import Typography from '../Typography/Typography';
 import { textChildrenStyle } from '../../library/Styles';
 import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
-import useId from '../../library/Hookz/useId';
+import useId from '../../library/hooks/useId';
 
 const bodyStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`

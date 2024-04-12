@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import { hideChromeBrowserOutline } from '../../../library/Styles';
 import type { KindProps, RothkoKind } from '../../../theme';
-import type { DragDelta, DragEvent } from '../../../utils/domUtils';
+import type { DragDelta, DragEvent } from '../../../library/utils/domUtils';
 import {
   addEvent,
   calculateXYDragPosn,
@@ -12,9 +12,9 @@ import {
   isMainClick,
   isMouseEvent,
   removeEvent,
-} from '../../../utils/domUtils';
+} from '../../../library/utils/domUtils';
 import { getOffsetFactory } from '../sliderUtils';
-import useIsMounted from '../../../library/Hookz/useIsMounted';
+import useIsMounted from '../../../library/hooks/useIsMounted';
 import type { WithAriaControls, WithAriaLabel } from '../../../types';
 
 type DraggableEvents = {

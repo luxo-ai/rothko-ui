@@ -10,12 +10,12 @@ import {
   BODY_SCROLL_LOCK_IGNORE_ID,
   disableBodyScroll,
   enableBodyScroll,
-} from '../../utils/domUtils';
+} from '../../library/utils/domUtils';
 import { DrawerContext } from './DrawerContext';
 import { textChildrenStyle } from '../../library/Styles';
 import { textStyle } from '../Typography/Typography';
 import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
-import useId from '../../library/Hookz/useId';
+import useId from '../../library/hooks/useId';
 
 const TABLET_OR_MOBILE_MAX_WIDTH_PX = 750;
 const DEFAULT_DRAWER_WIDTH_PX = 350;

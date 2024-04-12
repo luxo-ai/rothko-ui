@@ -13,7 +13,7 @@ import {
   disableBodyScroll,
   enableBodyScroll,
   removeEvent,
-} from '../../utils/domUtils';
+} from '../../library/utils/domUtils';
 import SearchBar from './SearchBar/SearchBar';
 
 type SearchPopoutProps = {

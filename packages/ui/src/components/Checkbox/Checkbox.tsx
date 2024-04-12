@@ -3,7 +3,7 @@ import keyboardKey from 'keyboard-key';
 import React from 'react';
 import styled from 'styled-components';
 import type { KindProps, RothkoKind } from '../../theme/types';
-import { keyDownFactory } from '../../utils/keyUtils';
+import { keyDownFactory } from '../../library/utils/keyUtils';
 import Typography from '../Typography/Typography';
 import type {
   WithAriaControls,
@@ -16,7 +16,7 @@ import type {
   WithAriaRequired,
   WithAriaErrorMessage,
 } from '../../types';
-import useId from '../../library/Hookz/useId';
+import useId from '../../library/hooks/useId';
 
 type WithAria<T> = WithAriaErrorMessage<
   WithAriaRequired<

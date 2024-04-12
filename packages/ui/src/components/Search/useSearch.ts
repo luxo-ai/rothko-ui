@@ -1,7 +1,7 @@
 import { debounce, identity } from '@rothko-ui/utils';
 import { useCallback, useEffect, useState } from 'react';
-import { useLRUCache } from '../../library/Hookz/useCache';
-import useOptions from '../../library/Hookz/useOptions';
+import { useLRUCache } from '../../library/hooks/useCache';
+import useOptions from '../../library/hooks/useOptions';
 import type { Option } from '../../library/types';
 
 const DEBOUNCE_WAIT_MS = 250;

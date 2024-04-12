@@ -6,7 +6,7 @@ import keyboardKey from 'keyboard-key';
 import { phantomButtonStyle } from '../../library/PhantomButton';
 import { unselectableStyle } from '../../library/Styles';
 import type { KindProps } from '../../theme';
-import { getElementFullHeight } from '../../utils/domUtils/dimensions';
+import { getElementFullHeight } from '../../library/utils/domUtils/dimensions';
 import Typography from '../Typography/Typography';
 import AccordionIcon from './AccordionIcon';
 import { Flex, FlexItem } from '../../layout';
@@ -14,7 +14,7 @@ import type { IconOverride } from './types';
 import useAccordion from './useAccordion';
 import { useDebuggerContext } from '../../library/DebuggerContext';
 import type { WithAriaHidden, WithAriaLabel, WithAriaLabelledBy } from '../../types';
-import useId from '../../library/Hookz/useId';
+import useId from '../../library/hooks/useId';
 
 // TODO make thhe padding a variable
 

@@ -3,9 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 import type { KindProps, RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
-import useId from '../../library/Hookz/useId';
+import useId from '../../library/hooks/useId';
 import type { WithAriaControls, WithAriaErrorMessage, WithAriaLabeling } from '../../types';
-import { keyDownFactory } from '../../utils/keyUtils';
+import { keyDownFactory } from '../../library/utils/keyUtils';
 import keyboardKey from 'keyboard-key';
 
 type WithAria<T> = WithAriaErrorMessage<WithAriaControls<WithAriaLabeling<T>>>;

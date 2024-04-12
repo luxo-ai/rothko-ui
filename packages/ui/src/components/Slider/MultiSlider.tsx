@@ -13,7 +13,7 @@ import type {
   WithAriaLabeling,
   WithAriaRequired,
 } from '../../types';
-import useId from '../../library/Hookz/useId';
+import useId from '../../library/hooks/useId';
 
 const BUFFER = 1;
 

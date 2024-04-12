@@ -8,7 +8,7 @@ import type { KindProps, RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
 import type { ToastDetails } from './types';
 import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
-import useId from '../../library/Hookz/useId';
+import useId from '../../library/hooks/useId';
 
 type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
 

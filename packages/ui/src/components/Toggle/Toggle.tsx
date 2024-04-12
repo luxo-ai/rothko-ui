@@ -5,7 +5,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { hideChromeBrowserOutline } from '../../library/Styles';
 import type { KindProps } from '../../theme/types';
-import { keyDownFactory } from '../../utils/keyUtils';
+import { keyDownFactory } from '../../library/utils/keyUtils';
 import { Typography } from '../Typography';
 import type {
   WithAriaControls,
@@ -18,7 +18,7 @@ import type {
   WithAriaLabeling,
   WithAriaRequired,
 } from '../../types';
-import useId from '../../library/Hookz/useId';
+import useId from '../../library/hooks/useId';
 
 type WithAria<T> = WithAriaErrorMessage<
   WithAriaRequired<

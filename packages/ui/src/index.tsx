@@ -10,4 +10,4 @@ export {
   disableBodyScroll,
   enableBodyScroll,
   getStyle,
-} from './utils/domUtils';
+} from './library/utils/domUtils';
