@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import type { Formatter, Config as StyleConfig } from 'style-dictionary';
 import styledDictionary from 'style-dictionary';
-import { pathToCssVariable } from './utils';
+import { pathToCssVariable } from './utils.js';
 
 const OUT_DIRECTORY = 'build';
 

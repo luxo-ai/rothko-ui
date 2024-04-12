@@ -16,6 +16,7 @@
   "dependencies": {
     "style-dictionary": "^3.7.1"
   },
+  "type": "module",
   "devDependencies": {
     "microbundle": "^0.15.1",
     "rimraf": "^3.0.2",
@@ -25,7 +26,7 @@
   },
   "scripts": {
     "prebuild": "yarn clean",
-    "build": "microbundle --format modern,cjs --no-sourcemap && ts-node-esm --skip-project ./src/build.ts",
+    "build": "microbundle --format modern,cjs --no-sourcemap && node --experimental-modules --loader ts-node/esm ./src/build.ts",
     "clean": "rimraf build",
     "lint": "eslint ./src --ext .js,.ts"
   },
