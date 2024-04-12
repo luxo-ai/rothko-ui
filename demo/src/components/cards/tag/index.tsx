@@ -13,6 +13,7 @@ import Props from '../Props';
 import tagCopy from './copy';
 import tagProps from './props';
 import WithKind from './usage/WithKind';
+import Usage from '../Usage';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Tag';
 

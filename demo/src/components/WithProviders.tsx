@@ -23,16 +23,13 @@ const themeOverride: ThemeOverrides = {
 
 type WithProvidersProps = {
   children: React.ReactNode;
-  themeMode?: 'dark' | 'light';
+  theme?: 'dark' | 'light';
 };
 
-const WithProviders = ({ children, themeMode = 'dark' }: WithProvidersProps) => {
+const WithProviders = ({ children, theme = 'dark' }: WithProvidersProps) => {
   const router = useRouter();
   return (
-    <RothkoProvider
-      themeOverrides={themeOverride}
-      themeMode={router.pathname === '/' ? 'dark' : themeMode}
-    >
+    <RothkoProvider overrides={themeOverride} theme={router.pathname === '/' ? 'dark' : theme}>
       {children}
     </RothkoProvider>
   );

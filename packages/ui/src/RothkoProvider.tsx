@@ -11,18 +11,13 @@ import { ThemeContextProvider, useTheme } from './theme';
 type RothkoProviderProps = {
   children: React.ReactNode;
   debugMode?: boolean;
-  themeMode?: ThemeMode;
-  themeOverrides?: ThemeOverrides;
+  theme?: ThemeMode;
+  overrides?: ThemeOverrides;
 };
 
 // proxy provider for theme and debugger contexts
-export const RothkoProvider = ({
-  children,
-  debugMode,
-  themeMode,
-  themeOverrides,
-}: RothkoProviderProps) => (
-  <ThemeContextProvider themeOverrides={themeOverrides} mode={themeMode}>
+export const RothkoProvider = ({ children, debugMode, theme, overrides }: RothkoProviderProps) => (
+  <ThemeContextProvider themeOverrides={overrides} mode={theme}>
     <DebuggerContextProvider debug={debugMode}>
       {children}
       <div id={PORTAL_ROOT_ID} />

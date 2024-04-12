@@ -13,7 +13,7 @@ const App = () => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open modal</Button>
-      <Modal size="m" title={TITLE} isOpen={open} onClose={() => setOpen(false)}>
+      <Modal size="m" title={TITLE} open={open} onClose={() => setOpen(false)}>
         {CONTENT}
       </Modal>
     </>
