@@ -14,7 +14,7 @@ import type { IconOverride } from './types';
 import useAccordion from './useAccordion';
 import { useDebuggerContext } from '../../library/DebuggerContext';
 import type { WithAriaHidden, WithAriaLabel, WithAriaLabelledBy } from '../../types';
-import useId from '../../library/Hooks/useId';
+import useId from '../../library/Hookz/useId';
 
 // TODO make thhe padding a variable
 
@@ -55,7 +55,7 @@ type AccordionPanelProps = WithAriaHidden<
 const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
   (
     {
-      id: idProp,
+      id,
       'aria-label': ariaLabel,
       'aria-hidden': ariaHidden,
       children,
@@ -68,28 +68,23 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
       labelStyle,
       onClick: onClickProp,
       onKeyDown: onKeyDownProp,
-      $key: panelKeyProp,
+      $key,
       style,
       subtitle,
       title,
     },
     ref
   ) => {
+    const contentId = useId();
+    const toggleId = useId();
+
     const debug = useDebuggerContext('<AccordionPanel />');
 
     const { bordered, iconOverride, kind, onClickPanel, selectedPanels, compact, withIcon } =
       useAccordion();
 
-    const id = useId(idProp);
-    const contentId = `${id}-content`;
-    const toggleId = `${id}-toggle`;
-
-    const panelKey = useId(panelKeyProp);
+    const panelKey = useId($key);
     const isPanelSelected = selectedPanels.has(panelKey);
-
-    const iconColor = kind
-      ? `var(--rothko-${kind}-500, #000)`
-      : 'var(--rothko-accordion-border, #000)';
 
     const onKeyDown = useCallback(
       (e: React.KeyboardEvent<HTMLButtonElement>) => {
@@ -118,11 +113,11 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
 
     return (
       <PanelContainerDiv
+        id={id}
         $spaced={!compact}
         $bordered={bordered}
         $disabled={disabled}
         kind={kind}
-        id={id}
         className={className}
         style={style}
         ref={ref}
@@ -130,29 +125,27 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
         <header>
           <PanelLabelButton
             id={toggleId}
-            role="tab" // for accordion button
-            type="button"
             $disabled={disabled}
-            aria-disabled={disabled}
-            aria-label={ariaLabel}
-            // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded
             aria-controls={contentId}
+            aria-disabled={disabled}
             aria-expanded={isPanelSelected}
-            aria-selected={isPanelSelected}
             aria-hidden={ariaHidden}
+            aria-label={ariaLabel}
+            aria-selected={isPanelSelected}
             className={labelClassName}
             disabled={disabled}
-            onKeyDown={onKeyDown}
-            style={labelStyle}
-            // TODO: is this right?
-            tabIndex={disabled ? -1 : 0}
             onClick={onClick}
+            onKeyDown={onKeyDown}
+            role="tab"
+            style={labelStyle}
+            tabIndex={disabled ? -1 : 0}
+            type="button"
           >
             {withIcon && (
               <AccordionIcon
                 open={isPanelSelected}
                 disabled={!!disabled}
-                color={iconColor}
+                kind={kind}
                 iconOverride={iconOverrideLocal || iconOverride}
               />
             )}

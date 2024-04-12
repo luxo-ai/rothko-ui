@@ -16,7 +16,7 @@ import {
 import { textChildrenStyle } from '../../library/Styles';
 import { textStyle } from '../Typography/Typography';
 import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
-import useId from '../../library/Hooks/useId';
+import useId from '../../library/Hookz/useId';
 
 type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
 

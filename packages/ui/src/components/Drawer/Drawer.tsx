@@ -15,7 +15,7 @@ import { DrawerContext } from './DrawerContext';
 import { textChildrenStyle } from '../../library/Styles';
 import { textStyle } from '../Typography/Typography';
 import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
-import useId from '../../library/Hooks/useId';
+import useId from '../../library/Hookz/useId';
 
 const TABLET_OR_MOBILE_MAX_WIDTH_PX = 750;
 const DEFAULT_DRAWER_WIDTH_PX = 350;

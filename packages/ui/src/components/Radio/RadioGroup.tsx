@@ -14,7 +14,7 @@ import type {
   WithAriaLabeling,
   WithAriaRequired,
 } from '../../types';
-import useId from '../../library/Hooks/useId';
+import useId from '../../library/Hookz/useId';
 import { Typography } from '../Typography';
 import type { RadioGroupContextType } from './RadioGroupContext';
 import RadioGroupContext from './RadioGroupContext';

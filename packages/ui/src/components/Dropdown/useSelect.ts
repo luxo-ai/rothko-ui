@@ -2,7 +2,7 @@ import { asNonNilArray, isFunction, isNil } from '@rothko-ui/utils';
 import { Set as ImSet } from 'immutable';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDebuggerContext } from '../../library/DebuggerContext';
-import useOptions from '../../library/Hooks/useOptions';
+import useOptions from '../../library/Hookz/useOptions';
 import type { Option, Value } from '../../library/types';
 import type { QueryMatchFn } from './types';
 

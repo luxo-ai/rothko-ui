@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 import { classes } from '@rothko-ui/utils';
 
-import InlineSpinnerLoader from '../../library/Loader/InlineSpinnerLoader';
+import InlineSpinnerLoader from '../../library/Loaderz/InlineSpinnerLoader';
 import type { Accessory } from '../../library/types';
 import type { KindProps, RothkoKind, RothkoSize } from '../../theme';
 import type { ButtonAppearance, ButtonShape } from './types';

@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react';
 import { Set as ImSet } from 'immutable';
+import React, { useCallback, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import type { RothkoKind } from '../../theme/types';
@@ -37,9 +37,9 @@ type AccordionProps = WithAria<{
 const Accordion = ({
   'aria-describedby': ariaDescribedBy,
   'aria-details': ariaDetails,
+  'aria-hidden': ariaHidden,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
-  'aria-hidden': ariaHidden,
   bordered,
   children,
   className,
@@ -80,13 +80,12 @@ const Accordion = ({
       }}
     >
       <AccordionGroupDiv
-        role="tablist" // for accordion
+        role="tablist"
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
         aria-describedby={ariaDescribedBy}
         aria-details={ariaDetails}
         aria-multiselectable={multiple}
-        // aria expanded?
         aria-hidden={ariaHidden}
         $spaced={!compact}
         style={style}

@@ -14,7 +14,7 @@ import {
   removeEvent,
 } from '../../../utils/domUtils';
 import { getOffsetFactory } from '../sliderUtils';
-import useIsMounted from '../../../library/Hooks/useIsMounted';
+import useIsMounted from '../../../library/Hookz/useIsMounted';
 import type { WithAriaControls, WithAriaLabel } from '../../../types';
 
 type DraggableEvents = {

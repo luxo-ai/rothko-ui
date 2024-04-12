@@ -5,7 +5,7 @@ import React, { useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { ItemText, LabelText } from '../../library/Common';
 import { useDebuggerContext } from '../../library/DebuggerContext';
-import useDropdownMenu from '../../library/Hooks/useMenu';
+import useDropdownMenu from '../../library/Hookz/useMenu';
 import { DefaultRenderOption } from '../../library/RenderOption';
 import type { NestedOption, Option, RenderOption, Value } from '../../library/types';
 import { directionMap } from '../../utils/keyUtils';

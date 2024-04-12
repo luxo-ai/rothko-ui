@@ -19,7 +19,7 @@ import {
 import Typography from '../Typography/Typography';
 import { textChildrenStyle } from '../../library/Styles';
 import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
-import useId from '../../library/Hooks/useId';
+import useId from '../../library/Hookz/useId';
 
 const bodyStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`

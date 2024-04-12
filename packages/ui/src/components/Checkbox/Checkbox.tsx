@@ -16,7 +16,7 @@ import type {
   WithAriaRequired,
   WithAriaErrorMessage,
 } from '../../types';
-import useId from '../../library/Hooks/useId';
+import useId from '../../library/Hookz/useId';
 
 type WithAria<T> = WithAriaErrorMessage<
   WithAriaRequired<

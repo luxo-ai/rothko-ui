@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { ItemText, LabelText } from '../../library/Common';
 import { useDebuggerContext } from '../../library/DebuggerContext';
-import useDropdownMenu from '../../library/Hooks/useMenu';
+import useDropdownMenu from '../../library/Hookz/useMenu';
 import { PhantomButton } from '../../library/PhantomButton';
 import { DefaultRenderOption } from '../../library/RenderOption';
 import { hideChromeBrowserOutline } from '../../library/Styles';
@@ -15,7 +15,7 @@ import Typography, { textStyle } from '../Typography/Typography';
 import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } from './Shared';
 import type { DropdownInnerProps } from './types';
 import useSelect from './useSelect';
-import useId from '../../library/Hooks/useId';
+import useId from '../../library/Hookz/useId';
 
 // TODO - Think about aria role for searachable dropdown?
 
