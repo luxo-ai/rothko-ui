@@ -73,7 +73,7 @@ const sliderProps = [
   },
   {
     name: 'value',
-    type: 'Nullable<number>',
+    type: 'Nilable<number>',
     defaultValue: null,
     description: 'Current value of the slider',
   },

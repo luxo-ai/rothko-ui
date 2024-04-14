@@ -3,7 +3,7 @@
   "version": "1.0.17",
   "repository": {
     "type": "git",
-    "url": "https://github.com/luxo-ai/rothko-ui",
+    "url": "git+https://github.com/luxo-ai/rothko-ui.git",
     "directory": "packages/tokens"
   },
   "publishConfig": {
@@ -12,23 +12,31 @@
   "private": false,
   "license": "MIT",
   "author": "luxo-ai <luxo@rothko-ui.com>",
-  "description": "Style tokens for rothko-ui",
-  "dependencies": {
-    "style-dictionary": "^3.7.1"
+  "description": "style tokens and tailwind plugin for rothko-ui",
+  "main": "dist/index.js",
+  "module": "dist/index.modern.js",
+  "types": "dist/src/src/index.d.ts",
+  "source": "src/index.ts",
+  "scripts": {
+    "prebuild": "yarn clean",
+    "build": "node ./src/build.js && sleep 1 && echo 'building...' && microbundle --format modern,cjs --no-sourcemap",
+    "clean": "rimraf build src/tokens dist",
+    "lint": "eslint ./src --ext .js,.ts"
   },
-  "type": "module",
+  "dependencies": {
+    "deepmerge": "^4.3.1",
+    "flat": "^6.0.1"
+  },
   "devDependencies": {
+    "@prettier/sync": "^0.5.1",
+    "@rothko-ui/utils": "*",
     "microbundle": "^0.15.1",
     "rimraf": "^3.0.2",
+    "style-dictionary": "^3.9.2",
+    "tailwindcss": "^3.4.3",
     "ts-node": "^10.9.1",
     "tsc": "^2.0.4",
     "typescript": "^4.8.4"
-  },
-  "scripts": {
-    "prebuild": "yarn clean",
-    "build": "microbundle --format modern,cjs --no-sourcemap && node --experimental-modules --loader ts-node/esm ./src/build.ts",
-    "clean": "rimraf build",
-    "lint": "eslint ./src --ext .js,.ts"
   },
   "exports": {
     ".": {
@@ -48,12 +56,10 @@
       "require": "./build/light-variables.css"
     }
   },
-  "module": "dist/index.modern.js",
-  "types": "dist/index.d.ts",
-  "source": "index.ts",
   "files": [
-    "dist/index.js",
-    "build/*.css"
+    "dist",
+    "build/*.css",
+    "LICENSE.txt"
   ],
   "gitHead": "fa0338bf50f574c0a42d143d3bd317a40a6e3fb9"
 }

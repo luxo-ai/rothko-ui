@@ -3,7 +3,7 @@
  * Adaption of: https://github.com/willmcpo/body-scroll-lock
  * The decision to adapt was to get more control and fix mobie issues found in the original solution
  */
-import type { Nullable } from '@rothko-ui/utils';
+import type { Nilable } from '@rothko-ui/utils';
 import { isNil, parseInt } from '@rothko-ui/utils';
 import type React from 'react';
 import { getStyle, scrollBarWidth } from './dimensions';
@@ -45,8 +45,8 @@ const isIosDevice =
     (window.navigator.platform === 'MacIntel' && window.navigator.maxTouchPoints > 1));
 
 let bodyLocks: Lock[] = [];
-let iosPrevStyle: Nullable<IOSPrevStyle> = null;
-let prevStyle: Nullable<PrevStyle> = null;
+let iosPrevStyle: Nilable<IOSPrevStyle> = null;
+let prevStyle: Nilable<PrevStyle> = null;
 let documentListenerAdded = false;
 let initialTouchClientY = -1;
 

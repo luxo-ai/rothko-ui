@@ -1,4 +1,4 @@
-import type { Nullable } from '@rothko-ui/utils';
+import type { Nilable } from '@rothko-ui/utils';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import { hideChromeBrowserOutline } from '../../../library/Styles';
@@ -67,7 +67,7 @@ export const SliderHandle = ({
   const handleRef = useRef<HTMLButtonElement | null>(null);
   const onChangeRef = useRef(onChange);
   const isDraggingRef = useRef<boolean>(false);
-  const touchIdentifierRef = useRef<Nullable<number>>(null);
+  const touchIdentifierRef = useRef<Nilable<number>>(null);
   const deltaRef = useRef<DragDelta>({ xDel: 0, yDel: 0 });
 
   const getOffset = useMemo(() => getOffsetFactory({ min, max }), [min, max]);

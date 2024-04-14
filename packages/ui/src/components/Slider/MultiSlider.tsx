@@ -1,4 +1,4 @@
-import type { Nullable } from '@rothko-ui/utils';
+import type { Nilable } from '@rothko-ui/utils';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import type { RothkoKind } from '../../theme';
@@ -86,7 +86,7 @@ type MultiSliderProps = WithAria<{
   /**
    * The current value of the MultiSlider component.
    */
-  value?: Nullable<Range>;
+  value?: Nilable<Range>;
 }>;
 
 const MultiSlider = ({

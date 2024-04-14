@@ -74,7 +74,7 @@ const multiSliderProps = [
   },
   {
     name: 'value',
-    type: 'Nullable<Range>',
+    type: 'Nilable<Range>',
     defaultValue: null,
     description: 'Current range of the multi-slider',
   },

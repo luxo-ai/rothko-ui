@@ -2,13 +2,15 @@ import type { Dictionary } from '@rothko-ui/utils';
 import cookie from 'cookie';
 import MobileDetect from 'mobile-detect';
 import type { AppContext, AppProps } from 'next/app';
-import { useEffect } from 'react';
+import '../../public/fonts/style.css';
 import RothkoHeader from '../components/Header';
 import { IsMobileOrTabletContext } from '../components/IsMobileOrTabletContext';
 import WithProviders from '../components/WithProviders';
-import config from '../config';
-import '../../public/fonts/style.css';
+// import config from '../config';
 import '../globals.css';
+import '@rothko-ui/tokens/web/dark.css';
+import '@rothko-ui/tokens/web/global.css';
+import '@rothko-ui/tokens/web/light.css';
 
 type RothkoAppProps = AppProps & {
   cookies?: Dictionary<string, string>;
@@ -17,31 +19,15 @@ type RothkoAppProps = AppProps & {
 export default function App({
   Component,
   pageProps,
-  cookies,
+  //  cookies,
   isMobileOrTablet = false,
 }: RothkoAppProps) {
-  useEffect(() => {
-    const threeScript = document.createElement('script');
-    threeScript.setAttribute('id', 'threeScript');
-    threeScript.setAttribute(
-      'src',
-      'https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js'
-    );
-    document.getElementsByTagName('head')[0].appendChild(threeScript);
-    return () => {
-      if (threeScript) {
-        threeScript.remove();
-      }
-    };
-  }, []);
-
-  const mode = (cookies?.[config.preference.themeMode] || 'dark') as 'dark' | 'light';
-
+  // const mode = (cookies?.[config.preference.themeMode] || 'dark') as 'dark' | 'light';
   return (
     <>
       <RothkoHeader />
       <IsMobileOrTabletContext.Provider value={isMobileOrTablet}>
-        <WithProviders theme={mode}>
+        <WithProviders theme={'light'}>
           <Component {...pageProps} />
         </WithProviders>
       </IsMobileOrTabletContext.Provider>

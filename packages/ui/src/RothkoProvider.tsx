@@ -1,7 +1,3 @@
-import '@rothko-ui/tokens/web/dark.css';
-import '@rothko-ui/tokens/web/global.css';
-import '@rothko-ui/tokens/web/light.css';
-
 import React from 'react';
 import { DebuggerContextProvider } from './library/DebuggerContext';
 import { PORTAL_ROOT_ID } from './library/Portal';

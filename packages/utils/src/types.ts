@@ -3,7 +3,7 @@
 export type Nil = undefined | null;
 export type Nilable<T> = T | Nil;
 
-export type KeyLike = string | number | symbol;
+export type KeyLike = keyof any;
 
 export type Obj = Record<KeyLike, unknown>;
 
@@ -16,6 +16,12 @@ export type WithData<Base extends Obj, DataType> = WithKey<Base, 'data', DataTyp
 export type DeepPartial<T> = T extends Obj
   ? {
       [P in keyof T]?: DeepPartial<T[P]>;
+    }
+  : T;
+
+export type DeepRequired<T> = T extends Obj
+  ? {
+      [P in keyof T]-?: DeepRequired<T[P]>;
     }
   : T;
 

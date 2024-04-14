@@ -66,7 +66,7 @@ const Tag = ({
   const iconColor =
     appearance === 'outline'
       ? `var(--rothko-${kind}-500, #000)`
-      : `var(--rothko-${kind}-color, #FFF)`;
+      : `var(--rothko-${kind}-foreground, #FFF)`;
 
   return (
     <TagContainerDiv
@@ -128,7 +128,7 @@ const TagContainerDiv = styled.div<ContainerProps>`
   }};
 
   border: 1px solid
-    ${({ kind }) => (kind ? `var(--rothko-${kind}-500, #000)` : `var(--rothko-color, #000)`)};
+    ${({ kind }) => (kind ? `var(--rothko-${kind}-500, #000)` : `var(--rothko-foreground, #000)`)};
   border-radius: 50vh;
 `;
 

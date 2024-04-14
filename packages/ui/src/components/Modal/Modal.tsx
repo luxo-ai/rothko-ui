@@ -257,7 +257,7 @@ const ModalContainerDiv = styled.div`
   ${textChildrenStyle}
 
   & > svg {
-    fill: var(--rothko-color, #000);
+    fill: var(--rothko-foreground, #000);
   }
 
   ${Object.entries(bodyStyleMap).map(

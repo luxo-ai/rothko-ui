@@ -7,10 +7,11 @@ export type {
   Map,
   NestedRecord,
   Nil,
-  Nilable as Nullable,
+  Nilable,
   Obj,
   WithData,
   WithKey,
+  DeepRequired,
 } from './types';
 
 /**

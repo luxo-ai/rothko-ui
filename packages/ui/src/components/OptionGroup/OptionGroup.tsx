@@ -96,7 +96,7 @@ function OptionGroup<V extends Value>({
           const localAccessoryRight = dataOptions?.accessoryRight;
 
           const svgColor = isSelected
-            ? `var(--rothko-${kind}-color, #000)`
+            ? `var(--rothko-${kind}-foreground, #000)`
             : `var(--rothko-${kind}-500, #000)`;
 
           const classNames = {
@@ -215,7 +215,7 @@ const OptionButton = styled.button<{
 
   &.selected {
     background: ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
-    color: ${({ kind }) => `var(--rothko-${kind}-color, #000)`};
+    color: ${({ kind }) => `var(--rothko-${kind}-foreground, #000)`};
   }
 
   &.with-radius {

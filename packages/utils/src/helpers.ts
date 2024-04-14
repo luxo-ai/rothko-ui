@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import root from './root';
-import type { Nil, Nilable, Falsy } from './types';
+import splitWords from './words';
+import type { Nil, Nilable, Falsy, Obj } from './types';
 
 type Func = (...args: any[]) => any;
 
@@ -152,6 +153,7 @@ export const isTruthy = <T>(value: T | Falsy): value is T => {
  *
  * @param {any} v The value to check.
  * @returns {boolean} Returns true if the value is empty, else false.
+ *
  * @example
  *
  * isEmpty({})
@@ -177,6 +179,45 @@ export const isEmpty = (v: any): boolean => {
 };
 
 /**
+ * Checks if the given object is non-empty.
+ *
+ * @param {Obj} obj The object to check.
+ * @returns {boolean} Returns true if the object is non-empty, else false.
+ *
+ * @example
+ *
+ * objectIsNonEmpty({})
+ * // => false
+ *
+ * objectIsNonEmpty({ key: 'value' })
+ * // => true
+ */
+export const objectIsNonEmpty = (obj: Obj): boolean => {
+  return !objectIsEmpty(obj);
+};
+
+/**
+ * Checks if the given object is empty.
+ *
+ * @param {Obj} obj The object to check.
+ * @returns {boolean} Returns true if the object is empty, else false.
+ *
+ * @example
+ *
+ * objectIsEmpty({})
+ * // => true
+ *
+ * objectIsEmpty({ key: 'value' })
+ * // => false
+ *
+ * objectIsEmpty({ key: undefined })
+ * // => false
+ */
+export const objectIsEmpty = (obj: Obj): boolean => {
+  return Object.keys(obj).length <= 0;
+};
+
+/**
  * Converts the first character of `string` to upper case and the remaining
  * to lower case.
  *
@@ -188,28 +229,71 @@ export const isEmpty = (v: any): boolean => {
  * // => 'Rothko-ui'
  */
 export const capitalize = (str: string): string => {
-  if (typeof str !== 'string') return '';
-  if (str === '') return str;
+  if (str.length <= 0) return str;
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 };
 
 /**
- * Converts a kebab-case string to camelCase.
+ * Converts a string to start case (capitalizes the first letter of each word).
  *
- * @param {string} str The kebab-case string to convert.
+ * @param {string} str The string to convert.
+ * @returns {string} Returns the start case string.
+ * @example
+ *
+ * startCase('rothko-ui-component')
+ * // => 'Rothko Ui Component'
+ *
+ * startCase('ROTHKO_UI_COMPONENT')
+ * // => 'Rothko Ui Component'
+ */
+export const toStartCase = (str: string): string => {
+  return splitWords(str)
+    .map(word => capitalize(word))
+    .join(' ');
+};
+
+/**
+ * Converts a string to camelCase.
+ *
+ * @param {string} str The string to convert.
  * @returns {string} Returns the camelCase string.
  * @example
  *
- * kebabToCamelCase('rothko-ui-component')
+ * camelCase('Rothko UI Component')
  * // => 'rothkoUiComponent'
  */
-export const kebabToCamelCase = (str: string): string => {
-  const camelCaps = str
-    .split('-')
-    .filter(s => s.length)
-    .map(capitalize)
+export const toCamelCase = (str: string): string => {
+  return splitWords(str)
+    .map((word, index) => (index === 0 ? word.toLowerCase() : capitalize(word)), [] as string[])
     .join('');
-  return `${camelCaps.slice(0, 1).toLowerCase()}${camelCaps.slice(1)}`;
+};
+
+/**
+ * Converts a string to snake_case.
+ *
+ * @param {string} str The string to convert.
+ * @returns {string} Returns the snake_case string.
+ * @example
+ *
+ * snakeCase('Rothko UI Component')
+ * // => 'rothko_ui_component'
+ */
+export const toSnakeCase = (str: string): string => {
+  return splitWords(str).join('_').toLowerCase();
+};
+
+/**
+ * Converts a string to SCREAMING_SNAKE_CASE.
+ *
+ * @param {string} str The string to convert.
+ * @returns {string} Returns the SCREAMING_SNAKE_CASE string.
+ * @example
+ *
+ * toScreamingSnakeCase('Rothko UI Component')
+ * // => 'ROTHKO_UI_COMPONENT'
+ */
+export const toScreamingSnakeCase = (str: string): string => {
+  return splitWords(str).join('_').toUpperCase();
 };
 
 /**
@@ -223,18 +307,40 @@ export const kebabToCamelCase = (str: string): string => {
  * // => 'rothko-ui'
  */
 export const toKebabCase = (str: string): string => {
-  return (
-    str
-      .replace(/\s+/g, '-')
-      .replace(/([A-Z])/g, match => `-${match.toLowerCase()}`)
-      // special characters
-      .replace(/[^a-zA-Z0-9-]/g, '')
-      // duplicate hyphens to single hyphen
-      .replace(/-+/g, '-')
-      // leading hyphen
-      .replace(/^-/, '')
-      .toLowerCase()
-  );
+  return splitWords(str).join('-').toLowerCase();
+};
+
+/**
+ * Converts a string to PascalCase.
+ *
+ * @param {string} str The string to convert.
+ * @returns {string} Returns the PascalCase string.
+ * @example
+ *
+ * toPascalCase('rothko ui component')
+ * // => 'RothkoUiComponent'
+ */
+export const toPascalCase = (str: string): string => {
+  return splitWords(str)
+    .reduce((acc, word) => [...acc, capitalize(word)], [] as string[])
+    .join('');
+};
+
+/**
+ * Truncates a string if it exceeds the specified length.
+ *
+ * @param {string} str The string to truncate.
+ * @param {number} maxLength The maximum length of the string.
+ * @param {string} [suffix='...'] The string to append at the end of the truncated string.
+ * @returns {string} Returns the truncated string.
+ * @example
+ *
+ * truncateString('hello world', 5)
+ * // => 'hello...'
+ */
+export const truncateString = (str: string, maxLength: number, suffix = '...'): string => {
+  if (str.length <= maxLength) return str;
+  return `${str.slice(0, maxLength - suffix.length)}${suffix}`;
 };
 
 /**
@@ -272,6 +378,30 @@ export const compact = <T>(arr: (T | Falsy)[]): T[] => {
  */
 export const asCompactedArray = <T>(v: Nilable<T> | T[]): T[] => {
   return compact(isArray(v) ? v : [v]);
+};
+
+/**
+ *
+ *
+ * @param {Record<Key1, Value>} obj
+ * @param {(key: string, value: Value) => Key2} fn
+ * @returns  {Record<Key2, Value>}
+ *
+ * @example
+ *
+ * mapKeys({ a: 1, b: 2 }, (key, value) => key.toUpperCase())
+ * // => { A: 1, B: 2 }
+ */
+export const mapKeys = <Obj extends Record<keyof any, any>, NewKey extends keyof any>(
+  obj: Obj,
+  fn: (key: keyof Obj, value: Obj[keyof Obj]) => NewKey
+): Record<NewKey, Obj[keyof Obj]> => {
+  const result: Record<NewKey, Obj[keyof Obj]> = {} as Record<NewKey, Obj[keyof Obj]>;
+  for (const key in obj) {
+    const value = obj[key];
+    result[fn(key, value)] = value;
+  }
+  return result;
 };
 
 /**

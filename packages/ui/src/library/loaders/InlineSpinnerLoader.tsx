@@ -74,17 +74,17 @@ const SpinnerSpan = styled.span<SpinnerSpanProps>`
   )}
 
   border-top-color: ${({ $color }) => {
-    if (!$color) return 'var(--rothko-color, #000)';
+    if (!$color) return 'var(--rothko-foreground, #000)';
     return isRothkoKind($color) ? `var(--rothko-${$color}-500, #000)` : $color;
   }};
 
   border-right-color: ${({ $color }) => {
-    if (!$color) return 'var(--rothko-color, #000)';
+    if (!$color) return 'var(--rothko-foreground, #000)';
     return isRothkoKind($color) ? `var(--rothko-${$color}-500, #000)` : $color;
   }};
 
   border-bottom-color: ${({ $color }) => {
-    if (!$color) return 'var(--rothko-color, #000)';
+    if (!$color) return 'var(--rothko-foreground, #000)';
     return isRothkoKind($color) ? `var(--rothko-${$color}-500, #000)` : $color;
   }};
 

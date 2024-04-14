@@ -133,12 +133,12 @@ const ToastAnimatedContainerDiv = styled.div<{
   code .rothko-toast-text {
     margin-top: 0;
     color: ${({ kind }) =>
-      kind ? `var(--rothko-${kind}-color, #000)` : 'var(--rothko-toast-color, #000)'};
+      kind ? `var(--rothko-${kind}-foreground, #000)` : 'var(--rothko-toast-color, #000)'};
   }
 
   & > * .rothko-toast-icon {
     fill: ${({ kind }) =>
-      kind ? `var(--rothko-${kind}-color, #000)` : 'var(--rothko-toast-color, #000)'};
+      kind ? `var(--rothko-${kind}-foreground, #000)` : 'var(--rothko-toast-color, #000)'};
   }
 `;
 

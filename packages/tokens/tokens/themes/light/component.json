@@ -1,91 +1,87 @@
 {
-  "base": {
-    "background": { "value": "#fff" },
-    "border": { "value": "#000" },
-    "color": { "value": "#000" },
-    "svg": {
-      "fill": { "value": "{base.color}" },
-      "stroke": { "value": "{base.color}" }
+  "background": { "value": "#fff" },
+  "border": { "value": "#000" },
+  "foreground": { "value": "#000" },
+  "svg": {
+    "fill": { "value": "{foreground}" },
+    "stroke": { "value": "{foreground}" }
+  },
+  "link": { "value": "#0000ee" },
+  "slider": {
+    "handle": {
+      "border": { "value": "#DEE7F5" },
+      "background": { "value": "#EBF2FB" }
+    },
+    "range": {
+      "background": { "value": "#3e4e94" }
+    },
+    "track": {
+      "background": { "value": "#000" }
     }
   },
-  "component": {
-    "link": { "value": "#0000ee" },
-    "slider": {
-      "handle": {
-        "border": { "value": "#DEE7F5" },
-        "background": { "value": "#EBF2FB" }
-      },
-      "range": {
-        "background": { "value": "#3e4e94" }
-      },
-      "track": {
-        "background": { "value": "#000" }
-      }
+  "dropdown": {
+    "background": { "value": "#FFF" },
+    "border_minimal": { "value": "rgba(188, 199, 223, 0.08)" },
+    "multiselect": {
+      "text": { "value": "{info.500}" },
+      "background": { "value": "#FFF" }
     },
-    "dropdown": {
-      "background": { "value": "#FFF" },
-      "border_minimal": { "value": "rgba(188, 199, 223, 0.08)" },
-      "multiselect": {
-        "text": { "value": "{semanticColor.info.500}" },
-        "background": { "value": "#FFF" }
-      },
-      "option": {
-        "background_selected": { "value": "#EEE" }
-      }
-    },
-    "search": {
-      "background": { "value": "#FFF" },
-      "option": {
-        "background_selected": { "value": "#EEE" }
-      }
-    },
-    "tabBar": {
-      "border": { "value": "#000" }
-    },
-    "radio": {
-      "border": { "value": "#DEE7F5" },
-      "background": { "value": "#EBF2FB" },
-      "background_selected": { "value": "{semanticColor.info.500}" }
-    },
-    "table": {
-      "background": { "value": "#fff" },
-      "header": {
-        "background": { "value": "#f8f9fa" }
-      },
-      "row": {
-        "border": { "value": "#f3f3f5" },
-        "minimized": {
-          "background": { "value": "#f8f9fa" }
-        }
-      }
-    },
-    "toast": {
-      "color": { "value": "#fff" },
-      "background": { "value": "#000" },
-      "life": {
-        "filled": { "value": "#e93c2f" },
-        "empty": { "value": "transparent" }
-      }
-    },
-    "box": {
-      "background": { "value": "#f8f9fa" },
-      "border": { "value": "{base.border}" }
-    },
-    "accordion": {
-      "border": { "value": "{base.border}" },
+    "option": {
+      "background_selected": { "value": "#EEE" }
+    }
+  },
+  "search": {
+    "background": { "value": "#FFF" },
+    "option": {
+      "background_selected": { "value": "#EEE" }
+    }
+  },
+  "tabBar": {
+    "border": { "value": "#000" }
+  },
+  "radio": {
+    "border": { "value": "#DEE7F5" },
+    "background": { "value": "#EBF2FB" },
+    "background_selected": { "value": "{info.500}" }
+  },
+  "table": {
+    "background": { "value": "#fff" },
+    "header": {
       "background": { "value": "#f8f9fa" }
     },
-    "checkbox": {
-      "background": { "value": "#DEE7F5" },
-      "background_selected": { "value": "#c42317" }
-    },
-    "input": {
-      "background": { "value": "rgba(188, 199, 223, 0.24)" },
-      "color": { "value": "{base.color}" }
-    },
-    "skeleton": {
-      "background": { "value": "#DEE7F5" },
-      "foreground": { "value": "#EBF2FB" }
+    "row": {
+      "border": { "value": "#f3f3f5" },
+      "minimized": {
+        "background": { "value": "#f8f9fa" }
+      }
     }
+  },
+  "toast": {
+    "color": { "value": "#fff" },
+    "background": { "value": "#000" },
+    "life": {
+      "filled": { "value": "#e93c2f" },
+      "empty": { "value": "transparent" }
+    }
+  },
+  "box": {
+    "background": { "value": "#f8f9fa" },
+    "border": { "value": "{border}" }
+  },
+  "accordion": {
+    "border": { "value": "{border}" },
+    "background": { "value": "#f8f9fa" }
+  },
+  "checkbox": {
+    "background": { "value": "#DEE7F5" },
+    "background_selected": { "value": "#c42317" }
+  },
+  "input": {
+    "background": { "value": "rgba(188, 199, 223, 0.24)" },
+    "color": { "value": "{foreground}" }
+  },
+  "skeleton": {
+    "background": { "value": "#DEE7F5" },
+    "foreground": { "value": "#EBF2FB" }
   }
 }

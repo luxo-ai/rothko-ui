@@ -1,4 +1,4 @@
-import camelCase from 'lodash/camelCase';
+import { toCamelCase } from '@rothko-ui/utils';
 import type { NavigationSection, NavigationSectionWithoutTo } from './types';
 
 const GETTING_STARTED: readonly NavigationSectionWithoutTo[] = [
@@ -40,10 +40,10 @@ export const buildSections = (
 ): NavigationSection[] => {
   return sectionList.map(item => {
     const children = 'children' in item ? buildSections(item.children, urlPrefix) : undefined;
-    const route = camelCase(item.label);
+    const route = toCamelCase(item.label);
     return {
       ...item,
-      to: urlPrefix ? `${urlPrefix}/${camelCase(item.label)}` : route,
+      to: urlPrefix ? `${urlPrefix}/${toCamelCase(item.label)}` : route,
       children,
     };
   });

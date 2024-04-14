@@ -1,7 +1,7 @@
 import { Container, Flex, Typography, useRothko } from '@rothko-ui/ui';
-import startCase from 'lodash/startCase';
 import Link from 'next/link';
 import WithNavigation from '../../components/WithNavigation';
+import { toStartCase } from '@rothko-ui/utils';
 
 const COMPONENTS = [
   'accordion',
@@ -73,7 +73,7 @@ const ComponentsPage = () => {
             rowGap="1.25rem"
           >
             <div style={{ height: '100%', flex: 1, width: '100%' }}>
-              <Typography.h6>{startCase(component)}</Typography.h6>
+              <Typography.h6>{toStartCase(component)}</Typography.h6>
               <Typography.bodySmall style={{ marginTop: '0.75rem' }}>
                 {COMPONENTS_COPY[component]}
               </Typography.bodySmall>

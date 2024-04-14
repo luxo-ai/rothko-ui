@@ -1,4 +1,3 @@
-import { noop, truncate } from 'lodash';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import FuzzySearch from 'fuzzy-search';
 import React, { useMemo, useState } from 'react';
@@ -23,6 +22,7 @@ import { JSXCode } from '../../Code';
 import Card from '../Card';
 import iconographyCopy from './copy';
 import styles from './Icons.module.scss';
+import { noop, truncateString } from '@rothko-ui/utils';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/icons';
 
@@ -115,7 +115,7 @@ const IconsCard = () => {
                           <Flex flexDirection="column" alignItems="center" gap="1rem">
                             <C width={30} height={30} />
                             <Typography.bodySmall>
-                              {truncate(iconName, { length: 18 })}
+                              {truncateString(iconName, 18)}
                             </Typography.bodySmall>
                           </Flex>
                         </button>

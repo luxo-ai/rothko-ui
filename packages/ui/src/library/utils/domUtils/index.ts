@@ -1,5 +1,5 @@
-import type { Nullable } from '@rothko-ui/utils';
-import { kebabToCamelCase, parseInt, findBy } from '@rothko-ui/utils';
+import type { Nilable } from '@rothko-ui/utils';
+import { parseInt, findBy, toCamelCase } from '@rothko-ui/utils';
 import type React from 'react';
 import type { RemSize } from '../../../types';
 import { innerHeight, innerWidth, outerHeight, outerWidth } from './dimensions';
@@ -23,7 +23,7 @@ export const getCssKeyWithBrowserPrefix = (cssKey: string) => {
 
   for (const prefix of browserPrefixes) {
     const withPrefix = `${prefix}-${cssKey}`;
-    if (kebabToCamelCase(withPrefix) in docStyle) {
+    if (toCamelCase(withPrefix) in docStyle) {
       return withPrefix;
     }
   }
@@ -36,7 +36,7 @@ type Unit = 'px' | '%' | 'rem' | 'em';
 export const getInlineCSSTranslation = ({ x = 0, y = 0 }: Position, unit: Unit = 'px') => {
   const key = getCssKeyWithBrowserPrefix('transform');
   const value = `translate(${x}${unit},${y}${unit})`;
-  return { [kebabToCamelCase(key)]: value };
+  return { [toCamelCase(key)]: value };
 };
 
 export const getTouch = (evt: React.TouchEvent, identifier: number) => {
@@ -57,7 +57,7 @@ type CalculatePosnArgs = {
   evt: DragEvent;
   forElement: HTMLElement;
   dragDelta?: DragDelta;
-  touchIdentifier?: Nullable<number>;
+  touchIdentifier?: Nilable<number>;
 };
 
 export const calculateXYDragPosn = ({

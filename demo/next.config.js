@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 
-const withTM = require('next-transpile-modules')(['@rothko-ui/ui', '@rothko-ui/icons']);
+const withTM = require('next-transpile-modules')([
+  '@rothko-ui/icons',
+  '@rothko-ui/tokens',
+  '@rothko-ui/ui',
+]);
 
 module.exports = {
   ...withTM(),

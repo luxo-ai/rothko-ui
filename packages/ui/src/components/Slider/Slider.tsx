@@ -1,4 +1,4 @@
-import type { Nullable } from '@rothko-ui/utils';
+import type { Nilable } from '@rothko-ui/utils';
 import React, { useMemo } from 'react';
 import type { RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
@@ -82,7 +82,7 @@ type SliderProps = WithAria<{
   /**
    * The current value of the Slider component.
    */
-  value?: Nullable<number>;
+  value?: Nilable<number>;
 }>;
 
 const Slider = ({

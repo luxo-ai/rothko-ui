@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Nullable, Obj } from '@rothko-ui/utils';
+import type { Nilable, Obj } from '@rothko-ui/utils';
 import type React from 'react';
 
 const touchesKeys = ['touches', 'targetTouches', 'changedTouches'] as const;
@@ -30,7 +30,7 @@ export const hasTouches = <K extends TouchKey>(evt: React.UIEvent, ...keys: K[])
 };
 
 export const addEvent = (
-  node: Nullable<Node>,
+  node: Nilable<Node>,
   event: string,
   handler: (e: any) => void,
   inputOptions?: AddEventListenerOptions
@@ -50,7 +50,7 @@ export const addEvent = (
 };
 
 export const removeEvent = (
-  node: Nullable<Node>,
+  node: Nilable<Node>,
   event: string,
   handler: (e: any) => void,
   inputOptions?: AddEventListenerOptions

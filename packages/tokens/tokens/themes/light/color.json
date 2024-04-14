@@ -1,0 +1,74 @@
+{
+  "primary": {
+    "100": { "value": "#000000" },
+    "200": { "value": "#000000" },
+    "300": { "value": "#000000" },
+    "400": { "value": "#000000" },
+    "500": { "value": "#000000" },
+    "600": { "value": "#000000" },
+    "700": { "value": "#000000" },
+    "800": { "value": "#000000" },
+    "900": { "value": "#000000" },
+    "foreground": { "value": "#FFFFFF" }
+  },
+  "secondary": {
+    "100": { "value": "#FDF2FC" },
+    "200": { "value": "#FBE5FB" },
+    "300": { "value": "#F3D5F5" },
+    "400": { "value": "#E6C5EB" },
+    "500": { "value": "#D4AEDE" },
+    "600": { "value": "#AC7FBE" },
+    "700": { "value": "#86579F" },
+    "800": { "value": "#613780" },
+    "900": { "value": "#45216A" },
+    "foreground": { "value": "#000000" }
+  },
+  "success": {
+    "100": { "value": "#DBFED9" },
+    "200": { "value": "#B4FDB6" },
+    "300": { "value": "#8DF99B" },
+    "400": { "value": "#6FF38E" },
+    "500": { "value": "#42EC7A" },
+    "600": { "value": "#30CA72" },
+    "700": { "value": "#21A969" },
+    "800": { "value": "#15885D" },
+    "900": { "value": "#0C7155" },
+    "foreground": { "value": "#000000" }
+  },
+  "info": {
+    "100": { "value": "#CCE6FB" },
+    "200": { "value": "#9BCBF7" },
+    "300": { "value": "#66A5E7" },
+    "400": { "value": "#3F7FD0" },
+    "500": { "value": "#0D4FB2" },
+    "600": { "value": "#093D99" },
+    "700": { "value": "#062D80" },
+    "800": { "value": "#041F67" },
+    "900": { "value": "#021655" },
+    "foreground": { "value": "#FFFFFF" }
+  },
+  "warning": {
+    "100": { "value": "#FFF9CC" },
+    "200": { "value": "#FFF399" },
+    "300": { "value": "#FFEA66" },
+    "400": { "value": "#FFE23F" },
+    "500": { "value": "#FFD400" },
+    "600": { "value": "#DBB200" },
+    "700": { "value": "#B79200" },
+    "800": { "value": "#937300" },
+    "900": { "value": "#7A5D00" },
+    "foreground": { "value": "#000000" }
+  },
+  "danger": {
+    "100": { "value": "#FCDBC9" },
+    "200": { "value": "#F9AF95" },
+    "300": { "value": "#EF785F" },
+    "400": { "value": "#E04638" },
+    "500": { "value": "#CC0000" },
+    "600": { "value": "#AF000F" },
+    "700": { "value": "#920019" },
+    "800": { "value": "#76001E" },
+    "900": { "value": "#610021" },
+    "foreground": { "value": "#FFFFFF" }
+  }
+}

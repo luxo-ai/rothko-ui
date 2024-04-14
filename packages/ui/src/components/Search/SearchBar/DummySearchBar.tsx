@@ -1,4 +1,4 @@
-import type { Nullable } from '@rothko-ui/utils';
+import type { Nilable } from '@rothko-ui/utils';
 import React from 'react';
 import styled from 'styled-components';
 import { ItemText } from '../../../library/Common';
@@ -8,7 +8,7 @@ import SearchButton from './SearchButton';
 import styles from './styles';
 
 type DummySearchBarProps = {
-  activeText?: Nullable<string>;
+  activeText?: Nilable<string>;
   className?: string;
   disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;

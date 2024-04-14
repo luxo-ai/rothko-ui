@@ -1,4 +1,3 @@
-import isString from 'lodash/isString';
 import Link from 'next/link';
 import React from 'react';
 
@@ -13,7 +12,7 @@ import {
   Typography,
   useRothko,
 } from '@rothko-ui/ui';
-import { asCompactedArray, toKebabCase } from '@rothko-ui/utils';
+import { asCompactedArray, isString, toKebabCase } from '@rothko-ui/utils';
 
 import { Code } from '../Code';
 import styles from './Cards.module.scss';

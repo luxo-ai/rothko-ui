@@ -6,7 +6,6 @@ import {
   isNotNil,
   isEmpty,
   capitalize,
-  kebabToCamelCase,
   compact,
   asCompactedArray,
   last,
@@ -19,6 +18,7 @@ import {
   findBy,
   isTruthy,
   isFalsy,
+  toCamelCase,
 } from './helpers';
 
 describe('isArray', () => {
@@ -195,9 +195,9 @@ describe('capitalize', () => {
   });
 });
 
-describe('kebabToCamelCase', () => {
+describe('toCamelCase', () => {
   it('should convert kebab-case to camelCase', () => {
-    expect(kebabToCamelCase('hello-world')).toBe('helloWorld');
+    expect(toCamelCase('hello-world')).toBe('helloWorld');
   });
 });
 

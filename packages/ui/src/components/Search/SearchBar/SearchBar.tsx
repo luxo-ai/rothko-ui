@@ -1,4 +1,4 @@
-import type { Nullable } from '@rothko-ui/utils';
+import type { Nilable } from '@rothko-ui/utils';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { phantomInputStyle } from '../../../library/PhantomInput';
@@ -19,7 +19,7 @@ type SearchBarProps = {
   onQueryChange: (q: string) => void;
   onSubmit: () => void;
   placeholder?: string;
-  query: Nullable<string>;
+  query: Nilable<string>;
 };
 
 const SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(

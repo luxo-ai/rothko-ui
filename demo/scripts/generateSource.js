@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const fs = require('fs').promises;
 const path = require('path');
-const snakCase = require('lodash/snakeCase');
+const { toSnakeCase } = require('@rothko-ui/utils');
 
 const usageDirName = 'usage';
 const outputFileName = 'sourceCode.ts';
@@ -23,7 +23,7 @@ async function processUsageDir(dirPath) {
   for (const fileName of fileNames) {
     if (fileName.endsWith('.tsx')) {
       const fileContent = await fs.readFile(path.join(dirPath, fileName), 'utf8');
-      const varName = snakCase(path.basename(fileName, '.tsx')).toUpperCase();
+      const varName = toSnakeCase(path.basename(fileName, '.tsx')).toUpperCase();
       aggregatedSource += `export const ${varName} = \`\n${cleanComponent(
         escapeForTemplateLiteral(fileContent)
       )}\`;\n`;

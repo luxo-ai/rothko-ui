@@ -1,4 +1,4 @@
-import type { Nullable } from '@rothko-ui/utils';
+import type { Nilable } from '@rothko-ui/utils';
 import { parseInt } from '@rothko-ui/utils';
 
 export const innerHeight = (el: HTMLElement) => {
@@ -77,11 +77,11 @@ export const scrollBarWidth = () => {
   );
 };
 
-export const getElementFullHeight = (el: Nullable<HTMLElement>) => {
+export const getElementFullHeight = (el: Nilable<HTMLElement>) => {
   return el?.getBoundingClientRect().height || 0;
 };
 
-export const getElementFullWidth = (el: Nullable<HTMLElement>) => {
+export const getElementFullWidth = (el: Nilable<HTMLElement>) => {
   return el?.getBoundingClientRect().width || 0;
 };
 

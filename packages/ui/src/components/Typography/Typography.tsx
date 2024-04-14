@@ -34,7 +34,8 @@ export const textStyle = css<TextProps>`
   font-family: var(--rothko-typography-body-regular);
   font-size: 1rem;
   line-height: 1.5rem;
-  color: ${({ kind }) => (kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)')};
+  color: ${({ kind }) =>
+    kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-foreground, #000)'};
 
   & > strong {
     ${boldTextStyle}
@@ -153,7 +154,8 @@ const linkStyle = css<LinkProps>`
   padding: 0px;
   text-decoration: none;
 
-  color: ${({ asText }) => (asText ? `var(--rothko-color, #000)` : 'var(--rothko-link, #0000ee)')};
+  color: ${({ asText }) =>
+    asText ? `var(--rothko-foreground, #000)` : 'var(--rothko-link, #0000ee)'};
 
   &.underline {
     text-decoration: underline;
@@ -208,7 +210,8 @@ const inlineBodySmall = styled.span<TextProps>`
 const code = styled.code<{
   kind?: RothkoKind;
 }>`
-  color: ${({ kind }) => (kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-color, #000)')};
+  color: ${({ kind }) =>
+    kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-foreground, #000)'};
   // padding: 0.125rem 0.25rem;
   // border-radius: 0.125rem;
   // background: #ffe5f8;

@@ -49,7 +49,7 @@ const StyledTable = styled.table`
   font-variant-numeric: tabular-nums;
   border-collapse: collapse;
   background: var(--rothko-table-background, transparent);
-  color: var(--rothko-color, #000);
+  color: var(--rothko-foreground, #000);
   // width: 100%;
 
   & thead {

@@ -27,7 +27,7 @@ const SearchButtonBase = styled(PhantomButton)`
   border-radius: 50%;
 
   :active:not(:disabled) {
-    background-color: var(--rothko-color, #000);
+    background-color: var(--rothko-foreground, #000);
     & > svg {
       fill: var(--rothko-background, #fff);
     }

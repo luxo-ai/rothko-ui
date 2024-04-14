@@ -29,7 +29,7 @@ export const textChildrenStyle = css`
   p,
   span,
   code {
-    color: var(--rothko-color, #000);
+    color: var(--rothko-foreground, #000);
   }
 `;
 
@@ -45,6 +45,6 @@ export const semanticTextChildrenStyle = css<{
   p,
   span,
   code {
-    color: ${({ kind }) => `var(--rothko-${kind}-color, #000)`};
+    color: ${({ kind }) => `var(--rothko-${kind}-foreground, #000)`};
   }
 `;
