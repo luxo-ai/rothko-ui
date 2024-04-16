@@ -152,7 +152,8 @@ const codeStyle = css`
   padding-right: 0.25rem;
   background-color: rgb(153 161 179 / 0.1);
   border-radius: 0.375rem;
-  white-space: nowrap;
+  // white-space: nowrap;
+  white-space: pre-wrap;
   transition: opacity 0.25s ease 0s;
 `;
 
