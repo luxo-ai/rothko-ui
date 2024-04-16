@@ -75,7 +75,7 @@ export const useLRUCache = <T, Arg = undefined>({
 
       return data;
     },
-    [dataFetcher, keyGenerator, cache]
+    [dataFetcher, keyGenerator, cache, cacheMax, debug]
   );
 
   return fetchWithCache;

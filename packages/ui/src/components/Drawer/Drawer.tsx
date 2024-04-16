@@ -3,11 +3,10 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import { Close } from '@rothko-ui/icons';
-import { classes } from '@rothko-ui/utils';
 
-import { ShadedBackdrop } from '../../library/Common';
+import ShadedBackdrop from '../../library/ShadedBackdrop';
 import { PhantomButton } from '../../library/PhantomButton';
-import { DomPortal } from '../../library/Portal';
+import DomPortal from '../../library/Portal';
 import {
   BODY_SCROLL_LOCK_IGNORE_ID,
   disableBodyScroll,
@@ -15,9 +14,10 @@ import {
 } from '../../library/utils/domUtils';
 import DrawerContext from './DrawerContext';
 import { textChildrenStyle } from '../../library/Styles';
-import { textStyle } from '../Typography/Typography';
+import { bodySizeStyle, paragraphStyle } from '../Typography/Typography';
 import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
 import useId from '../../library/hooks/useId';
+import { vuar } from '../../library/utils/vuar';
 
 const TABLET_OR_MOBILE_MAX_WIDTH_PX = 750;
 const DEFAULT_DRAWER_WIDTH_PX = 350;
@@ -115,11 +115,7 @@ const Drawer = ({
   return (
     <DrawerContext.Provider value={{ isOpen, closeDrawer }}>
       <DomPortal wrapperId="rothko-drawer-portal">
-        <DrawerBackdrop
-          aria-hidden
-          className={classes({ ['backdrop-open']: isOpen })}
-          onClick={onBackdropClick}
-        >
+        <DrawerBackdrop aria-hidden $show={isOpen} onClick={onBackdropClick}>
           {transition(
             (style, item) =>
               item && (
@@ -156,7 +152,7 @@ const Drawer = ({
 const AnimatedDrawerContainerDiv = animated(styled.div`
   position: fixed;
   inset: 0 auto 0 0;
-  background: var(--rothko-background, #fff);
+  background: ${vuar({ category: 'background', fallback: '#fff' })};
 
   padding: 1.5rem 1.5rem;
 
@@ -173,14 +169,14 @@ const AnimatedDrawerContainerDiv = animated(styled.div`
 
 const DrawerContentContainerDiv = styled.div`
   ${textChildrenStyle}
-  ${textStyle}
+  ${paragraphStyle}
+  ${bodySizeStyle}
   margin: 0;
   padding: 0;
 `;
 
 const DrawerBackdrop = styled(ShadedBackdrop)`
   -webkit-backface-visibility: hidden;
-  z-index: 1;
   display: flex;
   padding: 0 1rem;
 `;

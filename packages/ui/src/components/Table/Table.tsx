@@ -1,12 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { textStyle } from '../Typography/Typography';
+import {
+  bodySizeStyle,
+  boldFontStyle,
+  lightFontStyle,
+  paragraphStyle,
+} from '../Typography/Typography';
 import TableBody from './TableBody';
 import TableContext from './TableContext';
 import TableHeader from './TableHeader';
 import TableHeaders from './TableHeaders';
 import { isStringHeader } from './helpers';
 import type { Header } from './types';
+import { vuar } from '../../library/utils/vuar';
 
 type TableProps = {
   headers?: Header[];
@@ -48,31 +54,33 @@ const StyledTable = styled.table`
   width: 100%;
   font-variant-numeric: tabular-nums;
   border-collapse: collapse;
-  background: var(--rothko-table-background, transparent);
-  color: var(--rothko-foreground, #000);
+  background: ${vuar({ element: 'table', category: 'background', fallback: 'transparent' })};
+
+  color: ${vuar({ category: 'foreground' })};
   // width: 100%;
 
   & thead {
-    background: var(--rothko-table-header-background, #ccc);
+    background: ${vuar({ category: 'background', element: 'table-header' })};
   }
 
   & tr:not(:last-of-type) {
     border-bottom-width: 0.1rem;
     border-bottom-style: solid;
-    border-bottom-color: var(--rothko-table-row-border, #000);
+    border-bottom-color: ${vuar({ element: 'table-row', category: 'border', fallback: '#000' })};
   }
 
   & th {
     text-align: start;
-    ${textStyle}
-    font-family: var(--rothko-typography-body-bold);
-    font-weight: bold;
+    ${paragraphStyle}
+    ${bodySizeStyle}
+    ${boldFontStyle}
     padding: 1rem 1.25rem;
   }
 
   & td {
-    ${textStyle}
-    font-family: var(--rothko-typography-body-light);
+    ${paragraphStyle}
+    ${bodySizeStyle}
+    ${lightFontStyle}
     padding: 1.25rem;
   }
 
@@ -101,7 +109,12 @@ const StyledTable = styled.table`
     }
 
     & tr {
-      background: var(--rothko-table-row-minimized-background, transparent);
+      background: ${vuar({
+        element: 'table-row-minimized',
+        category: 'background',
+        fallback: 'transparent',
+      })};
+
       margin-bottom: 0.3rem;
     }
 
@@ -115,7 +128,6 @@ const StyledTable = styled.table`
 
     & {
       background: unset;
-      // border: 0.1rem solid var(--rothko-table-row-border, #000);
     }
 
     & td.pivoted {

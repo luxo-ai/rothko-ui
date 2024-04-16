@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import type { RothkoKind } from '../../../theme/types';
+import { vuar } from '../../../library/utils/vuar';
 
 const SliderRangeDiv = styled.div<{ kind?: RothkoKind; $disabled?: boolean }>`
   position: absolute;
@@ -7,12 +8,12 @@ const SliderRangeDiv = styled.div<{ kind?: RothkoKind; $disabled?: boolean }>`
   margin: 0;
   border-radius: 2px;
   background: ${({ kind }) =>
-    kind
-      ? `var(--rothko-${kind}-500, --rothko-slider-range-background, #3e4e94)`
-      : `var(--rothko-slider-range-background, #3e4e94)`};
+    vuar({ kind, category: 'background', element: 'slider-range', fallback: '#3e4e94' })};
+
   overflow: hidden;
   user-select: none;
   z-index: 2;
+
   ${({ $disabled }) =>
     $disabled &&
     css`

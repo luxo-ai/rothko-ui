@@ -5,19 +5,20 @@ import styled, { css } from 'styled-components';
 import { ChevronDownOutline, ChevronRightOutline, CloseOutline } from '@rothko-ui/icons';
 import { classes, isNil } from '@rothko-ui/utils';
 
-import { ItemText, LabelText } from '../../library/Common';
 import { useDebuggerContext } from '../../library/DebuggerContext';
 import useDropdownMenu from '../../library/hooks/useMenu';
 import { DefaultRenderOption } from '../../library/RenderOption';
 import type { NestedOption, Option, RenderOption, Value } from '../../library/types';
 import { directionMap } from '../../library/utils/keyUtils';
-import BackLinkButton from '../Button/BackLinkButton';
+import BackButton from '../../library/BackButton';
 import Typography from '../Typography/Typography';
 import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } from './Shared';
 import type { DropdownInnerProps } from './types';
 import type { StackOption } from './useNestedOptions';
 import useNestedOptions from './useNestedOptions';
 import useId from '../../library/hooks/useId';
+import ItemText from '../../library/ItemText';
+import LabelText from '../../library/LabelText';
 
 type NestedDropdownProps<V extends Value> = Pick<
   DropdownInnerProps<V, undefined>,
@@ -183,10 +184,6 @@ function NestedDropdown<V extends Value>({
     empty: !hasOptions,
   });
 
-  const dropdownMenuClasses = classes({
-    ['open-reverse']: openReverse,
-  });
-
   return (
     <div className={className}>
       {label && <LabelText id={labelId}>{label}</LabelText>}
@@ -213,7 +210,7 @@ function NestedDropdown<V extends Value>({
         className={containerClasses}
       >
         <TextContainerDiv className={classes({ disabled })} tabIndex={-1}>
-          {isNil(value) && <ItemText placeHolder>{placeholder}</ItemText>}
+          {isNil(value) && <ItemText $placeHolder>{placeholder}</ItemText>}
           {!isNil(value) && (
             <ItemText>{pathToCurrentOption.map(o => o.label).join(' / ')}</ItemText>
           )}
@@ -223,7 +220,7 @@ function NestedDropdown<V extends Value>({
             $open={open}
             $rotateOnOpen
             aria-label="Open"
-            className={classes({ disabled })}
+            disabled={disabled}
             onClick={toggleMenu}
           >
             <ChevronDownOutline aria-hidden width="1rem" height="1rem" />
@@ -231,7 +228,7 @@ function NestedDropdown<V extends Value>({
         ) : (
           <ControlButton
             aria-label="Clear Selection"
-            className={classes({ disabled })}
+            disabled={disabled}
             onClick={() => onSelect(null)}
           >
             <CloseOutline aria-hidden width="1rem" height="1rem" />
@@ -240,13 +237,13 @@ function NestedDropdown<V extends Value>({
         {open && (
           <DropdownMenu
             ref={menuRef}
-            className={dropdownMenuClasses}
+            $reverse={openReverse}
             tabIndex={-1}
             data-rothko-body-scroll-lock-ignore
           >
             {canGoToPrevCategory && (
               <ButtonContainerDiv>
-                <BackLinkButton
+                <BackButton
                   onClick={() => {
                     goToPrevCategory();
                     containerRef.current?.focus();

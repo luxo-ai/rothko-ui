@@ -12,6 +12,7 @@ import Typography from '../Typography/Typography';
 import type { ToastDetails } from './types';
 import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
 import useId from '../../library/hooks/useId';
+import { vuar } from '../../library/utils/vuar';
 
 type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
 
@@ -119,7 +120,13 @@ const ToastAnimatedContainerDiv = styled.div<{
   justify-content: space-between;
   padding: 1rem 0.75rem;
   background: ${({ kind }) =>
-    kind ? `var(--rothko-${kind}-500, #fff)` : 'var(--rothko-toast-background, #fff)'};
+    vuar({
+      kind,
+      element: 'toast',
+      category: 'background',
+      fallback: '#fff',
+    })};
+
   border-radius: 0.125rem;
 
   & > h1,
@@ -132,18 +139,20 @@ const ToastAnimatedContainerDiv = styled.div<{
   span,
   code .rothko-toast-text {
     margin-top: 0;
-    color: ${({ kind }) =>
-      kind ? `var(--rothko-${kind}-foreground, #000)` : 'var(--rothko-toast-color, #000)'};
+    color: ${({ kind }) => {
+      return vuar({ kind, element: 'toast', category: 'foreground', fallback: '#000' });
+    }};
   }
 
   & > * .rothko-toast-icon {
-    fill: ${({ kind }) =>
-      kind ? `var(--rothko-${kind}-foreground, #000)` : 'var(--rothko-toast-color, #000)'};
+    fill: ${({ kind }) => {
+      return vuar({ kind, element: 'toast', category: 'foreground', fallback: '#000' });
+    }};
   }
 `;
 
 const AnimatedWhiteBackdrop = styled(animated.div)`
-  background: var(--rothko-background, #fff);
+  background: ${vuar({ category: 'background' })}
   border-radius: 0.125rem;
   box-shadow: 0 1px 4px rgb(28 28 28 / 10%), 0 4px 6px rgb(28 28 28 / 4%),
     0 8px 16px rgb(28 28 28 / 4%), 0 10px 20px 2px rgb(28 28 28 / 2%),
@@ -166,10 +175,23 @@ const AnimatedLife = styled(animated.div)<{
   width: auto;
   background-image: linear-gradient(
     130deg,
-    ${({ kind }) =>
-      kind ? `var(--rothko-${kind}-100, #000)` : 'var(--rothko-toast-life-filled, #000)'},
-    ${({ kind }) =>
-      kind ? `var(--rothko-${kind}-transparent-100, #000)` : 'var(--rothko-toast-life-empty, #fff)'}
+    ${({ kind }) => {
+      return vuar({
+        kind,
+        element: 'toast-life-filled',
+        category: 'background',
+        fallback: '#000',
+      });
+    }},
+    ${({ kind }) => {
+      return vuar({
+        kind,
+        scale: 100,
+        element: 'toast-life-empty',
+        category: 'background',
+        fallback: '#fff',
+      });
+    }}
   );
   height: 0.2rem;
 `;

@@ -17,6 +17,7 @@ import { useDebuggerContext } from '../../library/DebuggerContext';
 import type { WithAriaHidden, WithAriaLabel, WithAriaLabelledBy } from '../../types';
 import useId from '../../library/hooks/useId';
 import AccordionIcon from './AccordionIcon';
+import { vuar } from '../../library/utils/vuar';
 
 type WithAria<T> = WithAriaHidden<WithAriaLabel<T>>;
 
@@ -273,18 +274,23 @@ type PanelContainerDivProps = {
 
 const PanelContainerDiv = styled.div<PanelContainerDivProps>`
   // overflow: hidden; do we need this? (messes with the onFous outline)
-  background: var(--rothko-accordion-background, #fff);
+  background: ${vuar({ element: 'accordion', category: 'background', fallback: '#fff' })};
 
   // padding: 0 0.875rem;
   border-radius: 0.125rem;
 
-  border: 1px solid var(--rothko-accordion-background, #fff);
+  border-width: 1px;
+  border-style: solid;
+  // same color as the accordion background
+  border-color: ${vuar({ element: 'accordion', category: 'background', fallback: '#fff' })};
 
   ${({ $bordered, kind }) =>
     $bordered &&
     css`
-      background: var(--rothko-background, transparent);
-      border: 1px solid ${kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-border, #000)'};
+      // same as global background
+      background: ${vuar({ category: 'background', fallback: 'transparent' })};
+      // set the border color
+      border-color: ${vuar({ kind, element: 'accordion', category: 'border' })};
     `}
 
   ${({ $spaced }) =>
@@ -314,19 +320,27 @@ const PanelContainerDiv = styled.div<PanelContainerDivProps>`
 const PanelLabelButton = styled.button<{ $disabled?: boolean }>`
   ${unselectableStyle}
   ${phantomButtonStyle}
+
   width: 100%;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   padding: 1rem 0.875rem;
 
-  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
-  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
+  ${({ $disabled }) =>
+    $disabled
+      ? css`
+          opacity: 0.5;
+          cursor: not-allowed;
+        `
+      : css`
+          cursor: pointer;
+          opacity: 1;
+        `}
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible
   &:focus-visible {
-    // --rothko-foucs doesn't exist yet
-    outline: 1px solid var(--rothko-focus, #000);
+    outline: 1px solid ${vuar({ element: 'accordion', category: 'border' })};
   }
 `;
 

@@ -9,6 +9,7 @@
     "700": { "value": "#FFFFFF" },
     "800": { "value": "#FFFFFF" },
     "900": { "value": "#FFFFFF" },
+    "default": { "value": "{primary.500}" },
     "foreground": { "value": "#000000" }
   },
   "secondary": {
@@ -21,6 +22,7 @@
     "700": { "value": "#713F8C" },
     "800": { "value": "#522771" },
     "900": { "value": "#3A175D" },
+    "default": { "value": "{secondary.500}" },
     "foreground": { "value": "#000000" }
   },
   "success": {
@@ -33,6 +35,7 @@
     "700": { "value": "#3C9055" },
     "800": { "value": "#267444" },
     "900": { "value": "#17603A" },
+    "default": { "value": "{success.500}" },
     "foreground": { "value": "#000000" }
   },
   "info": {
@@ -45,6 +48,7 @@
     "700": { "value": "#A13F0E" },
     "800": { "value": "#812B09" },
     "900": { "value": "#6B1C05" },
+    "default": { "value": "{info.500}" },
     "foreground": { "value": "#000000" }
   },
   "warning": {
@@ -57,6 +61,7 @@
     "700": { "value": "#A47922" },
     "800": { "value": "#845C15" },
     "900": { "value": "#6D470D" },
+    "default": { "value": "{warning.500}" },
     "foreground": { "value": "#000000" }
   },
   "danger": {
@@ -69,6 +74,7 @@
     "700": { "value": "#951228" },
     "800": { "value": "#780B27" },
     "900": { "value": "#630627" },
+    "default": { "value": "{danger.500}" },
     "foreground": { "value": "#FFFFFF" }
   }
 }

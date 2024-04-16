@@ -3,20 +3,20 @@ import styled from 'styled-components';
 import { animated, useTransition } from '@react-spring/web';
 
 import { CloseOutline } from '@rothko-ui/icons';
-import { classes } from '@rothko-ui/utils';
 
-import { ShadedBackdrop } from '../../library/Common';
+import ShadedBackdrop from '../../library/ShadedBackdrop';
 import { phantomButtonStyle } from '../../library/PhantomButton';
-import { DomPortal } from '../../library/Portal';
+import DomPortal from '../../library/Portal';
 import {
   BODY_SCROLL_LOCK_IGNORE_ID,
   disableBodyScroll,
   enableBodyScroll,
 } from '../../library/utils/domUtils';
 import { textChildrenStyle } from '../../library/Styles';
-import { textStyle } from '../Typography/Typography';
+import { bodySizeStyle, paragraphStyle } from '../Typography/Typography';
 import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
 import useId from '../../library/hooks/useId';
+import { vuar } from '../../library/utils/vuar';
 
 type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
 
@@ -115,11 +115,7 @@ const BottomPopup: React.FC<PopupProps> = ({
 
   return (
     <DomPortal wrapperId="rothko-bottom-popup">
-      <ShadedBackdrop
-        aria-hidden
-        onClick={onBackdropClick}
-        className={classes({ ['backdrop-open']: isOpen })}
-      >
+      <ShadedBackdrop aria-hidden onClick={onBackdropClick} $show={isOpen}>
         {transition(
           (style, item) =>
             item && (
@@ -147,7 +143,7 @@ const BottomPopup: React.FC<PopupProps> = ({
 const PopupContainerDiv = styled.div`
   border-top-left-radius: 0.75rem;
   border-top-right-radius: 0.75rem;
-  background: var(--rothko-background, #fff);
+  background: ${vuar({ category: 'background', fallback: '#fff' })};
   padding: 3.25rem 1.5rem 1.5rem 1.5rem;
   position: fixed;
   right: 0;
@@ -164,7 +160,8 @@ const PopupContainerDiv = styled.div`
 
 const PopupContentContainerDiv = styled.div`
   ${textChildrenStyle}
-  ${textStyle}
+  ${paragraphStyle}
+  ${bodySizeStyle}
   margin: 0;
   padding: 0;
   user-select: text;

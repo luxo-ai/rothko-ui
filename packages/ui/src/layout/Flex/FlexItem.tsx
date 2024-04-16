@@ -1,20 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import type { CustomColorCssProperties } from '../Container';
-import { useStyleProps } from '../Container';
 
-type FlexProps = CustomColorCssProperties & {
+type FlexProps = React.CSSProperties & {
   as?: keyof JSX.IntrinsicElements;
   children: React.ReactNode;
   className?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onFocus?: React.FocusEventHandler<HTMLElement>;
+  onBlur?: React.FocusEventHandler<HTMLElement>;
+  role?: React.AriaRole;
 };
 
 const FlexItem = React.forwardRef<HTMLDivElement, FlexProps>(
-  ({ as, children, className, onClick, ...styles }, ref) => {
-    const style = useStyleProps(styles);
+  ({ as, children, className, onClick, onBlur, onFocus, role, ...style }, ref) => {
     return (
-      <StyledFlexItemDiv as={as} ref={ref} onClick={onClick} className={className} style={style}>
+      <StyledFlexItemDiv
+        as={as}
+        ref={ref}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        onClick={onClick}
+        className={className}
+        style={style}
+        role={role}
+      >
         {children}
       </StyledFlexItemDiv>
     );

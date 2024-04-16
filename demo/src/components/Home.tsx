@@ -5,6 +5,15 @@ import { useRouter } from 'next/navigation';
 import PaddedNavLayout from '../components/layout/PaddedNavLayout';
 import config from '../config';
 import { useIsMobileOrTablet } from '../hooks/useIsMobileOrTablet';
+import styled from 'styled-components';
+
+const Title = styled(Typography.h1)`
+  font-family: var(--rothko-font-family-bold);
+  font-size: clamp(3.5rem, 7.5vw, 6rem);
+  line-height: calc(100% + 0.5rem);
+  letter-spacing: -0.03rem;
+  font-weight: 700;
+`;
 
 const Home = () => {
   const router = useRouter();
@@ -18,9 +27,7 @@ const Home = () => {
       >
         <Flex alignItems="center">
           <MaxWidth maxW="34rem">
-            <Typography.titleBig>
-              Elevate web development. Inspire new experiences.
-            </Typography.titleBig>
+            <Title>Elevate web development. Inspire new experiences.</Title>
             <Flex
               columnGap={isMobileOrTablet ? '0.5rem' : '0.75rem'}
               maxWidth="20rem"

@@ -1,10 +1,2 @@
 export { ThemeContextProvider, useTheme } from './ThemeContext';
-export type {
-  Color,
-  HexColor,
-  RGBColor,
-  RothkoKind,
-  RothkoSize,
-  ThemeMode,
-  ThemeOverrides,
-} from './types';
+export type { Color, HexColor, RGBColor, RothkoKind, RothkoSize, ThemeMode } from './types';

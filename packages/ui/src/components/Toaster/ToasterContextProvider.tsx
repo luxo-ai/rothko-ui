@@ -3,7 +3,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import * as uuid from 'uuid';
 
-import { DomPortal } from '../../library/Portal';
+import DomPortal from '../../library/Portal';
 import Toast from './Toaster';
 import ToasterContext from './ToasterContext';
 import type { ToastDetails, ToastKey } from './types';

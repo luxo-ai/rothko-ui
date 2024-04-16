@@ -8,14 +8,14 @@ import { phantomButtonStyle } from '../../library/PhantomButton';
 import type { Accessory, Option, Value } from '../../library/types';
 import type { RothkoKind, RothkoSize } from '../../theme';
 import type { EmSize, RemSize } from '../../types';
-import Typography from '../Typography/Typography';
+import Typography, { regularFontStyle } from '../Typography/Typography';
+import { vuar } from '../../library/utils/vuar';
 
 const accessorySizeMap: Record<RothkoSize, number> = {
   xs: 10,
   s: 13,
   m: 18,
   l: 30,
-  xl: 35,
 };
 
 type OptionArgs = {
@@ -83,7 +83,6 @@ function OptionGroup<V extends Value>({
     <OptionGroupContainerDiv id={id} style={style} className={className}>
       <Grid
         role="listbox"
-        ariaLabel="option buttons"
         flexGrow={1}
         gridTemplateColumns={`repeat(${maxCol}, 1fr)`}
         gap={optionGap}
@@ -95,9 +94,11 @@ function OptionGroup<V extends Value>({
           const localAccessoryLeft = dataOptions?.accessoryLeft;
           const localAccessoryRight = dataOptions?.accessoryRight;
 
-          const svgColor = isSelected
-            ? `var(--rothko-${kind}-foreground, #000)`
-            : `var(--rothko-${kind}-500, #000)`;
+          const svgColor = vuar({
+            kind,
+            category: isSelected ? 'foreground' : 'background',
+            fallback: '#000',
+          });
 
           const classNames = {
             disabled: isDisabled,
@@ -169,10 +170,6 @@ const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
     padding: 0.625rem 0.94rem;
     font-size: 1.25rem;
   `,
-  xl: css`
-    padding: 1rem 1.3rem;
-    font-size: 1.75rem;
-  `,
 };
 
 const OptionGroupContainerDiv = styled.div`
@@ -185,7 +182,7 @@ const OptionButton = styled.button<{
 }>`
   -webkit-tap-highlight-color: transparent;
   ${phantomButtonStyle}
-  font-family: var(--rothko-typography-body-bold); // was reg
+  ${regularFontStyle}
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -194,7 +191,7 @@ const OptionButton = styled.button<{
   user-select: none;
 
   &:not(.without-border) {
-    border: 0.1rem solid ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
+    border: 0.1rem solid ${({ kind }) => vuar({ kind, category: 'border', fallback: '#000' })};
   }
   // added
 
@@ -209,13 +206,11 @@ const OptionButton = styled.button<{
     color: white;
   }
 
-  // fix later to work with theming
-  // background: #ffffff;
-  color: ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
+  color: ${({ kind }) => vuar({ kind, category: 'background', fallback: '#000' })};
 
   &.selected {
-    background: ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
-    color: ${({ kind }) => `var(--rothko-${kind}-foreground, #000)`};
+    background: ${({ kind }) => vuar({ kind, category: 'background', fallback: '#000' })};
+    color: ${({ kind }) => vuar({ kind, category: 'foreground', fallback: '#000' })};
   }
 
   &.with-radius {
@@ -233,7 +228,7 @@ const OptionButton = styled.button<{
   )}
 
   &.disabled {
-    border-color: ${({ kind }) => `var(--rothko-${kind}-transparent-600, #000)`};
+    // border-color: ??
     cursor: not-allowed;
     opacity: 0.75;
   }
@@ -251,9 +246,6 @@ const expandedButtonWidth: Record<RothkoSize, FlattenSimpleInterpolation> = {
   `,
   l: css`
     width: 91.4px; // rem
-  `,
-  xl: css`
-    width: 127.41px; // rem
   `,
 };
 

@@ -17,6 +17,7 @@ import type {
   WithAriaErrorMessage,
 } from '../../types';
 import useId from '../../library/hooks/useId';
+import { vuar } from '../../library/utils/vuar';
 
 type WithAria<T> = WithAriaErrorMessage<
   WithAriaRequired<
@@ -165,7 +166,7 @@ const CheckboxDiv = styled.div<{
 }>`
   flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
-  background-color: var(--rothko-checkbox-background, #dee7f5);
+  background-color: ${vuar({ element: 'checkbox', category: 'background', fallback: '#dee7f5' })};
   cursor: pointer;
 
   width: 1.125rem;
@@ -180,7 +181,7 @@ const CheckboxDiv = styled.div<{
   transition: background-color 0.1s ease;
 
   &.checked {
-    background-color: ${({ kind = 'success' }) => `var(--rothko-${kind}-500)`};
+    background-color: ${({ kind = 'success' }) => vuar({ kind, category: 'background' })};
 
     &.with-check {
       background-image: url('data:image/svg+xml,%0A%20%20%20%20%3Csvg%20width%3D%2217%22%20height%3D%2213%22%20viewBox%3D%220%200%2017%2013%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M6.50002%2012.6L0.400024%206.60002L2.60002%204.40002L6.50002%208.40002L13.9%200.900024L16.1%203.10002L6.50002%2012.6Z%22%20fill%3D%22%23FFFFFF%22%2F%3E%0A%20%20%20%20%3C%2Fsvg%3E%0A%20%20');
@@ -192,11 +193,11 @@ const CheckboxDiv = styled.div<{
   }
 
   &:focus-visible {
-    outline: 1px solid var(--rothko-info-300);
+    outline: 1px solid ${vuar({ kind: 'info', scale: 300, category: 'background' })};
   }
 
   &.error:not(:focus) {
-    background-color: var(--rothko-danger-transparent-500);
+    // background-color: ?
   }
 
   &.disabled {

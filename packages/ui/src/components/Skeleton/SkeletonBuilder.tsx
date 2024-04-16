@@ -3,6 +3,7 @@ import React from 'react';
 
 import type { Color } from '../../theme';
 import useId from '../../library/hooks/useId';
+import { vuar } from '../../library/utils/vuar';
 
 const ANIMATION_KEY_TIMES = '0;0.5;1';
 
@@ -28,8 +29,8 @@ const SkeletonBuilder = ({
   const clipId = `${id}-clip`;
   const gradientId = `${id}-gradient`;
 
-  const backgroundColor = bgColorProp || 'var(--rothko-skeleton-background)';
-  const foregroundColor = fgColorProp || 'var(--rothko-skeleton-foreground)';
+  const backgroundColor = bgColorProp || vuar({ element: 'skeleton', category: 'background' });
+  const foregroundColor = fgColorProp || vuar({ element: 'skeleton', category: 'foreground' });
   const animationDuration = `${speed}s`;
 
   return (

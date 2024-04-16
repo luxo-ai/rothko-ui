@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Typography, { textStyle } from '../Typography/Typography';
+import Typography, { paragraphStyle } from '../Typography/Typography';
 import type {
   WithAriaControls,
   WithAriaCurrent,
@@ -60,7 +60,7 @@ const BreadCrumbItem = ({
         aria-labelledby={ariaLabelledBy}
         aria-haspopup={ariaHasPopup}
       >
-        <Typography.externalLink className="underline" href={to} target={target}>
+        <Typography.externalLink underline href={to} target={target}>
           {children}
         </Typography.externalLink>
       </BreadCrumbsItemContainerSpan>
@@ -78,7 +78,7 @@ const BreadCrumbItem = ({
         aria-labelledby={ariaLabelledBy}
         aria-haspopup={ariaHasPopup}
       >
-        <Typography.linkButton className="underline" onClick={onClick}>
+        <Typography.linkButton underline onClick={onClick}>
           {children}
         </Typography.linkButton>
       </BreadCrumbsItemContainerSpan>
@@ -101,7 +101,7 @@ const BreadCrumbItem = ({
 
 const BreadCrumbsItemContainerSpan = styled.span`
   &:not(:last-of-type):after {
-    ${textStyle}
+    ${paragraphStyle}
     content: ' / ';
   }
 `;

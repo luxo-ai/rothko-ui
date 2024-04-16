@@ -12,6 +12,7 @@ export type {
   WithData,
   WithKey,
   DeepRequired,
+  Falsy,
 } from './types';
 
 /**

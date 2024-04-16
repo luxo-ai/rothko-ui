@@ -19,7 +19,6 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
     return (
       <ListItem>
         <Typography.linkButton
-          asText
           onClick={() => {
             onNavigate?.();
             router.push(`/${item.to}`);
@@ -29,6 +28,7 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
             width: '100%',
             textAlign: 'inherit',
             padding: `0.5rem calc(${depth} * 0.75rem)`,
+            color: 'var(--rothko-foreground, #000)',
           }}
           bold={isSelected}
         >

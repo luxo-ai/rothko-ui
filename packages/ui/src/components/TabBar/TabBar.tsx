@@ -8,6 +8,7 @@ import Typography from '../Typography/Typography';
 import type { Tab } from './types';
 import { Container, Flex, FlexItem } from '../../layout';
 import type { WithAriaLabeling } from '../../types';
+import { vuar } from '../../library/utils/vuar';
 
 type WithAria<T> = WithAriaLabeling<T>;
 
@@ -113,8 +114,8 @@ const TabItem = styled(Typography.body)`
 const UnderLineDiv = styled.div<UnderlineDivProps>`
   width: ${({ tabCount }) => `${(100 / tabCount).toFixed(2)}%`};
   border-bottom: 3px solid
-    ${({ kind }) =>
-      kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-tabBar-border, #000)'};
+    ${({ kind }) => vuar({ kind, element: 'tab-bar', category: 'border', fallback: '#000' })};
+
   border-radius: 50vmin;
 
   -webkit-transform: translateX(calc(100% * ${({ currentTabIdx }) => currentTabIdx}));

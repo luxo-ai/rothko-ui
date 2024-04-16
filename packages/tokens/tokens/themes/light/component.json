@@ -2,11 +2,10 @@
   "background": { "value": "#fff" },
   "border": { "value": "#000" },
   "foreground": { "value": "#000" },
-  "svg": {
-    "fill": { "value": "{foreground}" },
-    "stroke": { "value": "{foreground}" }
+  "icon": {
+    "background": { "value": "{foreground}" },
+    "border": { "value": "{foreground}" }
   },
-  "link": { "value": "#0000ee" },
   "slider": {
     "handle": {
       "border": { "value": "#DEE7F5" },
@@ -21,19 +20,19 @@
   },
   "dropdown": {
     "background": { "value": "#FFF" },
-    "border_minimal": { "value": "rgba(188, 199, 223, 0.08)" },
     "multiselect": {
-      "text": { "value": "{info.500}" },
+      "foreground": { "value": "{info.default}" },
+      "border": { "value": "{dropdown.multiselect.foreground}" },
       "background": { "value": "#FFF" }
     },
     "option": {
-      "background_selected": { "value": "#EEE" }
+      "background::focus": { "value": "#EEE" }
     }
   },
   "search": {
     "background": { "value": "#FFF" },
     "option": {
-      "background_selected": { "value": "#EEE" }
+      "background::focus": { "value": "#EEE" }
     }
   },
   "tabBar": {
@@ -42,7 +41,7 @@
   "radio": {
     "border": { "value": "#DEE7F5" },
     "background": { "value": "#EBF2FB" },
-    "background_selected": { "value": "{info.500}" }
+    "background::focus": { "value": "{info.default}" }
   },
   "table": {
     "background": { "value": "#fff" },
@@ -57,11 +56,15 @@
     }
   },
   "toast": {
-    "color": { "value": "#fff" },
+    "foreground": { "value": "#fff" },
     "background": { "value": "#000" },
     "life": {
-      "filled": { "value": "#e93c2f" },
-      "empty": { "value": "transparent" }
+      "filled": {
+        "background": { "value": "#e93c2f" }
+      },
+      "empty": {
+        "background": { "value": "transparent" }
+      }
     }
   },
   "box": {
@@ -74,11 +77,11 @@
   },
   "checkbox": {
     "background": { "value": "#DEE7F5" },
-    "background_selected": { "value": "#c42317" }
+    "background::focus": { "value": "#c42317" }
   },
   "input": {
     "background": { "value": "rgba(188, 199, 223, 0.24)" },
-    "color": { "value": "{foreground}" }
+    "foreground": { "value": "{foreground}" }
   },
   "skeleton": {
     "background": { "value": "#DEE7F5" },

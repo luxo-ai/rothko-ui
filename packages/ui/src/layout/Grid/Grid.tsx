@@ -1,22 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import type { CustomColorCssProperties } from '../Container';
-import { useStyleProps } from '../Container';
 
-type GridProps = Omit<CustomColorCssProperties, 'display'> & {
+type GridProps = Omit<React.CSSProperties, 'display'> & {
   as?: keyof JSX.IntrinsicElements;
   children: React.ReactNode;
   className?: string;
   role?: React.AriaRole;
-  ariaLabel?: string;
+  onFocus?: React.FocusEventHandler<HTMLElement>;
+  onBlur?: React.FocusEventHandler<HTMLElement>;
+  onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
 const Grid = React.forwardRef<HTMLDivElement, GridProps>(
-  ({ as, role, ariaLabel, children, className, ...styles }, ref) => {
-    const style = useStyleProps(styles);
+  ({ as, role, onBlur, onClick, onFocus, children, className, ...style }, ref) => {
     return (
       <StyledGrid
-        aria-label={ariaLabel}
+        onFocus={onFocus}
+        onClick={onClick}
+        onBlur={onBlur}
         role={role}
         as={as}
         ref={ref}

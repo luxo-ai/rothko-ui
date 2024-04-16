@@ -26,7 +26,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en" className="light" style={{ colorScheme: 'dark' }}>
+      <Html lang="en">
         <Head>
           <link rel="icon" href="/favicon.ico" type="image/x-icon" />
           <link rel="manifest" href="/manifest.json" />

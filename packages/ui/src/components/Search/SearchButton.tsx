@@ -1,7 +1,8 @@
 import { SearchOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
-import { PhantomButton } from '../../../library/PhantomButton';
+import { PhantomButton } from '../../library/PhantomButton';
+import { vuar } from '../../library/utils/vuar';
 
 type SearchButtonProps = {
   disabled?: boolean;
@@ -10,8 +11,8 @@ type SearchButtonProps = {
 };
 
 const SearchButton = ({ disabled, onClick, type = 'submit' }: SearchButtonProps) => (
-  <SearchButtonBase aria-label="search" disabled={disabled} onClick={onClick} type={type}>
-    <SearchOutline width="1.5rem" height="1.5rem" />
+  <SearchButtonBase aria-label="Search" disabled={disabled} onClick={onClick} type={type}>
+    <SearchOutline aria-hidden width="1.5rem" height="1.5rem" />
   </SearchButtonBase>
 );
 
@@ -27,9 +28,10 @@ const SearchButtonBase = styled(PhantomButton)`
   border-radius: 50%;
 
   :active:not(:disabled) {
-    background-color: var(--rothko-foreground, #000);
+    // switch
+    background-color: ${vuar({ category: 'foreground' })};
     & > svg {
-      fill: var(--rothko-background, #fff);
+      fill: ${vuar({ category: 'background' })};
     }
   }
 `;

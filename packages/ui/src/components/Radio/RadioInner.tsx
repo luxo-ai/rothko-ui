@@ -9,6 +9,7 @@ import Typography from '../Typography/Typography';
 import useId from '../../library/hooks/useId';
 import type { WithAriaControls, WithAriaErrorMessage, WithAriaLabeling } from '../../types';
 import { keyDownFactory } from '../../library/utils/keyUtils';
+import { vuar } from '../../library/utils/vuar';
 
 type WithAria<T> = WithAriaErrorMessage<WithAriaControls<WithAriaLabeling<T>>>;
 
@@ -114,7 +115,7 @@ const RadioContainerDiv = styled.div`
 
 const RadioOutlineDiv = styled.div<{ $disabled?: boolean }>`
   -webkit-tap-highlight-color: transparent;
-  background-color: var(--rothko-radio-border, #000);
+  background-color: ${vuar({ element: 'radio', category: 'border', fallback: '#000' })};
   width: 1.25rem;
   height: 1.25rem;
   border-radius: calc(1.25rem / 2);
@@ -131,7 +132,7 @@ const RadioInnerDiv = styled.div<{
   kind?: RothkoKind;
 }>`
   -webkit-tap-highlight-color: transparent;
-  background-color: var(--rothko-radio-background, #ccc);
+  background-color: ${vuar({ element: 'radio', category: 'background', fallback: '#ccc' })};
 
   width: 100%;
   height: 100%;
@@ -144,14 +145,18 @@ const RadioInnerDiv = styled.div<{
 
   &.selected {
     background-color: ${({ kind }) =>
-      kind
-        ? `var(--rothko-${kind}-500, #281D75)`
-        : `var(--rothko-radio-background_selected, #281D75)`};
+      vuar({
+        kind,
+        element: 'radio',
+        category: 'background',
+        fallback: '#281D75',
+        focused: true,
+      })};
   }
 
   &.error {
-    background: var(--rothko-danger-300);
-    border-color: var(--rothko-danger-500);
+    background: ${vuar({ kind: 'danger', scale: 300, category: 'background' })};
+    border-color: ${vuar({ kind: 'danger', scale: 500, category: 'border' })};
   }
 
   &.disabled {
