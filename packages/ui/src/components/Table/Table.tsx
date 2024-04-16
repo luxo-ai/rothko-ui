@@ -1,11 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  bodySizeStyle,
-  boldFontStyle,
-  lightFontStyle,
-  paragraphStyle,
-} from '../Typography/Typography';
+import typographyStyles from '../Typography/styles';
 import TableBody from './TableBody';
 import TableContext from './TableContext';
 import TableHeader from './TableHeader';
@@ -71,16 +66,14 @@ const StyledTable = styled.table`
 
   & th {
     text-align: start;
-    ${paragraphStyle}
-    ${bodySizeStyle}
-    ${boldFontStyle}
+    ${typographyStyles.body}
+    ${typographyStyles.boldFontStyle}
     padding: 1rem 1.25rem;
   }
 
   & td {
-    ${paragraphStyle}
-    ${bodySizeStyle}
-    ${lightFontStyle}
+    ${typographyStyles.body}
+    ${typographyStyles.lightFontStyle}
     padding: 1.25rem;
   }
 

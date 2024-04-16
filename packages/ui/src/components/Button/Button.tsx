@@ -8,7 +8,7 @@ import InlineSpinnerLoader from '../../library/InlineSpinner';
 import type { Accessory } from '../../library/types';
 import type { RothkoKind, RothkoSize } from '../../theme';
 import type { ButtonAppearance, ButtonShape, WithButtonAria } from './types';
-import { regularFontStyle } from '../Typography/Typography';
+import typographyStyles from '../Typography/styles';
 import { vuar } from '../../library/utils/vuar';
 
 const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
@@ -277,7 +277,7 @@ export const buttonStyle = css<BaseButtonProps>`
   background: ${({ appearance, kind }) =>
     appearance === 'outline' ? 'transparent' : vuar({ kind, category: 'background' })};
 
-  ${regularFontStyle}
+  ${typographyStyles.regularFontStyle}
 
   color: ${({ appearance, kind }) =>
     vuar({

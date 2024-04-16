@@ -1,22 +1,22 @@
+import { animated, useTransition } from '@react-spring/web';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { animated, useTransition } from '@react-spring/web';
 
 import { CloseOutline } from '@rothko-ui/icons';
+import { isString } from '@rothko-ui/utils';
 
-import ShadedBackdrop from '../../library/ShadedBackdrop';
 import { phantomButtonStyle } from '../../library/PhantomButton';
 import DomPortal from '../../library/Portal';
+import ShadedBackdrop from '../../library/ShadedBackdrop';
+import useId from '../../library/hooks/useId';
 import {
   BODY_SCROLL_LOCK_IGNORE_ID,
   disableBodyScroll,
   enableBodyScroll,
 } from '../../library/utils/domUtils';
-import { textChildrenStyle } from '../../library/Styles';
-import { bodySizeStyle, paragraphStyle } from '../Typography/Typography';
-import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
-import useId from '../../library/hooks/useId';
 import { vuar } from '../../library/utils/vuar';
+import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
+import Typography from '../Typography/Typography';
 
 type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
 
@@ -131,7 +131,11 @@ const BottomPopup: React.FC<PopupProps> = ({
                 <PopupCloseButton aria-label="Close" onClick={() => onClose()}>
                   <CloseOutline aria-hidden width="1.5rem" height="1.5rem" />
                 </PopupCloseButton>
-                <PopupContentContainerDiv id={contentId}>{children}</PopupContentContainerDiv>
+                {isString(children) ? (
+                  <Typography.body id={contentId}>{children}</Typography.body>
+                ) : (
+                  <div id={contentId}>children</div>
+                )}
               </AnimatedPopupContainer>
             )
         )}
@@ -140,7 +144,7 @@ const BottomPopup: React.FC<PopupProps> = ({
   );
 };
 
-const PopupContainerDiv = styled.div`
+const AnimatedPopupContainer = animated(styled.div`
   border-top-left-radius: 0.75rem;
   border-top-right-radius: 0.75rem;
   background: ${vuar({ category: 'background', fallback: '#fff' })};
@@ -156,18 +160,7 @@ const PopupContainerDiv = styled.div`
   will-change: transform, opacity, height;
   transition-property: transform;
   transition-timing-function: ease-out;
-`;
-
-const PopupContentContainerDiv = styled.div`
-  ${textChildrenStyle}
-  ${paragraphStyle}
-  ${bodySizeStyle}
-  margin: 0;
-  padding: 0;
-  user-select: text;
-`;
-
-const AnimatedPopupContainer = animated(PopupContainerDiv);
+`);
 
 const PopupCloseButton = styled.button.attrs({ type: 'button' })`
   ${phantomButtonStyle}

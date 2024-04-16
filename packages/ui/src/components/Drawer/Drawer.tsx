@@ -13,11 +13,11 @@ import {
   enableBodyScroll,
 } from '../../library/utils/domUtils';
 import DrawerContext from './DrawerContext';
-import { textChildrenStyle } from '../../library/Styles';
-import { bodySizeStyle, paragraphStyle } from '../Typography/Typography';
 import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
 import useId from '../../library/hooks/useId';
 import { vuar } from '../../library/utils/vuar';
+import { Typography } from '../Typography';
+import { isString } from '@rothko-ui/utils';
 
 const TABLET_OR_MOBILE_MAX_WIDTH_PX = 750;
 const DEFAULT_DRAWER_WIDTH_PX = 350;
@@ -137,9 +137,11 @@ const Drawer = ({
                   >
                     <Close aria-hidden width={28} height={28} />
                   </PhantomButton>
-                  <DrawerContentContainerDiv id={drawerContentId}>
-                    {children}
-                  </DrawerContentContainerDiv>
+                  {isString(children) ? (
+                    <Typography.body id={drawerContentId}>{children}</Typography.body>
+                  ) : (
+                    <div id={drawerContentId}>children</div>
+                  )}
                 </AnimatedDrawerContainerDiv>
               )
           )}
@@ -166,14 +168,6 @@ const AnimatedDrawerContainerDiv = animated(styled.div`
 
   user-select: text;
 `);
-
-const DrawerContentContainerDiv = styled.div`
-  ${textChildrenStyle}
-  ${paragraphStyle}
-  ${bodySizeStyle}
-  margin: 0;
-  padding: 0;
-`;
 
 const DrawerBackdrop = styled(ShadedBackdrop)`
   -webkit-backface-visibility: hidden;

@@ -12,7 +12,8 @@ import { DefaultRenderOption } from '../../library/RenderOption';
 import { hideChromeBrowserOutline } from '../../library/Styles';
 import type { Value } from '../../library/types';
 import { directionMap } from '../../library/utils/keyUtils';
-import Typography, { bodySizeStyle, paragraphStyle } from '../Typography/Typography';
+import Typography from '../Typography/Typography';
+import typographyStyles from '../Typography/styles';
 import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } from './Shared';
 import type { DropdownInnerProps } from './types';
 import useSelect from './useSelect';
@@ -394,8 +395,7 @@ const NoResultsText = styled(ItemText).attrs({ as: 'p' })`
 
 const PhantomInput = styled.input`
   ${hideChromeBrowserOutline}
-  ${paragraphStyle}
-  ${bodySizeStyle}
+  ${typographyStyles.body}
   position: absolute;
   inset: 0;
   background: none !important;

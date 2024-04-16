@@ -25,13 +25,10 @@ const Grid = React.forwardRef<HTMLDivElement, GridProps>(
       'aria-activedescendant': ariaActivedescendant,
       'aria-atomic': ariaAtomic,
       'aria-autocomplete': ariaAutocomplete,
-      'aria-braillelabel': ariaBraillelabel,
-      'aria-brailleroledescription': ariaBrailleroledescription,
       'aria-busy': ariaBusy,
       'aria-checked': ariaChecked,
       'aria-colcount': ariaColcount,
       'aria-colindex': ariaColindex,
-      'aria-colindextext': ariaColindextext,
       'aria-colspan': ariaColspan,
       'aria-controls': ariaControls,
       'aria-current': ariaCurrent,
@@ -70,7 +67,6 @@ const Grid = React.forwardRef<HTMLDivElement, GridProps>(
       'aria-roledescription': ariaRoledescription,
       'aria-rowcount': ariaRowcount,
       'aria-rowindex': ariaRowindex,
-      'aria-rowindextext': ariaRowindextext,
       'aria-rowspan': ariaRowspan,
       'aria-selected': ariaSelected,
       ...style
@@ -82,13 +78,10 @@ const Grid = React.forwardRef<HTMLDivElement, GridProps>(
         aria-activedescendant={ariaActivedescendant}
         aria-atomic={ariaAtomic}
         aria-autocomplete={ariaAutocomplete}
-        aria-braillelabel={ariaBraillelabel}
-        aria-brailleroledescription={ariaBrailleroledescription}
         aria-busy={ariaBusy}
         aria-checked={ariaChecked}
         aria-colcount={ariaColcount}
         aria-colindex={ariaColindex}
-        aria-colindextext={ariaColindextext}
         aria-colspan={ariaColspan}
         aria-controls={ariaControls}
         aria-current={ariaCurrent}
@@ -121,7 +114,6 @@ const Grid = React.forwardRef<HTMLDivElement, GridProps>(
         aria-roledescription={ariaRoledescription}
         aria-rowcount={ariaRowcount}
         aria-rowindex={ariaRowindex}
-        aria-rowindextext={ariaRowindextext}
         aria-rowspan={ariaRowspan}
         aria-selected={ariaSelected}
         aria-setsize={ariaSetsize}

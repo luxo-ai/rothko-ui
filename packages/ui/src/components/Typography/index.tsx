@@ -1,2 +1,3 @@
 import Typography from './Typography';
-export { Typography };
+import typographyStyles from './styles';
+export { Typography, typographyStyles };

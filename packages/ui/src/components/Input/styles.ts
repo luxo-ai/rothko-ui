@@ -1,7 +1,7 @@
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import { css } from 'styled-components';
 import type { InputSize } from './types';
-import { regularFontStyle } from '../Typography/Typography';
+import typographyStyles from '../Typography/styles';
 import { vuar } from '../../library/utils/vuar';
 
 const sizeMap: Record<InputSize, FlattenSimpleInterpolation> = {
@@ -27,7 +27,7 @@ export const baseInputStyle = css`
   width: 100%;
   background: ${vuar({ element: 'input', category: 'background', fallback: '#fff' })};
 
-  ${regularFontStyle}
+  ${typographyStyles.regularFontStyle}
   color: ${vuar({ element: 'input', category: 'foreground', fallback: '#000' })};
   display: inline-block;
   box-sizing: border-box;

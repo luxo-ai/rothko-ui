@@ -7,10 +7,11 @@ import styled, { css } from 'styled-components';
 import { CloseOutline } from '@rothko-ui/icons';
 import { classes, isString } from '@rothko-ui/utils';
 
-import ShadedBackdrop from '../../library/ShadedBackdrop';
 import { phantomButtonStyle } from '../../library/PhantomButton';
 import DomPortal from '../../library/Portal';
-import type { RothkoSize } from '../../theme';
+import ShadedBackdrop from '../../library/ShadedBackdrop';
+import { textChildrenStyle } from '../../library/Styles';
+import useId from '../../library/hooks/useId';
 import {
   BODY_SCROLL_LOCK_IGNORE_ID,
   addEvent,
@@ -18,11 +19,10 @@ import {
   enableBodyScroll,
   removeEvent,
 } from '../../library/utils/domUtils';
-import Typography, { boldFontStyle } from '../Typography/Typography';
-import { textChildrenStyle } from '../../library/Styles';
-import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
-import useId from '../../library/hooks/useId';
 import { vuar } from '../../library/utils/vuar';
+import type { RothkoSize } from '../../theme';
+import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
+import { Typography, typographyStyles } from '../Typography';
 
 const bodyStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
@@ -48,7 +48,7 @@ const headerStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
     margin: 0 0 1.125rem 0;
     line-height: 1.25rem;
     font-size: 1rem;
-    ${boldFontStyle};
+    ${typographyStyles.boldFontStyle};
   `,
   s: css`
     margin: 0 0 1.25rem 0;
@@ -224,7 +224,7 @@ const Modal = ({
   );
 };
 
-const ModalContainerDiv = styled.div`
+const AnimatedModalContainer = animated(styled.div`
   border-radius: 0.125rem; // 2px
   -webkit-backface-visibility: hidden;
   width: 100%;
@@ -254,9 +254,7 @@ const ModalContainerDiv = styled.div`
       }
     `
   )};
-`;
-
-const AnimatedModalContainer = animated(ModalContainerDiv);
+`);
 
 const ModalHeaderText = styled(Typography.body)`
   ${Object.entries(headerStyleMap).map(

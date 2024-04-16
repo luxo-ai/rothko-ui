@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { phantomInputStyle } from '../../library/PhantomInput';
 import { baseInputStyle } from '../Input/styles';
-import { bodySizeStyle, lightFontStyle, paragraphStyle } from '../Typography/Typography';
+import typographyStyles from '../Typography/styles';
 import SearchButton from './SearchButton';
 
 type SearchBarProps = {
@@ -116,10 +116,9 @@ const SearchForm = styled.form`
 `;
 
 const SearchInput = styled.input`
-  ${paragraphStyle}
-  ${bodySizeStyle}
+  ${typographyStyles.body}
   ${phantomInputStyle}
-  ${lightFontStyle}
+  ${typographyStyles.lightFontStyle}
   width: 100%;
   padding: 0.5rem 1rem 0.5rem 1rem;
   margin: 0;
