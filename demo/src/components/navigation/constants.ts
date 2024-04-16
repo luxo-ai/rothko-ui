@@ -21,6 +21,7 @@ const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
     children: [{ label: 'Dropdown' }, { label: 'Multi Dropdown' }, { label: 'Nested Dropdown' }],
   },
   { label: 'Input' },
+  { label: 'Link' },
   { label: 'Modal' },
   { label: 'Radio Group' },
   { label: 'Skeleton' },
@@ -30,6 +31,7 @@ const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
   },
   { label: 'Tab Bar' },
   { label: 'Tag' },
+  { label: 'Textarea' },
   { label: 'Toast' },
   { label: 'Toggle' },
 ];

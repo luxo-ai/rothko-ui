@@ -307,12 +307,10 @@ const HandleButton = styled.button.attrs({ type: 'button' })<{
           element: 'slider-handle',
           fallback: '#ebf2fb',
         })};
-      
+    }
   }
   :disabled {
     // opacity: 0.8;
-    &:hover {
-      cursor: not-allowed;
-    }
+    cursor: not-allowed;
   }
 `;

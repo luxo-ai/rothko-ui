@@ -54,7 +54,7 @@ const App = () => {
     <MultiSlider
       label="Percent"
       kind="primary"
-      postfix="%"
+      valueFormat="%"
       showRange
       value={value}
       onChange={setValue}

@@ -54,7 +54,7 @@ const App = () => {
     <Slider
       label="Percent"
       kind="primary"
-      postfix="%"
+      valueFormat="%"
       showValue
       value={value}
       onChange={setValue}

@@ -14,7 +14,7 @@ import WithKind from './usage/WithKind';
 import Usage from '../Usage';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Checkbox';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Checkbox';
 
 const IMPORT = "import { Checkbox } from '@rothko-ui/ui';";
 

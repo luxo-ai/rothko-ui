@@ -18,7 +18,7 @@ import Usage from '../Usage';
 import KindRadioGroup from '../KindRadioGroup';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/TabBar';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/TabBar';
 
 const IMPORT = "import { TabBar } from '@rothko-ui/ui';";
 

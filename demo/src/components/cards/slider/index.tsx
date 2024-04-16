@@ -19,7 +19,7 @@ import Usage from '../Usage';
 import KindRadioGroup from '../KindRadioGroup';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Slider';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Slider';
 
 const IMPORT = "import { Slider } from '@rothko-ui/ui';";
 

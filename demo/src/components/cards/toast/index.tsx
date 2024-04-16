@@ -19,7 +19,7 @@ import Usage from '../Usage';
 import KindRadioGroup from '../KindRadioGroup';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Toaster';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Toaster';
 
 const IMPORT = "import { useToaster } from '@rothko-ui/ui';";
 

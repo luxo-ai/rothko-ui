@@ -7,12 +7,12 @@ const TABS = [
   {
     title: 'One',
     key: 'one',
-    render: () => <>{/* Screen one */}</>,
+    render: <>{/* Screen one */}</>,
   },
   {
     title: 'Two',
     key: 'two',
-    render: () => <>{/* Screen two */}</>,
+    render: <>{/* Screen two */}</>,
   },
 ] as const;
 
@@ -31,12 +31,12 @@ const TABS = [
   {
     title: 'One',
     key: 'one',
-    render: () => <>{/* Screen one */}</>,
+    render: <>{/* Screen one */}</>,
   },
   {
     title: 'Two',
     key: 'two',
-    render: () => <>{/* Screen two */}</>,
+    render: <>{/* Screen two */}</>,
   },
 ] as const;
 

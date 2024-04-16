@@ -1,5 +1,4 @@
 import { css } from 'styled-components';
-import { phantomButtonStyle } from '../../library/PhantomButton';
 import type { RothkoKind } from '../../theme';
 import { vuar } from '../../library/utils/vuar';
 import type { TypographyProps } from './types';
@@ -18,10 +17,6 @@ const headingColorStyle = css<{ kind?: RothkoKind }>`
 const codeColorStyle = css<{ kind?: RothkoKind }>`
   color: ${({ kind }) =>
     vuar({ kind, element: 'typography-code', category: 'color', fallback: '#000' })};
-`;
-
-const linkColorStyle = css<{ kind?: RothkoKind }>`
-  color: ${vuar({ element: 'typography-link', category: 'color', fallback: '#0000ee' })};
 `;
 // -------- END COLORS --------
 
@@ -111,55 +106,12 @@ const baseTextStyle = css<TypographyProps>`
   ${({ bold }) => {
     return bold ? boldFontStyle : '';
   }};
-
-  ${({ underline }) => {
-    return underline
-      ? css`
-          text-decoration: underline;
-        `
-      : '';
-  }};
-`;
-
-const baseLinkStyle = css<TypographyProps>`
-  ${baseTextStyle}
-  ${linkColorStyle}
-
-  border: none;
-  background: none;
-  padding: 0px;
-  text-decoration: none;
-
-  :hover:not(:disabled) {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-
-  :disabled {
-    opacity: 0.7;
-  }
-
-  // just make this its own thing
-  ${({ underline }) => {
-    return underline
-      ? css`
-          text-decoration: underline;
-        `
-      : '';
-  }};
 `;
 
 const baseHeadingStyle = css<TypographyProps>`
   ${baseTextStyle}
   ${headingColorStyle}
   ${headingFontStyle}
-`;
-
-const baseLinkButtonStyle = css<TypographyProps>`
-  ${phantomButtonStyle}
-  ${baseLinkStyle}
-  // to disregard user-select stuff from phantomButtonStyle
-  user-select: text;
 `;
 
 // -------- END BASE STYLES --------
@@ -187,26 +139,6 @@ const labelStyle = css<TypographyProps>`
   letter-spacing: 0.0625rem;
 `;
 
-const linkStyle = css<TypographyProps>`
-  ${baseLinkStyle};
-  ${bodySizeStyle}
-`;
-
-const linkSmallStyle = css<TypographyProps>`
-  ${baseLinkStyle};
-  ${bodySmallSizeStyle}
-`;
-
-const linkButtonStyle = css<TypographyProps>`
-  ${baseLinkButtonStyle}
-  ${bodySizeStyle}
-`;
-
-const linkButtonSmallStyle = css<TypographyProps>`
-  ${baseLinkButtonStyle}
-  ${bodySmallSizeStyle}
-`;
-
 const codeStyle = css`
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -230,13 +162,12 @@ export default {
   caption: captionStyle,
   code: codeStyle,
   label: labelStyle,
-  link: linkStyle,
-  linkButton: linkButtonStyle,
-  linkButtonSmall: linkButtonSmallStyle,
-  linkSmall: linkSmallStyle,
   baseHeadingStyle,
+  baseTextStyle,
   boldFontStyle,
   regularFontStyle,
   italicFontStyle,
   lightFontStyle,
+  bodySizeStyle,
+  bodySmallSizeStyle,
 };

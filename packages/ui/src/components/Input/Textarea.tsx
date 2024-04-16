@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { baseInputStyle } from './styles';
 import type { HtmlTextareaProps, InputSize } from './types';
 
-export type TextareaProps = {
+type TextareaProps = {
   /** textarea size */
   size?: InputSize;
 } & HtmlTextareaProps;

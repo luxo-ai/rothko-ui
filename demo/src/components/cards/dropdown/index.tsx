@@ -16,7 +16,7 @@ import Seachable from './usage/Searchable';
 import Usage from '../Usage';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Dropdown';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Dropdown';
 
 const IMPORT = "import { Dropdown } from '@rothko-ui/ui';";
 

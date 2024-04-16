@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 
-import { Typography } from '@rothko-ui/ui';
+import { Typography, LinkButton } from '@rothko-ui/ui';
 
 import { startsWithHttpOrHttps } from './helpers';
 
@@ -17,7 +17,9 @@ const Markdown = (props: { children: string }) => (
       p: ({ children }) => <Typography.body>{children}</Typography.body>,
       a: ({ children, href = '/' }) => (
         <Link target={startsWithHttpOrHttps(href) ? '_blank' : undefined} href={href}>
-          <Typography.linkButton as="span">{children}</Typography.linkButton>
+          <LinkButton underline="none" as="span">
+            {children}
+          </LinkButton>
         </Link>
       ),
       code: ({ children }) => <Typography.code>{children}</Typography.code>,

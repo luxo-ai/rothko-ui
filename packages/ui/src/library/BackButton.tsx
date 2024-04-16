@@ -1,8 +1,8 @@
 import { ChevronLeftOutline } from '@rothko-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
-import Typography from '../components/Typography/Typography';
 import { vuar } from './utils/vuar';
+import { LinkButton } from '../components/Link';
 
 type BackLinkProps = {
   disabled?: boolean;
@@ -31,7 +31,7 @@ const BackButton = ({ disabled, onClick }: BackLinkProps) => (
   </InlineLinkButton>
 );
 
-const InlineLinkButton = styled(Typography.linkButton)`
+const InlineLinkButton = styled(LinkButton)`
   -webkit-tap-highlight-color: transparent;
   display: inline-flex;
   flex-direction: row;

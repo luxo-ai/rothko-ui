@@ -11,6 +11,7 @@ import type {
   WithAriaLabelledBy,
   WithAriaSelected,
 } from '../../types';
+import { Link, LinkButton } from '../Link';
 
 type WithAria<T> = WithAriaHasPopup<
   WithAriaLabelledBy<WithAriaSelected<WithAriaControls<WithAriaLabel<WithAriaCurrent<T>>>>>
@@ -61,9 +62,9 @@ const BreadCrumbItem = ({
         aria-labelledby={ariaLabelledBy}
         aria-haspopup={ariaHasPopup}
       >
-        <Typography.link underline href={to} target={target}>
+        <Link underline="always" href={to} target={target}>
           {children}
-        </Typography.link>
+        </Link>
       </BreadCrumbsItemContainerSpan>
     );
   }
@@ -79,9 +80,9 @@ const BreadCrumbItem = ({
         aria-labelledby={ariaLabelledBy}
         aria-haspopup={ariaHasPopup}
       >
-        <Typography.linkButton underline onClick={onClick}>
+        <LinkButton underline="always" onClick={onClick}>
           {children}
-        </Typography.linkButton>
+        </LinkButton>
       </BreadCrumbsItemContainerSpan>
     );
   }

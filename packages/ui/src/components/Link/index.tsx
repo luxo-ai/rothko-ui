@@ -1,1 +1,1 @@
-export const t = 1;
+export { Link, LinkSmall, LinkButton, LinkButtonSmall } from './Link';

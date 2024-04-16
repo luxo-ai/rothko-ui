@@ -28,7 +28,7 @@ import Usage from '../Usage';
 const IMPORT = "import { Button } from '@rothko-ui/ui';";
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Button';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Button';
 
 const ButtonCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();

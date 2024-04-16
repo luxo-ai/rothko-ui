@@ -1,14 +1,6 @@
 import styled from 'styled-components';
-import type { RothkoKind } from '../../theme';
 import styles from './styles';
-
-type TypographyProps = {
-  bold?: boolean;
-  italic?: boolean;
-  kind?: RothkoKind;
-  light?: boolean;
-  underline?: boolean;
-};
+import type { TypographyProps } from './types';
 
 const body = styled.p<TypographyProps>`
   ${styles.body}
@@ -62,22 +54,6 @@ const label = styled.p<TypographyProps>`
   ${styles.label}
 `;
 
-const link = styled.a<TypographyProps>`
-  ${styles.link}
-`;
-
-const linkSmall = styled.a<TypographyProps>`
-  ${styles.linkSmall}
-`;
-
-const linkButton = styled.button<TypographyProps>`
-  ${styles.linkButton}
-`;
-
-const linkButtonSmall = styled.button<TypographyProps>`
-  ${styles.linkButtonSmall}
-`;
-
 const inlineBody = styled.span<TypographyProps>`
   ${styles.body}
 `;
@@ -90,13 +66,20 @@ const code = styled.code<TypographyProps>`
   ${styles.code}
 `;
 
+const Body = styled.p<{ size?: 's' | 'm' | 'l' }>`
+  ${({ size = 'm' }) => {
+    if (size === 's') {
+      return styles.bodySmall;
+    }
+    return styles.body;
+  }}
+`;
+
 export default {
   body,
   bodySmall,
   caption,
   code,
-  link,
-  linkSmall,
   h1,
   h2,
   h3,
@@ -106,6 +89,5 @@ export default {
   inlineBody,
   inlineBodySmall,
   label,
-  linkButton,
-  linkButtonSmall,
+  p: Body,
 };

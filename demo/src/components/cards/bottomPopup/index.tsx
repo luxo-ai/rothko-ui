@@ -11,7 +11,7 @@ import Props from '../Props';
 import Usage from '../Usage';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Popup';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Popup';
 
 const IMPORT = "import { BottomPopup } from '@rothko-ui/ui';";
 

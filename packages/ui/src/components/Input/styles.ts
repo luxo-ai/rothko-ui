@@ -27,7 +27,7 @@ export const baseInputStyle = css`
   width: 100%;
   background: ${vuar({ element: 'input', category: 'background', fallback: '#fff' })};
 
-  ${typographyStyles.regularFontStyle}
+  ${typographyStyles.body}
   color: ${vuar({ element: 'input', category: 'foreground', fallback: '#000' })};
   display: inline-block;
   box-sizing: border-box;

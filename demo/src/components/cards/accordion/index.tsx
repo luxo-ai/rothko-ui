@@ -32,7 +32,7 @@ import Usage from '../Usage';
 import KindRadioGroup from '../KindRadioGroup';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Accordion';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Accordion';
 
 const IMPORT = "import { Accordion, AccordionPanel } from '@rothko-ui/ui';";
 

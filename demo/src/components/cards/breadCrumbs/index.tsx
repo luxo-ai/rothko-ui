@@ -13,7 +13,7 @@ import Usage from '../Usage';
 const IMPORT = "import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';";
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/BreadCrumbs';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/BreadCrumbs';
 
 const BreadCrumbsCard = () => {
   return (

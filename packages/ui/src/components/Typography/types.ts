@@ -5,9 +5,4 @@ export type TypographyProps = {
   italic?: boolean;
   kind?: RothkoKind;
   light?: boolean;
-  underline?: boolean;
-};
-
-export type LinkProps = TypographyProps & {
-  underline?: boolean;
 };

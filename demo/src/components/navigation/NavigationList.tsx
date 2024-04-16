@@ -1,4 +1,4 @@
-import { List, ListItem, Typography } from '@rothko-ui/ui';
+import { List, ListItem, Typography, LinkButton } from '@rothko-ui/ui';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { NAVIGATION_LIST } from './constants';
@@ -18,7 +18,7 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
     const isSelected = selected === item.to;
     return (
       <ListItem>
-        <Typography.linkButton
+        <LinkButton
           onClick={() => {
             onNavigate?.();
             router.push(`/${item.to}`);
@@ -34,7 +34,7 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
         >
           {isSelected ? '_ ' : ''}
           {item.label}
-        </Typography.linkButton>
+        </LinkButton>
       </ListItem>
     );
   }

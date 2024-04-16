@@ -14,7 +14,7 @@ import Props from '../Props';
 import Usage from '../Usage';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Radio';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Radio';
 
 const IMPORT = "import { RadioGroup } from '@rothko-ui/ui';";
 

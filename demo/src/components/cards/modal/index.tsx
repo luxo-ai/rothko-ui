@@ -12,7 +12,7 @@ import Props from '../Props';
 import Usage from '../Usage';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Modal';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Modal';
 
 const IMPORT = "import { Modal } from '@rothko-ui/ui';";
 

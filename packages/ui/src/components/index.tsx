@@ -6,6 +6,7 @@ export * from './Checkbox';
 export * from './Drawer';
 export * from './Dropdown';
 export * from './Input';
+export * from './Link';
 export * from './List';
 export * from './Modal';
 export * from './OptionGroup';

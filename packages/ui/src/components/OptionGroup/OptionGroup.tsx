@@ -8,7 +8,8 @@ import { phantomButtonStyle } from '../../library/PhantomButton';
 import type { Accessory, Option, Value } from '../../library/types';
 import type { RothkoKind, RothkoSize } from '../../theme';
 import type { EmSize, RemSize } from '../../types';
-import styles from '../Typography/styles';
+import typographyStyles from '../Typography/styles';
+import linkStyles from '../Link/styles';
 import { vuar } from '../../library/utils/vuar';
 
 const accessorySizeMap: Record<RothkoSize, number> = {
@@ -182,7 +183,7 @@ const OptionButton = styled.button<{
 }>`
   -webkit-tap-highlight-color: transparent;
   ${phantomButtonStyle}
-  ${styles.boldFontStyle}
+  ${typographyStyles.boldFontStyle}
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -251,7 +252,7 @@ const expandedButtonWidth: Record<RothkoSize, FlattenSimpleInterpolation> = {
 
 const ExpandButtonLink = styled.a`
   -webkit-tap-highlight-color: transparent;
-  ${styles.link}
+  ${linkStyles.link}
   height: fit-content;
   ${Object.entries(sizeMap).map(
     ([key, value]) => css`

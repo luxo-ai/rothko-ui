@@ -8,7 +8,7 @@ import typographyCopy from './copy';
 import typographyProps from './props';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Typography';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Typography';
 
 const IMPORT = "import { Typography } from '@rothko-ui/ui';";
 

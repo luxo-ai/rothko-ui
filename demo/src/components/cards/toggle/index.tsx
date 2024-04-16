@@ -19,7 +19,7 @@ import Usage from '../Usage';
 import KindRadioGroup from '../KindRadioGroup';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/Components/Toggle';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Toggle';
 
 const IMPORT = "import { Toggle } from '@rothko-ui/ui';";
 
