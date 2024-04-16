@@ -29,6 +29,22 @@ a {
   --rothko-font-family-code: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+:root {
+  --demo-background: #fff;
+  --demo-nav-background: rgba(255, 255, 255, 0.75);
+  background: #fff;
+  color-scheme: light;
+}
+
+:root ::selection {
+  color: #fff;
+  background: #000;
+}
+:root ::-moz-selection {
+  color: #fff;
+  background: #000;
+}
+
 :root .dark {
   --demo-background: #000;
   --demo-nav-background: rgba(0, 0, 0, 0.75);
@@ -36,27 +52,11 @@ a {
   color-scheme: dark;
 }
 
-:root .dark ::selection {
+:root .dark :not(code) ::selection {
   background: #f81be5;
 }
-:root .dark ::-moz-selection {
+:root .dark :not(code) ::-moz-selection {
   background: #f81be5;
-}
-
-:root .light {
-  --demo-background: #fff;
-  --demo-nav-background: rgba(255, 255, 255, 0.75);
-  background: #fff;
-  color-scheme: light;
-}
-
-:root .light ::selection {
-  color: #fff;
-  background: #000;
-}
-:root .light ::-moz-selection {
-  color: #fff;
-  background: #000;
 }
 
 .phantom-button {

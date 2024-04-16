@@ -49,7 +49,7 @@
     "800": { "value": "#812B09" },
     "900": { "value": "#6B1C05" },
     "default": { "value": "{info.500}" },
-    "foreground": { "value": "#000000" }
+    "foreground": { "value": "#FFFFFF" }
   },
   "warning": {
     "100": { "value": "#FDF7DA" },

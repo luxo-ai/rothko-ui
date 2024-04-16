@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 16 Apr 2024 01:39:01 GMT
+ * Generated on Tue, 16 Apr 2024 01:54:15 GMT
  */
 
 export const PRIMARY_100 = '#FFFFFF';
@@ -46,7 +46,7 @@ export const INFO_700 = '#A13F0E';
 export const INFO_800 = '#812B09';
 export const INFO_900 = '#6B1C05';
 export const INFO = '#0D4FB2';
-export const INFO_FOREGROUND = '#000000';
+export const INFO_FOREGROUND = '#FFFFFF';
 export const WARNING_100 = '#FDF7DA';
 export const WARNING_200 = '#FCEEB5';
 export const WARNING_300 = '#F6E08E';
