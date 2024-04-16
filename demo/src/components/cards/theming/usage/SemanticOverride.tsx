@@ -3,24 +3,7 @@ import React from 'react';
 import { RothkoProvider } from '@rothko-ui/ui';
 
 const App = ({ children }: { children?: React.ReactNode }) => {
-  return (
-    <RothkoProvider
-      overrides={{
-        dark: {
-          success: {
-            500: { value: '#276c27' },
-          },
-        },
-        light: {
-          success: {
-            500: { value: '#11b811' },
-          },
-        },
-      }}
-    >
-      {children}
-    </RothkoProvider>
-  );
+  return <RothkoProvider>{children}</RothkoProvider>;
 };
 
 export default App;
