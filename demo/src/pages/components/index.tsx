@@ -1,4 +1,4 @@
-import { Container, Flex, Typography, useRothko } from '@rothko-ui/ui';
+import { Container, Flex, LinkButtonSmall, Typography, useRothko } from '@rothko-ui/ui';
 import Link from 'next/link';
 import WithNavigation from '../../components/WithNavigation';
 import { toStartCase } from '@rothko-ui/utils';
@@ -79,7 +79,7 @@ const ComponentsPage = () => {
               </Typography.bodySmall>
             </div>
             <Link href={`/components/${component}`}>
-              <Typography.linkButtonSmall as="span">Learn more</Typography.linkButtonSmall>
+              <LinkButtonSmall as="span">Learn more</LinkButtonSmall>
             </Link>
           </Container>
         ))}
