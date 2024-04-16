@@ -1,14 +1,6 @@
 // COMMON CUSTOMIZATIONS
 
-import type { Option, RothkoKind, RothkoSize } from '@rothko-ui/ui';
-
-export const sizeOptions: Option<RothkoSize>[] = [
-  { id: 'xs', label: 'xs' },
-  { id: 's', label: 's' },
-  { id: 'm', label: 'm' },
-  { id: 'l', label: 'l' },
-  { id: 'xl', label: 'xl' },
-];
+import type { Option, RothkoKind } from '@rothko-ui/ui';
 
 export const kindOptions: Option<RothkoKind>[] = [
   { id: 'danger', label: 'danger' },
