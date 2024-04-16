@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 15 Apr 2024 23:39:40 GMT
+ * Generated on Tue, 16 Apr 2024 01:39:01 GMT
  */
 
 export const PRIMARY_100 = '#000000';
@@ -18,23 +18,23 @@ export const SECONDARY_100 = '#FDF2FC';
 export const SECONDARY_200 = '#FBE5FB';
 export const SECONDARY_300 = '#F3D5F5';
 export const SECONDARY_400 = '#E6C5EB';
-export const SECONDARY_500 = '#D4AEDE';
+export const SECONDARY_500 = '#eb69ff';
 export const SECONDARY_600 = '#AC7FBE';
 export const SECONDARY_700 = '#86579F';
 export const SECONDARY_800 = '#613780';
 export const SECONDARY_900 = '#45216A';
-export const SECONDARY = '#D4AEDE';
+export const SECONDARY = '#eb69ff';
 export const SECONDARY_FOREGROUND = '#000000';
 export const SUCCESS_100 = '#DBFED9';
 export const SUCCESS_200 = '#B4FDB6';
 export const SUCCESS_300 = '#8DF99B';
 export const SUCCESS_400 = '#6FF38E';
-export const SUCCESS_500 = '#42EC7A';
+export const SUCCESS_500 = '#41ff69';
 export const SUCCESS_600 = '#30CA72';
 export const SUCCESS_700 = '#21A969';
 export const SUCCESS_800 = '#15885D';
 export const SUCCESS_900 = '#0C7155';
-export const SUCCESS = '#42EC7A';
+export const SUCCESS = '#41ff69';
 export const SUCCESS_FOREGROUND = '#000000';
 export const INFO_100 = '#CCE6FB';
 export const INFO_200 = '#9BCBF7';
@@ -51,23 +51,23 @@ export const WARNING_100 = '#FFF9CC';
 export const WARNING_200 = '#FFF399';
 export const WARNING_300 = '#FFEA66';
 export const WARNING_400 = '#FFE23F';
-export const WARNING_500 = '#FFD400';
+export const WARNING_500 = '#fee10e';
 export const WARNING_600 = '#DBB200';
 export const WARNING_700 = '#B79200';
 export const WARNING_800 = '#937300';
 export const WARNING_900 = '#7A5D00';
-export const WARNING = '#FFD400';
+export const WARNING = '#fee10e';
 export const WARNING_FOREGROUND = '#000000';
 export const DANGER_100 = '#FCDBC9';
 export const DANGER_200 = '#F9AF95';
 export const DANGER_300 = '#EF785F';
 export const DANGER_400 = '#E04638';
-export const DANGER_500 = '#CC0000';
+export const DANGER_500 = '#ff1313';
 export const DANGER_600 = '#AF000F';
 export const DANGER_700 = '#920019';
 export const DANGER_800 = '#76001E';
 export const DANGER_900 = '#610021';
-export const DANGER = '#CC0000';
+export const DANGER = '#ff1313';
 export const DANGER_FOREGROUND = '#FFFFFF';
 export const BACKGROUND = '#fff';
 export const BORDER = '#000';

@@ -8,7 +8,7 @@ import { phantomButtonStyle } from '../../library/PhantomButton';
 import type { Accessory, Option, Value } from '../../library/types';
 import type { RothkoKind, RothkoSize } from '../../theme';
 import type { EmSize, RemSize } from '../../types';
-import Typography, { regularFontStyle } from '../Typography/Typography';
+import Typography, { boldFontStyle } from '../Typography/Typography';
 import { vuar } from '../../library/utils/vuar';
 
 const accessorySizeMap: Record<RothkoSize, number> = {
@@ -182,7 +182,7 @@ const OptionButton = styled.button<{
 }>`
   -webkit-tap-highlight-color: transparent;
   ${phantomButtonStyle}
-  ${regularFontStyle}
+  ${boldFontStyle}
   display: inline-flex;
   align-items: center;
   justify-content: center;
