@@ -140,7 +140,7 @@ const Drawer = ({
                   {isString(children) ? (
                     <Typography.body id={drawerContentId}>{children}</Typography.body>
                   ) : (
-                    <div id={drawerContentId}>children</div>
+                    <div id={drawerContentId}>{children}</div>
                   )}
                 </AnimatedDrawerContainerDiv>
               )

@@ -214,7 +214,7 @@ const Modal = ({
                 {isString(children) ? (
                   <Typography.body id={modalContentId}>{children}</Typography.body>
                 ) : (
-                  <div id={modalContentId}>children</div>
+                  <div id={modalContentId}>{children}</div>
                 )}
               </AnimatedModalContainer>
             )

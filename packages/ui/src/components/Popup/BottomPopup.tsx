@@ -134,7 +134,7 @@ const BottomPopup: React.FC<PopupProps> = ({
                 {isString(children) ? (
                   <Typography.body id={contentId}>{children}</Typography.body>
                 ) : (
-                  <div id={contentId}>children</div>
+                  <div id={contentId}>{children}</div>
                 )}
               </AnimatedPopupContainer>
             )
