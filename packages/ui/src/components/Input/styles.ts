@@ -3,6 +3,7 @@ import { css } from 'styled-components';
 import type { InputSize } from './types';
 import typographyStyles from '../Typography/styles';
 import { vuar } from '../../library/utils/vuar';
+import type { RothkoKind } from '../../theme';
 
 const sizeMap: Record<InputSize, FlattenSimpleInterpolation> = {
   s: css`
@@ -19,7 +20,7 @@ const sizeMap: Record<InputSize, FlattenSimpleInterpolation> = {
   `,
 };
 
-export const baseInputStyle = css`
+export const baseInputStyle = css<{ kind?: RothkoKind }>`
   -webkit-tap-highlight-color: transparent;
   -webkit-appearance: none;
   -moz-appearance: none;

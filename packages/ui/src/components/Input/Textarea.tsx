@@ -3,18 +3,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { baseInputStyle } from './styles';
 import type { HtmlTextareaProps, InputSize } from './types';
+import type { RothkoKind } from '../../theme';
 
 type TextareaProps = {
   /** textarea size */
   size?: InputSize;
+  kind?: RothkoKind;
 } & HtmlTextareaProps;
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ size = 'm', className, disabled, tabIndex, ...props }, ref) => {
+  ({ size = 'm', className, disabled, tabIndex, kind, ...props }, ref) => {
     const baseClasses = classes(`inpt_size_${size}`, className);
     return (
       <StyledTextarea
         ref={ref}
+        kind={kind}
         className={baseClasses}
         disabled={disabled}
         tabIndex={disabled ? -1 : tabIndex}
