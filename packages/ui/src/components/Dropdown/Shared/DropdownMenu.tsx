@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { MenuBase } from '../../../library/Common';
+import Menu from '../../../library/Menu';
 
-const DropdownMenu = styled(MenuBase)`
+const DropdownMenu = styled(Menu)`
   max-height: 13rem;
   z-index: 10;
 `;

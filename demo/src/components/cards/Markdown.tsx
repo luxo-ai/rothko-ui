@@ -20,6 +20,7 @@ const Markdown = (props: { children: string }) => (
           <Typography.linkButton as="span">{children}</Typography.linkButton>
         </Link>
       ),
+      code: ({ children }) => <Typography.code>{children}</Typography.code>,
     }}
   >
     {props.children}

@@ -1,4 +1,3 @@
 import Search from './Search';
-import SearchBar from './SearchBar/SearchBar';
-export type { SearchMode } from './types';
+import SearchBar from './SearchBar';
 export { Search, SearchBar };

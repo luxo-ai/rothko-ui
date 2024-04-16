@@ -1,5 +1,6 @@
 import { css } from 'styled-components';
 import type { RothkoKind } from '../theme';
+import { vuar } from './utils/vuar';
 
 export const unselectableStyle = css`
   -webkit-touch-callout: none; /* iOS Safari */
@@ -29,7 +30,7 @@ export const textChildrenStyle = css`
   p,
   span,
   code {
-    color: var(--rothko-foreground, #000);
+    color: ${vuar({ category: 'foreground' })};
   }
 `;
 
@@ -45,6 +46,6 @@ export const semanticTextChildrenStyle = css<{
   p,
   span,
   code {
-    color: ${({ kind }) => `var(--rothko-${kind}-foreground, #000)`};
+    color: ${({ kind }) => vuar({ kind, category: 'foreground' })};
   }
 `;

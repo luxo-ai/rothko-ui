@@ -27,9 +27,9 @@ const ControlButton = styled.button.attrs({ type: 'button' })<ControlButtonProps
       transition: transform 0.125s linear;
     `}
 
-  &.disabled {
-    opacity: 0.5;
+  &:disabled {
     cursor: not-allowed;
+    opacity: 0.5;
   }
 `;
 

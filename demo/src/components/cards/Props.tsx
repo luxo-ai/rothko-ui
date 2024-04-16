@@ -16,13 +16,13 @@ const PropsTable = ({ props: propsMeta }: PropsTableProps) => {
         <TableRow key={name}>
           <TableData>{name}</TableData>
           <TableData>
-            <code style={{ fontSize: '0.875rem' }}>{type}</code>
+            <Typography.code style={{ fontSize: '0.875rem' }}>{type}</Typography.code>
           </TableData>
           {defaultValue === null ? (
             <TableData />
           ) : (
             <TableData>
-              <code style={{ fontSize: '0.875rem' }}>{defaultValue}</code>
+              <Typography.code style={{ fontSize: '0.875rem' }}>{defaultValue}</Typography.code>
             </TableData>
           )}
           <TableData>{description}</TableData>

@@ -9,6 +9,7 @@ import type { RothkoKind } from '../../theme/types';
 import { Typography } from '../Typography';
 import { semanticTextChildrenStyle, textChildrenStyle } from '../../library/Styles';
 import type { WithAriaLabeling, WithAriaSelected } from '../../types';
+import { vuar } from '../../library/utils/vuar';
 
 type TagAppearance = 'filled' | 'outline';
 
@@ -63,10 +64,10 @@ const Tag = ({
   'aria-details': ariaDetails,
   'aria-selected': ariaSelected,
 }: TagProps) => {
-  const iconColor =
-    appearance === 'outline'
-      ? `var(--rothko-${kind}-500, #000)`
-      : `var(--rothko-${kind}-foreground, #FFF)`;
+  const iconColor = vuar({
+    kind,
+    category: appearance === 'filled' ? 'foreground' : 'background',
+  });
 
   return (
     <TagContainerDiv
@@ -114,10 +115,7 @@ const TagContainerDiv = styled.div<ContainerProps>`
   text-align: center;
 
   background-color: ${({ kind, appearance }) => {
-    if (kind) {
-      return appearance === 'filled' ? `var(--rothko-${kind}-500, #000)` : 'transparent';
-    }
-    return appearance === 'filled' ? `var(--rothko-background, #FFF)` : 'transparent';
+    return appearance === 'filled' ? vuar({ kind, category: 'background' }) : 'transparent';
   }};
 
   ${({ kind, appearance }) => {
@@ -128,7 +126,9 @@ const TagContainerDiv = styled.div<ContainerProps>`
   }};
 
   border: 1px solid
-    ${({ kind }) => (kind ? `var(--rothko-${kind}-500, #000)` : `var(--rothko-foreground, #000)`)};
+    ${({ kind }) => {
+      return vuar({ kind, category: 'border' });
+    }};
   border-radius: 50vh;
 `;
 

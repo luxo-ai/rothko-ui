@@ -1,6 +1,8 @@
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import { css } from 'styled-components';
 import type { InputSize } from './types';
+import { regularFontStyle } from '../Typography/Typography';
+import { vuar } from '../../library/utils/vuar';
 
 const sizeMap: Record<InputSize, FlattenSimpleInterpolation> = {
   s: css`
@@ -23,10 +25,10 @@ export const baseInputStyle = css`
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  background: var(--rothko-input-background);
+  background: ${vuar({ element: 'input', category: 'background', fallback: '#fff' })};
 
-  font-family: var(--rothko-typography-body-regular);
-  color: var(--rothko-input-color, #000);
+  ${regularFontStyle}
+  color: ${vuar({ element: 'input', category: 'foreground', fallback: '#000' })};
   display: inline-block;
   box-sizing: border-box;
   line-height: 20px;
@@ -47,8 +49,8 @@ export const baseInputStyle = css`
   )}
 
   &.error:not(:focus):not(.focus) {
-    background: var(--rothko-danger-transparent-100);
-    border-color: var(--rothko-danger-500);
+    // background: ??
+    // border-color: ??
   }
 
   :not(:disabled):not(.disabled) {
@@ -57,7 +59,11 @@ export const baseInputStyle = css`
     &:active:not(:disabled) {
       outline: none;
       // border: 1.5px solid var(--info-500);
-      border-color: var(--rothko-border, #000); // var(--info-500); // var(--info-300);
+      // var(--info-500); // var(--info-300);
+      border-color: ${vuar({
+        category: 'border',
+        fallback: '#000',
+      })}; // var(--info-500); // var(--info-300);
     }
     :hover:not(:focus):not(.focus) {
     }

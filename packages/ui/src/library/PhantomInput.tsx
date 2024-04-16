@@ -1,7 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import type { CustomColorCssProperties } from '../layout/Container';
-import { useStyleProps } from '../layout/Container';
 import { hideChromeBrowserOutline } from './Styles';
 
 export const phantomInputStyle = css`
@@ -14,7 +12,7 @@ export const phantomInputStyle = css`
   text-overflow: ellipsis;
 `;
 
-type PhantomInputProps = Omit<CustomColorCssProperties, 'background' | 'border' | 'outline'> & {
+type PhantomInputProps = Omit<React.CSSProperties, 'background' | 'border' | 'outline'> & {
   type?: React.HTMLInputTypeAttribute;
   tabIndex?: number;
   readOnly?: boolean;
@@ -22,8 +20,7 @@ type PhantomInputProps = Omit<CustomColorCssProperties, 'background' | 'border' 
 };
 
 export const PhantomInput = React.forwardRef<HTMLInputElement, PhantomInputProps>(
-  ({ className, readOnly, tabIndex, type, ...styles }, ref) => {
-    const style = useStyleProps(styles);
+  ({ className, readOnly, tabIndex, type, ...style }, ref) => {
     return (
       <StyledPhantomInput
         className={className}

@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import { isString } from '@rothko-ui/utils';
 
 import { semanticTextChildrenStyle } from '../../library/Styles';
+import { vuar } from '../../library/utils/vuar';
 import type { RothkoKind } from '../../theme/types';
-import Typography from '../Typography/Typography';
 import type { WithAriaHidden, WithAriaLabeling, WithAriaLive } from '../../types';
+import Typography from '../Typography/Typography';
 
 type WithAria<T> = WithAriaHidden<WithAriaLabeling<WithAriaLive<T>>>;
 
@@ -71,11 +72,9 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
 
 Alert.displayName = 'Alert';
 
-const AlertContainerDiv = styled.div<{
-  kind: RothkoKind;
-}>`
+const AlertContainerDiv = styled.div<{ kind: RothkoKind }>`
   ${semanticTextChildrenStyle}
-  background-color: ${({ kind }) => `var(--rothko-${kind}-500)`};
+  background-color: ${({ kind }) => vuar({ kind, category: 'background' })};
   padding: 1rem 1.25rem;
   font-size: 1rem;
 `;

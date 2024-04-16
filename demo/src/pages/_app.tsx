@@ -6,11 +6,8 @@ import '../../public/fonts/style.css';
 import RothkoHeader from '../components/Header';
 import { IsMobileOrTabletContext } from '../components/IsMobileOrTabletContext';
 import WithProviders from '../components/WithProviders';
-// import config from '../config';
+import config from '../config';
 import '../globals.css';
-import '@rothko-ui/tokens/web/dark.css';
-import '@rothko-ui/tokens/web/global.css';
-import '@rothko-ui/tokens/web/light.css';
 
 type RothkoAppProps = AppProps & {
   cookies?: Dictionary<string, string>;
@@ -19,15 +16,15 @@ type RothkoAppProps = AppProps & {
 export default function App({
   Component,
   pageProps,
-  //  cookies,
+  cookies,
   isMobileOrTablet = false,
 }: RothkoAppProps) {
-  // const mode = (cookies?.[config.preference.themeMode] || 'dark') as 'dark' | 'light';
+  const mode = (cookies?.[config.preference.themeMode] || 'dark') as 'dark' | 'light';
   return (
     <>
       <RothkoHeader />
       <IsMobileOrTabletContext.Provider value={isMobileOrTablet}>
-        <WithProviders theme={'light'}>
+        <WithProviders theme={mode}>
           <Component {...pageProps} />
         </WithProviders>
       </IsMobileOrTabletContext.Provider>

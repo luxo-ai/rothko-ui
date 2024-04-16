@@ -35,8 +35,6 @@ const TYPOGRAPHY_H6 = 'h6';
 const TYPOGRAPHY_CAPTION = 'caption';
 const TYPOGRAPHY_CODE = 'code';
 const TYPOGRAPHY_LABEL = 'label';
-const TYPOGRAPHY_TITLE = 'bodyLarge'; // body-lg
-const TYPOGRAPHY_TITLE_BIG = 'bodyXLarge'; // title-xl
 
 export type TypographyType =
   | typeof TYPOGRAPHY_BODY
@@ -49,9 +47,7 @@ export type TypographyType =
   | typeof TYPOGRAPHY_H6
   | typeof TYPOGRAPHY_CAPTION
   | typeof TYPOGRAPHY_CODE
-  | typeof TYPOGRAPHY_LABEL
-  | typeof TYPOGRAPHY_TITLE
-  | typeof TYPOGRAPHY_TITLE_BIG;
+  | typeof TYPOGRAPHY_LABEL;
 
 // ~~ COLORS ~~
 export type HexColor = `#${string}`;
@@ -110,14 +106,18 @@ export type FontConfig = DeepPartial<{
 }>;
 
 export type ComponentColors = DeepPartial<{
+  typography: {
+    link: Color;
+    body: Color;
+    heading: Color;
+  };
   background: Color;
   border: Color;
-  color: Color;
-  svg: {
-    fill: Color;
-    stroke: Color;
+  foreground: Color;
+  icon: {
+    background: Color;
+    border: Color;
   };
-  link: Color;
   slider: {
     handle: {
       border: Color;
@@ -132,23 +132,18 @@ export type ComponentColors = DeepPartial<{
   };
   dropdown: {
     background: Color;
-    'border.minimal': Color;
     multiselect: {
-      text: Color;
+      foreground: Color;
       background: Color;
     };
     option: {
-      '::selected': {
-        background: Color;
-      };
+      'background::focus': Color;
     };
   };
   search: {
     background: Color;
     option: {
-      '::selected': {
-        background: Color;
-      };
+      'background::focus': Color;
     };
   };
   tabBar: {
@@ -157,9 +152,7 @@ export type ComponentColors = DeepPartial<{
   radio: {
     border: Color;
     background: Color;
-    '::selected': {
-      background: Color;
-    };
+    'background::focus': Color;
   };
   table: {
     header: {
@@ -173,8 +166,12 @@ export type ComponentColors = DeepPartial<{
     color: Color;
     background: Color;
     life: {
-      filled: Color;
-      empty: Color;
+      filled: {
+        background: Color;
+      };
+      empty: {
+        background: Color;
+      };
     };
   };
   box: {
@@ -187,9 +184,7 @@ export type ComponentColors = DeepPartial<{
   };
   checkbox: {
     background: Color;
-    '::selected': {
-      background: Color;
-    };
+    'background::focus': Color;
   };
   input: {
     background: Color;

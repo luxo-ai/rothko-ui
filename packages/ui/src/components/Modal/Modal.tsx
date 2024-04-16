@@ -7,9 +7,9 @@ import styled, { css } from 'styled-components';
 import { CloseOutline } from '@rothko-ui/icons';
 import { classes, isString } from '@rothko-ui/utils';
 
-import { ShadedBackdrop } from '../../library/Common';
+import ShadedBackdrop from '../../library/ShadedBackdrop';
 import { phantomButtonStyle } from '../../library/PhantomButton';
-import { DomPortal } from '../../library/Portal';
+import DomPortal from '../../library/Portal';
 import type { RothkoSize } from '../../theme';
 import {
   BODY_SCROLL_LOCK_IGNORE_ID,
@@ -18,10 +18,11 @@ import {
   enableBodyScroll,
   removeEvent,
 } from '../../library/utils/domUtils';
-import Typography from '../Typography/Typography';
+import Typography, { boldFontStyle } from '../Typography/Typography';
 import { textChildrenStyle } from '../../library/Styles';
 import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
 import useId from '../../library/hooks/useId';
+import { vuar } from '../../library/utils/vuar';
 
 const bodyStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
@@ -40,10 +41,6 @@ const bodyStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
     padding: 2.875rem 1.5rem 1.875rem 1.5rem;
     max-width: 43rem;
   `,
-  xl: css`
-    padding: 3rem 1.75rem 2rem 1.75rem;
-    max-width: 45rem;
-  `,
 };
 
 const headerStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
@@ -51,8 +48,7 @@ const headerStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
     margin: 0 0 1.125rem 0;
     line-height: 1.25rem;
     font-size: 1rem;
-    font-family: var(--rothko-typography-body-bold);
-    font-weight: bold;
+    ${boldFontStyle};
   `,
   s: css`
     margin: 0 0 1.25rem 0;
@@ -68,11 +64,6 @@ const headerStyleMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
     margin: 0 0 1.75rem 0;
     line-height: 1.875rem;
     font-size: 1.875rem;
-  `,
-  xl: css`
-    margin: 0 0 1.875rem 0;
-    line-height: 2rem;
-    font-size: 2rem;
   `,
 };
 
@@ -197,11 +188,7 @@ const Modal = ({
 
   return (
     <DomPortal wrapperId={`modal-portal-${size}`}>
-      <ModalBackdrop
-        aria-hidden
-        className={classes({ ['backdrop-open']: isOpen })}
-        onClick={onBackdropClick}
-      >
+      <ModalBackdrop aria-hidden $show={isOpen} onClick={onBackdropClick}>
         {transition(
           (style, item) =>
             item && (
@@ -243,7 +230,7 @@ const ModalContainerDiv = styled.div`
   width: 100%;
   max-height: calc(100vh - 1rem);
   position: relative;
-  background: var(--rothko-background, #fff);
+  background: ${vuar({ category: 'background', fallback: '#fff' })};
   margin: auto;
   overflow: scroll;
   scrollbar-width: thin;
@@ -257,7 +244,7 @@ const ModalContainerDiv = styled.div`
   ${textChildrenStyle}
 
   & > svg {
-    fill: var(--rothko-foreground, #000);
+    fill: ${vuar({ category: 'foreground', fallback: '#000' })};
   }
 
   ${Object.entries(bodyStyleMap).map(
@@ -283,7 +270,6 @@ const ModalHeaderText = styled(Typography.body)`
 
 const ModalBackdrop = styled(ShadedBackdrop)`
   -webkit-backface-visibility: hidden;
-  z-index: 1;
   display: flex;
   padding: 0 1rem;
 `;

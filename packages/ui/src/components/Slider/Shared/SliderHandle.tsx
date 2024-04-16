@@ -16,6 +16,7 @@ import {
 import { getOffsetFactory } from '../sliderUtils';
 import useIsMounted from '../../../library/hooks/useIsMounted';
 import type { WithAriaControls, WithAriaLabel } from '../../../types';
+import { vuar } from '../../../library/utils/vuar';
 
 type DraggableEvents = {
   start: string;
@@ -276,14 +277,19 @@ const HandleButton = styled.button.attrs({ type: 'button' })<{
   width: 1.5rem;
   height: 1.5rem;
   transform: ${({ vertical }) => (vertical ? `translate(0%, -50%)` : `translate(-50%, 0%)`)};
-  background-color: var(--rothko-slider-handle-background, #ebf2fb);
+  background-color: ${vuar({
+    category: 'background',
+    element: 'slider-handle',
+    fallback: '#ebf2fb',
+  })};
+
   transition-property: border;
   transition-duration: 0.2s;
   // box-shadow: 0 2px 6px 0 rgb(101 110 123 / 20%);
   border-radius: 50%;
   border-style: solid;
   border-width: 2px;
-  border-color: var(--rothko-slider-handle-border, #bcc7df);
+  border-color: ${vuar({ category: 'border', element: 'slider-handle', fallback: '#bcc7df' })};
   overflow: visible;
   touch-action: ${({ vertical }) => (vertical ? `pan-y` : `pan-x`)};
   z-index: 3;
@@ -295,10 +301,13 @@ const HandleButton = styled.button.attrs({ type: 'button' })<{
     &:active,
     &.active {
       border-color: ${({ kind }) =>
-        kind
-          ? `var(--rothko-${kind}-500, #000)`
-          : `var(--rothko-slider-handle-background, #ebf2fb)`};
-    }
+        vuar({
+          kind,
+          category: 'background',
+          element: 'slider-handle',
+          fallback: '#ebf2fb',
+        })};
+      
   }
   :disabled {
     // opacity: 0.8;

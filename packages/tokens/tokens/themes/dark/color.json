@@ -9,6 +9,7 @@
     "700": { "value": "#FFFFFF" },
     "800": { "value": "#FFFFFF" },
     "900": { "value": "#FFFFFF" },
+    "default": { "value": "{primary.500}" },
     "foreground": { "value": "#000000" }
   },
   "secondary": {
@@ -16,11 +17,12 @@
     "200": { "value": "#F9D5F8" },
     "300": { "value": "#EAB9EC" },
     "400": { "value": "#D3A0DB" },
-    "500": { "value": "#B57DC3" },
+    "500": { "value": "#eb69ff" },
     "600": { "value": "#925BA7" },
     "700": { "value": "#713F8C" },
     "800": { "value": "#522771" },
     "900": { "value": "#3A175D" },
+    "default": { "value": "{secondary.500}" },
     "foreground": { "value": "#000000" }
   },
   "success": {
@@ -28,11 +30,12 @@
     "200": { "value": "#D8F9D1" },
     "300": { "value": "#B9EEB5" },
     "400": { "value": "#9BDE9C" },
-    "500": { "value": "#78C881" },
+    "500": { "value": "#41ff69" },
     "600": { "value": "#57AC68" },
     "700": { "value": "#3C9055" },
     "800": { "value": "#267444" },
     "900": { "value": "#17603A" },
+    "default": { "value": "{success.500}" },
     "foreground": { "value": "#000000" }
   },
   "info": {
@@ -40,23 +43,25 @@
     "200": { "value": "#FBD9A4" },
     "300": { "value": "#F5BC75" },
     "400": { "value": "#EC9F52" },
-    "500": { "value": "#e0741d" },
+    "500": { "value": "#0D4FB2" },
     "600": { "value": "#C05815" },
     "700": { "value": "#A13F0E" },
     "800": { "value": "#812B09" },
     "900": { "value": "#6B1C05" },
-    "foreground": { "value": "#000000" }
+    "default": { "value": "{info.500}" },
+    "foreground": { "value": "#FFFFFF" }
   },
   "warning": {
     "100": { "value": "#FDF7DA" },
     "200": { "value": "#FCEEB5" },
     "300": { "value": "#F6E08E" },
     "400": { "value": "#EECF71" },
-    "500": { "value": "#E4B844" },
+    "500": { "value": "#fee10e" },
     "600": { "value": "#C49731" },
     "700": { "value": "#A47922" },
     "800": { "value": "#845C15" },
     "900": { "value": "#6D470D" },
+    "default": { "value": "{warning.500}" },
     "foreground": { "value": "#000000" }
   },
   "danger": {
@@ -64,11 +69,12 @@
     "200": { "value": "#FABDA7" },
     "300": { "value": "#F08E79" },
     "400": { "value": "#E26256" },
-    "500": { "value": "#d02424" },
+    "500": { "value": "#ff1313" },
     "600": { "value": "#B21A27" },
     "700": { "value": "#951228" },
     "800": { "value": "#780B27" },
     "900": { "value": "#630627" },
+    "default": { "value": "{danger.500}" },
     "foreground": { "value": "#FFFFFF" }
   }
 }

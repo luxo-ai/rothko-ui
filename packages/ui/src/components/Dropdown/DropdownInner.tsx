@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { ChevronDownOutline, CloseOutline } from '@rothko-ui/icons';
 import { classes, isArray, isNil } from '@rothko-ui/utils';
 
-import { ItemText, LabelText } from '../../library/Common';
 import { useDebuggerContext } from '../../library/DebuggerContext';
 import useDropdownMenu from '../../library/hooks/useMenu';
 import { PhantomButton } from '../../library/PhantomButton';
@@ -13,11 +12,14 @@ import { DefaultRenderOption } from '../../library/RenderOption';
 import { hideChromeBrowserOutline } from '../../library/Styles';
 import type { Value } from '../../library/types';
 import { directionMap } from '../../library/utils/keyUtils';
-import Typography, { textStyle } from '../Typography/Typography';
+import Typography, { bodySizeStyle, paragraphStyle } from '../Typography/Typography';
 import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } from './Shared';
 import type { DropdownInnerProps } from './types';
 import useSelect from './useSelect';
 import useId from '../../library/hooks/useId';
+import ItemText from '../../library/ItemText';
+import LabelText from '../../library/LabelText';
+import { vuar } from '../../library/utils/vuar';
 
 // TODO - Think about aria role for searachable dropdown?
 
@@ -189,10 +191,6 @@ function DropdownInner<V extends Value, T = undefined>({
     empty: !hasOptions,
   });
 
-  const dropdownMenuClasses = classes({
-    ['open-reverse']: openReverse,
-  });
-
   return (
     <div style={style} className={className}>
       {label && <LabelText id={labelId}>{label}</LabelText>}
@@ -240,7 +238,7 @@ function DropdownInner<V extends Value, T = undefined>({
           })}
           tabIndex={-1}
         >
-          {!hasValue && (!query || !hasOptions) && <ItemText placeHolder>{placeholder}</ItemText>}
+          {!hasValue && (!query || !hasOptions) && <ItemText $placeHolder>{placeholder}</ItemText>}
           {!isNil(value) && isArray(value) && (
             <MultiSelectContainerDiv>
               {value.map(v => {
@@ -260,7 +258,11 @@ function DropdownInner<V extends Value, T = undefined>({
                     >
                       <CloseOutline
                         aria-hidden
-                        fill="var(--rothko-dropdown-multiselect-text, #000)"
+                        fill={vuar({
+                          element: 'dropdown-multiselect',
+                          category: 'foreground',
+                          fallback: '#000',
+                        })}
                         width={16}
                         height={16}
                       />
@@ -279,7 +281,7 @@ function DropdownInner<V extends Value, T = undefined>({
             $open={open}
             $rotateOnOpen
             aria-label="Open"
-            className={classes({ disabled })}
+            disabled={disabled}
             onClick={toggleMenu}
           >
             <ChevronDownOutline aria-hidden width="1rem" height="1rem" />
@@ -287,7 +289,7 @@ function DropdownInner<V extends Value, T = undefined>({
         ) : (
           <ControlButton
             aria-label="Clear Selection"
-            className={classes({ disabled })}
+            disabled={disabled}
             onClick={() => onSelectHandler(null)}
           >
             <CloseOutline aria-hidden width="1rem" height="1rem" />
@@ -298,7 +300,7 @@ function DropdownInner<V extends Value, T = undefined>({
             id={dropdownMenuId}
             role={search ? 'listbox' : undefined}
             ref={menuRef}
-            className={dropdownMenuClasses}
+            $reverse={openReverse}
             tabIndex={-1}
             data-rothko-body-scroll-lock-ignore
           >
@@ -358,8 +360,18 @@ const MultiSelectLabelDiv = styled.div`
 
   padding: 0.0625rem 0.3rem 0.0625rem 0.5rem;
 
-  background: var(--rothko-dropdown-multiselect-background, #fff);
-  border: 1px solid var(--rothko-dropdown-multiselect-text, #000);
+  background: ${vuar({
+    element: 'dropdown-multiselect',
+    category: 'background',
+    fallback: '#fff',
+  })};
+
+  border: 1px solid
+    ${vuar({
+      element: 'dropdown-multiselect',
+      category: 'border',
+      fallback: '#000',
+    })};
 
   border-radius: 3.25rem;
   cursor: initial;
@@ -368,7 +380,11 @@ const MultiSelectLabelDiv = styled.div`
 const MultiSelectItemText = styled(Typography.bodySmall)`
   margin: 0;
   user-select: none;
-  color: var(--rothko-dropdown-multiselect-text, #000);
+  color: ${vuar({
+    element: 'dropdown-multiselect',
+    category: 'foreground',
+    fallback: '#000',
+  })};
 `;
 
 const NoResultsText = styled(ItemText).attrs({ as: 'p' })`
@@ -378,7 +394,8 @@ const NoResultsText = styled(ItemText).attrs({ as: 'p' })`
 
 const PhantomInput = styled.input`
   ${hideChromeBrowserOutline}
-  ${textStyle}
+  ${paragraphStyle}
+  ${bodySizeStyle}
   position: absolute;
   inset: 0;
   background: none !important;

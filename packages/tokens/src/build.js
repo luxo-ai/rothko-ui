@@ -76,16 +76,24 @@ const doesNotRequireQuotes = value => {
   return value === null || typeof value === 'number' || typeof value === 'boolean';
 };
 
+const removeDefaultSuffix = name => {
+  return name.replace(/[-_]+default$/i, '');
+};
+
+const createSpaces = numSpaces => {
+  return ' '.repeat(numSpaces);
+};
+
 const rothkoCssRootFormatter = ({ dictionary, options, file }) => {
   const header = styledDictionary.formatHelpers.fileHeader({ file });
   const { className } = options;
 
   const cssVariables = dictionary.allProperties.map(token => {
-    return `--rothko-${token.name}: ${token.value};`;
+    return `--rothko-${removeDefaultSuffix(token.name)}: ${token.value};`;
   });
 
   const styleClassName = compact([':root', className && `.${className}`]).join(' ');
-  const styleContent = `\t${cssVariables.join('\n\t')}`;
+  const styleContent = `${createSpaces(2)}${cssVariables.join(`\n${createSpaces(2)}`)}`;
 
   return `${header}${styleClassName} {\n${styleContent}\n}`;
 };
@@ -96,7 +104,7 @@ const rothkoTsFormatter = ({ dictionary, file }) => {
   const tsConstants = dictionary.allProperties.map(({ path, value }) => {
     const constantName = path.map(toScreamingSnakeCase).join('_');
     const constantValue = doesNotRequireQuotes(value) ? value : JSON.stringify(value);
-    return `export const ${constantName} = ${constantValue};`;
+    return `export const ${removeDefaultSuffix(constantName)} = ${constantValue};`;
   });
 
   const code = `${header}\n${tsConstants.join('\n')}`;
@@ -107,7 +115,7 @@ styledDictionary.registerFormat({
   name: 'css/variables-themed',
   formatter: function (args) {
     const themedVariablesFormat = rothkoCssRootFormatter(args);
-    const fill = 'fill: var(--rothko-svg-fill, #000)';
+    const fill = 'fill: var(--rothko-icon-background, #000)';
     const className = args.options.className ? `:root .${args.options.className}` : ':root';
     return `${themedVariablesFormat}\n\n${className} {\n  ${fill}\n}`;
   },

@@ -36,7 +36,7 @@ const useDropdownMenu = <
       onFocus?.(e);
       setFocus(true);
     },
-    [onFocus, setFocus]
+    [onFocus, setFocus, timeoutId, debug]
   );
 
   const onBlurHandler = useCallback(
@@ -54,7 +54,7 @@ const useDropdownMenu = <
         }
       }, 0);
     },
-    [onBlur, setFocus, setOpen]
+    [onBlur, setFocus, setOpen, timeoutId, debug]
   );
 
   const closeMenu = () => {
@@ -93,7 +93,7 @@ const useDropdownMenu = <
         menu.scrollTop = childElement.offsetTop + childElement.clientHeight - menu.clientHeight;
       }
     },
-    [menuRef]
+    [menuRef, debug]
   );
 
   return {

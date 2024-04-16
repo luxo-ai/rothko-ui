@@ -2,7 +2,7 @@ import { classes, isString } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import type { CSSProperties } from 'react';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { hideChromeBrowserOutline } from '../../library/Styles';
 import type { RothkoKind } from '../../theme/types';
 import { keyDownFactory } from '../../library/utils/keyUtils';
@@ -19,6 +19,7 @@ import type {
   WithAriaRequired,
 } from '../../types';
 import useId from '../../library/hooks/useId';
+import { vuar } from '../../library/utils/vuar';
 
 type WithAria<T> = WithAriaErrorMessage<
   WithAriaRequired<
@@ -192,15 +193,20 @@ const OuterToggleDiv = styled.div<OuterToogleDivProp>`
   width: 3rem;
   height: calc(1.4rem + 2px);
 
-  border: 1px solid var(--rothko-toggle-border);
+  border: 1px solid ${vuar({ element: 'toggle', category: 'border' })};
   border-radius: 50vmin;
 
   background-color: ${({ $toggled, kind }) => {
-    const unselected = css`var(--rothko-toggle-background, #dee7f5)`;
-    if (!kind) {
-      return $toggled ? 'var(--rothko-toggle-background_selected, #000)' : unselected;
+    if ($toggled) {
+      return vuar({
+        kind,
+        element: 'toggle',
+        category: 'background',
+        focused: true,
+        fallback: '#000',
+      });
     }
-    return $toggled ? `var(--rothko-${kind}-400, #000)` : unselected;
+    return vuar({ element: 'toggle', category: 'background', fallback: '#dee7f5' });
   }};
 
   -webkit-transition: background-color 0.5s ease;
@@ -215,12 +221,12 @@ const OuterToggleDiv = styled.div<OuterToogleDivProp>`
       position: absolute;
       inset: -0.13rem;
       border-radius: 50vmin;
-      border: 0.125rem solid ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
+      border: 0.125rem solid ${({ kind }) => vuar({ kind, category: 'border' })};
     }
   }
 
   &.error:not(:focus):not(.focus) {
-    background-color: var(--rothko-danger-transparent-500);
+    // background-color: ?
   }
 
   &.disabled {

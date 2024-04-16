@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid } from '../../layout';
-import { LabelText } from '../../library/Common';
 import type { RothkoKind } from '../../theme';
 import type {
   EmSize,
@@ -18,6 +17,7 @@ import useId from '../../library/hooks/useId';
 import { Typography } from '../Typography';
 import type { RadioGroupContextType } from './RadioGroupContext';
 import RadioGroupContext from './RadioGroupContext';
+import LabelText from '../../library/LabelText';
 
 const RadioGroupContainerDiv = styled.div``;
 

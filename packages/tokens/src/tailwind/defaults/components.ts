@@ -6,12 +6,16 @@ import * as dark from '../../tokens/dark';
 export const LIGHT_COMPONENTS: DeepRequired<ComponentColors> = {
   background: light.BACKGROUND,
   border: light.BORDER,
-  color: light.FOREGROUND,
-  svg: {
-    fill: light.SVG_FILL,
-    stroke: light.SVG_STROKE,
+  foreground: light.FOREGROUND,
+  typography: {
+    link: light.TYPOGRAPHY_LINK_COLOR,
+    body: light.TYPOGRAPHY_BODY_COLOR,
+    heading: light.TYPOGRAPHY_HEADING_COLOR,
   },
-  link: light.LINK,
+  icon: {
+    background: light.ICON_BACKGROUND,
+    border: light.ICON_BORDER,
+  },
   slider: {
     handle: {
       border: light.SLIDER_HANDLE_BORDER,
@@ -26,23 +30,18 @@ export const LIGHT_COMPONENTS: DeepRequired<ComponentColors> = {
   },
   dropdown: {
     background: light.DROPDOWN_BACKGROUND,
-    'border.minimal': light.DROPDOWN_BORDER_MINIMAL,
     multiselect: {
-      text: light.DROPDOWN_MULTISELECT_TEXT,
+      foreground: light.DROPDOWN_MULTISELECT_FOREGROUND,
       background: light.DROPDOWN_MULTISELECT_BACKGROUND,
     },
     option: {
-      '::selected': {
-        background: light.DROPDOWN_OPTION_BACKGROUND_SELECTED,
-      },
+      'background::focus': light.DROPDOWN_OPTION_BACKGROUND_FOCUS,
     },
   },
   search: {
     background: light.SEARCH_BACKGROUND,
     option: {
-      '::selected': {
-        background: light.SEARCH_OPTION_BACKGROUND_SELECTED,
-      },
+      'background::focus': light.SEARCH_OPTION_BACKGROUND_FOCUS,
     },
   },
   tabBar: {
@@ -51,9 +50,7 @@ export const LIGHT_COMPONENTS: DeepRequired<ComponentColors> = {
   radio: {
     border: light.RADIO_BORDER,
     background: light.RADIO_BACKGROUND,
-    '::selected': {
-      background: light.RADIO_BACKGROUND_SELECTED,
-    },
+    'background::focus': light.RADIO_BACKGROUND_FOCUS,
   },
   table: {
     header: {
@@ -67,8 +64,12 @@ export const LIGHT_COMPONENTS: DeepRequired<ComponentColors> = {
     color: light.FOREGROUND,
     background: light.BACKGROUND,
     life: {
-      filled: light.TOAST_LIFE_FILLED,
-      empty: light.TOAST_LIFE_EMPTY,
+      filled: {
+        background: light.TOAST_LIFE_FILLED_BACKGROUND,
+      },
+      empty: {
+        background: light.TOAST_LIFE_EMPTY_BACKGROUND,
+      },
     },
   },
   box: {
@@ -81,9 +82,7 @@ export const LIGHT_COMPONENTS: DeepRequired<ComponentColors> = {
   },
   checkbox: {
     background: light.RADIO_BACKGROUND,
-    '::selected': {
-      background: light.RADIO_BACKGROUND_SELECTED,
-    },
+    'background::focus': light.RADIO_BACKGROUND_FOCUS,
   },
   input: {
     background: light.BACKGROUND,
@@ -98,12 +97,16 @@ export const LIGHT_COMPONENTS: DeepRequired<ComponentColors> = {
 export const DARK_COMPONENTS: DeepRequired<ComponentColors> = {
   background: dark.BACKGROUND,
   border: dark.BORDER,
-  color: dark.FOREGROUND,
-  svg: {
-    fill: dark.SVG_FILL,
-    stroke: dark.SVG_STROKE,
+  foreground: dark.FOREGROUND,
+  typography: {
+    link: dark.TYPOGRAPHY_LINK_COLOR,
+    body: dark.TYPOGRAPHY_BODY_COLOR,
+    heading: dark.TYPOGRAPHY_HEADING_COLOR,
   },
-  link: dark.LINK,
+  icon: {
+    background: dark.ICON_BACKGROUND,
+    border: dark.ICON_BORDER,
+  },
   slider: {
     handle: {
       border: dark.SLIDER_HANDLE_BORDER,
@@ -118,23 +121,18 @@ export const DARK_COMPONENTS: DeepRequired<ComponentColors> = {
   },
   dropdown: {
     background: dark.DROPDOWN_BACKGROUND,
-    'border.minimal': dark.DROPDOWN_BORDER_MINIMAL,
     multiselect: {
-      text: dark.DROPDOWN_MULTISELECT_TEXT,
+      foreground: dark.DROPDOWN_MULTISELECT_FOREGROUND,
       background: dark.DROPDOWN_MULTISELECT_BACKGROUND,
     },
     option: {
-      '::selected': {
-        background: dark.DROPDOWN_OPTION_BACKGROUND_SELECTED,
-      },
+      'background::focus': dark.DROPDOWN_OPTION_BACKGROUND_FOCUS,
     },
   },
   search: {
     background: dark.SEARCH_BACKGROUND,
     option: {
-      '::selected': {
-        background: dark.SEARCH_OPTION_BACKGROUND_SELECTED,
-      },
+      'background::focus': dark.SEARCH_OPTION_BACKGROUND_FOCUS,
     },
   },
   tabBar: {
@@ -143,9 +141,7 @@ export const DARK_COMPONENTS: DeepRequired<ComponentColors> = {
   radio: {
     border: dark.RADIO_BORDER,
     background: dark.RADIO_BACKGROUND,
-    '::selected': {
-      background: dark.RADIO_BACKGROUND_SELECTED,
-    },
+    'background::focus': dark.RADIO_BACKGROUND_FOCUS,
   },
   table: {
     header: {
@@ -159,8 +155,12 @@ export const DARK_COMPONENTS: DeepRequired<ComponentColors> = {
     color: dark.FOREGROUND,
     background: dark.BACKGROUND,
     life: {
-      filled: dark.TOAST_LIFE_FILLED,
-      empty: dark.TOAST_LIFE_EMPTY,
+      filled: {
+        background: dark.TOAST_LIFE_FILLED_BACKGROUND,
+      },
+      empty: {
+        background: dark.TOAST_LIFE_EMPTY_BACKGROUND,
+      },
     },
   },
   box: {
@@ -173,9 +173,7 @@ export const DARK_COMPONENTS: DeepRequired<ComponentColors> = {
   },
   checkbox: {
     background: dark.RADIO_BACKGROUND,
-    '::selected': {
-      background: dark.RADIO_BACKGROUND_SELECTED,
-    },
+    'background::focus': dark.RADIO_BACKGROUND_FOCUS,
   },
   input: {
     background: dark.BACKGROUND,

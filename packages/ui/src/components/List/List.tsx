@@ -1,7 +1,5 @@
 import React from 'react';
-import type { CSSProperties } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { useStyleProps } from '../../layout/Container';
 
 const listStyle = css`
   padding: 0 0 0 1rem;
@@ -22,14 +20,13 @@ const listElements = {
 
 type ListKind = keyof typeof listElements;
 
-type ListProps = CSSProperties & {
+type ListProps = React.CSSProperties & {
   children: React.ReactNode;
   className?: string;
   kind?: ListKind;
 };
 
-const List = ({ children, className, kind = 'unordered', ...styles }: ListProps) => {
-  const style = useStyleProps(styles);
+const List = ({ children, className, kind = 'unordered', ...style }: ListProps) => {
   const ListEl = listElements[kind];
   return (
     <ListEl style={style} className={className} role="list">

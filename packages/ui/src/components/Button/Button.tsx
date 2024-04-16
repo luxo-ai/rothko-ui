@@ -4,20 +4,12 @@ import styled, { css } from 'styled-components';
 
 import { classes } from '@rothko-ui/utils';
 
-import InlineSpinnerLoader from '../../library/loaders/InlineSpinnerLoader';
+import InlineSpinnerLoader from '../../library/InlineSpinner';
 import type { Accessory } from '../../library/types';
 import type { RothkoKind, RothkoSize } from '../../theme';
-import type { ButtonAppearance, ButtonShape } from './types';
-import type {
-  WithAriaControls,
-  WithAriaDisabled,
-  WithAriaExpanded,
-  WithAriaHasPopup,
-  WithAriaHidden,
-  WithAriaLabeling,
-  WithAriaLive,
-  WithAriaPressed,
-} from '../../types';
+import type { ButtonAppearance, ButtonShape, WithButtonAria } from './types';
+import { regularFontStyle } from '../Typography/Typography';
+import { vuar } from '../../library/utils/vuar';
 
 const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
@@ -37,11 +29,6 @@ const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
     font-size: 1.25rem;
     border-width: 2px;
   `,
-  xl: css`
-    padding: 1rem 1.3rem;
-    font-size: 1.75rem;
-    border-width: 2px;
-  `,
 };
 
 const accessorySizeMap: Record<RothkoSize, number> = {
@@ -49,20 +36,9 @@ const accessorySizeMap: Record<RothkoSize, number> = {
   s: 17,
   m: 20,
   l: 30,
-  xl: 35,
 };
 
-type WithAria<T> = WithAriaDisabled<
-  WithAriaLive<
-    WithAriaPressed<
-      WithAriaHidden<
-        WithAriaExpanded<WithAriaHasPopup<WithAriaControls<WithAriaHidden<WithAriaLabeling<T>>>>>
-      >
-    >
-  >
->;
-
-type ButtonProps = WithAria<{
+type ButtonProps = WithButtonAria<{
   id?: string;
   /**
    * The left accessory component.
@@ -176,10 +152,11 @@ const Button: React.FC<ButtonProps> = ({
     ['fit-content']: fitContent,
   } as const;
 
-  const iconColor =
-    appearance === 'outline'
-      ? (`var(--rothko-${kind}-500, #000)` as const)
-      : (`var(--rothko-${kind}-foreground, #000)` as const);
+  const iconColor = vuar({
+    kind,
+    category: appearance === 'outline' ? 'background' : 'foreground',
+    fallback: '#000',
+  });
 
   const { onClick, onKeyDown } = useMemo(
     () => ({
@@ -242,7 +219,6 @@ const Button: React.FC<ButtonProps> = ({
         )}
         {loading ? (
           <InlineSpinnerLoader
-            aria-label="Loading"
             style={
               childrenHeight
                 ? { width: childrenHeight, height: childrenHeight, margin: 'auto' }
@@ -299,12 +275,16 @@ export const buttonStyle = css<BaseButtonProps>`
 
   width: 100%;
   background: ${({ appearance, kind }) =>
-    appearance === 'outline' ? 'transparent' : `var(--rothko-${kind}-500, #000)`};
-  font-family: var(--rothko-typography-body-regular);
+    appearance === 'outline' ? 'transparent' : vuar({ kind, category: 'background' })};
+
+  ${regularFontStyle}
+
   color: ${({ appearance, kind }) =>
-    appearance === 'outline'
-      ? `var(--rothko-${kind}-500, #000)`
-      : `var(--rothko-${kind}-foreground, #000)`};
+    vuar({
+      kind,
+      category: appearance === 'outline' ? 'background' : 'foreground',
+      fallback: '#000',
+    })};
 
   display: inline-flex;
   align-items: center;
@@ -317,7 +297,7 @@ export const buttonStyle = css<BaseButtonProps>`
 
   outline: none;
   border: ${({ appearance }) => (appearance == 'outline' ? '1px solid' : 'none')};
-  border-color: ${({ kind }) => `var(--rothko-${kind}-500, #000)`};
+  border-color: ${({ kind }) => vuar({ kind, category: 'border', fallback: '#000' })};
 
   ${Object.entries(sizeMap).map(
     ([key, value]) => css`
@@ -363,9 +343,15 @@ const StyledButton = styled.button<BaseButtonProps>`
     :focus {
     }
     :active {
-      background: ${({ appearance, kind }) =>
-        appearance === 'outline' ? css`transparent` : `var(--rothko-${kind}-400, #000)`};
-      border-color: ${({ kind }) => `var(--rothko-${kind}-400, #000)`};
+      ${({ appearance, kind }) =>
+        appearance === 'outline'
+          ? css`
+              background: transparent;
+            `
+          : css`
+              background: ${vuar({ kind, scale: 400, category: 'background' })};
+            `}
+      border-color: ${({ kind }) => vuar({ kind, scale: 400, category: 'background' })};
     }
   }
 

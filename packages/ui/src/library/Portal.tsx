@@ -11,7 +11,7 @@ type PortalProps = {
   wrapperId: string;
 };
 
-export const DomPortal = ({ children, wrapperId }: PortalProps) => {
+const DomPortal = ({ children, wrapperId }: PortalProps) => {
   const [wrapperEl, setWrapperEl] = useState<HTMLElement | null>(null);
 
   useIsomorphicLayoutEffect(() => {
@@ -46,3 +46,5 @@ const createWrapperAndAppend = (wrapperId: string, portalId: string) => {
   }
   return wrapperElement;
 };
+
+export default DomPortal;

@@ -1,0 +1,16 @@
+{
+  "typography": {
+    "link": {
+      "color": { "value": "#0000ee" }
+    },
+    "body": {
+      "color": { "value": "{foreground}" }
+    },
+    "heading": {
+      "color": { "value": "{foreground}" }
+    },
+    "code": {
+      "color": { "value": "#5327fb" }
+    }
+  }
+}

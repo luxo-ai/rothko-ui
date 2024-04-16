@@ -1,24 +1,18 @@
 import { classes } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { Container } from '../../layout';
-import { LabelText, MenuBase } from '../../library/Common';
 import { useDebuggerContext } from '../../library/DebuggerContext';
-import useDropdownMenu from '../../library/hooks/useMenu';
 import { DefaultRenderOption } from '../../library/RenderOption';
+import useDropdownMenu from '../../library/hooks/useMenu';
 import type { FocusHandler, Option, RenderOption, Value } from '../../library/types';
 import { directionMap } from '../../library/utils/keyUtils';
-import DummySearchBar from './SearchBar/DummySearchBar';
-import SearchBar from './SearchBar/SearchBar';
-import SearchPopout from './SearchPopout';
-import type { SearchMode } from './types';
+import SearchBar from './SearchBar';
 import type { OptionFetcher } from './useSearch';
 import { useSearch } from './useSearch';
-
-const isPopoutMode = (mode: SearchMode) => {
-  return mode === 'popout';
-};
+import Menu from '../../library/Menu';
+import { vuar } from '../../library/utils/vuar';
 
 type SearchProps<V extends Value, T> = {
   /** function for fetching data async */
@@ -33,8 +27,6 @@ type SearchProps<V extends Value, T> = {
   onFocus?: FocusHandler;
   /** onOpen handler */
   onOpen?: () => void;
-  /** whether or not to close dropdown on ESC (escape) */
-  closeOnEsc?: boolean;
   /** is the dropdown disabled */
   disabled?: boolean;
   /** custom method for rendering option */
@@ -45,33 +37,18 @@ type SearchProps<V extends Value, T> = {
   renderLoading?: () => JSX.Element;
   /* limit number of results shown in dropdown */
   optionLimit?: number;
-  /* type of search experience */
-  mode?: SearchMode;
-  /* header of the search (logo, etc) when in popout mode */
-  popoutHeader?: React.ReactElement;
-  /* opt into traditional search drop-down style */
-  traditionalUx?: boolean;
-  /** if the dropdown has a label */
-  label?: string;
-  /** initial query value */
-  initialQuery?: string;
 };
 
 function Search<V extends Value, T = undefined>({
   className,
-  closeOnEsc = true,
   dataFetcher,
   disabled,
-  initialQuery,
-  label: labelProp,
-  mode = 'dropdown',
   onBlur,
   onFocus,
   onOpen,
   onSearch: onSearchProp,
   optionLimit: limit,
   placeholder = 'Search...',
-  popoutHeader,
   renderOption: RenderOpt = DefaultRenderOption,
 }: SearchProps<V, T>) {
   const debug = useDebuggerContext('<Search />');
@@ -98,7 +75,6 @@ function Search<V extends Value, T = undefined>({
     disabled,
   });
 
-  const showPopout = isPopoutMode(mode) && open;
   const hasOptions = Boolean(options.length);
 
   const onSearch = useCallback(
@@ -137,15 +113,14 @@ function Search<V extends Value, T = undefined>({
     // these keydown events only happen when the menu is open
     if (!open) return;
 
-    if (code === keyboardKey.Enter && !isPopoutMode(mode)) {
+    if (code === keyboardKey.Enter) {
       e.preventDefault();
       if (optIdx < 0 || optIdx > options.length - 1) return;
       const option = options[optIdx];
       return onSelectOption(option);
     }
 
-    if (code === keyboardKey.Escape && !isPopoutMode(mode)) {
-      if (!closeOnEsc) return;
+    if (code === keyboardKey.Escape) {
       e.preventDefault();
       return closeMenu();
     }
@@ -161,51 +136,7 @@ function Search<V extends Value, T = undefined>({
     moveOptionIdx(direction);
   };
 
-  const label = useMemo(() => {
-    if (!labelProp) return null;
-    return <LabelText>{labelProp}</LabelText>;
-  }, [labelProp]);
-
-  const dropdownResults = useMemo(() => {
-    if (!open || !hasOptions) return null;
-    return (
-      <SearchMenu
-        ref={menuRef}
-        tabIndex={-1}
-        className={classes({
-          ['pop-out']: showPopout,
-        })}
-      >
-        <ul role="listbox" tabIndex={-1}>
-          {options.map((option, idx) => {
-            const selected = optIdx === idx;
-            return (
-              <li
-                aria-disabled={false}
-                aria-label={option.label}
-                aria-selected={selected}
-                className={classes({ selected })}
-                id={`option-${idx}`}
-                key={option.id}
-                role="option"
-                tabIndex={-1}
-                onClick={e => {
-                  e.preventDefault();
-                  setQuery(option.label);
-                  onSelectOption(option);
-                }}
-              >
-                <RenderOpt option={option} />
-              </li>
-            );
-          })}
-        </ul>
-      </SearchMenu>
-    );
-  }, [open, hasOptions, menuRef, showPopout, options, optIdx, RenderOpt, onSelectOption, setQuery]);
-
   useEffect(() => {
-    // if (mobile) return;
     scrollIntoView(`#option-${optIdx}`);
   }, [optIdx, scrollIntoView]);
 
@@ -216,70 +147,72 @@ function Search<V extends Value, T = undefined>({
     focus,
   });
 
-  if (isPopoutMode(mode)) {
-    return (
-      <>
-        {label}
-        <DummySearchBar
-          className={formClasses}
-          onSubmit={onSubmitQuery}
-          onClick={() => openMenu()}
-          disabled={disabled}
-          placeholder={placeholder}
-          activeText={initialQuery}
-        />
-        <SearchPopout
-          ref={containerRef}
-          setQuery={setQuery}
-          query={query}
-          onSubmit={onSubmitQuery}
-          isOpen={open}
-          onClose={() => closeMenu()}
-          header={popoutHeader}
-        >
-          {dropdownResults}
-        </SearchPopout>
-      </>
-    );
-  }
-
   return (
-    <>
-      {label}
-      <Container
-        ref={containerRef}
-        onFocus={onFocusHandler}
-        onBlur={onBlurHandler}
-        position="relative"
+    <Container
+      ref={containerRef}
+      onFocus={onFocusHandler}
+      onBlur={onBlurHandler}
+      position="relative"
+    >
+      <SearchBar
+        className={formClasses}
+        onSubmit={onSubmitQuery}
+        onKeyDown={onKeyDown}
+        onClick={() => openMenu()}
+        query={query}
+        onQueryChange={setQuery}
+        placeholder={placeholder}
+        disabled={disabled}
       >
-        <SearchBar
-          className={formClasses}
-          onSubmit={onSubmitQuery}
-          onKeyDown={onKeyDown}
-          onClick={() => openMenu()}
-          query={query}
-          onQueryChange={setQuery}
-          placeholder={placeholder}
-          disabled={disabled}
-        >
-          {dropdownResults}
-        </SearchBar>
-      </Container>
-    </>
+        {open && hasOptions && (
+          <SearchMenu ref={menuRef} tabIndex={-1}>
+            <ul role="listbox" tabIndex={-1}>
+              {options.map((option, idx) => {
+                const selected = optIdx === idx;
+                return (
+                  <li
+                    aria-disabled={false}
+                    aria-label={option.label}
+                    aria-selected={selected}
+                    className={classes({ selected })}
+                    id={`option-${idx}`}
+                    key={option.id}
+                    role="option"
+                    tabIndex={-1}
+                    onClick={e => {
+                      e.preventDefault();
+                      setQuery(option.label);
+                      onSelectOption(option);
+                    }}
+                  >
+                    <RenderOpt option={option} />
+                  </li>
+                );
+              })}
+            </ul>
+          </SearchMenu>
+        )}
+      </SearchBar>
+    </Container>
   );
 }
 
-const SearchMenu = styled(MenuBase)`
+const SearchMenu = styled(Menu)`
   max-height: 20rem;
   z-index: 10;
-  background-color: var(--rothko-search-background, #141414);
+  background-color: ${vuar({ category: 'background', element: 'search', fallback: '#141414' })};
 
   & li {
     padding: 1rem;
     &:hover,
     &:focus,
     &.selected {
-      background-color: var(--rothko-search-option-background_selected, #eee);
+      background-color: ${vuar({
+        category: 'background',
+        element: 'search-option',
+        focused: true,
+        fallback: '#eee',
+      })};
     }
   }
 `;

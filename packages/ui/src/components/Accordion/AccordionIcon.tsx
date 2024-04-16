@@ -5,6 +5,7 @@ import { MinusOutline, PlusOutline } from '@rothko-ui/icons';
 import type { Icon } from './types';
 import type { RothkoKind } from '../../theme';
 import { isFunctionalComponent } from '../../library/utils';
+import { vuar } from '../../library/utils/vuar';
 
 const ICON_SIZE = '1rem';
 
@@ -29,7 +30,7 @@ type AccordionIconProps = {
 
 const AccordionIcon = React.memo(
   ({ kind, iconOverride: IconOverride, open, disabled }: AccordionIconProps) => {
-    const color = kind ? `var(--rothko-${kind}-500, #000)` : 'var(--rothko-accordion-border, #000)';
+    const color = vuar({ kind, category: 'background', element: 'icon' });
 
     if (IconOverride) {
       return isFunctionalComponent(IconOverride) ? (

@@ -1,3 +1,7 @@
+@import '../../node_modules/@rothko-ui/tokens/build/dark-variables.css';
+@import '../../node_modules/@rothko-ui/tokens/build/light-variables.css';
+@import '../../node_modules/@rothko-ui/tokens/build/global-variables.css';
+
 html,
 body {
   padding: 0;
@@ -6,58 +10,53 @@ body {
     Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-  background-color: rgb(153 161 179 / 0.1);
-  border-radius: 0.375rem;
-  /* this is a nice color #582cff (secondary dark theme?) */
+:root {
+  --rothko-font-family-regular: 'Soehne-Buch', system-ui, -apple-system, 'Helvetica Neue', Arial,
+    sans-serif;
+  --rothko-font-family-bold: 'LabGrotesque-Bold';
+  --rothko-font-family-italic: 'LabGrotesque-Italic';
+  --rothko-font-family-light: 'LabGrotesque-Light';
+  --rothko-font-family-heading: 'LabGrotesque-Regular';
+  --rothko-font-family-code: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-:root .dark code {
-  color: var(--rothko-secondary-500, #5327fb);
+:root {
+  --demo-background: #fff;
+  --demo-nav-background: rgba(255, 255, 255, 0.75);
+  background: #fff;
+  color-scheme: light;
 }
 
-:root .light code {
-  color: #5327fb;
+:root ::selection {
+  color: #fff;
+  background: #000;
 }
-
-* {
-  box-sizing: border-box;
+:root ::-moz-selection {
+  color: #fff;
+  background: #000;
 }
 
 :root .dark {
   --demo-background: #000;
   --demo-nav-background: rgba(0, 0, 0, 0.75);
   background: #000;
-}
-.dark ::selection {
-  background: #f81be5;
-}
-.dark ::-moz-selection {
-  background: #f81be5;
+  color-scheme: dark;
 }
 
-:root .light {
-  --demo-background: #fff;
-  --demo-nav-background: rgba(255, 255, 255, 0.75);
-  background: #fff;
+:root .dark :not(code) ::selection {
+  background: #f81be5;
 }
-.light ::selection {
-  color: #fff;
-  background: #000;
-}
-.light ::-moz-selection {
-  color: #fff;
-  background: #000;
+:root .dark :not(code) ::-moz-selection {
+  background: #f81be5;
 }
 
 .phantom-button {

@@ -1,11 +1,10 @@
 import type { Nilable } from '@rothko-ui/utils';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { phantomInputStyle } from '../../../library/PhantomInput';
-import type { TextProps } from '../../Typography/Typography';
-import { textStyle } from '../../Typography/Typography';
+import { phantomInputStyle } from '../../library/PhantomInput';
+import { baseInputStyle } from '../Input/styles';
+import { bodySizeStyle, lightFontStyle, paragraphStyle } from '../Typography/Typography';
 import SearchButton from './SearchButton';
-import styles from './styles';
 
 type SearchBarProps = {
   children?: React.ReactNode;
@@ -62,7 +61,6 @@ const SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
         onBlur={onBlur}
       >
         <SearchInput
-          light
           disabled={disabled}
           onChange={e => onQueryChange(e.target.value)}
           onClick={onClick}
@@ -83,14 +81,56 @@ const SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
 SearchBar.displayName = 'SearchBar';
 
 const SearchForm = styled.form`
-  ${styles.searchBarWrapperStyle};
+  -webkit-tap-highlight-color: transparent;
+  ${baseInputStyle} // causing issues before, this helped
+  position: relative;
+
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  width: 100%;
+  min-height: calc(1.5rem + 2 * 0.125rem + 2 * 0.5rem + 2 * 2px);
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  border-radius: 0.125rem;
+
+  &.error:not(:focus):not(.focus) {
+    // background: ??
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+
+    > input,
+    button {
+      cursor: not-allowed;
+      opacity: 0.8;
+    }
+  }
   position: relative;
 `;
 
-const SearchInput = styled.input<Pick<TextProps, 'light'>>`
-  ${textStyle}
+const SearchInput = styled.input`
+  ${paragraphStyle}
+  ${bodySizeStyle}
   ${phantomInputStyle}
-  ${styles.searchBarInputStyle}
+  ${lightFontStyle}
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  margin: 0;
+
+  &,
+  > p,
+  > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 export default SearchBar;
