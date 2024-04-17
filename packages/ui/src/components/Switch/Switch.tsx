@@ -31,60 +31,60 @@ type WithAria<T> = WithAriaErrorMessage<
   >
 >;
 
-type ToggleProps = WithAria<{
+type SwitchProps = WithAria<{
   id?: string;
   /**
-   * The content to be rendered inside the Toggle component.
+   * The content to be rendered inside the Switch component.
    */
   children?: React.ReactNode;
   /**
-   * The CSS class name to be applied to the Toggle component.
+   * The CSS class name to be applied to the Switch component.
    */
   className?: string;
   /**
-   * Specifies whether the Toggle component is disabled.
+   * Specifies whether the Switch component is disabled.
    */
   disabled?: boolean;
   /**
-   * Specifies whether the Toggle component has an error state.
+   * Specifies whether the Switch component has an error state.
    */
   error?: boolean;
   /**
-   * The error text to be displayed when the Toggle component is in an error state.
+   * The error text to be displayed when the Switch component is in an error state.
    * @default 'Invalid'
    */
   errorText?: string;
   /**
-   * The visual style of the Toggle component.
+   * The visual style of the Switch component.
    */
   kind?: RothkoKind;
   /**
-   * The icon element to be displayed when the Toggle component is in the "off" state.
+   * The icon element to be displayed when the Switch component is in the "off" state.
    */
   offIcon?: JSX.Element;
   /**
-   * The event handler called when the Toggle component's value changes.
+   * The event handler called when the Switch component's value changes.
    */
-  onChange: (toggled: boolean) => void;
+  onChange: (Switchd: boolean) => void;
   /**
-   * The icon element to be displayed when the Toggle component is in the "on" state.
+   * The icon element to be displayed when the Switch component is in the "on" state.
    */
   onIcon?: JSX.Element;
   /**
-   * Specifies whether the Toggle component is required.
+   * Specifies whether the Switch component is required.
    */
   required?: boolean;
   /**
-   * The inline style object to be applied to the Toggle component.
+   * The inline style object to be applied to the Switch component.
    */
   style?: CSSProperties;
   /**
-   * Specifies whether the Toggle component is toggled.
+   * Specifies whether the Switch component is selected.
    */
-  toggled?: boolean;
+  selected?: boolean;
 }>;
 
-const Toggle = ({
+const Switch = ({
   children,
   className,
   disabled,
@@ -93,7 +93,7 @@ const Toggle = ({
   onChange,
   onIcon,
   style,
-  toggled,
+  selected,
   error,
   errorText = 'Invalid',
   'aria-label': ariaLabel,
@@ -109,21 +109,20 @@ const Toggle = ({
   'aria-required': ariaRequired,
   'aria-errormessage': ariaErrorMessage,
   id,
-}: // required,
-ToggleProps) => {
+}: SwitchProps) => {
   const labelId = useId();
   const errorMessageId = useId();
 
   const handleChange = () => {
     if (disabled) return;
-    onChange(!toggled);
+    onChange(!selected);
   };
 
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: handleChange });
 
   return (
-    <ToggleContainerDiv className={className} style={style}>
-      <OuterToggleDiv
+    <SwitchContainerDiv className={className} style={style}>
+      <OuterSwitchDiv
         id={id}
         aria-describedby={ariaDescribedBy}
         aria-details={ariaDetails}
@@ -134,11 +133,11 @@ ToggleProps) => {
         aria-expanded={ariaExpanded}
         aria-invalid={ariaInvalid || error}
         aria-required={ariaRequired}
-        aria-checked={!!toggled}
+        aria-checked={!!selected}
         aria-disabled={ariaDisabled || disabled}
         aria-label={ariaLabel}
         aria-errormessage={!ariaErrorMessage && error ? errorMessageId : ariaErrorMessage}
-        $toggled={toggled}
+        $selected={selected}
         className={classes({ disabled, error })}
         kind={kind}
         onClick={handleChange}
@@ -146,10 +145,10 @@ ToggleProps) => {
         role="switch"
         tabIndex={0}
       >
-        <InnerToggleDiv aria-hidden className={classes(toggled && 'active')}>
-          {toggled ? onIcon && <>{onIcon}</> : offIcon && <>{offIcon}</>}
-        </InnerToggleDiv>
-      </OuterToggleDiv>
+        <InnerSwitchDiv aria-hidden className={classes(selected && 'active')}>
+          {selected ? onIcon && <>{onIcon}</> : offIcon && <>{offIcon}</>}
+        </InnerSwitchDiv>
+      </OuterSwitchDiv>
       {children &&
         (isString(children) ? (
           <Typography.body id={labelId}>{children}</Typography.body>
@@ -161,22 +160,22 @@ ToggleProps) => {
           {errorText}
         </Typography.body>
       )}
-    </ToggleContainerDiv>
+    </SwitchContainerDiv>
   );
 };
 
-const ToggleContainerDiv = styled.div`
+const SwitchContainerDiv = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
 `;
 
-type OuterToogleDivProp = {
+type OuterSwitchDivProp = {
   kind?: RothkoKind;
-  $toggled?: boolean;
+  $selected?: boolean;
 };
 
-const OuterToggleDiv = styled.div<OuterToogleDivProp>`
+const OuterSwitchDiv = styled.div<OuterSwitchDivProp>`
   flex: 0 0 auto;
   -webkit-tap-highlight-color: transparent;
   ${hideChromeBrowserOutline}
@@ -193,20 +192,20 @@ const OuterToggleDiv = styled.div<OuterToogleDivProp>`
   width: 3rem;
   height: calc(1.4rem + 2px);
 
-  border: 1px solid ${vuar({ element: 'toggle', category: 'border' })};
+  border: 1px solid ${vuar({ element: 'switch', category: 'border' })};
   border-radius: 50vmin;
 
-  background-color: ${({ $toggled, kind }) => {
-    if ($toggled) {
+  background-color: ${({ $selected, kind }) => {
+    if ($selected) {
       return vuar({
         kind,
-        element: 'toggle',
+        element: 'switch',
         category: 'background',
         focused: true,
         fallback: '#000',
       });
     }
-    return vuar({ element: 'toggle', category: 'background', fallback: '#dee7f5' });
+    return vuar({ element: 'switch', category: 'background', fallback: '#dee7f5' });
   }};
 
   -webkit-transition: background-color 0.5s ease;
@@ -235,7 +234,7 @@ const OuterToggleDiv = styled.div<OuterToogleDivProp>`
   }
 `;
 
-const InnerToggleDiv = styled.div`
+const InnerSwitchDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -253,9 +252,9 @@ const InnerToggleDiv = styled.div`
   transition: transform 0.15s ease-out 0s;
 
   &.active {
-    // outer toggle width - width of inner toggle - horizontal margin - offset
+    // outer switch width - width of inner switch - horizontal margin - offset
     transform: translateX(calc(3rem - 1.4rem - 1px - 2px));
   }
 `;
 
-export default Toggle;
+export default Switch;

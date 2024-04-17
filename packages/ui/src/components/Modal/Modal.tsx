@@ -101,6 +101,8 @@ type ModalProps = WithAria<{
    * The title of the modal.
    */
   title?: string;
+  blur?: boolean;
+  blurRadius?: number;
 }>;
 
 const Modal = ({
@@ -113,6 +115,8 @@ const Modal = ({
   title,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
+  blur,
+  blurRadius = 8,
   style: styleProp = {},
 }: ModalProps) => {
   const titleId = useId();
@@ -188,7 +192,13 @@ const Modal = ({
 
   return (
     <DomPortal wrapperId={`modal-portal-${size}`}>
-      <ModalBackdrop aria-hidden $show={isOpen} onClick={onBackdropClick}>
+      <ModalBackdrop
+        aria-hidden
+        $blur={blur}
+        $blurRadius={blurRadius}
+        $show={isOpen}
+        onClick={onBackdropClick}
+      >
         {transition(
           (style, item) =>
             item && (

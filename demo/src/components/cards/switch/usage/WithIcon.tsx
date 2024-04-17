@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 
-import { Toggle } from '@rothko-ui/ui';
+import { Switch } from '@rothko-ui/ui';
 import { Video, VideoOff } from '@rothko-ui/icons';
 
 const App = () => {
-  const [toggled, setToggled] = useState(false);
+  const [selected, setSelected] = useState(false);
 
   return (
-    <Toggle
+    <Switch
       onIcon={<Video fill="#000" />}
       offIcon={<VideoOff fill="#000" />}
-      toggled={toggled}
-      onChange={v => setToggled(v)}
+      selected={selected}
+      onChange={v => setSelected(v)}
     />
   );
 };

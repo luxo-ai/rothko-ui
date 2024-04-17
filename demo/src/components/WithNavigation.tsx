@@ -13,7 +13,7 @@ const WithNavigation = ({ children, selected }: WithNavigationProps) => (
   <PaddedNavLayout>
     <div className={styles.withNavGrid}>
       <ToastContextProvider>
-        <WidthGeqOnly threshold={750}>
+        <WidthGeqOnly $threshold={750}>
           <NavigationList selected={selected} />
         </WidthGeqOnly>
         <div>{children}</div>

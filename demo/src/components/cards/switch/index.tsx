@@ -11,25 +11,25 @@ import Basic from './usage/Basic';
 import Card from '../Card';
 import Example from '../Example';
 import Props from '../Props';
-import toggleCopy from './copy';
-import toggleProps from './props';
+import switchCopy from './copy';
+import switchProps from './props';
 import WithIcon from './usage/WithIcon';
 import WithKind from './usage/WithKind';
 import Usage from '../Usage';
 import KindRadioGroup from '../KindRadioGroup';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Toggle';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Switch';
 
-const IMPORT = "import { Toggle } from '@rothko-ui/ui';";
+const IMPORT = "import { Switch } from '@rothko-ui/ui';";
 
-const ToggleCard = () => {
+const SwitchCard = () => {
   const [kind, setKind] = useState<RothkoKind>('primary');
   const isMobileOrTablet = useIsMobileOrTablet();
   const maxWidth = isMobileOrTablet ? undefined : '26rem';
 
   return (
-    <Card codeUrl={GITHUB_URL} copy={toggleCopy}>
+    <Card codeUrl={GITHUB_URL} copy={switchCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Usage />
         <Container maxWidth="32rem">
@@ -54,9 +54,9 @@ const ToggleCard = () => {
           <KindRadioGroup kind={kind} setKind={setKind} />
         </FlexItem>
       </Flex>
-      <Props copy={{ props: toggleProps }} />
+      <Props copy={{ props: switchProps }} />
     </Card>
   );
 };
 
-export default ToggleCard;
+export default SwitchCard;

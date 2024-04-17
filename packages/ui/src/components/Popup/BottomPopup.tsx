@@ -42,6 +42,8 @@ type PopupProps = WithAria<{
    * The inline style for the popup.
    */
   style?: React.CSSProperties;
+  blur?: boolean;
+  blurRadius?: number;
 }>;
 
 const BottomPopup: React.FC<PopupProps> = ({
@@ -53,6 +55,8 @@ const BottomPopup: React.FC<PopupProps> = ({
   style: styleProp = {},
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
+  blur,
+  blurRadius = 8,
 }) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
   const contentId = useId();
@@ -115,7 +119,13 @@ const BottomPopup: React.FC<PopupProps> = ({
 
   return (
     <DomPortal wrapperId="rothko-bottom-popup">
-      <ShadedBackdrop aria-hidden onClick={onBackdropClick} $show={isOpen}>
+      <ShadedBackdrop
+        aria-hidden
+        $blur={blur}
+        $blurRadius={blurRadius}
+        onClick={onBackdropClick}
+        $show={isOpen}
+      >
         {transition(
           (style, item) =>
             item && (

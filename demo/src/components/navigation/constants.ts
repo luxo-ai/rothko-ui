@@ -29,11 +29,11 @@ const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
     label: 'Slider',
     children: [{ label: 'Slider' }, { label: 'Multi Slider' }],
   },
+  { label: 'Switch' },
   { label: 'Tab Bar' },
   { label: 'Tag' },
   { label: 'Textarea' },
   { label: 'Toast' },
-  { label: 'Toggle' },
 ];
 
 export const buildSections = (

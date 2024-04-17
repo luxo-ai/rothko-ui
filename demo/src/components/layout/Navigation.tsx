@@ -37,7 +37,7 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
     <nav className={router.pathname === '/' ? `${styles.nav} ${styles.blurry}` : styles.nav}>
       <Flex justifyContent="space-between">
         <Flex alignItems="center" justifyContent="center" columnGap="1rem">
-          <WidthLeqOnly threshold={750}>
+          <WidthLeqOnly $threshold={750}>
             <FlexItem>
               <button
                 aria-label="menu button"
@@ -80,7 +80,7 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
               </button>
             )}
           </Flex>
-          <WidthGeqOnly threshold={750} style={{ height: '100%' }}>
+          <WidthGeqOnly $threshold={750} style={{ height: '100%' }}>
             <Button
               size="s"
               kind="primary"
@@ -97,17 +97,5 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
     </nav>
   );
 };
-
-/*
-            <Toggle
-              kind="success"
-              toggled={mode === 'dark'}
-              onChange={() => toggleMode()}
-              onIcon={<Moon fill="#000" />}
-              offIcon={<Sun fill="#000" />}
-
-          
-            />
-          */
 
 export default Navigation;

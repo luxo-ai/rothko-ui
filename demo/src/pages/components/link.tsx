@@ -2,7 +2,7 @@ import React from 'react';
 import LinkCard from '../../components/cards/link';
 import WithNavigation from '../../components/WithNavigation';
 
-const Input = () => {
+const Link = () => {
   return (
     <WithNavigation selected="components/link">
       <LinkCard />
@@ -10,4 +10,4 @@ const Input = () => {
   );
 };
 
-export default Input;
+export default Link;

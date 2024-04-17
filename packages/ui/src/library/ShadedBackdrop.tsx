@@ -1,14 +1,15 @@
 import styled, { css } from 'styled-components';
 
-const ShadedBackdrop = styled.div<{ $show?: boolean }>`
+const ShadedBackdrop = styled.div<{ $show?: boolean; $blur?: boolean; $blurRadius?: number }>`
   -webkit-backface-visibility: hidden;
   // shade the entire view in the background
   user-select: none;
   position: fixed;
   display: flex
   opacity: 0;
+  
 
-  ${({ $show }) =>
+  ${({ $show, $blur, $blurRadius = 8 }) =>
     $show
       ? css`
           opacity: 1;
@@ -20,6 +21,12 @@ const ShadedBackdrop = styled.div<{ $show?: boolean }>`
           -moz-transition: opacity 80ms ease-in-out;
           -ms-transition: opacity 80ms ease-in-out;
           transition: opacity 80ms ease-in-out;
+
+          ${$blur
+            ? css`
+                backdrop-filter: blur(${$blurRadius}px);
+              `
+            : ''}
         `
       : ''}
 `;

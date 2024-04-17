@@ -1,38 +1,43 @@
 import React from 'react';
 import styled from 'styled-components';
+import extractAriaProps from '../extractAriaProps';
 
-type GridSpanProps = Omit<React.CSSProperties, 'gridColumnStart' | 'gridColumnEnd'> & {
-  as?: keyof JSX.IntrinsicElements;
-  children?: React.ReactNode;
-  className?: string;
-  span: number;
-  start: number;
-  onFocus?: React.FocusEventHandler<HTMLElement>;
-  onBlur?: React.FocusEventHandler<HTMLElement>;
-  onClick?: React.MouseEventHandler<HTMLElement>;
-  role?: React.AriaRole;
-};
+type GridSpanProps = React.AriaAttributes &
+  Omit<React.CSSProperties, 'gridColumnStart' | 'gridColumnEnd'> & {
+    as?: keyof JSX.IntrinsicElements;
+    children?: React.ReactNode;
+    className?: string;
+    span: number;
+    start: number;
+    onFocus?: React.FocusEventHandler<HTMLElement>;
+    onBlur?: React.FocusEventHandler<HTMLElement>;
+    onClick?: React.MouseEventHandler<HTMLElement>;
+    role?: React.AriaRole;
+  };
 
-const GridSpan = React.forwardRef<HTMLDivElement, GridSpanProps>(
-  ({ as, onClick, onBlur, onFocus, children, className, span, start, role, ...style }, ref) => {
-    return (
-      <StyledGridSpanDiv
-        onClick={onClick}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        as={as}
-        className={className}
-        ref={ref}
-        span={span}
-        start={start}
-        style={style}
-        role={role}
-      >
-        {children}
-      </StyledGridSpanDiv>
-    );
-  }
-);
+const GridSpan = React.forwardRef<HTMLDivElement, GridSpanProps>((props, ref) => {
+  const {
+    props: { as, onClick, onBlur, onFocus, children, className, span, start, role, ...style },
+    ariaAttributes,
+  } = extractAriaProps(props);
+  return (
+    <StyledGridSpanDiv
+      {...ariaAttributes}
+      onClick={onClick}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      as={as}
+      className={className}
+      ref={ref}
+      span={span}
+      start={start}
+      style={style}
+      role={role}
+    >
+      {children}
+    </StyledGridSpanDiv>
+  );
+});
 
 GridSpan.displayName = 'GridSpan';
 

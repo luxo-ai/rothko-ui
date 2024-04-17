@@ -22,11 +22,11 @@ const Home = () => {
   return (
     <PaddedNavLayout withoutToggle>
       <MaxWidth
-        maxW="75rem"
+        $maxWidth="75rem"
         style={{ padding: `${isMobileOrTablet ? '1.5rem' : '3rem'} 0`, margin: '0 auto' }}
       >
         <Flex alignItems="center">
-          <MaxWidth maxW="34rem">
+          <MaxWidth $maxWidth="34rem">
             <Title>Elevate web development. Inspire new experiences.</Title>
             <Flex
               columnGap={isMobileOrTablet ? '0.5rem' : '0.75rem'}

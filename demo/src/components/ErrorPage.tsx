@@ -17,7 +17,7 @@ const ErrorPage = ({ code, header, children }: ErrorProps) => {
       gap="1rem"
     >
       <div>
-        <WidthGeqOnly threshold={600}>
+        <WidthGeqOnly $threshold={600}>
           <Flex gap="0.5rem">
             <Typography.h1>{code}</Typography.h1>
             {header && (
@@ -28,7 +28,7 @@ const ErrorPage = ({ code, header, children }: ErrorProps) => {
             )}
           </Flex>
         </WidthGeqOnly>
-        <WidthLeqOnly threshold={600}>
+        <WidthLeqOnly $threshold={600}>
           <Flex flexDirection="column" gap="0.5rem" alignItems="center">
             <Typography.h2>{code}</Typography.h2>
             {header && <Typography.h2>{header}</Typography.h2>}

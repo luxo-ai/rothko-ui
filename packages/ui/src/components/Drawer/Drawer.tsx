@@ -47,6 +47,8 @@ type DrawerProps = WithAria<{
    * The inline style for the Drawer.
    */
   style?: React.CSSProperties;
+  blur?: boolean;
+  blurRadius?: number;
 }>;
 
 const Drawer = ({
@@ -58,6 +60,8 @@ const Drawer = ({
   onClose,
   open: isOpen = false,
   style: styleProp = {},
+  blur,
+  blurRadius = 8,
 }: DrawerProps) => {
   const drawerContentId = useId();
   const drawerRef = useRef<HTMLDivElement | null>(null);
@@ -115,7 +119,13 @@ const Drawer = ({
   return (
     <DrawerContext.Provider value={{ isOpen, closeDrawer }}>
       <DomPortal wrapperId="rothko-drawer-portal">
-        <DrawerBackdrop aria-hidden $show={isOpen} onClick={onBackdropClick}>
+        <DrawerBackdrop
+          aria-hidden
+          $blur={blur}
+          $blurRadius={blurRadius}
+          $show={isOpen}
+          onClick={onBackdropClick}
+        >
           {transition(
             (style, item) =>
               item && (

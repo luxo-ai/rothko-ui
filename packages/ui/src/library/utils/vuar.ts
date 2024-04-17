@@ -9,6 +9,7 @@ type Category = 'foreground' | 'background' | 'border' | 'color';
 type Element =
   | 'accordion'
   | 'alert'
+  | 'bottom-popup'
   | 'breadcrumbs'
   | 'button'
   | 'checkbox'
@@ -18,16 +19,15 @@ type Element =
   | 'list'
   | 'modal'
   | 'option-group'
-  | 'bottom-popup'
   | 'radio'
   | 'search'
   | 'skeleton'
   | 'slider'
+  | 'switch'
   | 'tab-bar'
   | 'table'
   | 'tag'
-  | 'toast'
-  | 'toggle';
+  | 'toast';
 
 type Scale = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 

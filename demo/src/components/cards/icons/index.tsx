@@ -83,7 +83,7 @@ const IconsCard = () => {
           />
         </div>
         <Container>
-          <MaxWidth maxW="13rem">
+          <MaxWidth $maxWidth="13rem">
             <OptionGroup
               withoutBorder
               optionsWithRadius

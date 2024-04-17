@@ -19,5 +19,5 @@ export * from './TabBar';
 export * from './Table';
 export * from './Tag';
 export * from './Toaster';
-export * from './Toggle';
+export * from './Switch';
 export * from './Typography';

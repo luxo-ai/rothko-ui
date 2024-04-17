@@ -2,7 +2,7 @@ import React from 'react';
 import TextareaCard from '../../components/cards/textarea';
 import WithNavigation from '../../components/WithNavigation';
 
-const Input = () => {
+const Textarea = () => {
   return (
     <WithNavigation selected="components/textarea">
       <TextareaCard />
@@ -10,4 +10,4 @@ const Input = () => {
   );
 };
 
-export default Input;
+export default Textarea;
