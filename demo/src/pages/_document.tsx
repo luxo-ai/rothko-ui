@@ -30,7 +30,6 @@ class MyDocument extends Document {
         <Head>
           <link rel="icon" href="/favicon.ico" type="image/x-icon" />
           <link rel="manifest" href="/manifest.json" />
-          <link rel="apple-touch-icon" href="assets/aemiko.png" />
           {/* ---- LAB GROTESQUE ---- */}
           <link
             rel="preload"

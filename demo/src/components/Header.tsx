@@ -23,7 +23,6 @@ const RothkoHeader = ({
      * Open graph stuff
      * @link https://ogp.me/
      */}
-    <meta content="https://www.aemiko.com/" property="og:url" />
     <meta name="og:title" content={title} key="og:title" />
     <meta name="og:description" content={description} key="og:description" />
     <meta name="og:site_name" content="rothko-ui" key="og:site_name" />
