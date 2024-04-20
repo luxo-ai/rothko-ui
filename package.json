@@ -32,7 +32,8 @@
     "clean": "lerna clean",
     "lint": "lerna run lint",
     "test": "lerna run test",
-    "prepare": "husky"
+    "prepare": "husky",
+    "publish": "lerna publish --no-private"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.30.0",

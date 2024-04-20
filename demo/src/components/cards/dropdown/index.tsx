@@ -1,6 +1,6 @@
 import { Container, Flex } from '@rothko-ui/ui';
 
-import { BASIC, CLEARABLE, DISABLED, MENU_POSITION, SEARCHABLE } from './usage/sourceCode';
+import { BASIC, CLEARABLE, DISABLED, MENU_POSITION } from './usage/sourceCode';
 import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Basic from './usage/Basic';
@@ -12,7 +12,6 @@ import dropdownProps from './props';
 import Example from '../Example';
 import MenuPosition from './usage/MenuPosition';
 import Props from '../Props';
-import Seachable from './usage/Searchable';
 import Usage from '../Usage';
 
 const GITHUB_URL =
@@ -41,11 +40,6 @@ const SingleDropdownCard = () => {
         <Example title="Disabled" sourceCode={DISABLED}>
           <Container maxWidth={maxWith}>
             <Disabled />
-          </Container>
-        </Example>
-        <Example title="Searchable" sourceCode={SEARCHABLE}>
-          <Container maxWidth={maxWith}>
-            <Seachable />
           </Container>
         </Example>
         <Example title="Clearable" sourceCode={CLEARABLE}>
