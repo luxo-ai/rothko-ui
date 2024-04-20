@@ -34,7 +34,7 @@
     "test": "lerna run test",
     "prepare": "husky",
     "pub": "lerna publish --no-private",
-    "version": "lerna version --no-private"
+    "version:minor": "lerna version minor --no-private"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.30.0",
