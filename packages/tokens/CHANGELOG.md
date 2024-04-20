@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/luxo-ai/rothko-ui/compare/@rothko-ui/tokens@1.0.17...@rothko-ui/tokens@1.1.0) (2024-04-20)
+
+**Note:** Version bump only for package @rothko-ui/tokens
+
+
+
+
+
 ## [1.0.17](https://github.com/luxo-ai/rothko-ui/compare/@rothko-ui/tokens@1.0.16...@rothko-ui/tokens@1.0.17) (2023-09-16)
 
 **Note:** Version bump only for package @rothko-ui/tokens
