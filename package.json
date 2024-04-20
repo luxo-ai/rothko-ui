@@ -33,7 +33,7 @@
     "lint": "lerna run lint",
     "test": "lerna run test",
     "prepare": "husky",
-    "pub": "lerna publish --no-private",
+    "pub": "lerna publish from-git --no-private",
     "version:minor": "lerna version minor --no-private"
   },
   "devDependencies": {
