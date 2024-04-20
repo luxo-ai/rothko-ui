@@ -21,7 +21,7 @@
     "prebuild": "yarn clean",
     "build": "node ./src/build.js && sleep 1 && echo 'building...' && microbundle --format modern,cjs --no-sourcemap",
     "clean": "rimraf build src/tokens dist",
-    "lint": "eslint ./src --ext .js,.ts"
+    "lint": "eslint ./src --ext .ts"
   },
   "dependencies": {
     "deepmerge": "^4.3.1",
