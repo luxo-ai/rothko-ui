@@ -12,3 +12,5 @@ src/generated/*
 .eslintrc.js
 *.js
 next-env.d.ts
+**/*.js
+**/*.jsx
