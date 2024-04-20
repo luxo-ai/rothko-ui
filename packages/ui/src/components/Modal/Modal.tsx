@@ -116,7 +116,7 @@ const Modal = ({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   blur,
-  blurRadius = 8,
+  blurRadius,
   style: styleProp = {},
 }: ModalProps) => {
   const titleId = useId();

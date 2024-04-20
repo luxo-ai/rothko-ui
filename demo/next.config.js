@@ -14,9 +14,9 @@ module.exports = {
     styledComponents: true,
   },
   env: {
-    DEBUG: process.NEXT_PUBLIC_DEBUG,
-    BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
-    VERSION: process.env.NEXT_PUBLIC_VERSION,
+    DEBUG: process.env.DEBUG,
+    BASE_URL: process.env.BASE_URL,
+    VERSION: process.env.VERSION,
   },
   // otherwise .next
   distDir: 'build',

@@ -5,7 +5,7 @@ import { NestedDropdown } from '@rothko-ui/ui';
 const DROPDOWN_OPTIONS = [
   {
     id: '0',
-    label: 'Sub',
+    label: 'Substack group',
     subcategories: [
       {
         id: '0:1',

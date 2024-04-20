@@ -56,7 +56,7 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
               columnGap="0.25rem"
             >
               <Typography.h5>Rothko UI</Typography.h5>
-              <Typography.caption>v{config.version}</Typography.caption>
+              {config.version && <Typography.caption>v{config.version}</Typography.caption>}
             </Flex>
           </FlexItem>
         </Flex>

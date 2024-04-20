@@ -1,41 +1,41 @@
-import { Set as ImSet } from 'immutable';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
-import { asNonNilArray, isNil } from '@rothko-ui/utils';
+import { debounce, isNil } from '@rothko-ui/utils';
 
 import { useDebuggerContext } from '../../library/DebuggerContext';
 import type { FocusHandler, Option, Value } from '../../library/types';
+import type { QueryMatchFn } from './types';
 import useOptions from '../../library/hooks/useOptions';
 import useScrollIntoView from '../../library/hooks/useScrollIntoView';
 
+const DEBOUNCE_MS = 200;
+
 type HookArgs<V, T> = {
   disabled?: boolean;
-  multiple?: boolean;
-  onChange: (v: V | V[] | null) => void;
-  onClear?: () => void;
-  onDelete?: (v: V) => void;
-  onFocus?: FocusHandler;
   onBlur?: FocusHandler;
+  onChange: (v: V | null) => void;
+  onClear?: () => void;
+  onFocus?: FocusHandler;
   onOpen?: () => void;
   onClose?: () => void;
   options: Option<V, T>[];
-  value?: V | V[] | null;
+  searchFn?: QueryMatchFn<V, T>;
+  value?: V | null;
 };
 
-const useSelect = <V extends Value, T = undefined>({
-  multiple,
-  onChange,
-  onDelete,
+const useAutocomplete = <V extends Value, T = undefined>({
+  disabled,
   onBlur,
+  onChange,
+  onClear,
   onFocus,
   onOpen,
   onClose,
-  onClear,
-  value,
-  disabled,
   options: opts,
+  searchFn = defaultQueryMatcher,
+  value,
 }: HookArgs<V, T>) => {
-  const debug = useDebuggerContext('useSelect');
+  const debug = useDebuggerContext('useAutocomplete');
 
   const timeoutId = useRef<NodeJS.Timeout>();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -43,12 +43,14 @@ const useSelect = <V extends Value, T = undefined>({
 
   const [open, setOpen] = useState<boolean>(false);
   const [focus, setFocus] = useState<boolean>(false);
+  const [query, setQueryInner] = useState<string>('');
+
+  const selectedOption = useMemo(
+    () => (!isNil(value) ? opts.find(o => o.id === value) : null),
+    [opts, value]
+  );
 
   const { optIdx, moveOptionIdx, options, resetOptionIdx, setOptions } = useOptions(opts);
-
-  // important to useMemo here because otherwise the useEffect below will go into
-  // an infinite loop...
-  const selectedValues = useMemo(() => ImSet(asNonNilArray(value)), [value]);
 
   const closeMenu = () => {
     if (!open) return;
@@ -79,6 +81,7 @@ const useSelect = <V extends Value, T = undefined>({
     if (disabled) return;
     debug('clearValue');
     onChange(null);
+    setQueryInner('');
     onClear?.();
   }, [onChange, onClear, disabled, debug]);
 
@@ -107,52 +110,57 @@ const useSelect = <V extends Value, T = undefined>({
           onClose?.();
           setFocus(false);
           setOpen(false);
+          setQueryInner(selectedOption?.label || '');
+          setOptions(opts);
         }
       }, 0);
     },
-    [onBlur, setFocus, setOpen, onClose, timeoutId, debug]
+    [
+      onBlur,
+      setFocus,
+      setOpen,
+      onClose,
+      timeoutId,
+      debug,
+      setQueryInner,
+      opts,
+      setOptions,
+      selectedOption,
+    ]
+  );
+
+  // intellegently match if no options except one?
+  const setQuery = useCallback(
+    (newQuery: string) => {
+      setQueryInner(newQuery);
+      debounce(() => {
+        setOptions(newQuery ? opts.filter(opt => searchFn(newQuery, opt)) : opts);
+      }, DEBOUNCE_MS)();
+    },
+    [setQueryInner, setOptions, searchFn, opts]
   );
 
   const selectOne = useCallback(
     (selectedOpt: Option<V, T>) => {
       if (disabled) return;
       debug('selectOne');
-      const selectedId: V = selectedOpt.id;
-      onChange(multiple ? [...selectedValues, selectedId] : selectedId);
+      onChange(selectedOpt.id);
+      setQueryInner(selectedOpt.label);
+      setOptions(opts);
     },
-    [selectedValues, multiple, disabled, onChange, debug]
+    [onChange, setQueryInner, disabled, setOptions, debug, opts]
   );
-
-  const deleteOne = useCallback(
-    (toDelete: V) => {
-      if (disabled) return;
-      debug('deleteOne');
-      onChange(multiple ? [...selectedValues].filter(v => v !== toDelete) : null);
-      onDelete?.(toDelete);
-    },
-    [onChange, onDelete, multiple, selectedValues, disabled, debug]
-  );
-
-  const optionLookup = useMemo(
-    () => opts.reduce((acc, o) => ({ ...acc, [o.id]: o }), {} as Record<V, Option<V, T>>),
-    [opts]
-  );
-
-  useEffect(() => {
-    if (!multiple) return;
-    setOptions(
-      opts.filter(o => !selectedValues.has(o.id)),
-      { resetIdx: false }
-    );
-  }, [selectedValues, multiple, setOptions, opts]);
 
   return {
-    deleteOne,
+    clearValue,
     moveOptionIdx,
     optIdx,
-    optionLookup,
+    selectedOption,
     options,
+    query,
+    // probably don't need this in the select either
     selectOne,
+    setQuery,
     containerRef,
     menuRef,
     open,
@@ -162,8 +170,14 @@ const useSelect = <V extends Value, T = undefined>({
     closeMenu,
     openMenu,
     scrollIntoView,
-    clearValue,
   };
 };
 
-export default useSelect;
+const defaultQueryMatcher = <V extends Value, T = undefined>(
+  query: string,
+  option: Option<V, T>
+) => {
+  return option.label.toLowerCase().includes(query.toLowerCase());
+};
+
+export default useAutocomplete;

@@ -1,57 +1,44 @@
-import type React from 'react';
 import { useCallback, useState } from 'react';
 import { useDebuggerContext } from '../DebuggerContext';
 import type { Option } from '../types';
+import { isEmpty } from '@rothko-ui/utils';
+import { Direction } from './types';
 
-type HookArgs<V, T> = {
-  options: Option<V, T>[];
-  reverse?: boolean;
-  initialIdx?: number;
-};
+const INITIAL_IDX = -1;
 
-const useOptions = <V, T>({ initialIdx = -1, reverse, options: optionsRaw }: HookArgs<V, T>) => {
-  const debug = useDebuggerContext();
-  const [optIdx, setOptIdx] = useState<number>(initialIdx);
-
-  const [options, setOptionsInner] = useState<Option<V, T>[]>(
-    reverse ? reverseOptions(optionsRaw) : optionsRaw
-  );
+const useOptions = <V, T>(initialOptions: Option<V, T>[]) => {
+  const debug = useDebuggerContext('useOptions');
+  const [optIdx, setOptIdx] = useState<number>(INITIAL_IDX);
+  const [options, setOptionsInner] = useState<Option<V, T>[]>(initialOptions);
 
   const moveOptionIdx = useCallback(
-    (direction: -1 | 1) => {
+    (direction: Direction) => {
       debug(`moveOptionIdx(direction: ${direction})`);
-      const upperBound = options.length - 1;
-      const lowerBound = 0;
+      if (isEmpty(options)) return;
+
       // rotate through the indexes
+      const upperBound = options.length - 1;
       setOptIdx(prevIdx => {
-        const newIdx = direction + prevIdx;
-        if (newIdx < lowerBound) return upperBound;
-        if (newIdx > upperBound) return lowerBound;
-        return Math.min(Math.max(newIdx, lowerBound), upperBound);
+        return direction === Direction.INCR
+          ? incrementDial(prevIdx, upperBound)
+          : decrementDial(prevIdx, upperBound);
       });
     },
     [setOptIdx, options, debug]
   );
 
   const resetOptionIdx = useCallback(() => {
-    setOptIdx(initialIdx);
-  }, [setOptIdx, initialIdx]);
+    setOptIdx(INITIAL_IDX);
+  }, [setOptIdx]);
 
   const setOptions = useCallback(
-    (
-      opts: React.SetStateAction<Option<V, T>[]>,
-      { resetIdx = true }: { resetIdx?: boolean } = {}
-    ) => {
+    (opts: Option<V, T>[], { resetIdx = true }: { resetIdx?: boolean } = {}) => {
       debug(`setOptions`);
-      // this isn't nice, find a better way later
-      if (typeof opts === 'function') {
-        setOptionsInner(opts);
-      } else {
-        setOptionsInner(reverse ? reverseOptions(opts) : opts);
-      }
-      if (resetIdx) setOptIdx(initialIdx);
+      setOptionsInner(opts);
+      // just make option index the same unless greater than then just take the max?
+      if (resetIdx) resetOptionIdx();
     },
-    [setOptionsInner, setOptIdx, initialIdx, reverse, debug]
+    [setOptionsInner, resetOptionIdx, debug]
   );
 
   return {
@@ -63,12 +50,14 @@ const useOptions = <V, T>({ initialIdx = -1, reverse, options: optionsRaw }: Hoo
   };
 };
 
-const reverseOptions = <V, T>(options: Option<V, T>[]) => {
-  const result: Option<V, T>[] = [];
-  for (let i = options.length - 1; i >= 0; i--) {
-    result.push(options[i]);
-  }
-  return result;
+const incrementDial = (val: number, max: number) => {
+  if (val === INITIAL_IDX) return 0;
+  return (val + Direction.INCR) % (max + 1);
+};
+
+const decrementDial = (val: number, max: number) => {
+  if (val === INITIAL_IDX) return max;
+  return (val + Direction.DECR + (max + 1)) % (max + 1);
 };
 
 export default useOptions;

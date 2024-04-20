@@ -56,7 +56,7 @@ const BottomPopup: React.FC<PopupProps> = ({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   blur,
-  blurRadius = 8,
+  blurRadius,
 }) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
   const contentId = useId();

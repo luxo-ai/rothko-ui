@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { baseInputStyle } from '../../Input/styles';
-import { hideChromeBrowserOutline } from '../../../library/Styles';
-import { vuar } from '../../../library/utils/vuar';
 
-export const DropdownContainerDiv = styled.div`
+import { vuar } from '../utils/vuar';
+import { baseInputStyle } from '../../components/Input/styles';
+
+const DropdownContainer = styled.div`
   -webkit-tap-highlight-color: transparent;
   ${baseInputStyle} // causing issues before, this helped
 
@@ -31,20 +31,4 @@ export const DropdownContainerDiv = styled.div`
   }
 `;
 
-// replace with just input text instead... if you can (just use textStyle etc)
-export const TextContainerDiv = styled.div`
-  ${hideChromeBrowserOutline}
-  font-size: 1rem;
-  display: inline-block;
-  // left padding of icon + right padding of icon + width of icon
-  // padding-right: calc(1rem + 1rem + 16px);
-  padding-right: 1rem;
-
-  &.hidden {
-    visibility: hidden;
-  }
-
-  &.disabled {
-    opacity: 0.6;
-  }
-`;
+export default DropdownContainer;

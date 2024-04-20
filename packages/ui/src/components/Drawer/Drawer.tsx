@@ -61,7 +61,7 @@ const Drawer = ({
   open: isOpen = false,
   style: styleProp = {},
   blur,
-  blurRadius = 8,
+  blurRadius,
 }: DrawerProps) => {
   const drawerContentId = useId();
   const drawerRef = useRef<HTMLDivElement | null>(null);

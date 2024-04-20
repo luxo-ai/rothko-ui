@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { Dropdown } from '@rothko-ui/ui';
+import { Autocomplete } from '@rothko-ui/ui';
 
-const DROPDOWN_OPTIONS = [
+const AUTOCOMPLETE_OPTIONS = [
   {
     id: 0,
     label: 'Zero',
@@ -52,11 +52,11 @@ const DROPDOWN_OPTIONS = [
 const App = () => {
   const [selected, setSelected] = useState<number | null>(null);
   return (
-    <Dropdown
+    <Autocomplete
       menuPosition="top"
       value={selected}
       onChange={v => setSelected(v)}
-      options={DROPDOWN_OPTIONS}
+      options={AUTOCOMPLETE_OPTIONS}
     />
   );
 };

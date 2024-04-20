@@ -1,24 +1,24 @@
 import keyboardKey from 'keyboard-key';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
-import { ChevronDownOutline, ChevronRightOutline, CloseOutline } from '@rothko-ui/icons';
-import { classes, isNil } from '@rothko-ui/utils';
+import { ChevronRightOutline } from '@rothko-ui/icons';
+import { classes, isNil, map, mapReverse } from '@rothko-ui/utils';
 
 import { useDebuggerContext } from '../../library/DebuggerContext';
-import useDropdownMenu from '../../library/hooks/useMenu';
 import { DefaultRenderOption } from '../../library/RenderOption';
-import type { NestedOption, Option, RenderOption, Value } from '../../library/types';
-import { directionMap } from '../../library/utils/keyUtils';
+import type { NestedOption, RenderOption, Value } from '../../library/types';
 import BackButton from '../../library/BackButton';
 import Typography from '../Typography/Typography';
-import { ControlButton, DropdownContainerDiv, DropdownMenu, TextContainerDiv } from './Shared';
-import type { DropdownInnerProps } from './types';
-import type { StackOption } from './useNestedOptions';
-import useNestedOptions from './useNestedOptions';
-import useId from '../../library/hooks/useId';
+import type { DropdownInnerProps, StackOption } from './types';
+import useNestedDropdown from './useNestedDropdown';
 import ItemText from '../../library/ItemText';
 import LabelText from '../../library/LabelText';
+import DropdownContainer from '../../library/dropdown/DropdownContainer';
+import ControlButton from '../../library/dropdown/ControlButton';
+import DropdownMenu from '../../library/dropdown/DropdownMenu';
+import useFieldIds from '../../library/hooks/useFieldIds';
+import { Direction } from '../../library/hooks/types';
 
 type NestedDropdownProps<V extends Value> = Pick<
   DropdownInnerProps<V, undefined>,
@@ -33,7 +33,6 @@ type NestedDropdownProps<V extends Value> = Pick<
   | 'error'
   | 'onFocus'
   | 'onBlur'
-  | 'onDelete'
   | 'clearable'
   | 'className'
   | 'disabled'
@@ -46,6 +45,8 @@ type NestedDropdownProps<V extends Value> = Pick<
   | 'aria-invalid'
   | 'aria-errormessage'
   | 'errorText'
+  | 'onClear'
+  | 'onClose'
 > & {
   /** Current value of dropdown or value array if multiple */
   value?: V | null;
@@ -71,7 +72,9 @@ function NestedDropdown<V extends Value>({
   onChange,
   onFocus,
   onOpen,
-  options,
+  onClear,
+  onClose,
+  options: optionsRaw,
   placeholder = 'Select',
   renderOption: RenderOpt = DefaultRenderOption,
   value,
@@ -84,25 +87,19 @@ function NestedDropdown<V extends Value>({
   'aria-invalid': ariaInvalid,
   'aria-errormessage': ariaErrorMessage,
 }: NestedDropdownProps<V>) {
-  const labelId = useId();
-  const errorMessageId = useId();
-
+  const openReverse = menuPosition === 'top';
   const debug = useDebuggerContext('<NestedDropdown />');
 
-  const openReverse = menuPosition === 'top';
+  const { elementId: dropdownMenuId, labelId, errorMessageId } = useFieldIds();
 
   const {
-    currentOptions,
+    options,
     canGoToPrevCategory,
     optIdx,
     title,
     selectOne,
     goToPrevCategory,
     moveOptionIdx,
-    reset,
-  } = useNestedOptions({ options, onChange, reverse: openReverse });
-
-  const {
     containerRef,
     menuRef,
     focus,
@@ -112,69 +109,88 @@ function NestedDropdown<V extends Value>({
     scrollIntoView,
     onBlurHandler,
     onFocusHandler,
-  } = useDropdownMenu({
+    clearValue,
+    pathToCurrentOption,
+  } = useNestedDropdown({
+    options: optionsRaw,
+    onChange,
     onFocus,
     onBlur,
     onOpen,
     disabled,
+    onClose,
+    onClear,
+    value,
   });
 
   const hasOptions = Boolean(options.length);
   const hasValue = !isNil(value);
   const canClear = clearable && hasValue && !disabled;
-
-  const pathToCurrentOption = useMemo(
-    () => (!isNil(value) ? findPathToOptionMatch(value, options) : []),
-    [value, options]
-  );
-
-  const onSelect = (option: StackOption<V> | null) => {
-    selectOne(option);
-    if (option === null || !option.data.hasMore) {
-      closeMenu();
-      reset();
-    }
-  };
+  const mapper = openReverse ? mapReverse : map;
 
   const toggleMenu = () => {
     debug('toggleMenu');
     return open ? closeMenu() : openMenu();
   };
 
+  const onSelectHandler = (option: StackOption<V>) => {
+    selectOne(option);
+    if (!option.data.hasMore) {
+      closeMenu();
+    }
+  };
+
   const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     debug('onKeydown');
     const code = keyboardKey.getCode(e);
     if (!code) return;
-    // event only happens if the menu is not open
+
     if (code === keyboardKey.Spacebar) {
       e.preventDefault();
       if (!open) openMenu();
       return;
     }
-    // these keydown events only happen when the menu is open
-    if (!open) return;
+
+    // these events only happen when the menu is open
+    if (!open) {
+      return;
+    }
+
     if (code === keyboardKey.Enter) {
       e.preventDefault();
-      if (optIdx < 0 || optIdx > currentOptions.length - 1) return;
-      const option = currentOptions[optIdx];
-      return onSelect(option);
+      if (optIdx < 0 || optIdx > options.length - 1) return;
+      const option = options[optIdx];
+      return onSelectHandler(option);
     }
     if (code === keyboardKey.Escape) {
-      // if (!closeOnEsc) return;
       e.preventDefault();
       return closeMenu();
     }
-    const direction = directionMap[code];
-    if (!direction) return;
-    e.preventDefault();
-    moveOptionIdx(direction);
+
+    if (code === keyboardKey.ArrowUp) {
+      e.preventDefault();
+      moveOptionIdx(openReverse ? Direction.INCR : Direction.DECR);
+    }
+
+    if (code === keyboardKey.ArrowDown) {
+      e.preventDefault();
+      moveOptionIdx(openReverse ? Direction.DECR : Direction.INCR);
+    }
   };
 
   useEffect(() => {
-    if (!open) return;
-    const scrollIdx = optIdx < 0 && openReverse ? options.length - 1 : optIdx;
-    scrollIntoView(`#option-${scrollIdx}`);
-  }, [optIdx, open, openReverse, options.length, scrollIntoView]);
+    if (!open) {
+      return;
+    }
+    if (optIdx < 0 && openReverse) {
+      scrollIntoView(`#${dropdownMenuId}-opt-0`);
+      return;
+    }
+    if (optIdx >= 0) {
+      scrollIntoView(`#${dropdownMenuId}-opt-${optIdx}`);
+      return;
+    }
+  }, [optIdx, openReverse, open, scrollIntoView, options.length, dropdownMenuId]);
 
   const containerClasses = classes({
     error,
@@ -187,7 +203,7 @@ function NestedDropdown<V extends Value>({
   return (
     <div className={className}>
       {label && <LabelText id={labelId}>{label}</LabelText>}
-      <DropdownContainerDiv
+      <DropdownContainer
         id={id}
         aria-invalid={ariaInvalid || error}
         aria-required={ariaRequired}
@@ -195,53 +211,37 @@ function NestedDropdown<V extends Value>({
         aria-errormessage={
           !ariaErrorMessage && error && errorText ? errorMessageId : ariaErrorMessage
         }
-        aria-controls="dropdown-list-id-both-container-and-ul?" // when expanded
+        aria-controls={open ? dropdownMenuId : undefined}
         aria-label={ariaLabel}
         aria-describedby={ariaDescribedBy}
         aria-details={ariaDetails}
         aria-expanded={open}
         ref={containerRef}
-        tabIndex={0}
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
-        onClick={openMenu}
+        onClick={() => openMenu()}
         onKeyDown={onKeyDown}
         aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
         className={containerClasses}
+        tabIndex={0}
       >
-        <TextContainerDiv className={classes({ disabled })} tabIndex={-1}>
-          {isNil(value) && <ItemText $placeHolder>{placeholder}</ItemText>}
-          {!isNil(value) && (
-            <ItemText>{pathToCurrentOption.map(o => o.label).join(' / ')}</ItemText>
-          )}
-        </TextContainerDiv>
+        {isNil(value) && <ItemText $placeHolder>{placeholder}</ItemText>}
+        {!isNil(value) && <ItemText>{pathToCurrentOption.map(o => o.label).join(' / ')}</ItemText>}
         {!canClear ? (
           <ControlButton
-            $open={open}
-            $rotateOnOpen
-            aria-label="Open"
+            open={open}
+            rotateOnOpen
             disabled={disabled}
             onClick={toggleMenu}
-          >
-            <ChevronDownOutline aria-hidden width="1rem" height="1rem" />
-          </ControlButton>
+            type="indicator"
+          />
         ) : (
-          <ControlButton
-            aria-label="Clear Selection"
-            disabled={disabled}
-            onClick={() => onSelect(null)}
-          >
-            <CloseOutline aria-hidden width="1rem" height="1rem" />
-          </ControlButton>
+          <ControlButton disabled={disabled} onClick={() => clearValue()} type="clear" />
         )}
         {open && (
-          <DropdownMenu
-            ref={menuRef}
-            $reverse={openReverse}
-            tabIndex={-1}
-            data-rothko-body-scroll-lock-ignore
-          >
-            {canGoToPrevCategory && (
+          <DropdownMenu id={dropdownMenuId} ref={menuRef} reverse={openReverse}>
+            {/* Maaybe use flexbox */}
+            {!openReverse && canGoToPrevCategory && (
               <ButtonContainerDiv>
                 <BackButton
                   onClick={() => {
@@ -251,27 +251,32 @@ function NestedDropdown<V extends Value>({
                 />
               </ButtonContainerDiv>
             )}
-            {title && <TitleText>{title}</TitleText>}
+            {!openReverse && title && <TitleText>{title}</TitleText>}
             <ul
               aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
               role="listbox"
               tabIndex={-1}
             >
-              {currentOptions.map((option, idx) => {
+              {mapper(options, (option, idx) => {
+                const optionDisabled = option.disabled || disabled;
                 const selected = optIdx === idx;
                 return (
                   <li
-                    className={classes('option', { selected })}
-                    id={`option-${idx}`}
-                    key={option.id}
-                    role="option"
-                    aria-disabled={false}
+                    aria-disabled={optionDisabled}
                     aria-label={option.label}
                     aria-selected={selected}
+                    className={classes('option', {
+                      selected,
+                      disabled: optionDisabled,
+                    })}
+                    id={`${dropdownMenuId}-opt-${idx}`}
+                    key={option.id}
+                    role="option"
                     tabIndex={-1}
-                    onClick={() => {
-                      // e.preventDefault();
-                      onSelect(option);
+                    onClick={e => {
+                      if (optionDisabled) return;
+                      e.preventDefault();
+                      onSelectHandler(option);
                       containerRef.current?.blur();
                     }}
                   >
@@ -283,27 +288,23 @@ function NestedDropdown<V extends Value>({
                 );
               })}
             </ul>
+            {openReverse && title && <TitleText $reverse>{title}</TitleText>}
+            {openReverse && canGoToPrevCategory && (
+              <ButtonContainerDiv $reverse>
+                <BackButton
+                  onClick={() => {
+                    goToPrevCategory();
+                    containerRef.current?.focus();
+                  }}
+                />
+              </ButtonContainerDiv>
+            )}
           </DropdownMenu>
         )}
-      </DropdownContainerDiv>
+      </DropdownContainer>
       {error && errorText && <Typography.body id={errorMessageId}>{errorText}</Typography.body>}
     </div>
   );
-}
-
-function findPathToOptionMatch<V extends Value>(value: V, options: NestedOption<V>[]): Option<V>[] {
-  for (const option of options) {
-    const { subcategories } = option;
-    // match found at root
-    if (option.id === value) {
-      return [option];
-    }
-    if (subcategories) {
-      const subPath = findPathToOptionMatch(value, subcategories);
-      if (subPath.length) return [option, ...subPath];
-    }
-  }
-  return [];
 }
 
 const menuItemHPadding = css`
@@ -311,15 +312,37 @@ const menuItemHPadding = css`
   padding-right: 1rem;
 `;
 
-const ButtonContainerDiv = styled.div`
-  padding-top: 0.5rem;
+const ButtonContainerDiv = styled.div<{ $reverse?: boolean }>`
   padding-left: 0.5rem;
+  cursor: default;
+  ${({ $reverse }) => {
+    return $reverse
+      ? css`
+          padding-bottom: 0.5rem;
+          padding-top: 0.125rem;
+        `
+      : css`
+          padding-top: 0.5rem;
+          padding-bottom: 0.125rem;
+        `;
+  }}
 `;
 
-const TitleText = styled(Typography.label)`
-  padding-top: 1rem;
-  padding-bottom: 0.125rem;
+const TitleText = styled(Typography.label)<{ $reverse?: boolean }>`
   ${menuItemHPadding};
+  opacity: 0.75;
+  cursor: default;
+  ${({ $reverse }) => {
+    return $reverse
+      ? css`
+          padding-bottom: 0.5rem;
+          padding-top: 0.5rem;
+        `
+      : css`
+          padding-top: 0.5rem;
+          padding-bottom: 0.5rem;
+        `;
+  }}
 `;
 
 const NestedOptionContainerDiv = styled.div`

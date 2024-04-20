@@ -610,3 +610,48 @@ export const findBy = <T>(arr: ArrLike<T>, pred: (v: T) => boolean): T | undefin
     if (pred(val)) return val;
   }
 };
+
+/**
+ * Iterates over elements of `arr` in reverse, returning the first element `pred` returns truthy for.
+ * The predicate is invoked with one argument: (value).
+ *
+ * @param {ArrLike<T>} arr The array-like value to inspect.
+ * @param {(v: T) => boolean} pred The function invoked per iteration.
+ * @returns {T | undefined} Returns the found element, else `undefined`.
+ * @typeparam T The type of the values in the array-like object.
+ * @example
+ *
+ * findLastBy([1, 2, 3, 4], x => x % 2 === 0)
+ * // => 4
+ *
+ * findLastBy([1, 2, 3, 4], x => x > 4)
+ * // => undefined
+ */
+export const mapReverse = <T, U>(arr: T[], fn: (el: T, idx: number) => U): U[] => {
+  const result: U[] = [];
+  for (let i = arr.length - 1; i >= 0; i--) {
+    result.push(fn(arr[i], i));
+  }
+  return result;
+};
+
+/**
+ * Iterates over elements of `arr`, returning an array of all elements `pred` returns truthy for.
+ * The predicate is invoked with one argument: (value).
+ *
+ * @param {ArrLike<T>} arr The array-like value to inspect.
+ * @param {(v: T) => boolean} pred The function invoked per iteration.
+ * @returns {T[]} Returns the new array of filtered values.
+ * @typeparam T The type of the values in the array-like object.
+ * @example
+ *
+ * filter([1, 2, 3, 4], x => x % 2 === 0)
+ * // => [2, 4]
+ */
+export const map = <T, U>(arr: T[], fn: (el: T, idx: number) => U): U[] => {
+  const result: U[] = [];
+  for (let i = 0; i < arr.length; i++) {
+    result.push(fn(arr[i], i));
+  }
+  return result;
+};

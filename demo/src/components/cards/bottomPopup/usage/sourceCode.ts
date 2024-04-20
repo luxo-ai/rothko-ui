@@ -19,7 +19,7 @@ const App = () => {
       >
         Open popup
       </Button>
-      <BottomPopup open={open} onClose={() => setOpen(false)}>
+      <BottomPopup blur open={open} onClose={() => setOpen(false)}>
         {POPUP_CONTENT}
       </BottomPopup>
     </>

@@ -9,7 +9,7 @@ const ShadedBackdrop = styled.div<{ $show?: boolean; $blur?: boolean; $blurRadiu
   opacity: 0;
   
 
-  ${({ $show, $blur, $blurRadius = 8 }) =>
+  ${({ $show, $blur, $blurRadius = 6 }) =>
     $show
       ? css`
           opacity: 1;

@@ -11,6 +11,7 @@ const GETTING_STARTED: readonly NavigationSectionWithoutTo[] = [
 const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
   { label: 'Accordion' },
   { label: 'Alert' },
+  { label: 'Autocomplete' },
   { label: 'Bottom Popup' },
   { label: 'Bread Crumbs' },
   { label: 'Button' },

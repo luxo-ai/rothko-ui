@@ -1,6 +1,6 @@
-import CopyToClipboard from 'react-copy-to-clipboard';
 import FuzzySearch from 'fuzzy-search';
 import React, { useMemo, useState } from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 import * as Icons from '@rothko-ui/icons';
 import type { Accessory, Option } from '@rothko-ui/ui';
@@ -16,13 +16,13 @@ import {
   Typography,
 } from '@rothko-ui/ui';
 
-import { BASIC } from './usage/sourceCode';
-import { filledIconList, outlineIconList } from './iconsList';
+import { truncateString } from '@rothko-ui/utils';
 import { JSXCode } from '../../Code';
 import Card from '../Card';
-import iconographyCopy from './copy';
 import styles from './Icons.module.scss';
-import { noop, truncateString } from '@rothko-ui/utils';
+import iconographyCopy from './copy';
+import { filledIconList, outlineIconList } from './iconsList';
+import { BASIC } from './usage/sourceCode';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/icons';
 
@@ -54,18 +54,17 @@ const iconKindOptions: Option<IconKind, { accessoryLeft: Accessory }>[] = [
 ];
 
 const IconsCard = () => {
-  const [query, setQuery] = useState<string | null>(null);
+  const [query, setQuery] = useState<string>('');
   const [iconKind, setIconKind] = useState<IconKind>(IconKind.Filled);
 
   const iconList = useMemo(() => {
-    if (!query) {
-      return iconKind === IconKind.Outline ? outlineIconList : filledIconList;
+    if (!query.length) {
+      return iconKind === IconKind.Filled ? filledIconList : outlineIconList;
     }
-    if (iconKind === IconKind.Outline) {
-      return outlineIconSearcher.search(query);
-    }
-    return filledIconSearcher.search(query);
-  }, [query, iconKind]);
+    return iconKind === IconKind.Filled
+      ? filledIconSearcher.search(query)
+      : outlineIconSearcher.search(query);
+  }, [iconKind, query]);
 
   return (
     <Card codeUrl={GITHUB_URL} copy={iconographyCopy}>
@@ -77,7 +76,6 @@ const IconsCard = () => {
         <div>
           <SearchBar
             onQueryChange={q => setQuery(q)}
-            onSubmit={noop}
             placeholder="Search for an icon..."
             query={query}
           />
@@ -99,39 +97,45 @@ const IconsCard = () => {
           </MaxWidth>
         </Container>
         <div style={{ position: 'relative' }}>
-          <div className={styles.icons}>
-            {iconList.map(iconName => {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              const C = Icons[iconName] as React.FC<any>;
-              return (
-                <div className={styles.icon} key={iconName}>
-                  <ToastContextConsumer>
-                    {({ addToast }) => (
-                      <CopyToClipboard
-                        text={`<${iconName} width={20} height={20} />`}
-                        onCopy={() => addToast({ content: 'Added to clipboard!', withLife: true })}
-                      >
-                        <button aria-label={iconName}>
-                          <Flex flexDirection="column" alignItems="center" gap="1rem">
-                            <C width={30} height={30} />
-                            <Typography.bodySmall>
-                              {truncateString(iconName, 18)}
-                            </Typography.bodySmall>
-                          </Flex>
-                        </button>
-                      </CopyToClipboard>
-                    )}
-                  </ToastContextConsumer>
-                </div>
-              );
-            })}
-          </div>
+          {iconList.length > 0 && (
+            <div className={styles.icons}>
+              {iconList.map(iconName => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                const C = Icons[iconName] as React.FC<any>;
+                return (
+                  <div className={styles.icon} key={iconName}>
+                    <ToastContextConsumer>
+                      {({ addToast }) => (
+                        <CopyToClipboard
+                          text={`<${iconName} width={20} height={20} />`}
+                          onCopy={() =>
+                            addToast({ content: 'Added to clipboard!', withLife: true })
+                          }
+                        >
+                          <button aria-label={iconName}>
+                            <Flex flexDirection="column" alignItems="center" gap="1rem">
+                              <C width={30} height={30} />
+                              <Typography.bodySmall>
+                                {truncateString(iconName, 18)}
+                              </Typography.bodySmall>
+                            </Flex>
+                          </button>
+                        </CopyToClipboard>
+                      )}
+                    </ToastContextConsumer>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          {iconList.length === 0 && (
+            <FlexItem flex={1} width="100%" margin="auto" maxWidth="40rem">
+              <Alert appearance="outline" kind="primary" style={{ textAlign: 'center' }}>
+                No results. Please try another search...
+              </Alert>
+            </FlexItem>
+          )}
         </div>
-        {iconList.length === 0 && (
-          <FlexItem flex={1} width="100%" margin="auto" maxWidth="40rem">
-            <Alert style={{ textAlign: 'center' }}>No results. Please try another search...</Alert>
-          </FlexItem>
-        )}
       </Flex>
     </Card>
   );

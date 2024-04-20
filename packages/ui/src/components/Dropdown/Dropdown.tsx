@@ -5,7 +5,7 @@ import type { DropdownInnerProps } from './types';
 
 type DropdownProps<V extends Value, T> = Omit<
   DropdownInnerProps<V, T>,
-  'multiple' | 'value' | 'onChange'
+  'multiple' | 'value' | 'onChange' | 'onDelete'
 > & {
   /** Current value of dropdown or value array if multiple */
   value?: V | null;

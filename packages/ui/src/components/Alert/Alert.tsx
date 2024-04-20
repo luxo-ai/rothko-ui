@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { isString } from '@rothko-ui/utils';
 
@@ -30,6 +30,11 @@ type AlertProps = WithAria<{
    * The inline style for the Alert component.
    */
   style?: React.CSSProperties;
+  /**
+   * The appearance style of the Alert component.
+   * @default 'filled'
+   */
+  appearance?: 'filled' | 'outline';
 }>;
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
@@ -46,6 +51,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       className,
       style,
       id,
+      appearance = 'filled',
     },
     ref
   ) => {
@@ -53,6 +59,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       <AlertContainerDiv
         id={id}
         role="alert"
+        appearance={appearance}
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
         aria-describedby={ariaDescribedBy}
@@ -72,9 +79,18 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
 
 Alert.displayName = 'Alert';
 
-const AlertContainerDiv = styled.div<{ kind: RothkoKind }>`
-  ${semanticTextChildrenStyle}
-  background-color: ${({ kind }) => vuar({ kind, category: 'background' })};
+const AlertContainerDiv = styled.div<{ kind: RothkoKind; appearance: 'filled' | 'outline' }>`
+  ${({ appearance, kind }) => {
+    return appearance === 'filled'
+      ? css`
+          ${semanticTextChildrenStyle}
+          background-color: ${vuar({ kind, category: 'background' })};
+        `
+      : css`
+          border: 1px solid ${vuar({ kind, category: 'background' })};
+          color: ${vuar({ kind, category: 'color' })};
+        `;
+  }}
   padding: 1rem 1.25rem;
   font-size: 1rem;
 `;

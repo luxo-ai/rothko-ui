@@ -8,11 +8,16 @@ import type {
   WithAriaRequired,
 } from '../../types';
 
-export type QueryMatchFn<V, T = undefined> = (query: string, opt: Option<V, T>) => boolean;
-
 type WithAria<T> = WithAriaErrorMessage<
   WithAriaRequired<WithAriaInvalid<WithAriaDisabled<WithAriaLabeling<T>>>>
 >;
+
+export type StackOption<V extends Value> = Option<V, { hasMore: boolean }>;
+
+export type StackValue<V extends Value> = {
+  title?: string;
+  options: StackOption<V>[];
+};
 
 export type DropdownInnerProps<V extends Value, T> = WithAria<{
   id?: string;
@@ -50,7 +55,7 @@ export type DropdownInnerProps<V extends Value, T> = WithAria<{
    * The position of the dropdown menu.
    * @default: 'bottom'
    */
-  menuPosition?: 'top' | 'bottom' | 'auto';
+  menuPosition?: 'top' | 'bottom';
   /**
    * Whether the dropdown allows multiple selections.
    */
@@ -68,6 +73,14 @@ export type DropdownInnerProps<V extends Value, T> = WithAria<{
    * Event handler for when the dropdown value changes.
    */
   onChange: (v: V | V[] | null) => void;
+  /**
+   * Event handler for when the dropdown is cleared.
+   */
+  onClear?: () => void;
+  /**
+   * Event handler for when the dropdown is closed.
+   */
+  onClose?: () => void;
   /**
    * Event handler for when an option is deleted in multiple selection mode.
    */
@@ -93,11 +106,6 @@ export type DropdownInnerProps<V extends Value, T> = WithAria<{
    * Custom rendering function for dropdown options.
    */
   renderOption?: RenderOption<V, T>;
-  /**
-   * Whether to enable search functionality in the dropdown.
-   * Can be a boolean or a custom query matching function.
-   */
-  search?: boolean | QueryMatchFn<V, T>;
   /**
    * The format for displaying selected values.
    */
