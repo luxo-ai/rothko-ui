@@ -16,5 +16,5 @@
   },
   "compileOnSave": true,
   "exclude": ["**/*.spec.ts", "**/*.test.ts", "node_modules", "dist", "build"],
-  "include": ["src/index.ts", "**/*.ts"]
+  "include": ["src/index.ts", "**/*.ts", "src/build.js"]
 }
