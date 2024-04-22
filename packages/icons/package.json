@@ -25,7 +25,7 @@
   },
   "files": [
     "dist",
-    "LICENSE.txt"
+    "LICENSE"
   ],
   "peerDependencies": {
     "react": "^18.0.0",

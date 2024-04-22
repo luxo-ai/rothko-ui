@@ -59,7 +59,7 @@
   "files": [
     "dist",
     "build/*.css",
-    "LICENSE.txt"
+    "LICENSE"
   ],
   "gitHead": "fa0338bf50f574c0a42d143d3bd317a40a6e3fb9"
 }
