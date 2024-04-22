@@ -34,7 +34,6 @@
     "test": "lerna run test",
     "prepareDISABLE": "husky",
     "pub": "lerna publish from-git --no-private",
-    "version": "lerna version --no-private",
     "version:patch": "lerna version patch --no-private",
     "version:minor": "lerna version minor --no-private",
     "version:major": "lerna version major --no-private"
