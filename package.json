@@ -32,7 +32,7 @@
     "clean": "lerna clean",
     "lint": "lerna run lint",
     "test": "lerna run test",
-    "prepare": "husky",
+    "prepareDISABLE": "husky",
     "pub": "lerna publish from-git --no-private",
     "version": "lerna version --no-private",
     "version:patch": "lerna version patch --no-private",
