@@ -12,11 +12,15 @@ type WithAria<T> = WithAriaErrorMessage<
   WithAriaRequired<WithAriaInvalid<WithAriaDisabled<WithAriaLabeling<T>>>>
 >;
 
-export type StackOption<V extends Value> = Option<V, { hasMore: boolean }>;
+export type StackOption<V extends Value, T = undefined> = Option<V, T> & {
+  hasMore?: boolean;
+  more: Generator<StackOption<V, T>> | undefined;
+};
 
-export type StackValue<V extends Value> = {
+export type StackValue<V extends Value, T = undefined> = {
   title?: string;
-  options: StackOption<V>[];
+  path: string[];
+  options: StackOption<V, T>[];
 };
 
 export type DropdownInnerProps<V extends Value, T> = WithAria<{

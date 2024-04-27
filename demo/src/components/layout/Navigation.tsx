@@ -9,7 +9,6 @@ import {
   useRothko,
 } from '@rothko-ui/ui';
 import cookieCutter from 'cookie-cutter';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import config from '../../config';
@@ -22,7 +21,6 @@ type NavigationProps = {
 };
 
 const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
-  const router = useRouter();
   const { mode, toggleMode } = useRothko();
 
   useEffect(() => {
@@ -34,7 +32,7 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
   }, [mode]);
 
   return (
-    <nav className={router.pathname === '/' ? `${styles.nav} ${styles.blurry}` : styles.nav}>
+    <nav className={styles.nav}>
       <Flex justifyContent="space-between">
         <Flex alignItems="center" justifyContent="center" columnGap="1rem">
           <WidthLeqOnly $threshold={750}>
@@ -49,15 +47,12 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
             </FlexItem>
           </WidthLeqOnly>
           <FlexItem>
-            <Flex
-              onClick={() => router.push('/')}
-              cursor="pointer"
-              alignItems="end"
-              columnGap="0.25rem"
-            >
-              <Typography.h5>Rothko UI</Typography.h5>
-              {config.version && <Typography.caption>v{config.version}</Typography.caption>}
-            </Flex>
+            <Link href="/">
+              <Flex cursor="pointer" alignItems="end" columnGap="0.25rem">
+                <Typography.h5>Rothko UI</Typography.h5>
+                {config.version && <Typography.caption>v{config.version}</Typography.caption>}
+              </Flex>
+            </Link>
           </FlexItem>
         </Flex>
         <Flex justifyContent="center" alignItems="center" columnGap="1.75rem">
@@ -81,16 +76,18 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
             )}
           </Flex>
           <WidthGeqOnly $threshold={750} style={{ height: '100%' }}>
-            <Button
-              size="s"
-              kind="primary"
-              style={{ height: '100%' }}
-              // style={{ background: 'white', color: 'black' }}
-              accessoryLeft={({ size, color }) => <Heart fill={color} height={size} width={size} />}
-              onClick={() => router.push('/sponsor')}
-            >
-              Sponsor
-            </Button>
+            <Link href="/sponsor">
+              <Button
+                size="s"
+                kind="primary"
+                style={{ height: '100%' }}
+                accessoryLeft={({ size, color }) => (
+                  <Heart fill={color} height={size} width={size} />
+                )}
+              >
+                Sponsor
+              </Button>
+            </Link>
           </WidthGeqOnly>
         </Flex>
       </Flex>

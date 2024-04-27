@@ -1,15 +1,15 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import styled from 'styled-components';
 import Typography from '../components/Typography/Typography';
-import type { RenderOption } from './types';
+import type { Option } from './types';
 
-export const DefaultRenderOption: RenderOption<any> = ({ option }) => (
-  <OptText>{option.label}</OptText>
+const DefaultRenderOption = (props: { option: Pick<Option<unknown>, 'label'> }) => (
+  <OptText>{props.option.label}</OptText>
 );
 
 const OptText = styled(Typography.bodySmall)`
   margin: 0;
   user-select: none;
 `;
+
+export default DefaultRenderOption;

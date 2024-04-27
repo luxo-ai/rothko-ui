@@ -1,9 +1,9 @@
 import { List, ListItem, Typography, LinkButton } from '@rothko-ui/ui';
-import { useRouter } from 'next/navigation';
 import React from 'react';
 import { NAVIGATION_LIST } from './constants';
 import { isLeaf } from './helpers';
 import type { NavigationSection } from './types';
+import Link from 'next/link';
 
 type ExpandNavListProps = {
   depth?: number;
@@ -13,28 +13,30 @@ type ExpandNavListProps = {
 };
 
 const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListProps) => {
-  const router = useRouter();
   if (isLeaf(item)) {
     const isSelected = selected === item.to;
     return (
       <ListItem>
-        <LinkButton
-          onClick={() => {
-            onNavigate?.();
-            router.push(`/${item.to}`);
-          }}
-          style={{
-            textDecoration: 'none',
-            width: '100%',
-            textAlign: 'inherit',
-            padding: `0.5rem calc(${depth} * 0.75rem)`,
-            color: 'var(--rothko-foreground, #000)',
-          }}
-          bold={isSelected}
-        >
-          {isSelected ? '_ ' : ''}
-          {item.label}
-        </LinkButton>
+        <Link href={`/${item.to}`}>
+          <LinkButton
+            as="span"
+            onClick={() => {
+              onNavigate?.();
+            }}
+            style={{
+              display: 'inline-block',
+              textDecoration: 'none',
+              width: '100%',
+              textAlign: 'inherit',
+              padding: `0.5rem calc(${depth} * 0.75rem)`,
+              color: 'var(--rothko-foreground, #000)',
+            }}
+            bold={isSelected}
+          >
+            {isSelected ? '_ ' : ''}
+            {item.label}
+          </LinkButton>
+        </Link>
       </ListItem>
     );
   }

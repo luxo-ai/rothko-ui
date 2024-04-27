@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
+import type { NestedOption } from '@rothko-ui/ui';
 import { NestedDropdown } from '@rothko-ui/ui';
 
-const DROPDOWN_OPTIONS = [
+const DROPDOWN_OPTIONS: NestedOption<string>[] = [
   {
     id: '0',
     label: 'Sub',
-    subcategories: [
+    options: [
       {
         id: '0:1',
         label: 'Sub-One',
@@ -15,7 +16,10 @@ const DROPDOWN_OPTIONS = [
         id: '0:2',
         label: 'Sub-Two',
       },
-      { id: '03', label: 'Sub-Three' },
+      {
+        id: '03',
+        label: 'Sub-Three',
+      },
     ],
   },
   {

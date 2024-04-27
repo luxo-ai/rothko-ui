@@ -24,11 +24,7 @@ const PaddedNavLayout = React.forwardRef<HTMLDivElement, LayoutProps>(
       <div
         ref={ref}
         style={{ flex: 1 }}
-        className={
-          router.pathname === '/'
-            ? styles.paddedNavContainer
-            : `${styles.paddedNavContainer} ${styles.centered}`
-        }
+        className={`${styles.paddedNavContainer} ${styles.centered}`}
       >
         <Drawer open={isDrawerOpen} onClose={closeDrawer}>
           <NavigationList

@@ -1,34 +1,30 @@
 import { useCallback, useState } from 'react';
+
 import { useDebuggerContext } from '../DebuggerContext';
 import type { Option } from '../types';
-import { isEmpty } from '@rothko-ui/utils';
-import { Direction } from './types';
-
-const INITIAL_IDX = -1;
+import { INITIAL_OPTION_IDX } from './constants';
+import type { Direction } from './types';
+import { dial } from './utils';
 
 const useOptions = <V, T>(initialOptions: Option<V, T>[]) => {
   const debug = useDebuggerContext('useOptions');
-  const [optIdx, setOptIdx] = useState<number>(INITIAL_IDX);
+
+  const [optIdx, setOptIdx] = useState<number>(INITIAL_OPTION_IDX);
   const [options, setOptionsInner] = useState<Option<V, T>[]>(initialOptions);
 
   const moveOptionIdx = useCallback(
     (direction: Direction) => {
       debug(`moveOptionIdx(direction: ${direction})`);
-      if (isEmpty(options)) return;
-
+      if (options.length <= 0) return;
       // rotate through the indexes
       const upperBound = options.length - 1;
-      setOptIdx(prevIdx => {
-        return direction === Direction.INCR
-          ? incrementDial(prevIdx, upperBound)
-          : decrementDial(prevIdx, upperBound);
-      });
+      setOptIdx(prevIdx => dial[direction](prevIdx, upperBound));
     },
-    [setOptIdx, options, debug]
+    [setOptIdx, options.length, debug]
   );
 
   const resetOptionIdx = useCallback(() => {
-    setOptIdx(INITIAL_IDX);
+    setOptIdx(INITIAL_OPTION_IDX);
   }, [setOptIdx]);
 
   const setOptions = useCallback(
@@ -48,16 +44,6 @@ const useOptions = <V, T>(initialOptions: Option<V, T>[]) => {
     resetOptionIdx,
     setOptions,
   };
-};
-
-const incrementDial = (val: number, max: number) => {
-  if (val === INITIAL_IDX) return 0;
-  return (val + Direction.INCR) % (max + 1);
-};
-
-const decrementDial = (val: number, max: number) => {
-  if (val === INITIAL_IDX) return max;
-  return (val + Direction.DECR + (max + 1)) % (max + 1);
 };
 
 export default useOptions;

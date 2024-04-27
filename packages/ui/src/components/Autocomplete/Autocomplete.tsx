@@ -7,7 +7,7 @@ import { classes, isNil, map, mapReverse } from '@rothko-ui/utils';
 import { useDebuggerContext } from '../../library/DebuggerContext';
 import ItemText from '../../library/ItemText';
 import LabelText from '../../library/LabelText';
-import { DefaultRenderOption } from '../../library/RenderOption';
+import DefaultRenderOption from '../../library/RenderOption';
 import { hideChromeBrowserOutline } from '../../library/Styles';
 import useFieldIds from '../../library/hooks/useFieldIds';
 import type { FocusHandler, Option, RenderOption, Value } from '../../library/types';

@@ -1,83 +1,17 @@
+import type React from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 
-import { isEmpty, isNil } from '@rothko-ui/utils';
+import { isNil } from '@rothko-ui/utils';
 
 import { useDebuggerContext } from '../../library/DebuggerContext';
-import type { Stack } from '../../library/dataStructures';
-import { stackPeak, stackPop, stackPush } from '../../library/dataStructures';
-import type { FocusHandler, NestedOption, Value } from '../../library/types';
-import { Direction } from '../../library/hooks/types';
 import useScrollIntoView from '../../library/hooks/useScrollIntoView';
-import { findPathToOptionMatch, optionsToStackValue } from './utils';
-import type { StackOption, StackValue } from './types';
+import type { FocusHandler, NestedOption, Value } from '../../library/types';
+import { findOptionMatch2, findPathToOptionMatch } from './utils';
+import useNestedOptions from '../../library/hooks/useNestedOptions';
+import type { StackOption } from '../../library/hooks/types';
 
-const INITIAL_IDX = -1;
-
-// like useOptions but for nested options
-const useNestedOptions = <V extends Value>(initialOptions: NestedOption<V>[]) => {
-  const debug = useDebuggerContext('useNestedOptions');
-
-  const [optIdx, setOptIdx] = useState<number>(INITIAL_IDX);
-  const [optionStack, setOptionStack] = useState<Stack<StackValue<V>>>([
-    optionsToStackValue(initialOptions),
-  ]);
-
-  const { options = [], title } = useMemo(() => stackPeak(optionStack), [optionStack]) ?? {};
-
-  const resetOptionIdx = useCallback(
-    ({ resetStack = true }: { resetStack?: boolean } = {}) => {
-      if (resetStack) {
-        setOptionStack([optionsToStackValue(initialOptions)]);
-      }
-      setOptIdx(INITIAL_IDX);
-    },
-    [setOptionStack, setOptIdx, initialOptions]
-  );
-
-  const goToPrevCategory = useCallback(() => {
-    setOptionStack(prevStack => {
-      if (prevStack.length <= 1) {
-        return prevStack;
-      }
-      const [poppedStack] = stackPop(prevStack);
-      return poppedStack;
-    });
-    setOptIdx(INITIAL_IDX);
-  }, [setOptionStack, setOptIdx]);
-
-  const canGoToPrevCategory = optionStack.length > 1;
-
-  const moveOptionIdx = useCallback(
-    (direction: Direction) => {
-      debug(`moveOptionIdx(direction: ${direction})`);
-      if (isEmpty(options)) return;
-
-      // rotate through the indexes
-      const upperBound = options.length - 1;
-      setOptIdx(prevIdx => {
-        return direction === Direction.INCR
-          ? incrementDial(prevIdx, upperBound)
-          : decrementDial(prevIdx, upperBound);
-      });
-    },
-    [setOptIdx, options, debug]
-  );
-
-  return {
-    title,
-    canGoToPrevCategory,
-    goToPrevCategory,
-    // same as useOptions
-    options,
-    optIdx,
-    moveOptionIdx,
-    resetOptionIdx,
-    setOptionStack,
-  };
-};
-
-type HookArgs<V extends Value> = {
-  options: NestedOption<V>[];
+type HookArgs<V extends Value, T> = {
+  options: NestedOption<V, T>[];
   onChange: (id: V | null) => void;
   onFocus?: FocusHandler;
   onBlur?: FocusHandler;
@@ -88,7 +22,7 @@ type HookArgs<V extends Value> = {
   value?: V | null;
 };
 
-const useNestedDropdown = <V extends Value>({
+const useNestedDropdown = <V extends Value, T = undefined>({
   options: initialOptions,
   onChange,
   onFocus,
@@ -98,7 +32,7 @@ const useNestedDropdown = <V extends Value>({
   onClose,
   disabled,
   value,
-}: HookArgs<V>) => {
+}: HookArgs<V, T>) => {
   const debug = useDebuggerContext('useNestedDropdown');
 
   const timeoutId = useRef<NodeJS.Timeout>();
@@ -108,16 +42,8 @@ const useNestedDropdown = <V extends Value>({
   const [open, setOpen] = useState<boolean>(false);
   const [focus, setFocus] = useState<boolean>(false);
 
-  const {
-    title,
-    canGoToPrevCategory,
-    goToPrevCategory,
-    options,
-    optIdx,
-    moveOptionIdx,
-    resetOptionIdx,
-    setOptionStack,
-  } = useNestedOptions(initialOptions);
+  const { options, optIdx, title, moveOptionIdx, optionStack, dispatch } =
+    useNestedOptions(initialOptions);
 
   const closeMenu = () => {
     if (!open) return;
@@ -133,12 +59,9 @@ const useNestedDropdown = <V extends Value>({
     if (open || disabled) return;
     debug('openMenu');
     if (isNil(value)) {
-      // i think this will be problematic if the options are not the same as the original options
-      // also maybe the useOptions should be responsible for this? Also wait
-      // useOptions should be reseting this on setOptions....No?
-      // maybe we want to maintain it then. Like set the option index for a value.
-      // setOptionIndexFor(value)...
-      resetOptionIdx();
+      // reset if opening to an empty value
+      // alternatively reset on close.
+      dispatch({ type: 'RESET' });
     }
     onOpen?.();
     setOpen(true);
@@ -184,58 +107,59 @@ const useNestedDropdown = <V extends Value>({
   );
 
   const selectOne = useCallback(
-    (selectedOpt: StackOption<V>) => {
+    (selectedOpt: StackOption<V, T>) => {
       debug('selectOne');
-      const { hasMore } = selectedOpt.data;
-      if (!hasMore) {
-        onChange(selectedOpt.id);
-        resetOptionIdx();
-        return;
+
+      if (!selectedOpt.hasMore) {
+        return onChange(selectedOpt.id);
       }
+
+      const parentId = selectedOpt.id;
+      const depth = optionStack.size();
+      const next = parentId && findOptionMatch2(parentId, initialOptions, depth);
+
+      if (!next) {
+        throw new Error(`Could not find option with id: ${parentId}`);
+      }
+
       /* if has more push the next options on the stack */
-      const subOptions = initialOptions.find(o => o.id === selectedOpt.id)?.subcategories || [];
-      const nextStackValue = optionsToStackValue(subOptions, selectedOpt.label);
-      setOptionStack(prevStack => stackPush(prevStack, nextStackValue));
-      resetOptionIdx({ resetStack: false });
+      dispatch({ type: 'PUSH_OPT', op: next });
     },
-    [setOptionStack, onChange, resetOptionIdx, initialOptions, debug]
+    [onChange, debug, initialOptions, optionStack, dispatch]
   );
 
-  const pathToCurrentOption = useMemo(
-    () => (!isNil(value) ? findPathToOptionMatch(value, initialOptions) : []),
-    [value, initialOptions]
-  );
+  const goBack = useCallback(() => {
+    debug('goBack');
+    dispatch({ type: 'POP_OPT' });
+  }, [dispatch, debug]);
+
+  const pathToCurrentOption = useMemo(() => {
+    if (isNil(value)) return [];
+    return findPathToOptionMatch(value, initialOptions);
+  }, [value, initialOptions]);
+
+  const canGoToPrevCategory = !optionStack.isEmpty();
 
   return {
-    moveOptionIdx,
-    optIdx,
-    options,
-    selectOne,
+    canGoToPrevCategory,
+    clearValue,
+    closeMenu,
     containerRef,
-    menuRef,
-    open,
     focus,
+    goToPrevCategory: goBack,
+    menuRef,
+    moveOptionIdx,
     onBlurHandler,
     onFocusHandler,
-    closeMenu,
+    open,
     openMenu,
-    scrollIntoView,
-    clearValue,
-    title,
-    canGoToPrevCategory,
-    goToPrevCategory,
+    optIdx,
+    options,
     pathToCurrentOption,
+    scrollIntoView,
+    selectOne,
+    title,
   };
-};
-
-const incrementDial = (val: number, max: number) => {
-  if (val === INITIAL_IDX) return 0;
-  return (val + Direction.INCR) % (max + 1);
-};
-
-const decrementDial = (val: number, max: number) => {
-  if (val === INITIAL_IDX) return max;
-  return (val + Direction.DECR + (max + 1)) % (max + 1);
 };
 
 export default useNestedDropdown;

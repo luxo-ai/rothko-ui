@@ -1,4 +1,7 @@
-import type { NestedOption, Option, Value } from '../../library/types';
+import { INITIAL_OPTION_IDX } from './constants';
+import type { StackOption } from './types';
+import { Direction } from './types';
+import type { NestedOption, Option, Value } from '../types';
 
 export function findPathToOptionMatch<V extends Value, T = undefined>(
   value: V,
@@ -33,7 +36,7 @@ export function findOptionMatch<V extends Value, T = undefined>(
   return null;
 }
 
-export function findOptionMatch2<V, T = undefined>(
+export function findOptionMatch2<V, T>(
   value: V,
   options: NestedOption<V, T>[],
   targetDepth: number
@@ -63,3 +66,25 @@ export function findOptionMatch2<V, T = undefined>(
 
   return findOptionMatchWithDepthHeuristic(value, options, 0);
 }
+
+export function createStackOptions<V, T>(o: NestedOption<V, T>[]): StackOption<V, T>[] {
+  return o.map(({ options, ...rest }) => ({
+    ...rest,
+    hasMore: Boolean(options),
+  }));
+}
+
+const incrementDial = (val: number, max: number) => {
+  if (val === INITIAL_OPTION_IDX) return 0;
+  return (val + Direction.INCR) % (max + 1);
+};
+
+const decrementDial = (val: number, max: number) => {
+  if (val === INITIAL_OPTION_IDX) return max;
+  return (val + Direction.DECR + (max + 1)) % (max + 1);
+};
+
+export const dial: Record<Direction, (val: number, max: number) => number> = {
+  [Direction.INCR]: incrementDial,
+  [Direction.DECR]: decrementDial,
+};

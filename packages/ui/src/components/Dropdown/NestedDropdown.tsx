@@ -3,14 +3,14 @@ import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
 import { ChevronRightOutline } from '@rothko-ui/icons';
-import { classes, isNil, map, mapReverse } from '@rothko-ui/utils';
+import { classes, isNil, mapReverse, map } from '@rothko-ui/utils';
 
 import { useDebuggerContext } from '../../library/DebuggerContext';
-import { DefaultRenderOption } from '../../library/RenderOption';
-import type { NestedOption, RenderOption, Value } from '../../library/types';
+import DefaultRenderOption from '../../library/RenderOption';
+import type { NestedOption, RenderNestedOption, Value } from '../../library/types';
 import BackButton from '../../library/BackButton';
 import Typography from '../Typography/Typography';
-import type { DropdownInnerProps, StackOption } from './types';
+import type { DropdownInnerProps } from './types';
 import useNestedDropdown from './useNestedDropdown';
 import ItemText from '../../library/ItemText';
 import LabelText from '../../library/LabelText';
@@ -18,10 +18,11 @@ import DropdownContainer from '../../library/dropdown/DropdownContainer';
 import ControlButton from '../../library/dropdown/ControlButton';
 import DropdownMenu from '../../library/dropdown/DropdownMenu';
 import useFieldIds from '../../library/hooks/useFieldIds';
+import type { StackOption } from '../../library/hooks/types';
 import { Direction } from '../../library/hooks/types';
 
-type NestedDropdownProps<V extends Value> = Pick<
-  DropdownInnerProps<V, undefined>,
+type NestedDropdownProps<V extends Value, T = undefined> = Pick<
+  DropdownInnerProps<V, T>,
   | 'id'
   | 'placeholder'
   | 'bordered'
@@ -51,14 +52,14 @@ type NestedDropdownProps<V extends Value> = Pick<
   /** Current value of dropdown or value array if multiple */
   value?: V | null;
   /** dropdown options */
-  options: NestedOption<V>[];
+  options: NestedOption<V, T>[];
   /** event handler for value change */
   onChange: (v: V | null) => void;
   /** custom method for rendering option */
-  renderOption?: RenderOption<V, { hasMore: boolean }>;
+  renderOption?: RenderNestedOption<V, T>;
 };
 
-function NestedDropdown<V extends Value>({
+function NestedDropdown<V extends Value, T = undefined>({
   id,
   className,
   clearable,
@@ -86,7 +87,7 @@ function NestedDropdown<V extends Value>({
   'aria-required': ariaRequired,
   'aria-invalid': ariaInvalid,
   'aria-errormessage': ariaErrorMessage,
-}: NestedDropdownProps<V>) {
+}: NestedDropdownProps<V, T>) {
   const openReverse = menuPosition === 'top';
   const debug = useDebuggerContext('<NestedDropdown />');
 
@@ -133,9 +134,9 @@ function NestedDropdown<V extends Value>({
     return open ? closeMenu() : openMenu();
   };
 
-  const onSelectHandler = (option: StackOption<V>) => {
+  const onSelectHandler = (option: StackOption<V, T>) => {
     selectOne(option);
-    if (!option.data.hasMore) {
+    if (!option.hasMore) {
       closeMenu();
     }
   };
@@ -156,12 +157,25 @@ function NestedDropdown<V extends Value>({
       return;
     }
 
+    if (clearable && (code === keyboardKey.Delete || code === keyboardKey.Backspace)) {
+      e.preventDefault();
+      return clearValue();
+    }
+
     if (code === keyboardKey.Enter) {
       e.preventDefault();
       if (optIdx < 0 || optIdx > options.length - 1) return;
       const option = options[optIdx];
       return onSelectHandler(option);
     }
+
+    if (code === keyboardKey.ArrowLeft) {
+      if (canGoToPrevCategory) {
+        e.preventDefault();
+        return goToPrevCategory();
+      }
+    }
+
     if (code === keyboardKey.Escape) {
       e.preventDefault();
       return closeMenu();
@@ -190,7 +204,7 @@ function NestedDropdown<V extends Value>({
       scrollIntoView(`#${dropdownMenuId}-opt-${optIdx}`);
       return;
     }
-  }, [optIdx, openReverse, open, scrollIntoView, options.length, dropdownMenuId]);
+  }, [optIdx, openReverse, open, scrollIntoView, dropdownMenuId]);
 
   const containerClasses = classes({
     error,
@@ -282,7 +296,7 @@ function NestedDropdown<V extends Value>({
                   >
                     <NestedOptionContainerDiv>
                       <RenderOpt option={option} />
-                      {option.data.hasMore && <ChevronRightOutline width="1rem" height="1rem" />}
+                      {option.hasMore && <ChevronRightOutline width="1rem" height="1rem" />}
                     </NestedOptionContainerDiv>
                   </li>
                 );

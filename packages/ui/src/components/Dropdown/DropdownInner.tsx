@@ -6,7 +6,7 @@ import { classes, isArray, isNil, mapReverse, map } from '@rothko-ui/utils';
 
 import { useDebuggerContext } from '../../library/DebuggerContext';
 import { PhantomButton } from '../../library/PhantomButton';
-import { DefaultRenderOption } from '../../library/RenderOption';
+import DefaultRenderOption from '../../library/RenderOption';
 import type { Option, Value } from '../../library/types';
 import Typography from '../Typography/Typography';
 import type { DropdownInnerProps } from './types';
@@ -121,7 +121,6 @@ function DropdownInner<V extends Value, T = undefined>({
     if (!code) return;
 
     if (code === keyboardKey.Spacebar) {
-      // if (!search) e.preventDefault();
       e.preventDefault();
       if (!open) openMenu();
       return;
@@ -144,12 +143,18 @@ function DropdownInner<V extends Value, T = undefined>({
       return closeMenu();
     }
 
-    if (code === keyboardKey.Delete) {
-      if (!isArray(value)) return;
-      e.preventDefault();
-      const lastAdded = value[value.length - 1];
-      if (!lastAdded) return;
-      deleteOne(lastAdded);
+    if (code === keyboardKey.Delete || code === keyboardKey.Backspace) {
+      if (!value) {
+        return;
+      }
+      if (isArray(value) && value.length > 0) {
+        e.preventDefault();
+        deleteOne(value[value.length - 1]);
+      }
+      if (!isArray(value)) {
+        e.preventDefault();
+        clearValue();
+      }
     }
 
     if (code === keyboardKey.ArrowUp) {

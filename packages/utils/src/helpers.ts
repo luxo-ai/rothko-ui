@@ -612,20 +612,18 @@ export const findBy = <T>(arr: ArrLike<T>, pred: (v: T) => boolean): T | undefin
 };
 
 /**
- * Iterates over elements of `arr` in reverse, returning the first element `pred` returns truthy for.
- * The predicate is invoked with one argument: (value).
+ * Transforms each element in an array from the last to the first, applying a specified function.
+ * The transformation function is invoked with two arguments: the element and its index.
  *
- * @param {ArrLike<T>} arr The array-like value to inspect.
- * @param {(v: T) => boolean} pred The function invoked per iteration.
- * @returns {T | undefined} Returns the found element, else `undefined`.
- * @typeparam T The type of the values in the array-like object.
+ * @param {T[]} arr The array to process.
+ * @param {(el: T, idx: number) => U} fn The transformation function to apply to each element.
+ * @returns {U[]} Returns a new array containing the results of applying `fn` to each element in reverse order.
+ * @typeparam T The type of the elements in the original array.
+ * @typeparam U The type of the elements in the resulting array.
  * @example
  *
- * findLastBy([1, 2, 3, 4], x => x % 2 === 0)
- * // => 4
- *
- * findLastBy([1, 2, 3, 4], x => x > 4)
- * // => undefined
+ * mapReverse([1, 2, 3], (x, i) => x + i)
+ * // => [5, 3, 1]
  */
 export const mapReverse = <T, U>(arr: T[], fn: (el: T, idx: number) => U): U[] => {
   const result: U[] = [];
@@ -636,22 +634,46 @@ export const mapReverse = <T, U>(arr: T[], fn: (el: T, idx: number) => U): U[] =
 };
 
 /**
- * Iterates over elements of `arr`, returning an array of all elements `pred` returns truthy for.
- * The predicate is invoked with one argument: (value).
+ * Applies a transformation function to each element of an array, returning an array of the results.
+ * The function is called for each element in the array, with the element and its index as arguments.
  *
- * @param {ArrLike<T>} arr The array-like value to inspect.
- * @param {(v: T) => boolean} pred The function invoked per iteration.
- * @returns {T[]} Returns the new array of filtered values.
- * @typeparam T The type of the values in the array-like object.
+ * @param {T[]} arr The array to process.
+ * @param {(el: T, idx: number) => U} fn The function to apply to each element.
+ * @returns {U[]} Returns a new array containing the transformed elements.
+ * @typeparam T The type of the elements in the original array.
+ * @typeparam U The type of the elements in the resulting array.
  * @example
  *
- * filter([1, 2, 3, 4], x => x % 2 === 0)
- * // => [2, 4]
+ * map([1, 2, 3], x => x * 2)
+ * // => [2, 4, 6]
  */
 export const map = <T, U>(arr: T[], fn: (el: T, idx: number) => U): U[] => {
   const result: U[] = [];
   for (let i = 0; i < arr.length; i++) {
     result.push(fn(arr[i], i));
+  }
+  return result;
+};
+
+/**
+ * Transforms each element in an iterable collection, applying a specified function, and returns an array of results.
+ * The transformation function is invoked with two arguments: the element and its current index.
+ *
+ * @param {Iterable<T>} iterable The iterable collection to process.
+ * @param {(el: T, idx: number) => U} fn The function to apply to each element.
+ * @returns {U[]} Returns an array containing the transformed elements.
+ * @typeparam T The type of the elements in the iterable collection.
+ * @typeparam U The type of the elements in the resulting array.
+ * @example
+ *
+ * mapIterable(new Set([1, 2, 3]), x => x * 3)
+ * // => [3, 6, 9]
+ */
+export const mapIterable = <T, U>(iterable: Iterable<T>, fn: (el: T, idx: number) => U): U[] => {
+  const result: U[] = [];
+  let i = 0;
+  for (const el of iterable) {
+    result.push(fn(el, i++));
   }
   return result;
 };
