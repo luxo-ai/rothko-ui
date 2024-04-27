@@ -50,6 +50,7 @@ export default [
       babel({
         exclude: /\/node_modules\//,
         presets: [['@babel/preset-react', { useBuiltIns: true }]],
+        babelHelpers: 'bundled',
         // plugins: ['babel-plugin-styled-components'],
       }),
       terser({
