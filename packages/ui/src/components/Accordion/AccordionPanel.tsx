@@ -113,7 +113,7 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
       useAccordion();
 
     const panelKey = useId($key);
-    const isPanelSelected = selectedPanels.has(panelKey);
+    const isPanelSelected = selectedPanels.includes(panelKey);
 
     const onKeyDown = useCallback(
       (e: React.KeyboardEvent<HTMLButtonElement>) => {

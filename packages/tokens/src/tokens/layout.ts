@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Sat, 20 Apr 2024 03:59:28 GMT
+ * Generated on Sat, 27 Apr 2024 18:13:34 GMT
  */
 
 export const FONT_FAMILY_BOLD = "'Helvetica'";

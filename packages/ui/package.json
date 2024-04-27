@@ -41,7 +41,6 @@
     "@rothko-ui/icons": "^1.2.1",
     "@rothko-ui/tokens": "^1.2.2",
     "@rothko-ui/utils": "^1.2.2",
-    "immutable": "^4.0.0-rc.15",
     "keyboard-key": "^1.1.0",
     "styled-components": "^5.3.1",
     "uuid": "^9.0.0"
@@ -68,6 +67,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-visualizer": "^5.12.0",
     "typescript": "^4.4.2"
   },
   "files": [

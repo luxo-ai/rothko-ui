@@ -677,3 +677,26 @@ export const mapIterable = <T, U>(iterable: Iterable<T>, fn: (el: T, idx: number
   }
   return result;
 };
+
+/**
+ * Filters elements of an iterable collection, returning an array of elements for which `pred` returns truthy.
+ * @param {Iterable<T>} iterable The iterable collection to filter.
+ * @param {(el: T, idx: number) => boolean} pred The function invoked per iteration.
+ * @returns {T[]} Returns a new array of elements that satisfy the predicate.
+ * @typeparam T The type of the elements in the iterable collection.
+ * @example
+ *
+ * filterIterable(new Set([1, 2, 3, 4]), x => x % 2 === 0)
+ * // => [2, 4]
+ */
+export const filterIterable = <T>(
+  iterable: Iterable<T>,
+  pred: (el: T, idx: number) => boolean
+): T[] => {
+  const result: T[] = [];
+  let i = 0;
+  for (const el of iterable) {
+    if (pred(el, i++)) result.push(el);
+  }
+  return result;
+};

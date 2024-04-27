@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Map as ImmutableMap } from 'immutable';
 import { useCallback, useRef } from 'react';
 import { useDebuggerContext } from '../DebuggerContext';
 import useInterval from './useInterval';
@@ -12,7 +11,7 @@ const CACHE_MAX_DEFAULT = 10;
 type DataFecher<T, Arg = undefined> = (arg: Arg) => Promise<T> | T;
 type Metadata = { lastFetchedAt: number };
 type CacheValue<T> = { data: T; metadata: Metadata };
-type Cache<T> = ImmutableMap<string, CacheValue<T>>;
+type Cache<T> = Map<string, CacheValue<T>>;
 
 type HookArgs<T, Arg = undefined> = {
   dataFetcher?: DataFecher<T, Arg>;
@@ -32,7 +31,7 @@ export const useLRUCache = <T, Arg = undefined>({
 }: HookArgs<T, Arg>) => {
   const debug = useDebuggerContext('useLRUCache');
   /* contains meta data on values in cache */
-  const cache = useRef<Cache<T>>(ImmutableMap());
+  const cache = useRef<Cache<T>>(new Map()); // was immutable Map before...
 
   /* on interval run a vaccum to see if values are expired */
   useInterval(() => {
@@ -45,7 +44,10 @@ export const useLRUCache = <T, Arg = undefined>({
     }, [] as string[]);
 
     debug('Vacuuming keys', expiredKeys as any);
-    cache.current = currCache.removeAll(expiredKeys);
+    expiredKeys.forEach(key => {
+      currCache.delete(key);
+    });
+    // cache.current = currCache.removeAll(expiredKeys);
   }, vacuumDelaySeconds * ONE_MS);
 
   const fetchWithCache = useCallback(
@@ -91,5 +93,6 @@ const evictLeastUsed = <T>(cache: Cache<T>) => {
       LRUKey = k;
     }
   }
-  return cache.remove(LRUKey);
+  cache.delete(LRUKey);
+  return cache;
 };

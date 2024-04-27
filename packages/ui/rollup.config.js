@@ -5,6 +5,7 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { terser } from 'rollup-plugin-terser';
 import postcss from 'rollup-plugin-postcss';
 import babel from 'rollup-plugin-babel';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 const isDev = process.env.NODE_ENV === 'dev';
 
@@ -23,6 +24,7 @@ export default [
         sourcemap: isDev,
       },
     ],
+    treeshake: true,
     plugins: [
       peerDepsExternal(),
       resolve({
@@ -54,6 +56,10 @@ export default [
         output: {
           comments: false, // This will remove all comments
         },
+      }),
+      visualizer({
+        open: true, // Automatically open the report in your browser
+        filename: 'reports/bundle-analysis.html', // Output to a separate 'reports' directory
       }),
     ],
   },

@@ -1,7 +1,6 @@
-import { Set as ImSet } from 'immutable';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { asNonNilArray, isNil } from '@rothko-ui/utils';
+import { asNonNilArray, filterIterable, isNil } from '@rothko-ui/utils';
 
 import { useDebuggerContext } from '../../library/DebuggerContext';
 import type { FocusHandler, Option, Value } from '../../library/types';
@@ -48,7 +47,7 @@ const useSelect = <V extends Value, T = undefined>({
 
   // important to useMemo here because otherwise the useEffect below will go into
   // an infinite loop...
-  const selectedValues = useMemo(() => ImSet(asNonNilArray(value)), [value]);
+  const selectedValuesLookup = useMemo(() => new Set(asNonNilArray(value)), [value]);
 
   const closeMenu = () => {
     if (!open) return;
@@ -118,19 +117,19 @@ const useSelect = <V extends Value, T = undefined>({
       if (disabled) return;
       debug('selectOne');
       const selectedId: V = selectedOpt.id;
-      onChange(multiple ? [...selectedValues, selectedId] : selectedId);
+      onChange(multiple ? [...selectedValuesLookup, selectedId] : selectedId);
     },
-    [selectedValues, multiple, disabled, onChange, debug]
+    [selectedValuesLookup, multiple, disabled, onChange, debug]
   );
 
   const deleteOne = useCallback(
     (toDelete: V) => {
       if (disabled) return;
       debug('deleteOne');
-      onChange(multiple ? [...selectedValues].filter(v => v !== toDelete) : null);
+      onChange(multiple ? filterIterable(selectedValuesLookup, v => v !== toDelete) : null);
       onDelete?.(toDelete);
     },
-    [onChange, onDelete, multiple, selectedValues, disabled, debug]
+    [onChange, onDelete, multiple, selectedValuesLookup, disabled, debug]
   );
 
   const optionLookup = useMemo(
@@ -141,10 +140,10 @@ const useSelect = <V extends Value, T = undefined>({
   useEffect(() => {
     if (!multiple) return;
     setOptions(
-      opts.filter(o => !selectedValues.has(o.id)),
+      opts.filter(o => !selectedValuesLookup.has(o.id)),
       { resetIdx: false }
     );
-  }, [selectedValues, multiple, setOptions, opts]);
+  }, [selectedValuesLookup, multiple, setOptions, opts]);
 
   return {
     deleteOne,

@@ -1,4 +1,3 @@
-import { Set as ImSet } from 'immutable';
 import React, { useCallback, useState } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -77,16 +76,19 @@ const Accordion = ({
   style,
   hideIcon,
 }: AccordionProps) => {
-  const [selectedPanels, setSelectedPanels] = useState(ImSet<string>(selectedKeys || []));
+  const [selectedPanels, setSelectedPanels] = useState(selectedKeys || []);
 
   const onClickPanel = useCallback(
     (panelKey: string) => {
       setSelectedPanels(selected => {
-        const isOpen = selected.has(panelKey);
+        const isOpen = selected.includes(panelKey);
         onPanelChange?.(!isOpen, panelKey);
 
-        if (isOpen) return selected.remove(panelKey);
-        return multiple ? selected.add(panelKey) : ImSet([panelKey]);
+        if (isOpen) {
+          return selected.filter(key => key !== panelKey);
+        }
+
+        return multiple ? [...selected, panelKey] : [panelKey];
       });
     },
     [setSelectedPanels, multiple, onPanelChange]

@@ -1,5 +1,4 @@
 import { createContext } from 'react';
-import type { Set as ImSet } from 'immutable';
 
 import type { RothkoKind } from '../../theme';
 import type { Icon } from './types';
@@ -27,9 +26,9 @@ type AccordionContextType = {
    */
   onClickPanel: (id: string) => void;
   /**
-   * Set of IDs for the selected panels.
+   * IDs of the selected panels.
    */
-  selectedPanels: ImSet<string>;
+  selectedPanels: string[];
   /**
    * Determines whether the Accordion should hide the icon.
    */
