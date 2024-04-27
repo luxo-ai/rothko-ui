@@ -11,7 +11,7 @@ const isDev = process.env.NODE_ENV === 'dev';
 
 export default [
   {
-    input: './src/index.ts', // Update this if your entry file is different
+    input: './src/index.ts',
     output: [
       {
         file: 'dist/index.js',
@@ -48,9 +48,9 @@ export default [
         use: ['sass'],
       }),
       babel({
-        exclude: 'node_modules/**',
-        presets: ['@babel/preset-react', { useBuiltIns: true }],
-        plugins: ['babel-plugin-styled-components'],
+        exclude: /\/node_modules\//,
+        presets: [['@babel/preset-react', { useBuiltIns: true }]],
+        // plugins: ['babel-plugin-styled-components'],
       }),
       terser({
         output: {
