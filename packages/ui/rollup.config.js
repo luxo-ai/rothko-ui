@@ -1,10 +1,10 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
+import terser from '@rollup/plugin-terser';
+import { babel } from '@rollup/plugin-babel';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import { terser } from 'rollup-plugin-terser';
 import postcss from 'rollup-plugin-postcss';
-import babel from 'rollup-plugin-babel';
 import { visualizer } from 'rollup-plugin-visualizer';
 
 const isDev = process.env.NODE_ENV === 'dev';
@@ -49,7 +49,7 @@ export default [
       }),
       babel({
         exclude: 'node_modules/**',
-        presets: ['@babel/preset-react'],
+        presets: ['@babel/preset-react', { useBuiltIns: true }],
         plugins: ['babel-plugin-styled-components'],
       }),
       terser({
