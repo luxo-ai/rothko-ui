@@ -1,6 +1,6 @@
 {
   "name": "@rothko-ui/ui",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/luxo-ai/rothko-ui.git",
@@ -39,8 +39,8 @@
   "dependencies": {
     "@react-spring/web": "^9.5.2",
     "@rothko-ui/icons": "^1.2.1",
-    "@rothko-ui/tokens": "^1.2.1",
-    "@rothko-ui/utils": "^1.2.1",
+    "@rothko-ui/tokens": "^1.2.2",
+    "@rothko-ui/utils": "^1.2.2",
     "immutable": "^4.0.0-rc.15",
     "keyboard-key": "^1.1.0",
     "styled-components": "^5.3.1",
