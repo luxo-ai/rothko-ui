@@ -8,6 +8,7 @@ import { IsMobileOrTabletContext } from '../components/IsMobileOrTabletContext';
 import WithProviders from '../components/WithProviders';
 import config from '../config';
 import '../globals.css';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 type RothkoAppProps = AppProps & {
   cookies?: Dictionary<string, string>;
@@ -21,14 +22,14 @@ export default function App({
 }: RothkoAppProps) {
   const mode = (cookies?.[config.preference.themeMode] || 'dark') as 'dark' | 'light';
   return (
-    <>
+    <ErrorBoundary>
       <RothkoHeader />
       <IsMobileOrTabletContext.Provider value={isMobileOrTablet}>
         <WithProviders theme={mode}>
           <Component {...pageProps} />
         </WithProviders>
       </IsMobileOrTabletContext.Provider>
-    </>
+    </ErrorBoundary>
   );
 }
 
