@@ -6,6 +6,8 @@ import { babel } from '@rollup/plugin-babel';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import { visualizer } from 'rollup-plugin-visualizer';
+import autoprefixer from 'autoprefixer';
+import crypto from 'crypto';
 
 const isDev = process.env.NODE_ENV === 'dev';
 
@@ -41,11 +43,28 @@ export default [
         declaration: true, // Enable generation of declaration files
         declarationDir: '.', // Output directory for declaration files
         outDir: 'dist', // Required when declaration is true
+        include: ['**/*.ts', '**/*.tsx', '**/*.d.ts', './declarations.d.ts'],
       }),
       postcss({
-        extract: false, // Inline CSS in the JavaScript, set true if you prefer CSS files
+        plugins: [autoprefixer()],
+        extract: true, // Inline CSS in the JavaScript, set true if you prefer CSS files
         modules: true,
+        minimize: true,
+        sourceMap: isDev,
         use: ['sass'],
+        /* modules: {
+          generateScopedName: (name, filename, css) => {
+            const contentHash = crypto
+              .createHash('md5')
+              .update(filename)
+              .update(css)
+              .digest('hex')
+              .slice(0, 10);
+            const firstFewChars = name.slice(0, 3);
+            return `${firstFewChars}_${contentHash}`;
+          },
+        },
+        */
       }),
       babel({
         exclude: /\/node_modules\//,
@@ -59,7 +78,7 @@ export default [
         },
       }),
       visualizer({
-        open: true, // Automatically open the report in your browser
+        open: false, // Automatically open the report in your browser
         filename: 'reports/bundle-analysis.html', // Output to a separate 'reports' directory
       }),
     ],

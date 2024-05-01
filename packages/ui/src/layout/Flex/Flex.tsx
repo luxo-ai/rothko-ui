@@ -1,6 +1,7 @@
+import { classes } from '@rothko-ui/utils';
 import React from 'react';
-import styled from 'styled-components';
 import extractAriaProps from '../extractAriaProps';
+import styles from './Flex.module.scss';
 
 type FlexProps = React.AriaAttributes &
   Omit<React.CSSProperties, 'display'> & {
@@ -13,32 +14,28 @@ type FlexProps = React.AriaAttributes &
     role?: React.AriaRole;
   };
 
-const Flex = React.forwardRef<HTMLDivElement, FlexProps>((props, ref) => {
+const Flex = React.forwardRef<HTMLElement, FlexProps>((props, ref) => {
   const {
-    props: { as, children, className, role, onClick, onBlur, onFocus, ...style },
+    props: { as = 'div', children, className, role, onClick, onBlur, onFocus, ...style },
     ariaAttributes,
   } = extractAriaProps(props);
-  return (
-    <StyledFlexDiv
-      {...ariaAttributes}
-      role={role}
-      as={as}
-      ref={ref}
-      onClick={onClick}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      className={className}
-      style={style}
-    >
-      {children}
-    </StyledFlexDiv>
+
+  return React.createElement(
+    as,
+    {
+      ...ariaAttributes,
+      ref,
+      onClick,
+      onFocus,
+      onBlur,
+      className: classes(className, styles.flex),
+      style,
+      role,
+    },
+    children
   );
 });
 
 Flex.displayName = 'Flex';
-
-const StyledFlexDiv = styled.div`
-  display: flex;
-`;
 
 export default Flex;

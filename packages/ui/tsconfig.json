@@ -19,7 +19,8 @@
     "sourceMap": false,
     "jsx": "react",
     // include dom API for definitions like window on compile
-    "lib": ["dom"]
+    "lib": ["dom"],
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "compileOnSave": true,
   "exclude": [
@@ -30,5 +31,5 @@
     "node_modules",
     "dist"
   ],
-  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["**/*.d.ts", "./declarations.d.ts", "**/*.ts", "**/*.tsx", "**/*.module.scss"]
 }

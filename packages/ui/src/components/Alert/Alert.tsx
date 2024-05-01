@@ -1,13 +1,11 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
 
-import { isString } from '@rothko-ui/utils';
+import { classes, isString } from '@rothko-ui/utils';
 
-import { semanticTextChildrenStyle } from '../../library/Styles';
-import { vuar } from '../../library/utils/vuar';
 import type { RothkoKind } from '../../theme/types';
 import type { WithAriaHidden, WithAriaLabeling, WithAriaLive } from '../../types';
 import Typography from '../Typography/Typography';
+import styles from './Alert.module.scss';
 
 type WithAria<T> = WithAriaHidden<WithAriaLabeling<WithAriaLive<T>>>;
 
@@ -56,43 +54,25 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     ref
   ) => {
     return (
-      <AlertContainerDiv
+      <div
         id={id}
         role="alert"
-        appearance={appearance}
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
         aria-describedby={ariaDescribedBy}
         aria-details={ariaDetails}
         aria-hidden={ariaHidden}
         aria-live={ariaLive}
-        className={className}
-        kind={kind}
+        className={classes(styles[`alert--${kind}`], styles[`alert--${appearance}`], className)}
         ref={ref}
         style={style}
       >
         {isString(children) ? <Typography.body>{children}</Typography.body> : children}
-      </AlertContainerDiv>
+      </div>
     );
   }
 );
 
 Alert.displayName = 'Alert';
-
-const AlertContainerDiv = styled.div<{ kind: RothkoKind; appearance: 'filled' | 'outline' }>`
-  ${({ appearance, kind }) => {
-    return appearance === 'filled'
-      ? css`
-          ${semanticTextChildrenStyle}
-          background-color: ${vuar({ kind, category: 'background' })};
-        `
-      : css`
-          border: 1px solid ${vuar({ kind, category: 'background' })};
-          color: ${vuar({ kind, category: 'color' })};
-        `;
-  }}
-  padding: 1rem 1.25rem;
-  font-size: 1rem;
-`;
 
 export default Alert;

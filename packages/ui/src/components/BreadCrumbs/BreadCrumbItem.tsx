@@ -1,8 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import Typography from '../Typography/Typography';
-import typographyStyles from '../Typography/styles';
 import type {
   WithAriaControls,
   WithAriaCurrent,
@@ -12,6 +10,8 @@ import type {
   WithAriaSelected,
 } from '../../types';
 import { Link, LinkButton } from '../Link';
+import styles from './BreadCrumbItem.module.scss';
+import { classes } from '@rothko-ui/utils';
 
 type WithAria<T> = WithAriaHasPopup<
   WithAriaLabelledBy<WithAriaSelected<WithAriaControls<WithAriaLabel<WithAriaCurrent<T>>>>>
@@ -35,6 +35,8 @@ type BreadCrumbItemProps = WithAria<{
    * The URL to navigate to when the breadcrumb item is clicked.
    */
   to?: string;
+  className?: string;
+  style?: React.CSSProperties;
 }>;
 
 const BreadCrumbItem = ({
@@ -49,10 +51,14 @@ const BreadCrumbItem = ({
   onClick,
   target,
   to,
+  style,
+  className,
 }: BreadCrumbItemProps) => {
+  const classNames = classes(styles['breadcrumbs-item'], className);
+
   if (to) {
     return (
-      <BreadCrumbsItemContainerSpan
+      <span
         id={id}
         role="link"
         aria-label={ariaLabel}
@@ -61,16 +67,18 @@ const BreadCrumbItem = ({
         aria-selected={ariaSelected}
         aria-labelledby={ariaLabelledBy}
         aria-haspopup={ariaHasPopup}
+        style={style}
+        className={classNames}
       >
         <Link underline="always" href={to} target={target}>
           {children}
         </Link>
-      </BreadCrumbsItemContainerSpan>
+      </span>
     );
   }
   if (onClick) {
     return (
-      <BreadCrumbsItemContainerSpan
+      <span
         id={id}
         role="link"
         aria-label={ariaLabel}
@@ -79,15 +87,17 @@ const BreadCrumbItem = ({
         aria-selected={ariaSelected}
         aria-labelledby={ariaLabelledBy}
         aria-haspopup={ariaHasPopup}
+        style={style}
+        className={classNames}
       >
         <LinkButton underline="always" onClick={onClick}>
           {children}
         </LinkButton>
-      </BreadCrumbsItemContainerSpan>
+      </span>
     );
   }
   return (
-    <BreadCrumbsItemContainerSpan
+    <span
       id={id}
       aria-label={ariaLabel}
       aria-current={ariaCurrent}
@@ -95,17 +105,12 @@ const BreadCrumbItem = ({
       aria-selected={ariaSelected}
       aria-labelledby={ariaLabelledBy}
       aria-haspopup={ariaHasPopup}
+      style={style}
+      className={classNames}
     >
       <Typography.body as="span">{children}</Typography.body>
-    </BreadCrumbsItemContainerSpan>
+    </span>
   );
 };
-
-const BreadCrumbsItemContainerSpan = styled.span`
-  &:not(:last-of-type):after {
-    ${typographyStyles.body}
-    content: ' / ';
-  }
-`;
 
 export default BreadCrumbItem;

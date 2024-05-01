@@ -1,18 +1,15 @@
 import keyboardKey from 'keyboard-key';
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 
 import { classes, isNil, map, mapReverse } from '@rothko-ui/utils';
 
 import { useDebuggerContext } from '../../library/DebuggerContext';
-import ItemText from '../../library/ItemText';
+import ItemText from '../../library/ItemText/ItemText';
 import LabelText from '../../library/LabelText';
-import DefaultRenderOption from '../../library/RenderOption';
-import { hideChromeBrowserOutline } from '../../library/Styles';
+import DefaultRenderOption from '../../library/dropdown/RenderOption';
 import useFieldIds from '../../library/hooks/useFieldIds';
 import type { FocusHandler, Option, RenderOption, Value } from '../../library/types';
 import Typography from '../Typography/Typography';
-import typographyStyles from '../Typography/styles';
 import type { QueryMatchFn, WithAria } from './types';
 import useAutocomplete from './useAutocomplete';
 import NoResultsText from '../../library/dropdown/NoResultsText';
@@ -20,6 +17,7 @@ import DropdownContainer from '../../library/dropdown/DropdownContainer';
 import ControlButton from '../../library/dropdown/ControlButton';
 import DropdownMenu from '../../library/dropdown/DropdownMenu';
 import { Direction } from '../../library/hooks/types';
+import PhantomInput from './PhantomInput';
 
 export type DropdownProps<V extends Value, T> = WithAria<{
   id?: string;
@@ -291,10 +289,10 @@ function DropdownInner<V extends Value, T = undefined>({
             aria-label="Search"
             tabIndex={0}
             value={query}
-            className={classes({ disabled })}
+            disabled={disabled}
           />
         )}
-        <div>{isNil(value) && !query && <ItemText $placeHolder>{placeholder}</ItemText>}</div>
+        <div>{isNil(value) && !query && <ItemText isPlaceHolder>{placeholder}</ItemText>}</div>
         {!canClear ? (
           <ControlButton
             open={open}
@@ -350,22 +348,5 @@ function DropdownInner<V extends Value, T = undefined>({
     </div>
   );
 }
-
-const PhantomInput = styled.input`
-  ${hideChromeBrowserOutline}
-  ${typographyStyles.body}
-  position: absolute;
-  inset: 0;
-  background: none !important;
-  border: none !important;
-  outline: none !important;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  z-index: 2;
-  // left padding of icon + right padding of icon + width of icon
-  padding: 0.5rem calc(1rem + 1rem + 16px) 0.5rem 1rem;
-  cursor: text;
-`;
 
 export default DropdownInner;

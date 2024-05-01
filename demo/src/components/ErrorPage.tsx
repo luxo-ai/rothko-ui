@@ -1,5 +1,6 @@
-import { Flex, Typography, WidthGeqOnly, WidthLeqOnly } from '@rothko-ui/ui';
+import { Flex, Typography } from '@rothko-ui/ui';
 import React from 'react';
+import { DesktopOnly, MobileOnly } from './Dimensions';
 
 type ErrorProps = {
   code: 400 | 404 | 500 | 501;
@@ -17,7 +18,7 @@ const ErrorPage = ({ code, header, children }: ErrorProps) => {
       gap="1rem"
     >
       <div>
-        <WidthGeqOnly $threshold={600}>
+        <DesktopOnly>
           <Flex gap="0.5rem">
             <Typography.h1>{code}</Typography.h1>
             {header && (
@@ -27,13 +28,13 @@ const ErrorPage = ({ code, header, children }: ErrorProps) => {
               </>
             )}
           </Flex>
-        </WidthGeqOnly>
-        <WidthLeqOnly $threshold={600}>
+        </DesktopOnly>
+        <MobileOnly>
           <Flex flexDirection="column" gap="0.5rem" alignItems="center">
             <Typography.h2>{code}</Typography.h2>
             {header && <Typography.h2>{header}</Typography.h2>}
           </Flex>
-        </WidthLeqOnly>
+        </MobileOnly>
       </div>
       <div>{children}</div>
     </Flex>

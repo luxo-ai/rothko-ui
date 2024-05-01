@@ -1,0 +1,23 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/themeMixins.scss';
+
+@mixin alertStyle($kind) {
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+
+  &.alert--filled {
+    @include semanticTextChildren($kind, $foreground: true);
+    background: kind($kind);
+  }
+
+  &.alert--outline {
+    @include semanticTextChildren($kind, $foreground: false);
+    border: 1px solid kind($kind);
+  }
+}
+
+@each $kind in $ROTHKO_KINDS {
+  .alert--#{$kind} {
+    @include alertStyle($kind);
+  }
+}

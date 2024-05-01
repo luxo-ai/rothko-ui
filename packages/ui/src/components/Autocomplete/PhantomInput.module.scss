@@ -1,0 +1,22 @@
+@import '../../styles/mixins.scss';
+@import '../Typography/Typography.module.scss';
+
+.phantom-input {
+  @include hideChromeBrowserOutline();
+  @include bodyStyle();
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  // unique to autocomplete
+  position: absolute;
+  inset: 0;
+  // left padding of icon + right padding of icon + width of icon
+  padding: 0.5rem calc(1rem + 1rem + 16px) 0.5rem 1rem;
+}

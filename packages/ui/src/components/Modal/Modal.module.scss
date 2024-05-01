@@ -1,0 +1,94 @@
+// themeMixins.scss
+@import '../../styles/mixins.scss';
+@import '../../styles/themeMixins.scss';
+@import '../../library//PhantomButton.module.scss';
+@import '../Typography/Typography.module.scss';
+
+// Mixins for body styles based on size
+@mixin bodySizeStyles($size) {
+  @if $size == 'xs' {
+    padding: 2.75rem 1.125rem 1.5rem 1.125rem;
+    max-width: 20rem;
+  } @else if $size == 's' {
+    padding: 2.75rem 1.25rem 1.75rem 1.25rem;
+    max-width: 22rem;
+  } @else if $size == 'm' {
+    padding: 2.75rem 1.25rem 1.75rem 1.25rem;
+    max-width: 32rem;
+  } @else if $size == 'l' {
+    padding: 2.875rem 1.5rem 1.875rem 1.5rem;
+    max-width: 43rem;
+  }
+}
+
+// Mixins for header styles based on size
+@mixin headerSizeStyles($size) {
+  @if $size == 'xs' {
+    margin: 0 0 1.125rem 0;
+    line-height: 1.25rem;
+    font-size: 1rem;
+    @include boldFontStyle(); // Assuming this function exists
+  } @else if $size == 's' {
+    margin: 0 0 1.25rem 0;
+    line-height: 1.8rem;
+    font-size: 1.5rem;
+  } @else if $size == 'm' {
+    margin: 0 0 1.75rem 0;
+    line-height: 1.875rem;
+    font-size: 1.75rem;
+  } @else if $size == 'l' {
+    margin: 0 0 1.75rem 0;
+    line-height: 1.875rem;
+    font-size: 1.875rem;
+  }
+}
+
+// Mixin for modal container
+.modal-container {
+  border-radius: 0.125rem; // 2px
+  backface-visibility: hidden;
+  width: 100%;
+  max-height: calc(100vh - 1rem);
+  position: relative;
+  background-color: var(--rothko-modal-background, #fff);
+  margin: auto;
+  overflow: scroll;
+  scrollbar-width: thin;
+  z-index: 2;
+  user-select: text;
+
+  will-change: transform, opacity;
+  transition-property: transform, opacity;
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
+
+  @include textChildrenStyle(); // Assuming this function exists
+
+  & > svg {
+    fill: var(--rothko-modal-foreground, #000);
+  }
+
+  @each $size in $ROTHKO_SIZES {
+    &.modal-size-#{$size} {
+      @include bodySizeStyles($size);
+    }
+  }
+}
+
+// Mixin for modal header text
+.modal-header {
+  @each $size in $ROTHKO_SIZES {
+    &.modal-header-size-#{$size} {
+      @include headerSizeStyles($size);
+    }
+  }
+}
+
+// Mixin for modal close button
+.modal-close-button {
+  @include phantomButtonStyle(); // Assuming this function exists
+  position: absolute;
+  top: 14px;
+  right: 17px;
+}
+
+// Applying the mixins in the main stylesheet

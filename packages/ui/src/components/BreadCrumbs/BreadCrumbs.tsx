@@ -1,7 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import type { WithAriaControls, WithAriaHidden, WithAriaLabeling } from '../../types';
+import styles from './BreadCrumbs.module.scss';
+import { classes } from '@rothko-ui/utils';
 
 type WithAria<T> = WithAriaControls<WithAriaHidden<WithAriaLabeling<T>>>;
 
@@ -11,11 +12,15 @@ type BreadCrumbsProps = WithAria<{
    * The content to be displayed as the children of the BreadCrumbs component.
    */
   children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
 }>;
 
 const BreadCrumbs = ({
   id,
   children,
+  className,
+  style,
   'aria-label': ariaLabel,
   'aria-hidden': ariaHidden,
   'aria-controls': ariaControls,
@@ -24,7 +29,7 @@ const BreadCrumbs = ({
   'aria-describedby': ariaDescribedBy,
 }: BreadCrumbsProps) => {
   return (
-    <BreadCrumbsContainerDiv
+    <div
       id={id}
       aria-label={ariaLabel}
       aria-hidden={ariaHidden}
@@ -33,17 +38,12 @@ const BreadCrumbs = ({
       aria-details={ariaDetails}
       aria-describedby={ariaDescribedBy}
       role="navigation"
+      style={style}
+      className={classes(styles['breadcrumbs'], className)}
     >
       {children}
-    </BreadCrumbsContainerDiv>
+    </div>
   );
 };
-
-const BreadCrumbsContainerDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.25rem;
-`;
 
 export default BreadCrumbs;

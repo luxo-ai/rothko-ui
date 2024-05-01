@@ -1,0 +1,6 @@
+.list-item {
+  margin: 0.5rem 0;
+  &.hide-bullet {
+    list-style-type: none;
+  }
+}

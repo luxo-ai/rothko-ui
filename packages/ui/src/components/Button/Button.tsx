@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { FlattenSimpleInterpolation } from 'styled-components';
 import styled, { css } from 'styled-components';
 
@@ -10,6 +10,7 @@ import type { RothkoKind, RothkoSize } from '../../theme';
 import type { ButtonAppearance, ButtonShape, WithButtonAria } from './types';
 import typographyStyles from '../Typography/styles';
 import { vuar } from '../../library/utils/vuar';
+import styles from './Button.module.scss';
 
 const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
   xs: css`
@@ -147,10 +148,17 @@ const Button: React.FC<ButtonProps> = ({
   const [childrenHeight, setChildrenHeight] = useState<number | null>(18); // was null before. How do we do this better?
 
   const appearanceClasses = {
-    ['btn-pill']: shape === 'pill',
-    ['btn-square']: shape == 'square',
-    ['fit-content']: fitContent,
+    [styles['btn-pill']]: shape === 'pill',
+    [styles['btn-square']]: shape === 'square',
+    [styles['fit-content']]: fitContent,
   } as const;
+
+  const classNames = classes(
+    styles[`btn-${appearance}-${kind}`],
+    styles[`btn-size-${size}`],
+    appearanceClasses,
+    className
+  );
 
   const iconColor = vuar({
     kind,
@@ -158,27 +166,23 @@ const Button: React.FC<ButtonProps> = ({
     fallback: '#000',
   });
 
-  const { onClick, onKeyDown } = useMemo(
-    () => ({
-      onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        if (loading || disabled) {
-          e.preventDefault();
-          e.stopPropagation();
-        } else {
-          onClickProp?.(e);
-        }
-      },
-      onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => {
-        if (loading || disabled) {
-          e.preventDefault();
-          e.stopPropagation();
-        } else {
-          onKeyDownProp?.(e);
-        }
-      },
-    }),
-    [loading, disabled, onClickProp, onKeyDownProp]
-  );
+  const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (loading || disabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      onClickProp?.(e);
+    }
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (loading || disabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      onKeyDownProp?.(e);
+    }
+  };
 
   useEffect(() => {
     if (!childrenContainerRef.current) return;
@@ -187,9 +191,8 @@ const Button: React.FC<ButtonProps> = ({
   }, [setChildrenHeight, childrenContainerRef, size]);
 
   return (
-    <StyledButton
+    <button
       id={id}
-      appearance={appearance}
       aria-label={ariaLabel}
       aria-disabled={ariaDisabled || disabled}
       aria-controls={ariaControls}
@@ -201,9 +204,8 @@ const Button: React.FC<ButtonProps> = ({
       aria-labelledby={ariaLabelledBy}
       aria-pressed={ariaPressed}
       aria-busy={loading}
-      className={classes(appearanceClasses, `btn-size-${size}`, className)}
+      className={classNames}
       disabled={disabled}
-      kind={kind}
       onClick={onClick}
       onKeyDown={onKeyDown}
       role={role}
@@ -211,11 +213,11 @@ const Button: React.FC<ButtonProps> = ({
       tabIndex={disabled ? -1 : tabIndex}
       type={type}
     >
-      <ContainerDiv ref={childrenContainerRef}>
+      <div className={styles['btn-content']} ref={childrenContainerRef}>
         {!loading && Left && (
-          <AccessoryContainerDiv $kind="left">
+          <div className={styles['btn-accessory']}>
             <Left aria-hidden size={accessorySizeMap[size]} color={iconColor} />
-          </AccessoryContainerDiv>
+          </div>
         )}
         {loading ? (
           <InlineSpinnerLoader
@@ -231,22 +233,22 @@ const Button: React.FC<ButtonProps> = ({
           <span>{children}</span>
         )}
         {!loading && Right && (
-          <AccessoryContainerDiv $kind="right">
+          <div className={styles['btn-accessory']}>
             <Right aria-hidden size={accessorySizeMap[size]} color={iconColor} />
-          </AccessoryContainerDiv>
+          </div>
         )}
-      </ContainerDiv>
-    </StyledButton>
+      </div>
+    </button>
   );
 };
 
-const ContainerDiv = styled.div`
+export const ContainerDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-const AccessoryContainerDiv = styled.div<{ $kind: 'left' | 'right' }>`
+export const AccessoryContainerDiv = styled.div<{ $kind: 'left' | 'right' }>`
   display: flex;
   align-items: center;
   ${({ $kind }) => {
@@ -329,7 +331,7 @@ export const buttonStyle = css<BaseButtonProps>`
   }
 `;
 
-const StyledButton = styled.button<BaseButtonProps>`
+export const StyledButton = styled.button<BaseButtonProps>`
   ${buttonStyle}
 
   :not(:disabled) {

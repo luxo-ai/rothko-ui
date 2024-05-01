@@ -1,0 +1,8 @@
+@import '../Typography/Typography.module.scss';
+
+.breadcrumb-item {
+  &:not(:last-of-type):after {
+    @include bodyStyle();
+    content: ' / ';
+  }
+}

@@ -1,5 +1,5 @@
 import { Github } from '@rothko-ui/icons';
-import { Button, Flex, MaxWidth, Typography } from '@rothko-ui/ui';
+import { Button, Container, Flex, Typography } from '@rothko-ui/ui';
 
 import { useRouter } from 'next/navigation';
 import PaddedNavLayout from '../components/layout/PaddedNavLayout';
@@ -21,12 +21,13 @@ const Home = () => {
 
   return (
     <PaddedNavLayout withoutToggle>
-      <MaxWidth
-        $maxWidth="75rem"
-        style={{ padding: `${isMobileOrTablet ? '1.5rem' : '3rem'} 0`, margin: '0 auto' }}
+      <Container
+        maxWidth="75rem"
+        margin="0 auto"
+        padding={`${isMobileOrTablet ? '1.5rem' : '3rem'} 0`}
       >
         <Flex alignItems="center">
-          <MaxWidth $maxWidth="34rem">
+          <Container maxWidth="34rem">
             <Title>Elevate web development. Inspire new experiences.</Title>
             <Flex
               columnGap={isMobileOrTablet ? '0.5rem' : '0.75rem'}
@@ -61,9 +62,9 @@ const Home = () => {
               Rothko UI is a modern component library designed to empower developers with sleek and
               customizable interfaces for web applications.
             </Typography.h6>
-          </MaxWidth>
+          </Container>
         </Flex>
-      </MaxWidth>
+      </Container>
     </PaddedNavLayout>
   );
 };

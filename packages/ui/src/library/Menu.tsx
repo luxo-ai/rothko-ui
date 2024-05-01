@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components';
 import { vuar } from './utils/vuar';
+import { hideChromeBrowserOutline } from './Styles';
 
 const Menu = styled.div<{ $reverse?: boolean }>`
   width: 100%;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+  ${hideChromeBrowserOutline}
 
   background-color: ${vuar({ element: 'dropdown', category: 'background', fallback: '#fff' })};
 

@@ -84,7 +84,9 @@ const Tag = ({
       aria-selected={ariaSelected}
     >
       {isString(children) ? (
-        <Typography.inlineBodySmall style={{ margin: 0 }}>{children}</Typography.inlineBodySmall>
+        <Typography.bodySmall as="span" style={{ margin: 0 }}>
+          {children}
+        </Typography.bodySmall>
       ) : (
         <div>{children}</div>
       )}

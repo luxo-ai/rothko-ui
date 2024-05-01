@@ -1,10 +1,9 @@
 import { animated, useTransition } from '@react-spring/web';
 import React, { useEffect, useRef } from 'react';
-import styled from 'styled-components';
 
 import { Close } from '@rothko-ui/icons';
 
-import ShadedBackdrop from '../../library/ShadedBackdrop';
+import ShadedBackdrop from '../../library/ShadedBackdrop/ShadedBackdrop';
 import { PhantomButton } from '../../library/PhantomButton';
 import DomPortal from '../../library/Portal';
 import {
@@ -15,12 +14,9 @@ import {
 import DrawerContext from './DrawerContext';
 import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
 import useId from '../../library/hooks/useId';
-import { vuar } from '../../library/utils/vuar';
 import { Typography } from '../Typography';
-import { isString } from '@rothko-ui/utils';
-
-const TABLET_OR_MOBILE_MAX_WIDTH_PX = 750;
-const DEFAULT_DRAWER_WIDTH_PX = 350;
+import { classes, isString } from '@rothko-ui/utils';
+import styles from './Drawer.module.scss';
 
 type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
 
@@ -48,7 +44,6 @@ type DrawerProps = WithAria<{
    */
   style?: React.CSSProperties;
   blur?: boolean;
-  blurRadius?: number;
 }>;
 
 const Drawer = ({
@@ -61,7 +56,6 @@ const Drawer = ({
   open: isOpen = false,
   style: styleProp = {},
   blur,
-  blurRadius,
 }: DrawerProps) => {
   const drawerContentId = useId();
   const drawerRef = useRef<HTMLDivElement | null>(null);
@@ -119,22 +113,16 @@ const Drawer = ({
   return (
     <DrawerContext.Provider value={{ isOpen, closeDrawer }}>
       <DomPortal wrapperId="rothko-drawer-portal">
-        <DrawerBackdrop
-          aria-hidden
-          $blur={blur}
-          $blurRadius={blurRadius}
-          $show={isOpen}
-          onClick={onBackdropClick}
-        >
+        <ShadedBackdrop paddingH blur={blur} show={isOpen} onClick={onBackdropClick}>
           {transition(
             (style, item) =>
               item && (
-                <AnimatedDrawerContainerDiv
+                <animated.div
                   aria-label={ariaLabel}
                   aria-labelledby={ariaLabelledBy}
                   aria-describedby={drawerContentId}
                   role="dialog"
-                  className={className}
+                  className={classes(styles.drawer, className)}
                   id={id}
                   ref={drawerRef}
                   style={{ ...styleProp, ...style }}
@@ -152,37 +140,13 @@ const Drawer = ({
                   ) : (
                     <div id={drawerContentId}>{children}</div>
                   )}
-                </AnimatedDrawerContainerDiv>
+                </animated.div>
               )
           )}
-        </DrawerBackdrop>
+        </ShadedBackdrop>
       </DomPortal>
     </DrawerContext.Provider>
   );
 };
-
-const AnimatedDrawerContainerDiv = animated(styled.div`
-  position: fixed;
-  inset: 0 auto 0 0;
-  background: ${vuar({ category: 'background', fallback: '#fff' })};
-
-  padding: 1.5rem 1.5rem;
-
-  z-index: 999999;
-  width: ${DEFAULT_DRAWER_WIDTH_PX}px;
-  overflow-y: auto;
-
-  @media only screen and (max-width: ${TABLET_OR_MOBILE_MAX_WIDTH_PX}px) {
-    width: calc(100% - 2 * 1.5rem);
-  }
-
-  user-select: text;
-`);
-
-const DrawerBackdrop = styled(ShadedBackdrop)`
-  -webkit-backface-visibility: hidden;
-  display: flex;
-  padding: 0 1rem;
-`;
 
 export default Drawer;

@@ -1,19 +1,12 @@
 import { Github, Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
-import {
-  Button,
-  Flex,
-  FlexItem,
-  Typography,
-  WidthGeqOnly,
-  WidthLeqOnly,
-  useRothko,
-} from '@rothko-ui/ui';
+import { Button, Flex, FlexItem, Typography, useRothko } from '@rothko-ui/ui';
 import cookieCutter from 'cookie-cutter';
 import { useEffect } from 'react';
 
 import config from '../../config';
 import styles from './Navigation.module.scss';
 import Link from 'next/link';
+import { DesktopOnly, MobileOnly } from '../Dimensions';
 
 type NavigationProps = {
   openDrawer: () => void;
@@ -35,7 +28,7 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
     <nav className={styles.nav}>
       <Flex justifyContent="space-between">
         <Flex alignItems="center" justifyContent="center" columnGap="1rem">
-          <WidthLeqOnly $threshold={750}>
+          <MobileOnly>
             <FlexItem>
               <button
                 aria-label="menu button"
@@ -45,7 +38,7 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
                 <Menu width={28} height={28} />
               </button>
             </FlexItem>
-          </WidthLeqOnly>
+          </MobileOnly>
           <FlexItem>
             <Link href="/">
               <Flex cursor="pointer" alignItems="end" columnGap="0.25rem">
@@ -75,7 +68,7 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
               </button>
             )}
           </Flex>
-          <WidthGeqOnly $threshold={750} style={{ height: '100%' }}>
+          <DesktopOnly height="100%">
             <Link href="/sponsor">
               <Button
                 size="s"
@@ -88,7 +81,7 @@ const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
                 Sponsor
               </Button>
             </Link>
-          </WidthGeqOnly>
+          </DesktopOnly>
         </Flex>
       </Flex>
     </nav>

@@ -1,9 +1,10 @@
 import React from 'react';
 import type { CSSProperties } from 'styled-components';
-import styled, { css } from 'styled-components';
 import Flex from '../../layout/Flex/Flex';
 import FlexItem from '../../layout/Flex/FlexItem';
 import Typography from '../Typography/Typography';
+import { classes } from '@rothko-ui/utils';
+import styles from './ListItem.module.scss';
 
 type ListItemProps = CSSProperties & {
   bullet?: JSX.Element;
@@ -21,32 +22,26 @@ const ListItem = ({ bullet, children: childrenProp, className, ...style }: ListI
 
   if (bullet) {
     return (
-      <StyledListItem style={style} role="listitem" className={className} hideDefaultBullet>
+      <li
+        style={style}
+        role="listitem"
+        className={classes(styles['list-item'], styles['hide-bullet'], className)}
+      >
         <Flex alignItems="center" gap="0.25rem">
           <FlexItem display="flex" flex="0 0 auto">
             {bullet}
           </FlexItem>
           <FlexItem flex="0 0 auto">{children}</FlexItem>
         </Flex>
-      </StyledListItem>
+      </li>
     );
   }
 
   return (
-    <StyledListItem style={style} className={className} role="listitem">
+    <li style={style} className={classes(styles['list-item'], className)} role="listitem">
       {children}
-    </StyledListItem>
+    </li>
   );
 };
-
-const StyledListItem = styled.li<{ hideDefaultBullet?: boolean }>`
-  ${({ hideDefaultBullet }) =>
-    hideDefaultBullet
-      ? css`
-          list-style-type: none;
-        `
-      : ''}
-  margin: 0.5rem 0;
-`;
 
 export default ListItem;

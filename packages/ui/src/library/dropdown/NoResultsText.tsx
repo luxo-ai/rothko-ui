@@ -1,10 +1,13 @@
-import styled from 'styled-components';
+import React from 'react';
+import Typography from '../../components/Typography/Typography';
+import styles from './NoResultsText.module.scss';
 
-import ItemText from '../ItemText';
+type NoResultsTextProps = {
+  children?: React.ReactNode;
+};
 
-const NoResultsText = styled(ItemText).attrs({ as: 'p' })`
-  text-align: center;
-  padding: 1rem;
-`;
+const NoResultsText = ({ children }: NoResultsTextProps) => {
+  return <Typography.body className={styles['no-results-text']}>{children}</Typography.body>;
+};
 
 export default NoResultsText;

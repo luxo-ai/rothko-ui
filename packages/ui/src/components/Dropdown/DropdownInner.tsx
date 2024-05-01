@@ -1,17 +1,16 @@
 import keyboardKey from 'keyboard-key';
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 
 import { classes, isArray, isNil, mapReverse, map } from '@rothko-ui/utils';
 
 import { useDebuggerContext } from '../../library/DebuggerContext';
 import { PhantomButton } from '../../library/PhantomButton';
-import DefaultRenderOption from '../../library/RenderOption';
+import DefaultRenderOption from '../../library/dropdown/RenderOption';
 import type { Option, Value } from '../../library/types';
 import Typography from '../Typography/Typography';
 import type { DropdownInnerProps } from './types';
 import useSelect from './useSelect';
-import ItemText from '../../library/ItemText';
+import ItemText from '../../library/ItemText/ItemText';
 import LabelText from '../../library/LabelText';
 import { vuar } from '../../library/utils/vuar';
 import useFieldIds from '../../library/hooks/useFieldIds';
@@ -21,6 +20,7 @@ import ControlButton from '../../library/dropdown/ControlButton';
 import DropdownMenu from '../../library/dropdown/DropdownMenu';
 import { CloseOutline } from '@rothko-ui/icons';
 import { Direction } from '../../library/hooks/types';
+import styles from './Dropdown.module.scss';
 
 function DropdownInner<V extends Value, T = undefined>({
   id,
@@ -215,14 +215,14 @@ function DropdownInner<V extends Value, T = undefined>({
         aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
         tabIndex={0}
       >
-        {!hasValue && <ItemText $placeHolder>{placeholder}</ItemText>}
+        {!hasValue && <ItemText isPlaceHolder>{placeholder}</ItemText>}
         {!isNil(value) && isArray(value) && (
-          <MultiSelectContainerDiv>
+          <div className={styles['multi-select-container']}>
             {value.map(v => {
               const opt = optionLookup[v];
               return (
-                <MultiSelectLabelDiv tabIndex={-1} key={opt.id}>
-                  <MultiSelectItemText>{opt.label}</MultiSelectItemText>
+                <div className={styles['multi-select-label']} tabIndex={-1} key={opt.id}>
+                  <Typography.bodySmall>{opt.label}</Typography.bodySmall>
                   <PhantomButton
                     aria-label={`Delete ${opt.label}`}
                     $displayFlex
@@ -244,10 +244,10 @@ function DropdownInner<V extends Value, T = undefined>({
                       height={16}
                     />
                   </PhantomButton>
-                </MultiSelectLabelDiv>
+                </div>
               );
             })}
-          </MultiSelectContainerDiv>
+          </div>
         )}
         {!multiple && !isNil(value) && !isArray(value) && (
           <ItemText>{optionLookup[value].label}</ItemText>
@@ -309,47 +309,5 @@ function DropdownInner<V extends Value, T = undefined>({
     </div>
   );
 }
-
-const MultiSelectContainerDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-`;
-
-const MultiSelectLabelDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 0.125rem;
-  align-items: center;
-
-  padding: 0.0625rem 0.3rem 0.0625rem 0.5rem;
-
-  background: ${vuar({
-    element: 'dropdown-multiselect',
-    category: 'background',
-    fallback: '#fff',
-  })};
-
-  border: 1px solid
-    ${vuar({
-      element: 'dropdown-multiselect',
-      category: 'border',
-      fallback: '#000',
-    })};
-
-  border-radius: 3.25rem;
-  cursor: initial;
-`;
-
-const MultiSelectItemText = styled(Typography.bodySmall)`
-  margin: 0;
-  user-select: none;
-  color: ${vuar({
-    element: 'dropdown-multiselect',
-    category: 'foreground',
-    fallback: '#000',
-  })};
-`;
 
 export default DropdownInner;

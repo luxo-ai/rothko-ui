@@ -1,0 +1,28 @@
+$ROTHKO_KINDS: ('primary', 'secondary', 'info', 'success', 'warning', 'danger');
+$ROTHKO_SIZES: ('xs', 's', 'm', 'l');
+
+@function kind($kind, $scale: null, $fallback: null) {
+  @if $fallback == null {
+    $fallback: '#000';
+  }
+  @if $scale == null {
+    @return var(--rothko-#{$kind}, $fallback);
+  }
+  @return var(--rothko-#{$kind}-#{$scale}, $fallback);
+}
+
+@function kindForeground($kind, $fallback: null) {
+  @if $fallback == null {
+    $fallback: '#000';
+  }
+  @return var(--rothko-#{$kind}-foreground, $fallback);
+}
+
+@mixin withKindText($kind) {
+  color: kind($kind);
+}
+
+@mixin withKind($kind) {
+  color: kindForeground($kind);
+  background: kind($kind);
+}

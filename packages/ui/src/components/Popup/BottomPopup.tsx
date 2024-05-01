@@ -7,7 +7,7 @@ import { isString } from '@rothko-ui/utils';
 
 import { phantomButtonStyle } from '../../library/PhantomButton';
 import DomPortal from '../../library/Portal';
-import ShadedBackdrop from '../../library/ShadedBackdrop';
+import ShadedBackdrop from '../../library/ShadedBackdrop/ShadedBackdrop';
 import useId from '../../library/hooks/useId';
 import {
   BODY_SCROLL_LOCK_IGNORE_ID,
@@ -43,7 +43,6 @@ type PopupProps = WithAria<{
    */
   style?: React.CSSProperties;
   blur?: boolean;
-  blurRadius?: number;
 }>;
 
 const BottomPopup: React.FC<PopupProps> = ({
@@ -56,7 +55,6 @@ const BottomPopup: React.FC<PopupProps> = ({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   blur,
-  blurRadius,
 }) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
   const contentId = useId();
@@ -119,13 +117,7 @@ const BottomPopup: React.FC<PopupProps> = ({
 
   return (
     <DomPortal wrapperId="rothko-bottom-popup">
-      <ShadedBackdrop
-        aria-hidden
-        $blur={blur}
-        $blurRadius={blurRadius}
-        onClick={onBackdropClick}
-        $show={isOpen}
-      >
+      <ShadedBackdrop blur={blur} onClick={onBackdropClick} show={isOpen}>
         {transition(
           (style, item) =>
             item && (

@@ -1,0 +1,47 @@
+@import './themeMixins.scss';
+
+// i don't think this is necessary anymore postcss adds vendor prefixes
+@mixin unselectable {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
+
+@mixin hideChromeBrowserOutline {
+  outline: none;
+  :active,
+  :focus {
+    outline: none;
+  }
+}
+
+@mixin textChildrenStyle() {
+  & > h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  code {
+    color: var(--rothko-foreground, #000);
+  }
+}
+
+@mixin semanticTextChildren($kind, $foreground: false) {
+  & > h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  code {
+    color: if($foreground, kindForeground($kind), kind($kind));
+  }
+}

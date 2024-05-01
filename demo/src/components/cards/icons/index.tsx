@@ -9,7 +9,6 @@ import {
   Container,
   Flex,
   FlexItem,
-  MaxWidth,
   OptionGroup,
   SearchBar,
   ToastContextConsumer,
@@ -80,21 +79,18 @@ const IconsCard = () => {
             query={query}
           />
         </div>
-        <Container>
-          <MaxWidth $maxWidth="13rem">
-            <OptionGroup
-              withoutBorder
-              optionsWithRadius
-              maxCol={2}
-              kind="primary"
-              // kind="secondary"
-              optionGap="0.75rem"
-              size="xs"
-              value={iconKind}
-              options={iconKindOptions}
-              onChange={v => setIconKind(v)}
-            />
-          </MaxWidth>
+        <Container maxWidth="13rem">
+          <OptionGroup
+            withoutBorder
+            optionsWithRadius
+            maxCol={2}
+            kind="primary"
+            optionGap="0.75rem"
+            size="xs"
+            value={iconKind}
+            options={iconKindOptions}
+            onChange={v => setIconKind(v)}
+          />
         </Container>
         <div style={{ position: 'relative' }}>
           {iconList.length > 0 && (

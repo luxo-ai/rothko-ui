@@ -1,0 +1,20 @@
+$TABLET_OR_MOBILE_MAX_WIDTH: 750px;
+$DEFAULT_DRAWER_WIDTH: 350px;
+
+.drawer {
+  position: fixed;
+  inset: 0 auto 0 0;
+  background: var(--rothko-background, #fff);
+
+  padding: 1.5rem 1.5rem;
+
+  z-index: 999999;
+  width: $DEFAULT_DRAWER_WIDTH;
+  overflow-y: auto;
+
+  @media only screen and (max-width: $TABLET_OR_MOBILE_MAX_WIDTH) {
+    width: calc(100% - 2 * 1.5rem);
+  }
+
+  user-select: text;
+}

@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import extractAriaProps from './extractAriaProps';
 
 type ContainerProps = React.AriaAttributes &
@@ -14,31 +13,29 @@ type ContainerProps = React.AriaAttributes &
     role?: React.AriaRole;
   };
 
-const Container = React.forwardRef<HTMLDivElement, ContainerProps>((props, ref) => {
+const Container = React.forwardRef<HTMLElement, ContainerProps>((props, ref) => {
   const {
-    props: { as, id, children, onBlur, onFocus, onClick, className, role, ...style },
+    props: { as = 'div', id, children, onBlur, onFocus, onClick, className, role, ...style },
     ariaAttributes,
   } = extractAriaProps(props);
-  return (
-    <StyledContainerDiv
-      {...ariaAttributes}
-      id={id}
-      ref={ref}
-      as={as}
-      onClick={onClick}
-      onBlur={onBlur}
-      onFocus={onFocus}
-      className={className}
-      style={style}
-      role={role}
-    >
-      {children}
-    </StyledContainerDiv>
+  return React.createElement(
+    as,
+    {
+      ...ariaAttributes,
+      id,
+      ref,
+
+      onClick,
+      onBlur,
+      onFocus,
+      className,
+      style,
+      role,
+    },
+    children
   );
 });
 
 Container.displayName = 'Container';
-
-const StyledContainerDiv = styled.div``;
 
 export default Container;

@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import extractAriaProps from '../extractAriaProps';
+import styles from './Grid.module.scss';
+import { classes } from '@rothko-ui/utils';
 
 type GridProps = React.AriaAttributes &
   Omit<React.CSSProperties, 'display'> & {
@@ -13,32 +14,27 @@ type GridProps = React.AriaAttributes &
     onClick?: React.MouseEventHandler<HTMLElement>;
   };
 
-const Grid = React.forwardRef<HTMLDivElement, GridProps>((props, ref) => {
+const Grid = React.forwardRef<HTMLElement, GridProps>((props, ref) => {
   const {
-    props: { as, role, onBlur, onClick, onFocus, children, className, ...style },
+    props: { as = 'div', role, onBlur, onClick, onFocus, children, className, ...style },
     ariaAttributes,
   } = extractAriaProps(props);
-  return (
-    <StyledGrid
-      {...ariaAttributes}
-      onFocus={onFocus}
-      onClick={onClick}
-      onBlur={onBlur}
-      role={role}
-      as={as}
-      ref={ref}
-      className={className}
-      style={style}
-    >
-      {children}
-    </StyledGrid>
+  return React.createElement(
+    as,
+    {
+      ...ariaAttributes,
+      ref,
+      onClick,
+      onFocus,
+      onBlur,
+      className: classes(className, styles.grid),
+      style,
+      role,
+    },
+    children
   );
 });
 
 Grid.displayName = 'Grid';
-
-const StyledGrid = styled.div`
-  display: grid;
-`;
 
 export default Grid;
