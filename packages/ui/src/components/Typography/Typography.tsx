@@ -1,17 +1,9 @@
 import React from 'react';
-import type { RothkoKind } from '../../theme';
-import { classes, compact } from '@rothko-ui/utils';
+import { classes, scopedClasses as sc } from '@rothko-ui/utils';
 import styles from './Typography.module.scss';
+import type { TypographyProps } from './types';
 
-export type TypographyProps2 = {
-  bold?: boolean;
-  italic?: boolean;
-  kind?: RothkoKind;
-  light?: boolean;
-  as?: keyof JSX.IntrinsicElements;
-};
-
-// CLASS NAMES
+const scopedClasses = sc(styles);
 
 const body = ({
   italic,
@@ -22,15 +14,20 @@ const body = ({
   children,
   className,
   ...props
-}: JSX.IntrinsicElements['p'] & TypographyProps2) => {
-  const classNames = classes(
-    styles[compact(['body', kind]).join('-')],
-    light && styles['text-light'],
-    italic && styles['text-italic'],
-    bold && styles['text-bold'],
-    className
+}: JSX.IntrinsicElements['p'] & TypographyProps) => {
+  const baseClasses = scopedClasses(
+    'typography',
+    'typography__paragraph',
+    kind && `typography__paragraph--${kind}`,
+    light && 'typography__paragraph--light',
+    italic && 'typography__paragraph--italic',
+    bold && 'typography__paragraph--bold'
   );
-  return React.createElement(as || 'p', { ...props, className: classNames }, children);
+  return React.createElement(
+    as || 'p',
+    { ...props, className: classes(baseClasses, className) },
+    children
+  );
 };
 
 const bodySmall = ({
@@ -42,15 +39,21 @@ const bodySmall = ({
   children,
   className,
   ...props
-}: JSX.IntrinsicElements['p'] & TypographyProps2) => {
-  const classNames = classes(
-    styles[compact(['body-small', kind]).join('-')],
-    light && styles['text-light'],
-    italic && styles['text-italic'],
-    bold && styles['text-bold'],
-    className
+}: JSX.IntrinsicElements['p'] & TypographyProps) => {
+  const baseClasses = scopedClasses(
+    'typography',
+    'typography__paragraph',
+    'typography__paragraph__small',
+    kind && `typography__paragraph--${kind}`,
+    light && 'typography__paragraph--light',
+    italic && 'typography__paragraph--italic',
+    bold && 'typography__paragraph--bold'
   );
-  return React.createElement(as || 'p', { ...props, className: classNames }, children);
+  return React.createElement(
+    as || 'p',
+    { ...props, className: classes(baseClasses, className) },
+    children
+  );
 };
 
 const h1 = ({
@@ -60,15 +63,23 @@ const h1 = ({
   kind,
   as,
   children,
+  className,
   ...props
-}: JSX.IntrinsicElements['h1'] & TypographyProps2) => {
-  const classNames = classes(
-    styles[compact(['h1', kind]).join('-')],
-    light && styles['text-light'],
-    italic && styles['text-italic'],
-    bold && styles['text-bold']
+}: JSX.IntrinsicElements['h1'] & TypographyProps) => {
+  const baseClasses = scopedClasses(
+    'typography',
+    'typography__heading',
+    'typography__heading__h1',
+    kind && `typography__heading--${kind}`,
+    light && 'typography__heading--light',
+    italic && 'typography__heading--italic',
+    bold && 'typography__heading--bold'
   );
-  return React.createElement(as || 'h1', { ...props, className: classNames }, children);
+  return React.createElement(
+    as || 'h1',
+    { ...props, className: classes(baseClasses, className) },
+    children
+  );
 };
 
 const h2 = ({
@@ -78,15 +89,23 @@ const h2 = ({
   kind,
   as,
   children,
+  className,
   ...props
-}: JSX.IntrinsicElements['h2'] & TypographyProps2) => {
-  const classNames = classes(
-    styles[compact(['h2', kind]).join('-')],
-    light && styles['text-light'],
-    italic && styles['text-italic'],
-    bold && styles['text-bold']
+}: JSX.IntrinsicElements['h2'] & TypographyProps) => {
+  const baseClasses = scopedClasses(
+    'typography',
+    'typography__heading',
+    'typography__heading__h2',
+    kind && `typography__heading--${kind}`,
+    light && 'typography__heading--light',
+    italic && 'typography__heading--italic',
+    bold && 'typography__heading--bold'
   );
-  return React.createElement(as || 'h2', { ...props, className: classNames }, children);
+  return React.createElement(
+    as || 'h2',
+    { ...props, className: classes(baseClasses, className) },
+    children
+  );
 };
 
 const h3 = ({
@@ -96,15 +115,23 @@ const h3 = ({
   kind,
   as,
   children,
+  className,
   ...props
-}: JSX.IntrinsicElements['h3'] & TypographyProps2) => {
-  const classNames = classes(
-    styles[compact(['h3', kind]).join('-')],
-    light && styles['text-light'],
-    italic && styles['text-italic'],
-    bold && styles['text-bold']
+}: JSX.IntrinsicElements['h3'] & TypographyProps) => {
+  const baseClasses = scopedClasses(
+    'typography',
+    'typography__heading',
+    'typography__heading__h3',
+    kind && `typography__heading--${kind}`,
+    light && 'typography__heading--light',
+    italic && 'typography__heading--italic',
+    bold && 'typography__heading--bold'
   );
-  return React.createElement(as || 'h3', { ...props, className: classNames }, children);
+  return React.createElement(
+    as || 'h3',
+    { ...props, className: classes(baseClasses, className) },
+    children
+  );
 };
 
 const h4 = ({
@@ -114,15 +141,23 @@ const h4 = ({
   kind,
   as,
   children,
+  className,
   ...props
-}: JSX.IntrinsicElements['h4'] & TypographyProps2) => {
-  const classNames = classes(
-    styles[compact(['h4', kind]).join('-')],
-    light && styles['text-light'],
-    italic && styles['text-italic'],
-    bold && styles['text-bold']
+}: JSX.IntrinsicElements['h4'] & TypographyProps) => {
+  const baseClasses = scopedClasses(
+    'typography',
+    'typography__heading',
+    'typography__heading__h4',
+    kind && `typography__heading--${kind}`,
+    light && 'typography__heading--light',
+    italic && 'typography__heading--italic',
+    bold && 'typography__heading--bold'
   );
-  return React.createElement(as || 'h4', { ...props, className: classNames }, children);
+  return React.createElement(
+    as || 'h4',
+    { ...props, className: classes(baseClasses, className) },
+    children
+  );
 };
 
 const h5 = ({
@@ -132,15 +167,23 @@ const h5 = ({
   kind,
   as,
   children,
+  className,
   ...props
-}: JSX.IntrinsicElements['h5'] & TypographyProps2) => {
-  const classNames = classes(
-    styles[compact(['h5', kind]).join('-')],
-    light && styles['text-light'],
-    italic && styles['text-italic'],
-    bold && styles['text-bold']
+}: JSX.IntrinsicElements['h5'] & TypographyProps) => {
+  const baseClasses = scopedClasses(
+    'typography',
+    'typography__heading',
+    'typography__heading__h5',
+    kind && `typography__heading--${kind}`,
+    light && 'typography__heading--light',
+    italic && 'typography__heading--italic',
+    bold && 'typography__heading--bold'
   );
-  return React.createElement(as || 'h5', { ...props, className: classNames }, children);
+  return React.createElement(
+    as || 'h5',
+    { ...props, className: classes(baseClasses, className) },
+    children
+  );
 };
 
 const h6 = ({
@@ -150,15 +193,23 @@ const h6 = ({
   kind,
   as,
   children,
+  className,
   ...props
-}: JSX.IntrinsicElements['h6'] & TypographyProps2) => {
-  const classNames = classes(
-    styles[compact(['h6', kind]).join('-')],
-    light && styles['text-light'],
-    italic && styles['text-italic'],
-    bold && styles['text-bold']
+}: JSX.IntrinsicElements['h6'] & TypographyProps) => {
+  const baseClasses = scopedClasses(
+    'typography',
+    'typography__heading',
+    'typography__heading__h6',
+    kind && `typography__heading--${kind}`,
+    light && 'typography__heading--light',
+    italic && 'typography__heading--italic',
+    bold && 'typography__heading--bold'
   );
-  return React.createElement(as || 'h6', { ...props, className: classNames }, children);
+  return React.createElement(
+    as || 'h6',
+    { ...props, className: classes(baseClasses, className) },
+    children
+  );
 };
 
 const caption = ({
@@ -168,15 +219,23 @@ const caption = ({
   kind,
   as,
   children,
+  className,
   ...props
-}: JSX.IntrinsicElements['p'] & TypographyProps2) => {
-  const classNames = classes(
-    styles[compact(['caption', kind]).join('-')],
-    light && styles['text-light'],
-    italic && styles['text-italic'],
-    bold && styles['text-bold']
+}: JSX.IntrinsicElements['p'] & TypographyProps) => {
+  const baseClasses = scopedClasses(
+    'typography',
+    'typography__paragraph',
+    'typography__paragraph__caption',
+    kind && `typography__paragraph--${kind}`,
+    light && 'typography__paragraph--light',
+    italic && 'typography__paragraph--italic',
+    bold && 'typography__paragraph--bold'
   );
-  return React.createElement(as || 'p', { ...props, className: classNames }, children);
+  return React.createElement(
+    as || 'p',
+    { ...props, className: classes(baseClasses, className) },
+    children
+  );
 };
 
 const label = ({
@@ -186,15 +245,23 @@ const label = ({
   kind,
   as,
   children,
+  className,
   ...props
-}: JSX.IntrinsicElements['label'] & TypographyProps2) => {
-  const classNames = classes(
-    styles[compact(['label', kind]).join('-')],
-    light && styles['text-light'],
-    italic && styles['text-italic'],
-    bold && styles['text-bold']
+}: JSX.IntrinsicElements['label'] & TypographyProps) => {
+  const baseClasses = scopedClasses(
+    'typography',
+    'typography__paragraph',
+    'typography__paragraph__label',
+    kind && `typography__paragraph--${kind}`,
+    light && 'typography__paragraph--light',
+    italic && 'typography__paragraph--italic',
+    bold && 'typography__paragraph--bold'
   );
-  return React.createElement(as || 'label', { ...props, className: classNames }, children);
+  return React.createElement(
+    as || 'label',
+    { ...props, className: classes(baseClasses, className) },
+    children
+  );
 };
 
 const code = ({
@@ -204,15 +271,22 @@ const code = ({
   kind,
   as,
   children,
+  className,
   ...props
-}: JSX.IntrinsicElements['code'] & TypographyProps2) => {
-  const classNames = classes(
-    styles[compact(['code', kind]).join('-')],
-    light && styles['text-light'],
-    italic && styles['text-italic'],
-    bold && styles['text-bold']
+}: JSX.IntrinsicElements['code'] & TypographyProps) => {
+  const baseClasses = scopedClasses(
+    'typography',
+    'typography__code',
+    kind && `typography__paragraph--${kind}`,
+    light && 'typography__code--light',
+    italic && 'typography__code--italic',
+    bold && 'typography__code--bold'
   );
-  return React.createElement(as || 'code', { ...props, className: classNames }, children);
+  return React.createElement(
+    as || 'code',
+    { ...props, className: classes(baseClasses, className) },
+    children
+  );
 };
 
 export default {

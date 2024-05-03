@@ -1,0 +1,139 @@
+@use './variables' as variables;
+
+// font style mixins
+@mixin regularFontStyle() {
+  font-family: variables.$regularFont;
+}
+
+@mixin boldFontStyle() {
+  font-family: variables.$boldFont;
+  font-weight: bold;
+}
+
+@mixin italicFontStyle() {
+  font-family: variables.$italicFont;
+}
+
+@mixin lightFontStyle() {
+  font-family: variables.$lightFont;
+}
+
+@mixin headingFontStyle() {
+  font-family: variables.$headingFont;
+  font-weight: 700;
+}
+
+@mixin codeFontStyle() {
+  font-family: variables.$codeFont;
+}
+
+// size mixins
+@mixin bodySizeStyle() {
+  font-size: variables.$bodyFontSize;
+  line-height: variables.$bodyLineHeight;
+}
+
+@mixin bodySmallSizeStyle() {
+  font-size: variables.$bodySmallFontSize;
+  line-height: variables.$bodySmallLineHeight;
+}
+
+@mixin captionSizeStyle() {
+  font-size: variables.$captionFontSize;
+  line-height: variables.$captionLineHeight;
+}
+
+@mixin labelSizeStyle() {
+  font-size: variables.$labelFontSize;
+  line-height: variables.$labelLineHeight;
+}
+
+@mixin codeSizeStyle() {
+  font-size: variables.$codeFontSize;
+  line-height: variables.$codeLineHeight;
+}
+
+@mixin h1SizeStyle() {
+  font-size: variables.$h1FontSize;
+  line-height: variables.$h1LineHeight;
+}
+
+@mixin h2SizeStyle() {
+  font-size: variables.$h2FontSize;
+  line-height: variables.$h2LineHeight;
+}
+
+@mixin h3SizeStyle() {
+  font-size: variables.$h3FontSize;
+  line-height: variables.$h3LineHeight;
+}
+
+@mixin h4SizeStyle() {
+  font-size: variables.$h4FontSize;
+  line-height: variables.$h4LineHeight;
+}
+
+@mixin h5SizeStyle() {
+  font-size: variables.$h5FontSize;
+  line-height: variables.$h5LineHeight;
+}
+
+@mixin h6SizeStyle() {
+  font-size: variables.$h6FontSize;
+  line-height: variables.$h6LineHeight;
+}
+
+@mixin baseTextStyle() {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@mixin withFontStyleSelectors {
+  & > strong,
+  &--bold {
+    @include boldFontStyle();
+  }
+
+  & > i,
+  &--italic {
+    @include italicFontStyle();
+  }
+
+  &--light {
+    @include lightFontStyle();
+  }
+}
+
+// base mixins
+@mixin baseParagraphStyle() {
+  @include baseTextStyle();
+  @include regularFontStyle();
+  @include withFontStyleSelectors();
+}
+
+@mixin baseHeadingStyle() {
+  @include baseTextStyle();
+  @include headingFontStyle();
+  @include withFontStyleSelectors();
+}
+
+@mixin baseCodeStyle() {
+  @include baseTextStyle();
+  @include codeFontStyle();
+  @include withFontStyleSelectors();
+}
+
+// kind mixin
+@mixin withKind {
+  @each $kind in variables.$rothkoKinds {
+    &--#{$kind} {
+      color: variables.safeGetTheme($kind);
+    }
+  }
+}
+
+// only for use in other components
+@mixin bodyStyle() {
+  @include baseParagraphStyle();
+  @include bodySizeStyle();
+}

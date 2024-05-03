@@ -41,11 +41,11 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
     );
   }
   return (
-    <List margin={0} padding="0" kind="none">
+    <List margin={0} padding="0" variant="none">
       <ListItem paddingTop="0.5rem" paddingLeft={`calc(${depth} * 0.75rem)`}>
         <Typography.label>{item.label.toUpperCase()}</Typography.label>
       </ListItem>
-      <List padding="0" kind="none">
+      <List padding="0" variant="none">
         {item.children.map((subItem, idx) => (
           <ExpandNavList
             onNavigate={onNavigate}

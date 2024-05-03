@@ -1,6 +1,15 @@
+@use '../Typography/mixins' as typographyMixins;
+
 .breadcrumbs {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.25rem;
+}
+
+.breadcrumbs__item {
+  &:not(:last-of-type):after {
+    @include typographyMixins.bodyStyle();
+    content: ' / ';
+  }
 }

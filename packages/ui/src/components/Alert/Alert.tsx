@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { classes, isString } from '@rothko-ui/utils';
+import { classes, scopedClasses as sc, isString } from '@rothko-ui/utils';
 
 import type { RothkoKind } from '../../theme/types';
-import type { WithAriaHidden, WithAriaLabeling, WithAriaLive } from '../../types';
 import Typography from '../Typography/Typography';
+import type { WithAria } from './types';
 import styles from './Alert.module.scss';
 
-type WithAria<T> = WithAriaHidden<WithAriaLabeling<WithAriaLive<T>>>;
+const scopedClasses = sc(styles);
 
 type AlertProps = WithAria<{
   id?: string;
@@ -53,6 +53,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     },
     ref
   ) => {
+    const baseClasses = scopedClasses('alert', `alert--${kind}`, `alert--${appearance}`);
     return (
       <div
         id={id}
@@ -63,7 +64,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         aria-details={ariaDetails}
         aria-hidden={ariaHidden}
         aria-live={ariaLive}
-        className={classes(styles[`alert--${kind}`], styles[`alert--${appearance}`], className)}
+        className={classes(baseClasses, className)}
         ref={ref}
         style={style}
       >

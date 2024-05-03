@@ -1,0 +1,48 @@
+@use './variables' as variables;
+@use '../Typography/mixins' as typographyMixins;
+@use '../../styles/mixins' as mixins;
+
+@mixin withSizes {
+  @each $size in variables.$inputSizes {
+    &--#{$size} {
+      @if map-has-key(variables.$paddingSizeMap, $size) {
+        padding: map-get(variables.$paddingSizeMap, $size);
+      }
+      @if map-has-key(variables.$fontSizeMap, $size) {
+        font-size: map-get(variables.$fontSizeMap, $size);
+      }
+    }
+  }
+}
+
+@mixin inputStyle {
+  @include typographyMixins.bodyStyle();
+  @include mixins.iosTapHighlightColorTransparent();
+
+  appearance: none;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+
+  background-color: variables.$inputBackground;
+  color: variables.$inputForeground;
+
+  border: none;
+  border-radius: variables.$inputDefaultBorderRadius;
+
+  &.error:not(:focus) {
+    background: variables.$rothkoDanger / 10;
+    border: 1px solid variables.$rothkoDanger / 2;
+  }
+
+  &:focus:not(:disabled),
+  &:active:not(:disabled) {
+    outline: none;
+    border: 1px solid variables.$inputBorderFocus;
+  }
+
+  :disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}

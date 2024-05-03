@@ -1,7 +1,15 @@
 .list {
   padding: 0 0 0 1rem;
 
-  .list-style-none {
+  &--no-bullet {
+    list-style-type: none;
+  }
+}
+
+.list__item {
+  margin: 0.5rem 0;
+
+  &--no-bullet {
     list-style-type: none;
   }
 }

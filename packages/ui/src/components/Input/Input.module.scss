@@ -1,73 +1,13 @@
-// themeMixins.scss
-@import '../Typography/Typography.module.scss';
+@use './mixins' as mixins;
 
-// Mixin for sizes
-@mixin inputSize($size) {
-  @if $size == 's' {
-    padding: 0.35rem;
-    font-size: 0.75rem;
-  } @else if $size == 'm' {
-    padding: 0.55rem;
-    font-size: 1rem;
-  } @else if $size == 'l' {
-    padding: 0.65rem;
-    font-size: 1.5rem;
-  }
-}
-
-@mixin inputStyle {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 100%;
-
-  background-color: var(--rothko-input-background, #fff);
-
-  @include bodyStyle();
-  color: var(--rothko-input-foreground, #000);
-
-  display: inline-block;
-  box-sizing: border-box;
-  border: none;
-  border-radius: 0.125rem; // 2px
-
-  // Iterating over sizes
-  @each $size in ('s', 'm', 'l') {
-    &.inpt_size_#{$size} {
-      @include inputSize($size);
-    }
-  }
-
-  // Error state styling
-  &.error:not(:focus) {
-    // Add error state background and border colors
-    background: var(--rothko-danger / 10);
-    border: 1px solid var(--rothko-danger / 2);
-  }
-
-  // Focus and interaction states
-  :not(:disabled) {
-    &:focus:not(:disabled),
-    &:active:not(:disabled) {
-      outline: none;
-      border: 1px solid var(--rothko-input-border-focus, #000);
-    }
-  }
-
-  // Disabled state
-  :disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-}
-
-.inpt {
-  @include inputStyle();
+.input {
+  @include mixins.inputStyle();
+  @include mixins.withSizes();
 }
 
 .textarea {
-  @include inputStyle();
+  @include mixins.inputStyle();
+  @include mixins.withSizes();
   display: block;
   height: 8rem;
   min-height: 6rem;

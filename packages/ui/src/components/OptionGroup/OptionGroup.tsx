@@ -9,7 +9,6 @@ import type { Accessory, Option, Value } from '../../library/types';
 import type { RothkoKind, RothkoSize } from '../../theme';
 import type { EmSize, RemSize } from '../../types';
 import typographyStyles from '../Typography/styles';
-import linkStyles from '../Link/styles';
 import { vuar } from '../../library/utils/vuar';
 
 const accessorySizeMap: Record<RothkoSize, number> = {
@@ -64,7 +63,7 @@ function OptionGroup<V extends Value>({
   style,
   value,
 }: OptionGroupProps<V>) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, _setExpanded] = useState(false);
 
   const maxOptions = Math.min(options.length, maxRow ? maxRow * maxCol : Infinity);
 
@@ -142,14 +141,6 @@ function OptionGroup<V extends Value>({
           ))}
         {<div>{children}</div>}
       </Grid>
-      {maxOptions < options.length && (
-        <ExpandButtonLink
-          onClick={() => setExpanded(e => !e)}
-          className={`expand-button-size-${size} expand-button-width-${size}`}
-        >
-          {expanded ? '- less' : '+ more'}
-        </ExpandButtonLink>
-      )}
     </OptionGroupContainerDiv>
   );
 }
@@ -233,41 +224,6 @@ const OptionButton = styled.button<{
     cursor: not-allowed;
     opacity: 0.75;
   }
-`;
-
-const expandedButtonWidth: Record<RothkoSize, FlattenSimpleInterpolation> = {
-  xs: css`
-    width: 50px; // rem
-  `,
-  s: css`
-    width: 58px; // rem
-  `,
-  m: css`
-    width: 73px; // rem
-  `,
-  l: css`
-    width: 91.4px; // rem
-  `,
-};
-
-const ExpandButtonLink = styled.a`
-  -webkit-tap-highlight-color: transparent;
-  ${linkStyles.link}
-  height: fit-content;
-  ${Object.entries(sizeMap).map(
-    ([key, value]) => css`
-      &.expand-button-size-${key} {
-        ${value}
-      }
-    `
-  )}
-  ${Object.entries(expandedButtonWidth).map(
-    ([key, value]) => css`
-      &.expand-button-width-${key} {
-        ${value}
-      }
-    `
-  )}
 `;
 
 export default OptionGroup;

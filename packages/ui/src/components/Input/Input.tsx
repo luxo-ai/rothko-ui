@@ -1,26 +1,40 @@
-import { classes } from '@rothko-ui/utils';
 import React from 'react';
-import type { HtmlInputProps, InputSize } from './types';
+
+import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+
+import type { HtmlInputProps, InputSize, TextProps } from './types';
 import styles from './Input.module.scss';
 
-export type InputProps = {
-  /** input size */
-  $size?: InputSize;
-  $error?: boolean;
-} & HtmlInputProps;
+const scoppedClasses = sc(styles);
+
+export type InputProps = HtmlInputProps &
+  TextProps & {
+    /**
+     * The size of the input.
+     * @default 'm'
+     */
+    size?: InputSize;
+    /**
+     * Specifies whether there is an error with the input.
+     */
+    error?: boolean;
+  };
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ $size = 'm', $error, className, disabled, tabIndex, ...props }, ref) => {
+  ({ size = 'm', light, bold, italic, error, className, disabled, tabIndex, ...props }, ref) => {
+    const baseClasses = scoppedClasses(
+      'input',
+      `input--${size}`,
+      light && 'input--light',
+      bold && 'input--bold',
+      italic && 'input--italic',
+      error && 'error'
+    );
     return (
       <input
         {...props}
         ref={ref}
-        className={classes(
-          styles['inpt'],
-          styles[`inpt_size_${$size}`],
-          $error && styles['error'],
-          className
-        )}
+        className={classes(baseClasses, className)}
         disabled={disabled}
         tabIndex={disabled ? -1 : tabIndex}
       />

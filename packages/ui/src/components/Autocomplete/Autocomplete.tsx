@@ -107,7 +107,7 @@ export type DropdownProps<V extends Value, T> = WithAria<{
   value?: V | null;
 }>;
 
-function DropdownInner<V extends Value, T = undefined>({
+function Autocomplete<V extends Value, T = undefined>({
   id,
   bordered = true,
   className,
@@ -349,4 +349,4 @@ function DropdownInner<V extends Value, T = undefined>({
   );
 }
 
-export default DropdownInner;
+export default Autocomplete;

@@ -155,7 +155,11 @@ const Modal = ({
                 aria-modal
                 role="dialog"
                 style={{ ...styleProp, ...style }}
-                className={classes(styles['modal-header'], styles[`modal-size-${size}`], className)}
+                className={classes(
+                  styles['modal-container'],
+                  styles[`modal-size-${size}`],
+                  className
+                )}
                 ref={modalRef}
               >
                 <button

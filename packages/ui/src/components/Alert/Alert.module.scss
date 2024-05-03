@@ -1,23 +1,32 @@
-@import '../../styles/mixins.scss';
-@import '../../styles/themeMixins.scss';
+@use '../../styles/variables' as variables;
+@use '../../styles/mixins' as mixins;
 
-@mixin alertStyle($kind) {
-  padding: 1rem 1.25rem;
-  font-size: 1rem;
+@each $kind in variables.$rothkoKinds {
+  .alert--#{$kind} {
+    $alertTheme: variables.safeGetTheme($kind);
+    $alertThemeForeground: variables.safeGetThemeForeground($kind);
 
-  &.alert--filled {
-    @include semanticTextChildren($kind, $foreground: true);
-    background: kind($kind);
-  }
-
-  &.alert--outline {
-    @include semanticTextChildren($kind, $foreground: false);
-    border: 1px solid kind($kind);
+    --alert-theme: #{$alertTheme};
+    --alert-theme-foreground: #{$alertThemeForeground};
   }
 }
 
-@each $kind in $ROTHKO_KINDS {
-  .alert--#{$kind} {
-    @include alertStyle($kind);
+.alert {
+  --alert-text-color: #000;
+  $alertTextColor: var(--alert-text-color);
+
+  @include mixins.textChildrenColor($color: $alertTextColor);
+
+  padding: 1rem 1.25rem;
+  font-size: 1rem; // import font size variable
+
+  &--filled {
+    --alert-text-color: var(--alert-theme-foreground);
+    background: var(--alert-theme);
+  }
+
+  &--outline {
+    --alert-text-color: var(--alert-theme);
+    border: 1px solid var(--alert-theme);
   }
 }

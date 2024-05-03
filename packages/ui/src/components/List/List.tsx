@@ -1,6 +1,9 @@
-import { classes } from '@rothko-ui/utils';
 import React from 'react';
+
+import { classes, scopedClasses as sc } from '@rothko-ui/utils';
 import styles from './List.module.scss';
+
+const scopedClasses = sc(styles);
 
 type ListProps = React.CSSProperties & {
   children: React.ReactNode;
@@ -9,18 +12,18 @@ type ListProps = React.CSSProperties & {
 };
 
 const List = ({ children, className, variant = 'unordered', ...style }: ListProps) => {
-  return React.createElement(
-    variant === 'ordered' ? 'ol' : 'ul',
-    {
-      style,
-      className: classes(
-        styles['list'],
-        variant === 'none' && styles['list-style-none'],
-        className
-      ),
-      role: 'list',
-    },
-    children
+  const baseClasses = scopedClasses('list', variant === 'none' && 'list--no-bullet');
+  if (variant === 'ordered') {
+    return (
+      <ol className={classes(baseClasses, className)} style={style} role="list">
+        {children}
+      </ol>
+    );
+  }
+  return (
+    <ul className={classes(baseClasses, className)} style={style} role="list">
+      {children}
+    </ul>
   );
 };
 

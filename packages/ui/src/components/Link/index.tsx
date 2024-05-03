@@ -1,1 +1,4 @@
-export { Link, LinkSmall, LinkButton, LinkButtonSmall } from './Link';
+import Link from './Link';
+import LinkButton from './LinkButton';
+
+export { Link, LinkButton };

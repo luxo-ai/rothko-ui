@@ -1,46 +1,29 @@
-@import '../../styles/themeMixins.scss';
+@use './variables' as variables;
+@use '../../styles/mixins' as mixins;
 
-.checkbox-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.5rem;
-}
+.checkbox {
+  // flex-shrink: 0;
+  @include mixins.iosTapHighlightColorTransparent();
 
-// Mixin for individual checkbox styling
-@mixin checkbox($kind: null) {
-  flex-shrink: 0;
-  -webkit-tap-highlight-color: transparent;
-  background-color: var(--rothko-checkbox-background, #dee7f5);
+  background-color: variables.$checkboxBackgroundColor;
 
   cursor: pointer;
 
-  width: 1.125rem;
-  height: 1.125rem;
+  width: variables.$checkboxSize;
+  height: variables.$checkboxSize;
 
-  border-radius: 1px;
-  padding: 0.25rem;
+  border-radius: variables.$checkboxBorderRadius;
+  padding: variables.$checkboxPadding;
 
   transition: background-color 0.1s ease;
 
-  &.checked {
-    background-color: if($kind == null, kind('success'), kind($kind));
-
-    background-image: url('data:image/svg+xml,%0A%20%20%20%20%3Csvg%20width%3D%2217%22%20height%3D%2213%22%20viewBox%3D%220%200%2017%2013%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M6.50002%2012.6L0.400024%206.60002L2.60002%204.40002L6.50002%208.40002L13.9%200.900024L16.1%203.10002L6.50002%2012.6Z%22%20fill%3D%22%23FFFFFF%22%2F%3E%0A%20%20%20%20%3C%2Fsvg%3E%0A%20%20');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    background-origin: content-box;
-  }
-
   &:focus-visible {
-    outline: 1px solid kind($kind: 'info', $scale: 300);
+    outline: 1px solid variables.$rothkoInfo300;
   }
 
   &.error:not(:focus) {
     // Define error state background color
-    background-color: var(--rothko-danger / 10);
+    background-color: variables.$rothkoDanger / 10;
   }
 
   &.disabled {
@@ -49,12 +32,26 @@
   }
 }
 
-.checkbox {
-  @include checkbox();
+@each $kind in variables.$rothkoKinds {
+  .checkbox--#{$kind} {
+    $checkboxTheme: variables.safeGetTheme($kind);
+    $checkboxThemeForeground: variables.safeGetThemeForeground($kind);
+
+    &.selected {
+      background-color: $checkboxTheme;
+      background-image: url('data:image/svg+xml,%0A%20%20%20%20%3Csvg%20width%3D%2217%22%20height%3D%2213%22%20viewBox%3D%220%200%2017%2013%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M6.50002%2012.6L0.400024%206.60002L2.60002%204.40002L6.50002%208.40002L13.9%200.900024L16.1%203.10002L6.50002%2012.6Z%22%20fill%3D%22%23FFFFFF%22%2F%3E%0A%20%20%20%20%3C%2Fsvg%3E%0A%20%20');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      background-origin: content-box;
+    }
+  }
 }
 
-@each $kind in $ROTHKO_KINDS {
-  .checkbox--#{$kind} {
-    @include checkbox($kind);
-  }
+.checkbox__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
 }

@@ -1,23 +1,13 @@
 import React from 'react';
 
-import Typography from '../Typography/Typography';
-import type {
-  WithAriaControls,
-  WithAriaCurrent,
-  WithAriaHasPopup,
-  WithAriaLabel,
-  WithAriaLabelledBy,
-  WithAriaSelected,
-} from '../../types';
-import { Link, LinkButton } from '../Link';
-import styles from './BreadCrumbItem.module.scss';
 import { classes } from '@rothko-ui/utils';
 
-type WithAria<T> = WithAriaHasPopup<
-  WithAriaLabelledBy<WithAriaSelected<WithAriaControls<WithAriaLabel<WithAriaCurrent<T>>>>>
->;
+import Typography from '../Typography/Typography';
+import { Link, LinkButton } from '../Link';
+import type { ItemsWithAria } from './types';
+import styles from './BreadCrumbs.module.scss';
 
-type BreadCrumbItemProps = WithAria<{
+type BreadCrumbItemProps = ItemsWithAria<{
   id?: string;
   /**
    * The content of the breadcrumb item.
@@ -35,7 +25,13 @@ type BreadCrumbItemProps = WithAria<{
    * The URL to navigate to when the breadcrumb item is clicked.
    */
   to?: string;
+  /**
+   * The class name for the breadcrumb item.
+   */
   className?: string;
+  /**
+   * The style for the breadcrumb item.
+   */
   style?: React.CSSProperties;
 }>;
 
@@ -54,7 +50,7 @@ const BreadCrumbItem = ({
   style,
   className,
 }: BreadCrumbItemProps) => {
-  const classNames = classes(styles['breadcrumbs-item'], className);
+  const classNames = classes(styles['breadcrumbs__item'], className);
 
   if (to) {
     return (

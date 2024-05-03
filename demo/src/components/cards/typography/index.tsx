@@ -33,7 +33,9 @@ const TypographyCard = () => {
         <Tag kind="success" appearance="outline">
           <Typography.caption>2.5rem</Typography.caption>
         </Tag>
-        <Typography.h1>h1</Typography.h1>
+        <Typography.h1 italic kind="danger">
+          h1
+        </Typography.h1>
         <Tag kind="success" appearance="outline">
           <Typography.caption>2.25rem</Typography.caption>
         </Tag>
@@ -57,7 +59,7 @@ const TypographyCard = () => {
         <Tag kind="success" appearance="outline">
           <Typography.caption>1rem</Typography.caption>
         </Tag>
-        <Typography.body>body</Typography.body>
+        <Typography.body kind="danger">body</Typography.body>
         <Tag kind="success" appearance="outline">
           <Typography.caption>0.875rem</Typography.caption>
         </Tag>

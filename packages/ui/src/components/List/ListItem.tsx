@@ -1,12 +1,13 @@
 import React from 'react';
-import type { CSSProperties } from 'styled-components';
+
+import { classes } from '@rothko-ui/utils';
+
 import Flex from '../../layout/Flex/Flex';
 import FlexItem from '../../layout/Flex/FlexItem';
 import Typography from '../Typography/Typography';
-import { classes } from '@rothko-ui/utils';
-import styles from './ListItem.module.scss';
+import styles from './List.module.scss';
 
-type ListItemProps = CSSProperties & {
+type ListItemProps = React.CSSProperties & {
   bullet?: JSX.Element;
   children: React.ReactNode;
   className?: string;
@@ -25,7 +26,7 @@ const ListItem = ({ bullet, children: childrenProp, className, ...style }: ListI
       <li
         style={style}
         role="listitem"
-        className={classes(styles['list-item'], styles['hide-bullet'], className)}
+        className={classes(styles['list__item'], styles['list__item--no-bullet'], className)}
       >
         <Flex alignItems="center" gap="0.25rem">
           <FlexItem display="flex" flex="0 0 auto">
@@ -38,7 +39,7 @@ const ListItem = ({ bullet, children: childrenProp, className, ...style }: ListI
   }
 
   return (
-    <li style={style} className={classes(styles['list-item'], className)} role="listitem">
+    <li style={style} className={classes(styles['list__item'], className)} role="listitem">
       {children}
     </li>
   );

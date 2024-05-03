@@ -1,241 +1,73 @@
-@function kind($kind, $scale: null, $fallback: null) {
-  @if $fallback == null {
-    $fallback: '#000';
-  }
-  @if $scale == null {
-    @return var(--rothko-#{$kind}, $fallback);
-  }
-  @return var(--rothko-#{$kind}-#{$scale}, $fallback);
-}
+@use './variables' as variables;
+@use './mixins' as mixins;
 
-// Mixins for Colors
-@mixin bodyColorStyle($kind: null) {
-  color: if($kind == null, var(--rothko-typography-body-color, #000), kind($kind));
-}
-
-@mixin headingColorStyle($kind: null) {
-  color: if($kind == null, var(--rothko-typography-heading-color, #000), kind($kind));
-}
-
-@mixin codeColorStyle($kind: null) {
-  color: if($kind == null, var(--rothko-typography-code-color, #000), kind($kind));
-}
-
-// Mixins for Font Styles
-@mixin boldFontStyle() {
-  font-family: var(--rothko-font-family-bold);
-  font-weight: bold;
-}
-
-@mixin italicFontStyle() {
-  font-family: var(--rothko-font-family-italic);
-}
-
-@mixin lightFontStyle() {
-  font-family: var(--rothko-font-family-light);
-}
-
-@mixin regularFontStyle() {
-  font-family: var(--rothko-font-family-regular);
-}
-
-@mixin headingFontStyle() {
-  font-family: var(--rothko-font-family-heading);
-  font-weight: 700;
-}
-
-@mixin codeFontStyle() {
-  font-family: var(--rothko-font-family-code);
-}
-
-// Mixins for Sizes
-@mixin bodySizeStyle() {
-  font-size: var(--rothko-font-size-body, 1rem);
-  line-height: var(--rothko-line-height-body, 1.5rem);
-}
-
-@mixin bodySmallSizeStyle() {
-  font-size: var(--rothko-font-size-body-small, 0.875rem);
-  line-height: var(--rothko-line-height-body-small, 1.25rem);
-}
-
-@mixin captionSizeStyle() {
-  font-size: var(--rothko-font-size-caption, 0.75rem);
-  line-height: var(--rothko-line-height-caption, 0.9375rem);
-}
-
-@mixin labelSizeStyle() {
-  font-size: var(--rothko-font-size-label, 0.75rem);
-  line-height: var(--rothko-line-height-label, 0.9375rem);
-}
-
-@mixin codeSizeStyle() {
-  font-size: var(--rothko-font-size-code, 1rem);
-  line-height: var(--rothko-line-height-code, 1.25rem);
-}
-
-// Base Styles
-@mixin baseTextStyle($kind: null) {
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimize legibility;
+.typography {
   margin: 0.125rem 0;
+}
 
-  @include bodyColorStyle($kind);
-  @include regularFontStyle();
+.typography__paragraph {
+  color: variables.$bodyColor;
 
-  & > strong {
-    @include boldFontStyle();
+  @include mixins.withKind();
+  @include mixins.baseParagraphStyle();
+  @include mixins.bodySizeStyle();
+
+  &__small {
+    @include mixins.bodySmallSizeStyle();
   }
 
-  & > i {
-    @include italicFontStyle();
+  &__label {
+    @include mixins.labelSizeStyle();
+    @include mixins.boldFontStyle();
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
   }
 
-  &.text-light {
-    @include lightFontStyle();
-  }
-
-  &.text-italic {
-    @include italicFontStyle();
-  }
-
-  &.text-bold {
-    @include boldFontStyle();
+  &__caption {
+    @include mixins.captionSizeStyle();
   }
 }
 
-@mixin baseHeadingStyle($kind: null) {
-  @include baseTextStyle($kind);
-  @include headingColorStyle($kind);
-  @include headingFontStyle();
+.typography__heading {
+  color: variables.$headingColor;
+
+  @include mixins.withKind();
+  @include mixins.baseHeadingStyle();
+
+  &__h1 {
+    @include mixins.h1SizeStyle();
+  }
+
+  &__h2 {
+    @include mixins.h2SizeStyle();
+  }
+
+  &__h3 {
+    @include mixins.h3SizeStyle();
+  }
+
+  &__h4 {
+    @include mixins.h4SizeStyle();
+  }
+
+  &__h5 {
+    @include mixins.h5SizeStyle();
+  }
+
+  &__h6 {
+    @include mixins.h6SizeStyle();
+  }
 }
 
-@mixin bodyStyle($kind: null) {
-  @include baseTextStyle($kind);
-  @include bodySizeStyle();
-}
+.typography__code {
+  color: variables.$codeColor;
 
-@mixin bodySmallStyle($kind: null) {
-  @include baseTextStyle($kind);
-  @include bodySmallSizeStyle();
-}
+  @include mixins.withKind();
+  @include mixins.baseCodeStyle();
+  @include mixins.codeSizeStyle();
 
-@mixin captionStyle($kind: null) {
-  @include baseTextStyle($kind);
-  @include captionSizeStyle();
-}
-
-@mixin labelStyle($kind: null) {
-  @include baseTextStyle($kind);
-  @include boldFontStyle();
-  @include labelSizeStyle();
-  text-transform: uppercase;
-  letter-spacing: 0.0625rem;
-}
-
-@mixin codeStyle($kind: null) {
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimize legibility;
-  @include codeColorStyle($kind);
-  @include codeSizeStyle();
-  @include codeFontStyle();
   white-space: pre-wrap;
   padding: 1px 0 1px 0.25rem;
   background-color: rgba(153, 161, 179, 0.1);
   border-radius: 0.375rem;
-  transition: opacity 0.25s ease 0s;
-}
-
-// Typography Styles
-@each $kind in ('primary', 'secondary', 'info', 'success', 'warning', 'danger') {
-  .body {
-    @include bodyStyle();
-  }
-  .body-.#{$kind} {
-    @include bodyStyle($kind);
-  }
-  .body-small {
-    @include bodySmallStyle();
-  }
-  .body-small-.#{$kind} {
-    @include bodySmallStyle($kind);
-  }
-  .caption {
-    @include captionStyle();
-  }
-  .caption-.#{$kind} {
-    @include captionStyle($kind);
-  }
-  .label {
-    @include labelStyle();
-  }
-  .label-.#{$kind} {
-    @include labelStyle($kind);
-  }
-  .code {
-    @include codeStyle();
-  }
-  .code-.#{$kind} {
-    @include codeStyle($kind);
-  }
-  .h1 {
-    @include baseHeadingStyle();
-    font-size: var(--rothko-font-size-h1, 2.5rem);
-    line-height: var(--rothko-line-height-h1, 3.25rem);
-  }
-  .h1-.#{$kind} {
-    @include baseHeadingStyle($kind);
-    font-size: var(--rothko-font-size-h1, 2.5rem);
-    line-height: var(--rothko-line-height-h1, 3.25rem);
-  }
-  .h2 {
-    @include baseHeadingStyle();
-    font-size: var(--rothko-font-size-h2, 2.25rem);
-    line-height: var(--rothko-line-height-h2, 2.75rem);
-  }
-  .h2-.#{$kind} {
-    @include baseHeadingStyle($kind);
-    font-size: var(--rothko-font-size-h2, 2.25rem);
-    line-height: var(--rothko-line-height-h2, 2.75rem);
-  }
-  .h3 {
-    @include baseHeadingStyle();
-    font-size: var(--rothko-font-size-h3, 2rem);
-    line-height: var(--rothko-line-height-h3, 2.5rem);
-  }
-  .h3-.#{$kind} {
-    @include baseHeadingStyle($kind);
-    font-size: var(--rothko-font-size-h3, 2rem);
-    line-height: var(--rothko-line-height-h3, 2.5rem);
-  }
-  .h4 {
-    @include baseHeadingStyle();
-    font-size: var(--rothko-font-size-h4, 1.75rem);
-    line-height: var(--rothko-line-height-h4, 2.25rem);
-  }
-  .h4-.#{$kind} {
-    @include baseHeadingStyle($kind);
-    font-size: var(--rothko-font-size-h4, 1.75rem);
-    line-height: var(--rothko-line-height-h4, 2.25rem);
-  }
-  .h5 {
-    @include baseHeadingStyle();
-    font-size: var(--rothko-font-size-h5, 1.5rem);
-    line-height: var(--rothko-line-height-h5, 2rem);
-  }
-  .h5-.#{$kind} {
-    @include baseHeadingStyle($kind);
-    font-size: var(--rothko-font-size-h5, 1.5rem);
-    line-height: var(--rothko-line-height-h5, 2rem);
-  }
-  .h6 {
-    @include baseHeadingStyle();
-    font-size: var(--rothko-font-size-h6, 1.25rem);
-    line-height: var(--rothko-line-height-h6, 1.75rem);
-  }
-  .h6-.#{$kind} {
-    @include baseHeadingStyle($kind);
-    font-size: var(--rothko-font-size-h6, 1.25rem);
-    line-height: var(--rothko-line-height-h6, 1.75rem);
-  }
 }

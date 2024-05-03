@@ -1,0 +1,32 @@
+@use '../Typography/mixins' as typographyMixins;
+@use './variables' as variables;
+
+@mixin baseLinkStyle {
+  @include typographyMixins.baseParagraphStyle();
+  color: variables.$defaultLinkColor;
+
+  padding: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@mixin linkUnderlineNone {
+  text-decoration: none;
+  &:hover,
+  &:active,
+  &:focus,
+  &:visited {
+    text-decoration: none;
+  }
+}
+
+@mixin linkUnderlineHover {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@mixin linkUnderlineAlways {
+  text-decoration: underline;
+}

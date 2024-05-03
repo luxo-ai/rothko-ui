@@ -1,9 +1,9 @@
+@use '../Typography/mixins' as typographyMixins;
 @import '../../styles/mixins.scss';
-@import '../Typography/Typography.module.scss';
 
 .phantom-input {
   @include hideChromeBrowserOutline();
-  @include bodyStyle();
+  @include typographyMixins.bodyStyle();
   -webkit-tap-highlight-color: transparent;
   appearance: none;
   width: 100%;

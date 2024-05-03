@@ -14,7 +14,7 @@ const ItemText = ({ isPlaceHolder, children }: ItemTextProps) => {
   return (
     <Typography.body
       as="span"
-      className={classes(styles['item-text'], isPlaceHolder && styles['item-text-placeholder'])}
+      className={classes(styles['item-text'], isPlaceHolder && styles['place-holder'])}
     >
       {children}
     </Typography.body>

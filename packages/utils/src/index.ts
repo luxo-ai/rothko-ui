@@ -1,7 +1,7 @@
-import classes from './classes';
 import Stack from './Stack';
 
-export { classes, Stack };
+export { classes, scopedClasses } from './classes';
+export { Stack };
 export * from './helpers';
 
 export type {

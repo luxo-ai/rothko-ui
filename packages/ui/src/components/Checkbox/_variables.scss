@@ -1,0 +1,6 @@
+@forward '../../styles/variables';
+
+$checkboxBackgroundColor: var(--rothko-checkbox-background, #dee7f5);
+$checkboxSize: 1.125rem;
+$checkboxBorderRadius: 1px;
+$checkboxPadding: 0.25rem;

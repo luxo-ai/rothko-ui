@@ -1,10 +1,9 @@
 import React from 'react';
 
-import type { WithAriaControls, WithAriaHidden, WithAriaLabeling } from '../../types';
-import styles from './BreadCrumbs.module.scss';
 import { classes } from '@rothko-ui/utils';
 
-type WithAria<T> = WithAriaControls<WithAriaHidden<WithAriaLabeling<T>>>;
+import type { WithAria } from './types';
+import styles from './BreadCrumbs.module.scss';
 
 type BreadCrumbsProps = WithAria<{
   id?: string;
@@ -12,7 +11,13 @@ type BreadCrumbsProps = WithAria<{
    * The content to be displayed as the children of the BreadCrumbs component.
    */
   children: React.ReactNode;
+  /**
+   * The class name for the BreadCrumbs component.
+   */
   className?: string;
+  /**
+   * The style for the BreadCrumbs component.
+   */
   style?: React.CSSProperties;
 }>;
 

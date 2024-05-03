@@ -33,6 +33,7 @@
   "scripts": {
     "build": "NODE_ENV=prod rollup --config",
     "build:dev": "NODE_ENV=dev rollup --config --watch",
+    "generate:scss": "typed-scss-modules src --nameFormat none --exportType default",
     "prebuild": "rimraf dist",
     "lint": "eslint ./src --ext .js,.ts,.jsx,.tsx",
     "typecheck": "tsc --noEmit"
@@ -72,6 +73,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-visualizer": "^5.12.0",
+    "typed-scss-modules": "^8.0.1",
     "typescript": "^4.4.2",
     "typescript-plugin-css-modules": "^5.1.0"
   },

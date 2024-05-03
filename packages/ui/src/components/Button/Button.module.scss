@@ -1,145 +1,82 @@
-@import '../../styles/themeMixins.scss';
-@import '../Typography/Typography.module.scss';
+@use './variables' as variables;
+@use './mixins' as mixins;
 
-$padding-size-map: (
-  'xs': 0.3rem 0.5rem,
-  's': 0.3rem 0.5rem,
-  'm': 0.5rem 0.75rem,
-  'l': 0.625rem 0.94rem,
-);
+.button {
+  @include mixins.baseButtonStyle();
 
-$font-size-map: (
-  'xs': 0.75rem,
-  's': 0.85rem,
-  'm': 1rem,
-  'l': 1.25rem,
-);
+  &--pill {
+    @include mixins.buttonPill;
+  }
+  &--square {
+    @include mixins.buttonSquare;
+  }
+  &--fit-content {
+    @include mixins.buttonFitContent;
+  }
 
-$border-width-size-map: (
-  'l': 2px,
-);
-
-@mixin buttonStyle($appearance, $kind) {
-  @include regularFontStyle();
-
-  // Use font smoothing to make text more readable
-  -webkit-font-smoothing: antialiased;
-  -webkit-tap-highlight-color: transparent;
-
-  // Prevent double tap zoom on mobile
-  touch-action: manipulation;
-
-  width: 100%;
-
-  background: if($appearance == 'outline', transparent, kind($kind));
-  color: if($appearance == 'outline', kind($kind), kindForeground($kind));
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  overflow: hidden;
-  cursor: pointer;
-  user-select: none;
-
-  outline: none;
-  border: 1px solid kind($kind);
-
-  @each $size in $ROTHKO_SIZES {
-    &.btn-size-#{$size} {
-      @if map-has-key($padding-size-map, $size) {
-        padding: map-get($padding-size-map, $size);
+  @each $size in variables.$rothkoSizes {
+    &--#{$size} {
+      @if map-has-key(variables.$paddingSizeMap, $size) {
+        padding: map-get(variables.$paddingSizeMap, $size);
       }
-      @if map-has-key($font-size-map, $size) {
-        font-size: map-get($font-size-map, $size);
+      @if map-has-key(variables.$fontSizeMap, $size) {
+        font-size: map-get(variables.$fontSizeMap, $size);
       }
-      @if map-has-key($border-width-size-map, $size) {
-        border-width: map-get($border-width-size-map, $size);
+      @if map-has-key(variables.$borderWidthSizeMap, $size) {
+        border-width: map-get(variables.$borderWidthSizeMap, $size);
       }
     }
-  }
-
-  border-radius: 0; // 0.125rem; default?
-
-  &.btn-pill {
-    border-radius: 50vmin;
-  }
-
-  &.btn-square {
-    border-radius: 0;
-  }
-
-  &.fit-content {
-    width: fit-content;
-  }
-
-  &:not(:disabled) {
-    /**
-     * hover is annoying and has bad UX on touch based machines
-     * The element is still marked as "hover" after pressing and until
-     * onBlur is called. Keep the same look for now (deactivate :hover)
-      :hover {
-    }
-    */
-    // :focus {
-    // }
-    &:active {
-      background: if($appearance == 'outline', transparent, kind($kind, $scale: 400));
-      border-color: kind($kind, $scale: 400);
-    }
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.65;
   }
 }
 
-.btn-accessory {
+@mixin themedButton($appearance, $kind) {
+  $buttonTheme: variables.safeGetTheme($kind);
+  $buttonThemeForeground: variables.safeGetThemeForeground($kind);
+  $buttonThemeActive: var(--rothko-#{$kind}-400); // variables.safeGetTheme($kind, 400);
+
+  background: if($appearance == 'outline', transparent, $buttonTheme);
+  border: 1px solid $buttonTheme;
+  color: if($appearance == 'outline', $buttonTheme, $buttonThemeForeground);
+
+  /**
+   * hover is annoying and has bad UX on touch based machines
+   * The element is still marked as "hover" after pressing and until
+   * onBlur is called. Keep the same look for now (deactivate :hover)
+    :hover {
+    }
+    :focus {
+    }
+   */
+  &:active:not(:disabled) {
+    background: if($appearance == 'outline', transparent, $buttonThemeActive);
+    border-color: $buttonThemeActive;
+  }
+}
+
+.button--outline {
+  @each $kind in variables.$rothkoKinds {
+    &--#{$kind} {
+      @include themedButton('outline', $kind);
+    }
+  }
+}
+
+.button--filled {
+  @each $kind in variables.$rothkoKinds {
+    &--#{$kind} {
+      @include themedButton('filled', $kind);
+    }
+  }
+}
+
+.button__accessory {
   display: flex;
   align-items: center;
 }
 
-.btn-content {
+.button__content {
   display: flex;
   align-items: center;
   justify-content: center;
   column-gap: 0.25rem;
-}
-
-.btn-outline-primary {
-  @include buttonStyle('outline', 'primary');
-}
-.btn-outline-secondary {
-  @include buttonStyle('outline', 'secondary');
-}
-.btn-outline-info {
-  @include buttonStyle('outline', 'info');
-}
-.btn-outline-success {
-  @include buttonStyle('outline', 'success');
-}
-.btn-outline-warning {
-  @include buttonStyle('outline', 'warning');
-}
-.btn-outline-danger {
-  @include buttonStyle('outline', 'danger');
-}
-.btn-filled-primary {
-  @include buttonStyle('filled', 'primary');
-}
-.btn-filled-secondary {
-  @include buttonStyle('filled', 'secondary');
-}
-.btn-filled-info {
-  @include buttonStyle('filled', 'info');
-}
-.btn-filled-success {
-  @include buttonStyle('filled', 'success');
-}
-.btn-filled-warning {
-  @include buttonStyle('filled', 'warning');
-}
-.btn-filled-danger {
-  @include buttonStyle('filled', 'danger');
 }

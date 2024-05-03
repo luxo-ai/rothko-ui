@@ -5,4 +5,5 @@ export type TypographyProps = {
   italic?: boolean;
   kind?: RothkoKind;
   light?: boolean;
+  as?: keyof JSX.IntrinsicElements;
 };

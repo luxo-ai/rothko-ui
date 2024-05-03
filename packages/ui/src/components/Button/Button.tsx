@@ -1,36 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import type { FlattenSimpleInterpolation } from 'styled-components';
-import styled, { css } from 'styled-components';
 
-import { classes } from '@rothko-ui/utils';
+import { classes, scopedClasses as sc } from '@rothko-ui/utils';
 
 import InlineSpinnerLoader from '../../library/InlineSpinner';
 import type { Accessory } from '../../library/types';
 import type { RothkoKind, RothkoSize } from '../../theme';
 import type { ButtonAppearance, ButtonShape, WithButtonAria } from './types';
-import typographyStyles from '../Typography/styles';
 import { vuar } from '../../library/utils/vuar';
 import styles from './Button.module.scss';
 
-const sizeMap: Record<RothkoSize, FlattenSimpleInterpolation> = {
-  xs: css`
-    padding: 0.3rem 0.5rem;
-    font-size: 0.75rem;
-  `,
-  s: css`
-    padding: 0.3rem 0.5rem;
-    font-size: 0.85rem;
-  `,
-  m: css`
-    padding: 0.5rem 0.75rem;
-    font-size: 1rem; // 0.875rem; // was 1rem
-  `,
-  l: css`
-    padding: 0.625rem 0.94rem;
-    font-size: 1.25rem;
-    border-width: 2px;
-  `,
-};
+const scopedClasses = sc(styles);
 
 const accessorySizeMap: Record<RothkoSize, number> = {
   xs: 10,
@@ -147,17 +126,12 @@ const Button: React.FC<ButtonProps> = ({
   const childrenContainerRef = useRef<HTMLDivElement | null>(null);
   const [childrenHeight, setChildrenHeight] = useState<number | null>(18); // was null before. How do we do this better?
 
-  const appearanceClasses = {
-    [styles['btn-pill']]: shape === 'pill',
-    [styles['btn-square']]: shape === 'square',
-    [styles['fit-content']]: fitContent,
-  } as const;
-
-  const classNames = classes(
-    styles[`btn-${appearance}-${kind}`],
-    styles[`btn-size-${size}`],
-    appearanceClasses,
-    className
+  const baseClasses = scopedClasses(
+    'button',
+    `button--${appearance}--${kind}`,
+    `button--${size}`,
+    shape && `button--${shape}`,
+    fitContent && 'button--fit-content'
   );
 
   const iconColor = vuar({
@@ -204,7 +178,7 @@ const Button: React.FC<ButtonProps> = ({
       aria-labelledby={ariaLabelledBy}
       aria-pressed={ariaPressed}
       aria-busy={loading}
-      className={classNames}
+      className={classes(baseClasses, className)}
       disabled={disabled}
       onClick={onClick}
       onKeyDown={onKeyDown}
@@ -213,9 +187,9 @@ const Button: React.FC<ButtonProps> = ({
       tabIndex={disabled ? -1 : tabIndex}
       type={type}
     >
-      <div className={styles['btn-content']} ref={childrenContainerRef}>
+      <div className={styles['button__content']} ref={childrenContainerRef}>
         {!loading && Left && (
-          <div className={styles['btn-accessory']}>
+          <div className={styles['button__accessory']}>
             <Left aria-hidden size={accessorySizeMap[size]} color={iconColor} />
           </div>
         )}
@@ -233,7 +207,7 @@ const Button: React.FC<ButtonProps> = ({
           <span>{children}</span>
         )}
         {!loading && Right && (
-          <div className={styles['btn-accessory']}>
+          <div className={styles['button__accessory']}>
             <Right aria-hidden size={accessorySizeMap[size]} color={iconColor} />
           </div>
         )}
@@ -241,126 +215,5 @@ const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
-
-export const ContainerDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const AccessoryContainerDiv = styled.div<{ $kind: 'left' | 'right' }>`
-  display: flex;
-  align-items: center;
-  ${({ $kind }) => {
-    return $kind === 'left'
-      ? css`
-          margin-right: 0.25rem;
-        `
-      : css`
-          margin-left: 0.25rem;
-        `;
-  }}
-`;
-
-type BaseButtonProps = {
-  kind: RothkoKind;
-  appearance: ButtonAppearance;
-};
-
-export const buttonStyle = css<BaseButtonProps>`
-  // use font smoothing to make text more readable
-  -webkit-font-smoothing: antialiased;
-  -webkit-tap-highlight-color: transparent;
-
-  // prevent double tap zoom on mobile
-  touch-action: manipulation;
-
-  width: 100%;
-  background: ${({ appearance, kind }) =>
-    appearance === 'outline' ? 'transparent' : vuar({ kind, category: 'background' })};
-
-  ${typographyStyles.regularFontStyle}
-
-  color: ${({ appearance, kind }) =>
-    vuar({
-      kind,
-      category: appearance === 'outline' ? 'background' : 'foreground',
-      fallback: '#000',
-    })};
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  user-select: none;
-
-  outline: none;
-  border: ${({ appearance }) => (appearance == 'outline' ? '1px solid' : 'none')};
-  border-color: ${({ kind }) => vuar({ kind, category: 'border', fallback: '#000' })};
-
-  ${Object.entries(sizeMap).map(
-    ([key, value]) => css`
-      &.btn-size-${key} {
-        ${value}
-      }
-    `
-  )}
-
-  // border-radius: 0.125rem;
-  border-radius: 0;
-
-  &.btn-pill {
-    border-radius: 50vmin;
-  }
-
-  &.btn-square {
-    border-radius: 0;
-  }
-
-  &.fit-content {
-    width: fit-content;
-  }
-
-  &.btn-circle {
-    border-radius: 50%;
-    width: fit-content;
-    padding: 0.5rem;
-  }
-`;
-
-export const StyledButton = styled.button<BaseButtonProps>`
-  ${buttonStyle}
-
-  :not(:disabled) {
-    /**
-     * hover is annoying and has bad UX on touch based machines
-     * The element is still marked as "hover" after pressing and until
-     * onBlur is called. Keep the same look for now (deactivate :hover)
-      :hover {
-    }
-    */
-    :focus {
-    }
-    :active {
-      ${({ appearance, kind }) =>
-        appearance === 'outline'
-          ? css`
-              background: transparent;
-            `
-          : css`
-              background: ${vuar({ kind, scale: 400, category: 'background' })};
-            `}
-      border-color: ${({ kind }) => vuar({ kind, scale: 400, category: 'background' })};
-    }
-  }
-
-  :disabled {
-    cursor: not-allowed;
-    opacity: 0.65;
-  }
-`;
 
 export default Button;

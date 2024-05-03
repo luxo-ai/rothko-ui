@@ -1,32 +1,16 @@
-import { classes, isString } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import React from 'react';
+
+import { classes, scopedClasses as sc, isString } from '@rothko-ui/utils';
+
 import type { RothkoKind } from '../../theme/types';
 import { keyDownFactory } from '../../library/utils/keyUtils';
 import Typography from '../Typography/Typography';
-import type {
-  WithAriaControls,
-  WithAriaDisabled,
-  WithAriaExpanded,
-  WithAriaHasPopup,
-  WithAriaHidden,
-  WithAriaInvalid,
-  WithAriaLabeling,
-  WithAriaRequired,
-  WithAriaErrorMessage,
-} from '../../types';
 import useId from '../../library/hooks/useId';
 import styles from './Checkbox.module.scss';
+import type { WithAria } from './types';
 
-type WithAria<T> = WithAriaErrorMessage<
-  WithAriaRequired<
-    WithAriaHasPopup<
-      WithAriaExpanded<
-        WithAriaHidden<WithAriaDisabled<WithAriaInvalid<WithAriaControls<WithAriaLabeling<T>>>>>
-      >
-    >
-  >
->;
+const scoppedClasses = sc(styles);
 
 type CheckboxProps = WithAria<{
   id?: string;
@@ -92,7 +76,7 @@ const Checkbox = ({
   className,
   disabled,
   error,
-  kind,
+  kind = 'success',
   onChange,
   style,
   errorText = 'Invalid',
@@ -108,8 +92,16 @@ CheckboxProps) => {
 
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: clickCheckbox });
 
+  const baseClassses = scoppedClasses(
+    'checkbox',
+    `checkbox--${kind}`,
+    error && 'error',
+    checked && 'selected',
+    disabled && 'disabled'
+  );
+
   return (
-    <div style={style} className={classes(styles['checkbox-container'], className)}>
+    <div style={style} className={classes(styles['checkbox__container'], className)}>
       <div
         id={id}
         aria-describedby={ariaDescribedBy}
@@ -125,12 +117,7 @@ CheckboxProps) => {
         aria-disabled={ariaDisabled || disabled}
         aria-label={ariaLabel}
         aria-errormessage={!ariaErrorMessage && error ? errorMessageId : ariaErrorMessage}
-        className={classes(
-          styles[kind ? `checkbox--${kind}` : 'checkbox'],
-          error && styles['error'],
-          checked && styles['checked'],
-          disabled && styles['disabled']
-        )}
+        className={baseClassses}
         onClick={() => clickCheckbox()}
         onKeyDown={onKeyDown}
         role="checkbox"

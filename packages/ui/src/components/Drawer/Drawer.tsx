@@ -2,6 +2,7 @@ import { animated, useTransition } from '@react-spring/web';
 import React, { useEffect, useRef } from 'react';
 
 import { Close } from '@rothko-ui/icons';
+import { classes, isString } from '@rothko-ui/utils';
 
 import ShadedBackdrop from '../../library/ShadedBackdrop/ShadedBackdrop';
 import { PhantomButton } from '../../library/PhantomButton';
@@ -12,13 +13,10 @@ import {
   enableBodyScroll,
 } from '../../library/utils/domUtils';
 import DrawerContext from './DrawerContext';
-import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
 import useId from '../../library/hooks/useId';
 import { Typography } from '../Typography';
-import { classes, isString } from '@rothko-ui/utils';
+import type { WithAria } from './types';
 import styles from './Drawer.module.scss';
-
-type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
 
 type DrawerProps = WithAria<{
   id?: string;

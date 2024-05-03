@@ -2,7 +2,7 @@
 @import '../../styles/mixins.scss';
 @import '../../styles/themeMixins.scss';
 @import '../../library//PhantomButton.module.scss';
-@import '../Typography/Typography.module.scss';
+@import '../Typography/mixins';
 
 // Mixins for body styles based on size
 @mixin bodySizeStyles($size) {
@@ -50,7 +50,9 @@
   width: 100%;
   max-height: calc(100vh - 1rem);
   position: relative;
-  background-color: var(--rothko-modal-background, #fff);
+  //   background: ${vuar({ category: 'background', fallback: '#fff' })};
+  // background-color: var(--rothko-modal-background, #fff);
+  background: var(--rothko-background, #fff);
   margin: auto;
   overflow: scroll;
   scrollbar-width: thin;
