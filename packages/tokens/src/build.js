@@ -140,21 +140,17 @@ const build = () => {
   ['light', 'dark'].map(theme => {
     console.log('\n==============================================');
     console.log(`\nCreating theme - ${theme}`);
-    styledDictionary
-      .extend(generateThemeCssStyleDictionaryConfig(theme))
-      .buildPlatform('web')
-      .extend(generateThemeTypescriptStyleDictionaryConfig(theme))
-      .buildPlatform('web');
+    styledDictionary.extend(generateThemeCssStyleDictionaryConfig(theme)).buildPlatform('web');
+    // .extend(generateThemeTypescriptStyleDictionaryConfig(theme))
+    // .buildPlatform('web');
     console.log(`\nFinish theme - ${theme}`);
   });
 
   console.log('\n==============================================');
   console.log(`\nCreating typography`);
-  styledDictionary
-    .extend(generatePlatformStyleDictionaryConfig())
-    .buildPlatform('web')
-    .extend(generatePlatformTypescriptStyleDictionaryConfig())
-    .buildPlatform('web');
+  styledDictionary.extend(generatePlatformStyleDictionaryConfig()).buildPlatform('web');
+  // .extend(generatePlatformTypescriptStyleDictionaryConfig())
+  // .buildPlatform('web');
 
   console.log('\n==============================================');
   console.log('\nToken generation completed!');

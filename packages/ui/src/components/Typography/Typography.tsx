@@ -1,7 +1,13 @@
 import React from 'react';
 import { classes, scopedClasses as sc } from '@rothko-ui/utils';
 import styles from './Typography.module.scss';
-import type { TypographyProps } from './types';
+import type {
+  TypographyProps,
+  BaseParagraphProps,
+  BaseHeadingProps,
+  BaseLabelProps,
+  BaseCodeProps,
+} from './types';
 
 const scopedClasses = sc(styles);
 
@@ -14,7 +20,7 @@ const body = ({
   children,
   className,
   ...props
-}: JSX.IntrinsicElements['p'] & TypographyProps) => {
+}: BaseParagraphProps & TypographyProps) => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__paragraph',
@@ -39,7 +45,7 @@ const bodySmall = ({
   children,
   className,
   ...props
-}: JSX.IntrinsicElements['p'] & TypographyProps) => {
+}: BaseParagraphProps & TypographyProps) => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__paragraph',
@@ -65,7 +71,7 @@ const h1 = ({
   children,
   className,
   ...props
-}: JSX.IntrinsicElements['h1'] & TypographyProps) => {
+}: BaseHeadingProps & TypographyProps) => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__heading',
@@ -91,7 +97,7 @@ const h2 = ({
   children,
   className,
   ...props
-}: JSX.IntrinsicElements['h2'] & TypographyProps) => {
+}: BaseHeadingProps & TypographyProps) => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__heading',
@@ -117,7 +123,7 @@ const h3 = ({
   children,
   className,
   ...props
-}: JSX.IntrinsicElements['h3'] & TypographyProps) => {
+}: BaseHeadingProps & TypographyProps) => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__heading',
@@ -143,7 +149,7 @@ const h4 = ({
   children,
   className,
   ...props
-}: JSX.IntrinsicElements['h4'] & TypographyProps) => {
+}: BaseHeadingProps & TypographyProps) => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__heading',
@@ -169,7 +175,7 @@ const h5 = ({
   children,
   className,
   ...props
-}: JSX.IntrinsicElements['h5'] & TypographyProps) => {
+}: BaseHeadingProps & TypographyProps) => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__heading',
@@ -195,7 +201,7 @@ const h6 = ({
   children,
   className,
   ...props
-}: JSX.IntrinsicElements['h6'] & TypographyProps) => {
+}: BaseHeadingProps & TypographyProps) => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__heading',
@@ -221,7 +227,7 @@ const caption = ({
   children,
   className,
   ...props
-}: JSX.IntrinsicElements['p'] & TypographyProps) => {
+}: BaseParagraphProps & TypographyProps) => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__paragraph',
@@ -247,7 +253,7 @@ const label = ({
   children,
   className,
   ...props
-}: JSX.IntrinsicElements['label'] & TypographyProps) => {
+}: BaseLabelProps & TypographyProps) => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__paragraph',
@@ -273,7 +279,7 @@ const code = ({
   children,
   className,
   ...props
-}: JSX.IntrinsicElements['code'] & TypographyProps) => {
+}: BaseCodeProps & TypographyProps) => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__code',

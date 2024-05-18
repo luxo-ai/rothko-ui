@@ -10,7 +10,7 @@ export type HtmlInputProps = Omit<
 >;
 
 export type HtmlTextareaProps = Omit<
-  React.HTMLProps<HTMLTextAreaElement>,
+  React.TextareaHTMLAttributes<HTMLTextAreaElement>,
   'ref' | 'size' | 'error' | 'as'
 >;
 
