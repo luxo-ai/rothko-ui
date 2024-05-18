@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input } from '@rothko-ui/ui';
-import styles from './SearchBar.module.scss';
+import styles from './Searchbar.module.scss';
 
 type SearchBarProps = {
   onQueryChange: (q: string) => void;
