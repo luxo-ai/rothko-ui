@@ -46,7 +46,7 @@
   flex-wrap: wrap-reverse;
   display: flex;
   gap: 0.5rem;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
   padding: 1rem 0.75rem;
   background: variables.$toastBackground;
