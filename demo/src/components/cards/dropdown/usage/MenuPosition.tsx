@@ -21,7 +21,7 @@ const App = () => {
   const [selected, setSelected] = useState<number | null>(null);
   return (
     <Dropdown
-      menuPosition="top"
+      menuVariant="top"
       value={selected}
       onChange={v => setSelected(v)}
       options={DROPDOWN_OPTIONS}

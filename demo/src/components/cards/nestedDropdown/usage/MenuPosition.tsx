@@ -36,7 +36,7 @@ const App = () => {
   const [selected, setSelected] = useState<string | null>(null);
   return (
     <NestedDropdown
-      menuPosition="top"
+      menuVariant="top"
       value={selected}
       onChange={v => setSelected(v)}
       options={DROPDOWN_OPTIONS}

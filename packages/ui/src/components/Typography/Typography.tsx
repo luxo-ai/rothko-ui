@@ -20,7 +20,7 @@ const body = ({
   children,
   className,
   ...props
-}: BaseParagraphProps & TypographyProps) => {
+}: BaseParagraphProps & TypographyProps): JSX.Element => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__paragraph',
@@ -45,7 +45,7 @@ const bodySmall = ({
   children,
   className,
   ...props
-}: BaseParagraphProps & TypographyProps) => {
+}: BaseParagraphProps & TypographyProps): JSX.Element => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__paragraph',
@@ -71,7 +71,7 @@ const h1 = ({
   children,
   className,
   ...props
-}: BaseHeadingProps & TypographyProps) => {
+}: BaseHeadingProps & TypographyProps): JSX.Element => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__heading',
@@ -97,7 +97,7 @@ const h2 = ({
   children,
   className,
   ...props
-}: BaseHeadingProps & TypographyProps) => {
+}: BaseHeadingProps & TypographyProps): JSX.Element => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__heading',
@@ -123,7 +123,7 @@ const h3 = ({
   children,
   className,
   ...props
-}: BaseHeadingProps & TypographyProps) => {
+}: BaseHeadingProps & TypographyProps): JSX.Element => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__heading',
@@ -149,7 +149,7 @@ const h4 = ({
   children,
   className,
   ...props
-}: BaseHeadingProps & TypographyProps) => {
+}: BaseHeadingProps & TypographyProps): JSX.Element => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__heading',
@@ -175,7 +175,7 @@ const h5 = ({
   children,
   className,
   ...props
-}: BaseHeadingProps & TypographyProps) => {
+}: BaseHeadingProps & TypographyProps): JSX.Element => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__heading',
@@ -201,7 +201,7 @@ const h6 = ({
   children,
   className,
   ...props
-}: BaseHeadingProps & TypographyProps) => {
+}: BaseHeadingProps & TypographyProps): JSX.Element => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__heading',
@@ -227,7 +227,7 @@ const caption = ({
   children,
   className,
   ...props
-}: BaseParagraphProps & TypographyProps) => {
+}: BaseParagraphProps & TypographyProps): JSX.Element => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__paragraph',
@@ -253,7 +253,7 @@ const label = ({
   children,
   className,
   ...props
-}: BaseLabelProps & TypographyProps) => {
+}: BaseLabelProps & TypographyProps): JSX.Element => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__paragraph',
@@ -279,7 +279,7 @@ const code = ({
   children,
   className,
   ...props
-}: BaseCodeProps & TypographyProps) => {
+}: BaseCodeProps & TypographyProps): JSX.Element => {
   const baseClasses = scopedClasses(
     'typography',
     'typography__code',
