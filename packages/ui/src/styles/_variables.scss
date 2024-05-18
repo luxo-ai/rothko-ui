@@ -75,6 +75,8 @@ $rothkoKinds: ('primary', 'secondary', 'info', 'success', 'warning', 'danger');
 $rothkoSizes: ('xs', 's', 'm', 'l');
 
 $rothkoBackground: var(--rothko-background, #fff);
+$rothkoForeground: var(--rothko-foreground, #000);
+$rothkoBorder: var(--rothko-border, #000);
 
 $rothkoTheme: (
   'primary': $rothkoPrimary,

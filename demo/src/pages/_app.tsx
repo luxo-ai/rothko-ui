@@ -5,10 +5,12 @@ import type { AppContext, AppProps } from 'next/app';
 import '../../public/fonts/style.css';
 import RothkoHeader from '../components/Header';
 import { IsMobileOrTabletContext } from '../components/IsMobileOrTabletContext';
-import WithProviders from '../components/WithProviders';
 import config from '../config';
 import '../globals.css';
 import ErrorBoundary from '../components/ErrorBoundary';
+import React from 'react';
+import { RothkoProvider, ToastContextProvider } from '@rothko-ui/ui';
+import PaddedNavLayout from '../components/layout/PaddedNavLayout';
 
 type RothkoAppProps = AppProps & {
   cookies?: Dictionary<string, string>;
@@ -16,18 +18,22 @@ type RothkoAppProps = AppProps & {
 };
 export default function App({
   Component,
-  pageProps,
   cookies,
   isMobileOrTablet = false,
+  ...pageProps
 }: RothkoAppProps) {
-  const mode = (cookies?.[config.preference.themeMode] || 'dark') as 'dark' | 'light';
+  const theme = (cookies?.[config.preference.theme] || 'dark') as 'dark' | 'light';
   return (
     <ErrorBoundary>
       <RothkoHeader />
       <IsMobileOrTabletContext.Provider value={isMobileOrTablet}>
-        <WithProviders theme={mode}>
-          <Component {...pageProps} />
-        </WithProviders>
+        <RothkoProvider debugMode={config.debug} theme={theme}>
+          <PaddedNavLayout selected={pageProps.router.pathname}>
+            <ToastContextProvider>
+              <Component {...pageProps} />
+            </ToastContextProvider>
+          </PaddedNavLayout>
+        </RothkoProvider>
       </IsMobileOrTabletContext.Provider>
     </ErrorBoundary>
   );

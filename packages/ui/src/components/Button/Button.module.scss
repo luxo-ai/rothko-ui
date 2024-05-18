@@ -34,9 +34,11 @@
   $buttonThemeForeground: variables.safeGetThemeForeground($kind);
   $buttonThemeActive: var(--rothko-#{$kind}-400); // variables.safeGetTheme($kind, 400);
 
-  background: if($appearance == 'outline', transparent, $buttonTheme);
+  background-color: if($appearance == 'outline', transparent, $buttonTheme);
   border: 1px solid $buttonTheme;
   color: if($appearance == 'outline', $buttonTheme, $buttonThemeForeground);
+
+  transition: border-color 0.4s ease-out, background-color 0.4s ease-out;
 
   /**
    * hover is annoying and has bad UX on touch based machines
@@ -48,7 +50,7 @@
     }
    */
   &:active:not(:disabled) {
-    background: if($appearance == 'outline', transparent, $buttonThemeActive);
+    background-color: if($appearance == 'outline', transparent, $buttonThemeActive);
     border-color: $buttonThemeActive;
   }
 }

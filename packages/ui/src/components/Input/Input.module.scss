@@ -1,4 +1,6 @@
 @use './mixins' as mixins;
+@use './variables' as variables;
+@use '../../styles/placeholders';
 
 .input {
   @include mixins.inputStyle();

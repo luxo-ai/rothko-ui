@@ -1,8 +1,14 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
 
-import { phantomButtonStyle } from '../PhantomButton';
 import { ChevronDownOutline, CloseOutline } from '@rothko-ui/icons';
+import { scopedClasses as sc } from '@rothko-ui/utils';
+
+import style from './ControlButton.module.scss';
+
+const scoppedClasses = sc(style);
+
+const CLOSE_LABEL = 'Close';
+const OPEN_LABEL = 'Open';
 
 type ControlButtonProps = {
   rotateOnOpen?: boolean;
@@ -33,46 +39,35 @@ const ControlButton = ({ rotateOnOpen, open, disabled, onClick, type }: ControlB
   })();
 
   return (
-    <StyledControlButton
+    <button
       aria-label={ariaLabel}
       disabled={disabled}
       onClick={() => onClick()}
-      $rotateOnOpen={rotateOnOpen}
-      $open={open}
+      className={scoppedClasses('control-button', rotateOnOpen && 'rotate-on-open', open && 'open')}
     >
       {type === 'clear' ? <Clear /> : <Indicator />}
-    </StyledControlButton>
+    </button>
   );
 };
 
-const StyledControlButton = styled.button.attrs({ type: 'button' })<{
-  $rotateOnOpen?: boolean;
-  $open?: boolean;
-}>`
-  ${phantomButtonStyle}
-  display: flex;
-  align-items: center;
-  top: 0.51rem;
-  right: 0.51rem;
-  cursor: pointer;
-  margin: calc(-1 * 2 * 0.51rem);
-  height: auto;
-  width: auto;
-  padding: 0.51rem 1rem 0.51rem 1rem;
-  // otherwise hidden under input padding and cursor pointer doesn't work
-  z-index: 9;
+type IdkButtonProps = {
+  open?: boolean;
+  disabled?: boolean;
+  onClick: () => void;
+};
 
-  ${({ $rotateOnOpen, $open }) =>
-    $rotateOnOpen &&
-    css`
-      transform: rotate(${($open && '180deg') || '0deg'});
-      transition: transform 0.125s linear;
-    `}
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-`;
+export const IdkYet = ({ open, disabled, onClick }: IdkButtonProps) => {
+  return (
+    <button
+      aria-label={open ? CLOSE_LABEL : OPEN_LABEL}
+      aria-disabled={disabled}
+      disabled={disabled}
+      onClick={() => onClick()}
+      className={scoppedClasses('idk-key', open && 'open')}
+    >
+      <Indicator />
+    </button>
+  );
+};
 
 export default ControlButton;

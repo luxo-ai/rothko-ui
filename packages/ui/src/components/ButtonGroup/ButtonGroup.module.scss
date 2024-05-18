@@ -1,0 +1,44 @@
+.button-group {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  :not(:last-child):not(:first-child) {
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  :first-child:not(:last-child) {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  :last-child:not(:first-child) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  &:not(.no-effect) {
+    & > button {
+      will-change: transform;
+      transition-property: transform;
+      transition-duration: 0.3s;
+      transition-timing-function: cubic-bezier(0.39, 0.58, 0.57, 1); // sine
+
+      @media (prefers-reduced-motion: reduce) {
+        button {
+          transition-property: unset;
+          transition-duration: unset;
+          transition-timing-function: unset;
+        }
+      }
+    }
+
+    & > button:active {
+      transform: translateZ(0) scaleX(0.97) scaleY(0.97);
+    }
+  }
+}

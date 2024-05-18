@@ -1,20 +1,20 @@
-import styled, { css } from 'styled-components';
-import { vuar } from '../../../library/utils/vuar';
+import React from 'react';
+import { scopedClasses as sc } from '@rothko-ui/utils';
+import styles from './SliderTrack.module.scss';
 
-const SliderTrackDiv = styled.div<{ $disabled?: boolean }>`
-  position: relative;
-  display: flex;
-  align-items: center;
-  height: 1px;
-  background: ${vuar({ element: 'slider-track', category: 'background', fallback: '#000' })};
-  border-radius: 2px;
-  user-select: none;
-  z-index: 0;
-  ${({ $disabled }) =>
-    $disabled &&
-    css`
-      opacity: 0.75;
-    `}
-`;
+const scoppedClasses = sc(styles);
+
+type SliderTrackDivProps = React.HTMLProps<HTMLDivElement> & {
+  disabled?: boolean;
+};
+
+const SliderTrackDiv = ({ disabled, children, ...props }: SliderTrackDivProps) => {
+  const baseClasses = scoppedClasses('slider-track', disabled && 'disabled');
+  return (
+    <div {...props} className={baseClasses}>
+      {children}
+    </div>
+  );
+};
 
 export default SliderTrackDiv;

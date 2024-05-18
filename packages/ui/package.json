@@ -44,8 +44,6 @@
     "@rothko-ui/tokens": "^1.2.3",
     "@rothko-ui/utils": "^1.2.3",
     "keyboard-key": "^1.1.0",
-    "sass": "^1.75.0",
-    "styled-components": "^5.3.1",
     "uuid": "^9.0.0"
   },
   "peerDependencies": {
@@ -61,10 +59,8 @@
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "@types/styled-components": "^5.1.14",
     "@types/uuid": "^9.0.1",
     "autoprefixer": "^10.4.19",
-    "babel-plugin-styled-components": "^2.1.4",
     "crypto": "^1.0.1",
     "microbundle": "^0.13.3",
     "npm-run-all": "^4.1.5",
@@ -73,9 +69,9 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-visualizer": "^5.12.0",
+    "sass": "^1.77.0",
     "typed-scss-modules": "^8.0.1",
-    "typescript": "^4.4.2",
-    "typescript-plugin-css-modules": "^5.1.0"
+    "typescript": "^4.4.2"
   },
   "files": [
     "dist",

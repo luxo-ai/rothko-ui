@@ -1,65 +1,50 @@
-import { Email, Github, Heart, Twitter } from '@rothko-ui/icons';
-import { Drawer, Flex, Typography, useRothko } from '@rothko-ui/ui';
+import { Email, Github, Twitter } from '@rothko-ui/icons';
+import { Flex, Typography, useRothko } from '@rothko-ui/ui';
 import Link from 'next/link';
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import config from '../../config';
-import NavigationList from '../navigation/NavigationList';
 import Navigation from './Navigation';
 import styles from './Navigation.module.scss';
-import { useRouter } from 'next/router';
+import { DesktopOnly } from '../Dimensions';
+import NavigationList from './NavigationList';
 
 type LayoutProps = {
+  selected?: string;
   children: React.ReactNode;
-  withoutToggle?: boolean;
 };
 
-const PaddedNavLayout = React.forwardRef<HTMLDivElement, LayoutProps>(
-  ({ children, withoutToggle }, ref) => {
-    const router = useRouter();
-    const { mode } = useRothko();
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const closeDrawer = useCallback(() => setIsDrawerOpen(false), [setIsDrawerOpen]);
-    const openDrawer = useCallback(() => setIsDrawerOpen(true), [setIsDrawerOpen]);
-    return (
-      <div
-        ref={ref}
-        style={{ flex: 1 }}
-        className={`${styles.paddedNavContainer} ${styles.centered}`}
-      >
-        <Drawer open={isDrawerOpen} onClose={closeDrawer}>
-          <NavigationList
-            // too lazy to fix this, remove starting '/' in path
-            selected={router.pathname.substring(1)}
-            onNavigate={() => setIsDrawerOpen(false)}
-          />
-        </Drawer>
-        <header>
-          <Navigation withoutToggle={withoutToggle} openDrawer={openDrawer} />
-        </header>
-        <main>{children}</main>
-        <footer>
-          <Typography.bodySmall style={{ marginBottom: '0.5rem' }}>
-            Built with {/* <title>I &lt;3 Brooklyn</title> in SVG? */}
-            <span>
-              {<Heart style={{ marginBottom: -2 }} width={16} height={16} fill="red" />}
-            </span>{' '}
-            in Brooklyn
-          </Typography.bodySmall>
-          <Flex columnGap="1rem" justifyContent="center" alignItems="center">
-            <Twitter width={20} height={20} fill={mode === 'dark' ? '#cccc' : undefined} />
-            <Link href={config.repoUrl} target="_bank" className="phantom-button">
-              <Github width={20} height={20} fill={mode === 'dark' ? '#cccc' : undefined} />
-            </Link>
-            <Link href={`mailto:${config.contactEmail}`} className="phantom-button">
-              <Email width={20} height={20} fill={mode === 'dark' ? '#cccc' : undefined} />
-            </Link>
-          </Flex>
-        </footer>
-      </div>
-    );
-  }
-);
-
-PaddedNavLayout.displayName = 'PaddedNavLayout';
+const PaddedNavLayout = ({ children, selected }: LayoutProps) => {
+  const { mode } = useRothko();
+  return (
+    <div className={styles.paddedNavContainer}>
+      <header>
+        <Navigation />
+      </header>
+      <main>
+        <div className={styles.withNavGrid}>
+          <DesktopOnly>
+            <NavigationList selected={selected} />
+          </DesktopOnly>
+          {children}
+        </div>
+      </main>
+      <footer>
+        <Flex marginBottom="0.5rem" flexDirection="column" alignItems="center">
+          <Typography.body>Built in NYC</Typography.body>
+          <Typography.bodySmall light>© {new Date().getFullYear()} Rothko-UI</Typography.bodySmall>
+        </Flex>
+        <Flex columnGap="1rem" justifyContent="center" alignItems="center">
+          <Twitter width={20} height={20} fill={mode === 'dark' ? '#cccc' : undefined} />
+          <Link href={config.repoUrl} target="_bank">
+            <Github width={20} height={20} fill={mode === 'dark' ? '#cccc' : undefined} />
+          </Link>
+          <Link href={`mailto:${config.contactEmail}`}>
+            <Email width={20} height={20} fill={mode === 'dark' ? '#cccc' : undefined} />
+          </Link>
+        </Flex>
+      </footer>
+    </div>
+  );
+};
 
 export default PaddedNavLayout;

@@ -11,7 +11,6 @@ type KindRadioProps = {
 const KindRadioGroup = ({ kind, setKind }: KindRadioProps) => {
   return (
     <RadioGroup
-      kind="secondary"
       maxCol={3}
       columnGap="1.5rem"
       label="kind"

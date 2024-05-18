@@ -1,12 +1,9 @@
 import React, { useCallback, useRef } from 'react';
 import { animated, useSpring } from '@react-spring/web';
-import styled, { css } from 'styled-components';
 import keyboardKey from 'keyboard-key';
 
-import { isString } from '@rothko-ui/utils';
+import { classes, isString, scopedClasses as sc } from '@rothko-ui/utils';
 
-import { phantomButtonStyle } from '../../library/PhantomButton';
-import { unselectableStyle } from '../../library/Styles';
 import type { RothkoKind } from '../../theme';
 import { getElementFullHeight } from '../../library/utils/domUtils/dimensions';
 import Typography from '../Typography/Typography';
@@ -17,7 +14,9 @@ import { useDebuggerContext } from '../../library/DebuggerContext';
 import type { WithAriaHidden, WithAriaLabel, WithAriaLabelledBy } from '../../types';
 import useId from '../../library/hooks/useId';
 import AccordionIcon from './AccordionIcon';
-import { vuar } from '../../library/utils/vuar';
+import styles from './Accordion.module.scss';
+
+const scoppedClasses = sc(styles);
 
 type WithAria<T> = WithAriaHidden<WithAriaLabel<T>>;
 
@@ -112,6 +111,16 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
     const { bordered, iconOverride, kind, onClickPanel, selectedPanels, compact, hideIcon } =
       useAccordion();
 
+    const baseContainerClasses = scoppedClasses(
+      'accordion__panel',
+      kind && `accordion__panel--${kind}`,
+      compact && 'compact',
+      disabled && 'disabled',
+      bordered && 'bordered'
+    );
+
+    const baseLabelClasses = scoppedClasses('accordion__panel__label', disabled && 'disabled');
+
     const panelKey = useId($key);
     const isPanelSelected = selectedPanels.includes(panelKey);
 
@@ -141,27 +150,17 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
     );
 
     return (
-      <PanelContainerDiv
-        id={id}
-        $spaced={!compact}
-        $bordered={bordered}
-        $disabled={disabled}
-        kind={kind}
-        className={className}
-        style={style}
-        ref={ref}
-      >
+      <div id={id} className={classes(baseContainerClasses, className)} style={style} ref={ref}>
         <header>
-          <PanelLabelButton
+          <button
             id={toggleId}
-            $disabled={disabled}
             aria-controls={contentId}
             aria-disabled={disabled}
             aria-expanded={isPanelSelected}
             aria-hidden={ariaHidden}
             aria-label={ariaLabel}
             aria-selected={isPanelSelected}
-            className={labelClassName}
+            className={classes(baseLabelClasses, labelClassName)}
             disabled={disabled}
             onClick={onClick}
             onKeyDown={onKeyDown}
@@ -190,7 +189,7 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
                 <FlexItem>{subtitle}</FlexItem>
               )}
             </Flex>
-          </PanelLabelButton>
+          </button>
         </header>
         <PanelContent
           id={contentId}
@@ -201,7 +200,7 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
         >
           {isString(children) ? <DefaultBodyText>{children}</DefaultBodyText> : <>{children}</>}
         </PanelContent>
-      </PanelContainerDiv>
+      </div>
     );
   }
 );
@@ -238,6 +237,8 @@ const PanelContent = ({
   id,
   'aria-labelledby': ariaLabelledBy,
 }: PanelContentProps) => {
+  const baseContentClasses = scoppedClasses('accordion__panel__content');
+
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   const springStyle = useSpring({
@@ -258,110 +259,42 @@ const PanelContent = ({
 
   return (
     <animated.section id={id} role="tabpanel" aria-labelledby={ariaLabelledBy} style={springStyle}>
-      <PanelContentDiv style={style} className={className} ref={contentRef}>
+      <div style={style} className={classes(baseContentClasses, className)} ref={contentRef}>
         {children}
-      </PanelContentDiv>
+      </div>
     </animated.section>
   );
 };
 
-type PanelContainerDivProps = {
-  kind?: RothkoKind;
-  $bordered?: boolean;
-  $spaced?: boolean;
-  $disabled?: boolean;
+const DefaultBodyText = ({ children }: { children: React.ReactNode }) => {
+  return <Typography.body className={styles['accordion__text']}>{children}</Typography.body>;
 };
 
-const PanelContainerDiv = styled.div<PanelContainerDivProps>`
-  // overflow: hidden; do we need this? (messes with the onFous outline)
-  background: ${vuar({ element: 'accordion', category: 'background', fallback: '#fff' })};
+const DefaultTitleText = ({ children, kind }: { children: React.ReactNode; kind?: RothkoKind }) => {
+  return (
+    <Typography.body bold className={styles['accordion__text']} kind={kind}>
+      {children}
+    </Typography.body>
+  );
+};
 
-  // padding: 0 0.875rem;
-  border-radius: 0.125rem;
-
-  border-width: 1px;
-  border-style: solid;
-  // same color as the accordion background
-  border-color: ${vuar({ element: 'accordion', category: 'background', fallback: '#fff' })};
-
-  ${({ $bordered, kind }) =>
-    $bordered &&
-    css`
-      // same as global background
-      background: ${vuar({ category: 'background', fallback: 'transparent' })};
-      // set the border color
-      border-color: ${vuar({ kind, element: 'accordion', category: 'border' })};
-    `}
-
-  ${({ $spaced }) =>
-    $spaced
-      ? css`
-          border-radius: 0.125rem;
-        `
-      : css`
-          border-radius: 0;
-          &:last-of-type {
-            border-bottom-left-radius: 0.125rem;
-            border-bottom-right-radius: 0.125rem;
-          }
-          &:first-of-type {
-            border-top-left-radius: 0.125rem;
-            border-top-right-radius: 0.125rem;
-          }
-          &:not(:last-of-type) {
-            border-bottom: none;
-          }
-        `}
-
-  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
-  pointer-events: ${({ $disabled }) => ($disabled ? 'none' : 'auto')};
-`;
-
-const PanelLabelButton = styled.button<{ $disabled?: boolean }>`
-  ${unselectableStyle}
-  ${phantomButtonStyle}
-
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 0.875rem;
-
-  ${({ $disabled }) =>
-    $disabled
-      ? css`
-          opacity: 0.5;
-          cursor: not-allowed;
-        `
-      : css`
-          cursor: pointer;
-          opacity: 1;
-        `}
-
-  // https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible
-  &:focus-visible {
-    outline: 1px solid ${vuar({ element: 'accordion', category: 'border' })};
-  }
-`;
-
-const PanelContentDiv = styled.div`
-  padding: 0 0.875rem 0.875rem;
-`;
-
-const DefaultBodyText = styled(Typography.body)`
-  margin: 0;
-  padding: 0;
-`;
-
-const DefaultTitleText = styled(Typography.body).attrs({ bold: true })`
-  margin: 0;
-  padding: 0;
-`;
-
-const DefaultSubtitleText = styled(Typography.bodySmall).attrs({ light: true })`
-  margin: 0;
-  padding: 0;
-  opacity: 0.8;
-`;
+const DefaultSubtitleText = ({
+  children,
+  kind,
+}: {
+  children: React.ReactNode;
+  kind?: RothkoKind;
+}) => {
+  return (
+    <Typography.bodySmall
+      light
+      kind={kind}
+      style={{ opacity: 0.8 }}
+      className={styles['accordion__text']}
+    >
+      {children}
+    </Typography.bodySmall>
+  );
+};
 
 export default AccordionPanel;

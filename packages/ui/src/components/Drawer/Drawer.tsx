@@ -5,7 +5,7 @@ import { Close } from '@rothko-ui/icons';
 import { classes, isString } from '@rothko-ui/utils';
 
 import ShadedBackdrop from '../../library/ShadedBackdrop/ShadedBackdrop';
-import { PhantomButton } from '../../library/PhantomButton';
+import PhantomButton from '../../library/Button/PhantomButton';
 import DomPortal from '../../library/Portal';
 import {
   BODY_SCROLL_LOCK_IGNORE_ID,
@@ -126,7 +126,6 @@ const Drawer = ({
                   style={{ ...styleProp, ...style }}
                 >
                   <PhantomButton
-                    type="button"
                     aria-label="Close"
                     style={{ marginBottom: '1rem' }}
                     onClick={() => closeDrawer()}

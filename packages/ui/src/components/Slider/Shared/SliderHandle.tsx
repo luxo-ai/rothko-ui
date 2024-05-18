@@ -1,7 +1,6 @@
 import type { Nilable } from '@rothko-ui/utils';
+import { scopedClasses as sc } from '@rothko-ui/utils';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import styled from 'styled-components';
-import { hideChromeBrowserOutline } from '../../../library/Styles';
 import type { RothkoKind } from '../../../theme';
 import type { DragDelta, DragEvent } from '../../../library/utils/domUtils';
 import {
@@ -16,7 +15,9 @@ import {
 import { getOffsetFactory } from '../sliderUtils';
 import useIsMounted from '../../../library/hooks/useIsMounted';
 import type { WithAriaControls, WithAriaLabel } from '../../../types';
-import { vuar } from '../../../library/utils/vuar';
+import styles from './SliderHandle.module.scss';
+
+const scoppedClasses = sc(styles);
 
 type DraggableEvents = {
   start: string;
@@ -237,7 +238,7 @@ export const SliderHandle = ({
     : { left: offset, right: 'auto' };
 
   return (
-    <HandleButton
+    <button
       aria-disabled={!!disabled}
       aria-label={ariaLabel}
       aria-valuemax={max}
@@ -245,7 +246,6 @@ export const SliderHandle = ({
       aria-valuenow={value}
       aria-controls={ariaControls}
       disabled={disabled}
-      kind={kind}
       onMouseDown={e => handleDragStart(e, false)}
       onMouseUp={e => handleDragStop(e, false)}
       onTouchStart={() => {
@@ -260,57 +260,7 @@ export const SliderHandle = ({
       ref={handleRef}
       role="slider"
       style={positionStyle}
-      vertical={vertical}
+      className={scoppedClasses('handle', kind && `handle--${kind}`, vertical && 'vertical')}
     />
   );
 };
-
-const HandleButton = styled.button.attrs({ type: 'button' })<{
-  kind?: RothkoKind;
-  vertical?: boolean;
-}>`
-  ${hideChromeBrowserOutline}
-  -webkit-tap-highlight-color: transparent;
-  position: absolute;
-  // https://stackoverflow.com/questions/30552307/ios-safari-buttons-not-perfect-circles
-  padding: 0;
-  width: 1.5rem;
-  height: 1.5rem;
-  transform: ${({ vertical }) => (vertical ? `translate(0%, -50%)` : `translate(-50%, 0%)`)};
-  background-color: ${vuar({
-    category: 'background',
-    element: 'slider-handle',
-    fallback: '#ebf2fb',
-  })};
-
-  transition-property: border;
-  transition-duration: 0.2s;
-  // box-shadow: 0 2px 6px 0 rgb(101 110 123 / 20%);
-  border-radius: 50%;
-  border-style: solid;
-  border-width: 2px;
-  border-color: ${vuar({ category: 'border', element: 'slider-handle', fallback: '#bcc7df' })};
-  overflow: visible;
-  touch-action: ${({ vertical }) => (vertical ? `pan-y` : `pan-x`)};
-  z-index: 3;
-  user-select: none;
-  cursor: pointer;
-
-  &:not(:disabled) {
-    &:hover,
-    &:active,
-    &.active {
-      border-color: ${({ kind }) =>
-        vuar({
-          kind,
-          category: 'background',
-          element: 'slider-handle',
-          fallback: '#ebf2fb',
-        })};
-    }
-  }
-  :disabled {
-    // opacity: 0.8;
-    cursor: not-allowed;
-  }
-`;

@@ -1,11 +1,9 @@
 import { animated, useTransition } from '@react-spring/web';
 import React, { useEffect, useRef } from 'react';
-import styled from 'styled-components';
 
 import { CloseOutline } from '@rothko-ui/icons';
-import { isString } from '@rothko-ui/utils';
+import { isString, classes, scopedClasses as sc } from '@rothko-ui/utils';
 
-import { phantomButtonStyle } from '../../library/PhantomButton';
 import DomPortal from '../../library/Portal';
 import ShadedBackdrop from '../../library/ShadedBackdrop/ShadedBackdrop';
 import useId from '../../library/hooks/useId';
@@ -14,11 +12,11 @@ import {
   disableBodyScroll,
   enableBodyScroll,
 } from '../../library/utils/domUtils';
-import { vuar } from '../../library/utils/vuar';
-import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
 import Typography from '../Typography/Typography';
+import type { WithAria } from './types';
+import styles from './Popup.module.scss';
 
-type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
+const scopedClasses = sc(styles);
 
 type PopupProps = WithAria<{
   id?: string;
@@ -42,6 +40,9 @@ type PopupProps = WithAria<{
    * The inline style for the popup.
    */
   style?: React.CSSProperties;
+  /**
+   * Determines whether the popup should blur the background.
+   */
   blur?: boolean;
 }>;
 
@@ -58,6 +59,8 @@ const BottomPopup: React.FC<PopupProps> = ({
 }) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
   const contentId = useId();
+
+  const baseClasses = scopedClasses('bottom-popup');
 
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -121,54 +124,33 @@ const BottomPopup: React.FC<PopupProps> = ({
         {transition(
           (style, item) =>
             item && (
-              <AnimatedPopupContainer
+              <animated.div
                 aria-label={ariaLabel}
                 aria-labelledby={ariaLabelledBy}
                 aria-describedby={contentId}
                 id={id}
                 style={{ ...styleProp, ...style }}
                 ref={popupRef}
-                className={className}
+                className={classes(baseClasses, className)}
               >
-                <PopupCloseButton aria-label="Close" onClick={() => onClose()}>
+                <button
+                  className={scopedClasses('bottom-popup__close-button')}
+                  aria-label="Close"
+                  onClick={() => onClose()}
+                >
                   <CloseOutline aria-hidden width="1.5rem" height="1.5rem" />
-                </PopupCloseButton>
+                </button>
                 {isString(children) ? (
                   <Typography.body id={contentId}>{children}</Typography.body>
                 ) : (
                   <div id={contentId}>{children}</div>
                 )}
-              </AnimatedPopupContainer>
+              </animated.div>
             )
         )}
       </ShadedBackdrop>
     </DomPortal>
   );
 };
-
-const AnimatedPopupContainer = animated(styled.div`
-  border-top-left-radius: 0.75rem;
-  border-top-right-radius: 0.75rem;
-  background: ${vuar({ category: 'background', fallback: '#fff' })};
-  padding: 3.25rem 1.5rem 1.5rem 1.5rem;
-  position: fixed;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 999;
-  height: 0;
-  overflow: hidden;
-
-  will-change: transform, opacity, height;
-  transition-property: transform;
-  transition-timing-function: ease-out;
-`);
-
-const PopupCloseButton = styled.button.attrs({ type: 'button' })`
-  ${phantomButtonStyle}
-  position: absolute;
-  top: 14px;
-  right: 16px;
-`;
 
 export default BottomPopup;

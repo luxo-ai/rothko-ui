@@ -3,7 +3,7 @@ import type { Dictionary } from './types';
 /**
  * based on https://www.npmjs.com/package/clsx
  */
-type Falsey = number | false | null | undefined;
+type Falsey = number | false | null | undefined | '';
 
 type Arg<ClassName extends string> =
   | ClassName
@@ -14,7 +14,7 @@ const classesInner = <ClassName extends string>(...args: Arg<ClassName>[]) => {
   const strings: ClassName[] = [];
 
   for (const arg of args) {
-    if (typeof arg === 'string') {
+    if (typeof arg === 'string' && arg !== '') {
       strings.push(arg);
     } else if (typeof arg === 'object' && arg !== null) {
       strings.push(...(Object.keys(arg) as ClassName[]).filter(key => Boolean(arg[key])));

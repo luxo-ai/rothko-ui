@@ -1,0 +1,6 @@
+@forward '../../styles/variables';
+
+$accordionBackgroundColor: var(--rothko-accordion-background, #fff);
+$accordionBorderColor: var(--rothko-accordion-border, #000);
+$accordionHorizontalPadding: 0.875rem;
+$accordionPanelBorderRadius: 0.125rem;

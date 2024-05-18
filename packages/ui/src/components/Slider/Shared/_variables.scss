@@ -1,0 +1,7 @@
+@forward '../../../styles/variables';
+
+$sliderHandleSize: 1.5rem;
+$sliderHandleBackground: var(--rothko-slider-handle-background, #ebf2fb);
+$sliderHandleBorder: var(--rothko-slider-handle-border, #bcc7df);
+$sliderRangeBackground: var(--rothko-slider-range-background, #3e4e94);
+$sliderTrackBackground: var(--rothko-slider-track-background, #000);

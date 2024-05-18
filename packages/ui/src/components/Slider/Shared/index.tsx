@@ -1,5 +1,5 @@
-import SliderRangeDiv from './SliderRange';
-import SliderTrackDiv from './SliderTrack';
+import SliderRange from './SliderRange';
+import SliderTrack from './SliderTrack';
 
-export { SliderContainerDiv, SliderLegendContainerDiv } from './SliderContainer';
-export { SliderRangeDiv, SliderTrackDiv };
+export { SliderContainer, SliderLegendContainer } from './SliderContainer';
+export { SliderRange, SliderTrack };

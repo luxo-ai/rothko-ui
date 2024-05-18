@@ -1,0 +1,6 @@
+@forward '../../styles/variables';
+
+$toastLifeFilledBackground: var(--rothko-toast-life-filled-background, #000);
+$toastLifeEmptyBackground: var(--rothko-toast-life-empty-background, #fff);
+$toastBackground: var(--rothko-toast-background, #fff);
+$toastForeground: var(--rothko-toast-foreground, #000);

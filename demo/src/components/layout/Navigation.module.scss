@@ -1,36 +1,22 @@
+$headerBarHeightPx: 60px;
+$maxWidth: 75rem;
+$mainPaddingTop: 3rem;
+
 .nav {
-  & > div {
-    // 04/09/24
-    padding: 0 1.5rem;
-  }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  // center content
-  margin: 0 auto;
   height: 100%;
-
   background: var(--demo-background, #000);
 
-  &.blurry {
-    & > div {
-      padding: 0; // 04/09/24
-    }
-    background: var(--demo-nav-background, #000);
-    backdrop-filter: blur(5px);
-  }
-
-  // border-bottom: 1px solid rgb(51, 51, 51);
-  & > #nav-title {
-    user-select: none;
-  }
-
-  @media screen and (max-width: 750px) {
-    padding: 0 1rem;
+  padding: 0 1.5rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: $maxWidth;
+  @media screen and (max-width: 50rem) {
+    margin: 0;
   }
 }
-
-$headerBarHeightPx: 60px;
 
 .paddedNavContainer {
   height: 100%;
@@ -39,48 +25,27 @@ $headerBarHeightPx: 60px;
   display: flex;
   flex-direction: column;
   background: var(--demo-background, #000);
-  // background: #f6f9fc;
-  // overflow: hidden;
 
   // Header content
   & > header {
     height: $headerBarHeightPx;
     position: fixed;
     inset: 0 0 auto 0;
-    // background: white;
-    z-index: 999998;
+    z-index: 9999;
   }
-
-  // 04/09/24 -------
-  & header > nav > div {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 75rem;
-    width: 100%;
-    @media screen and (max-width: 50rem) {
-      margin: 0;
-    }
-  }
-  // ---------------
 
   // Main content
   & > main {
     flex: 1;
-    padding: 1rem;
+    padding: $mainPaddingTop 1.5rem;
     height: 100%;
-    //  overflow: auto;
-  }
-
-  // 04/09/24 ------
-  &.centered > main {
     margin: 0 auto;
-    max-width: 75rem;
+    max-width: $maxWidth;
     width: 100%;
     @media screen and (max-width: 50rem) {
       margin: 0;
     }
   }
-  // ---------------
 
   // Footer content
   & > footer {
@@ -88,22 +53,26 @@ $headerBarHeightPx: 60px;
   }
 }
 
-.phantomButton {
-  -webkit-font-smoothing: antialiased;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-  user-select: none;
-  background: transparent;
-  border: none;
-  outline: none;
-  padding: 0;
-  cursor: pointer;
-  z-index: 1;
-  display: flex;
+.hoverButton:hover {
+  @media screen and (min-width: 750px) {
+    opacity: 0.8;
+  }
+}
 
-  :hover {
-    @media screen and (min-width: 750px) {
-      opacity: 0.8;
-    }
+.withNavGrid {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  column-gap: 2.5rem;
+
+  & nav {
+    position: sticky;
+    top: calc($headerBarHeightPx + $mainPaddingTop);
+    height: calc(100vh - $headerBarHeightPx - $mainPaddingTop);
+    overflow-y: auto;
+    padding-bottom: 1.5rem;
+  }
+
+  @media screen and (max-width: 750px) {
+    display: block;
   }
 }

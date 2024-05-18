@@ -42,11 +42,7 @@ export const ThemeContextProvider = ({
     }
   }, [mode]);
 
-  return (
-    <Context.Provider value={{ mode, toggleMode }}>
-      <div className={mode}>{children}</div>
-    </Context.Provider>
-  );
+  return <Context.Provider value={{ mode, toggleMode }}>{children}</Context.Provider>;
 };
 
 export const useTheme = () => {

@@ -1,16 +1,14 @@
 export type Styles = {
-  'modal-close-button': string;
-  'modal-container': string;
-  'modal-header': string;
-  'modal-header-size-l': string;
-  'modal-header-size-m': string;
-  'modal-header-size-s': string;
-  'modal-header-size-xs': string;
-  'modal-size-l': string;
-  'modal-size-m': string;
-  'modal-size-s': string;
-  'modal-size-xs': string;
-  'phantom-button': string;
+  modal: string;
+  'modal__close-button': string;
+  'modal__header--l': string;
+  'modal__header--m': string;
+  'modal__header--s': string;
+  'modal__header--xs': string;
+  'modal--l': string;
+  'modal--m': string;
+  'modal--s': string;
+  'modal--xs': string;
 };
 
 export type ClassNames = keyof Styles;

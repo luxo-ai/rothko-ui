@@ -1,33 +1,29 @@
 import React from 'react';
-import styled from 'styled-components';
-
-import Menu from '../Menu';
-
-const StyledDropdownMenu = styled(Menu)`
-  max-height: 13rem;
-  z-index: 10;
-`;
+import Menu from '../Menu/Menu';
+import styles from './Dropdown.module.scss';
+import type { MenuVariant, ScrollableHTMLElement } from '../Menu/types';
 
 type DropdownMenuProps = {
   id?: string;
-  reverse?: boolean;
+  variant?: MenuVariant;
   children?: React.ReactNode;
   role?: React.AriaRole;
+  open?: boolean;
 };
 
-const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
-  ({ id, reverse, children }, ref) => {
+const DropdownMenu = React.forwardRef<ScrollableHTMLElement, DropdownMenuProps>(
+  ({ id, variant, children, open }, ref) => {
     return (
-      <StyledDropdownMenu
+      <Menu
         id={id}
         ref={ref}
-        // tab index is needed to make the menu focusable via keyboard
-        tabIndex={-1}
-        $reverse={reverse}
+        open={open}
+        variant={variant}
+        className={styles['dropdown-menu']}
         data-rothko-body-scroll-lock-ignore
       >
         {children}
-      </StyledDropdownMenu>
+      </Menu>
     );
   }
 );

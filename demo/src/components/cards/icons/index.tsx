@@ -3,16 +3,15 @@ import React, { useMemo, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 import * as Icons from '@rothko-ui/icons';
-import type { Accessory, Option } from '@rothko-ui/ui';
 import {
   Alert,
   Container,
   Flex,
   FlexItem,
-  OptionGroup,
-  SearchBar,
+  ButtonGroup,
   ToastContextConsumer,
   Typography,
+  Button,
 } from '@rothko-ui/ui';
 
 import { truncateString } from '@rothko-ui/utils';
@@ -22,45 +21,24 @@ import styles from './Icons.module.scss';
 import iconographyCopy from './copy';
 import { filledIconList, outlineIconList } from './iconsList';
 import { BASIC } from './usage/sourceCode';
+import SearchBar from '../../SearchBar';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/icons';
 
-enum IconKind {
-  Outline,
-  Filled,
-}
+type IconKind = 'filled' | 'outline';
 
 const outlineIconSearcher = new FuzzySearch([...outlineIconList]);
 const filledIconSearcher = new FuzzySearch([...filledIconList]);
 
-const iconKindOptions: Option<IconKind, { accessoryLeft: Accessory }>[] = [
-  {
-    id: IconKind.Filled,
-    label: 'Filled',
-    data: {
-      accessoryLeft: ({ size, color }) => <Icons.Moon width={size} height={size} fill={color} />,
-    },
-  },
-  {
-    id: IconKind.Outline,
-    label: 'Outline',
-    data: {
-      accessoryLeft: ({ size, color }) => (
-        <Icons.MoonOutline width={size} height={size} fill={color} />
-      ),
-    },
-  },
-];
-
 const IconsCard = () => {
   const [query, setQuery] = useState<string>('');
-  const [iconKind, setIconKind] = useState<IconKind>(IconKind.Filled);
+  const [iconKind, setIconKind] = useState<IconKind>('filled');
 
   const iconList = useMemo(() => {
     if (!query.length) {
-      return iconKind === IconKind.Filled ? filledIconList : outlineIconList;
+      return iconKind === 'filled' ? filledIconList : outlineIconList;
     }
-    return iconKind === IconKind.Filled
+    return iconKind === 'filled'
       ? filledIconSearcher.search(query)
       : outlineIconSearcher.search(query);
   }, [iconKind, query]);
@@ -80,17 +58,26 @@ const IconsCard = () => {
           />
         </div>
         <Container maxWidth="13rem">
-          <OptionGroup
-            withoutBorder
-            optionsWithRadius
-            maxCol={2}
-            kind="primary"
-            optionGap="0.75rem"
-            size="xs"
-            value={iconKind}
-            options={iconKindOptions}
-            onChange={v => setIconKind(v)}
-          />
+          <ButtonGroup noEffect kind="primary" size="xs" shape="pill" style={{ width: '10rem' }}>
+            <Button
+              accessoryLeft={({ size, color }) => (
+                <Icons.Moon width={size} height={size} fill={color} />
+              )}
+              appearance={iconKind === 'filled' ? 'filled' : 'outline'}
+              onClick={() => setIconKind('filled')}
+            >
+              Filled
+            </Button>
+            <Button
+              accessoryRight={({ size, color }) => (
+                <Icons.MoonOutline width={size} height={size} fill={color} />
+              )}
+              appearance={iconKind === 'outline' ? 'filled' : 'outline'}
+              onClick={() => setIconKind('outline')}
+            >
+              Outline
+            </Button>
+          </ButtonGroup>
         </Container>
         <div style={{ position: 'relative' }}>
           {iconList.length > 0 && (

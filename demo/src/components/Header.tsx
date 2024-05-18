@@ -11,7 +11,7 @@ type HeaderProps = {
 const RothkoHeader = ({
   children,
   title = 'Rothko UI',
-  description = 'Modern React UI library.',
+  description = 'Modern React UI Library.',
 }: HeaderProps) => (
   <Header>
     <title key="title">{title}</title>

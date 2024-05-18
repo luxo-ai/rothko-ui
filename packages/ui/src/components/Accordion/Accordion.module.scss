@@ -1,0 +1,93 @@
+@use './variables' as variables;
+@use '../../styles/mixins' as mixins;
+@use './placeholders';
+
+// container for all panels
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  &.compact {
+    gap: 0;
+  }
+}
+
+// container for single panel
+.accordion__panel {
+  background: variables.$accordionBackgroundColor;
+  border-radius: variables.$accordionPanelBorderRadius;
+  // same color as the accordion background
+  border: 1px solid variables.$accordionBackgroundColor;
+
+  &.bordered {
+    border-color: variables.$accordionBorderColor;
+  }
+
+  &.compact {
+    border-radius: 0;
+    &:last-of-type {
+      border-bottom-left-radius: variables.$accordionPanelBorderRadius;
+      border-bottom-right-radius: variables.$accordionPanelBorderRadius;
+    }
+    &:first-of-type {
+      border-top-left-radius: variables.$accordionPanelBorderRadius;
+      border-top-right-radius: variables.$accordionPanelBorderRadius;
+    }
+    &:not(:last-of-type) {
+      border-bottom: none;
+    }
+  }
+
+  &.disabled {
+    @extend %accordion-disabled;
+  }
+}
+
+@each $kind in variables.$rothkoKinds {
+  .accordion__panel--#{$kind} {
+    &.bordered {
+      // set the border color
+      border-color: variables.safeGetTheme($kind);
+    }
+    // set the text color for the label's children
+    & > svg {
+      fill: variables.safeGetTheme($kind);
+    }
+  }
+}
+
+// button
+.accordion__panel__label {
+  @extend %user-select-none;
+  @extend %phantom-button-style;
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0.875rem;
+  cursor: pointer;
+
+  &:disabled,
+  &.disabled {
+    @extend %accordion-disabled;
+  }
+
+  // https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible
+  &:focus-visible {
+    outline: 1px solid variables.$accordionBorderColor;
+  }
+}
+
+// content panel
+.accordion__panel__content {
+  padding: 0 0.875rem 0.875rem;
+}
+
+// increasing specificity because accordiion comes first in the cascade :(
+// long term solutin is to make each component it's own package
+p.accordion__text {
+  margin: 0;
+  padding: 0;
+}

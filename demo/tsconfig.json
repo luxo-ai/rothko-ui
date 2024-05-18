@@ -30,5 +30,12 @@
     "node_modules",
     "build"
   ],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "scripts/generateSource.js"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "scripts/generateSource.js",
+    "build/types/**/*.ts"
+  ]
 }

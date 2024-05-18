@@ -1,6 +1,4 @@
 .icons {
-  // margin="0 auto" flexWrap="wrap" gap="1rem"
-  // display: flex;
   display: grid;
   grid-template-columns: repeat(5, 160px); // repeat(5, 1fr);
   grid-template-rows: 120px;
@@ -14,12 +12,18 @@
     grid-template-columns: repeat(5, 160px); // repeat(4, 1fr);
   }
 
-  @media screen and (max-width: 1155px) {
+  @media screen and (max-width: 1245px) {
     grid-template-columns: repeat(4, 180px); // repeat(3, 1fr);
     grid-template-rows: 150px;
   }
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 1098px) {
+    gap: 0.75rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: unset;
+  }
+
+  @media screen and (max-width: 664px) {
     gap: 0.75rem;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: unset;
@@ -31,14 +35,19 @@
     grid-template-rows: unset;
   }
 
-  @media screen and (max-width: 458px) {
+  @media screen and (max-width: 475px) {
+    gap: 0.75rem;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: unset;
+  }
+
+  @media screen and (max-width: 300px) {
     gap: 0.75rem;
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: unset;
   }
 
   .icon {
-    // min-height: 10rem;
     width: 100%;
     background: var(--rothko-box-background);
     button {

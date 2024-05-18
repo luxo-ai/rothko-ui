@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Sat, 27 Apr 2024 18:13:34 GMT
+ * Generated on Sat, 18 May 2024 05:03:29 GMT
  */
 
 export const PRIMARY_100 = '#FFFFFF';
@@ -83,12 +83,10 @@ export const DROPDOWN_MULTISELECT_FOREGROUND = '#c42317';
 export const DROPDOWN_MULTISELECT_BORDER = '#c42317';
 export const DROPDOWN_MULTISELECT_BACKGROUND = '#000';
 export const DROPDOWN_OPTION_BACKGROUND_FOCUS = '#3B3B3B';
-export const SEARCH_BACKGROUND = '#141414';
-export const SEARCH_OPTION_BACKGROUND_FOCUS = '#3B3B3B';
 export const TAB_BAR_BORDER = '#FFF';
 export const RADIO_BORDER = '#6b6b6b';
 export const RADIO_BACKGROUND = '#2D3035';
-export const RADIO_BACKGROUND_FOCUS = '#c42317';
+export const RADIO_BACKGROUND_FOCUS = '#2D3035';
 export const TABLE_BACKGROUND = '#080808';
 export const TABLE_HEADER_BACKGROUND = '#141414';
 export const TABLE_ROW_BORDER = '#000';
@@ -97,8 +95,6 @@ export const TOAST_FOREGROUND = '#FFF';
 export const TOAST_BACKGROUND = '#141414';
 export const TOAST_LIFE_FILLED_BACKGROUND = '#e93c2f';
 export const TOAST_LIFE_EMPTY_BACKGROUND = 'transparent';
-export const BOX_BACKGROUND = '#141414';
-export const BOX_BORDER = '#FFF';
 export const ACCORDION_BORDER = '#FFF';
 export const ACCORDION_BACKGROUND = '#141414';
 export const CHECKBOX_BACKGROUND = '#DEE7F5';
@@ -107,9 +103,10 @@ export const INPUT_BACKGROUND = 'rgba(188, 199, 223, 0.24)';
 export const INPUT_FOREGROUND = '#FFF';
 export const SKELETON_BACKGROUND = '#DEE7F5';
 export const SKELETON_FOREGROUND = '#EBF2FB';
-export const TOGGLE_BORDER = '#DEE7F5';
-export const TOGGLE_BACKGROUND = 'rgba(143, 155, 179, 0.16)';
-export const TOGGLE_BACKGROUND_FOCUS = 'green';
+export const SWITCH_BORDER = '#494949';
+export const SWITCH_BACKGROUND = '#2d3035';
+export const SWITCH_BACKGROUND_FOCUS = '#41ff69';
+export const SWITCH_HANDLE_BACKGROUND = '#757985';
 export const TYPOGRAPHY_LINK_COLOR = '#e93c2f';
 export const TYPOGRAPHY_BODY_COLOR = '#FFF';
 export const TYPOGRAPHY_HEADING_COLOR = '#FFF';

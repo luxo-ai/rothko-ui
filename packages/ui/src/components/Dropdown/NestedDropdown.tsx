@@ -1,5 +1,5 @@
 import keyboardKey from 'keyboard-key';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { ChevronRightOutline } from '@rothko-ui/icons';
 import { classes, isNil, mapReverse, map } from '@rothko-ui/utils';
@@ -7,12 +7,12 @@ import { classes, isNil, mapReverse, map } from '@rothko-ui/utils';
 import { useDebuggerContext } from '../../library/DebuggerContext';
 import DefaultRenderOption from '../../library/dropdown/RenderOption';
 import type { NestedOption, RenderNestedOption, Value } from '../../library/types';
-import BackButton from '../../library/BackButton';
+import BackButton from '../../library/Button/BackButton';
 import Typography from '../Typography/Typography';
 import type { DropdownInnerProps } from './types';
 import useNestedDropdown from './useNestedDropdown';
 import ItemText from '../../library/ItemText/ItemText';
-import LabelText from '../../library/LabelText';
+import ComponentLabel from '../../library/ComponentLabel/ComponentLabel';
 import DropdownContainer from '../../library/dropdown/DropdownContainer';
 import ControlButton from '../../library/dropdown/ControlButton';
 import DropdownMenu from '../../library/dropdown/DropdownMenu';
@@ -20,13 +20,14 @@ import useFieldIds from '../../library/hooks/useFieldIds';
 import type { StackOption } from '../../library/hooks/types';
 import { Direction } from '../../library/hooks/types';
 import styles from './Dropdown.module.scss';
+import type { ScrollableHTMLElement } from '../../library/Menu/types';
+import MenuItem from '../../library/Menu/MenuItem';
 
 type NestedDropdownProps<V extends Value, T = undefined> = Pick<
   DropdownInnerProps<V, T>,
   | 'id'
   | 'placeholder'
-  | 'bordered'
-  | 'menuPosition'
+  | 'menuVariant'
   | 'label'
   | 'style'
   | 'noResultsMessage'
@@ -67,8 +68,7 @@ function NestedDropdown<V extends Value, T = undefined>({
   error,
   errorText = 'Invalid',
   label,
-  menuPosition = 'bottom',
-  bordered = true,
+  menuVariant = 'bottom',
   onBlur,
   onChange,
   onFocus,
@@ -88,7 +88,8 @@ function NestedDropdown<V extends Value, T = undefined>({
   'aria-invalid': ariaInvalid,
   'aria-errormessage': ariaErrorMessage,
 }: NestedDropdownProps<V, T>) {
-  const openReverse = menuPosition === 'top';
+  const menuRef = useRef<ScrollableHTMLElement>(null);
+  const openReverse = menuVariant === 'top';
   const debug = useDebuggerContext('<NestedDropdown />');
 
   const { elementId: dropdownMenuId, labelId, errorMessageId } = useFieldIds();
@@ -102,12 +103,10 @@ function NestedDropdown<V extends Value, T = undefined>({
     goToPrevCategory,
     moveOptionIdx,
     containerRef,
-    menuRef,
     focus,
     open,
     openMenu,
     closeMenu,
-    scrollIntoView,
     onBlurHandler,
     onFocusHandler,
     clearValue,
@@ -124,7 +123,6 @@ function NestedDropdown<V extends Value, T = undefined>({
     value,
   });
 
-  const hasOptions = Boolean(options.length);
   const hasValue = !isNil(value);
   const canClear = clearable && hasValue && !disabled;
   const mapper = openReverse ? mapReverse : map;
@@ -193,32 +191,20 @@ function NestedDropdown<V extends Value, T = undefined>({
   };
 
   useEffect(() => {
-    if (!open) {
-      return;
+    if (open && menuRef.current && openReverse && optIdx === -1) {
+      menuRef.current.scrollToBottom();
     }
-    if (optIdx < 0 && openReverse) {
-      scrollIntoView(`#${dropdownMenuId}-opt-0`);
-      return;
-    }
-    if (optIdx >= 0) {
-      scrollIntoView(`#${dropdownMenuId}-opt-${optIdx}`);
-      return;
-    }
-  }, [optIdx, openReverse, open, scrollIntoView, dropdownMenuId]);
-
-  const containerClasses = classes({
-    error,
-    disabled,
-    focus,
-    minimal: !bordered,
-    empty: !hasOptions,
-  });
+  }, [open, menuRef, openReverse, optIdx]);
 
   return (
     <div className={className}>
-      {label && <LabelText id={labelId}>{label}</LabelText>}
+      {label && <ComponentLabel id={labelId}>{label}</ComponentLabel>}
       <DropdownContainer
         id={id}
+        error={error}
+        disabled={disabled}
+        focus={focus}
+        open={open}
         aria-invalid={ariaInvalid || error}
         aria-required={ariaRequired}
         aria-disabled={ariaDisabled}
@@ -236,7 +222,6 @@ function NestedDropdown<V extends Value, T = undefined>({
         onClick={() => openMenu()}
         onKeyDown={onKeyDown}
         aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
-        className={containerClasses}
         tabIndex={0}
       >
         {isNil(value) && <ItemText isPlaceHolder>{placeholder}</ItemText>}
@@ -252,82 +237,65 @@ function NestedDropdown<V extends Value, T = undefined>({
         ) : (
           <ControlButton disabled={disabled} onClick={() => clearValue()} type="clear" />
         )}
-        {open && (
-          <DropdownMenu id={dropdownMenuId} ref={menuRef} reverse={openReverse}>
-            {/* Maaybe use flexbox */}
-            {!openReverse && canGoToPrevCategory && (
-              <div className={classes(styles['nested-button-container'])}>
-                <BackButton
-                  onClick={() => {
-                    goToPrevCategory();
-                    containerRef.current?.focus();
-                  }}
-                />
-              </div>
-            )}
-            {!openReverse && title && (
-              <Typography.label className={classes(styles['nested-dropdown-category-title'])}>
-                {title}
-              </Typography.label>
-            )}
-            <ul
-              aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
-              role="listbox"
-              tabIndex={-1}
+
+        <DropdownMenu
+          id={dropdownMenuId}
+          ref={menuRef}
+          open={open}
+          variant={menuVariant}
+          aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
+        >
+          {/* Maaybe use flexbox */}
+          {!openReverse && canGoToPrevCategory && (
+            <div className={styles['nested-button-container']}>
+              <BackButton
+                onClick={() => {
+                  goToPrevCategory();
+                  containerRef.current?.focus();
+                }}
+              />
+            </div>
+          )}
+          {!openReverse && title && (
+            <Typography.label className={styles['nested-dropdown-category-title']}>
+              {title}
+            </Typography.label>
+          )}
+          {mapper(options, (option, idx) => (
+            <MenuItem
+              disabled={option.disabled}
+              aria-label={option.label}
+              focused={optIdx === idx}
+              key={option.id}
+              onClick={() => {
+                onSelectHandler(option);
+                containerRef.current?.blur();
+              }}
             >
-              {mapper(options, (option, idx) => {
-                const optionDisabled = option.disabled || disabled;
-                const selected = optIdx === idx;
-                return (
-                  <li
-                    aria-disabled={optionDisabled}
-                    aria-label={option.label}
-                    aria-selected={selected}
-                    className={classes('option', {
-                      selected,
-                      disabled: optionDisabled,
-                    })}
-                    id={`${dropdownMenuId}-opt-${idx}`}
-                    key={option.id}
-                    role="option"
-                    tabIndex={-1}
-                    onClick={e => {
-                      if (optionDisabled) return;
-                      e.preventDefault();
-                      onSelectHandler(option);
-                      containerRef.current?.blur();
-                    }}
-                  >
-                    <div className={styles['nested-option-container']}>
-                      <RenderOpt option={option} />
-                      {option.hasMore && <ChevronRightOutline width="1rem" height="1rem" />}
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-            {openReverse && title && (
-              <Typography.label
-                className={classes(
-                  styles['nested-dropdown-category-title'],
-                  styles['title-reverse']
-                )}
-              >
-                {title}
-              </Typography.label>
-            )}
-            {openReverse && canGoToPrevCategory && (
-              <div className={classes(styles['nested-button-container'], styles['button-reverse'])}>
-                <BackButton
-                  onClick={() => {
-                    goToPrevCategory();
-                    containerRef.current?.focus();
-                  }}
-                />
+              <div className={styles['nested-option-container']}>
+                <RenderOpt option={option} />
+                {option.hasMore && <ChevronRightOutline width="1rem" height="1rem" />}
               </div>
-            )}
-          </DropdownMenu>
-        )}
+            </MenuItem>
+          ))}
+          {openReverse && title && (
+            <Typography.label
+              className={classes(styles['nested-dropdown-category-title'], styles['title-reverse'])}
+            >
+              {title}
+            </Typography.label>
+          )}
+          {openReverse && canGoToPrevCategory && (
+            <div className={classes(styles['nested-button-container'], styles['button-reverse'])}>
+              <BackButton
+                onClick={() => {
+                  goToPrevCategory();
+                  containerRef.current?.focus();
+                }}
+              />
+            </div>
+          )}
+        </DropdownMenu>
       </DropdownContainer>
       {error && errorText && <Typography.body id={errorMessageId}>{errorText}</Typography.body>}
     </div>

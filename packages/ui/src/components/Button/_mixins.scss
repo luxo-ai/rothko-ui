@@ -1,5 +1,7 @@
+@use '../../styles/mixins' as mixins;
 @use '../Typography/mixins' as typographyMixins;
 @use './variables' as variables;
+@use '../../styles/placeholders';
 
 @mixin buttonPill {
   border-radius: 50vmin;
@@ -14,11 +16,13 @@
 }
 
 @mixin baseButtonStyle {
+  @extend %ios-tap-highlight-color-transparent;
   @include typographyMixins.regularFontStyle();
   // Use font smoothing to make text more readable
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 
+  appearance: none;
   // Prevent double tap zoom on mobile
   touch-action: manipulation;
   cursor: pointer;

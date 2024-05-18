@@ -1,0 +1,58 @@
+import React from 'react';
+import type { RothkoKind, RothkoSize } from '../../theme';
+import type { ButtonAppearance, ButtonShape } from '../Button/types';
+import styles from './ButtonGroup.module.scss';
+import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+
+const scoppedClasses = sc(styles);
+
+type ButtonGroupProps = {
+  appearance?: ButtonAppearance;
+  children: React.ReactNode;
+  className?: string;
+  gap?: number | string;
+  kind?: RothkoKind;
+  noEffect?: boolean;
+  shape?: ButtonShape;
+  size?: RothkoSize;
+  style?: React.CSSProperties;
+};
+
+const ButtonGroup = ({
+  appearance,
+  children,
+  className,
+  gap,
+  kind,
+  noEffect,
+  shape,
+  size,
+  style = {},
+}: ButtonGroupProps) => {
+  const baseClasses = scoppedClasses('button-group', noEffect && 'no-effect');
+  const buttonChildren = React.Children.map(children, (child, index) => {
+    if (!React.isValidElement(child)) {
+      return child;
+    }
+    if (child.type !== 'button') {
+      // eslint-disable-next-line no-console
+      console.warn("ButtonGroup expects 'button' elements as children.");
+    }
+    return React.cloneElement(child, {
+      ...(child.props || {}),
+      key: child.key || `bttn${index}`,
+      appearance: child.props.appearance || appearance,
+      shape: child.props.shape || shape,
+      kind: child.props.kind || kind,
+      size: child.props.size || size,
+    });
+  });
+
+  return (
+    <div style={{ ...style, gap: gap || style.gap }} className={classes(baseClasses, className)}>
+      {buttonChildren}
+    </div>
+  );
+};
+
+export default ButtonGroup;

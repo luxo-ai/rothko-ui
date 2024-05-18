@@ -1,33 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Grid } from '../../layout';
 import type { RothkoKind } from '../../theme';
-import type {
-  EmSize,
-  RemSize,
-  WithAriaControls,
-  WithAriaDisabled,
-  WithAriaErrorMessage,
-  WithAriaHidden,
-  WithAriaInvalid,
-  WithAriaLabeling,
-  WithAriaRequired,
-} from '../../types';
+import type { EmSize, RemSize } from '../../types';
 import useId from '../../library/hooks/useId';
 import { Typography } from '../Typography';
 import type { RadioGroupContextType } from './RadioGroupContext';
 import RadioGroupContext from './RadioGroupContext';
-import LabelText from '../../library/LabelText';
+import ComponentLabel from '../../library/ComponentLabel/ComponentLabel';
+import type { RadioGroupWithAria } from './types';
 
-const RadioGroupContainerDiv = styled.div``;
-
-type WithAria<T> = WithAriaErrorMessage<
-  WithAriaRequired<
-    WithAriaHidden<WithAriaDisabled<WithAriaInvalid<WithAriaControls<WithAriaLabeling<T>>>>>
-  >
->;
-
-type RadioGroupProps<K extends string> = WithAria<{
+type RadioGroupProps<K extends string> = RadioGroupWithAria<{
   id?: string;
   /**
    * The content to be rendered inside the RadioGroup.
@@ -140,8 +122,8 @@ RadioGroupProps<K>) {
   );
 
   return (
-    <RadioGroupContainerDiv id={id} style={style} className={className}>
-      {label && <LabelText id={labelId}>{label}</LabelText>}
+    <div id={id} style={style} className={className}>
+      {label && <ComponentLabel id={labelId}>{label}</ComponentLabel>}
       <Grid
         aria-label={ariaLabel}
         aria-describedby={ariaDescribedBy}
@@ -168,7 +150,7 @@ RadioGroupProps<K>) {
           {errorText}
         </Typography.body>
       )}
-    </RadioGroupContainerDiv>
+    </div>
   );
 }
 

@@ -5,7 +5,6 @@ import { asNonNilArray, filterIterable, isNil } from '@rothko-ui/utils';
 import { useDebuggerContext } from '../../library/DebuggerContext';
 import type { FocusHandler, Option, Value } from '../../library/types';
 import useOptions from '../../library/hooks/useOptions';
-import useScrollIntoView from '../../library/hooks/useScrollIntoView';
 
 type HookArgs<V, T> = {
   disabled?: boolean;
@@ -38,7 +37,6 @@ const useSelect = <V extends Value, T = undefined>({
 
   const timeoutId = useRef<NodeJS.Timeout>();
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollIntoView, scrollElRef: menuRef } = useScrollIntoView();
 
   const [open, setOpen] = useState<boolean>(false);
   const [focus, setFocus] = useState<boolean>(false);
@@ -56,7 +54,7 @@ const useSelect = <V extends Value, T = undefined>({
     setFocus(false);
     onClose?.();
     containerRef.current?.blur();
-    menuRef.current?.blur();
+    //   menuRef.current?.blur();
   };
 
   const openMenu = () => {
@@ -153,14 +151,12 @@ const useSelect = <V extends Value, T = undefined>({
     options,
     selectOne,
     containerRef,
-    menuRef,
     open,
     focus,
     onBlurHandler,
     onFocusHandler,
     closeMenu,
     openMenu,
-    scrollIntoView,
     clearValue,
   };
 };

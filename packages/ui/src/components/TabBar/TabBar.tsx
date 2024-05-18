@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 
 import type { KeyLike } from '@rothko-ui/utils';
+import { classes, scopedClasses as sc } from '@rothko-ui/utils';
 
 import type { RothkoKind } from '../../theme/types';
-import Typography from '../Typography/Typography';
-import type { Tab } from './types';
-import { Container, Flex, FlexItem } from '../../layout';
-import type { WithAriaLabeling } from '../../types';
-import { vuar } from '../../library/utils/vuar';
+import type { Tab, WithAria } from './types';
+import { Container, Flex } from '../../layout';
+import styles from './TabBar.module.scss';
 
-type WithAria<T> = WithAriaLabeling<T>;
+const scopedClasses = sc(styles);
 
 type TabBarProps<Key extends KeyLike> = WithAria<{
   id?: string;
@@ -38,8 +36,12 @@ function TabBar<Key extends KeyLike>({
   const [tabIdx, setTabIdx] = useState(initialIdx >= 0 ? initialIdx : 0);
   return (
     <>
-      <TabListContainerDiv id={id} className={className} style={style}>
-        <TabList aria-label="tablist" role="tablist" tabCount={tabCount}>
+      <div
+        id={id}
+        className={classes(scopedClasses('tab-list__container'), className)}
+        style={style}
+      >
+        <Flex as="ul" className={styles['tab-list']} aria-label="tablist" role="tablist">
           {tabs.map((t, idx) => (
             <Flex
               as="li"
@@ -52,79 +54,30 @@ function TabBar<Key extends KeyLike>({
               key={`${String(t.key)}-${idx}`}
               margin="0 auto"
               alignItems="center"
+              justifyContent="center"
               columnGap="0.5rem"
               cursor="pointer"
               // aria-label={t.title}
             >
-              <FlexItem>{t.leftIcon}</FlexItem>
-              <TabItem aria-label={t.title}>{t.title}</TabItem>
-              <FlexItem>{t.rightIcon}</FlexItem>
+              {t.leftIcon && <div>{t.leftIcon}</div>}
+              <div className={styles['tab__item']} aria-label={t.title}>
+                {t.title}
+              </div>
+              {t.rightIcon && <div>{t.rightIcon}</div>}
             </Flex>
           ))}
-        </TabList>
-        <UnderLineDiv kind={kind} tabCount={tabCount} currentTabIdx={tabIdx} />
-      </TabListContainerDiv>
+        </Flex>
+        <div
+          style={{
+            width: `${(100 / tabCount).toFixed(2)}%`,
+            transform: `translateX(calc(100% * ${tabIdx}))`,
+          }}
+          className={scopedClasses('tab__underline', kind && `tab__underline--${kind}`)}
+        />
+      </div>
       <Container {...containerStyle}>{tabs[tabIdx].render}</Container>
     </>
   );
 }
-
-type UnderlineDivProps = {
-  kind?: RothkoKind;
-  currentTabIdx: number;
-  tabCount: number;
-};
-
-const TabListContainerDiv = styled.div`
-  margin: 0.5rem 0;
-`;
-
-const TabList = styled.ul<{ tabCount: number }>`
-  display: grid;
-  grid-template-columns: repeat(${({ tabCount }) => tabCount}, 1fr);
-
-  list-style: none;
-
-  margin: 0;
-  // padding betweeb list and underline
-  padding: 0.5rem 0;
-  // tablet and mobile
-  @media only screen and (max-width: 700px) {
-    padding: 0.25rem 0;
-  }
-
-  & > li {
-    -webkit-tap-highlight-color: transparent;
-  }
-`;
-
-const TabItem = styled(Typography.body)`
-  // .attrs({ as: 'li' })
-  -webkit-tap-highlight-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin: 0;
-  user-select: none;
-
-  cursor: pointer;
-`;
-
-const UnderLineDiv = styled.div<UnderlineDivProps>`
-  width: ${({ tabCount }) => `${(100 / tabCount).toFixed(2)}%`};
-  border-bottom: 3px solid
-    ${({ kind }) => vuar({ kind, element: 'tab-bar', category: 'border', fallback: '#000' })};
-
-  border-radius: 50vmin;
-
-  -webkit-transform: translateX(calc(100% * ${({ currentTabIdx }) => currentTabIdx}));
-  -moz-transform: translateX(calc(100% * ${({ currentTabIdx }) => currentTabIdx}));
-  transform: translateX(calc(100% * ${({ currentTabIdx }) => currentTabIdx}));
-
-  -webkit-transition: transform 0.2s ease-in;
-  -moz-transition: transform 0.2s ease-in;
-  transition: transform 0.2s ease-in;
-`;
 
 export default TabBar;

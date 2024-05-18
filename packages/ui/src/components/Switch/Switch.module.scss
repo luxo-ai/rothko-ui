@@ -1,0 +1,85 @@
+@use '../../styles/mixins' as mixins;
+@use './variabes' as variables;
+@use '../../styles/placeholders';
+
+.switch__container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.switch__outer-circle {
+  flex: 0 0 auto;
+  @extend %ios-tap-highlight-color-transparent;
+  @extend %hide-chrome-browser-outline;
+
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+
+  width: 3rem;
+  height: calc(1.4rem + 2px);
+
+  border: 1px solid variables.$switchBorder;
+  border-radius: 50vmin;
+
+  background-color: variables.$switchBackground;
+
+  &.selected {
+    background-color: variables.$switchSelectedBackground;
+
+    @each $kind in variables.$rothkoKinds {
+      &--#{$kind} {
+        background-color: variables.safeGetTheme($kind);
+      }
+    }
+  }
+
+  transition: background-color 0.5s ease;
+
+  &:focus-visible {
+    :after {
+      content: '';
+      display: block;
+      position: absolute;
+      inset: -0.13rem;
+      border-radius: 50vmin;
+      // border: 0.125rem solid ${({ kind }) => vuar({ kind, category: 'border' })};
+    }
+  }
+
+  &.error:not(:focus):not(.focus) {
+    background-color: red;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.switch__inner-circle {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 1.4rem;
+  height: 1.4rem;
+  margin: 0 1px;
+
+  background-color: variables.$switchHandleBackground;
+  border-radius: 50%;
+
+  transition: transform 0.15s ease-out;
+
+  &.active {
+    // outer switch width - width of inner switch - horizontal margin - offset
+    transform: translateX(calc(3rem - 1.4rem - 1px - 2px));
+  }
+}

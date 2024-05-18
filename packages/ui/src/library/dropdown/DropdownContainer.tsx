@@ -1,34 +1,37 @@
-import styled from 'styled-components';
+import React from 'react';
+import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import styles from './Dropdown.module.scss';
 
-import { vuar } from '../utils/vuar';
-import { baseInputStyle } from '../../components/Input/styles';
+const scoppedClasses = sc(styles);
 
-const DropdownContainer = styled.div`
-  -webkit-tap-highlight-color: transparent;
-  ${baseInputStyle} // causing issues before, this helped
+export type DropdownContainerProps = Omit<
+  React.HTMLProps<HTMLDivElement>,
+  'focus' | 'error' | 'ref' | 'disabled' | 'open'
+> & {
+  children: React.ReactNode;
+  focus?: boolean;
+  error?: boolean;
+  disabled?: boolean;
+  open?: boolean;
+};
 
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 1rem 0.5rem 1rem;
-
-  // prevent multi-select shrinkage
-  // placeholder text (body) line-height + text margin + top padding + bottom padding + top border + bottom border
-  min-height: calc(1.5rem + 2 * 0.125rem + 2 * 0.5rem + 2 * 2px);
-
-  border: 0.125rem solid ${vuar({ category: 'border', fallback: '#000' })};
-
-  cursor: pointer;
-
-  &.disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
+const DropdownContainer = React.forwardRef<HTMLDivElement, DropdownContainerProps>(
+  ({ children, error, disabled, open, className, ...props }, ref) => {
+    const baseClasses = scoppedClasses(
+      'dropown-container',
+      error && 'error',
+      open && 'open',
+      // focus && 'focus',
+      disabled && 'disabled'
+    );
+    return (
+      <div {...props} ref={ref} className={classes(baseClasses, className)}>
+        {children}
+      </div>
+    );
   }
+);
 
-  &.empty {
-    cursor: default;
-  }
-`;
+DropdownContainer.displayName = 'DropdownContainer';
 
 export default DropdownContainer;

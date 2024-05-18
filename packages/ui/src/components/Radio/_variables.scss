@@ -1,0 +1,5 @@
+@forward '../../styles/variables';
+
+$radioBorder: var(--rothko-radio-border, #000);
+$radioBackground: var(--rothko-radio-background, #ccc);
+$radioSelectedBackground: var(--rothko-radio-background-focus, #281d75);

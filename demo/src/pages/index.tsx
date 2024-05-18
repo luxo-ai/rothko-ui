@@ -1,6 +1,4 @@
 import type { GetServerSideProps } from 'next';
-import Home from '../components/Home';
-import WithProviders from '../components/WithProviders';
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return {
@@ -12,11 +10,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const HomePage = () => {
-  return (
-    <WithProviders theme="dark">
-      <Home />
-    </WithProviders>
-  );
+  return null;
 };
 
 export default HomePage;

@@ -1,27 +1,18 @@
 import type { Nilable } from '@rothko-ui/utils';
 import React, { useMemo } from 'react';
-import styled from 'styled-components';
 import type { RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
-import { SliderContainerDiv, SliderRangeDiv, SliderTrackDiv } from './Shared';
+import { SliderContainer, SliderLegendContainer, SliderRange, SliderTrack } from './Shared';
 import { SliderHandle } from './Shared/SliderHandle';
 import { getOffsetFactory } from './sliderUtils';
-import type { SliderWidth } from './types';
-import type {
-  WithAriaControls,
-  WithAriaInvalid,
-  WithAriaLabeling,
-  WithAriaRequired,
-} from '../../types';
+import type { MultiSliderWithAria, SliderWidth } from './types';
 import useId from '../../library/hooks/useId';
 
 const BUFFER = 1;
 
 export type Range = [number, number];
 
-type WithAria<T> = WithAriaRequired<WithAriaInvalid<WithAriaControls<WithAriaLabeling<T>>>>;
-
-type MultiSliderProps = WithAria<{
+type MultiSliderProps = MultiSliderWithAria<{
   id?: string;
   /**
    * The CSS class name for the MultiSlider component.
@@ -126,14 +117,14 @@ const MultiSlider = ({
   const maxReached = upper >= max;
 
   return (
-    <SliderContainerDiv
+    <SliderContainer
       id={id}
-      $maxWidth={maxWidth}
-      $minWidth={minWidth || maxWidth}
+      maxWidth={maxWidth}
+      minWidth={minWidth || maxWidth}
       className={className}
       style={style}
     >
-      <SliderLegendContainerDiv>
+      <SliderLegendContainer>
         {label && (
           <Typography.label id={labelId} light>
             {label}
@@ -145,8 +136,8 @@ const MultiSlider = ({
             {maxReached && orMore ? '+' : ''}
           </Typography.label>
         )}
-      </SliderLegendContainerDiv>
-      <SliderTrackDiv
+      </SliderLegendContainer>
+      <SliderTrack
         id={trackId}
         aria-label={ariaLabel}
         aria-describedby={ariaDescribedBy}
@@ -156,7 +147,7 @@ const MultiSlider = ({
         aria-required={ariaRequired}
         aria-disabled={disabled}
         aria-orientation="horizontal"
-        $disabled={disabled}
+        disabled={disabled}
       >
         <SliderHandle
           aria-label="Min Slider"
@@ -172,8 +163,8 @@ const MultiSlider = ({
             onChange([v, upper]);
           }}
         />
-        <SliderRangeDiv
-          $disabled={disabled}
+        <SliderRange
+          disabled={disabled}
           kind={kind}
           style={{
             left: getOffset(lower),
@@ -194,16 +185,9 @@ const MultiSlider = ({
             onChange([lower, v]);
           }}
         />
-      </SliderTrackDiv>
-    </SliderContainerDiv>
+      </SliderTrack>
+    </SliderContainer>
   );
 };
-
-const SliderLegendContainerDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-`;
 
 export default MultiSlider;

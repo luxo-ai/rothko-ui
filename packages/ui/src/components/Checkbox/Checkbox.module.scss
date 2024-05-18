@@ -1,9 +1,10 @@
 @use './variables' as variables;
 @use '../../styles/mixins' as mixins;
+@use '../../styles/placeholders';
 
 .checkbox {
   // flex-shrink: 0;
-  @include mixins.iosTapHighlightColorTransparent();
+  @extend %ios-tap-highlight-color-transparent;
 
   background-color: variables.$checkboxBackgroundColor;
 

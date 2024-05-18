@@ -1,4 +1,5 @@
 import type { RothkoKind } from '../../theme';
+import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
 
 export type ToastDetails = {
   /**
@@ -24,3 +25,5 @@ export type ToastDetails = {
 };
 
 export type ToastKey = string;
+
+export type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;

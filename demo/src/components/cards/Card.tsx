@@ -2,22 +2,14 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Github } from '@rothko-ui/icons';
-import {
-  Container,
-  Flex,
-  FlexItem,
-  List,
-  ListItem,
-  TabBar,
-  Typography,
-  useRothko,
-} from '@rothko-ui/ui';
+import { Container, Flex, FlexItem, TabBar, Typography, useRothko } from '@rothko-ui/ui';
 import { asCompactedArray, isString, toKebabCase } from '@rothko-ui/utils';
 
 import { Code } from '../Code';
 import styles from './Cards.module.scss';
 import type { Body as BodyType, CCode, CardCopy, Section as SectionType } from './types';
 import Markdown from './Markdown';
+import { List, ListItem } from '../List';
 
 type CardProps = {
   children?: React.ReactNode;
@@ -46,7 +38,7 @@ const Card = ({ children, copy, codeUrl }: CardProps) => {
               href={codeUrl}
               target="_bank"
               // fixes mobile flashing issue
-              className="phantom-button"
+              // className="phantom-button"
             >
               <Github width={23} height={23} fill={mode === 'dark' ? '#fff' : undefined} />
               <Typography.bodySmall>View Source</Typography.bodySmall>

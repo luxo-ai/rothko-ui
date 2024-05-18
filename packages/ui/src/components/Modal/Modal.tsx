@@ -3,7 +3,7 @@ import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useRef } from 'react';
 
 import { CloseOutline } from '@rothko-ui/icons';
-import { classes, isString } from '@rothko-ui/utils';
+import { classes, isString, scopedClasses as sc } from '@rothko-ui/utils';
 
 import DomPortal from '../../library/Portal';
 import ShadedBackdrop from '../../library/ShadedBackdrop/ShadedBackdrop';
@@ -16,11 +16,11 @@ import {
   removeEvent,
 } from '../../library/utils/domUtils';
 import type { RothkoSize } from '../../theme';
-import type { WithAriaLabel, WithAriaLabelledBy } from '../../types';
 import { Typography } from '../Typography';
+import type { WithAria } from './types';
 import styles from './Modal.module.scss';
 
-type WithAria<T> = WithAriaLabelledBy<WithAriaLabel<T>>;
+const scopedClasses = sc(styles);
 
 type ModalProps = WithAria<{
   id?: string;
@@ -74,6 +74,8 @@ const Modal = ({
   const modalContentId = useId();
 
   const modalRef = useRef<HTMLDivElement | null>(null);
+
+  const baseClasses = scopedClasses('modal', `modal--${size}`);
 
   const closeModal = useCallback(() => {
     onClose?.();
@@ -155,25 +157,18 @@ const Modal = ({
                 aria-modal
                 role="dialog"
                 style={{ ...styleProp, ...style }}
-                className={classes(
-                  styles['modal-container'],
-                  styles[`modal-size-${size}`],
-                  className
-                )}
+                className={classes(baseClasses, className)}
                 ref={modalRef}
               >
                 <button
-                  className={styles['modal-close-button']}
+                  className={styles['modal__close-button']}
                   aria-label="Close"
                   onClick={() => closeModal()}
                 >
                   <CloseOutline aria-hidden width="1.5rem" height="1.5rem" />
                 </button>
                 {title && (
-                  <Typography.body
-                    id={titleId}
-                    className={classes(styles['modal-header'], styles[`modal-header-size-${size}`])}
-                  >
+                  <Typography.body id={titleId} className={scopedClasses(`modal__header--${size}`)}>
                     {title}
                   </Typography.body>
                 )}

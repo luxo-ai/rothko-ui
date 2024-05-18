@@ -1,21 +1,40 @@
-import styled from 'styled-components';
+import React from 'react';
 import type { SliderWidth } from '../types';
+import styles from './SliderContainer.module.scss';
+import { Container } from '../../../layout';
 
 type SliderContainerDivProps = {
-  $maxWidth: SliderWidth;
-  $minWidth: SliderWidth;
+  id?: string;
+  style?: React.CSSProperties;
+  maxWidth: SliderWidth;
+  minWidth: SliderWidth;
+  children?: React.ReactNode;
+  className?: string;
 };
 
-export const SliderContainerDiv = styled.div<SliderContainerDivProps>`
-  height: 100%;
-  width: 100%;
-  min-width: ${({ $minWidth }) => (typeof $minWidth === 'number' ? `${$minWidth}px` : $minWidth)};
-  max-width: ${({ $maxWidth }) => (typeof $maxWidth === 'number' ? `${$maxWidth}px` : $maxWidth)};
-`;
+export const SliderContainer = ({
+  maxWidth,
+  minWidth,
+  children,
+  id,
+  style,
+  className,
+}: SliderContainerDivProps) => {
+  return (
+    <Container
+      {...style}
+      className={className}
+      id={id}
+      width="100%"
+      height="100%"
+      minWidth={minWidth}
+      maxWidth={maxWidth}
+    >
+      {children}
+    </Container>
+  );
+};
 
-export const SliderLegendContainerDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
-`;
+export const SliderLegendContainer = ({ children }: { children?: React.ReactNode }) => {
+  return <div className={styles['slider__legend-container']}>{children}</div>;
+};

@@ -1,0 +1,27 @@
+@use './variables' as variables;
+@use '../../library/Button/mixins' as buttonMixins;
+
+.bottom-popup {
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  background: variables.$bottomPopupBackground;
+  padding: 3.25rem 1.5rem 1.5rem 1.5rem;
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 999;
+  height: 0;
+  overflow: hidden;
+
+  will-change: transform, opacity, height;
+  transition-property: transform;
+  transition-timing-function: ease-out;
+}
+
+.bottom-popup__close-button {
+  @include buttonMixins.phantomButtonStyle();
+  position: absolute;
+  top: 14px;
+  right: 16px;
+}

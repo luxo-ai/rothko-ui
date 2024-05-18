@@ -1,17 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
 import keyboardKey from 'keyboard-key';
 
-import { classes } from '@rothko-ui/utils';
+import { classes, scopedClasses as sc } from '@rothko-ui/utils';
 
 import type { RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
 import useId from '../../library/hooks/useId';
-import type { WithAriaControls, WithAriaErrorMessage, WithAriaLabeling } from '../../types';
 import { keyDownFactory } from '../../library/utils/keyUtils';
-import { vuar } from '../../library/utils/vuar';
+import type { WithAria } from './types';
+import styles from './Radio.module.scss';
 
-type WithAria<T> = WithAriaErrorMessage<WithAriaControls<WithAriaLabeling<T>>>;
+const scopedClasses = sc(styles);
 
 export type RadioInnerProps = WithAria<{
   id?: string;
@@ -75,9 +74,22 @@ const RadioInner = ({
 
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: clickRadio });
 
+  const outerDivClassess = scopedClasses(
+    'radio__outer-circle',
+    disabled && 'disabled',
+    error && 'error'
+  );
+
+  const middleDivClasses = scopedClasses(
+    'radio__middle-circle',
+    error && 'error',
+    selected && 'selected',
+    kind && kind
+  );
+
   return (
-    <RadioContainerDiv style={style} className={className}>
-      <RadioOutlineDiv
+    <div style={style} className={classes(styles['radio__container'], className)}>
+      <div
         id={id}
         aria-describedby={ariaDescribedBy}
         aria-details={ariaDetails}
@@ -88,80 +100,23 @@ const RadioInner = ({
         aria-label={ariaLabel}
         aria-errormessage={ariaErrorMessage}
         role="radio"
-        className={classes({ disabled, error })}
+        className={outerDivClassess}
         onClick={() => clickRadio()}
         onKeyDown={onKeyDown}
         tabIndex={0}
       >
-        <RadioInnerDiv aria-hidden kind={kind} className={classes({ selected, error, disabled })} />
-      </RadioOutlineDiv>
+        <div aria-hidden className={middleDivClasses}>
+          {selected && <div aria-hidden className={styles['radio__inner-circle']} />}
+        </div>
+      </div>
       {children &&
         (typeof children === 'string' ? (
           <Typography.body id={labelId}>{children}</Typography.body>
         ) : (
           <div id={labelId}>{children}</div>
         ))}
-    </RadioContainerDiv>
+    </div>
   );
 };
-
-const RadioContainerDiv = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center; // for children
-  justify-content: flex-start;
-  gap: 0.3rem;
-`;
-
-const RadioOutlineDiv = styled.div<{ $disabled?: boolean }>`
-  -webkit-tap-highlight-color: transparent;
-  background-color: ${vuar({ element: 'radio', category: 'border', fallback: '#000' })};
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: calc(1.25rem / 2);
-  padding: 0.1875rem;
-  cursor: pointer;
-
-  &.disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-`;
-
-const RadioInnerDiv = styled.div<{
-  kind?: RothkoKind;
-}>`
-  -webkit-tap-highlight-color: transparent;
-  background-color: ${vuar({ element: 'radio', category: 'background', fallback: '#ccc' })};
-
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-
-  -webkit-transition: background-color 0.1s ease;
-  -moz-transition: background-color 0.1s ease;
-  -ms-transition: background-color 0.1s ease;
-  transition: background-color 0.1s ease;
-
-  &.selected {
-    background-color: ${({ kind }) =>
-      vuar({
-        kind,
-        element: 'radio',
-        category: 'background',
-        fallback: '#281D75',
-        focused: true,
-      })};
-  }
-
-  &.error {
-    background: ${vuar({ kind: 'danger', scale: 300, category: 'background' })};
-    border-color: ${vuar({ kind: 'danger', scale: 500, category: 'border' })};
-  }
-
-  &.disabled {
-    opacity: 0.6;
-  }
-`;
 
 export default RadioInner;

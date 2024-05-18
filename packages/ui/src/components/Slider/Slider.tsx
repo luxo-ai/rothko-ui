@@ -2,20 +2,12 @@ import type { Nilable } from '@rothko-ui/utils';
 import React, { useMemo } from 'react';
 import type { RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
-import { SliderContainerDiv, SliderRangeDiv, SliderTrackDiv } from './Shared';
-import { SliderLegendContainerDiv } from './Shared/SliderContainer';
+import { SliderContainer, SliderRange, SliderTrack } from './Shared';
+import { SliderLegendContainer } from './Shared/SliderContainer';
 import { SliderHandle } from './Shared/SliderHandle';
 import { getOffsetFactory } from './sliderUtils';
-import type { SliderWidth } from './types';
-import type {
-  WithAriaControls,
-  WithAriaInvalid,
-  WithAriaLabeling,
-  WithAriaRequired,
-} from '../../types';
+import type { SliderWidth, WithAria } from './types';
 import useId from '../../library/hooks/useId';
-
-type WithAria<T> = WithAriaRequired<WithAriaInvalid<WithAriaControls<WithAriaLabeling<T>>>>;
 
 type SliderProps = WithAria<{
   id?: string;
@@ -122,14 +114,14 @@ const Slider = ({
   const maxReached = localVal >= max;
 
   return (
-    <SliderContainerDiv
+    <SliderContainer
       id={id}
-      $maxWidth={maxWidth}
-      $minWidth={minWidth || maxWidth}
+      maxWidth={maxWidth}
+      minWidth={minWidth || maxWidth}
       className={className}
       style={style}
     >
-      <SliderLegendContainerDiv>
+      <SliderLegendContainer>
         {label && (
           <Typography.label id={labelId} light>
             {label}
@@ -141,8 +133,8 @@ const Slider = ({
             {maxReached && orMore ? '+' : ''}
           </Typography.label>
         )}
-      </SliderLegendContainerDiv>
-      <SliderTrackDiv
+      </SliderLegendContainer>
+      <SliderTrack
         id={trackId}
         aria-label={ariaLabel}
         aria-describedby={ariaDescribedBy}
@@ -152,7 +144,7 @@ const Slider = ({
         aria-required={ariaRequired}
         aria-disabled={disabled}
         aria-orientation="horizontal"
-        $disabled={disabled}
+        disabled={disabled}
       >
         <SliderHandle
           aria-controls={ariaControls}
@@ -167,9 +159,9 @@ const Slider = ({
           }}
           value={localVal}
         />
-        <SliderRangeDiv $disabled={disabled} kind={kind} style={{ width: getOffset(localVal) }} />
-      </SliderTrackDiv>
-    </SliderContainerDiv>
+        <SliderRange disabled={disabled} kind={kind} style={{ width: getOffset(localVal) }} />
+      </SliderTrack>
+    </SliderContainer>
   );
 };
 

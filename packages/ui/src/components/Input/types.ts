@@ -5,7 +5,7 @@ import type { TypographyProps } from '../Typography/types';
 export type InputSize = Extract<RothkoSize, 's' | 'm' | 'l'>;
 
 export type HtmlInputProps = Omit<
-  React.HTMLProps<HTMLInputElement>,
+  React.InputHTMLAttributes<HTMLInputElement>,
   'ref' | 'size' | 'error' | 'as'
 >;
 

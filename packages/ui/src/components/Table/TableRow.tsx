@@ -3,6 +3,7 @@ import React from 'react';
 import TableContext from './TableContext';
 import TableData from './TableData';
 import { isStringHeader } from './helpers';
+import styles from './Table.module.scss';
 
 type TableRowProps = {
   style?: React.CSSProperties;
@@ -29,9 +30,11 @@ const TableRow = ({ children, style, className }: TableRowProps) => (
           {({ headers }) => {
             const header = headers[idx];
             return (
-              <td className={classes(className, 'pivoted')} style={style}>
+              <td className={classes(styles['pivoted'], className)} style={style}>
                 {header && (
-                  <div className="tdBefore">{isStringHeader(header) ? header : header.content}</div>
+                  <div className={styles['tdBefore']}>
+                    {isStringHeader(header) ? header : header.content}
+                  </div>
                 )}
                 {innerContent ? <div>{innerContent}</div> : <div>&nbsp;</div>}
               </td>

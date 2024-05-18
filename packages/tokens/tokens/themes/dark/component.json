@@ -19,18 +19,12 @@
     }
   },
   "dropdown": {
-    "background": { "value": "#141414" },
+    "background": { "value": "{background}" },
     "multiselect": {
       "foreground": { "value": "#c42317" },
       "border": { "value": "{dropdown.multiselect.foreground}" },
       "background": { "value": "#000" }
     },
-    "option": {
-      "background::focus": { "value": "#3B3B3B" }
-    }
-  },
-  "search": {
-    "background": { "value": "#141414" },
     "option": {
       "background::focus": { "value": "#3B3B3B" }
     }
@@ -41,23 +35,23 @@
   "radio": {
     "border": { "value": "#6b6b6b" },
     "background": { "value": "#2D3035" },
-    "background::focus": { "value": "#c42317" }
+    "background::focus": { "value": "{radio.background}" }
   },
   "table": {
     "background": { "value": "#080808" },
     "header": {
-      "background": { "value": "#141414" }
+      "background": { "value": "{background}" }
     },
     "row": {
       "border": { "value": "#000" },
       "minimized": {
-        "background": { "value": "#141414" }
+        "background": { "value": "{background}" }
       }
     }
   },
   "toast": {
     "foreground": { "value": "{foreground}" },
-    "background": { "value": "#141414" },
+    "background": { "value": "{background}" },
     "life": {
       "filled": {
         "background": { "value": "#e93c2f" }
@@ -67,13 +61,9 @@
       }
     }
   },
-  "box": {
-    "background": { "value": "#141414" },
-    "border": { "value": "{border}" }
-  },
   "accordion": {
     "border": { "value": "{border}" },
-    "background": { "value": "#141414" }
+    "background": { "value": "{background}" }
   },
   "checkbox": {
     "background": { "value": "#DEE7F5" },
@@ -87,9 +77,12 @@
     "background": { "value": "#DEE7F5" },
     "foreground": { "value": "#EBF2FB" }
   },
-  "toggle": {
-    "border": { "value": "#DEE7F5" },
-    "background": { "value": "rgba(143, 155, 179, 0.16)" },
-    "background::focus": { "value": "green" }
+  "switch": {
+    "border": { "value": "#494949" },
+    "background": { "value": "#2d3035" },
+    "background::focus": { "value": "{success.default}" },
+    "handle": {
+      "background": { "value": "#757985" }
+    }
   }
 }

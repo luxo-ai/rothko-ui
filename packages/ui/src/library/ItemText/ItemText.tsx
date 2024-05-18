@@ -6,6 +6,7 @@ import Typography from '../../components/Typography/Typography';
 import styles from './ItemText.module.scss';
 
 type ItemTextProps = {
+  style?: React.CSSProperties;
   children: React.ReactNode;
   isPlaceHolder?: boolean;
 };

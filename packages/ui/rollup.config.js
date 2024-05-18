@@ -30,16 +30,15 @@ export default [
     plugins: [
       peerDepsExternal(),
       resolve({
-        extensions: ['.js', '.jsx', '.ts', '.tsx'], // add .js if it's not already included
-        mainFields: ['module', 'main'], // look for 'module' entry point in package.json
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        mainFields: ['module', 'main'],
       }),
       commonjs({
         ignoreGlobal: true,
         include: /\/node_modules\//,
       }),
-      // ensure TypeScript compiles your JSX/TSX
       typescript({
-        tsconfig: './tsconfig.json', // Path to a specific tsconfig file
+        tsconfig: './tsconfig.json',
         declaration: true, // Enable generation of declaration files
         declarationDir: '.', // Output directory for declaration files
         outDir: 'dist', // Required when declaration is true
@@ -47,7 +46,7 @@ export default [
       }),
       postcss({
         plugins: [autoprefixer()],
-        extract: true, // Inline CSS in the JavaScript, set true if you prefer CSS files
+        extract: true,
         modules: true,
         minimize: true,
         sourceMap: isDev,
@@ -70,16 +69,15 @@ export default [
         exclude: /\/node_modules\//,
         presets: [['@babel/preset-react', { useBuiltIns: true }]],
         babelHelpers: 'bundled',
-        // plugins: ['babel-plugin-styled-components'],
       }),
       terser({
         output: {
-          comments: false, // This will remove all comments
+          comments: false, // remove all comments
         },
       }),
       visualizer({
-        open: false, // Automatically open the report in your browser
-        filename: 'reports/bundle-analysis.html', // Output to a separate 'reports' directory
+        open: false,
+        filename: 'reports/bundle-analysis.html',
       }),
     ],
   },

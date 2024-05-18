@@ -1,90 +1,108 @@
 import { Github, Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
-import { Button, Flex, FlexItem, Typography, useRothko } from '@rothko-ui/ui';
+import {
+  Button,
+  Drawer,
+  Flex,
+  FlexItem,
+  PhantomButton,
+  Typography,
+  useRothko,
+} from '@rothko-ui/ui';
 import cookieCutter from 'cookie-cutter';
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import config from '../../config';
 import styles from './Navigation.module.scss';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { DesktopOnly, MobileOnly } from '../Dimensions';
+import NavigationList from './NavigationList';
+import { useRouter } from 'next/router';
 
-type NavigationProps = {
-  openDrawer: () => void;
-  withoutToggle?: boolean;
-};
-
-const Navigation = ({ openDrawer, withoutToggle }: NavigationProps) => {
+const Navigation = () => {
   const { mode, toggleMode } = useRothko();
+  const router = useRouter();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const modeIcon = useMemo(() => {
+    return mode === 'dark' ? (
+      <Sun fill="#ffbb00" width={28} height={28} />
+    ) : (
+      <Moon fill="#4833e0" width={27} height={27} />
+    );
+  }, [mode]);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && mode) {
       // Set a cookie
       const expirationDate = new Date(Date.now() + 1000 * 60 * 60 * 24 * 3); // 3 days
-      cookieCutter.set(config.preference.themeMode, mode, { expires: expirationDate, path: '/' });
+      cookieCutter.set(config.preference.theme, mode, { expires: expirationDate, path: '/' });
     }
   }, [mode]);
 
   return (
-    <nav className={styles.nav}>
-      <Flex justifyContent="space-between">
-        <Flex alignItems="center" justifyContent="center" columnGap="1rem">
-          <MobileOnly>
+    <>
+      <nav className={styles.nav}>
+        <Flex justifyContent="space-between">
+          <Flex alignItems="center" justifyContent="center" columnGap="1rem">
+            <MobileOnly>
+              <FlexItem>
+                <PhantomButton displayFlex aria-label="Menu" onClick={() => setIsDrawerOpen(true)}>
+                  <Menu width={28} height={28} />
+                </PhantomButton>
+              </FlexItem>
+            </MobileOnly>
             <FlexItem>
-              <button
-                aria-label="menu button"
-                className={`dflx ${styles.phantomButton}`}
-                onClick={() => openDrawer()}
-              >
-                <Menu width={28} height={28} />
-              </button>
+              <NextLink href="/">
+                <Flex cursor="pointer" alignItems="end" columnGap="0.25rem">
+                  <Typography.h5>Rothko UI</Typography.h5>
+                  {config.version && <Typography.caption>v{config.version}</Typography.caption>}
+                </Flex>
+              </NextLink>
             </FlexItem>
-          </MobileOnly>
-          <FlexItem>
-            <Link href="/">
-              <Flex cursor="pointer" alignItems="end" columnGap="0.25rem">
-                <Typography.h5>Rothko UI</Typography.h5>
-                {config.version && <Typography.caption>v{config.version}</Typography.caption>}
-              </Flex>
-            </Link>
-          </FlexItem>
-        </Flex>
-        <Flex justifyContent="center" alignItems="center" columnGap="1.75rem">
-          <Flex justifyContent="center" alignItems="center" columnGap="1rem">
-            <Link
-              target="_blank"
-              href={config.repoUrl}
-              className={styles.phantomButton}
-              rel="noreferrer"
-            >
-              <Github fill={mode === 'dark' ? '#fff' : '#000'} width={28} height={28} />
-            </Link>
-            {!withoutToggle && (
-              <button onClick={() => toggleMode()} className={styles.phantomButton}>
-                {mode === 'dark' ? (
-                  <Sun fill="#ffbb00" width={28} height={28} />
-                ) : (
-                  <Moon fill="#4833e0" width={27} height={27} />
-                )}
-              </button>
-            )}
           </Flex>
-          <DesktopOnly height="100%">
-            <Link href="/sponsor">
-              <Button
-                size="s"
-                kind="primary"
-                style={{ height: '100%' }}
-                accessoryLeft={({ size, color }) => (
-                  <Heart fill={color} height={size} width={size} />
-                )}
+          <Flex justifyContent="center" alignItems="center" columnGap="1.75rem">
+            <Flex justifyContent="center" alignItems="center" columnGap="1rem">
+              <NextLink
+                target="_blank"
+                href={config.repoUrl}
+                style={{ display: 'flex' }}
+                className={styles.hoverButton}
               >
-                Sponsor
-              </Button>
-            </Link>
-          </DesktopOnly>
+                <Github fill={mode === 'dark' ? '#fff' : '#000'} width={28} height={28} />
+              </NextLink>
+              <PhantomButton
+                displayFlex
+                className={styles.hoverButton}
+                onClick={() => toggleMode()}
+              >
+                {modeIcon}
+              </PhantomButton>
+            </Flex>
+            <DesktopOnly height="100%">
+              <NextLink href="/sponsor">
+                <Button
+                  size="s"
+                  kind="primary"
+                  style={{ height: '100%' }}
+                  accessoryLeft={({ size, color }) => (
+                    <Heart fill={color} height={size} width={size} />
+                  )}
+                >
+                  Sponsor
+                </Button>
+              </NextLink>
+            </DesktopOnly>
+          </Flex>
         </Flex>
-      </Flex>
-    </nav>
+      </nav>
+      <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
+        <NavigationList
+          style={{ marginLeft: '0.5rem' }}
+          selected={router.pathname}
+          onNavigate={() => setIsDrawerOpen(false)}
+        />
+      </Drawer>
+    </>
   );
 };
 

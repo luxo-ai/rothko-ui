@@ -1,0 +1,21 @@
+@use '../Typography/mixins' as typographyMixins;
+@use '../../styles/placeholders';
+
+// position: absolute;
+// inset: 0;
+// left padding of icon + right padding of icon + width of icon
+// padding: 0.5rem calc(1rem + 1rem + 16px) 0.5rem 1rem;
+
+.autocomplete__phantom-input {
+  @extend %hide-chrome-browser-outline;
+  @extend %ios-tap-highlight-color-transparent;
+  @include typographyMixins.bodyStyle();
+  appearance: none;
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

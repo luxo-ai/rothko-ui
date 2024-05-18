@@ -1,24 +1,30 @@
-import styled, { css } from 'styled-components';
+import React from 'react';
+import { scopedClasses as sc } from '@rothko-ui/utils';
 import type { RothkoKind } from '../../../theme/types';
-import { vuar } from '../../../library/utils/vuar';
+import styles from './SliderRange.modue.scss';
 
-const SliderRangeDiv = styled.div<{ kind?: RothkoKind; $disabled?: boolean }>`
-  position: absolute;
-  height: 0.25rem;
-  margin: 0;
-  border-radius: 2px;
-  background: ${({ kind }) =>
-    vuar({ kind, category: 'background', element: 'slider-range', fallback: '#3e4e94' })};
+const scopedClasses = sc(styles);
 
-  overflow: hidden;
-  user-select: none;
-  z-index: 2;
+type SliderRangeDivProps = {
+  kind?: RothkoKind;
+  disabled?: boolean;
+  children?: React.ReactNode;
+  style?: React.CSSProperties;
+};
 
-  ${({ $disabled }) =>
-    $disabled &&
-    css`
-      opacity: 0.75;
-    `}
-`;
+const SliderRange = ({ kind, disabled, children, style }: SliderRangeDivProps) => {
+  return (
+    <div
+      style={style}
+      className={scopedClasses(
+        'slider-range',
+        kind && `slider-range--${kind}`,
+        disabled && 'disabled'
+      )}
+    >
+      {children}
+    </div>
+  );
+};
 
-export default SliderRangeDiv;
+export default SliderRange;

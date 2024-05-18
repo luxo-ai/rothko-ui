@@ -7,6 +7,7 @@ import type {
   WithAriaLabeling,
   WithAriaRequired,
 } from '../../types';
+import type { MenuVariant } from '../../library/Menu/types';
 
 type WithAria<T> = WithAriaErrorMessage<
   WithAriaRequired<WithAriaInvalid<WithAriaDisabled<WithAriaLabeling<T>>>>
@@ -25,11 +26,6 @@ export type StackValue<V extends Value, T = undefined> = {
 
 export type DropdownInnerProps<V extends Value, T> = WithAria<{
   id?: string;
-  /**
-   * Whether the dropdown should have a border.
-   * @default: true
-   */
-  bordered?: boolean;
   /**
    * Additional class name for the dropdown.
    */
@@ -59,7 +55,7 @@ export type DropdownInnerProps<V extends Value, T> = WithAria<{
    * The position of the dropdown menu.
    * @default: 'bottom'
    */
-  menuPosition?: 'top' | 'bottom';
+  menuVariant?: MenuVariant;
   /**
    * Whether the dropdown allows multiple selections.
    */

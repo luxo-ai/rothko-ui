@@ -1,31 +1,27 @@
 import keyboardKey from 'keyboard-key';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-import { classes, isNil, map, mapReverse } from '@rothko-ui/utils';
+import { isNil, map, mapReverse } from '@rothko-ui/utils';
 
 import { useDebuggerContext } from '../../library/DebuggerContext';
-import ItemText from '../../library/ItemText/ItemText';
-import LabelText from '../../library/LabelText';
+import ComponentLabel from '../../library/ComponentLabel/ComponentLabel';
 import DefaultRenderOption from '../../library/dropdown/RenderOption';
 import useFieldIds from '../../library/hooks/useFieldIds';
 import type { FocusHandler, Option, RenderOption, Value } from '../../library/types';
 import Typography from '../Typography/Typography';
 import type { QueryMatchFn, WithAria } from './types';
 import useAutocomplete from './useAutocomplete';
-import NoResultsText from '../../library/dropdown/NoResultsText';
 import DropdownContainer from '../../library/dropdown/DropdownContainer';
 import ControlButton from '../../library/dropdown/ControlButton';
 import DropdownMenu from '../../library/dropdown/DropdownMenu';
 import { Direction } from '../../library/hooks/types';
-import PhantomInput from './PhantomInput';
+import type { MenuVariant, ScrollableHTMLElement } from '../../library/Menu/types';
+import MenuEmpty from '../../library/Menu/MenuEmpty';
+import MenuItem from '../../library/Menu/MenuItem';
+import styles from './Autocomplete.module.scss';
 
 export type DropdownProps<V extends Value, T> = WithAria<{
   id?: string;
-  /**
-   * Whether the dropdown should have a border.
-   * @default: true
-   */
-  bordered?: boolean;
   /**
    * Additional class name for the dropdown.
    */
@@ -55,7 +51,7 @@ export type DropdownProps<V extends Value, T> = WithAria<{
    * The position of the dropdown menu.
    * @default: 'bottom'
    */
-  menuPosition?: 'top' | 'bottom';
+  menuVariant?: MenuVariant;
   /**
    * The message to display when there are no search results.
    * @default: 'No results'
@@ -109,13 +105,12 @@ export type DropdownProps<V extends Value, T> = WithAria<{
 
 function Autocomplete<V extends Value, T = undefined>({
   id,
-  bordered = true,
   className,
   clearable = true,
   disabled,
   error,
   label,
-  menuPosition = 'bottom',
+  menuVariant = 'bottom',
   noResultsMessage = 'No results',
   onBlur,
   onChange,
@@ -140,7 +135,8 @@ function Autocomplete<V extends Value, T = undefined>({
   'aria-invalid': ariaInvalid,
   'aria-errormessage': ariaErrorMessage,
 }: DropdownProps<V, T>) {
-  const openReverse = menuPosition === 'top';
+  const menuRef = useRef<ScrollableHTMLElement>(null);
+  const openReverse = menuVariant === 'top';
   const debug = useDebuggerContext('<Dropdown/>');
 
   const { elementId: dropdownMenuId, labelId, errorMessageId } = useFieldIds();
@@ -156,12 +152,10 @@ function Autocomplete<V extends Value, T = undefined>({
     closeMenu,
     containerRef,
     focus,
-    menuRef,
     onBlurHandler,
     onFocusHandler,
     open,
     openMenu,
-    scrollIntoView,
   } = useAutocomplete({
     onBlur,
     onFocus,
@@ -175,7 +169,6 @@ function Autocomplete<V extends Value, T = undefined>({
     value,
   });
 
-  const hasOptions = Boolean(options.length);
   const canClear = clearable && !isNil(value) && !disabled;
   const mapper = openReverse ? mapReverse : map;
 
@@ -230,32 +223,20 @@ function Autocomplete<V extends Value, T = undefined>({
   };
 
   useEffect(() => {
-    if (!open) {
-      return;
+    if (open && menuRef.current && openReverse && optIdx === -1) {
+      menuRef.current.scrollToBottom();
     }
-    if (optIdx < 0 && openReverse) {
-      scrollIntoView(`#${dropdownMenuId}-opt-0`);
-      return;
-    }
-    if (optIdx >= 0) {
-      scrollIntoView(`#${dropdownMenuId}-opt-${optIdx}`);
-      return;
-    }
-  }, [optIdx, openReverse, open, scrollIntoView, options.length, dropdownMenuId]);
-
-  const containerClasses = classes({
-    error,
-    disabled,
-    focus,
-    minimal: !bordered,
-    empty: !hasOptions,
-  });
+  }, [open, menuRef, openReverse, optIdx]);
 
   return (
     <div style={style} className={className}>
-      {label && <LabelText id={labelId}>{label}</LabelText>}
+      {label && <ComponentLabel id={labelId}>{label}</ComponentLabel>}
       <DropdownContainer
         id={id}
+        error={error}
+        disabled={disabled}
+        focus={focus}
+        open={open}
         aria-invalid={ariaInvalid || error}
         aria-required={ariaRequired}
         aria-disabled={ariaDisabled}
@@ -270,7 +251,6 @@ function Autocomplete<V extends Value, T = undefined>({
         aria-haspopup="listbox"
         aria-expanded={open}
         ref={containerRef}
-        className={containerClasses}
         onBlur={onBlurHandler}
         onFocus={onFocusHandler}
         onClick={() => openMenu()}
@@ -278,21 +258,20 @@ function Autocomplete<V extends Value, T = undefined>({
         aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
         tabIndex={0}
       >
-        {!disabled && (
-          <PhantomInput
-            aria-autocomplete="list"
-            aria-controls="dropdown-list"
-            autoComplete="off"
-            spellCheck="false"
-            onChange={e => setQuery(e.target.value)}
-            type="text"
-            aria-label="Search"
-            tabIndex={0}
-            value={query}
-            disabled={disabled}
-          />
-        )}
-        <div>{isNil(value) && !query && <ItemText isPlaceHolder>{placeholder}</ItemText>}</div>
+        <input
+          aria-autocomplete="list"
+          aria-controls="dropdown-list"
+          autoComplete="off"
+          spellCheck="false"
+          onChange={e => setQuery(e.target.value)}
+          type="text"
+          aria-label="Search"
+          tabIndex={0}
+          value={query}
+          disabled={disabled}
+          className={styles['autocomplete__phantom-input']}
+          placeholder={placeholder}
+        />
         {!canClear ? (
           <ControlButton
             open={open}
@@ -304,45 +283,27 @@ function Autocomplete<V extends Value, T = undefined>({
         ) : (
           <ControlButton disabled={disabled} onClick={() => clearValue()} type="clear" />
         )}
-        {open && (
-          <DropdownMenu id={dropdownMenuId} role="listbox" ref={menuRef} reverse={openReverse}>
-            {!hasOptions ? (
-              <NoResultsText>{noResultsMessage}</NoResultsText>
-            ) : (
-              <ul
-                aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
-                tabIndex={-1}
-              >
-                {mapper(options, (option, idx) => {
-                  const optionDisabled = option.disabled || disabled;
-                  const selected = optIdx === idx;
-                  return (
-                    <li
-                      aria-disabled={optionDisabled}
-                      aria-label={option.label}
-                      aria-selected={selected}
-                      className={classes({
-                        selected,
-                        disabled: optionDisabled,
-                      })}
-                      id={`${dropdownMenuId}-opt-${idx}`}
-                      key={option.id}
-                      role="option"
-                      tabIndex={-1}
-                      onClick={e => {
-                        if (optionDisabled) return;
-                        e.preventDefault();
-                        onSelectHandler(option);
-                      }}
-                    >
-                      <RenderOpt option={option} />
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          </DropdownMenu>
-        )}
+        <DropdownMenu
+          id={dropdownMenuId}
+          ref={menuRef}
+          open={open}
+          role="listbox"
+          variant={menuVariant}
+          aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
+        >
+          <MenuEmpty>{noResultsMessage}</MenuEmpty>
+          {mapper(options, (option, idx) => (
+            <MenuItem
+              disabled={option.disabled}
+              focused={optIdx === idx}
+              key={option.id}
+              aria-label={option.label}
+              onClick={() => onSelectHandler(option)}
+            >
+              <RenderOpt option={option} />
+            </MenuItem>
+          ))}
+        </DropdownMenu>
       </DropdownContainer>
       {error && errorText && <Typography.body id={errorMessageId}>{errorText}</Typography.body>}
     </div>

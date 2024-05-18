@@ -4,7 +4,6 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import { isNil } from '@rothko-ui/utils';
 
 import { useDebuggerContext } from '../../library/DebuggerContext';
-import useScrollIntoView from '../../library/hooks/useScrollIntoView';
 import type { FocusHandler, NestedOption, Value } from '../../library/types';
 import { findOptionMatch2, findPathToOptionMatch } from './utils';
 import useNestedOptions from '../../library/hooks/useNestedOptions';
@@ -37,7 +36,6 @@ const useNestedDropdown = <V extends Value, T = undefined>({
 
   const timeoutId = useRef<NodeJS.Timeout>();
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollIntoView, scrollElRef: menuRef } = useScrollIntoView();
 
   const [open, setOpen] = useState<boolean>(false);
   const [focus, setFocus] = useState<boolean>(false);
@@ -52,7 +50,7 @@ const useNestedDropdown = <V extends Value, T = undefined>({
     setFocus(false);
     onClose?.();
     containerRef.current?.blur();
-    menuRef.current?.blur();
+    // menuRef.current?.blur();
   };
 
   const openMenu = () => {
@@ -147,7 +145,6 @@ const useNestedDropdown = <V extends Value, T = undefined>({
     containerRef,
     focus,
     goToPrevCategory: goBack,
-    menuRef,
     moveOptionIdx,
     onBlurHandler,
     onFocusHandler,
@@ -156,7 +153,6 @@ const useNestedDropdown = <V extends Value, T = undefined>({
     optIdx,
     options,
     pathToCurrentOption,
-    scrollIntoView,
     selectOne,
     title,
   };

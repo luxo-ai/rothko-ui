@@ -1,12 +1,12 @@
 import { useTransition } from '@react-spring/web';
 import React, { useCallback, useMemo, useState } from 'react';
-import styled from 'styled-components';
 import * as uuid from 'uuid';
 
 import DomPortal from '../../library/Portal';
 import Toast from './Toaster';
 import ToasterContext from './ToasterContext';
 import type { ToastDetails, ToastKey } from './types';
+import styles from './Toaster.module.scss';
 
 const DEFAULT_DURATION_MS = 3000;
 
@@ -62,7 +62,7 @@ const ToastContextProvider = ({ children }: ToastContextProviderProps) => {
   return (
     <ToasterContext.Provider value={{ removeToast, addToast }}>
       <DomPortal wrapperId="toaster">
-        <ToastsContainerDiv>
+        <div className={styles['toasts']}>
           {transitions((style, toast) => (
             <Toast
               key={toast.key}
@@ -80,7 +80,7 @@ const ToastContextProvider = ({ children }: ToastContextProviderProps) => {
               }}
             />
           ))}
-        </ToastsContainerDiv>
+        </div>
       </DomPortal>
       {children}
     </ToasterContext.Provider>
@@ -88,26 +88,3 @@ const ToastContextProvider = ({ children }: ToastContextProviderProps) => {
 };
 
 export default ToastContextProvider;
-
-const ToastsContainerDiv = styled.div`
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  bottom: 0.75rem;
-  margin: 0.25rem 1rem;
-
-  min-width: 10rem;
-  max-width: max(18rem, 20%);
-  right: 0rem;
-
-  // tablet or mobile max width
-  @media only screen and (min-width: 800px) {
-    right: 0.75rem;
-    max-width: max(32rem, 20%);
-    min-width: 15rem;
-  }
-
-  z-index: 99999;
-`;

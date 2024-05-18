@@ -29,19 +29,13 @@
       "background::focus": { "value": "#EEE" }
     }
   },
-  "search": {
-    "background": { "value": "#FFF" },
-    "option": {
-      "background::focus": { "value": "#EEE" }
-    }
-  },
   "tabBar": {
     "border": { "value": "#000" }
   },
   "radio": {
     "border": { "value": "#DEE7F5" },
     "background": { "value": "#EBF2FB" },
-    "background::focus": { "value": "{info.default}" }
+    "background::focus": { "value": "#3c54ff" }
   },
   "table": {
     "background": { "value": "#fff" },
@@ -67,10 +61,6 @@
       }
     }
   },
-  "box": {
-    "background": { "value": "#f8f9fa" },
-    "border": { "value": "{border}" }
-  },
   "accordion": {
     "border": { "value": "{border}" },
     "background": { "value": "#f8f9fa" }
@@ -86,5 +76,13 @@
   "skeleton": {
     "background": { "value": "#DEE7F5" },
     "foreground": { "value": "#EBF2FB" }
+  },
+  "switch": {
+    "border": { "value": "#d9d9d9" },
+    "background": { "value": "#dee7f5" },
+    "background::focus": { "value": "{success.default}" },
+    "handle": {
+      "background": { "value": "#fff" }
+    }
   }
 }

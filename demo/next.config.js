@@ -10,9 +10,6 @@ module.exports = {
   ...withTM(),
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
   swcMinify: true,
-  compiler: {
-    styledComponents: true,
-  },
   env: {
     DEBUG: process.env.DEBUG,
     BASE_URL: process.env.BASE_URL,

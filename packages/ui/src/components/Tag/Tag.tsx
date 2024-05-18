@@ -1,19 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import { CloseOutline } from '@rothko-ui/icons';
-import { isString } from '@rothko-ui/utils';
+import { isString, classes, scopedClasses as sc } from '@rothko-ui/utils';
 
-import { phantomButtonStyle } from '../../library/PhantomButton';
 import type { RothkoKind } from '../../theme/types';
 import { Typography } from '../Typography';
-import { semanticTextChildrenStyle, textChildrenStyle } from '../../library/Styles';
-import type { WithAriaLabeling, WithAriaSelected } from '../../types';
 import { vuar } from '../../library/utils/vuar';
+import type { WithAria } from './types';
+import styles from './Tag.module.scss';
+
+const scopedClasses = sc(styles);
 
 type TagAppearance = 'filled' | 'outline';
-
-type WithAria<T> = WithAriaSelected<WithAriaLabeling<T>>;
 
 type TagProps = WithAria<{
   id?: string;
@@ -69,14 +67,14 @@ const Tag = ({
     category: appearance === 'filled' ? 'foreground' : 'background',
   });
 
+  const baseClasses = scopedClasses(`tag--${appearance}`, kind && `tag--${appearance}--${kind}`);
+
   return (
-    <TagContainerDiv
+    <div
       id={id}
       role={role}
-      className={className}
+      className={classes(baseClasses, className)}
       style={style}
-      appearance={appearance}
-      kind={kind}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
       aria-describedby={ariaDescribedBy}
@@ -91,55 +89,12 @@ const Tag = ({
         <div>{children}</div>
       )}
       {onClose && (
-        <TagCloseButton aria-label="Close">
+        <button className={styles['tag__close-button']} aria-label="Close">
           <CloseOutline aria-hidden onClick={onClose} fill={iconColor} width={16} height={16} />
-        </TagCloseButton>
+        </button>
       )}
-    </TagContainerDiv>
+    </div>
   );
 };
-
-type ContainerProps = {
-  kind: RothkoKind;
-  appearance: TagAppearance;
-};
-
-const TagContainerDiv = styled.div<ContainerProps>`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  width: fit-content;
-  min-width: 4rem;
-  height: max-content;
-  padding: 0.125rem 0.5rem;
-  justify-content: center;
-  text-align: center;
-
-  background-color: ${({ kind, appearance }) => {
-    return appearance === 'filled' ? vuar({ kind, category: 'background' }) : 'transparent';
-  }};
-
-  ${({ kind, appearance }) => {
-    if (kind) {
-      return appearance === 'filled' ? semanticTextChildrenStyle : textChildrenStyle;
-    }
-    return textChildrenStyle;
-  }};
-
-  border: 1px solid
-    ${({ kind }) => {
-      return vuar({ kind, category: 'border' });
-    }};
-  border-radius: 50vh;
-`;
-
-const TagCloseButton = styled.button`
-  ${phantomButtonStyle}
-  margin-left: 0.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 
 export default Tag;

@@ -1,27 +1,19 @@
 import type { DocumentContext } from 'next/document';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
 import React from 'react';
+import cookie from 'cookie';
+import config from '../config';
 
-class MyDocument extends Document {
+type CookiesProps = {
+  cookies: Record<string, string>;
+};
+
+class MyDocument extends Document<CookiesProps> {
   static async getInitialProps(ctx: DocumentContext) {
-    const sheet = new ServerStyleSheet();
-    const originalRenderPage = ctx.renderPage;
-
-    try {
-      ctx.renderPage = () =>
-        originalRenderPage({
-          enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
-        });
-
-      const initialProps = await Document.getInitialProps(ctx);
-      return {
-        ...initialProps,
-        styles: [initialProps.styles, sheet.getStyleElement()],
-      };
-    } finally {
-      sheet.seal();
-    }
+    const initialProps = await Document.getInitialProps(ctx);
+    const cookieString = ctx.req?.headers.cookie || '';
+    const cookies = cookie.parse(cookieString);
+    return { ...initialProps, cookies };
   }
 
   render() {
@@ -81,7 +73,7 @@ class MyDocument extends Document {
             crossOrigin=""
           />
         </Head>
-        <body>
+        <body className={this.props.cookies[config.preference.theme] || 'dark'}>
           <Main />
           <NextScript />
         </body>

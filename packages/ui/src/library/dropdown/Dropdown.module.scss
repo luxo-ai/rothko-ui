@@ -1,0 +1,51 @@
+@use './variables' as variables;
+@use '../../components/Typography/mixins' as typographyMixins;
+@use './../../styles/placeholders';
+
+.dropdown-menu {
+  max-height: 13rem;
+  z-index: 10; // needed?
+}
+
+.dropown-container {
+  @include typographyMixins.bodyStyle();
+  @extend %ios-tap-highlight-color-transparent;
+
+  // taken from input
+  background-color: variables.$inputBackground;
+  color: variables.$inputForeground;
+  border-radius: variables.$inputDefaultBorderRadius;
+  &.error:not(:focus) {
+    outline: 1px solid variables.$rothkoDanger / 2;
+  }
+  // end taken from input
+
+  cursor: default;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border: none;
+  outline: none;
+
+  // placeholder text (body) line-height + text margin + top padding + bottom padding + top border + bottom border
+  min-height: calc(1.5rem + 2 * 0.125rem + 2 * 0.5rem + 2 * 2px);
+  // border: 0.125rem solid ${vuar({ category: 'border', fallback: '#000' })};
+
+  &:not(.open) {
+    cursor: pointer;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &:focus-visible,
+  &.focus {
+    //  outline: 0.125rem solid green;
+    //  outline-offset: 0.125rem;
+  }
+}

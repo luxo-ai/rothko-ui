@@ -3,7 +3,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import React from 'react';
 
 import { CopyOutline } from '@rothko-ui/icons';
-import { Flex, ToastContextConsumer, Typography, useRothko } from '@rothko-ui/ui';
+import { Flex, PhantomButton, ToastContextConsumer, Typography, useRothko } from '@rothko-ui/ui';
 
 export type Language = 'bash' | 'jsx' | 'json' | 'text' | 'typescript';
 
@@ -61,14 +61,14 @@ export const Code = ({
                     text={sourceCode}
                     onCopy={() => addToast({ content: 'Added to clipboard!', withLife: true })}
                   >
-                    <button className="phantom-button">
+                    <PhantomButton>
                       <Flex gap="0.25rem">
                         <CopyOutline fill={style.color} width="1.125rem" height="1.125rem" />
                         <Typography.caption bold style={{ color: style.color }}>
                           Copy
                         </Typography.caption>
                       </Flex>
-                    </button>
+                    </PhantomButton>
                   </CopyToClipboard>
                 )}
               </ToastContextConsumer>

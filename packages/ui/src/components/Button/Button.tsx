@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { classes, scopedClasses as sc } from '@rothko-ui/utils';
 
-import InlineSpinnerLoader from '../../library/InlineSpinner';
+import InlineSpinnerLoader from '../../library/Spinner/InlineSpinner';
 import type { Accessory } from '../../library/types';
 import type { RothkoKind, RothkoSize } from '../../theme';
 import type { ButtonAppearance, ButtonShape, WithButtonAria } from './types';

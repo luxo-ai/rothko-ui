@@ -1,0 +1,23 @@
+@use './variables' as variables;
+
+.slider-range {
+  position: absolute;
+  height: 0.25rem;
+  margin: 0;
+  border-radius: 2px;
+  background: variables.$sliderRangeBackground;
+
+  @each $kind in variables.$rothkoKinds {
+    &--#{$kind} {
+      background: variables.safeGetTheme($kind);
+    }
+  }
+
+  overflow: hidden;
+  user-select: none;
+  z-index: 2;
+
+  &.disabled {
+    opacity: 0.75;
+  }
+}

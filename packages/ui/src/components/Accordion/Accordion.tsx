@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import styled, { css } from 'styled-components';
 
 import type { RothkoKind } from '../../theme/types';
 import AccordionContext from './AccordionContext';
-import type { Icon } from './types';
-import type { WithAriaHidden, WithAriaLabeling } from '../../types';
+import type { Icon, WithAria } from './types';
+import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import styles from './Accordion.module.scss';
 
-type WithAria<T> = WithAriaHidden<WithAriaLabeling<T>>;
+const scoppedClasses = sc(styles);
 
 type AccordionProps = WithAria<{
   id?: string;
@@ -76,6 +76,7 @@ const Accordion = ({
   style,
   hideIcon,
 }: AccordionProps) => {
+  const baseClasses = scoppedClasses('accordion', compact && 'compact');
   const [selectedPanels, setSelectedPanels] = useState(selectedKeys || []);
 
   const onClickPanel = useCallback(
@@ -106,7 +107,7 @@ const Accordion = ({
         hideIcon,
       }}
     >
-      <AccordionGroupDiv
+      <div
         id={id}
         role="tablist"
         aria-label={ariaLabel}
@@ -115,25 +116,13 @@ const Accordion = ({
         aria-details={ariaDetails}
         aria-multiselectable={multiple}
         aria-hidden={ariaHidden}
-        $spaced={!compact}
         style={style}
-        className={className}
+        className={classes(baseClasses, className)}
       >
         {children}
-      </AccordionGroupDiv>
+      </div>
     </AccordionContext.Provider>
   );
 };
-
-const AccordionGroupDiv = styled.div<{ $spaced?: boolean }>`
-  display: flex;
-  flex-direction: column;
-
-  ${({ $spaced }) =>
-    $spaced &&
-    css`
-      gap: 0.75rem;
-    `}
-`;
 
 export default Accordion;
