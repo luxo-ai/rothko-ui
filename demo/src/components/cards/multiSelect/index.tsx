@@ -9,7 +9,7 @@ import Clearable from './usage/Clearable';
 import Disabled from './usage/Disabled';
 import Example from '../Example';
 import MenuPosition from './usage/MenuPosition';
-import multiDropdownCopy from './copy';
+import multiSelectCopy from './copy';
 import multiDropdownProps from './props';
 import Props from '../Props';
 import Usage from '../Usage';
@@ -24,7 +24,7 @@ const MultiSelectCard = () => {
   const maxWidth = isMobileOrTablet ? undefined : '26rem';
 
   return (
-    <Card codeUrl={GITHUB_URL} copy={multiDropdownCopy}>
+    <Card codeUrl={GITHUB_URL} copy={multiSelectCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Usage />
         <Container maxWidth="32rem">

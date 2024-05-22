@@ -9,7 +9,7 @@ import Clearable from './usage/Clearable';
 import Disabled from './usage/Disabled';
 import Example from '../Example';
 import MenuPosition from './usage/MenuPosition';
-import nestedDropdownCopy from './copy';
+import nestedSelectCopy from './copy';
 import nestedDropdownProps from './props';
 import Props from '../Props';
 import Usage from '../Usage';
@@ -24,7 +24,7 @@ const NestedSelectCard = () => {
   const maxWidth = isMobileOrTablet ? undefined : '26rem';
 
   return (
-    <Card codeUrl={GITHUB_URL} copy={nestedDropdownCopy}>
+    <Card codeUrl={GITHUB_URL} copy={nestedSelectCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Usage />
         <Container maxWidth="32rem">

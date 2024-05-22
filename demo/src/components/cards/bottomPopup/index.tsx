@@ -10,6 +10,7 @@ import Card from '../Card';
 import Example from '../Example';
 import Props from '../Props';
 import Usage from '../Usage';
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 
 const GITHUB_URL =
   'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Popup';
@@ -17,6 +18,8 @@ const GITHUB_URL =
 const IMPORT = "import { BottomPopup } from '@rothko-ui/ui';";
 
 const BottomPopupCard = () => {
+  const isMobileOrTablet = useIsMobileOrTablet();
+  const maxWidth = isMobileOrTablet ? undefined : '15rem';
   return (
     <Card codeUrl={GITHUB_URL} copy={bottomPopupCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
@@ -25,12 +28,12 @@ const BottomPopupCard = () => {
           <TSCode sourceCode={IMPORT} />
         </Container>
         <Example sourceCode={BASIC}>
-          <Container maxWidth="15rem">
+          <Container maxWidth={maxWidth}>
             <Basic />
           </Container>
         </Example>
         <Example title="Blur" sourceCode={BLUR}>
-          <Container maxWidth="15rem">
+          <Container maxWidth={maxWidth}>
             <Blur />
           </Container>
         </Example>
