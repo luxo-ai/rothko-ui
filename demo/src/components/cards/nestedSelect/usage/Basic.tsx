@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-
 import type { NestedOption } from '@rothko-ui/ui';
-import { NestedDropdown } from '@rothko-ui/ui';
+import { NestedSelect } from '@rothko-ui/ui';
 
 const DROPDOWN_OPTIONS: NestedOption<string>[] = [
   {
@@ -59,7 +58,7 @@ const DROPDOWN_OPTIONS: NestedOption<string>[] = [
 const App = () => {
   const [selected, setSelected] = useState<string | null>(null);
   return (
-    <NestedDropdown value={selected} onChange={v => setSelected(v)} options={DROPDOWN_OPTIONS} />
+    <NestedSelect value={selected} onChange={v => setSelected(v)} options={DROPDOWN_OPTIONS} />
   );
 };
 

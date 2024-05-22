@@ -16,13 +16,13 @@ import Props from '../Props';
 import Usage from '../Usage';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Dropdown';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Select';
 
-const IMPORT = "import { Dropdown } from '@rothko-ui/ui';";
+const IMPORT = "import { Select } from '@rothko-ui/ui';";
 
 // change postfix/prefix with "onRenderSelected"
 
-const SingleDropdownCard = () => {
+const SelectCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();
   const maxWith = isMobileOrTablet ? undefined : '26rem';
 
@@ -64,4 +64,4 @@ const SingleDropdownCard = () => {
   );
 };
 
-export default SingleDropdownCard;
+export default SelectCard;

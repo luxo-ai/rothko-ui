@@ -1,7 +1,6 @@
 export const BASIC = `
 import React, { useState } from 'react';
-
-import { MultiDropdown } from '@rothko-ui/ui';
+import { MultiSelect } from '@rothko-ui/ui';
 
 const DROPDOWN_OPTIONS = [
   {
@@ -21,7 +20,7 @@ const DROPDOWN_OPTIONS = [
 const App = () => {
   const [selected, setSelected] = useState<number[] | null>(null);
   return (
-    <MultiDropdown values={selected} onChange={v => setSelected(v)} options={DROPDOWN_OPTIONS} />
+    <MultiSelect values={selected} onChange={v => setSelected(v)} options={DROPDOWN_OPTIONS} />
   );
 };
 
@@ -29,8 +28,7 @@ export default App;
 `;
 export const CLEARABLE = `
 import React, { useState } from 'react';
-
-import { MultiDropdown } from '@rothko-ui/ui';
+import { MultiSelect } from '@rothko-ui/ui';
 
 const DROPDOWN_OPTIONS = [
   {
@@ -50,7 +48,7 @@ const DROPDOWN_OPTIONS = [
 const App = () => {
   const [selected, setSelected] = useState<number[] | null>(null);
   return (
-    <MultiDropdown
+    <MultiSelect
       clearable
       values={selected}
       onChange={v => setSelected(v)}
@@ -63,8 +61,7 @@ export default App;
 `;
 export const DISABLED = `
 import React, { useState } from 'react';
-
-import { MultiDropdown } from '@rothko-ui/ui';
+import { MultiSelect } from '@rothko-ui/ui';
 
 const DROPDOWN_OPTIONS = [
   {
@@ -84,7 +81,7 @@ const DROPDOWN_OPTIONS = [
 const App = () => {
   const [selected, setSelected] = useState<number[] | null>(null);
   return (
-    <MultiDropdown
+    <MultiSelect
       disabled
       values={selected}
       onChange={v => setSelected(v)}
@@ -97,8 +94,7 @@ export default App;
 `;
 export const MENU_POSITION = `
 import React, { useState } from 'react';
-
-import { MultiDropdown } from '@rothko-ui/ui';
+import { MultiSelect } from '@rothko-ui/ui';
 
 const DROPDOWN_OPTIONS = [
   {
@@ -118,7 +114,7 @@ const DROPDOWN_OPTIONS = [
 const App = () => {
   const [selected, setSelected] = useState<number[] | null>(null);
   return (
-    <MultiDropdown
+    <MultiSelect
       menuVariant="top"
       values={selected}
       onChange={v => setSelected(v)}

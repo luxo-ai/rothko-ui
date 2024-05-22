@@ -1,7 +1,7 @@
-import NestedDropdownCard from '../../components/cards/nestedDropdown';
+import NestedSelectCard from '../../components/cards/nestedSelect';
 
 const NestedDropdown = () => {
-  return <NestedDropdownCard />;
+  return <NestedSelectCard />;
 };
 
 export default NestedDropdown;

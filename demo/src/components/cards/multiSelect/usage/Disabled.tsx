@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-
-import { MultiDropdown } from '@rothko-ui/ui';
+import { MultiSelect } from '@rothko-ui/ui';
 
 const DROPDOWN_OPTIONS = [
   {
@@ -20,8 +19,8 @@ const DROPDOWN_OPTIONS = [
 const App = () => {
   const [selected, setSelected] = useState<number[] | null>(null);
   return (
-    <MultiDropdown
-      clearable
+    <MultiSelect
+      disabled
       values={selected}
       onChange={v => setSelected(v)}
       options={DROPDOWN_OPTIONS}

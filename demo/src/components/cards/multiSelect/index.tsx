@@ -9,22 +9,22 @@ import Clearable from './usage/Clearable';
 import Disabled from './usage/Disabled';
 import Example from '../Example';
 import MenuPosition from './usage/MenuPosition';
-import nestedDropdownCopy from './copy';
-import nestedDropdownProps from './props';
+import multiDropdownCopy from './copy';
+import multiDropdownProps from './props';
 import Props from '../Props';
 import Usage from '../Usage';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Dropdown';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Select';
 
-const IMPORT = "import { NestedDropdown } from '@rothko-ui/ui';";
+const IMPORT = "import { MultiSelet } from '@rothko-ui/ui';";
 
-const NestedDropdownCard = () => {
+const MultiSelectCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();
   const maxWidth = isMobileOrTablet ? undefined : '26rem';
 
   return (
-    <Card codeUrl={GITHUB_URL} copy={nestedDropdownCopy}>
+    <Card codeUrl={GITHUB_URL} copy={multiDropdownCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Usage />
         <Container maxWidth="32rem">
@@ -51,9 +51,9 @@ const NestedDropdownCard = () => {
           </Container>
         </Example>
       </Flex>
-      <Props copy={{ props: nestedDropdownProps }} />
+      <Props copy={{ props: multiDropdownProps }} />
     </Card>
   );
 };
 
-export default NestedDropdownCard;
+export default MultiSelectCard;
