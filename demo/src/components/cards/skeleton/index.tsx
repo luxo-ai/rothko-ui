@@ -6,8 +6,10 @@ import Card from '../Card';
 import Example from '../Example';
 import skeletonCopy from './copy';
 import skeletonProps from './props';
-import Basic from './usage/Basic';
-import { BASIC } from './usage/sourceCode';
+import SkeletonBoxWithLabel from './usage/SkeletonBoxWithLabel';
+import SkeletonBuilder from './usage/SkeletonBuilder';
+import SkeletonBox from './usage/SkeletonBox';
+import { SKELETON_BOX_WITH_LABEL, SKELETON_BOX, SKELETON_BUILDER } from './usage/sourceCode';
 import Props from '../Props';
 import Usage from '../Usage';
 
@@ -27,9 +29,19 @@ const SkeletonCard = () => {
         <Container maxWidth="32rem">
           <TSCode sourceCode={IMPORT} />
         </Container>
-        <Example sourceCode={BASIC}>
+        <Example title="Box with Label" sourceCode={SKELETON_BOX_WITH_LABEL}>
           <Container maxWidth={maxWith}>
-            <Basic />
+            <SkeletonBoxWithLabel />
+          </Container>
+        </Example>
+        <Example title="Box" sourceCode={SKELETON_BOX}>
+          <Container maxWidth={maxWith}>
+            <SkeletonBox />
+          </Container>
+        </Example>
+        <Example title="Custom" sourceCode={SKELETON_BUILDER}>
+          <Container maxWidth={maxWith}>
+            <SkeletonBuilder />
           </Container>
         </Example>
       </Flex>

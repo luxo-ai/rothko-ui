@@ -17,14 +17,14 @@ const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
   { label: 'Button' },
   { label: 'Checkbox' },
   { label: 'Drawer' },
-  {
-    label: 'Dropdown',
-    children: [{ label: 'Dropdown' }, { label: 'Multi Dropdown' }, { label: 'Nested Dropdown' }],
-  },
   { label: 'Input' },
   { label: 'Link' },
   { label: 'Modal' },
   { label: 'Radio Group' },
+  {
+    label: 'Select',
+    children: [{ label: 'Select' }, { label: 'Multi Select' }, { label: 'Nested Select' }],
+  },
   { label: 'Skeleton' },
   {
     label: 'Slider',

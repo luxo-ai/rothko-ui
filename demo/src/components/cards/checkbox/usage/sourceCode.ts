@@ -1,11 +1,11 @@
 export const BASIC = `
 import React, { useState } from 'react';
-
 import { Checkbox, Flex } from '@rothko-ui/ui';
 
 const App = () => {
-  const [withoutLabelChecked, setWithoutLabelChecked] = useState(false);
-  const [withLabelChecked, setWithLabelChecked] = useState(false);
+  const [withoutLabelChecked, setWithoutLabelChecked] = useState(true);
+  const [withLabelChecked, setWithLabelChecked] = useState(true);
+
   return (
     <Flex flexDirection="column" rowGap="1rem">
       <Checkbox checked={withoutLabelChecked} onChange={v => setWithoutLabelChecked(v)} />
@@ -20,7 +20,6 @@ export default App;
 `;
 export const DISABLED = `
 import React from 'react';
-
 import { Checkbox, Flex } from '@rothko-ui/ui';
 
 const App = () => {
@@ -36,21 +35,8 @@ const App = () => {
 
 export default App;
 `;
-export const WITH_CHECK = `
-import React, { useState } from 'react';
-
-import { Checkbox } from '@rothko-ui/ui';
-
-const App = () => {
-  const [checked, setChecked] = useState(false);
-  return <Checkbox checked={checked} withCheck onChange={v => setChecked(v)} />;
-};
-
-export default App;
-`;
 export const WITH_KIND = `
 import React, { useState } from 'react';
-
 import { Checkbox, Flex } from '@rothko-ui/ui';
 
 const App = () => {

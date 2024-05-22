@@ -54,6 +54,10 @@ type ModalProps = WithAria<{
    * The title of the modal.
    */
   title?: string;
+  /**
+   * Whether the modal should blur the background.
+   * @default false
+   */
   blur?: boolean;
 }>;
 

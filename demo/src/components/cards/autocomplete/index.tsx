@@ -7,7 +7,12 @@ import Example from '../Example';
 import Usage from '../Usage';
 import autocompleteCopy from './copy';
 import Basic from './usage/Basic';
-import { BASIC } from './usage/sourceCode';
+import Disabled from './usage/Disabled';
+import MenuVariant from './usage/MenuVariant';
+import RenderOption from './usage/RenderOption';
+import { BASIC, DISABLED, MENU_VARIANT } from './usage/sourceCode';
+import Props from '../Props';
+import autocompleteProps from './props';
 
 const GITHUB_URL =
   'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Autocomplete';
@@ -30,7 +35,23 @@ const SingleDropdownCard = () => {
             <Basic />
           </Container>
         </Example>
+        <Example title="Menu Variant" sourceCode={MENU_VARIANT}>
+          <Container maxWidth={maxWith}>
+            <MenuVariant />
+          </Container>
+        </Example>
+        <Example title="Render Option" sourceCode={MENU_VARIANT}>
+          <Container maxWidth={maxWith}>
+            <RenderOption />
+          </Container>
+        </Example>
+        <Example title="Disabled" sourceCode={DISABLED}>
+          <Container maxWidth={maxWith}>
+            <Disabled />
+          </Container>
+        </Example>
       </Flex>
+      <Props copy={{ props: autocompleteProps }} />
     </Card>
   );
 };

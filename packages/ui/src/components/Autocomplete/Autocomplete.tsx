@@ -20,35 +20,35 @@ import MenuEmpty from '../../library/Menu/MenuEmpty';
 import MenuItem from '../../library/Menu/MenuItem';
 import styles from './Autocomplete.module.scss';
 
-export type DropdownProps<V extends Value, T> = WithAria<{
+export type AutocompleteProps<V extends Value, T> = WithAria<{
   id?: string;
   /**
-   * Additional class name for the dropdown.
+   * Additional class name for the autocomplete.
    */
   className?: string;
   /**
-   * Whether the dropdown is clearable.
+   * Whether the autocomplete is clearable.
    */
   clearable?: boolean;
   /**
-   * Whether the dropdown is disabled.
+   * Whether the autocomplete is disabled.
    */
   disabled?: boolean;
   /**
-   * Whether the dropdown has an error state.
+   * Whether the autocomplete has an error state.
    */
   error?: boolean;
   /**
-   * The error message to display when the dropdown has an error state.
+   * The error message to display when the autocomplete has an error state.
    * @default: 'Invalid'
    */
   errorText?: string;
   /**
-   * The label for the dropdown.
+   * The label for the autocomplete.
    */
   label?: string;
   /**
-   * The position of the dropdown menu.
+   * The position of the autocomplete menu.
    * @default: 'bottom'
    */
   menuVariant?: MenuVariant;
@@ -58,47 +58,56 @@ export type DropdownProps<V extends Value, T> = WithAria<{
    */
   noResultsMessage?: React.ReactNode;
   /**
-   * Event handler for when the dropdown loses focus.
+   * Event handler for when the autocomplete loses focus.
    */
   onBlur?: FocusHandler;
   /**
-   * Event handler for when the dropdown value changes.
+   * Event handler for when the autocomplete value changes.
    */
   onChange: (v: V | null) => void;
+  /**
+   * Event handler for when the autocomplete is cleared.
+   */
   onClear?: () => void;
+  /**
+   * Event handler for when the autocomplete is closed.
+   */
   onClose?: () => void;
   /**
-   * Event handler for when the dropdown gains focus.
+   * Event handler for when the autocomplete gains focus.
    */
   onFocus?: FocusHandler;
   /**
-   * Event handler for when the dropdown is opened.
+   * Event handler for when the autocomplete is opened.
    */
   onOpen?: () => void;
   /**
-   * The options for the dropdown.
+   * The options for the autocomplete.
    */
   options: Option<V, T>[];
   /**
-   * The placeholder text for the dropdown.
+   * The placeholder text for the autocomplete.
    * @default: 'Select'
    */
   placeholder?: string;
   /**
-   * Custom rendering function for dropdown options.
+   * Custom rendering function for autocomplete options.
    */
   renderOption?: RenderOption<V, T>;
+  /**
+   * Custom search function for filtering options.
+   */
   searchFn?: QueryMatchFn<V, T>;
   /**
    * The format for displaying selected values.
    */
   selectedFormat?: string;
   /**
-   * Custom styles for the dropdown.
+   * Custom styles for the autocomplete.
    */
   style?: React.CSSProperties;
   /**
-   * The value(s) of the dropdown.
+   * The value(s) of the autocomplete.
    */
   value?: V | null;
 }>;
@@ -134,12 +143,12 @@ function Autocomplete<V extends Value, T = undefined>({
   'aria-required': ariaRequired,
   'aria-invalid': ariaInvalid,
   'aria-errormessage': ariaErrorMessage,
-}: DropdownProps<V, T>) {
+}: AutocompleteProps<V, T>) {
   const menuRef = useRef<ScrollableHTMLElement>(null);
   const openReverse = menuVariant === 'top';
-  const debug = useDebuggerContext('<Dropdown/>');
+  const debug = useDebuggerContext('<Autocomplete/>');
 
-  const { elementId: dropdownMenuId, labelId, errorMessageId } = useFieldIds();
+  const { elementId: autocompleteMenuId, labelId, errorMessageId } = useFieldIds();
 
   const {
     clearValue,
@@ -243,7 +252,7 @@ function Autocomplete<V extends Value, T = undefined>({
         aria-errormessage={
           !ariaErrorMessage && error && errorText ? errorMessageId : ariaErrorMessage
         }
-        aria-controls={open ? dropdownMenuId : undefined}
+        aria-controls={open ? autocompleteMenuId : undefined}
         aria-label={ariaLabel}
         aria-describedby={ariaDescribedBy}
         aria-details={ariaDetails}
@@ -260,7 +269,7 @@ function Autocomplete<V extends Value, T = undefined>({
       >
         <input
           aria-autocomplete="list"
-          aria-controls="dropdown-list"
+          aria-controls={autocompleteMenuId}
           autoComplete="off"
           spellCheck="false"
           onChange={e => setQuery(e.target.value)}
@@ -284,7 +293,7 @@ function Autocomplete<V extends Value, T = undefined>({
           <ControlButton disabled={disabled} onClick={() => clearValue()} type="clear" />
         )}
         <DropdownMenu
-          id={dropdownMenuId}
+          id={autocompleteMenuId}
           ref={menuRef}
           open={open}
           role="listbox"

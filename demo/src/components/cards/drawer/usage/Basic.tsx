@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { ArrowRightOutline } from '@rothko-ui/icons';
 import { Button, Drawer } from '@rothko-ui/ui';
 
@@ -17,9 +16,9 @@ const App = () => {
         kind="primary"
         onClick={() => setOpen(true)}
       >
-        Open Drawer
+        Open
       </Button>
-      <Drawer blur open={open} onClose={() => setOpen(false)}>
+      <Drawer open={open} onClose={() => setOpen(false)}>
         {DRAWER_CONTENT}
       </Drawer>
     </>

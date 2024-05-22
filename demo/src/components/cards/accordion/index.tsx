@@ -14,12 +14,14 @@ import Multiple from './usage/Multiple';
 import Selected from './usage/Selected';
 import WithKind from './usage/WithKind';
 import WithSubtitle from './usage/WithSubtitle';
+import NoIcon from './usage/NoIcon';
 import {
   BASIC,
   BORDERED,
   COMPACT,
   ICON_OVERRIDE,
   MULTIPLE,
+  NO_ICON,
   SELECTED,
   WITH_KIND,
   WITH_SUBTITLE,
@@ -37,7 +39,7 @@ const GITHUB_URL =
 const IMPORT = "import { Accordion, AccordionPanel } from '@rothko-ui/ui';";
 
 const AccordionCard = () => {
-  const [kind, setKind] = useState<RothkoKind>('primary');
+  const [kind, setKind] = useState<RothkoKind>('secondary');
 
   return (
     <Card codeUrl={GITHUB_URL} copy={accordionCopy}>
@@ -53,20 +55,23 @@ const AccordionCard = () => {
           <Example title="Bordered" sourceCode={BORDERED}>
             <Bordered />
           </Example>
-          <Example title="Subtitles" sourceCode={WITH_SUBTITLE}>
-            <WithSubtitle />
+          <Example title="Selected" sourceCode={SELECTED}>
+            <Selected />
           </Example>
           <Example title="Multiple" sourceCode={MULTIPLE}>
             <Multiple />
           </Example>
+          <Example title="Subtitles" sourceCode={WITH_SUBTITLE}>
+            <WithSubtitle />
+          </Example>
           <Example title="Compact" sourceCode={COMPACT}>
             <Compact />
           </Example>
-          <Example title="Selected" sourceCode={SELECTED}>
-            <Selected />
-          </Example>
           <Example title="Icon Override" sourceCode={ICON_OVERRIDE}>
             <IconOverride />
+          </Example>
+          <Example title="No Icons" sourceCode={NO_ICON}>
+            <NoIcon />
           </Example>
           <FlexItem>
             <Example title="With Kind" sourceCode={insertKind(WITH_KIND, kind)}>

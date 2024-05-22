@@ -32,7 +32,7 @@ type AccordionContextType = {
   /**
    * Determines whether the Accordion should hide the icon.
    */
-  hideIcon?: boolean;
+  noIcon?: boolean;
 };
 
 const AccordionContext = createContext<AccordionContextType | null>(null);

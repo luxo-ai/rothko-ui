@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import keyboardKey from 'keyboard-key';
 
@@ -98,8 +98,8 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
       onKeyDown: onKeyDownProp,
       $key,
       style,
-      subtitle,
-      title,
+      subtitle: subtitleProp,
+      title: titleProp,
     },
     ref
   ) => {
@@ -108,7 +108,7 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
 
     const debug = useDebuggerContext('<AccordionPanel />');
 
-    const { bordered, iconOverride, kind, onClickPanel, selectedPanels, compact, hideIcon } =
+    const { bordered, iconOverride, kind, onClickPanel, selectedPanels, compact, noIcon } =
       useAccordion();
 
     const baseContainerClasses = scoppedClasses(
@@ -149,6 +149,26 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
       [onClickPanel, onClickProp, panelKey, disabled]
     );
 
+    const title = useMemo(() => {
+      if (!titleProp) {
+        return null;
+      }
+      if (isString(titleProp)) {
+        return <DefaultTitleText kind={kind}>{titleProp}</DefaultTitleText>;
+      }
+      return <FlexItem>{titleProp}</FlexItem>;
+    }, [titleProp, kind]);
+
+    const subtitle = useMemo(() => {
+      if (!subtitleProp) {
+        return null;
+      }
+      if (isString(subtitleProp)) {
+        return <DefaultSubtitleText kind={kind}>{subtitleProp}</DefaultSubtitleText>;
+      }
+      return <FlexItem>{subtitleProp}</FlexItem>;
+    }, [subtitleProp, kind]);
+
     return (
       <div id={id} className={classes(baseContainerClasses, className)} style={style} ref={ref}>
         <header>
@@ -169,7 +189,7 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
             tabIndex={disabled ? -1 : 0}
             type="button"
           >
-            {!hideIcon && (
+            {!noIcon && (
               <AccordionIcon
                 open={isPanelSelected}
                 disabled={!!disabled}
@@ -177,18 +197,12 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
                 iconOverride={iconOverrideLocal || iconOverride}
               />
             )}
-            <Flex flexDirection="column" rowGap="0.1rem" alignItems="start">
-              {isString(title) ? (
-                <DefaultTitleText kind={kind}>{title}</DefaultTitleText>
-              ) : (
-                <FlexItem>{title}</FlexItem>
-              )}
-              {isString(subtitle) ? (
-                <DefaultSubtitleText kind={kind}>{subtitle}</DefaultSubtitleText>
-              ) : (
-                <FlexItem>{subtitle}</FlexItem>
-              )}
-            </Flex>
+            {(title || subtitle) && (
+              <Flex flexDirection="column" rowGap="0.1rem" alignItems="start">
+                {title}
+                {subtitle}
+              </Flex>
+            )}
           </button>
         </header>
         <PanelContent

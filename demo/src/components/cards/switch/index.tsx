@@ -3,11 +3,12 @@ import { useState } from 'react';
 import type { RothkoKind } from '@rothko-ui/ui';
 import { Container, Flex, FlexItem } from '@rothko-ui/ui';
 
-import { BASIC, WITH_ICON, WITH_KIND } from './usage/sourceCode';
+import { BASIC, DISABLED, WITH_ICON, WITH_KIND } from './usage/sourceCode';
 import { insertKind } from '../helpers';
 import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Basic from './usage/Basic';
+import Disabed from './usage/Disabled';
 import Card from '../Card';
 import Example from '../Example';
 import Props from '../Props';
@@ -24,7 +25,7 @@ const GITHUB_URL =
 const IMPORT = "import { Switch } from '@rothko-ui/ui';";
 
 const SwitchCard = () => {
-  const [kind, setKind] = useState<RothkoKind>('primary');
+  const [kind, setKind] = useState<RothkoKind>('secondary');
   const isMobileOrTablet = useIsMobileOrTablet();
   const maxWidth = isMobileOrTablet ? undefined : '26rem';
 
@@ -43,6 +44,11 @@ const SwitchCard = () => {
         <Example title="With Icon" sourceCode={WITH_ICON}>
           <Container maxWidth={maxWidth}>
             <WithIcon />
+          </Container>
+        </Example>
+        <Example title="Disabled" sourceCode={DISABLED}>
+          <Container maxWidth={maxWidth}>
+            <Disabed />
           </Container>
         </Example>
         <FlexItem>

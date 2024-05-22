@@ -119,7 +119,7 @@ const App = () => {
   const [selected, setSelected] = useState<number[] | null>(null);
   return (
     <MultiDropdown
-      menuPosition="top"
+      menuVariant="top"
       values={selected}
       onChange={v => setSelected(v)}
       options={DROPDOWN_OPTIONS}

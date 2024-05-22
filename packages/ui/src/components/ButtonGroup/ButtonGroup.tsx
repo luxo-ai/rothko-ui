@@ -1,6 +1,6 @@
 import React from 'react';
 import type { RothkoKind, RothkoSize } from '../../theme';
-import type { ButtonAppearance, ButtonShape } from '../Button/types';
+import type { ButtonAppearance, ButtonVariant } from '../Button/types';
 import styles from './ButtonGroup.module.scss';
 import { classes, scopedClasses as sc } from '@rothko-ui/utils';
 
@@ -13,7 +13,7 @@ type ButtonGroupProps = {
   gap?: number | string;
   kind?: RothkoKind;
   noEffect?: boolean;
-  shape?: ButtonShape;
+  variant?: ButtonVariant;
   size?: RothkoSize;
   style?: React.CSSProperties;
 };
@@ -25,7 +25,7 @@ const ButtonGroup = ({
   gap,
   kind,
   noEffect,
-  shape,
+  variant,
   size,
   style = {},
 }: ButtonGroupProps) => {
@@ -42,7 +42,7 @@ const ButtonGroup = ({
       ...(child.props || {}),
       key: child.key || `bttn${index}`,
       appearance: child.props.appearance || appearance,
-      shape: child.props.shape || shape,
+      variant: child.props.variant || variant,
       kind: child.props.kind || kind,
       size: child.props.size || size,
     });

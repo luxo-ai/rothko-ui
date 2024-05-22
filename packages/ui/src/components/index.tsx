@@ -5,7 +5,7 @@ export * from './BreadCrumbs';
 export * from './Button';
 export * from './Checkbox';
 export * from './Drawer';
-export * from './Dropdown';
+export * from './Select';
 export * from './Input';
 export * from './Link';
 export * from './Modal';

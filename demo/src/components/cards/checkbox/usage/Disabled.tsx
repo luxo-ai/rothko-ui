@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Checkbox, Flex } from '@rothko-ui/ui';
 
 const App = () => {

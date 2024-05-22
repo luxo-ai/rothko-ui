@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { Switch } from '@rothko-ui/ui';
 
 const App = () => {

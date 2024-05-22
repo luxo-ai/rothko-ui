@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { ArrowUpOutline } from '@rothko-ui/icons';
 import { BottomPopup, Button } from '@rothko-ui/ui';
 
@@ -8,6 +7,7 @@ const POPUP_CONTENT =
 
 const App = () => {
   const [open, setOpen] = useState(false);
+
   return (
     <>
       <Button
@@ -16,9 +16,9 @@ const App = () => {
         )}
         onClick={() => setOpen(true)}
       >
-        Open popup
+        Open
       </Button>
-      <BottomPopup blur open={open} onClose={() => setOpen(false)}>
+      <BottomPopup open={open} onClose={() => setOpen(false)}>
         {POPUP_CONTENT}
       </BottomPopup>
     </>

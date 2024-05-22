@@ -1,13 +1,14 @@
 export const BASIC = `
 import React, { useState } from 'react';
 
+import type { NestedOption } from '@rothko-ui/ui';
 import { NestedDropdown } from '@rothko-ui/ui';
 
-const DROPDOWN_OPTIONS = [
+const DROPDOWN_OPTIONS: NestedOption<string>[] = [
   {
     id: '0',
-    label: 'Sub',
-    subcategories: [
+    label: 'Substack group',
+    options: [
       {
         id: '0:1',
         label: 'Sub-One',
@@ -16,7 +17,34 @@ const DROPDOWN_OPTIONS = [
         id: '0:2',
         label: 'Sub-Two',
       },
-      { id: '03', label: 'Sub-Three' },
+      {
+        id: '03',
+        label: 'Sub-Three',
+        options: [
+          {
+            id: '0:3:1',
+            label: 'Sub-Three-One',
+          },
+          {
+            id: '0:3:2',
+            label: 'Sub-Three-Two',
+            options: [
+              {
+                id: '0:3:2:1',
+                label: 'Sub-Three-Two-One',
+              },
+              {
+                id: '0:3:2:2',
+                label: 'Sub-Three-Two-Two',
+              },
+            ],
+          },
+          {
+            id: '0:3:3',
+            label: 'Sub-Three-Three',
+          },
+        ],
+      },
     ],
   },
   {
@@ -41,13 +69,14 @@ export default App;
 export const CLEARABLE = `
 import React, { useState } from 'react';
 
+import type { NestedOption } from '@rothko-ui/ui';
 import { NestedDropdown } from '@rothko-ui/ui';
 
-const DROPDOWN_OPTIONS = [
+const DROPDOWN_OPTIONS: NestedOption<string>[] = [
   {
     id: '0',
     label: 'Sub',
-    subcategories: [
+    options: [
       {
         id: '0:1',
         label: 'Sub-One',
@@ -56,7 +85,10 @@ const DROPDOWN_OPTIONS = [
         id: '0:2',
         label: 'Sub-Two',
       },
-      { id: '03', label: 'Sub-Three' },
+      {
+        id: '03',
+        label: 'Sub-Three',
+      },
     ],
   },
   {
@@ -86,13 +118,14 @@ export default App;
 export const DISABLED = `
 import React, { useState } from 'react';
 
+import type { NestedOption } from '@rothko-ui/ui';
 import { NestedDropdown } from '@rothko-ui/ui';
 
-const DROPDOWN_OPTIONS = [
+const DROPDOWN_OPTIONS: NestedOption<string>[] = [
   {
     id: '0',
     label: 'Sub',
-    subcategories: [
+    options: [
       {
         id: '0:1',
         label: 'Sub-One',
@@ -101,7 +134,10 @@ const DROPDOWN_OPTIONS = [
         id: '0:2',
         label: 'Sub-Two',
       },
-      { id: '03', label: 'Sub-Three' },
+      {
+        id: '03',
+        label: 'Sub-Three',
+      },
     ],
   },
   {
@@ -131,13 +167,14 @@ export default App;
 export const MENU_POSITION = `
 import React, { useState } from 'react';
 
+import type { NestedOption } from '@rothko-ui/ui';
 import { NestedDropdown } from '@rothko-ui/ui';
 
-const DROPDOWN_OPTIONS = [
+const DROPDOWN_OPTIONS: NestedOption<string>[] = [
   {
     id: '0',
-    label: 'Sub',
-    subcategories: [
+    label: 'Substack group',
+    options: [
       {
         id: '0:1',
         label: 'Sub-One',
@@ -146,7 +183,10 @@ const DROPDOWN_OPTIONS = [
         id: '0:2',
         label: 'Sub-Two',
       },
-      { id: '03', label: 'Sub-Three' },
+      {
+        id: '03',
+        label: 'Sub-Three',
+      },
     ],
   },
   {
@@ -163,7 +203,7 @@ const App = () => {
   const [selected, setSelected] = useState<string | null>(null);
   return (
     <NestedDropdown
-      menuPosition="top"
+      menuVariant="top"
       value={selected}
       onChange={v => setSelected(v)}
       options={DROPDOWN_OPTIONS}

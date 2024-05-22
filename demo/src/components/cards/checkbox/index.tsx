@@ -1,6 +1,6 @@
 import { Container, Flex } from '@rothko-ui/ui';
 
-import { BASIC, DISABLED, WITH_CHECK, WITH_KIND } from './usage/sourceCode';
+import { BASIC, DISABLED, WITH_KIND } from './usage/sourceCode';
 import { TSCode } from '../../Code';
 import Basic from './usage/Basic';
 import Card from '../Card';
@@ -9,7 +9,6 @@ import checkboxProps from './props';
 import Disabled from './usage/Disabled';
 import Example from '../Example';
 import Props from '../Props';
-import WithCheck from './usage/WithCheck';
 import WithKind from './usage/WithKind';
 import Usage from '../Usage';
 
@@ -28,9 +27,6 @@ const CheckboxCard = () => {
         </Container>
         <Example sourceCode={BASIC}>
           <Basic />
-        </Example>
-        <Example title="With Check" sourceCode={WITH_CHECK}>
-          <WithCheck />
         </Example>
         <Example title="Disabled" sourceCode={DISABLED}>
           <Disabled />

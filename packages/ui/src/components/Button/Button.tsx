@@ -5,7 +5,7 @@ import { classes, scopedClasses as sc } from '@rothko-ui/utils';
 import InlineSpinnerLoader from '../../library/Spinner/InlineSpinner';
 import type { Accessory } from '../../library/types';
 import type { RothkoKind, RothkoSize } from '../../theme';
-import type { ButtonAppearance, ButtonShape, WithButtonAria } from './types';
+import type { ButtonAppearance, ButtonVariant, WithButtonAria } from './types';
 import { vuar } from '../../library/utils/vuar';
 import styles from './Button.module.scss';
 
@@ -61,19 +61,21 @@ type ButtonProps = WithButtonAria<{
   /**
    * The click event handler.
    */
-  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   /**
    * The keydown event handler.
    */
-  onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
   /**
    * The role of the button.
+   * @default 'button'
    */
   role?: React.AriaRole;
   /**
-   * The shape of the button.
+   * The variant of the button.
+   * @default 'default'
    */
-  shape?: ButtonShape;
+  variant?: ButtonVariant;
   /**
    * The size of the button.
    * @default 'm'
@@ -89,6 +91,7 @@ type ButtonProps = WithButtonAria<{
   tabIndex?: number;
   /**
    * The type of the button.
+   * @default 'button'
    */
   type?: 'button' | 'submit' | 'reset';
 }>;
@@ -116,7 +119,7 @@ const Button: React.FC<ButtonProps> = ({
   loading,
   onClick: onClickProp,
   onKeyDown: onKeyDownProp,
-  shape,
+  variant = 'default',
   size = 'm',
   style,
   tabIndex,
@@ -130,7 +133,7 @@ const Button: React.FC<ButtonProps> = ({
     'button',
     `button--${appearance}--${kind}`,
     `button--${size}`,
-    shape && `button--${shape}`,
+    variant !== 'default' && `button--${variant}`,
     fitContent && 'button--fit-content'
   );
 

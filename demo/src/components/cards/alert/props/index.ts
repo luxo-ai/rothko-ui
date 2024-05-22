@@ -1,33 +1,33 @@
 const alertProps = [
   {
-    name: 'aria-label',
-    type: 'string',
-    defaultValue: null,
-    description: 'ARIA label for the alert, enhancing accessibility.',
-  },
-  {
-    name: 'children',
-    type: 'React.ReactNode',
-    defaultValue: null,
-    description: 'The content of the alert.',
+    name: 'appearance',
+    type: "'filled' | 'outline'",
+    defaultValue: "'filled'",
+    description: 'The appearance style of the Alert component. Default is "filled".',
   },
   {
     name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'CSS class name for custom styling.',
+    description: 'The class name for the Alert component.',
+  },
+  {
+    name: 'id',
+    type: 'string',
+    defaultValue: null,
+    description: 'Unique identifier for the Alert component.',
   },
   {
     name: 'kind',
     type: 'RothkoKind',
-    defaultValue: 'danger',
+    defaultValue: "'danger'",
     description: "Specifies the alert's style kind. Default is 'danger'.",
   },
   {
     name: 'style',
     type: 'CSSProperties',
     defaultValue: null,
-    description: 'Inline styles for the alert.',
+    description: 'The inline style for the Alert component.',
   },
 ] as const;
 

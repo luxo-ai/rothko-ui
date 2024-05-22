@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { Textarea } from '@rothko-ui/ui';
 
 const App = () => {

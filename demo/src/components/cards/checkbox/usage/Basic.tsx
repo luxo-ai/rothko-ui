@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-
 import { Checkbox, Flex } from '@rothko-ui/ui';
 
 const App = () => {
-  const [withoutLabelChecked, setWithoutLabelChecked] = useState(false);
-  const [withLabelChecked, setWithLabelChecked] = useState(false);
+  const [withoutLabelChecked, setWithoutLabelChecked] = useState(true);
+  const [withLabelChecked, setWithLabelChecked] = useState(true);
+
   return (
     <Flex flexDirection="column" rowGap="1rem">
       <Checkbox checked={withoutLabelChecked} onChange={v => setWithoutLabelChecked(v)} />

@@ -7,27 +7,28 @@ import styles from './Input.module.scss';
 
 const scoppedClasses = sc(styles);
 
-export type InputProps = HtmlInputProps &
-  TextProps & {
-    /**
-     * The size of the input.
-     * @default 'm'
-     */
-    size?: InputSize;
-    /**
-     * Specifies whether there is an error with the input.
-     */
-    error?: boolean;
-  };
+export type InputProps = HtmlInputProps & {
+  /**
+   * The size of the input.
+   * @default 'm'
+   */
+  size?: InputSize;
+  /**
+   * Specifies whether there is an error with the input.
+   */
+  error?: boolean;
+  /**
+   * The variant of the input.
+   */
+  variant?: keyof TextProps;
+};
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ size = 'm', light, bold, italic, error, className, disabled, tabIndex, ...props }, ref) => {
+  ({ size = 'm', variant, error, className, disabled, tabIndex, ...props }, ref) => {
     const baseClasses = scoppedClasses(
       'input',
       `input--${size}`,
-      light && 'input--light',
-      bold && 'input--bold',
-      italic && 'input--italic',
+      variant && `input--${variant}`,
       error && 'error'
     );
     return (

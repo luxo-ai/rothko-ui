@@ -20,4 +20,4 @@ export type WithButtonAria<T> = WithAriaDisabled<
 >;
 
 export type ButtonAppearance = 'filled' | 'outline';
-export type ButtonShape = 'pill' | 'square';
+export type ButtonVariant = 'pill' | 'square' | 'default';

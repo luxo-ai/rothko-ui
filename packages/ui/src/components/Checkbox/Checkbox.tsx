@@ -41,12 +41,13 @@ type CheckboxProps = WithAria<{
   errorText?: string;
   /**
    * The visual style of the checkbox.
+   * @default: 'success'
    */
   kind?: RothkoKind;
   /**
    * The callback function called when the checkbox value changes.
    */
-  onChange?: (val: boolean) => void;
+  onChange?: (v: boolean) => void;
   /**
    * Specifies whether the checkbox is required.
    */

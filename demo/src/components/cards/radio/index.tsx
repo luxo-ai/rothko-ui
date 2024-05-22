@@ -39,7 +39,7 @@ const RadioGroupCard = () => {
             <Disabled />
           </Container>
         </Example>
-        <Example title="Menu Position" sourceCode={MAX_COLUMN}>
+        <Example title="Max Column" sourceCode={MAX_COLUMN}>
           <Container maxWidth={maxWidth}>
             <MaxColumn />
           </Container>

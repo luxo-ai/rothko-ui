@@ -11,8 +11,8 @@ const App = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Open modal</Button>
-      <Modal blur size="m" title={TITLE} open={open} onClose={() => setOpen(false)}>
+      <Button onClick={() => setOpen(true)}>Open</Button>
+      <Modal size="m" title={TITLE} open={open} onClose={() => setOpen(false)}>
         {CONTENT}
       </Modal>
     </>

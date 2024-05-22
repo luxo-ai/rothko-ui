@@ -58,36 +58,45 @@ export default App;
 export const ICON_OVERRIDE = `
 import React from 'react';
 import { Accordion, AccordionPanel } from '@rothko-ui/ui';
-import { ArrowIosDownward, ArrowIosForward, RadioButtonOff, RadioButtonOn } from '@rothko-ui/icons';
+import { ArrowIosForward, RadioButtonOff, RadioButtonOn } from '@rothko-ui/icons';
 
-const ARROW_ICON_SIZE = 20;
-const RADIO_ICON_SIZE = 18;
+const ICON_SIZE = '1rem';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
 
+const IconWithTransition = ({ open }: { open: boolean }) => {
+  return (
+    <ArrowIosForward
+      style={{
+        transition: 'transform 0.23s ease-in-out',
+        transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
+      }}
+      width={ICON_SIZE}
+      height={ICON_SIZE}
+    />
+  );
+};
+
 const App = () => {
   return (
     <Accordion
-      icon={({ open }) =>
-        open ? (
-          <ArrowIosDownward width={ARROW_ICON_SIZE} height={ARROW_ICON_SIZE} />
-        ) : (
-          <ArrowIosForward width={ARROW_ICON_SIZE} height={ARROW_ICON_SIZE} />
-        )
-      }
-      multiple
+      // override the icon at an accordion level
+      icon={({ open }) => {
+        return <IconWithTransition open={open} />;
+      }}
     >
       <AccordionPanel title="Label 1">{CONTENT}</AccordionPanel>
       <AccordionPanel
-        icon={({ open }) =>
-          open ? (
-            <RadioButtonOn width={RADIO_ICON_SIZE} height={RADIO_ICON_SIZE} />
-          ) : (
-            <RadioButtonOff width={RADIO_ICON_SIZE} height={RADIO_ICON_SIZE} />
-          )
-        }
         title="Label 2"
+        // override the icon at a panel level
+        icon={({ open }) => {
+          return open ? (
+            <RadioButtonOn width={ICON_SIZE} height={ICON_SIZE} />
+          ) : (
+            <RadioButtonOff width={ICON_SIZE} height={ICON_SIZE} />
+          );
+        }}
       >
         {CONTENT}
       </AccordionPanel>
@@ -108,6 +117,25 @@ const CONTENT =
 const App = () => {
   return (
     <Accordion multiple>
+      <AccordionPanel title="Label 1">{CONTENT}</AccordionPanel>
+      <AccordionPanel title="Label 2">{CONTENT}</AccordionPanel>
+      <AccordionPanel title="Label 3">{CONTENT}</AccordionPanel>
+    </Accordion>
+  );
+};
+
+export default App;
+`;
+export const NO_ICON = `
+import React from 'react';
+import { Accordion, AccordionPanel } from '@rothko-ui/ui';
+
+const CONTENT =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
+
+const App = () => {
+  return (
+    <Accordion noIcon>
       <AccordionPanel title="Label 1">{CONTENT}</AccordionPanel>
       <AccordionPanel title="Label 2">{CONTENT}</AccordionPanel>
       <AccordionPanel title="Label 3">{CONTENT}</AccordionPanel>

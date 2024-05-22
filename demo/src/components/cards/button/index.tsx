@@ -10,7 +10,7 @@ import Card from '../Card';
 import Disabled from './usage/Disabled';
 import Example from '../Example';
 import Loading from './usage/Loading';
-import Shape from './usage/Shape';
+import Shape from './usage/Variant';
 import Size from './usage/Size';
 import WithKind from './usage/WithKind';
 import {
@@ -18,7 +18,7 @@ import {
   APPEARANCE,
   DISABLED,
   LOADING,
-  SHAPE,
+  VARIANT,
   SIZE,
   WITH_KIND,
 } from './usage/sourceCode';
@@ -51,7 +51,7 @@ const ButtonCard = () => {
             <Appearance />
           </Flex>
         </Example>
-        <Example title="Shape" sourceCode={SHAPE}>
+        <Example title="Variant" sourceCode={VARIANT}>
           <Flex gap="1rem" maxWidth="22rem">
             <Shape />
           </Flex>

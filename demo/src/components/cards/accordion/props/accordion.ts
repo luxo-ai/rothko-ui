@@ -1,21 +1,9 @@
 const accordionProps = [
   {
-    name: 'aria-label',
-    type: 'string',
-    defaultValue: null,
-    description: 'ARIA label for the accordion, providing additional context for accessibility.',
-  },
-  {
     name: 'bordered',
     type: 'boolean',
     defaultValue: 'false',
     description: 'If `true`, borders are added around each accordion item. Default is `false`.',
-  },
-  {
-    name: 'children',
-    type: 'React.ReactNode',
-    defaultValue: null,
-    description: 'The content of the accordion, required.',
   },
   {
     name: 'className',
@@ -30,10 +18,16 @@ const accordionProps = [
     description: 'Adds spacing around items for better separation. Default is `false`.',
   },
   {
-    name: 'iconOverride',
-    type: 'React.ReactNode | Accessory<{ open?: boolean }>',
+    name: 'icon',
+    type: 'Icon',
     defaultValue: null,
     description: 'Custom icons for accordion state indicators.',
+  },
+  {
+    name: 'id',
+    type: 'string',
+    defaultValue: null,
+    description: 'Unique identifier for the accordion.',
   },
   {
     name: 'kind',
@@ -45,31 +39,32 @@ const accordionProps = [
     name: 'multiple',
     type: 'boolean',
     defaultValue: 'false',
-    description: 'If `true`, only one accordion item can be open at a time. Default is `false`.',
+    description:
+      'If `true`, multiple accordion items can be open at the same time. Default is `false`.',
   },
   {
-    name: 'style',
-    type: 'CSSProperties',
-    defaultValue: null,
-    description: 'Inline styles for the accordion.',
-  },
-  {
-    name: 'withIcon',
+    name: 'noIcon',
     type: 'boolean',
-    defaultValue: 'true',
-    description: 'If `true`, icons are shown next to items. Default is `true`.',
-  },
-  {
-    name: 'selectedPanelKeys',
-    type: 'string[]',
-    defaultValue: null,
-    description: 'The list of selected panels by key',
+    defaultValue: 'false',
+    description: 'If `true`, icons are not shown next to items. Default is `false`.',
   },
   {
     name: 'onPanelChange',
     type: '(isOpen: boolean, panelKey: string) => void',
     defaultValue: null,
     description: 'Callback when a panel is opened or closed.',
+  },
+  {
+    name: 'selectedKeys',
+    type: 'string[]',
+    defaultValue: '[]',
+    description: 'The list of selected panels by key.',
+  },
+  {
+    name: 'style',
+    type: 'CSSProperties',
+    defaultValue: null,
+    description: 'Inline styles for the accordion.',
   },
 ] as const;
 

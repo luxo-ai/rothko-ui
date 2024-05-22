@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Switch } from '@rothko-ui/ui';
 
 const App = () => {
-  const [withoutLabelSelected, setWithoutLabelSelected] = useState(false);
+  const [withoutLabelSelected, setWithoutLabelSelected] = useState(true);
   const [withLabelSelected, setWithLabelSelected] = useState(false);
 
   return (

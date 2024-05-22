@@ -3,7 +3,8 @@ import { Container, Flex } from '@rothko-ui/ui';
 import { BASIC } from './usage/sourceCode';
 import { TSCode } from '../../Code';
 import Basic from './usage/Basic';
-import breadCrumbItemProps from './props';
+import breadCrumbsProps from './props/breadcrumbs';
+import breadCrumbsItemsProps from './props/breadcrumbsItem';
 import breadCrumbsCopy from './copy';
 import Card from '../Card';
 import Example from '../Example';
@@ -29,7 +30,12 @@ const BreadCrumbsCard = () => {
           </Container>
         </Example>
       </Flex>
-      <Props copy={{ props: breadCrumbItemProps }} />
+      <Props
+        copy={[
+          { title: 'BreadCrumbs Props', props: breadCrumbsProps },
+          { title: 'BreadCrumbItem Props', props: breadCrumbsItemsProps },
+        ]}
+      />
     </Card>
   );
 };

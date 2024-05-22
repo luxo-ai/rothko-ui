@@ -41,6 +41,10 @@ type DrawerProps = WithAria<{
    * The inline style for the Drawer.
    */
   style?: React.CSSProperties;
+  /**
+   * Determines whether the Drawer is blurred.
+   * @default false
+   */
   blur?: boolean;
 }>;
 

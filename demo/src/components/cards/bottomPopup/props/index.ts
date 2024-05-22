@@ -1,34 +1,40 @@
-const alertProps = [
+const popupProps = [
   {
-    name: 'aria-label',
-    type: 'string',
-    defaultValue: null,
-    description: 'ARIA label for the alert, enhancing accessibility.',
-  },
-  {
-    name: 'children',
-    type: 'React.ReactNode',
-    defaultValue: null,
-    description: 'The content of the alert.',
+    name: 'blur',
+    type: 'boolean',
+    defaultValue: 'false',
+    description: 'Determines whether the popup should blur the background.',
   },
   {
     name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'CSS class name for custom styling.',
+    description: 'The CSS class name for the popup.',
   },
   {
-    name: 'kind',
-    type: 'RothkoKind',
-    defaultValue: 'danger',
-    description: "Specifies the alert's style kind. Default is 'danger'.",
+    name: 'id',
+    type: 'string',
+    defaultValue: null,
+    description: 'Unique identifier for the popup.',
+  },
+  {
+    name: 'onClose',
+    type: '() => void',
+    defaultValue: null,
+    description: 'Callback function to be called when the popup is closed.',
+  },
+  {
+    name: 'open',
+    type: 'boolean',
+    defaultValue: null,
+    description: 'Determines whether the popup is open or closed.',
   },
   {
     name: 'style',
-    type: 'CSSProperties',
+    type: 'React.CSSProperties',
     defaultValue: null,
-    description: 'Inline styles for the alert.',
+    description: 'The inline style for the popup.',
   },
 ] as const;
 
-export default alertProps;
+export default popupProps;

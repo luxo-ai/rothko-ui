@@ -1,9 +1,10 @@
 import { Container, Flex } from '@rothko-ui/ui';
 
-import { BASIC } from './usage/sourceCode';
+import { BASIC, BLUR } from './usage/sourceCode';
 import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Basic from './usage/Basic';
+import Blur from './usage/Blur';
 import Card from '../Card';
 import Example from '../Example';
 import modalCopy from './copy';
@@ -18,7 +19,7 @@ const IMPORT = "import { Modal } from '@rothko-ui/ui';";
 
 const ModalCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();
-  const maxWith = isMobileOrTablet ? undefined : '30rem';
+  const maxWith = isMobileOrTablet ? undefined : '15rem';
 
   return (
     <Card codeUrl={GITHUB_URL} copy={modalCopy}>
@@ -30,6 +31,11 @@ const ModalCard = () => {
         <Example sourceCode={BASIC}>
           <Container maxWidth={maxWith}>
             <Basic />
+          </Container>
+        </Example>
+        <Example title="Blur" sourceCode={BLUR}>
+          <Container maxWidth={maxWith}>
+            <Blur />
           </Container>
         </Example>
       </Flex>

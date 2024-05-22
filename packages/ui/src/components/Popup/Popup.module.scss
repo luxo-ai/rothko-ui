@@ -17,6 +17,7 @@
   will-change: transform, opacity, height;
   transition-property: transform;
   transition-timing-function: ease-out;
+  user-select: text;
 }
 
 .bottom-popup__close-button {

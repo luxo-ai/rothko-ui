@@ -7,21 +7,22 @@ import styles from './Input.module.scss';
 
 const scoppedClasses = sc(styles);
 
-type TextareaProps = HtmlTextareaProps &
-  TextProps & {
-    /** textarea size */
-    size?: InputSize;
-    error?: boolean;
-  };
+type TextareaProps = HtmlTextareaProps & {
+  /** textarea size */
+  size?: InputSize;
+  error?: boolean;
+  /**
+   * The variant of the textarea.
+   */
+  variant?: keyof TextProps;
+};
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ size = 'm', error, light, bold, italic, className, disabled, tabIndex, ...props }, ref) => {
+  ({ size = 'm', error, variant, className, disabled, tabIndex, ...props }, ref) => {
     const baseClasses = scoppedClasses(
       'textarea',
       `textarea--${size}`,
-      light && 'textarea--light',
-      bold && 'textarea--bold',
-      italic && 'textarea--italic',
+      variant && `textarea--${variant}`,
       error && 'error'
     );
     return (

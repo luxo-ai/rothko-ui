@@ -1,8 +1,9 @@
 import { Container, Flex } from '@rothko-ui/ui';
 
-import { BASIC } from './usage/sourceCode';
+import { BASIC, BLUR } from './usage/sourceCode';
 import { TSCode } from '../../Code';
 import Basic from './usage/Basic';
+import Blur from './usage/Blur';
 import Card from '../Card';
 import drawerCopy from './copy';
 import drawerProps from './props';
@@ -26,6 +27,11 @@ const DrawerCard = () => {
         <Example sourceCode={BASIC}>
           <Container maxWidth="15rem">
             <Basic />
+          </Container>
+        </Example>
+        <Example title="Blur" sourceCode={BLUR}>
+          <Container maxWidth="15rem">
+            <Blur />
           </Container>
         </Example>
       </Flex>
