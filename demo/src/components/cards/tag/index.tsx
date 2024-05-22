@@ -36,9 +36,9 @@ const TagCard = () => {
           </Container>
         </Example>
         <Example title="Appearance" sourceCode={APPEARANCE}>
-          <Container maxWidth={maxWidth}>
+          <Flex gap="0.75rem" maxWidth={maxWidth}>
             <Appearance />
-          </Container>
+          </Flex>
         </Example>
         <Example title="Closeable" sourceCode={CLOSEABLE}>
           <Container maxWidth={maxWidth}>
@@ -46,9 +46,9 @@ const TagCard = () => {
           </Container>
         </Example>
         <Example title="With Kind" sourceCode={WITH_KIND}>
-          <Container maxWidth={maxWidth}>
+          <Flex flexDirection="column" gap="0.75rem" maxWidth={maxWidth}>
             <WithKind />
-          </Container>
+          </Flex>
         </Example>
       </Flex>
       <Props copy={{ props: tagProps }} />
