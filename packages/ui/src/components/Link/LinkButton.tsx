@@ -28,6 +28,7 @@ const LinkButton = React.forwardRef<
     );
     return (
       <PhantomButton
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
         disabled={disabled}
         ref={ref}

@@ -1,18 +1,17 @@
 export type Styles = {
-  active: string;
+  danger: string;
   disabled: string;
   error: string;
   focus: string;
+  info: string;
+  primary: string;
+  secondary: string;
   selected: string;
-  'selected--danger': string;
-  'selected--info': string;
-  'selected--primary': string;
-  'selected--secondary': string;
-  'selected--success': string;
-  'selected--warning': string;
+  success: string;
   switch__container: string;
   'switch__inner-circle': string;
   'switch__outer-circle': string;
+  warning: string;
 };
 
 export type ClassNames = keyof Styles;

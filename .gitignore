@@ -1,13 +1,25 @@
 # macOS stuff
 .DS_Store
 
-# Node stuff
-node_modules/
+# node stuff
+/node_modules/
+
+# yarn/npm stuff
 npm-debug.log*
 yarn-error.log*
+
+# vscode stuff
 .vscode
 
-.env
-
+# lerna stuff
 lerna.log*
 lerna-debug.log*
+
+# keys
+*.pem
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

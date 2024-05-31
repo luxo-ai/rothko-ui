@@ -27,7 +27,7 @@
 
   border-radius: 50%;
   border-style: solid;
-  border-width: 2px;
+  border-width: 0.125rem;
   border-color: variables.$sliderHandleBorder;
 
   overflow: visible;
@@ -35,28 +35,7 @@
   user-select: none;
   cursor: pointer;
 
-  &:not(:disabled) {
-    &:hover,
-    &:active,
-    &.active {
-      border-color: variables.$sliderHandleBackground;
-    }
-  }
-
-  @each $kind in variables.$rothkoKinds {
-    &--#{$kind} {
-      &:not(:disabled) {
-        &:hover,
-        &:active,
-        &.active {
-          border-color: variables.safeGetTheme($kind);
-        }
-      }
-    }
-  }
-
-  :disabled {
-    opacity: 0.8;
+  &:disabled {
     cursor: not-allowed;
   }
 }

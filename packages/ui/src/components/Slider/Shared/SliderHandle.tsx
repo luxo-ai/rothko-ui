@@ -1,7 +1,6 @@
 import type { Nilable } from '@rothko-ui/utils';
 import { scopedClasses as sc } from '@rothko-ui/utils';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import type { RothkoKind } from '../../../theme';
 import type { DragDelta, DragEvent } from '../../../library/utils/domUtils';
 import {
   addEvent,
@@ -43,7 +42,6 @@ type SliderHandleProps = WithAria<{
   onChange: (v: number) => void;
   onDrag?: (e: DragEvent) => void;
   onMouseDown?: (e: DragEvent) => void;
-  kind?: RothkoKind;
   vertical?: boolean;
   disabled?: boolean;
   value: number;
@@ -51,13 +49,12 @@ type SliderHandleProps = WithAria<{
   max: number;
 }>;
 
-export const SliderHandle = ({
+const SliderHandle = ({
   disabled,
   vertical,
   value,
   min = 0,
   max,
-  kind,
   onDrag,
   onMouseDown,
   onChange,
@@ -260,7 +257,9 @@ export const SliderHandle = ({
       ref={handleRef}
       role="slider"
       style={positionStyle}
-      className={scoppedClasses('handle', kind && `handle--${kind}`, vertical && 'vertical')}
+      className={scoppedClasses('handle', vertical && 'vertical')}
     />
   );
 };
+
+export default SliderHandle;

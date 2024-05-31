@@ -99,10 +99,6 @@ export type AutocompleteProps<V extends Value, T> = WithAria<{
    */
   searchFn?: QueryMatchFn<V, T>;
   /**
-   * The format for displaying selected values.
-   */
-  selectedFormat?: string;
-  /**
    * Custom styles for the autocomplete.
    */
   style?: React.CSSProperties;
@@ -130,7 +126,6 @@ function Autocomplete<V extends Value, T = undefined>({
   placeholder = 'Select',
   renderOption: RenderOpt = DefaultRenderOption,
   searchFn,
-  // selectedFormat,
   style,
   value,
   onClear,

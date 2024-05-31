@@ -114,12 +114,6 @@ const autocompleteProps = [
     description: 'Custom search function for filtering options.',
   },
   {
-    name: 'selectedFormat',
-    type: 'string',
-    defaultValue: null,
-    description: 'The format for displaying selected values.',
-  },
-  {
     name: 'style',
     type: 'React.CSSProperties',
     defaultValue: null,

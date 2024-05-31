@@ -108,8 +108,7 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
 
     const debug = useDebuggerContext('<AccordionPanel />');
 
-    const { bordered, iconOverride, kind, onClickPanel, selectedPanels, compact, noIcon } =
-      useAccordion();
+    const { bordered, iconOverride, kind, onClickPanel, selectedPanels, compact } = useAccordion();
 
     const baseContainerClasses = scoppedClasses(
       'accordion__panel',
@@ -189,14 +188,12 @@ const AccordionPanel = React.forwardRef<HTMLDivElement, AccordionPanelProps>(
             tabIndex={disabled ? -1 : 0}
             type="button"
           >
-            {!noIcon && (
-              <AccordionIcon
-                open={isPanelSelected}
-                disabled={!!disabled}
-                kind={kind}
-                iconOverride={iconOverrideLocal || iconOverride}
-              />
-            )}
+            <AccordionIcon
+              open={isPanelSelected}
+              disabled={!!disabled}
+              kind={kind}
+              iconOverride={iconOverrideLocal || iconOverride}
+            />
             {(title || subtitle) && (
               <Flex flexDirection="column" rowGap="0.1rem" alignItems="start">
                 {title}

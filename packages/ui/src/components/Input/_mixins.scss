@@ -2,19 +2,7 @@
 @use '../Typography/mixins' as typographyMixins;
 @use '../../styles/placeholders';
 
-@mixin withSizes {
-  @each $size in variables.$inputSizes {
-    &--#{$size} {
-      @if map-has-key(variables.$paddingSizeMap, $size) {
-        padding: map-get(variables.$paddingSizeMap, $size);
-      }
-      @if map-has-key(variables.$fontSizeMap, $size) {
-        font-size: map-get(variables.$fontSizeMap, $size);
-      }
-    }
-  }
-}
-
+// should be a placeholder in the future to avoid duplication
 @mixin inputStyle {
   @extend %ios-tap-highlight-color-transparent;
   @include typographyMixins.bodyStyle();
@@ -26,20 +14,22 @@
   box-sizing: border-box;
   width: 100%;
 
+  padding: 0.5rem 0.75rem;
   background-color: variables.$inputBackground;
   color: variables.$inputForeground;
   border-radius: variables.$inputDefaultBorderRadius;
 
   &.error:not(:focus) {
-    outline: 1px solid variables.$rothkoDanger / 2;
+    outline: 1px solid variables.$rothkoDanger;
   }
 
-  &:focus:not(:disabled) {
+  &:focus-visible:not(:disabled) {
     // outline: 1px solid variables.$inputBorderFocus;
   }
 
-  :disabled {
-    pointer-events: none;
+  &:disabled {
+    // keeps getting reordered and I don't know why
+    // pointer-events: none;
     cursor: not-allowed;
     opacity: 0.6;
   }

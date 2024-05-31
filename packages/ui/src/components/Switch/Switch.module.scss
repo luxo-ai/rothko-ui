@@ -9,11 +9,10 @@
 }
 
 .switch__outer-circle {
-  flex: 0 0 auto;
   @extend %ios-tap-highlight-color-transparent;
   @extend %hide-chrome-browser-outline;
 
-  position: relative;
+  flex: 0 0 auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -22,39 +21,24 @@
   user-select: none;
   outline: none;
 
-  width: 3rem;
-  height: calc(1.4rem + 2px);
+  width: 2.5rem;
+  height: calc(1.25rem + 2px);
 
-  border: 1px solid variables.$switchBorder;
   border-radius: 50vmin;
-
   background-color: variables.$switchBackground;
+  transition: background-color 0.5s ease;
 
   &.selected {
     background-color: variables.$switchSelectedBackground;
-
     @each $kind in variables.$rothkoKinds {
-      &--#{$kind} {
+      &.#{$kind} {
         background-color: variables.safeGetTheme($kind);
       }
     }
   }
 
-  transition: background-color 0.5s ease;
-
-  &:focus-visible {
-    :after {
-      content: '';
-      display: block;
-      position: absolute;
-      inset: -0.13rem;
-      border-radius: 50vmin;
-      // border: 0.125rem solid ${({ kind }) => vuar({ kind, category: 'border' })};
-    }
-  }
-
   &.error:not(:focus):not(.focus) {
-    background-color: red;
+    outline: 1px solid variables.safeGetTheme($kind: 'danger');
   }
 
   &.disabled {
@@ -64,22 +48,20 @@
 }
 
 .switch__inner-circle {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.25rem;
+  height: 1.25rem;
   margin: 0 1px;
 
   background-color: variables.$switchHandleBackground;
   border-radius: 50%;
 
-  transition: transform 0.15s ease-out;
+  transition: transform 0.15s ease-in-out;
 
-  &.active {
-    // outer switch width - width of inner switch - horizontal margin - offset
-    transform: translateX(calc(3rem - 1.4rem - 1px - 2px));
+  &.selected {
+    transform: translateX(calc(1.25rem - 2px));
   }
 }

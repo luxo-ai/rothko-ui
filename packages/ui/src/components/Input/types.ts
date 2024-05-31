@@ -1,8 +1,5 @@
 import type React from 'react';
-import type { RothkoSize } from '../../theme';
 import type { TypographyProps } from '../Typography/types';
-
-export type InputSize = Extract<RothkoSize, 's' | 'm' | 'l'>;
 
 export type HtmlInputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,

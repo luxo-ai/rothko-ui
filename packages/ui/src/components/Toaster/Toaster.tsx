@@ -57,7 +57,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
   } = props;
   const labelId = useId();
 
-  const iconColor = vuar({ kind, category: 'foreground' });
+  const iconColor = vuar({ kind, element: 'toast', category: 'foreground' });
 
   return (
     <animated.div

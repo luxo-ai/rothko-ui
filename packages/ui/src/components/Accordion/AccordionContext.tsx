@@ -29,10 +29,6 @@ type AccordionContextType = {
    * IDs of the selected panels.
    */
   selectedPanels: string[];
-  /**
-   * Determines whether the Accordion should hide the icon.
-   */
-  noIcon?: boolean;
 };
 
 const AccordionContext = createContext<AccordionContextType | null>(null);

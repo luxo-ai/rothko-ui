@@ -3,9 +3,12 @@
 const styledDictionary = require('style-dictionary');
 const { compact, toScreamingSnakeCase } = require('@rothko-ui/utils');
 const prettier = require('prettier');
+const fs = require('fs');
+const path = require('path');
 
 const CSS_OUT_DIRECTORY = 'build';
 const TS_OUT_DIRECTORY = 'src/tokens';
+const COMBINED_CSS_FILE_NAME = 'tokens.css';
 
 const generateThemeCssStyleDictionaryConfig = theme => ({
   source: [`tokens/themes/${theme}/*.json`],
@@ -137,23 +140,28 @@ styledDictionary.registerFormat({
 });
 
 const build = () => {
+  const generatedFiles = [];
+
   ['light', 'dark'].map(theme => {
     console.log('\n==============================================');
     console.log(`\nCreating theme - ${theme}`);
     styledDictionary.extend(generateThemeCssStyleDictionaryConfig(theme)).buildPlatform('web');
-    // .extend(generateThemeTypescriptStyleDictionaryConfig(theme))
-    // .buildPlatform('web');
+    generatedFiles.push(path.join(CSS_OUT_DIRECTORY, `${theme}-variables.css`));
     console.log(`\nFinish theme - ${theme}`);
   });
 
   console.log('\n==============================================');
   console.log(`\nCreating typography`);
   styledDictionary.extend(generatePlatformStyleDictionaryConfig()).buildPlatform('web');
-  // .extend(generatePlatformTypescriptStyleDictionaryConfig())
-  // .buildPlatform('web');
+  generatedFiles.push(path.join(CSS_OUT_DIRECTORY, 'global-variables.css'));
 
   console.log('\n==============================================');
   console.log('\nToken generation completed!');
+
+  console.log('\n==============================================');
+  console.log('\nCreating combined CSS file');
+  const combinedCss = generatedFiles.map(file => fs.readFileSync(file)).join('\n\n');
+  fs.writeFileSync(path.join(CSS_OUT_DIRECTORY, COMBINED_CSS_FILE_NAME), combinedCss);
 
   process.exit(0);
 };

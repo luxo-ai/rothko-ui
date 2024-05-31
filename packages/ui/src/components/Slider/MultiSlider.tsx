@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import type { RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
 import { SliderContainer, SliderLegendContainer, SliderRange, SliderTrack } from './Shared';
-import { SliderHandle } from './Shared/SliderHandle';
+import SliderHandle from './Shared/SliderHandle';
 import { getOffsetFactory } from './sliderUtils';
 import type { MultiSliderWithAria, SliderWidth } from './types';
 import useId from '../../library/hooks/useId';
@@ -110,9 +110,7 @@ const MultiSlider = ({
 
   const getOffset = useMemo(() => getOffsetFactory({ min, max }), [min, max]);
 
-  const [lower, upper] = useMemo(() => {
-    return value ? value : [min, max];
-  }, [value, min, max]);
+  const [lower, upper] = useMemo(() => (value ? value : [min, max]), [value, min, max]);
 
   const maxReached = upper >= max;
 
@@ -132,7 +130,7 @@ const MultiSlider = ({
         )}
         {showRange && (
           <Typography.label light>
-            {lower.toFixed(precision)} - {upper.toFixed(precision)}
+            {lower.toFixed(precision)} -{upper.toFixed(precision)}
             {maxReached && orMore ? '+' : ''}
           </Typography.label>
         )}
@@ -153,7 +151,6 @@ const MultiSlider = ({
           aria-label="Min Slider"
           aria-controls={ariaControls}
           disabled={disabled}
-          kind={kind}
           max={max}
           min={min}
           value={lower}
@@ -175,7 +172,6 @@ const MultiSlider = ({
           aria-label="Max Slider"
           aria-controls={ariaControls}
           disabled={disabled}
-          kind={kind}
           max={max}
           min={min}
           value={upper}

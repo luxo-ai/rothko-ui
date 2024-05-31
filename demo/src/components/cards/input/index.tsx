@@ -1,10 +1,9 @@
 import { Container, Flex } from '@rothko-ui/ui';
 
-import { BASIC, DISABLED, SIZE, VARIANT } from './usage/sourceCode';
+import { BASIC, DISABLED, VARIANT } from './usage/sourceCode';
 import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Basic from './usage/Basic';
-import Size from './usage/Size';
 import Variant from './usage/Variant';
 import Disabled from './usage/Disabled';
 import Card from '../Card';
@@ -38,11 +37,6 @@ const InputCard = () => {
         <Example title="Variant" sourceCode={VARIANT}>
           <Flex flexDirection="column" gap="1.25rem" maxWidth={maxWith}>
             <Variant />
-          </Flex>
-        </Example>
-        <Example title="Size" sourceCode={SIZE}>
-          <Flex flexDirection="column" gap="1.25rem" maxWidth={maxWith}>
-            <Size />
           </Flex>
         </Example>
         <Example title="Disabled" sourceCode={DISABLED}>

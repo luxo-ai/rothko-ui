@@ -1,7 +1,6 @@
 import { animated, useTransition } from '@react-spring/web';
 import React, { useEffect, useRef } from 'react';
 
-import { CloseOutline } from '@rothko-ui/icons';
 import { isString, classes, scopedClasses as sc } from '@rothko-ui/utils';
 
 import DomPortal from '../../library/Portal';
@@ -15,6 +14,7 @@ import {
 import Typography from '../Typography/Typography';
 import type { WithAria } from './types';
 import styles from './Popup.module.scss';
+import CloseButton from '../../library/Button/CloseButton';
 
 const scopedClasses = sc(styles);
 
@@ -133,13 +133,10 @@ const BottomPopup: React.FC<PopupProps> = ({
                 ref={popupRef}
                 className={classes(baseClasses, className)}
               >
-                <button
+                <CloseButton
                   className={scopedClasses('bottom-popup__close-button')}
-                  aria-label="Close"
                   onClick={() => onClose()}
-                >
-                  <CloseOutline aria-hidden width="1.5rem" height="1.5rem" />
-                </button>
+                />
                 {isString(children) ? (
                   <Typography.body id={contentId}>{children}</Typography.body>
                 ) : (

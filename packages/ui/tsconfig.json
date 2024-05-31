@@ -31,5 +31,5 @@
     "node_modules",
     "dist"
   ],
-  "include": ["**/*.d.ts", "./declarations.d.ts", "**/*.ts", "**/*.tsx", "**/*.module.scss"]
+  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx", "**/*.module.scss"]
 }

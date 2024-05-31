@@ -44,7 +44,6 @@ function SelectInner<V extends Value, T = undefined>({
   options: optionsRaw,
   placeholder = 'Select',
   renderOption: RenderOpt = DefaultRenderOption,
-  // selectedFormat,
   style,
   value,
   errorText = 'Invalid',

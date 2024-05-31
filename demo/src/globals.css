@@ -1,6 +1,4 @@
-@import '../../node_modules/@rothko-ui/tokens/build/dark-variables.css';
-@import '../../node_modules/@rothko-ui/tokens/build/light-variables.css';
-@import '../../node_modules/@rothko-ui/tokens/build/global-variables.css';
+@import '../../node_modules/@rothko-ui/tokens/build/tokens.css';
 @import '@rothko-ui/ui/dist/index.css';
 
 html,

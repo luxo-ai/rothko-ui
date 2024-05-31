@@ -120,12 +120,6 @@ const selectProps = [
     description: 'Custom rendering function for select options.',
   },
   {
-    name: 'selectedFormat',
-    type: 'string',
-    defaultValue: null,
-    description: 'The format for displaying selected values.',
-  },
-  {
     name: 'style',
     type: 'React.CSSProperties',
     defaultValue: null,

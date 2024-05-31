@@ -1,7 +1,7 @@
 {
   "typography": {
     "link": {
-      "color": { "value": "#0000ee" }
+      "color": { "value": "#492bfb" }
     },
     "body": {
       "color": { "value": "{foreground}" }

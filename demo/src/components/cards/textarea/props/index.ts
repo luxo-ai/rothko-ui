@@ -6,12 +6,6 @@ const textareaProps = [
     description: 'Specifies whether there is an error with the input.',
   },
   {
-    name: 'size',
-    type: 'InputSize',
-    defaultValue: "'m'",
-    description: 'The size of the input.',
-  },
-  {
     name: 'variant',
     type: "'bold' | 'italic' | 'light'",
     defaultValue: null,

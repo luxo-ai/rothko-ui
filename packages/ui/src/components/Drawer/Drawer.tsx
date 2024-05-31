@@ -1,11 +1,9 @@
 import { animated, useTransition } from '@react-spring/web';
 import React, { useEffect, useRef } from 'react';
 
-import { Close } from '@rothko-ui/icons';
 import { classes, isString } from '@rothko-ui/utils';
 
 import ShadedBackdrop from '../../library/ShadedBackdrop/ShadedBackdrop';
-import PhantomButton from '../../library/Button/PhantomButton';
 import DomPortal from '../../library/Portal';
 import {
   BODY_SCROLL_LOCK_IGNORE_ID,
@@ -17,6 +15,7 @@ import useId from '../../library/hooks/useId';
 import { Typography } from '../Typography';
 import type { WithAria } from './types';
 import styles from './Drawer.module.scss';
+import CloseButton from '../../library/Button/CloseButton';
 
 type DrawerProps = WithAria<{
   id?: string;
@@ -129,13 +128,11 @@ const Drawer = ({
                   ref={drawerRef}
                   style={{ ...styleProp, ...style }}
                 >
-                  <PhantomButton
+                  <CloseButton
                     aria-label="Close"
                     style={{ marginBottom: '1rem' }}
                     onClick={() => closeDrawer()}
-                  >
-                    <Close aria-hidden width={28} height={28} />
-                  </PhantomButton>
+                  />
                   {isString(children) ? (
                     <Typography.body id={drawerContentId}>{children}</Typography.body>
                   ) : (

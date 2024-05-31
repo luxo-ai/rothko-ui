@@ -15,7 +15,7 @@
 
 // container for single panel
 .accordion__panel {
-  background: variables.$accordionBackgroundColor;
+  background-color: variables.$accordionBackgroundColor;
   border-radius: variables.$accordionPanelBorderRadius;
   // same color as the accordion background
   border: 1px solid variables.$accordionBackgroundColor;
@@ -80,7 +80,6 @@
   }
 }
 
-// content panel
 .accordion__panel__content {
   padding: 0 variables.$accordionHorizontalPadding variables.$accordionVerticalPadding;
 }

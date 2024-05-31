@@ -2,7 +2,6 @@ import { animated, useTransition } from '@react-spring/web';
 import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useRef } from 'react';
 
-import { CloseOutline } from '@rothko-ui/icons';
 import { classes, isString, scopedClasses as sc } from '@rothko-ui/utils';
 
 import DomPortal from '../../library/Portal';
@@ -19,6 +18,7 @@ import type { RothkoSize } from '../../theme';
 import { Typography } from '../Typography';
 import type { WithAria } from './types';
 import styles from './Modal.module.scss';
+import CloseButton from '../../library/Button/CloseButton';
 
 const scopedClasses = sc(styles);
 
@@ -164,13 +164,10 @@ const Modal = ({
                 className={classes(baseClasses, className)}
                 ref={modalRef}
               >
-                <button
+                <CloseButton
                   className={styles['modal__close-button']}
-                  aria-label="Close"
                   onClick={() => closeModal()}
-                >
-                  <CloseOutline aria-hidden width="1.5rem" height="1.5rem" />
-                </button>
+                />
                 {title && (
                   <Typography.body id={titleId} className={scopedClasses(`modal__header--${size}`)}>
                     {title}

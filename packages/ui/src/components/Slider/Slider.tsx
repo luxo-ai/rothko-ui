@@ -4,7 +4,7 @@ import type { RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
 import { SliderContainer, SliderRange, SliderTrack } from './Shared';
 import { SliderLegendContainer } from './Shared/SliderContainer';
-import { SliderHandle } from './Shared/SliderHandle';
+import SliderHandle from './Shared/SliderHandle';
 import { getOffsetFactory } from './sliderUtils';
 import type { SliderWidth, WithAria } from './types';
 import useId from '../../library/hooks/useId';
@@ -107,9 +107,7 @@ const Slider = ({
 
   const getOffset = useMemo(() => getOffsetFactory({ min, max }), [min, max]);
 
-  const localVal = useMemo(() => {
-    return value || min;
-  }, [value, min]);
+  const localVal = useMemo(() => value || min, [value, min]);
 
   const maxReached = localVal >= max;
 
@@ -150,7 +148,6 @@ const Slider = ({
           aria-controls={ariaControls}
           aria-label="Slider"
           disabled={disabled}
-          kind={kind}
           max={max}
           min={min}
           onChange={v => {

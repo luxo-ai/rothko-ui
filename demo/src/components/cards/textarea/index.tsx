@@ -1,11 +1,10 @@
 import { Container, Flex } from '@rothko-ui/ui';
 
-import { BASIC, DISABLED, SIZE, VARIANT } from './usage/sourceCode';
+import { BASIC, DISABLED, VARIANT } from './usage/sourceCode';
 import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Basic from './usage/Basic';
 import Disabled from './usage/Disabled';
-import Size from './usage/Size';
 import Variant from './usage/Variant';
 import Card from '../Card';
 import Example from '../Example';
@@ -34,11 +33,6 @@ const TextareaCard = () => {
           <Container maxWidth={maxWith}>
             <Basic />
           </Container>
-        </Example>
-        <Example title="Size" sourceCode={SIZE}>
-          <Flex flexDirection="column" gap="1.25rem" maxWidth={maxWith}>
-            <Size />
-          </Flex>
         </Example>
         <Example title="Variant" sourceCode={VARIANT}>
           <Flex flexDirection="column" gap="1.25rem" maxWidth={maxWith}>

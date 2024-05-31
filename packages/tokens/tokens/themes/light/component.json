@@ -8,14 +8,14 @@
   },
   "slider": {
     "handle": {
-      "border": { "value": "#DEE7F5" },
-      "background": { "value": "#EBF2FB" }
+      "border": { "value": "{slider.handle.background}" },
+      "background": { "value": "#262626" }
     },
     "range": {
-      "background": { "value": "#3e4e94" }
+      "background": { "value": "#3c54ff" }
     },
     "track": {
-      "background": { "value": "#000" }
+      "background": { "value": "rgb(0 0 0 / 8%)" }
     }
   },
   "dropdown": {

@@ -97,18 +97,6 @@ const multiDropdownProps = [
     description: 'Is this a minimal dropdown',
   },
   {
-    name: 'selectedPrefix',
-    type: 'string',
-    defaultValue: "''",
-    description: 'Prefix of a selected item',
-  },
-  {
-    name: 'selectedPostfix',
-    type: 'string',
-    defaultValue: "''",
-    description: 'Postfix of a selected item',
-  },
-  {
     name: 'style',
     type: 'React.CSSProperties',
     defaultValue: null,

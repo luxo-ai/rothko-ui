@@ -60,7 +60,6 @@
 }
 
 .modal__close-button {
-  @include buttonMixins.phantomButtonStyle();
   position: absolute;
   top: 14px;
   right: 16px;

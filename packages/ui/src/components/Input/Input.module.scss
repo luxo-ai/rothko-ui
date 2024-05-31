@@ -4,12 +4,10 @@
 
 .input {
   @include mixins.inputStyle();
-  @include mixins.withSizes();
 }
 
 .textarea {
   @include mixins.inputStyle();
-  @include mixins.withSizes();
   display: block;
   height: 8rem;
   min-height: 6rem;

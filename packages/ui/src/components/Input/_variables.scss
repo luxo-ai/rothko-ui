@@ -5,17 +5,3 @@ $inputForeground: var(--rothko-input-foreground, #000);
 $inputBorderFocus: var(--rothko-input-border-focus, #000);
 
 $inputDefaultBorderRadius: 0.125rem; // 2px
-
-$paddingSizeMap: (
-  's': 0.35rem,
-  'm': 0.55rem,
-  'l': 0.65rem,
-);
-
-$fontSizeMap: (
-  's': 0.75rem,
-  'm': 1rem,
-  'l': 1.5rem,
-);
-
-$inputSizes: ('s', 'm', 'l');

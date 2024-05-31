@@ -43,10 +43,6 @@ type AccordionProps = WithAria<{
    */
   style?: React.CSSProperties;
   /**
-   * If `true`, icons are _not_ shown next to items.
-   */
-  noIcon?: boolean;
-  /**
    * The list of selected panels by key.
    * @default []
    */
@@ -74,7 +70,6 @@ const Accordion = ({
   onPanelChange,
   selectedKeys = [],
   style,
-  noIcon,
 }: AccordionProps) => {
   const baseClasses = scoppedClasses('accordion', compact && 'compact');
   const [selectedPanels, setSelectedPanels] = useState(selectedKeys || []);
@@ -104,7 +99,6 @@ const Accordion = ({
         onClickPanel,
         selectedPanels,
         compact,
-        noIcon,
       }}
     >
       <div

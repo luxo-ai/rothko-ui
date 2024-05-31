@@ -35,14 +35,14 @@ const MultiSelectCard = () => {
             <Basic />
           </Container>
         </Example>
-        <Example title="Disabled" sourceCode={DISABLED}>
-          <Container maxWidth={maxWidth}>
-            <Disabled />
-          </Container>
-        </Example>
         <Example title="Clearable" sourceCode={CLEARABLE}>
           <Container maxWidth={maxWidth}>
             <Clearable />
+          </Container>
+        </Example>
+        <Example title="Disabled" sourceCode={DISABLED}>
+          <Container maxWidth={maxWidth}>
+            <Disabled />
           </Container>
         </Example>
         <Example title="Menu Position" sourceCode={MENU_POSITION}>

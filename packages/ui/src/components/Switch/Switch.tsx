@@ -120,7 +120,7 @@ const Switch = ({
         className={scopedClasses(
           'switch__outer-circle',
           selected && 'selected',
-          selected && kind && `selected--${kind}`,
+          kind && kind,
           disabled && 'disabled',
           error && 'error'
         )}
@@ -129,7 +129,7 @@ const Switch = ({
         role="switch"
         tabIndex={0}
       >
-        <div aria-hidden className={scopedClasses('switch__inner-circle', selected && 'active')}>
+        <div className={scopedClasses('switch__inner-circle', { selected })}>
           {selected ? onIcon && <>{onIcon}</> : offIcon && <>{offIcon}</>}
         </div>
       </div>

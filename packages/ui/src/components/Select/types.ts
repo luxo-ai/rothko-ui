@@ -107,10 +107,6 @@ export type SelectInnerProps<V extends Value, T> = WithAria<{
    */
   renderOption?: RenderOption<V, T>;
   /**
-   * The format for displaying selected values.
-   */
-  selectedFormat?: string;
-  /**
    * Custom styles for the select.
    */
   style?: React.CSSProperties;

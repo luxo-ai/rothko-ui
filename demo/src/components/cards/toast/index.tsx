@@ -24,7 +24,7 @@ const GITHUB_URL =
 const IMPORT = "import { useToaster } from '@rothko-ui/ui';";
 
 const ToastCard = () => {
-  const [kind, setKind] = useState<RothkoKind>('primary');
+  const [kind, setKind] = useState<RothkoKind>('danger');
   const isMobileOrTablet = useIsMobileOrTablet();
   const maxWidth = isMobileOrTablet ? undefined : '15rem';
 

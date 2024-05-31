@@ -43,12 +43,6 @@ const accordionProps = [
       'If `true`, multiple accordion items can be open at the same time. Default is `false`.',
   },
   {
-    name: 'noIcon',
-    type: 'boolean',
-    defaultValue: 'false',
-    description: 'If `true`, icons are not shown next to items. Default is `false`.',
-  },
-  {
     name: 'onPanelChange',
     type: '(isOpen: boolean, panelKey: string) => void',
     defaultValue: null,

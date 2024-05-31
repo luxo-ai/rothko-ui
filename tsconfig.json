@@ -2,26 +2,21 @@
   "compilerOptions": {
     "module": "ESNext",
     "target": "ESNext",
-    "lib": ["ESNext", "dom"],
-    "outDir": "dist",
     "strict": true,
-    "noEmit": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "moduleResolution": "node",
-    "baseUrl": "./",
     "paths": {
       "@rothko-ui/ui": ["./packages/ui"],
       "@rothko-ui/utils": ["./packages/utils"],
       "@rothko-ui/tokens": ["./packages/tokens"],
-      "@rothko-ui/icons": ["./packages/icons"],
-      "demo": ["./demo"]
+      "@rothko-ui/icons": ["./packages/icons"]
     }
   },
   "compileOnSave": true,
-  "exclude": ["**/*.spec.ts", "node_modules", "dist"],
-  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx", "typings.d.ts"]
+  "exclude": ["**/*.spec.ts", "node_modules"],
+  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx"]
 }

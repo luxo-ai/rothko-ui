@@ -39,26 +39,14 @@
     "typescript": "^4.8.4"
   },
   "exports": {
-    ".": {
-      "import": "./dist/index.modern.js",
-      "require": "./dist/index.js"
-    },
-    "./web/dark.css": {
-      "import": "./build/dark-variables.css",
-      "require": "./build/dark-variables.css"
-    },
-    "./web/global.css": {
-      "import": "./build/global-variables.css",
-      "require": "./build/global-variables.css"
-    },
-    "./web/light.css": {
-      "import": "./build/light-variables.css",
-      "require": "./build/light-variables.css"
+    "./web/tokens.css": {
+      "import": "./build/tokens.css",
+      "require": "./build/tokens.css"
     }
   },
   "files": [
     "dist",
-    "build/*.css",
+    "build/tokens.css",
     "LICENSE"
   ],
   "gitHead": "fa0338bf50f574c0a42d143d3bd317a40a6e3fb9"

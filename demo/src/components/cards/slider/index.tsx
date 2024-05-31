@@ -24,7 +24,7 @@ const GITHUB_URL =
 const IMPORT = "import { Slider } from '@rothko-ui/ui';";
 
 const SliderCard = () => {
-  const [kind, setKind] = useState<RothkoKind>('primary');
+  const [kind, setKind] = useState<RothkoKind>('secondary');
   const isMobileOrTablet = useIsMobileOrTablet();
   const maxWidth = isMobileOrTablet ? undefined : '26rem';
 

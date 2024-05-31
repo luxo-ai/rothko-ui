@@ -2,17 +2,12 @@ import React from 'react';
 
 import { classes, scopedClasses as sc } from '@rothko-ui/utils';
 
-import type { HtmlInputProps, InputSize, TextProps } from './types';
+import type { HtmlInputProps, TextProps } from './types';
 import styles from './Input.module.scss';
 
 const scoppedClasses = sc(styles);
 
-export type InputProps = HtmlInputProps & {
-  /**
-   * The size of the input.
-   * @default 'm'
-   */
-  size?: InputSize;
+type InputProps = HtmlInputProps & {
   /**
    * Specifies whether there is an error with the input.
    */
@@ -24,15 +19,11 @@ export type InputProps = HtmlInputProps & {
 };
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ size = 'm', variant, error, className, disabled, tabIndex, ...props }, ref) => {
-    const baseClasses = scoppedClasses(
-      'input',
-      `input--${size}`,
-      variant && `input--${variant}`,
-      error && 'error'
-    );
+  ({ variant, error, className, disabled, tabIndex, ...props }, ref) => {
+    const baseClasses = scoppedClasses('input', variant && `input--${variant}`, error && 'error');
     return (
       <input
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
         ref={ref}
         className={classes(baseClasses, className)}
