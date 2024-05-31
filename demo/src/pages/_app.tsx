@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import type { Dictionary } from '@rothko-ui/utils';
 import cookie from 'cookie';
 import MobileDetect from 'mobile-detect';

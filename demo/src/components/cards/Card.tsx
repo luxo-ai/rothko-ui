@@ -57,7 +57,6 @@ const Card = ({ children, copy, codeUrl }: CardProps) => {
 };
 
 type SectionProps = {
-  style?: React.CSSProperties;
   sectionKey: string;
   section: SectionType;
 };

@@ -84,9 +84,11 @@ export const Code = ({
               }}
             >
               {tokens.map((line, i) => (
+                // eslint-disable-next-line react/jsx-props-no-spreading, react/no-array-index-key
                 <div key={i} {...getLineProps({ line })}>
                   {displayLineNumbers && <span>{i + 1}&nbsp;</span>}
                   {line.map((token, key) => (
+                    // eslint-disable-next-line react/jsx-props-no-spreading, react/no-array-index-key
                     <span key={key} {...getTokenProps({ token })} />
                   ))}
                 </div>

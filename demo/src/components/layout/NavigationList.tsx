@@ -52,6 +52,7 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
             onNavigate={onNavigate}
             selected={selected}
             depth={depth + 1}
+            // eslint-disable-next-line react/no-array-index-key
             key={`${item.label}-sub-${idx}`}
             item={subItem}
           />
