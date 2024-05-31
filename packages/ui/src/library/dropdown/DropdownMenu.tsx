@@ -7,7 +7,6 @@ type DropdownMenuProps = {
   id?: string;
   variant?: MenuVariant;
   children?: React.ReactNode;
-  role?: React.AriaRole;
   open?: boolean;
 };
 

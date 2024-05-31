@@ -11,6 +11,7 @@ type PhantomButtonProps = Omit<React.HTMLProps<HTMLButtonElement>, 'type'> & {
 const PhantomButton = ({ displayFlex, children, className, ...props }: PhantomButtonProps) => {
   const baseClasses = scoppedClasses('phantom-button', displayFlex && 'flex');
   return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <button {...props} type="button" className={classes(baseClasses, className)}>
       {children}
     </button>

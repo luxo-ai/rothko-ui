@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 import React from 'react';
 import extractAriaProps from '../extractAriaProps';
 import { classes } from '@rothko-ui/utils';

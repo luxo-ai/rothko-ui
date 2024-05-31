@@ -11,10 +11,11 @@ type ItemTextProps = {
   isPlaceHolder?: boolean;
 };
 
-const ItemText = ({ isPlaceHolder, children }: ItemTextProps) => {
+const ItemText = ({ style, isPlaceHolder, children }: ItemTextProps) => {
   return (
     <Typography.body
       as="span"
+      style={style}
       className={classes(styles['item-text'], isPlaceHolder && styles['place-holder'])}
     >
       {children}

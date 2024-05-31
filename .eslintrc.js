@@ -64,4 +64,5 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json', './packages/**/tsconfig.json', './demo/tsconfig.json'],
   },
+  ignorePatterns: ['packages/icons/'],
 };

@@ -50,7 +50,7 @@ function TabBar<Key extends KeyLike>({
                 setTabIdx(idx);
                 onSelect?.(t.key);
               }}
-              // style={{ '-webkit-tap-highlight-color': 'transparent' }}
+              // eslint-disable-next-line react/no-array-index-key
               key={`${String(t.key)}-${idx}`}
               margin="0 auto"
               alignItems="center"
@@ -75,6 +75,7 @@ function TabBar<Key extends KeyLike>({
           className={scopedClasses('tab__underline', kind && `tab__underline--${kind}`)}
         />
       </div>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Container {...containerStyle}>{tabs[tabIdx].render}</Container>
     </>
   );

@@ -9,3 +9,4 @@
 **/*.jsx
 .eslintrc.js
 next-env.d.ts
+packages/icons/

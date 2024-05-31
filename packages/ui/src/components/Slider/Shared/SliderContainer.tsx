@@ -22,6 +22,7 @@ export const SliderContainer = ({
 }: SliderContainerDivProps) => {
   return (
     <Container
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...style}
       className={className}
       id={id}

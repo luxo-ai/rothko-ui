@@ -79,6 +79,7 @@ const Menu = React.forwardRef<ScrollableHTMLElement, MenuProps>(
           aria-hidden
           className={classes(baseClasses, className)}
         >
+          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
           <ul {...listProps} tabIndex={-1} aria-disabled={ariaDisabled || disabled} role="listbox">
             {children}
           </ul>

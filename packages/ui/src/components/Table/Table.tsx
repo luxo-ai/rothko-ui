@@ -30,6 +30,7 @@ const Table = React.forwardRef<HTMLTableElement, TableProps>(
                 }
                 const { key, content, className, ...rest } = header;
                 return (
+                  // eslint-disable-next-line react/jsx-props-no-spreading
                   <TableHeader {...rest} className={className} key={key}>
                     {content}
                   </TableHeader>

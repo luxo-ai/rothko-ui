@@ -291,7 +291,6 @@ function Autocomplete<V extends Value, T = undefined>({
           id={autocompleteMenuId}
           ref={menuRef}
           open={open}
-          role="listbox"
           variant={menuVariant}
           aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
         >

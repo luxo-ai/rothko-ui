@@ -11,6 +11,7 @@ type SliderTrackDivProps = React.HTMLProps<HTMLDivElement> & {
 const SliderTrackDiv = ({ disabled, children, ...props }: SliderTrackDivProps) => {
   const baseClasses = scoppedClasses('slider-track', disabled && 'disabled');
   return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <div {...props} className={baseClasses}>
       {children}
     </div>

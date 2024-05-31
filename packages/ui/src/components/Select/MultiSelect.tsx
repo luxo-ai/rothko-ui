@@ -18,7 +18,7 @@ function MultiSelect<V extends Value, T = undefined>({
   values: value,
   ...props
 }: MultiSelectProps<V, T>) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, react/jsx-props-no-spreading
   return <SelectInner {...props} value={value} onChange={onChange as any} multiple />;
 }
 

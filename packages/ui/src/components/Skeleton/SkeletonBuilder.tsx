@@ -34,6 +34,7 @@ const SkeletonBuilder = ({
   const animationDuration = `${speed}s`;
 
   return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <svg aria-labelledby={ariaId} role="img" {...svgProps}>
       <title id={ariaId}>Loading...</title>
       <rect
@@ -47,6 +48,7 @@ const SkeletonBuilder = ({
       />
       <defs>
         <clipPath id={clipId}>{children}</clipPath>
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <linearGradient {...gradientProps} id={gradientId}>
           <stop offset="0%" stopColor={backgroundColor}>
             <animate

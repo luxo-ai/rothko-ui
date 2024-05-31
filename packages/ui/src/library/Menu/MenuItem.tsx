@@ -42,6 +42,7 @@ const MenuItem = React.forwardRef<HTMLLIElement, MenuProps>(
 
     return (
       <li
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...listProps}
         id={id}
         style={style}

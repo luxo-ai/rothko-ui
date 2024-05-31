@@ -25,6 +25,7 @@ const DropdownContainer = React.forwardRef<HTMLDivElement, DropdownContainerProp
       disabled && 'disabled'
     );
     return (
+      // eslint-disable-next-line react/jsx-props-no-spreading
       <div {...props} ref={ref} className={classes(baseClasses, className)}>
         {children}
       </div>
