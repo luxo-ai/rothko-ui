@@ -7,6 +7,7 @@ type ThemeProviderProps = {
   defaultTheme: string;
 };
 
+/*
 const ThemeProvider = ({ children, defaultTheme }: ThemeProviderProps) => {
   return (
     <ThemeProviderInner themes={['dark', 'light']} defaultTheme={defaultTheme}>
@@ -14,6 +15,7 @@ const ThemeProvider = ({ children, defaultTheme }: ThemeProviderProps) => {
     </ThemeProviderInner>
   );
 };
+*/
 
 const ThemeProviderTemp = ({ children, defaultTheme: _d }: ThemeProviderProps) => {
   return <>{children}</>;
