@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import React from 'react';
 import { ThemeProvider as ThemeProviderInner } from 'next-themes';
 
 type ThemeProviderProps = {
