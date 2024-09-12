@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 
 import { classes } from '@rothko-ui/utils';

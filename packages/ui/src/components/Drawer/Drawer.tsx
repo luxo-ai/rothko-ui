@@ -1,5 +1,3 @@
-'use client';
-
 import { animated, useTransition } from '@react-spring/web';
 import React, { useEffect, useRef } from 'react';
 

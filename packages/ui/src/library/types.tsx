@@ -1,4 +1,4 @@
-import type { EmSize, RemSize, WithAriaHidden } from '../types';
+import type { EmSize, RemSize } from '../types';
 
 type WithData<Base, DataType> = DataType extends undefined ? Base : Base & { data: DataType };
 
@@ -20,9 +20,8 @@ export type FocusHandler = (e: React.FocusEvent<HTMLElement>) => void;
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Accessory<Props = {}> = (
-  props: Props &
-    WithAriaHidden<{
-      size: number | RemSize | EmSize;
-      color: string;
-    }>
+  props: Props & {
+    size: number | RemSize | EmSize;
+    color: string;
+  }
 ) => JSX.Element;

@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useContext } from 'react';
 import Typography from '../../components/Typography/Typography';
 import styles from './Menu.module.scss';

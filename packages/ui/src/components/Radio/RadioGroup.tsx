@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { Grid } from '../../layout';
 import type { RothkoKind } from '../../theme';

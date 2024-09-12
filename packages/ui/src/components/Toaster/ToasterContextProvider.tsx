@@ -1,5 +1,3 @@
-'use client';
-
 import { useTransition } from '@react-spring/web';
 import React, { useCallback, useMemo, useState } from 'react';
 import * as uuid from 'uuid';

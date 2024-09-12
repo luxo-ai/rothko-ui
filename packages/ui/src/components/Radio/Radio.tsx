@@ -2,12 +2,13 @@ import React from 'react';
 
 import { isString } from '@rothko-ui/utils';
 
-import type { RadioInnerProps } from './RadioInner';
+import type { AriaAttributes, RadioInnerProps } from './RadioInner';
 import RadioInner from './RadioInner';
 import useRadioGroup from './useRadioGroup';
+import type { WithAria } from '../../types';
 
 type RadioProps = Pick<
-  RadioInnerProps,
+  WithAria<RadioInnerProps, AriaAttributes>,
   | 'id'
   | 'children'
   | 'className'

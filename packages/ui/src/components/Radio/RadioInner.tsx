@@ -12,7 +12,7 @@ import type { WithAria } from '../../types';
 
 const sc = scopedClasses(styles);
 
-type AriaAttributes =
+export type AriaAttributes =
   | 'aria-label'
   | 'aria-describedby'
   | 'aria-details'

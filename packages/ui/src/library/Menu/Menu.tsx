@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useImperativeHandle, useMemo } from 'react';
 import { classes, scopedClasses } from '@rothko-ui/utils';
 import styles from './Menu.module.scss';
