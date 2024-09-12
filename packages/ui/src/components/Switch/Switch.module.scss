@@ -9,8 +9,8 @@
 }
 
 .switch__outer-circle {
-  @extend %ios-tap-highlight-color-transparent;
   @extend %hide-chrome-browser-outline;
+  @include mixins.iosTapHighlightColorTransparent;
 
   flex: 0 0 auto;
   display: flex;

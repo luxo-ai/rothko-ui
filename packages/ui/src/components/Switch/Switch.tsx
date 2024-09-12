@@ -1,4 +1,4 @@
-import { classes, isString, scopedClasses as sc } from '@rothko-ui/utils';
+import { classes, isString, scopedClasses } from '@rothko-ui/utils';
 import keyboardKey from 'keyboard-key';
 import type { CSSProperties } from 'react';
 import React from 'react';
@@ -6,12 +6,28 @@ import type { RothkoKind } from '../../theme/types';
 import { keyDownFactory } from '../../library/utils/keyUtils';
 import { Typography } from '../Typography';
 import useId from '../../library/hooks/useId';
-import type { WithAria } from './types';
 import styles from './Switch.module.scss';
+import type { WithAria } from '../../types';
 
-const scopedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
-type SwitchProps = WithAria<{
+type StyleableComponents = 'errorText' | 'label';
+
+type AriaAttributes =
+  | 'aria-label'
+  | 'aria-describedby'
+  | 'aria-details'
+  | 'aria-labelledby'
+  | 'aria-hidden'
+  | 'aria-controls'
+  | 'aria-haspopup'
+  | 'aria-expanded'
+  | 'aria-disabled'
+  | 'aria-invalid'
+  | 'aria-required'
+  | 'aria-errormessage';
+
+type SwitchProps = {
   id?: string;
   /**
    * The content to be rendered inside the Switch component.
@@ -21,6 +37,10 @@ type SwitchProps = WithAria<{
    * The CSS class name to be applied to the Switch component.
    */
   className?: string;
+  /**
+   * Additional class names for the Switch component
+   */
+  classNames?: Partial<Record<StyleableComponents, string>>;
   /**
    * Specifies whether the Switch component is disabled.
    */
@@ -59,20 +79,26 @@ type SwitchProps = WithAria<{
    */
   style?: CSSProperties;
   /**
+   * Additional inline styles for the Switch component.
+   */
+  styles?: Partial<Record<StyleableComponents, CSSProperties>>;
+  /**
    * Specifies whether the Switch component is selected.
    */
   selected?: boolean;
-}>;
+};
 
 const Switch = ({
   children,
   className,
+  classNames = {},
   disabled,
   kind,
   offIcon,
   onChange,
   onIcon,
   style,
+  styles: stylesProp = {},
   selected,
   error,
   errorText = 'Invalid',
@@ -89,7 +115,7 @@ const Switch = ({
   'aria-required': ariaRequired,
   'aria-errormessage': ariaErrorMessage,
   id,
-}: SwitchProps) => {
+}: WithAria<SwitchProps, AriaAttributes>) => {
   const labelId = useId();
   const errorMessageId = useId();
 
@@ -117,7 +143,7 @@ const Switch = ({
         aria-disabled={ariaDisabled || disabled}
         aria-label={ariaLabel}
         aria-errormessage={!ariaErrorMessage && error ? errorMessageId : ariaErrorMessage}
-        className={scopedClasses(
+        className={sc(
           'switch__outer-circle',
           selected && 'selected',
           kind && kind,
@@ -129,18 +155,27 @@ const Switch = ({
         role="switch"
         tabIndex={0}
       >
-        <div className={scopedClasses('switch__inner-circle', { selected })}>
+        <div className={sc('switch__inner-circle', { selected })}>
           {selected ? onIcon && <>{onIcon}</> : offIcon && <>{offIcon}</>}
         </div>
       </div>
       {children &&
         (isString(children) ? (
-          <Typography.body id={labelId}>{children}</Typography.body>
+          <Typography.body className={classNames.label} style={stylesProp.label} id={labelId}>
+            {children}
+          </Typography.body>
         ) : (
-          <div id={labelId}>{children}</div>
+          <div className={classNames.label} style={stylesProp.label} id={labelId}>
+            {children}
+          </div>
         ))}
       {error && (
-        <Typography.body id={errorMessageId} kind="danger">
+        <Typography.body
+          className={classNames.errorText}
+          style={stylesProp.errorText}
+          id={errorMessageId}
+          kind="danger"
+        >
           {errorText}
         </Typography.body>
       )}

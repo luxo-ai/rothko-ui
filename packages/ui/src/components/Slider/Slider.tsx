@@ -6,10 +6,20 @@ import { SliderContainer, SliderRange, SliderTrack } from './Shared';
 import { SliderLegendContainer } from './Shared/SliderContainer';
 import SliderHandle from './Shared/SliderHandle';
 import { getOffsetFactory } from './sliderUtils';
-import type { SliderWidth, WithAria } from './types';
+import type { SliderWidth } from './types';
 import useId from '../../library/hooks/useId';
+import type { WithAria } from '../../types';
 
-type SliderProps = WithAria<{
+type AriaAttributes =
+  | 'aria-label'
+  | 'aria-describedby'
+  | 'aria-details'
+  | 'aria-labelledby'
+  | 'aria-controls'
+  | 'aria-invalid'
+  | 'aria-required';
+
+type SliderProps = {
   id?: string;
   /**
    * The class name for the Slider component.
@@ -75,7 +85,7 @@ type SliderProps = WithAria<{
    * The current value of the Slider component.
    */
   value?: Nilable<number>;
-}>;
+};
 
 const Slider = ({
   className,
@@ -101,7 +111,7 @@ const Slider = ({
   'aria-controls': ariaControls,
   'aria-invalid': ariaInvalid,
   'aria-required': ariaRequired,
-}: SliderProps) => {
+}: WithAria<SliderProps, AriaAttributes>) => {
   const trackId = useId();
   const labelId = useId();
 

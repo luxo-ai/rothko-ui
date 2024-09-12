@@ -3,36 +3,25 @@
 @use '../../../styles/placeholders';
 
 .handle {
-  @extend %ios-tap-highlight-color-transparent;
   @extend %hide-chrome-browser-outline;
+  @include mixins.iosTapHighlightColorTransparent;
+  @include mixins.userSelectNone;
 
   position: absolute;
-  // https://stackoverflow.com/questions/30552307/ios-safari-buttons-not-perfect-circles
-  padding: 0;
   width: variables.$sliderHandleSize;
   height: variables.$sliderHandleSize;
+
+  // https://stackoverflow.com/questions/30552307/ios-safari-buttons-not-perfect-circles
+  padding: 0;
 
   transform: translate(-50%, 0%);
   touch-action: pan-x;
 
-  &.vertical {
-    transform: translate(0%, -50%);
-    touch-action: pan-y;
-  }
-
   background-color: variables.$sliderHandleBackground;
-
-  transition-property: border;
-  transition-duration: 0.2s;
-
+  border: 0.125rem solid variables.$sliderHandleBorder;
   border-radius: 50%;
-  border-style: solid;
-  border-width: 0.125rem;
-  border-color: variables.$sliderHandleBorder;
 
-  overflow: visible;
   z-index: 3;
-  user-select: none;
   cursor: pointer;
 
   &:disabled {

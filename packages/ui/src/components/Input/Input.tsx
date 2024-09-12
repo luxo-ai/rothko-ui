@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import { classes, scopedClasses } from '@rothko-ui/utils';
 
 import type { HtmlInputProps, TextProps } from './types';
 import styles from './Input.module.scss';
 
-const scoppedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
 type InputProps = HtmlInputProps & {
   /**
@@ -20,7 +20,7 @@ type InputProps = HtmlInputProps & {
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ variant, error, className, disabled, tabIndex, ...props }, ref) => {
-    const baseClasses = scoppedClasses('input', variant && `input--${variant}`, error && 'error');
+    const baseClasses = sc('input', variant && `input--${variant}`, error && 'error');
     return (
       <input
         // eslint-disable-next-line react/jsx-props-no-spreading

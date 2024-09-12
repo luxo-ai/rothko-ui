@@ -1,6 +1,7 @@
 @forward '../../styles/variables';
 
 $checkboxBackgroundColor: var(--rothko-checkbox-background, #dee7f5);
+$checkboxBackgroundColorSelected: var(--rothko-checkbox-background-focus, #3c54ff);
 $checkboxSize: 1.125rem;
 $checkboxBorderRadius: 1px;
-$checkboxPadding: 0.25rem;
+$checkboxPadding: 0.125rem;

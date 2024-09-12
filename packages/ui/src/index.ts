@@ -1,6 +1,5 @@
 import PhantomButton from './library/Button/PhantomButton';
 
-export * from './RothkoProvider';
 export * from './components';
 export * from './layout';
 export type { Accessory, NestedOption, Option } from './library/types';

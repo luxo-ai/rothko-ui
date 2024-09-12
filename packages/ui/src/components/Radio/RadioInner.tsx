@@ -1,18 +1,26 @@
 import React from 'react';
 import keyboardKey from 'keyboard-key';
 
-import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import { classes, scopedClasses } from '@rothko-ui/utils';
 
 import type { RothkoKind } from '../../theme';
 import Typography from '../Typography/Typography';
 import useId from '../../library/hooks/useId';
 import { keyDownFactory } from '../../library/utils/keyUtils';
-import type { WithAria } from './types';
 import styles from './Radio.module.scss';
+import type { WithAria } from '../../types';
 
-const scopedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
-export type RadioInnerProps = WithAria<{
+type AriaAttributes =
+  | 'aria-label'
+  | 'aria-describedby'
+  | 'aria-details'
+  | 'aria-labelledby'
+  | 'aria-controls'
+  | 'aria-errormessage';
+
+export type RadioInnerProps = {
   id?: string;
   /**
    * The content to be rendered inside the radio component.
@@ -46,7 +54,7 @@ export type RadioInnerProps = WithAria<{
    * The inline style for the radio component.
    */
   style?: React.CSSProperties;
-}>;
+};
 
 const RadioInner = ({
   id,
@@ -64,7 +72,7 @@ const RadioInner = ({
   onSelect,
   selected,
   style,
-}: RadioInnerProps) => {
+}: WithAria<RadioInnerProps, AriaAttributes>) => {
   const labelId = useId();
 
   const clickRadio = () => {
@@ -74,13 +82,9 @@ const RadioInner = ({
 
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: clickRadio });
 
-  const outerDivClassess = scopedClasses(
-    'radio__outer-circle',
-    disabled && 'disabled',
-    error && 'error'
-  );
+  const outerDivClassess = sc('radio__outer-circle', disabled && 'disabled', error && 'error');
 
-  const middleDivClasses = scopedClasses(
+  const middleDivClasses = sc(
     'radio__middle-circle',
     error && 'error',
     selected && 'selected',

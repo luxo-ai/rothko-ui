@@ -5,14 +5,24 @@ import Typography from '../Typography/Typography';
 import { SliderContainer, SliderLegendContainer, SliderRange, SliderTrack } from './Shared';
 import SliderHandle from './Shared/SliderHandle';
 import { getOffsetFactory } from './sliderUtils';
-import type { MultiSliderWithAria, SliderWidth } from './types';
+import type { SliderWidth } from './types';
 import useId from '../../library/hooks/useId';
+import type { WithAria } from '../../types';
 
 const BUFFER = 1;
 
-export type Range = [number, number];
+type Range = [number, number];
 
-type MultiSliderProps = MultiSliderWithAria<{
+type AriaAttributes =
+  | 'aria-label'
+  | 'aria-describedby'
+  | 'aria-details'
+  | 'aria-labelledby'
+  | 'aria-controls'
+  | 'aria-invalid'
+  | 'aria-required';
+
+type MultiSliderProps = {
   id?: string;
   /**
    * The CSS class name for the MultiSlider component.
@@ -78,7 +88,7 @@ type MultiSliderProps = MultiSliderWithAria<{
    * The current value of the MultiSlider component.
    */
   value?: Nilable<Range>;
-}>;
+};
 
 const MultiSlider = ({
   className,
@@ -104,7 +114,7 @@ const MultiSlider = ({
   'aria-controls': ariaControls,
   'aria-invalid': ariaInvalid,
   'aria-required': ariaRequired,
-}: MultiSliderProps) => {
+}: WithAria<MultiSliderProps, AriaAttributes>) => {
   const trackId = useId();
   const labelId = useId();
 
@@ -130,7 +140,7 @@ const MultiSlider = ({
         )}
         {showRange && (
           <Typography.label light>
-            {lower.toFixed(precision)} -{upper.toFixed(precision)}
+            {lower.toFixed(precision)} - {upper.toFixed(precision)}
             {maxReached && orMore ? '+' : ''}
           </Typography.label>
         )}

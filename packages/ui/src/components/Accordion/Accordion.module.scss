@@ -16,12 +16,17 @@
 // container for single panel
 .accordion__panel {
   background-color: variables.$accordionBackgroundColor;
-  border-radius: variables.$accordionPanelBorderRadius;
-  // same color as the accordion background
   border: 1px solid variables.$accordionBackgroundColor;
+  border-radius: variables.$accordionPanelBorderRadius;
 
   &.bordered {
     border-color: variables.$accordionBorderColor;
+
+    @each $kind in variables.$rothkoKinds {
+      &.#{$kind} {
+        border-color: variables.safeGetTheme($kind);
+      }
+    }
   }
 
   &.compact {
@@ -44,28 +49,14 @@
   }
 }
 
-@each $kind in variables.$rothkoKinds {
-  .accordion__panel--#{$kind} {
-    &.bordered {
-      // set the border color
-      border-color: variables.safeGetTheme($kind);
-    }
-    // set the text color for the label's children
-    & > svg {
-      fill: variables.safeGetTheme($kind);
-    }
-  }
-}
-
-// button
+// phantom button
 .accordion__panel__label {
-  @extend %user-select-none;
-  @extend %phantom-button-style;
+  @include mixins.userSelectNone;
 
-  width: 100%;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  width: 100%;
   padding: variables.$accordionVerticalPadding variables.$accordionHorizontalPadding;
   cursor: pointer;
 
@@ -74,7 +65,6 @@
     @extend %accordion-disabled;
   }
 
-  // https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible
   &:focus-visible {
     outline: 1px solid variables.$accordionBorderColor;
   }
@@ -82,11 +72,4 @@
 
 .accordion__panel__content {
   padding: 0 variables.$accordionHorizontalPadding variables.$accordionVerticalPadding;
-}
-
-// increasing specificity because accordiion comes first in the cascade :(
-// long term solutin is to make each component it's own package
-p.accordion__text {
-  margin: 0;
-  padding: 0;
 }

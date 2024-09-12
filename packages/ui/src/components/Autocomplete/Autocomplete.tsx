@@ -3,13 +3,13 @@ import React, { useEffect, useRef } from 'react';
 
 import { isNil, map, mapReverse } from '@rothko-ui/utils';
 
-import { useDebuggerContext } from '../../library/DebuggerContext';
+import { debugFactory } from '../../library/debug';
 import ComponentLabel from '../../library/ComponentLabel/ComponentLabel';
 import DefaultRenderOption from '../../library/dropdown/RenderOption';
 import useFieldIds from '../../library/hooks/useFieldIds';
 import type { FocusHandler, Option, RenderOption, Value } from '../../library/types';
 import Typography from '../Typography/Typography';
-import type { QueryMatchFn, WithAria } from './types';
+import type { AriaAttributes, QueryMatchFn } from './types';
 import useAutocomplete from './useAutocomplete';
 import DropdownContainer from '../../library/dropdown/DropdownContainer';
 import ControlButton from '../../library/dropdown/ControlButton';
@@ -19,13 +19,22 @@ import type { MenuVariant, ScrollableHTMLElement } from '../../library/Menu/type
 import MenuEmpty from '../../library/Menu/MenuEmpty';
 import MenuItem from '../../library/Menu/MenuItem';
 import styles from './Autocomplete.module.scss';
+import type { WithAria } from '../../types';
 
-export type AutocompleteProps<V extends Value, T> = WithAria<{
+const debug = debugFactory('<Autocomplete/>');
+
+type StyleableComponents = 'errorText' | 'label';
+
+export type AutocompleteProps<V extends Value, T> = {
   id?: string;
   /**
    * Additional class name for the autocomplete.
    */
   className?: string;
+  /**
+   * Additional class names for the autocomplete components.
+   */
+  classNames?: Partial<Record<StyleableComponents, string>>;
   /**
    * Whether the autocomplete is clearable.
    */
@@ -103,14 +112,19 @@ export type AutocompleteProps<V extends Value, T> = WithAria<{
    */
   style?: React.CSSProperties;
   /**
+   * Custom styles for the autocomplete components.
+   */
+  styles?: Partial<Record<StyleableComponents, React.CSSProperties>>;
+  /**
    * The value(s) of the autocomplete.
    */
   value?: V | null;
-}>;
+};
 
 function Autocomplete<V extends Value, T = undefined>({
   id,
   className,
+  classNames = {},
   clearable = true,
   disabled,
   error,
@@ -127,6 +141,7 @@ function Autocomplete<V extends Value, T = undefined>({
   renderOption: RenderOpt = DefaultRenderOption,
   searchFn,
   style,
+  styles: stylesProp = {},
   value,
   onClear,
   errorText = 'Invalid',
@@ -138,10 +153,9 @@ function Autocomplete<V extends Value, T = undefined>({
   'aria-required': ariaRequired,
   'aria-invalid': ariaInvalid,
   'aria-errormessage': ariaErrorMessage,
-}: AutocompleteProps<V, T>) {
+}: WithAria<AutocompleteProps<V, T>, AriaAttributes>) {
   const menuRef = useRef<ScrollableHTMLElement>(null);
   const openReverse = menuVariant === 'top';
-  const debug = useDebuggerContext('<Autocomplete/>');
 
   const { elementId: autocompleteMenuId, labelId, errorMessageId } = useFieldIds();
 
@@ -234,7 +248,11 @@ function Autocomplete<V extends Value, T = undefined>({
 
   return (
     <div style={style} className={className}>
-      {label && <ComponentLabel id={labelId}>{label}</ComponentLabel>}
+      {label && (
+        <ComponentLabel style={stylesProp.label} className={classNames.label} id={labelId}>
+          {label}
+        </ComponentLabel>
+      )}
       <DropdownContainer
         id={id}
         error={error}
@@ -308,7 +326,15 @@ function Autocomplete<V extends Value, T = undefined>({
           ))}
         </DropdownMenu>
       </DropdownContainer>
-      {error && errorText && <Typography.body id={errorMessageId}>{errorText}</Typography.body>}
+      {error && errorText && (
+        <Typography.body
+          style={stylesProp.errorText}
+          className={classNames.errorText}
+          id={errorMessageId}
+        >
+          {errorText}
+        </Typography.body>
+      )}
     </div>
   );
 }

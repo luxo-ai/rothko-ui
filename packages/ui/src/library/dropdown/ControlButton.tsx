@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { ChevronDownOutline, CloseOutline } from '@rothko-ui/icons';
-import { scopedClasses as sc } from '@rothko-ui/utils';
+import { scopedClasses } from '@rothko-ui/utils';
 
 import style from './ControlButton.module.scss';
 
-const scoppedClasses = sc(style);
+const sc = scopedClasses(style);
 
 const CLOSE_LABEL = 'Close';
 const OPEN_LABEL = 'Open';
@@ -43,7 +43,7 @@ const ControlButton = ({ rotateOnOpen, open, disabled, onClick, type }: ControlB
       aria-label={ariaLabel}
       disabled={disabled}
       onClick={() => onClick()}
-      className={scoppedClasses('control-button', rotateOnOpen && 'rotate-on-open', open && 'open')}
+      className={sc('control-button', rotateOnOpen && 'rotate-on-open', open && 'open')}
     >
       {type === 'clear' ? <Clear /> : <Indicator />}
     </button>
@@ -63,7 +63,7 @@ export const IdkYet = ({ open, disabled, onClick }: IdkButtonProps) => {
       aria-disabled={disabled}
       disabled={disabled}
       onClick={() => onClick()}
-      className={scoppedClasses('idk-key', open && 'open')}
+      className={sc('idk-key', open && 'open')}
     >
       <Indicator />
     </button>

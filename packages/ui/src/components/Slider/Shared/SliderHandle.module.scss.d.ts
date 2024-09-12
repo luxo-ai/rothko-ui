@@ -1,7 +1,5 @@
 export type Styles = {
-  active: string;
   handle: string;
-  vertical: string;
 };
 
 export type ClassNames = keyof Styles;

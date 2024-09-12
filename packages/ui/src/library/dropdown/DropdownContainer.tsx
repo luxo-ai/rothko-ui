@@ -1,8 +1,8 @@
 import React from 'react';
-import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import { classes, scopedClasses } from '@rothko-ui/utils';
 import styles from './Dropdown.module.scss';
 
-const scoppedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
 export type DropdownContainerProps = Omit<
   React.HTMLProps<HTMLDivElement>,
@@ -17,7 +17,7 @@ export type DropdownContainerProps = Omit<
 
 const DropdownContainer = React.forwardRef<HTMLDivElement, DropdownContainerProps>(
   ({ children, error, disabled, open, className, ...props }, ref) => {
-    const baseClasses = scoppedClasses(
+    const baseClasses = sc(
       'dropown-container',
       error && 'error',
       open && 'open',

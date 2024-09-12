@@ -2,9 +2,9 @@ import React from 'react';
 import type { RothkoKind, RothkoSize } from '../../theme';
 import type { ButtonAppearance, ButtonVariant } from '../Button/types';
 import styles from './ButtonGroup.module.scss';
-import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import { classes, scopedClasses } from '@rothko-ui/utils';
 
-const scoppedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
 type ButtonGroupProps = {
   appearance?: ButtonAppearance;
@@ -29,7 +29,7 @@ const ButtonGroup = ({
   size,
   style = {},
 }: ButtonGroupProps) => {
-  const baseClasses = scoppedClasses('button-group', noEffect && 'no-effect');
+  const baseClasses = sc('button-group', noEffect && 'no-effect');
   const buttonChildren = React.Children.map(children, (child, index) => {
     if (!React.isValidElement(child)) {
       return child;

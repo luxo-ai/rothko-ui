@@ -1,5 +1,5 @@
 import type { Nilable } from '@rothko-ui/utils';
-import { scopedClasses as sc } from '@rothko-ui/utils';
+import { scopedClasses } from '@rothko-ui/utils';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import type { DragDelta, DragEvent } from '../../../library/utils/domUtils';
 import {
@@ -13,10 +13,10 @@ import {
 } from '../../../library/utils/domUtils';
 import { getOffsetFactory } from '../sliderUtils';
 import useIsMounted from '../../../library/hooks/useIsMounted';
-import type { WithAriaControls, WithAriaLabel } from '../../../types';
 import styles from './SliderHandle.module.scss';
+import type { WithAria } from '../../../types';
 
-const scoppedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
 type DraggableEvents = {
   start: string;
@@ -36,9 +36,9 @@ const mouseEvents: DraggableEvents = {
   stop: 'mouseup',
 };
 
-type WithAria<T> = WithAriaControls<WithAriaLabel<T>>;
+type AriaAttributes = 'aria-label' | 'aria-controls';
 
-type SliderHandleProps = WithAria<{
+type SliderHandleProps = {
   onChange: (v: number) => void;
   onDrag?: (e: DragEvent) => void;
   onMouseDown?: (e: DragEvent) => void;
@@ -47,7 +47,7 @@ type SliderHandleProps = WithAria<{
   value: number;
   min?: number;
   max: number;
-}>;
+};
 
 const SliderHandle = ({
   disabled,
@@ -60,7 +60,7 @@ const SliderHandle = ({
   onChange,
   'aria-label': ariaLabel,
   'aria-controls': ariaControls,
-}: SliderHandleProps) => {
+}: WithAria<SliderHandleProps, AriaAttributes>) => {
   const isMounted = useIsMounted();
 
   const handleRef = useRef<HTMLButtonElement | null>(null);
@@ -257,7 +257,7 @@ const SliderHandle = ({
       ref={handleRef}
       role="slider"
       style={positionStyle}
-      className={scoppedClasses('handle', vertical && 'vertical')}
+      className={sc('handle')}
     />
   );
 };

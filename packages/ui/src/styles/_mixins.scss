@@ -33,3 +33,11 @@
     fill: $color;
   }
 }
+
+@mixin iosTapHighlightColorTransparent {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@mixin userSelectNone {
+  user-select: none;
+}

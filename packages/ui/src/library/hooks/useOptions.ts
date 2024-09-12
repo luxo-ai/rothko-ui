@@ -1,13 +1,13 @@
 import { useCallback, useState } from 'react';
 
-import { useDebuggerContext } from '../DebuggerContext';
+import { debugFactory } from '../debug';
 import type { Option } from '../types';
 import { INITIAL_OPTION_IDX } from './constants';
 import type { Direction } from './types';
 import { dial } from './utils';
 
 const useOptions = <V, T>(initialOptions: Option<V, T>[]) => {
-  const debug = useDebuggerContext('useOptions');
+  const debug = debugFactory('useOptions');
 
   const [optIdx, setOptIdx] = useState<number>(INITIAL_OPTION_IDX);
   const [options, setOptionsInner] = useState<Option<V, T>[]>(initialOptions);

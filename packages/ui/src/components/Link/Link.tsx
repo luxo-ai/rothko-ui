@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import { classes, scopedClasses } from '@rothko-ui/utils';
 
 import type { LinkProps } from './types';
 import styles from './Link.module.scss';
 
-const scoppedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
 const Link = React.forwardRef<
   HTMLElement,
@@ -15,7 +15,7 @@ const Link = React.forwardRef<
     { as = 'a', small, italic, underline, bold, light, kind, className, children, ...props },
     ref
   ) => {
-    const baseClasses = scoppedClasses(
+    const baseClasses = sc(
       'link',
       small && 'link-small',
       italic && 'link--italic',

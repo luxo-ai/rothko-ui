@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 
 import type { KeyLike } from '@rothko-ui/utils';
-import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import { classes, scopedClasses } from '@rothko-ui/utils';
 
 import type { RothkoKind } from '../../theme/types';
-import type { Tab, WithAria } from './types';
+import type { Tab } from './types';
 import { Container, Flex } from '../../layout';
 import styles from './TabBar.module.scss';
+import type { WithAria } from '../../types';
 
-const scopedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
-type TabBarProps<Key extends KeyLike> = WithAria<{
+type AriaAttributes = 'aria-label' | 'aria-controls';
+
+type TabBarProps<Key extends KeyLike> = {
   id?: string;
   kind?: RothkoKind;
   className?: string;
@@ -19,7 +22,7 @@ type TabBarProps<Key extends KeyLike> = WithAria<{
   style?: React.CSSProperties;
   tabs: ReadonlyArray<Tab<Key>>;
   containerStyle?: React.CSSProperties;
-}>;
+};
 
 function TabBar<Key extends KeyLike>({
   className,
@@ -30,7 +33,9 @@ function TabBar<Key extends KeyLike>({
   tabs,
   containerStyle = {},
   id,
-}: TabBarProps<Key>) {
+  'aria-controls': ariaControls,
+  'aria-label': ariaLabel,
+}: WithAria<TabBarProps<Key>, AriaAttributes>) {
   const tabCount = tabs.length;
   const initialIdx = tabs.findIndex(t => t.key === initialTab);
   const [tabIdx, setTabIdx] = useState(initialIdx >= 0 ? initialIdx : 0);
@@ -38,10 +43,17 @@ function TabBar<Key extends KeyLike>({
     <>
       <div
         id={id}
-        className={classes(scopedClasses('tab-list__container'), className)}
+        aria-label={ariaLabel}
+        className={classes(sc('tab-list__container'), className)}
         style={style}
       >
-        <Flex as="ul" className={styles['tab-list']} aria-label="tablist" role="tablist">
+        <Flex
+          as="ul"
+          className={styles['tab-list']}
+          aria-label={ariaLabel}
+          aria-controls={ariaControls}
+          role="tablist"
+        >
           {tabs.map((t, idx) => (
             <Flex
               as="li"
@@ -72,7 +84,7 @@ function TabBar<Key extends KeyLike>({
             width: `${(100 / tabCount).toFixed(2)}%`,
             transform: `translateX(calc(100% * ${tabIdx}))`,
           }}
-          className={scopedClasses('tab__underline', kind && `tab__underline--${kind}`)}
+          className={sc('tab__underline', kind && `tab__underline--${kind}`)}
         />
       </div>
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}

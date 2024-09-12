@@ -3,7 +3,7 @@
 @use '../../library/Button/mixins' as buttonMixins;
 
 .toast__close-button {
-  @include buttonMixins.phantomButtonStyle();
+  @include buttonMixins.phantomButtonStyle;
   margin-top: 0.125rem;
   display: block;
   margin-left: auto;
@@ -12,9 +12,11 @@
 .toast__animated-backdrop {
   background: variables.$rothkoBackground;
   border-radius: 0.125rem;
+  /*
   box-shadow: 0 1px 4px rgb(28 28 28 / 10%), 0 4px 6px rgb(28 28 28 / 4%),
     0 8px 16px rgb(28 28 28 / 4%), 0 10px 20px 2px rgb(28 28 28 / 2%),
     0 12px 24px 4px rgb(28 28 28 / 4%);
+    */
   position: relative;
 }
 
@@ -49,7 +51,7 @@
   align-items: flex-end;
   justify-content: space-between;
   padding: 1rem 0.75rem;
-  background: variables.$toastBackground;
+  background-color: variables.$toastBackground;
   border-radius: 0.125rem;
 
   @each $kind in variables.$rothkoKinds {

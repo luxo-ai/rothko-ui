@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import { ChevronRightOutline } from '@rothko-ui/icons';
 import { classes, isNil, mapReverse, map } from '@rothko-ui/utils';
 
-import { useDebuggerContext } from '../../library/DebuggerContext';
+import { debugFactory } from '../../library/debug';
 import DefaultRenderOption from '../../library/dropdown/RenderOption';
 import type { NestedOption, RenderNestedOption, Value } from '../../library/types';
 import BackButton from '../../library/Button/BackButton';
@@ -23,6 +23,8 @@ import styles from './Select.module.scss';
 import type { ScrollableHTMLElement } from '../../library/Menu/types';
 import MenuItem from '../../library/Menu/MenuItem';
 
+const debug = debugFactory('<NestedDropdown />');
+
 type NestedSelectProps<V extends Value, T = undefined> = Pick<
   SelectInnerProps<V, T>,
   | 'id'
@@ -30,6 +32,7 @@ type NestedSelectProps<V extends Value, T = undefined> = Pick<
   | 'menuVariant'
   | 'label'
   | 'style'
+  | 'styles'
   | 'noResultsMessage'
   | 'onOpen'
   | 'error'
@@ -37,6 +40,7 @@ type NestedSelectProps<V extends Value, T = undefined> = Pick<
   | 'onBlur'
   | 'clearable'
   | 'className'
+  | 'classNames'
   | 'disabled'
   | 'aria-label'
   | 'aria-describedby'
@@ -63,6 +67,9 @@ type NestedSelectProps<V extends Value, T = undefined> = Pick<
 function NestedSelect<V extends Value, T = undefined>({
   id,
   className,
+  classNames = {},
+  style,
+  styles: stylesProp = {},
   clearable,
   disabled,
   error,
@@ -90,7 +97,6 @@ function NestedSelect<V extends Value, T = undefined>({
 }: NestedSelectProps<V, T>) {
   const menuRef = useRef<ScrollableHTMLElement>(null);
   const openReverse = menuVariant === 'top';
-  const debug = useDebuggerContext('<NestedDropdown />');
 
   const { elementId: dropdownMenuId, labelId, errorMessageId } = useFieldIds();
 
@@ -197,8 +203,12 @@ function NestedSelect<V extends Value, T = undefined>({
   }, [open, menuRef, openReverse, optIdx]);
 
   return (
-    <div className={className}>
-      {label && <ComponentLabel id={labelId}>{label}</ComponentLabel>}
+    <div className={className} style={style}>
+      {label && (
+        <ComponentLabel style={stylesProp.label} className={classNames.label} id={labelId}>
+          {label}
+        </ComponentLabel>
+      )}
       <DropdownContainer
         id={id}
         error={error}
@@ -297,7 +307,15 @@ function NestedSelect<V extends Value, T = undefined>({
           )}
         </DropdownMenu>
       </DropdownContainer>
-      {error && errorText && <Typography.body id={errorMessageId}>{errorText}</Typography.body>}
+      {error && errorText && (
+        <Typography.body
+          style={stylesProp.errorText}
+          className={classNames.errorText}
+          id={errorMessageId}
+        >
+          {errorText}
+        </Typography.body>
+      )}
     </div>
   );
 }

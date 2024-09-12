@@ -16,24 +16,23 @@
 }
 
 @mixin baseButtonStyle {
-  @extend %ios-tap-highlight-color-transparent;
-  @include typographyMixins.regularFontStyle();
+  @include mixins.iosTapHighlightColorTransparent;
+  @include mixins.userSelectNone;
+  @include typographyMixins.regularFontStyle;
   // Use font smoothing to make text more readable
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-
-  appearance: none;
-  // Prevent double tap zoom on mobile
-  touch-action: manipulation;
-  cursor: pointer;
-  user-select: none;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-
   overflow: hidden;
+
+  appearance: none;
+  // Prevent double tap zoom on mobile
+  touch-action: manipulation;
+  cursor: pointer;
 
   border-radius: variables.$defaultBorderRadius;
 

@@ -3,11 +3,11 @@
 @use '../../styles/placeholders';
 
 .input {
-  @include mixins.inputStyle();
+  @include mixins.inputStyle;
 }
 
 .textarea {
-  @include mixins.inputStyle();
+  @include mixins.inputStyle;
   display: block;
   height: 8rem;
   min-height: 6rem;

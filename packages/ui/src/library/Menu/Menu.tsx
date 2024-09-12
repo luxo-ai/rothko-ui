@@ -1,11 +1,13 @@
+'use client';
+
 import React, { useImperativeHandle, useMemo } from 'react';
-import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import { classes, scopedClasses } from '@rothko-ui/utils';
 import styles from './Menu.module.scss';
 import MenuContext from './MenuContext';
 import useScrollIntoView from '../hooks/useScrollIntoView';
 import type { MenuVariant, ScrollableHTMLElement } from './types';
 
-const scoppedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
 type MenuProps = Omit<React.HTMLProps<HTMLUListElement>, 'ref' | 'role' | 'tabIndex'> & {
   /**
@@ -40,7 +42,7 @@ const Menu = React.forwardRef<ScrollableHTMLElement, MenuProps>(
     },
     forwardedRef
   ) => {
-    const baseClasses = scoppedClasses('menu', variant === 'top' && 'menu--reverse');
+    const baseClasses = sc('menu', variant === 'top' && 'menu--reverse');
 
     const { scrollIntoView, scrollElRef } = useScrollIntoView();
 

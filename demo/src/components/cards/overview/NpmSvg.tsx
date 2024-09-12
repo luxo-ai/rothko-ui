@@ -1,10 +1,10 @@
-import { useRothko } from '@rothko-ui/ui';
+import useTheme from '../../theme/useTheme';
 
 const NpmSvg = () => {
-  const { mode } = useRothko();
+  const { theme } = useTheme();
   return (
     <svg
-      fill={mode === 'dark' ? '#FFF' : '#000'}
+      fill={theme === 'dark' ? '#FFF' : '#000'}
       display="flex"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"

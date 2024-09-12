@@ -1,18 +1,35 @@
 import keyboardKey from 'keyboard-key';
 import React from 'react';
 
-import { classes, scopedClasses as sc, isString } from '@rothko-ui/utils';
+import { Checkmark } from '@rothko-ui/icons';
+import { classes, scopedClasses, isString } from '@rothko-ui/utils';
 
 import type { RothkoKind } from '../../theme/types';
 import { keyDownFactory } from '../../library/utils/keyUtils';
 import Typography from '../Typography/Typography';
 import useId from '../../library/hooks/useId';
 import styles from './Checkbox.module.scss';
-import type { WithAria } from './types';
+import type { WithAria } from '../../types';
 
-const scoppedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
-type CheckboxProps = WithAria<{
+type StyleableComponents = 'errorText' | 'label';
+
+type AriaAttributes =
+  | 'aria-label'
+  | 'aria-describedby'
+  | 'aria-details'
+  | 'aria-labelledby'
+  | 'aria-hidden'
+  | 'aria-controls'
+  | 'aria-haspopup'
+  | 'aria-expanded'
+  | 'aria-disabled'
+  | 'aria-invalid'
+  | 'aria-required'
+  | 'aria-errormessage';
+
+type CheckboxProps = {
   id?: string;
   /**
    * Specifies whether the checkbox is checked.
@@ -26,6 +43,10 @@ type CheckboxProps = WithAria<{
    * The CSS class name for the checkbox.
    */
   className?: string;
+  /**
+   * Additional class names for the checkbox components.
+   */
+  classNames?: Partial<Record<StyleableComponents, string>>;
   /**
    * Specifies whether the checkbox is disabled.
    */
@@ -41,7 +62,6 @@ type CheckboxProps = WithAria<{
   errorText?: string;
   /**
    * The visual style of the checkbox.
-   * @default: 'success'
    */
   kind?: RothkoKind;
   /**
@@ -56,7 +76,11 @@ type CheckboxProps = WithAria<{
    * The inline style for the checkbox.
    */
   style?: React.CSSProperties;
-}>;
+  /**
+   * Additional inline styles for the checkbox components.
+   */
+  styles?: Partial<Record<StyleableComponents, React.CSSProperties>>;
+};
 
 const Checkbox = ({
   id,
@@ -75,14 +99,16 @@ const Checkbox = ({
   checked,
   children,
   className,
+  classNames = {},
   disabled,
   error,
-  kind = 'success',
+  kind,
   onChange,
   style,
+  styles: stylesProp = {},
   errorText = 'Invalid',
 }: // required,
-CheckboxProps) => {
+WithAria<CheckboxProps, AriaAttributes>) => {
   const errorMessageId = useId();
   const labelId = useId();
 
@@ -93,13 +119,15 @@ CheckboxProps) => {
 
   const onKeyDown = keyDownFactory({ [keyboardKey.Enter]: clickCheckbox });
 
-  const baseClassses = scoppedClasses(
+  const baseClassses = sc(
     'checkbox',
-    `checkbox--${kind}`,
+    kind && kind,
     error && 'error',
     checked && 'selected',
     disabled && 'disabled'
   );
+
+  const iconColorVar = kind ? `--rothko-${kind}-foreground` : '--rothko-checkbox-icon-background';
 
   return (
     <div style={style} className={classes(styles['checkbox__container'], className)}>
@@ -123,15 +151,26 @@ CheckboxProps) => {
         onKeyDown={onKeyDown}
         role="checkbox"
         tabIndex={0}
-      />
+      >
+        {checked && <Checkmark fill={`var(${iconColorVar})`} width="100%" height="100%" />}
+      </div>
       {children &&
         (isString(children) ? (
-          <Typography.body id={labelId}>{children}</Typography.body>
+          <Typography.body className={classNames.label} style={stylesProp.label} id={labelId}>
+            {children}
+          </Typography.body>
         ) : (
-          <div id={labelId}>{children}</div>
+          <div className={classNames.label} style={stylesProp.label} id={labelId}>
+            {children}
+          </div>
         ))}
       {error && (
-        <Typography.body id={errorMessageId} kind="danger">
+        <Typography.body
+          className={classNames.errorText}
+          style={stylesProp.errorText}
+          id={errorMessageId}
+          kind="danger"
+        >
           {errorText}
         </Typography.body>
       )}

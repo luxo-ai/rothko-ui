@@ -1,22 +1,30 @@
 @use './variables' as variables;
 @use '../../styles/mixins' as mixins;
-@use '../../styles/placeholders';
 
 .checkbox {
-  // flex-shrink: 0;
-  @extend %ios-tap-highlight-color-transparent;
+  @include mixins.iosTapHighlightColorTransparent;
 
-  background-color: variables.$checkboxBackgroundColor;
-
-  cursor: pointer;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: variables.$checkboxSize;
   height: variables.$checkboxSize;
+  cursor: pointer;
 
   border-radius: variables.$checkboxBorderRadius;
   padding: variables.$checkboxPadding;
 
+  background-color: variables.$checkboxBackgroundColor;
   transition: background-color 0.1s ease;
+
+  &.selected {
+    background-color: variables.$checkboxBackgroundColorSelected;
+    @each $kind in variables.$rothkoKinds {
+      &.#{$kind} {
+        background-color: variables.safeGetTheme($kind);
+      }
+    }
+  }
 
   &:focus-visible {
     outline: 1px solid variables.$rothkoInfo300;
@@ -30,22 +38,6 @@
   &.disabled {
     cursor: not-allowed;
     opacity: 0.6;
-  }
-}
-
-@each $kind in variables.$rothkoKinds {
-  .checkbox--#{$kind} {
-    $checkboxTheme: variables.safeGetTheme($kind);
-    $checkboxThemeForeground: variables.safeGetThemeForeground($kind);
-
-    &.selected {
-      background-color: $checkboxTheme;
-      background-image: url('data:image/svg+xml,%0A%20%20%20%20%3Csvg%20width%3D%2217%22%20height%3D%2213%22%20viewBox%3D%220%200%2017%2013%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M6.50002%2012.6L0.400024%206.60002L2.60002%204.40002L6.50002%208.40002L13.9%200.900024L16.1%203.10002L6.50002%2012.6Z%22%20fill%3D%22%23FFFFFF%22%2F%3E%0A%20%20%20%20%3C%2Fsvg%3E%0A%20%20');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
-      background-origin: content-box;
-    }
   }
 }
 

@@ -65,4 +65,12 @@ module.exports = {
     project: ['./tsconfig.json', './packages/**/tsconfig.json', './demo/tsconfig.json'],
   },
   ignorePatterns: ['packages/icons/'],
+  overrides: [
+    {
+      files: ['*.ts', '*.js', '**/index.tsx', '**/index.jsx'],
+      rules: {
+        'import/prefer-default-export': ['off'],
+      },
+    },
+  ],
 };

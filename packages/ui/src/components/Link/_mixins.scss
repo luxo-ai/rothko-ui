@@ -2,9 +2,8 @@
 @use './variables' as variables;
 
 @mixin baseLinkStyle {
-  @include typographyMixins.baseParagraphStyle();
+  @include typographyMixins.baseParagraphStyle;
   color: variables.$defaultLinkColor;
-
   padding: 0;
   text-decoration: none;
   cursor: pointer;

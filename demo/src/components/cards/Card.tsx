@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Github } from '@rothko-ui/icons';
-import { Container, Flex, FlexItem, TabBar, Typography, useRothko } from '@rothko-ui/ui';
+import { Container, Flex, FlexItem, TabBar, Typography } from '@rothko-ui/ui';
 import { asCompactedArray, isString, toKebabCase } from '@rothko-ui/utils';
 
 import { Code } from '../Code';
@@ -10,6 +10,7 @@ import styles from './Cards.module.scss';
 import type { Body as BodyType, CCode, CardCopy, Section as SectionType } from './types';
 import Markdown from './Markdown';
 import { List, ListItem } from '../List';
+import useTheme from '../theme/useTheme';
 
 type CardProps = {
   children?: React.ReactNode;
@@ -18,7 +19,7 @@ type CardProps = {
 };
 
 const Card = ({ children, copy, codeUrl }: CardProps) => {
-  const { mode } = useRothko();
+  const { theme } = useTheme();
   const { title, description, sections } = copy;
   return (
     <div className={styles.componentCard}>
@@ -40,7 +41,7 @@ const Card = ({ children, copy, codeUrl }: CardProps) => {
               // fixes mobile flashing issue
               // className="phantom-button"
             >
-              <Github width={23} height={23} fill={mode === 'dark' ? '#fff' : undefined} />
+              <Github width={23} height={23} fill={theme === 'dark' ? '#fff' : undefined} />
               <Typography.bodySmall>View Source</Typography.bodySmall>
             </Link>
           </Container>

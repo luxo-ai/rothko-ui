@@ -1,10 +1,12 @@
+'use client';
+
 import React, { useContext, useEffect } from 'react';
-import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import { classes, scopedClasses } from '@rothko-ui/utils';
 import styles from './Menu.module.scss';
 import MenuContext from './MenuContext';
 import useId from '../hooks/useId';
 
-const scoppedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
 type MenuProps = Omit<React.HTMLProps<HTMLLIElement>, 'id' | 'ref' | 'role' | 'tabIndex'> & {
   focused?: boolean;
@@ -29,7 +31,7 @@ const MenuItem = React.forwardRef<HTMLLIElement, MenuProps>(
     const id = useId();
     const { disabled: parentDisabled, scrollIntoView } = useContext(MenuContext);
     const disabled = parentDisabled || itemDisabled;
-    const baseClasses = scoppedClasses(
+    const baseClasses = sc(
       'menu__item',
       selected && 'menu__item--selected',
       disabled && 'disabled'

@@ -1,14 +1,24 @@
-import React, { useCallback, useState } from 'react';
+'use client';
+
+import React, { useCallback, useMemo, useState } from 'react';
 
 import type { RothkoKind } from '../../theme/types';
 import AccordionContext from './AccordionContext';
-import type { Icon, WithAria } from './types';
-import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import type { Icon } from './types';
+import { classes, scopedClasses } from '@rothko-ui/utils';
 import styles from './Accordion.module.scss';
+import type { WithAria } from '../../types';
 
-const scoppedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
-type AccordionProps = WithAria<{
+type AriaAttributes =
+  | 'aria-describedby'
+  | 'aria-details'
+  | 'aria-label'
+  | 'aria-labelledby'
+  | 'aria-hidden';
+
+type AccordionProps = {
   id?: string;
   /**
    * If `true`, borders are added around each accordion item.
@@ -51,7 +61,7 @@ type AccordionProps = WithAria<{
    * Callback when a panel is opened or closed.
    */
   onPanelChange?: (isOpen: boolean, panelKey: string) => void;
-}>;
+};
 
 const Accordion = ({
   id,
@@ -70,8 +80,8 @@ const Accordion = ({
   onPanelChange,
   selectedKeys = [],
   style,
-}: AccordionProps) => {
-  const baseClasses = scoppedClasses('accordion', compact && 'compact');
+}: WithAria<AccordionProps, AriaAttributes>) => {
+  const baseClasses = sc('accordion', compact && 'compact');
   const [selectedPanels, setSelectedPanels] = useState(selectedKeys || []);
 
   const onClickPanel = useCallback(
@@ -90,17 +100,20 @@ const Accordion = ({
     [setSelectedPanels, multiple, onPanelChange]
   );
 
+  const value = useMemo(
+    () => ({
+      bordered,
+      iconOverride,
+      kind,
+      onClickPanel,
+      selectedPanels,
+      compact,
+    }),
+    [bordered, iconOverride, kind, onClickPanel, selectedPanels, compact]
+  );
+
   return (
-    <AccordionContext.Provider
-      value={{
-        bordered,
-        iconOverride,
-        kind,
-        onClickPanel,
-        selectedPanels,
-        compact,
-      }}
-    >
+    <AccordionContext.Provider value={value}>
       <div
         id={id}
         role="tablist"

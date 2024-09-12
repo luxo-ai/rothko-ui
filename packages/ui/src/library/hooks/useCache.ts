@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useRef } from 'react';
-import { useDebuggerContext } from '../DebuggerContext';
+import { debugFactory } from '../debug';
 import useInterval from './useInterval';
 
 const ONE_MS = 1000;
@@ -29,7 +29,7 @@ export const useLRUCache = <T, Arg = undefined>({
   expiresSeconds = EXPIRES_SECONDS_DEFAULT,
   vacuumDelaySeconds = VACUUM_DELAY_SECONDS_DEFAULT,
 }: HookArgs<T, Arg>) => {
-  const debug = useDebuggerContext('useLRUCache');
+  const debug = debugFactory('useLRUCache');
   /* contains meta data on values in cache */
   const cache = useRef<Cache<T>>(new Map()); // was immutable Map before...
 

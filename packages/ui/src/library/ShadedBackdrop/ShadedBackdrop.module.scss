@@ -1,4 +1,4 @@
-$BLUR_RADIUS: 6px;
+$blurRadius: 6px;
 
 .shaded-backdrop {
   backface-visibility: hidden;
@@ -15,7 +15,7 @@ $BLUR_RADIUS: 6px;
     z-index: 999999;
     transition: opacity 80ms ease-in-out;
     &.blur {
-      backdrop-filter: blur($BLUR_RADIUS);
+      backdrop-filter: blur($blurRadius);
     }
     &.padding-h {
       padding-left: 1rem;

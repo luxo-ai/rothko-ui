@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 
 import { isArray, isNil, mapReverse, map } from '@rothko-ui/utils';
 
-import { useDebuggerContext } from '../../library/DebuggerContext';
+import { debugFactory } from '../../library/debug';
 import PhantomButton from '../../library/Button/PhantomButton';
 import DefaultRenderOption from '../../library/dropdown/RenderOption';
 import type { Option, Value } from '../../library/types';
@@ -27,6 +27,7 @@ import type { ScrollableHTMLElement } from '../../library/Menu/types';
 function SelectInner<V extends Value, T = undefined>({
   id,
   className,
+  classNames = {},
   clearable,
   disabled,
   error,
@@ -45,6 +46,7 @@ function SelectInner<V extends Value, T = undefined>({
   placeholder = 'Select',
   renderOption: RenderOpt = DefaultRenderOption,
   style,
+  styles: stylesProp = {},
   value,
   errorText = 'Invalid',
   'aria-label': ariaLabel,
@@ -58,7 +60,7 @@ function SelectInner<V extends Value, T = undefined>({
 }: SelectInnerProps<V, T>) {
   const menuRef = useRef<ScrollableHTMLElement>(null);
   const openReverse = menuVariant === 'top';
-  const debug = useDebuggerContext('<Dropdown/>');
+  const debug = debugFactory('<Dropdown/>');
 
   const { elementId: dropdownMenuId, labelId, errorMessageId } = useFieldIds();
 
@@ -174,7 +176,11 @@ function SelectInner<V extends Value, T = undefined>({
 
   return (
     <div style={style} className={className}>
-      {label && <ComponentLabel id={labelId}>{label}</ComponentLabel>}
+      {label && (
+        <ComponentLabel style={stylesProp.label} className={classNames.label} id={labelId}>
+          {label}
+        </ComponentLabel>
+      )}
       <DropdownContainer
         id={id}
         error={error}
@@ -273,7 +279,15 @@ function SelectInner<V extends Value, T = undefined>({
           ))}
         </DropdownMenu>
       </DropdownContainer>
-      {error && errorText && <Typography.body id={errorMessageId}>{errorText}</Typography.body>}
+      {error && errorText && (
+        <Typography.body
+          style={stylesProp.errorText}
+          className={classNames.errorText}
+          id={errorMessageId}
+        >
+          {errorText}
+        </Typography.body>
+      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { animated, useTransition } from '@react-spring/web';
 import keyboardKey from 'keyboard-key';
 import React, { useCallback, useEffect, useRef } from 'react';
 
-import { classes, isString, scopedClasses as sc } from '@rothko-ui/utils';
+import { classes, isString, scopedClasses } from '@rothko-ui/utils';
 
 import DomPortal from '../../library/Portal';
 import ShadedBackdrop from '../../library/ShadedBackdrop/ShadedBackdrop';
@@ -16,13 +16,15 @@ import {
 } from '../../library/utils/domUtils';
 import type { RothkoSize } from '../../theme';
 import { Typography } from '../Typography';
-import type { WithAria } from './types';
 import styles from './Modal.module.scss';
 import CloseButton from '../../library/Button/CloseButton';
+import type { WithAria } from '../../types';
 
-const scopedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
-type ModalProps = WithAria<{
+type AriaAttributes = 'aria-label' | 'aria-labelledby';
+
+type ModalProps = {
   id?: string;
   /**
    * The content of the modal.
@@ -59,7 +61,7 @@ type ModalProps = WithAria<{
    * @default false
    */
   blur?: boolean;
-}>;
+};
 
 const Modal = ({
   id,
@@ -73,13 +75,13 @@ const Modal = ({
   'aria-labelledby': ariaLabelledBy,
   blur,
   style: styleProp = {},
-}: ModalProps) => {
+}: WithAria<ModalProps, AriaAttributes>) => {
   const titleId = useId();
   const modalContentId = useId();
 
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  const baseClasses = scopedClasses('modal', `modal--${size}`);
+  const baseClasses = sc('modal', `modal--${size}`);
 
   const closeModal = useCallback(() => {
     onClose?.();
@@ -169,7 +171,7 @@ const Modal = ({
                   onClick={() => closeModal()}
                 />
                 {title && (
-                  <Typography.body id={titleId} className={scopedClasses(`modal__header--${size}`)}>
+                  <Typography.body id={titleId} className={sc(`modal__header--${size}`)}>
                     {title}
                   </Typography.body>
                 )}

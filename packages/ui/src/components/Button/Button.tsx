@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import { classes, scopedClasses } from '@rothko-ui/utils';
 
 import InlineSpinnerLoader from '../../library/Spinner/InlineSpinner';
 import type { Accessory } from '../../library/types';
 import type { RothkoKind, RothkoSize } from '../../theme';
-import type { ButtonAppearance, ButtonVariant, WithButtonAria } from './types';
+import type { ButtonAppearance, ButtonVariant } from './types';
 import { vuar } from '../../library/utils/vuar';
 import styles from './Button.module.scss';
+import type { WithAria } from '../../types';
+import { getElementFullHeight } from '../../library/utils/domUtils';
 
-const scopedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
 const accessorySizeMap: Record<RothkoSize, number> = {
   xs: 10,
@@ -18,7 +20,19 @@ const accessorySizeMap: Record<RothkoSize, number> = {
   l: 30,
 };
 
-type ButtonProps = WithButtonAria<{
+type AriaAttributes =
+  | 'aria-label'
+  | 'aria-describedby'
+  | 'aria-details'
+  | 'aria-labelledby'
+  | 'aria-hidden'
+  | 'aria-controls'
+  | 'aria-haspopup'
+  | 'aria-expanded'
+  | 'aria-pressed'
+  | 'aria-disabled';
+
+type ButtonProps = {
   id?: string;
   /**
    * The left accessory component.
@@ -94,9 +108,9 @@ type ButtonProps = WithButtonAria<{
    * @default 'button'
    */
   type?: 'button' | 'submit' | 'reset';
-}>;
+};
 
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   id,
   accessoryLeft: Left,
   accessoryRight: Right,
@@ -125,11 +139,11 @@ const Button: React.FC<ButtonProps> = ({
   tabIndex,
   type = 'button',
   role = 'button',
-}) => {
+}: WithAria<ButtonProps, AriaAttributes>) => {
   const childrenContainerRef = useRef<HTMLDivElement | null>(null);
   const [childrenHeight, setChildrenHeight] = useState<number | null>(18); // was null before. How do we do this better?
 
-  const baseClasses = scopedClasses(
+  const baseClasses = sc(
     'button',
     `button--${appearance}--${kind}`,
     `button--${size}`,
@@ -163,9 +177,9 @@ const Button: React.FC<ButtonProps> = ({
 
   useEffect(() => {
     if (!childrenContainerRef.current) return;
-    const { height } = childrenContainerRef.current.getBoundingClientRect();
-    setChildrenHeight(height - 0); // figure out this value later was 4
-  }, [setChildrenHeight, childrenContainerRef, size]);
+    const height = getElementFullHeight(childrenContainerRef.current);
+    setChildrenHeight(height);
+  }, [setChildrenHeight, childrenContainerRef]);
 
   return (
     <button

@@ -1,15 +1,30 @@
+'use client';
+
 import React from 'react';
 import { Grid } from '../../layout';
 import type { RothkoKind } from '../../theme';
-import type { EmSize, RemSize } from '../../types';
+import type { EmSize, RemSize, WithAria } from '../../types';
 import useId from '../../library/hooks/useId';
 import { Typography } from '../Typography';
 import type { RadioGroupContextType } from './RadioGroupContext';
 import RadioGroupContext from './RadioGroupContext';
 import ComponentLabel from '../../library/ComponentLabel/ComponentLabel';
-import type { RadioGroupWithAria } from './types';
 
-type RadioGroupProps<K extends string> = RadioGroupWithAria<{
+type StyleableComponents = 'errorText' | 'label';
+
+type AriaAttributes =
+  | 'aria-label'
+  | 'aria-describedby'
+  | 'aria-details'
+  | 'aria-labelledby'
+  | 'aria-hidden'
+  | 'aria-controls'
+  | 'aria-disabled'
+  | 'aria-invalid'
+  | 'aria-required'
+  | 'aria-errormessage';
+
+type RadioGroupProps<K extends string> = {
   id?: string;
   /**
    * The content to be rendered inside the RadioGroup.
@@ -19,6 +34,10 @@ type RadioGroupProps<K extends string> = RadioGroupWithAria<{
    * The CSS class name for the RadioGroup.
    */
   className?: string;
+  /**
+   * Additional class names for the RadioGroup components.
+   */
+  classNames?: Partial<Record<StyleableComponents, string>>;
   /**
    * The gap between columns in the RadioGroup.
    * @default '0.5rem'
@@ -73,10 +92,14 @@ type RadioGroupProps<K extends string> = RadioGroupWithAria<{
    */
   style?: React.CSSProperties;
   /**
+   * Additional inline styles for the RadioGroup components.
+   */
+  styles?: Partial<Record<StyleableComponents, React.CSSProperties>>;
+  /**
    * The current value of the RadioGroup.
    */
   value?: K | null;
-}>;
+};
 
 function RadioGroup<K extends string>({
   id,
@@ -92,7 +115,9 @@ function RadioGroup<K extends string>({
   'aria-errormessage': ariaErrorMessage,
   errorText = 'Invalid',
   style,
+  styles = {},
   className,
+  classNames = {},
   maxCol = 4,
   columnGap = '0.5rem',
   rowGap = '0.5rem',
@@ -104,7 +129,7 @@ function RadioGroup<K extends string>({
   disabled,
   children,
 }: // required,
-RadioGroupProps<K>) {
+WithAria<RadioGroupProps<K>, AriaAttributes>) {
   const labelId = useId();
   const errorMessageId = useId();
 
@@ -123,7 +148,11 @@ RadioGroupProps<K>) {
 
   return (
     <div id={id} style={style} className={className}>
-      {label && <ComponentLabel id={labelId}>{label}</ComponentLabel>}
+      {label && (
+        <ComponentLabel className={classNames.label} style={styles.label} id={labelId}>
+          {label}
+        </ComponentLabel>
+      )}
       <Grid
         aria-label={ariaLabel}
         aria-describedby={ariaDescribedBy}
@@ -146,7 +175,12 @@ RadioGroupProps<K>) {
         </RadioGroupContext.Provider>
       </Grid>
       {error && (
-        <Typography.body id={errorMessageId} kind="danger">
+        <Typography.body
+          className={classNames.errorText}
+          style={styles.errorText}
+          id={errorMessageId}
+          kind="danger"
+        >
           {errorText}
         </Typography.body>
       )}

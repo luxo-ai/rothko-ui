@@ -3,7 +3,7 @@ import { useCallback, useMemo, useReducer } from 'react';
 
 import { Stack } from '@rothko-ui/utils';
 
-import { useDebuggerContext } from '../DebuggerContext';
+import { debugFactory } from '../debug';
 import type { NestedOption } from '../types';
 import { INITIAL_OPTION_IDX } from './constants';
 import type { Direction, StackValue } from './types';
@@ -57,7 +57,7 @@ const reducer = <V, T>(state: State<V, T>, action: Action<V, T>): State<V, T> =>
 
 // like useOptions but for nested options
 const useNestedOptions = <V, T>(initialOptions: NestedOption<V, T>[]) => {
-  const debug = useDebuggerContext('useNestedOptions');
+  const debug = debugFactory('useNestedOptions');
 
   const [{ optionStack, optIdx }, dispatch] = useReducer<Reducer<State<V, T>, Action<V, T>>>(
     reducer,

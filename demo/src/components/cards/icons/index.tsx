@@ -58,7 +58,7 @@ const IconsCard = () => {
           />
         </div>
         <Container maxWidth="13rem">
-          <ButtonGroup noEffect kind="primary" size="xs" variant="pill" style={{ width: '10rem' }}>
+          <ButtonGroup noEffect kind="primary" size="xs" variant="pill">
             <Button
               accessoryLeft={({ size, color }) => (
                 <Icons.Moon width={size} height={size} fill={color} />

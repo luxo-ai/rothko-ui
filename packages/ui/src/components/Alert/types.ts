@@ -1,4 +1,7 @@
-import type { WithAriaHidden, WithAriaLabeling, WithAriaLive } from '../../types';
-
-// Alert aria attributes
-export type WithAria<T> = WithAriaHidden<WithAriaLabeling<WithAriaLive<T>>>;
+export type AriaAttributes =
+  | 'aria-describedby'
+  | 'aria-details'
+  | 'aria-label'
+  | 'aria-labelledby'
+  | 'aria-live'
+  | 'aria-hidden';

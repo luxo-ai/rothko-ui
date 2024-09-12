@@ -11,7 +11,7 @@ module.exports = {
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
   swcMinify: true,
   env: {
-    DEBUG: process.env.DEBUG,
+    ROTHKO_DEBUG: process.env.ROTHKO_DEBUG,
     BASE_URL: process.env.BASE_URL,
     VERSION: process.env.VERSION,
   },

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { scopedClasses as sc } from '@rothko-ui/utils';
+import { scopedClasses } from '@rothko-ui/utils';
 
 import type { RothkoSize } from '../../theme';
 import styles from './Spinner.module.scss';
 
-const scoppedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
 type SimpleInlineSpinnerProps = {
   color?: string;
@@ -28,7 +28,7 @@ const InlineSpinner = ({ size = 'm', style = {}, color }: SimpleInlineSpinnerPro
     <span
       aria-label="Loading"
       role="progressbar"
-      className={scoppedClasses('inline-spinner', `inline-spinner--${size}`)}
+      className={sc('inline-spinner', `inline-spinner--${size}`)}
       style={{ ...style, ...borderColorStyle }}
     >
       loading...

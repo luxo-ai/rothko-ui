@@ -38,7 +38,7 @@ const checkboxProps = [
   {
     name: 'kind',
     type: 'RothkoKind',
-    defaultValue: 'success',
+    defaultValue: null,
     description: 'The visual style of the checkbox.',
   },
   {

@@ -3,7 +3,8 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import React from 'react';
 
 import { CopyOutline } from '@rothko-ui/icons';
-import { Flex, PhantomButton, ToastContextConsumer, Typography, useRothko } from '@rothko-ui/ui';
+import { Flex, PhantomButton, ToastContextConsumer, Typography } from '@rothko-ui/ui';
+import useTheme from './theme/useTheme';
 
 export type Language = 'bash' | 'jsx' | 'json' | 'text' | 'typescript';
 
@@ -34,7 +35,7 @@ export const Code = ({
   themeOverride,
   ...containerStyle
 }: CodeProps) => {
-  const { mode } = useRothko();
+  const { theme: mode } = useTheme();
   const defaultTheme = language === 'jsx' ? 'nightOwl' : 'jetwave';
   const theme = THEMES[themeOverride || defaultTheme];
   return (

@@ -1,3 +1,5 @@
+'use client';
+
 import { animated, useTransition } from '@react-spring/web';
 import React, { useEffect, useRef } from 'react';
 
@@ -13,11 +15,13 @@ import {
 import DrawerContext from './DrawerContext';
 import useId from '../../library/hooks/useId';
 import { Typography } from '../Typography';
-import type { WithAria } from './types';
 import styles from './Drawer.module.scss';
 import CloseButton from '../../library/Button/CloseButton';
+import type { WithAria } from '../../types';
 
-type DrawerProps = WithAria<{
+type AriaAttributes = 'aria-label' | 'aria-labelledby';
+
+type DrawerProps = {
   id?: string;
   /**
    * The content to be rendered inside the Drawer.
@@ -45,7 +49,7 @@ type DrawerProps = WithAria<{
    * @default false
    */
   blur?: boolean;
-}>;
+};
 
 const Drawer = ({
   id,
@@ -57,7 +61,7 @@ const Drawer = ({
   open: isOpen = false,
   style: styleProp = {},
   blur,
-}: DrawerProps) => {
+}: WithAria<DrawerProps, AriaAttributes>) => {
   const drawerContentId = useId();
   const drawerRef = useRef<HTMLDivElement | null>(null);
 

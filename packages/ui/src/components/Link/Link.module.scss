@@ -3,8 +3,8 @@
 @use './variables' as variables;
 
 .link {
-  @include mixins.baseLinkStyle();
-  @include typographyMixins.bodySizeStyle();
+  @include mixins.baseLinkStyle;
+  @include typographyMixins.bodySizeStyle;
 
   @each $kind in variables.$rothkoKinds {
     &--#{$kind} {
@@ -14,19 +14,19 @@
 }
 
 .link.link-small {
-  @include typographyMixins.bodySmallSizeStyle();
+  @include typographyMixins.bodySmallSizeStyle;
 }
 
 .link__underline-none {
-  @include mixins.linkUnderlineNone();
+  @include mixins.linkUnderlineNone;
 }
 
 .link__underline-hover {
-  @include mixins.linkUnderlineHover();
+  @include mixins.linkUnderlineHover;
 }
 
 .link__underline-always {
-  @include mixins.linkUnderlineAlways();
+  @include mixins.linkUnderlineAlways;
 }
 
 .link.link-button--disabled {

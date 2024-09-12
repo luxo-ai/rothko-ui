@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import { classes, scopedClasses } from '@rothko-ui/utils';
 
 import type { HtmlTextareaProps, TextProps } from './types';
 import styles from './Input.module.scss';
 
-const scoppedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
 type TextareaProps = HtmlTextareaProps & {
   error?: boolean;
@@ -17,11 +17,7 @@ type TextareaProps = HtmlTextareaProps & {
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ error, variant, className, disabled, tabIndex, ...props }, ref) => {
-    const baseClasses = scoppedClasses(
-      'textarea',
-      variant && `textarea--${variant}`,
-      error && 'error'
-    );
+    const baseClasses = sc('textarea', variant && `textarea--${variant}`, error && 'error');
     return (
       <textarea
         // eslint-disable-next-line react/jsx-props-no-spreading

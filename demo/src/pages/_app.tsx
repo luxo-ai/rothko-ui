@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+
 import type { Dictionary } from '@rothko-ui/utils';
 import cookie from 'cookie';
 import MobileDetect from 'mobile-detect';
@@ -10,8 +11,9 @@ import config from '../config';
 import '../globals.css';
 import ErrorBoundary from '../components/ErrorBoundary';
 import React from 'react';
-import { RothkoProvider, ToastContextProvider } from '@rothko-ui/ui';
+import { ToastContextProvider } from '@rothko-ui/ui';
 import PaddedNavLayout from '../components/layout/PaddedNavLayout';
+import ThemeProvider from '../components/theme/ThemeProvider';
 
 type RothkoAppProps = AppProps & {
   cookies?: Dictionary<string, string>;
@@ -28,13 +30,13 @@ export default function App({
     <ErrorBoundary>
       <RothkoHeader />
       <IsMobileOrTabletContext.Provider value={isMobileOrTablet}>
-        <RothkoProvider debugMode={config.debug} theme={theme}>
+        <ThemeProvider defaultTheme={theme}>
           <PaddedNavLayout selected={pageProps.router.pathname}>
             <ToastContextProvider>
               <Component {...pageProps} />
             </ToastContextProvider>
           </PaddedNavLayout>
-        </RothkoProvider>
+        </ThemeProvider>
       </IsMobileOrTabletContext.Provider>
     </ErrorBoundary>
   );

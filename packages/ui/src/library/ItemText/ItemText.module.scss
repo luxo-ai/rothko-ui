@@ -1,6 +1,6 @@
 .item-text {
   user-select: none;
-  .place-holder {
+  &.placeholder {
     opacity: 0.75;
   }
 }

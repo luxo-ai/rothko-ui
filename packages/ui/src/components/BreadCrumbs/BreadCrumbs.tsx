@@ -2,10 +2,18 @@ import React from 'react';
 
 import { classes } from '@rothko-ui/utils';
 
-import type { WithAria } from './types';
 import styles from './BreadCrumbs.module.scss';
+import type { WithAria } from '../../types';
 
-type BreadCrumbsProps = WithAria<{
+type AriaAttributes =
+  | 'aria-label'
+  | 'aria-hidden'
+  | 'aria-controls'
+  | 'aria-labelledby'
+  | 'aria-details'
+  | 'aria-describedby';
+
+type BreadCrumbsProps = {
   id?: string;
   /**
    * The content to be displayed as the children of the BreadCrumbs component.
@@ -19,7 +27,7 @@ type BreadCrumbsProps = WithAria<{
    * The style for the BreadCrumbs component.
    */
   style?: React.CSSProperties;
-}>;
+};
 
 const BreadCrumbs = ({
   id,
@@ -32,7 +40,7 @@ const BreadCrumbs = ({
   'aria-labelledby': ariaLabelledBy,
   'aria-details': ariaDetails,
   'aria-describedby': ariaDescribedBy,
-}: BreadCrumbsProps) => {
+}: WithAria<BreadCrumbsProps, AriaAttributes>) => {
   return (
     <div
       id={id}

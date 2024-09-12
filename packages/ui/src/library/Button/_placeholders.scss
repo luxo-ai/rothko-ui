@@ -1,4 +1,4 @@
-@use '../../styles/placeholders';
+@use '../../styles/mixins' as mixins;
 
 %button-disabled {
   pointer-events: none;
@@ -7,10 +7,10 @@
 }
 
 %phantom-button-style {
+  @include mixins.iosTapHighlightColorTransparent;
+  @include mixins.userSelectNone;
   // use font smoothing to make text/svgs clearer
   -webkit-font-smoothing: antialiased;
-  @extend %ios-tap-highlight-color-transparent;
-  @extend %user-select-none;
   // prevent double tap zoom on mobile
   touch-action: manipulation;
   background: transparent;

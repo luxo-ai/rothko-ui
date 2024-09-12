@@ -1,15 +1,15 @@
 import React from 'react';
-import { scopedClasses as sc } from '@rothko-ui/utils';
+import { scopedClasses } from '@rothko-ui/utils';
 import styles from './SliderTrack.module.scss';
 
-const scoppedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
 type SliderTrackDivProps = React.HTMLProps<HTMLDivElement> & {
   disabled?: boolean;
 };
 
 const SliderTrackDiv = ({ disabled, children, ...props }: SliderTrackDivProps) => {
-  const baseClasses = scoppedClasses('slider-track', disabled && 'disabled');
+  const baseClasses = sc('slider-track', disabled && 'disabled');
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <div {...props} className={baseClasses}>

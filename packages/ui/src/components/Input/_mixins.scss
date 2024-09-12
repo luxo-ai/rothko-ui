@@ -1,11 +1,12 @@
 @use './variables' as variables;
 @use '../Typography/mixins' as typographyMixins;
+@use '../../styles/mixins' as mixins;
 @use '../../styles/placeholders';
 
 // should be a placeholder in the future to avoid duplication
 @mixin inputStyle {
-  @extend %ios-tap-highlight-color-transparent;
-  @include typographyMixins.bodyStyle();
+  @include mixins.iosTapHighlightColorTransparent;
+  @include typographyMixins.bodyStyle;
 
   appearance: none;
   border: none;
@@ -14,18 +15,18 @@
   box-sizing: border-box;
   width: 100%;
 
-  padding: 0.5rem 0.75rem;
   background-color: variables.$inputBackground;
   color: variables.$inputForeground;
   border-radius: variables.$inputDefaultBorderRadius;
+  padding: variables.$inputVerticalPadding variables.$inputHorizontalPadding;
 
   &.error:not(:focus) {
     outline: 1px solid variables.$rothkoDanger;
   }
 
-  &:focus-visible:not(:disabled) {
-    // outline: 1px solid variables.$inputBorderFocus;
-  }
+  // &:focus-visible:not(:disabled) {
+  // outline: 1px solid variables.$inputBorderFocus;
+  // }
 
   &:disabled {
     // keeps getting reordered and I don't know why

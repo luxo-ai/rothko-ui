@@ -3,13 +3,12 @@
 .drawer {
   position: fixed;
   inset: 0 auto 0 0;
-  background: variables.$rothkoBackground;
-
-  padding: 1.5rem 1.5rem;
-
-  z-index: 999999;
   width: variables.$defaultDrawerWidth;
+  z-index: 9999;
   overflow-y: auto;
+
+  background: variables.$rothkoBackground;
+  padding: 1.5rem 1.5rem;
 
   @media only screen and (max-width: variables.$tabletOrMobileMaxWidth) {
     width: calc(100% - 2 * 1.5rem);

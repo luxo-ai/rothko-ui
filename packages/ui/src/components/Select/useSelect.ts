@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { asNonNilArray, filterIterable, isNil } from '@rothko-ui/utils';
 
-import { useDebuggerContext } from '../../library/DebuggerContext';
+import { debugFactory } from '../../library/debug';
 import type { FocusHandler, Option, Value } from '../../library/types';
 import useOptions from '../../library/hooks/useOptions';
 
@@ -33,7 +33,7 @@ const useSelect = <V extends Value, T = undefined>({
   disabled,
   options: opts,
 }: HookArgs<V, T>) => {
-  const debug = useDebuggerContext('useSelect');
+  const debug = debugFactory('useSelect');
 
   const timeoutId = useRef<NodeJS.Timeout>();
   const containerRef = useRef<HTMLDivElement>(null);

@@ -12,7 +12,7 @@
       "background": { "value": "#2d3035" }
     },
     "range": {
-      "background": { "value": "#3c54ff" }
+      "background": { "value": "#4d63ff" }
     },
     "track": {
       "background": { "value": "rgb(255 255 255 / 8%)" }
@@ -67,7 +67,8 @@
   },
   "checkbox": {
     "background": { "value": "#DEE7F5" },
-    "background::focus": { "value": "#c42317" }
+    "background::focus": { "value": "#4d63ff" },
+    "icon": { "background": { "value": "#fff" } }
   },
   "input": {
     "background": { "value": "rgba(188, 199, 223, 0.24)" },

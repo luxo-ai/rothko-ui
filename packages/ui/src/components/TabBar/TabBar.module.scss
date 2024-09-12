@@ -4,9 +4,6 @@
 @use '../../styles/placeholders';
 
 .tab-list {
-  // display: grid;
-  // grid-template-columns: // repeat($ {({tabCount}) => tabCount}, 1fr);
-
   list-style: none;
   justify-content: space-between;
 
@@ -19,9 +16,8 @@
   }
 
   & > li {
-    @extend %ios-tap-highlight-color-transparent;
+    @include mixins.iosTapHighlightColorTransparent;
     width: 100%;
-    // flex: 1;
   }
 }
 
@@ -32,9 +28,7 @@
 .tab__underline {
   $borderWidthAndStyle: 3px solid;
 
-  // width: ${({ tabCount }) => `${(100 / tabCount).toFixed(2)}%`};
   border-bottom: $borderWidthAndStyle variables.$tabBarBorder;
-
   @each $kind in variables.$rothkoKinds {
     &--#{$kind} {
       border-bottom: $borderWidthAndStyle variables.safeGetTheme($kind);
@@ -42,14 +36,13 @@
   }
 
   border-radius: 50vmin;
-
-  // transform: translateX(calc(100% * ${({ currentTabIdx }) => currentTabIdx}));
   transition: transform 0.2s ease-in;
 }
 
 .tab__item {
-  @extend %ios-tap-highlight-color-transparent;
-  @include typographyMixins.bodyStyle();
+  @extend %hide-chrome-browser-outline;
+  @include mixins.iosTapHighlightColorTransparent;
+  @include typographyMixins.bodyStyle;
 
   display: flex;
   align-items: center;

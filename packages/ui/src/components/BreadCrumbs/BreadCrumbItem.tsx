@@ -4,10 +4,18 @@ import { classes } from '@rothko-ui/utils';
 
 import Typography from '../Typography/Typography';
 import { Link, LinkButton } from '../Link';
-import type { ItemsWithAria } from './types';
 import styles from './BreadCrumbs.module.scss';
+import type { WithAria } from '../../types';
 
-type BreadCrumbItemProps = ItemsWithAria<{
+type AriaAttributes =
+  | 'aria-haspopup'
+  | 'aria-selected'
+  | 'aria-controls'
+  | 'aria-labelledby'
+  | 'aria-label'
+  | 'aria-current';
+
+type BreadCrumbItemProps = {
   id?: string;
   /**
    * The content of the breadcrumb item.
@@ -33,7 +41,7 @@ type BreadCrumbItemProps = ItemsWithAria<{
    * The style for the breadcrumb item.
    */
   style?: React.CSSProperties;
-}>;
+};
 
 const BreadCrumbItem = ({
   id,
@@ -49,7 +57,7 @@ const BreadCrumbItem = ({
   to,
   style,
   className,
-}: BreadCrumbItemProps) => {
+}: WithAria<BreadCrumbItemProps, AriaAttributes>) => {
   const classNames = classes(styles['breadcrumbs__item'], className);
 
   if (to) {

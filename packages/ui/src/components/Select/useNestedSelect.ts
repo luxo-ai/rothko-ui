@@ -3,7 +3,7 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { isNil } from '@rothko-ui/utils';
 
-import { useDebuggerContext } from '../../library/DebuggerContext';
+import { debugFactory } from '../../library/debug';
 import type { FocusHandler, NestedOption, Value } from '../../library/types';
 import { findOptionMatch2, findPathToOptionMatch } from './utils';
 import useNestedOptions from '../../library/hooks/useNestedOptions';
@@ -32,7 +32,7 @@ const useNestedDropdown = <V extends Value, T = undefined>({
   disabled,
   value,
 }: HookArgs<V, T>) => {
-  const debug = useDebuggerContext('useNestedDropdown');
+  const debug = debugFactory('useNestedDropdown');
 
   const timeoutId = useRef<NodeJS.Timeout>();
   const containerRef = useRef<HTMLDivElement>(null);

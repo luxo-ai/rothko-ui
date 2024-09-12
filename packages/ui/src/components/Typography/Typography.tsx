@@ -1,5 +1,5 @@
 import React from 'react';
-import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import { classes, scopedClasses } from '@rothko-ui/utils';
 import styles from './Typography.module.scss';
 import type {
   TypographyProps,
@@ -9,7 +9,7 @@ import type {
   BaseCodeProps,
 } from './types';
 
-const scopedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
 const body = ({
   italic,
@@ -21,7 +21,7 @@ const body = ({
   className,
   ...props
 }: BaseParagraphProps & TypographyProps): JSX.Element => {
-  const baseClasses = scopedClasses(
+  const baseClasses = sc(
     'typography',
     'typography__paragraph',
     kind && `typography__paragraph--${kind}`,
@@ -46,7 +46,7 @@ const bodySmall = ({
   className,
   ...props
 }: BaseParagraphProps & TypographyProps): JSX.Element => {
-  const baseClasses = scopedClasses(
+  const baseClasses = sc(
     'typography',
     'typography__paragraph',
     'typography__paragraph__small',
@@ -72,7 +72,7 @@ const h1 = ({
   className,
   ...props
 }: BaseHeadingProps & TypographyProps): JSX.Element => {
-  const baseClasses = scopedClasses(
+  const baseClasses = sc(
     'typography',
     'typography__heading',
     'typography__heading__h1',
@@ -98,7 +98,7 @@ const h2 = ({
   className,
   ...props
 }: BaseHeadingProps & TypographyProps): JSX.Element => {
-  const baseClasses = scopedClasses(
+  const baseClasses = sc(
     'typography',
     'typography__heading',
     'typography__heading__h2',
@@ -124,7 +124,7 @@ const h3 = ({
   className,
   ...props
 }: BaseHeadingProps & TypographyProps): JSX.Element => {
-  const baseClasses = scopedClasses(
+  const baseClasses = sc(
     'typography',
     'typography__heading',
     'typography__heading__h3',
@@ -150,7 +150,7 @@ const h4 = ({
   className,
   ...props
 }: BaseHeadingProps & TypographyProps): JSX.Element => {
-  const baseClasses = scopedClasses(
+  const baseClasses = sc(
     'typography',
     'typography__heading',
     'typography__heading__h4',
@@ -176,7 +176,7 @@ const h5 = ({
   className,
   ...props
 }: BaseHeadingProps & TypographyProps): JSX.Element => {
-  const baseClasses = scopedClasses(
+  const baseClasses = sc(
     'typography',
     'typography__heading',
     'typography__heading__h5',
@@ -202,7 +202,7 @@ const h6 = ({
   className,
   ...props
 }: BaseHeadingProps & TypographyProps): JSX.Element => {
-  const baseClasses = scopedClasses(
+  const baseClasses = sc(
     'typography',
     'typography__heading',
     'typography__heading__h6',
@@ -228,7 +228,7 @@ const caption = ({
   className,
   ...props
 }: BaseParagraphProps & TypographyProps): JSX.Element => {
-  const baseClasses = scopedClasses(
+  const baseClasses = sc(
     'typography',
     'typography__paragraph',
     'typography__paragraph__caption',
@@ -254,7 +254,7 @@ const label = ({
   className,
   ...props
 }: BaseLabelProps & TypographyProps): JSX.Element => {
-  const baseClasses = scopedClasses(
+  const baseClasses = sc(
     'typography',
     'typography__paragraph',
     'typography__paragraph__label',
@@ -280,7 +280,7 @@ const code = ({
   className,
   ...props
 }: BaseCodeProps & TypographyProps): JSX.Element => {
-  const baseClasses = scopedClasses(
+  const baseClasses = sc(
     'typography',
     'typography__code',
     kind && `typography__paragraph--${kind}`,

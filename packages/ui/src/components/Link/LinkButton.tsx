@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { classes, scopedClasses as sc } from '@rothko-ui/utils';
+import { classes, scopedClasses } from '@rothko-ui/utils';
 
 import type { LinkProps } from './types';
 import styles from './Link.module.scss';
 import PhantomButton from '../../library/Button/PhantomButton';
 
-const scoppedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
 const LinkButton = React.forwardRef<
   HTMLButtonElement,
@@ -16,7 +16,7 @@ const LinkButton = React.forwardRef<
     { disabled, small, italic, underline, bold, light, kind, className, children, ...props },
     ref
   ) => {
-    const baseClasses = scoppedClasses(
+    const baseClasses = sc(
       'link',
       disabled && 'link-button--disabled',
       small && 'link-small',

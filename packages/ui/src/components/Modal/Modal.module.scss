@@ -5,30 +5,24 @@
 @use '../../styles/placeholders';
 
 .modal {
-  border-radius: 0.125rem; // 2px
+  @extend %text-children-style;
+
   backface-visibility: hidden;
 
+  position: relative;
   width: 100%;
   max-height: calc(100vh - 1rem);
-  position: relative;
 
+  border-radius: variables.$modalBorderRadius;
   background-color: variables.$modalBackground;
   margin: auto;
 
   overflow: scroll;
-  scrollbar-width: thin;
-  z-index: 2;
   user-select: text;
 
   will-change: transform, opacity;
   transition-property: transform, opacity;
   transition-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
-
-  & > svg {
-    fill: variables.$modalForeground;
-  }
-
-  @extend %text-children-style;
 }
 
 @each $size in variables.$rothkoSizes {
@@ -45,7 +39,7 @@
 @each $size in variables.$rothkoSizes {
   .modal__header--#{$size} {
     @if ($size == 'xs') {
-      @include typographyMixins.boldFontStyle();
+      @include typographyMixins.boldFontStyle;
     }
     @if map-has-key(variables.$modalHeaderMarginSizeMap, $size) {
       margin: map-get(variables.$modalHeaderMarginSizeMap, $size);

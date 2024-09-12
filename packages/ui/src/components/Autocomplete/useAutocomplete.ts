@@ -2,7 +2,7 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { debounce, isNil } from '@rothko-ui/utils';
 
-import { useDebuggerContext } from '../../library/DebuggerContext';
+import { debugFactory } from '../../library/debug';
 import type { FocusHandler, Option, Value } from '../../library/types';
 import type { QueryMatchFn } from './types';
 import useOptions from '../../library/hooks/useOptions';
@@ -34,7 +34,7 @@ const useAutocomplete = <V extends Value, T = undefined>({
   searchFn = defaultQueryMatcher,
   value,
 }: HookArgs<V, T>) => {
-  const debug = useDebuggerContext('useAutocomplete');
+  const debug = debugFactory('useAutocomplete');
 
   const timeoutId = useRef<NodeJS.Timeout>();
   const containerRef = useRef<HTMLDivElement>(null);

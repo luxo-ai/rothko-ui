@@ -8,63 +8,63 @@
 .typography__paragraph {
   color: variables.$bodyColor;
 
-  @include mixins.withKind();
-  @include mixins.baseParagraphStyle();
-  @include mixins.bodySizeStyle();
+  @include mixins.withKind;
+  @include mixins.baseParagraphStyle;
+  @include mixins.bodySizeStyle;
 
   &__small {
-    @include mixins.bodySmallSizeStyle();
+    @include mixins.bodySmallSizeStyle;
   }
 
   &__label {
-    @include mixins.labelSizeStyle();
-    @include mixins.boldFontStyle();
+    @include mixins.labelSizeStyle;
+    @include mixins.boldFontStyle;
     text-transform: uppercase;
     letter-spacing: 0.0625rem;
   }
 
   &__caption {
-    @include mixins.captionSizeStyle();
+    @include mixins.captionSizeStyle;
   }
 }
 
 .typography__heading {
   color: variables.$headingColor;
 
-  @include mixins.withKind();
-  @include mixins.baseHeadingStyle();
+  @include mixins.withKind;
+  @include mixins.baseHeadingStyle;
 
   &__h1 {
-    @include mixins.h1SizeStyle();
+    @include mixins.h1SizeStyle;
   }
 
   &__h2 {
-    @include mixins.h2SizeStyle();
+    @include mixins.h2SizeStyle;
   }
 
   &__h3 {
-    @include mixins.h3SizeStyle();
+    @include mixins.h3SizeStyle;
   }
 
   &__h4 {
-    @include mixins.h4SizeStyle();
+    @include mixins.h4SizeStyle;
   }
 
   &__h5 {
-    @include mixins.h5SizeStyle();
+    @include mixins.h5SizeStyle;
   }
 
   &__h6 {
-    @include mixins.h6SizeStyle();
+    @include mixins.h6SizeStyle;
   }
 }
 
 .typography__code {
   color: variables.$codeColor;
 
-  @include mixins.withKind();
-  @include mixins.baseCodeStyle();
-  @include mixins.codeSizeStyle();
+  @include mixins.withKind;
+  @include mixins.baseCodeStyle;
+  @include mixins.codeSizeStyle;
 
   white-space: pre-wrap;
   padding: 0.125rem 0.25rem;

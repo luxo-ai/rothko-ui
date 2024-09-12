@@ -1,7 +1,7 @@
 import { animated, useTransition } from '@react-spring/web';
 import React, { useEffect, useRef } from 'react';
 
-import { isString, classes, scopedClasses as sc } from '@rothko-ui/utils';
+import { isString, classes, scopedClasses } from '@rothko-ui/utils';
 
 import DomPortal from '../../library/Portal';
 import ShadedBackdrop from '../../library/ShadedBackdrop/ShadedBackdrop';
@@ -12,13 +12,15 @@ import {
   enableBodyScroll,
 } from '../../library/utils/domUtils';
 import Typography from '../Typography/Typography';
-import type { WithAria } from './types';
 import styles from './Popup.module.scss';
 import CloseButton from '../../library/Button/CloseButton';
+import type { WithAria } from '../../types';
 
-const scopedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
-type PopupProps = WithAria<{
+type AriaAttributes = 'aria-label' | 'aria-labelledby';
+
+type PopupProps = {
   id?: string;
   /**
    * The content of the popup.
@@ -44,9 +46,9 @@ type PopupProps = WithAria<{
    * Determines whether the popup should blur the background.
    */
   blur?: boolean;
-}>;
+};
 
-const BottomPopup: React.FC<PopupProps> = ({
+const BottomPopup = ({
   id,
   children,
   className,
@@ -56,11 +58,11 @@ const BottomPopup: React.FC<PopupProps> = ({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   blur,
-}) => {
+}: WithAria<PopupProps, AriaAttributes>) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
   const contentId = useId();
 
-  const baseClasses = scopedClasses('bottom-popup');
+  const baseClasses = sc('bottom-popup');
 
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -134,7 +136,7 @@ const BottomPopup: React.FC<PopupProps> = ({
                 className={classes(baseClasses, className)}
               >
                 <CloseButton
-                  className={scopedClasses('bottom-popup__close-button')}
+                  className={sc('bottom-popup__close-button')}
                   onClick={() => onClose()}
                 />
                 {isString(children) ? (

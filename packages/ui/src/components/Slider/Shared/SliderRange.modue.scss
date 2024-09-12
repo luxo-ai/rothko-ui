@@ -2,8 +2,7 @@
 
 .slider-range {
   position: absolute;
-  height: 0.5rem;
-  margin: 0;
+  height: variables.$sliderTrackHeight;
   border-radius: variables.$sliderBorderRadius;
   background: variables.$sliderRangeBackground;
 

@@ -28,30 +28,34 @@ type AccordionIconProps = {
   open?: boolean;
 };
 
-const AccordionIcon = React.memo(
-  ({ kind, iconOverride: IconOverride, open, disabled }: AccordionIconProps) => {
-    const color = vuar({ kind, category: 'background', element: 'icon' });
+const AccordionIcon = ({
+  kind,
+  iconOverride: IconOverride,
+  open,
+  disabled,
+}: AccordionIconProps) => {
+  const color = vuar({ kind, category: 'background', element: 'icon' });
 
-    if (IconOverride) {
-      return isFunctionalComponent(IconOverride) ? (
-        <IconOverride
-          aria-hidden
-          open={Boolean(open)}
-          disabled={Boolean(disabled)}
-          color={color}
-          size={ICON_SIZE}
-        />
-      ) : (
-        <>{IconOverride}</>
-      );
-    }
-    return open ? (
-      <MinusOutline aria-hidden fill={color} width={ICON_SIZE} height={ICON_SIZE} />
+  if (IconOverride) {
+    return isFunctionalComponent(IconOverride) ? (
+      <IconOverride
+        aria-hidden
+        open={Boolean(open)}
+        disabled={Boolean(disabled)}
+        color={color}
+        size={ICON_SIZE}
+      />
     ) : (
-      <PlusOutline aria-hidden fill={color} width={ICON_SIZE} height={ICON_SIZE} />
+      <>{IconOverride}</>
     );
   }
-);
+
+  return open ? (
+    <MinusOutline aria-hidden fill={color} width={ICON_SIZE} height={ICON_SIZE} />
+  ) : (
+    <PlusOutline aria-hidden fill={color} width={ICON_SIZE} height={ICON_SIZE} />
+  );
+};
 
 AccordionIcon.displayName = 'AccordionIcon';
 

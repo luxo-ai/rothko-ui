@@ -73,7 +73,8 @@ class MyDocument extends Document<CookiesProps> {
             crossOrigin=""
           />
         </Head>
-        <body className={this.props.cookies[config.preference.theme] || 'dark'}>
+        <body className={'dark'}>
+          {/*this.props.cookies[config.preference.theme] || 'dark'}>*/}
           <Main />
           <NextScript />
         </body>

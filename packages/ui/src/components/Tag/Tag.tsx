@@ -1,19 +1,26 @@
 import React from 'react';
 
 import { CloseOutline } from '@rothko-ui/icons';
-import { isString, classes, scopedClasses as sc } from '@rothko-ui/utils';
+import { isString, classes, scopedClasses } from '@rothko-ui/utils';
 
 import type { RothkoKind } from '../../theme/types';
 import { Typography } from '../Typography';
 import { vuar } from '../../library/utils/vuar';
-import type { WithAria } from './types';
 import styles from './Tag.module.scss';
+import type { WithAria } from '../../types';
 
-const scopedClasses = sc(styles);
+const sc = scopedClasses(styles);
 
 type TagAppearance = 'filled' | 'outline';
 
-type TagProps = WithAria<{
+type AriaAttributes =
+  | 'aria-label'
+  | 'aria-labelledby'
+  | 'aria-describedby'
+  | 'aria-details'
+  | 'aria-selected';
+
+type TagProps = {
   id?: string;
   /**
    * The appearance style of the tag.
@@ -45,7 +52,7 @@ type TagProps = WithAria<{
    * The inline style for the tag.
    */
   style?: React.CSSProperties;
-}>;
+};
 
 const Tag = ({
   id,
@@ -61,13 +68,13 @@ const Tag = ({
   'aria-describedby': ariaDescribedBy,
   'aria-details': ariaDetails,
   'aria-selected': ariaSelected,
-}: TagProps) => {
+}: WithAria<TagProps, AriaAttributes>) => {
   const iconColor = vuar({
     kind,
     category: appearance === 'filled' ? 'foreground' : 'background',
   });
 
-  const baseClasses = scopedClasses(`tag--${appearance}`, kind && `tag--${appearance}--${kind}`);
+  const baseClasses = sc(`tag--${appearance}`, kind && `tag--${appearance}--${kind}`);
 
   return (
     <div

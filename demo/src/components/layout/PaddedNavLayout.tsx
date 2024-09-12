@@ -1,5 +1,5 @@
 import { Email, Github, Twitter } from '@rothko-ui/icons';
-import { Flex, Typography, useRothko } from '@rothko-ui/ui';
+import { Flex, Typography } from '@rothko-ui/ui';
 import Link from 'next/link';
 import React from 'react';
 import config from '../../config';
@@ -7,6 +7,7 @@ import Navigation from './Navigation';
 import styles from './Navigation.module.scss';
 import { DesktopOnly } from '../Dimensions';
 import NavigationList from './NavigationList';
+import useTheme from '../theme/useTheme';
 
 type LayoutProps = {
   selected?: string;
@@ -14,7 +15,7 @@ type LayoutProps = {
 };
 
 const PaddedNavLayout = ({ children, selected }: LayoutProps) => {
-  const { mode } = useRothko();
+  const { theme } = useTheme();
   return (
     <div className={styles.paddedNavContainer}>
       <header>
@@ -34,12 +35,12 @@ const PaddedNavLayout = ({ children, selected }: LayoutProps) => {
           <Typography.bodySmall light>© {new Date().getFullYear()} Rothko-UI</Typography.bodySmall>
         </Flex>
         <Flex columnGap="1rem" justifyContent="center" alignItems="center">
-          <Twitter width={20} height={20} fill={mode === 'dark' ? '#cccc' : undefined} />
+          <Twitter width={20} height={20} fill={theme === 'dark' ? '#cccc' : undefined} />
           <Link href={config.repoUrl} target="_bank">
-            <Github width={20} height={20} fill={mode === 'dark' ? '#cccc' : undefined} />
+            <Github width={20} height={20} fill={theme === 'dark' ? '#cccc' : undefined} />
           </Link>
           <Link href={`mailto:${config.contactEmail}`}>
-            <Email width={20} height={20} fill={mode === 'dark' ? '#cccc' : undefined} />
+            <Email width={20} height={20} fill={theme === 'dark' ? '#cccc' : undefined} />
           </Link>
         </Flex>
       </footer>

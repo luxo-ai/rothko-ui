@@ -32,7 +32,7 @@
 @mixin themedButton($appearance, $kind) {
   $buttonTheme: variables.safeGetTheme($kind);
   $buttonThemeForeground: variables.safeGetThemeForeground($kind);
-  $buttonThemeActive: var(--rothko-#{$kind}-400); // variables.safeGetTheme($kind, 400);
+  $buttonThemeActive: variables.safeGetTheme($kind, '400');
 
   background-color: if($appearance == 'outline', transparent, $buttonTheme);
   border: 1px solid $buttonTheme;

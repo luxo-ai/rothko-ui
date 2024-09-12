@@ -1,13 +1,5 @@
 import { Github, Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
-import {
-  Button,
-  Drawer,
-  Flex,
-  FlexItem,
-  PhantomButton,
-  Typography,
-  useRothko,
-} from '@rothko-ui/ui';
+import { Button, Drawer, Flex, FlexItem, PhantomButton, Typography } from '@rothko-ui/ui';
 import cookieCutter from 'cookie-cutter';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -17,27 +9,28 @@ import NextLink from 'next/link';
 import { DesktopOnly, MobileOnly } from '../Dimensions';
 import NavigationList from './NavigationList';
 import { useRouter } from 'next/router';
+import useTheme from '../theme/useTheme';
 
 const Navigation = () => {
-  const { mode, toggleMode } = useRothko();
+  const { theme, toggleTheme } = useTheme();
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const modeIcon = useMemo(() => {
-    return mode === 'dark' ? (
+    return theme === 'dark' ? (
       <Sun fill="#ffbb00" width={28} height={28} />
     ) : (
       <Moon fill="#4833e0" width={27} height={27} />
     );
-  }, [mode]);
+  }, [theme]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && mode) {
+    if (typeof window !== 'undefined' && theme) {
       // Set a cookie
       const expirationDate = new Date(Date.now() + 1000 * 60 * 60 * 24 * 3); // 3 days
-      cookieCutter.set(config.preference.theme, mode, { expires: expirationDate, path: '/' });
+      cookieCutter.set(config.preference.theme, theme, { expires: expirationDate, path: '/' });
     }
-  }, [mode]);
+  }, [theme]);
 
   return (
     <>
@@ -68,12 +61,12 @@ const Navigation = () => {
                 style={{ display: 'flex' }}
                 className={styles.hoverButton}
               >
-                <Github fill={mode === 'dark' ? '#fff' : '#000'} width={28} height={28} />
+                <Github fill={theme === 'dark' ? '#fff' : '#000'} width={28} height={28} />
               </NextLink>
               <PhantomButton
                 displayFlex
                 className={styles.hoverButton}
-                onClick={() => toggleMode()}
+                onClick={() => toggleTheme()}
               >
                 {modeIcon}
               </PhantomButton>

@@ -4,7 +4,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  height: 0.5rem;
+  height: variables.$sliderTrackHeight;
   background: variables.$sliderTrackBackground;
 
   border-radius: variables.$sliderBorderRadius;

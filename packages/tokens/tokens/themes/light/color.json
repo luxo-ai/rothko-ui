@@ -23,7 +23,7 @@
     "800": { "value": "#681E93" },
     "900": { "value": "#4B127A" },
     "default": { "value": "{secondary.500}" },
-    "foreground": { "value": "#000" }
+    "foreground": { "value": "#fff" }
   },
   "success": {
     "100": { "value": "#DFFFD9" },

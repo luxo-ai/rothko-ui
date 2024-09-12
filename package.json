@@ -28,6 +28,7 @@
     "dev:demo": "yarn workspace demo dev",
     "test:utils": "lerna run test --scope=@rothko-ui/utils",
     "generate:source": "yarn workspace demo generateSource",
+    "generate:scss": "yarn workspace @rothko-ui/ui generate:scss",
     "build": "lerna run build --stream",
     "clean": "lerna clean",
     "lint": "lerna run lint",

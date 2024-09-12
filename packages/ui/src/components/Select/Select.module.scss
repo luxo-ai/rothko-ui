@@ -1,28 +1,28 @@
+@use './variables' as variables;
+
 .multi-select-container {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
 .multi-select-label {
   display: flex;
-  flex-direction: row;
-  gap: 0.125rem;
   align-items: center;
+  gap: 0.125rem;
 
   padding: 0.0625rem 0.3rem 0.0625rem 0.5rem;
 
-  background: var(--rothko-dropdown-multiselect-background, #fff);
-  border: 1px solid var(--rothko-dropdown-multiselect-border, #000);
+  background-color: variables.$dropdownMultiselectBackground;
+  border: 1px solid variables.$dropdownMultiselectBorder;
 
   border-radius: 3.25rem;
-  cursor: initial;
+  cursor: default;
 
   & > p {
     margin: 0;
     user-select: none;
-    color: var(--rothko-dropdown-multiselect-foreground, #000);
+    color: variables.$dropdownMultiselectForeground;
   }
 }
 
@@ -61,7 +61,6 @@
 
 .nested-option-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }

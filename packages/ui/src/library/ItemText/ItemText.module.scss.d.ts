@@ -1,6 +1,6 @@
 export type Styles = {
   'item-text': string;
-  'place-holder': string;
+  placeholder: string;
 };
 
 export type ClassNames = keyof Styles;
