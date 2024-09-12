@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { RothkoProvider } from '@rothko-ui/ui';
-
 const App = ({ children }: { children?: React.ReactNode }) => {
-  return <RothkoProvider>{children}</RothkoProvider>;
+  return <>{children}</>;
 };
 
 export default App;

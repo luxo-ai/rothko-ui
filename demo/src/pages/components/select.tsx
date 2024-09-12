@@ -1,7 +1,7 @@
-import DropdownCard from '../../components/cards/select';
+import SelectCard from '../../components/cards/select';
 
-const Dropdown = () => {
-  return <DropdownCard />;
+const Select = () => {
+  return <SelectCard />;
 };
 
-export default Dropdown;
+export default Select;

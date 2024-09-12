@@ -1,7 +1,7 @@
 import MultiSelectCard from '../../components/cards/multiSelect';
 
-const MultiDropdown = () => {
+const MultiSelect = () => {
   return <MultiSelectCard />;
 };
 
-export default MultiDropdown;
+export default MultiSelect;
