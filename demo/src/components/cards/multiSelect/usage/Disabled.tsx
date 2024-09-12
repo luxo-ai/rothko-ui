@@ -1,30 +1,13 @@
 import React, { useState } from 'react';
 import { MultiSelect } from '@rothko-ui/ui';
+import { listOfNames } from './listOfNames';
 
-const DROPDOWN_OPTIONS = [
-  {
-    id: 0,
-    label: 'Zero',
-  },
-  {
-    id: 1,
-    label: 'One',
-  },
-  {
-    id: 2,
-    label: 'Two',
-  },
-];
+const nameOptions = listOfNames.map((name, idx) => ({ id: idx, label: name }));
 
 const App = () => {
   const [selected, setSelected] = useState<number[] | null>(null);
   return (
-    <MultiSelect
-      disabled
-      values={selected}
-      onChange={v => setSelected(v)}
-      options={DROPDOWN_OPTIONS}
-    />
+    <MultiSelect disabled values={selected} onChange={v => setSelected(v)} options={nameOptions} />
   );
 };
 

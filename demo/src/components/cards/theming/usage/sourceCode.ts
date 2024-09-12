@@ -1,10 +1,8 @@
 export const COMPONENT_OVERRIDE = `
 import React from 'react';
 
-import { RothkoProvider } from '@rothko-ui/ui';
-
 const App = ({ children }: { children?: React.ReactNode }) => {
-  return <RothkoProvider>{children}</RothkoProvider>;
+  return <>{children}</>;
 };
 
 export default App;
@@ -12,10 +10,8 @@ export default App;
 export const SEMANTIC_OVERRIDE = `
 import React from 'react';
 
-import { RothkoProvider } from '@rothko-ui/ui';
-
 const App = ({ children }: { children?: React.ReactNode }) => {
-  return <RothkoProvider>{children}</RothkoProvider>;
+  return <>{children}</>;
 };
 
 export default App;
@@ -23,10 +19,8 @@ export default App;
 export const TYPOGRAPHY_OVERRIDE = `
 import React from 'react';
 
-import { RothkoProvider } from '@rothko-ui/ui';
-
 const App = ({ children }: { children?: React.ReactNode }) => {
-  return <RothkoProvider>{children}</RothkoProvider>;
+  return <>{children}</>;
 };
 
 export default App;
