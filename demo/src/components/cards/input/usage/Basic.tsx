@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input } from '@rothko-ui/ui';
+import { Input } from '@rothko-ui/components';
 
 const App = () => {
   const [value, setValue] = useState<string>('');

@@ -1,0 +1,50 @@
+@use './variables' as variables;
+@use '../../../styles/mixins' as mixins;
+
+.checkbox {
+  @include mixins.iosTapHighlightColorTransparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: variables.$checkboxSize;
+  height: variables.$checkboxSize;
+  cursor: pointer;
+
+  border-radius: variables.$checkboxBorderRadius;
+  padding: variables.$checkboxPadding;
+
+  background-color: variables.$checkboxBackgroundColor;
+  transition: background-color 0.1s ease;
+
+  &.selected {
+    background-color: variables.$checkboxBackgroundColorSelected;
+    @each $kind in variables.$rothkoKinds {
+      &.#{$kind} {
+        background-color: variables.safeGetTheme($kind);
+      }
+    }
+  }
+
+  &:focus-visible {
+    outline: 1px solid variables.$rothkoInfo300;
+  }
+
+  &.error:not(:focus) {
+    // Define error state background color
+    background-color: variables.$rothkoDanger / 10;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.checkbox__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}

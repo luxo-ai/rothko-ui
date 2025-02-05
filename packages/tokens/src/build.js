@@ -1,17 +1,14 @@
 /* eslint-disable no-console */
-// import type { Formatter, Config as StyleConfig } from 'style-dictionary';
 const styledDictionary = require('style-dictionary');
-const { compact, toScreamingSnakeCase } = require('@rothko-ui/utils');
-const prettier = require('prettier');
+const compact = require('lodash/compact');
 const fs = require('fs');
 const path = require('path');
 
 const CSS_OUT_DIRECTORY = 'build';
-const TS_OUT_DIRECTORY = 'src/tokens';
 const COMBINED_CSS_FILE_NAME = 'tokens.css';
 
 const generateThemeCssStyleDictionaryConfig = theme => ({
-  source: [`tokens/themes/${theme}/*.json`],
+  source: [`tokens/theme/${theme}/*.json`],
   platforms: {
     web: {
       buildPath: `${CSS_OUT_DIRECTORY}/`,
@@ -28,23 +25,8 @@ const generateThemeCssStyleDictionaryConfig = theme => ({
   },
 });
 
-const generateThemeTypescriptStyleDictionaryConfig = theme => ({
-  source: [`tokens/themes/${theme}/*.json`],
-  platforms: {
-    web: {
-      buildPath: `${TS_OUT_DIRECTORY}/`,
-      files: [
-        {
-          destination: `${theme}.ts`,
-          format: 'ts/module-themed',
-        },
-      ],
-    },
-  },
-});
-
-const generatePlatformStyleDictionaryConfig = () => ({
-  source: [`tokens/platforms/**/*.json`],
+const generateLayoutStyleDictionaryConfig = () => ({
+  source: ['tokens/layout.json'],
   platforms: {
     web: {
       buildPath: `${CSS_OUT_DIRECTORY}/`,
@@ -59,25 +41,6 @@ const generatePlatformStyleDictionaryConfig = () => ({
     },
   },
 });
-
-const generatePlatformTypescriptStyleDictionaryConfig = () => ({
-  source: [`tokens/platforms/**/*.json`],
-  platforms: {
-    web: {
-      buildPath: `${TS_OUT_DIRECTORY}/`,
-      files: [
-        {
-          destination: 'layout.ts',
-          format: 'ts/module',
-        },
-      ],
-    },
-  },
-});
-
-const doesNotRequireQuotes = value => {
-  return value === null || typeof value === 'number' || typeof value === 'boolean';
-};
 
 const removeDefaultSuffix = name => {
   return name.replace(/[-_]+default$/i, '');
@@ -101,19 +64,6 @@ const rothkoCssRootFormatter = ({ dictionary, options, file }) => {
   return `${header}${styleClassName} {\n${styleContent}\n}`;
 };
 
-const rothkoTsFormatter = ({ dictionary, file }) => {
-  const header = styledDictionary.formatHelpers.fileHeader({ file });
-
-  const tsConstants = dictionary.allProperties.map(({ path, value }) => {
-    const constantName = path.map(toScreamingSnakeCase).join('_');
-    const constantValue = doesNotRequireQuotes(value) ? value : JSON.stringify(value);
-    return `export const ${removeDefaultSuffix(constantName)} = ${constantValue};`;
-  });
-
-  const code = `${header}\n${tsConstants.join('\n')}`;
-  return prettier.format(code, { singleQuote: true });
-};
-
 styledDictionary.registerFormat({
   name: 'css/variables-themed',
   formatter: function (args) {
@@ -129,16 +79,6 @@ styledDictionary.registerFormat({
   formatter: rothkoCssRootFormatter,
 });
 
-styledDictionary.registerFormat({
-  name: 'ts/module-themed',
-  formatter: rothkoTsFormatter,
-});
-
-styledDictionary.registerFormat({
-  name: 'ts/module',
-  formatter: rothkoTsFormatter,
-});
-
 const build = () => {
   const generatedFiles = [];
 
@@ -152,7 +92,7 @@ const build = () => {
 
   console.log('\n==============================================');
   console.log(`\nCreating typography`);
-  styledDictionary.extend(generatePlatformStyleDictionaryConfig()).buildPlatform('web');
+  styledDictionary.extend(generateLayoutStyleDictionaryConfig()).buildPlatform('web');
   generatedFiles.push(path.join(CSS_OUT_DIRECTORY, 'global-variables.css'));
 
   console.log('\n==============================================');

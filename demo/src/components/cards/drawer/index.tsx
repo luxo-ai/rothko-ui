@@ -1,4 +1,4 @@
-import { Container, Flex } from '@rothko-ui/ui';
+import { Container, Flex } from '@rothko-ui/components';
 
 import { BASIC, BLUR } from './usage/sourceCode';
 import { TSCode } from '../../Code';
@@ -12,10 +12,9 @@ import Props from '../Props';
 import Usage from '../Usage';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 
-const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Drawer';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Drawer';
 
-const IMPORT = "import { Drawer } from '@rothko-ui/ui';";
+const IMPORT = "import { Drawer } from '@rothko-ui/components';";
 
 const DrawerCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();

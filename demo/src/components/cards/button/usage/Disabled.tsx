@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from '@rothko-ui/ui';
+import { Button } from '@rothko-ui/components';
 
 const App = () => {
   return <Button disabled>Disabled Button</Button>;

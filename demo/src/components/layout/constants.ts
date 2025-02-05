@@ -1,4 +1,4 @@
-import { toCamelCase } from '@rothko-ui/utils';
+import toCamelCase from 'lodash.camelcase';
 import type { NavigationSection, NavigationSectionWithoutTo } from './types';
 
 const GETTING_STARTED: readonly NavigationSectionWithoutTo[] = [
@@ -18,7 +18,6 @@ const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
   { label: 'Checkbox' },
   { label: 'Drawer' },
   { label: 'Input' },
-  { label: 'Link' },
   { label: 'Modal' },
   { label: 'Radio Group' },
   {
@@ -31,7 +30,7 @@ const COMPONENTS: readonly NavigationSectionWithoutTo[] = [
     children: [{ label: 'Slider' }, { label: 'Multi Slider' }],
   },
   { label: 'Switch' },
-  { label: 'Tab Bar' },
+  { label: 'Tabs' },
   { label: 'Tag' },
   { label: 'Textarea' },
   { label: 'Toast' },

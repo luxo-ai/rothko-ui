@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import type { Option } from '@rothko-ui/ui';
-import { Autocomplete, Typography } from '@rothko-ui/ui';
+import type { Option } from '@rothko-ui/components';
+import { Autocomplete, Paragraph } from '@rothko-ui/components';
 import { listOfCountriesWithFlags } from './listOfCountries';
 
 const countryOptions: Option<number, { flag: string }>[] = listOfCountriesWithFlags.map(
@@ -20,10 +20,10 @@ const App = () => {
       onChange={v => setSelected(v)}
       options={countryOptions}
       renderOption={({ option }) => (
-        <Typography.bodySmall>
+        <Paragraph size="s">
           <span style={{ marginRight: '0.5rem' }}>{option.data.flag}</span>
           {option.label}
-        </Typography.bodySmall>
+        </Paragraph>
       )}
     />
   );

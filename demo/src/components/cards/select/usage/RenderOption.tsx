@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import type { Option } from '@rothko-ui/ui';
-import { Select, Typography } from '@rothko-ui/ui';
+import type { Option } from '@rothko-ui/components';
+import { Select, Paragraph } from '@rothko-ui/components';
 import { listOfNamesWithUsername } from './listOfNames';
 
 const nameOptions: Option<number, { username: string }>[] = listOfNamesWithUsername.map(
@@ -20,12 +20,12 @@ const App = () => {
       onChange={v => setSelected(v)}
       options={nameOptions}
       renderOption={({ option }) => (
-        <Typography.bodySmall>
+        <Paragraph size="s">
           {option.label}{' '}
-          <Typography.caption italic as="span">
+          <Paragraph size="xs" italic as="span">
             ({option.data.username})
-          </Typography.caption>
-        </Typography.bodySmall>
+          </Paragraph>
+        </Paragraph>
       )}
     />
   );

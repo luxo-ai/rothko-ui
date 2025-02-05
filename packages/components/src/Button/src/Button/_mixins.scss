@@ -1,0 +1,42 @@
+@use '../../../../styles/mixins' as mixins;
+@use './variables' as variables;
+
+@mixin buttonPill {
+  border-radius: 50vmin;
+}
+
+@mixin buttonSquare {
+  border-radius: 0;
+}
+
+@mixin buttonFitContent {
+  width: fit-content;
+}
+
+@mixin baseButtonStyle {
+  @include mixins.iosTapHighlightColorTransparent;
+  @include mixins.userSelectNone;
+  font-family: variables.$regularFont;
+  // @include typographyMixins.regularFontStyle; // TODO-TYPEOGRAPHY
+  // Use font smoothing to make text more readable
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+
+  appearance: none;
+  // Prevent double tap zoom on mobile
+  touch-action: manipulation;
+  cursor: pointer;
+
+  border-radius: variables.$defaultBorderRadius;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+}

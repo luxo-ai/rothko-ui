@@ -9,12 +9,13 @@ import {
   Flex,
   FlexItem,
   ButtonGroup,
-  ToastContextConsumer,
-  Typography,
+  ToasterConsumer,
+  Paragraph,
   Button,
-} from '@rothko-ui/ui';
+  Heading3,
+} from '@rothko-ui/components';
 
-import { truncateString } from '@rothko-ui/utils';
+import truncateString from 'lodash.truncate';
 import { JSXCode } from '../../Code';
 import Card from '../Card';
 import styles from './Icons.module.scss';
@@ -49,7 +50,7 @@ const IconsCard = () => {
         <JSXCode sourceCode={BASIC} />
       </section>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
-        <Typography.h3>Availabe Icons</Typography.h3>
+        <Heading3>Availabe Icons</Heading3>
         <div>
           <SearchBar
             onQueryChange={q => setQuery(q)}
@@ -87,7 +88,7 @@ const IconsCard = () => {
                 const C = Icons[iconName] as React.FC<any>;
                 return (
                   <div className={styles.icon} key={iconName}>
-                    <ToastContextConsumer>
+                    <ToasterConsumer>
                       {({ addToast }) => (
                         <CopyToClipboard
                           text={`<${iconName} width={20} height={20} />`}
@@ -98,14 +99,14 @@ const IconsCard = () => {
                           <button aria-label={iconName}>
                             <Flex flexDirection="column" alignItems="center" gap="1rem">
                               <C width={30} height={30} />
-                              <Typography.bodySmall>
-                                {truncateString(iconName, 18)}
-                              </Typography.bodySmall>
+                              <Paragraph size="s">
+                                {truncateString(iconName, { length: 18 })}
+                              </Paragraph>
                             </Flex>
                           </button>
                         </CopyToClipboard>
                       )}
-                    </ToastContextConsumer>
+                    </ToasterConsumer>
                   </div>
                 );
               })}

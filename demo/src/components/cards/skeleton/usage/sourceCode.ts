@@ -1,6 +1,6 @@
 export const SKELETON_BOX = `
 import React from 'react';
-import { SkeletonBox } from '@rothko-ui/ui';
+import { SkeletonBox } from '@rothko-ui/components';
 
 const App = () => {
   return <SkeletonBox width={200} speed={1 / 1.5} />;
@@ -10,7 +10,7 @@ export default App;
 `;
 export const SKELETON_BOX_WITH_LABEL = `
 import React from 'react';
-import { SkeletonBoxWithLabel } from '@rothko-ui/ui';
+import { SkeletonBoxWithLabel } from '@rothko-ui/components';
 
 const App = () => {
   return <SkeletonBoxWithLabel width={200} speed={1 / 1.5} />;
@@ -20,7 +20,7 @@ export default App;
 `;
 export const SKELETON_BUILDER = `
 import React from 'react';
-import { SkeletonBuilder } from '@rothko-ui/ui';
+import { SkeletonBuilder } from '@rothko-ui/components';
 
 const App = () => {
   return (

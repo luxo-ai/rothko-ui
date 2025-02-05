@@ -1,7 +1,7 @@
 export const BASIC = `
 import React, { useState } from 'react';
-import type { NestedOption } from '@rothko-ui/ui';
-import { NestedSelect } from '@rothko-ui/ui';
+import type { NestedOption } from '@rothko-ui/components';
+import { NestedSelect } from '@rothko-ui/components';
 
 const DROPDOWN_OPTIONS: NestedOption<string>[] = [
   {
@@ -67,8 +67,8 @@ export default App;
 `;
 export const CLEARABLE = `
 import React, { useState } from 'react';
-import type { NestedOption } from '@rothko-ui/ui';
-import { NestedSelect } from '@rothko-ui/ui';
+import type { NestedOption } from '@rothko-ui/components';
+import { NestedSelect } from '@rothko-ui/components';
 
 const DROPDOWN_OPTIONS: NestedOption<string>[] = [
   {
@@ -115,8 +115,8 @@ export default App;
 `;
 export const DISABLED = `
 import React, { useState } from 'react';
-import type { NestedOption } from '@rothko-ui/ui';
-import { NestedSelect } from '@rothko-ui/ui';
+import type { NestedOption } from '@rothko-ui/components';
+import { NestedSelect } from '@rothko-ui/components';
 
 const DROPDOWN_OPTIONS: NestedOption<string>[] = [
   {
@@ -163,8 +163,8 @@ export default App;
 `;
 export const MENU_POSITION = `
 import React, { useState } from 'react';
-import type { NestedOption } from '@rothko-ui/ui';
-import { NestedSelect } from '@rothko-ui/ui';
+import type { NestedOption } from '@rothko-ui/components';
+import { NestedSelect } from '@rothko-ui/components';
 
 const DROPDOWN_OPTIONS: NestedOption<string>[] = [
   {

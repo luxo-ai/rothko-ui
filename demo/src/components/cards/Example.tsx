@@ -1,4 +1,4 @@
-import { Flex, FlexItem, TabBar, Typography } from '@rothko-ui/ui';
+import { Flex, FlexItem, Paragraph, Tabs, Tab, Heading5 } from '@rothko-ui/components';
 
 import { JSXCode } from '../Code';
 
@@ -14,29 +14,25 @@ const Example = ({ title, sourceCode, subTitle, children }: CodeSnippetProps) =>
     <Flex flexDirection="column" rowGap="0.25rem">
       {title && (
         <FlexItem>
-          <Typography.h5>{title}</Typography.h5>
-          {subTitle && <Typography.body>{subTitle}</Typography.body>}
+          <Heading5>{title}</Heading5>
+          {subTitle && <Paragraph>{subTitle}</Paragraph>}
         </FlexItem>
       )}
       <FlexItem>
-        <TabBar
+        <Tabs
           kind="success"
-          initialTab="Example"
-          style={{ maxWidth: '10rem' }}
-          containerStyle={{ margin: '1rem 0 1rem 0' }}
-          tabs={[
-            {
-              title: 'Example',
-              key: 'Example',
-              render: children,
-            },
-            {
-              title: 'Code',
-              key: 'Code',
-              render: <JSXCode maxWidth="52rem" sourceCode={sourceCode} />,
-            },
-          ]}
-        />
+          styles={{
+            tabs: { maxWidth: '10rem' },
+            tab: { margin: '1rem 0 1rem 0' },
+          }}
+        >
+          <Tab title="Example" $key="Example">
+            {children}
+          </Tab>
+          <Tab title="Code" $key="Code">
+            <JSXCode maxWidth="52rem" sourceCode={sourceCode} />
+          </Tab>
+        </Tabs>
       </FlexItem>
     </Flex>
   );

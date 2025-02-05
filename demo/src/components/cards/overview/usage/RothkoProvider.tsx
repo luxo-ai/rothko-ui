@@ -1,7 +1,7 @@
-import { Typography } from '@rothko-ui/ui';
+import { Heading1 } from '@rothko-ui/components';
 
 const App = () => {
-  return <Typography.h1>Hello World!</Typography.h1>;
+  return <Heading1>Hello World!</Heading1>;
 };
 
 export default App;

@@ -1,20 +1,11 @@
 import React, { useState } from 'react';
 
-import { MultiSlider } from '@rothko-ui/ui';
+import { MultiSlider } from '@rothko-ui/components';
 
 const App = () => {
   const [value, setValue] = useState<[number, number]>([0, 50]);
   return (
-    <MultiSlider
-      disabled
-      showRange
-      label="Percent"
-      kind="primary"
-      value={value}
-      onChange={setValue}
-      min={0}
-      max={100}
-    />
+    <MultiSlider disabled kind="primary" value={value} onChange={setValue} min={0} max={100} />
   );
 };
 

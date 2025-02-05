@@ -1,0 +1,45 @@
+@use './variables' as variables;
+@use '../../../styles/mixins' as mixins;
+
+.input {
+  @include mixins.iosTapHighlightColorTransparent;
+
+  font-family: variables.$regularFont;
+  font-size: variables.$bodyFontSize;
+  line-height: variables.$bodyLineHeight;
+
+  appearance: none;
+  border: none;
+  outline: none;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+
+  background-color: variables.$inputBackground;
+  color: variables.$inputForeground;
+  border-radius: variables.$inputDefaultBorderRadius;
+  padding: variables.$inputVerticalPadding variables.$inputHorizontalPadding;
+
+  &.error:not(:focus) {
+    outline: 1px solid variables.$rothkoDanger;
+  }
+
+  // &:focus-visible:not(:disabled) {
+  // outline: 1px solid variables.$inputBorderFocus;
+  // }
+
+  &:disabled {
+    // keeps getting reordered and I don't know why
+    // pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.textarea {
+  display: block;
+  height: 8rem;
+  min-height: 6rem;
+  max-height: 16rem;
+  resize: vertical;
+}

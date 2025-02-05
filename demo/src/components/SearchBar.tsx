@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input } from '@rothko-ui/ui';
+import { Input } from '@rothko-ui/components';
 import styles from './Searchbar.module.scss';
 
 type SearchBarProps = {

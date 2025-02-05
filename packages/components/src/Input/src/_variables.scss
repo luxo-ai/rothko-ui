@@ -1,0 +1,8 @@
+@forward '../../../styles/variables';
+
+$inputBackground: var(--rothko-input-background, #fff);
+$inputForeground: var(--rothko-input-foreground, #000);
+$inputBorderFocus: var(--rothko-input-border-focus, #000);
+$inputVerticalPadding: 0.5rem;
+$inputHorizontalPadding: 0.75rem;
+$inputDefaultBorderRadius: 0.125rem; // 2px MOVE TO VARIABLE 

@@ -1,4 +1,4 @@
-import { Container, Flex } from '@rothko-ui/ui';
+import { Container, Flex } from '@rothko-ui/components';
 
 import { BASIC } from './usage/sourceCode';
 import { TSCode } from '../../Code';
@@ -11,10 +11,10 @@ import Example from '../Example';
 import Props from '../Props';
 import Usage from '../Usage';
 
-const IMPORT = "import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/ui';";
+const IMPORT = "import { BreadCrumbs, BreadCrumbItem } from '@rothko-ui/components';";
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/BreadCrumbs';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/BreadCrumbs';
 
 const BreadCrumbsCard = () => {
   return (

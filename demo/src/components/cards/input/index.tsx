@@ -1,10 +1,9 @@
-import { Container, Flex } from '@rothko-ui/ui';
+import { Container, Flex } from '@rothko-ui/components';
 
 import { BASIC, DISABLED, VARIANT } from './usage/sourceCode';
 import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Basic from './usage/Basic';
-import Variant from './usage/Variant';
 import Disabled from './usage/Disabled';
 import Card from '../Card';
 import Example from '../Example';
@@ -13,10 +12,9 @@ import Usage from '../Usage';
 import Props from '../Props';
 import inputProps from './props';
 
-const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Input';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Input';
 
-const IMPORT = "import { Input } from '@rothko-ui/ui';";
+const IMPORT = "import { Input } from '@rothko-ui/components';";
 
 const InputCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();
@@ -33,11 +31,6 @@ const InputCard = () => {
           <Container maxWidth={maxWith}>
             <Basic />
           </Container>
-        </Example>
-        <Example title="Variant" sourceCode={VARIANT}>
-          <Flex flexDirection="column" gap="1.25rem" maxWidth={maxWith}>
-            <Variant />
-          </Flex>
         </Example>
         <Example title="Disabled" sourceCode={DISABLED}>
           <Container maxWidth={maxWith}>

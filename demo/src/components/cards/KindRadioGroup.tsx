@@ -1,5 +1,5 @@
-import type { RothkoKind } from '@rothko-ui/ui';
-import { Radio, RadioGroup } from '@rothko-ui/ui';
+import type { RothkoKind } from '@rothko-ui/components';
+import { Radio, RadioGroup } from '@rothko-ui/components';
 
 const kinds: RothkoKind[] = ['danger', 'info', 'primary', 'secondary', 'success', 'warning'];
 

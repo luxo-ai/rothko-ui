@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Tag } from '@rothko-ui/ui';
+import { Tag } from '@rothko-ui/components';
 
 const App = () => {
   return (

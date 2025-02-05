@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import type { RothkoKind } from '@rothko-ui/ui';
-import { Container, Flex, FlexItem } from '@rothko-ui/ui';
+import type { RothkoKind } from '@rothko-ui/components';
+import { Container, Flex, FlexItem } from '@rothko-ui/components';
 
 import accordionCopy from './copy';
 import Basic from './usage/Basic';
@@ -32,9 +32,9 @@ import Usage from '../Usage';
 import KindRadioGroup from '../KindRadioGroup';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Accordion';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src//Accordion';
 
-const IMPORT = "import { Accordion, AccordionPanel } from '@rothko-ui/ui';";
+const IMPORT = "import { Accordion, AccordionPanel } from '@rothko-ui/components';";
 
 const AccordionCard = () => {
   const [kind, setKind] = useState<RothkoKind>('secondary');

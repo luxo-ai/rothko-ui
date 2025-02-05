@@ -1,20 +1,15 @@
 export const BASIC = `
 import React, { useState } from 'react';
 
-import { MultiSlider } from '@rothko-ui/ui';
+import { MultiSlider, SliderHandle } from '@rothko-ui/components';
 
 const App = () => {
   const [value, setValue] = useState<[number, number]>([0, 50]);
   return (
-    <MultiSlider
-      label="Temperature"
-      showRange
-      kind="primary"
-      value={value}
-      onChange={setValue}
-      min={0}
-      max={100}
-    />
+    <MultiSlider kind="primary" value={value} onChange={setValue} min={0} max={100}>
+      <SliderHandle />
+      <SliderHandle />
+    </MultiSlider>
   );
 };
 
@@ -23,44 +18,12 @@ export default App;
 export const DISABLED = `
 import React, { useState } from 'react';
 
-import { MultiSlider } from '@rothko-ui/ui';
+import { MultiSlider } from '@rothko-ui/components';
 
 const App = () => {
   const [value, setValue] = useState<[number, number]>([0, 50]);
   return (
-    <MultiSlider
-      disabled
-      showRange
-      label="Percent"
-      kind="primary"
-      value={value}
-      onChange={setValue}
-      min={0}
-      max={100}
-    />
-  );
-};
-
-export default App;
-`;
-export const FORMAT = `
-import React, { useState } from 'react';
-
-import { MultiSlider } from '@rothko-ui/ui';
-
-const App = () => {
-  const [value, setValue] = useState<[number, number]>([0, 50]);
-  return (
-    <MultiSlider
-      label="Percent"
-      kind="primary"
-      valueFormat="%"
-      showRange
-      value={value}
-      onChange={setValue}
-      min={0}
-      max={100}
-    />
+    <MultiSlider disabled kind="primary" value={value} onChange={setValue} min={0} max={100} />
   );
 };
 
@@ -69,20 +32,11 @@ export default App;
 export const WITH_KIND = `
 import React, { useState } from 'react';
 
-import { MultiSlider } from '@rothko-ui/ui';
+import { MultiSlider } from '@rothko-ui/components';
 
 const App = () => {
   const [value, setValue] = useState<[number, number]>([0, 50]);
-  return (
-    <MultiSlider
-      label="Percent"
-      showRange kind="info"
-      value={value}
-      onChange={setValue}
-      min={0}
-      max={100}
-    />
-  );
+  return <MultiSlider kind="info" value={value} onChange={setValue} min={0} max={100} />;
 };
 
 export default App;

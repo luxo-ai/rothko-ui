@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import type { RothkoKind } from '@rothko-ui/ui';
-import { Switch } from '@rothko-ui/ui';
+import type { RothkoKind } from '@rothko-ui/components';
+import { Switch } from '@rothko-ui/components';
 
 const App = (props: { kind: RothkoKind }) => {
   const [selected, setSelected] = useState(true);

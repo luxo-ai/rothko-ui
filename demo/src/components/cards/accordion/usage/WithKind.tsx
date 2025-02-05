@@ -1,6 +1,6 @@
 import React from 'react';
-import type { RothkoKind } from '@rothko-ui/ui';
-import { Accordion, AccordionPanel } from '@rothko-ui/ui';
+import type { RothkoKind } from '@rothko-ui/components';
+import { Accordion, AccordionPanel } from '@rothko-ui/components';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';

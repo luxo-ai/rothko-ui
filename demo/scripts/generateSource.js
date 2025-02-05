@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const fs = require('fs').promises;
 const path = require('path');
-const { toSnakeCase } = require('@rothko-ui/utils');
+const toSnakeCase = require('lodash.snakecase');
 
 const usageDirName = 'usage';
 const outputFileName = 'sourceCode.ts';
@@ -11,7 +11,7 @@ const escapeForTemplateLiteral = str => str.replace(/\\/g, '\\\\').replace(/`/g,
 
 const cleanComponent = str => {
   return str
-    .replace(/import\s+(type\s+)?\{\s*RothkoKind\s*\}\s+from\s+'@rothko-ui\/ui';\s*/, '') // Remove import type { RothkoKind } from '@rothko-ui/ui';
+    .replace(/import\s+(type\s+)?\{\s*RothkoKind\s*\}\s+from\s+'@rothko-ui\/components';\s*/, '') // Remove import type { RothkoKind } from '@rothko-ui/components';
     .replace(/\(props:\s*\{[^}]*\}\)\s*=>\s*/, '() => ') // Remove prop type annotation
     .replace(/\s+kind={props\.kind}/, ' kind="info"'); // Remove kind={props.kind} and set it to "info"
 };

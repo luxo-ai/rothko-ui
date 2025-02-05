@@ -1,0 +1,32 @@
+@use './variables' as variables;
+@use '../../../styles/mixins' as mixins;
+
+@mixin boldFontStyle() {
+  font-family: variables.$boldFont;
+  font-weight: bold;
+}
+
+@mixin italicFontStyle() {
+  font-family: variables.$italicFont;
+}
+
+@mixin lightFontStyle() {
+  font-family: variables.$lightFont;
+  font-weight: 300;
+}
+
+@mixin baseParagraphStyle() {
+  @include mixins.optimizeLegibility;
+  font-family: variables.$regularFont;
+}
+
+@mixin baseHeadingStyle() {
+  @include mixins.optimizeLegibility;
+  font-family: variables.$headingFont;
+  font-weight: 700;
+}
+
+@mixin baseCodeStyle() {
+  @include mixins.optimizeLegibility;
+  font-family: variables.$codeFont;
+}

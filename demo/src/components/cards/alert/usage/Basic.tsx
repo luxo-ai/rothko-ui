@@ -1,4 +1,4 @@
-import React, { Alert } from '@rothko-ui/ui';
+import React, { Alert } from '@rothko-ui/components';
 
 const App = () => {
   return (

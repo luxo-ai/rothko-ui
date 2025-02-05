@@ -1,4 +1,16 @@
-import { Container, Flex, Grid, Tag, Typography } from '@rothko-ui/ui';
+import {
+  Container,
+  Flex,
+  Grid,
+  Tag,
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+  Heading6,
+  Paragraph,
+} from '@rothko-ui/components';
 
 import { TSCode } from '../../Code';
 import Card from '../Card';
@@ -8,9 +20,10 @@ import typographyCopy from './copy';
 import typographyProps from './props';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Typography';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Typography';
 
-const IMPORT = "import { Typography } from '@rothko-ui/ui';";
+const IMPORT =
+  "import { Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Paragraph, } from '@rothko-ui/components';";
 
 const TypographyCard = () => {
   return (
@@ -28,48 +41,48 @@ const TypographyCard = () => {
         gridAutoRows="4rem"
         alignItems="center"
       >
-        <Typography.h3>Font Size</Typography.h3>
-        <Typography.h3>Preview</Typography.h3>
+        <Heading3>Font Size</Heading3>
+        <Heading3>Preview</Heading3>
         <Tag kind="success" appearance="outline">
-          <Typography.caption>2.5rem</Typography.caption>
+          <Paragraph size="xs">2.5rem</Paragraph>
         </Tag>
-        <Typography.h1>h1</Typography.h1>
+        <Heading1>h1</Heading1>
         <Tag kind="success" appearance="outline">
-          <Typography.caption>2.25rem</Typography.caption>
+          <Paragraph size="xs">2.25rem</Paragraph>
         </Tag>
-        <Typography.h2>h2</Typography.h2>
+        <Heading2>h2</Heading2>
         <Tag kind="success" appearance="outline">
-          <Typography.caption>2rem</Typography.caption>
+          <Paragraph size="xs">2rem</Paragraph>
         </Tag>
-        <Typography.h3>h3</Typography.h3>
+        <Heading3>h3</Heading3>
         <Tag kind="success" appearance="outline">
-          <Typography.caption>1.75rem</Typography.caption>
+          <Paragraph size="xs">1.75rem</Paragraph>
         </Tag>
-        <Typography.h4>h4</Typography.h4>
+        <Heading4>h4</Heading4>
         <Tag kind="success" appearance="outline">
-          <Typography.caption>1.5rem</Typography.caption>
+          <Paragraph size="xs">1.5rem</Paragraph>
         </Tag>
-        <Typography.h5>h5</Typography.h5>
+        <Heading5>h5</Heading5>
         <Tag kind="success" appearance="outline">
-          <Typography.caption>1.25rem</Typography.caption>
+          <Paragraph size="xs">1.25rem</Paragraph>
         </Tag>
-        <Typography.h6>h6</Typography.h6>
+        <Heading6>h6</Heading6>
         <Tag kind="success" appearance="outline">
-          <Typography.caption>1rem</Typography.caption>
+          <Paragraph size="xs">1.25rem</Paragraph>
         </Tag>
-        <Typography.body>body</Typography.body>
+        <Paragraph size="l">paragraph large</Paragraph>
         <Tag kind="success" appearance="outline">
-          <Typography.caption>0.875rem</Typography.caption>
+          <Paragraph size="xs">1rem</Paragraph>
         </Tag>
-        <Typography.bodySmall>bodySmall</Typography.bodySmall>
+        <Paragraph>paragraph</Paragraph>
         <Tag kind="success" appearance="outline">
-          <Typography.caption>0.75rem</Typography.caption>
+          <Paragraph size="xs">0.875rem</Paragraph>
         </Tag>
-        <Typography.label>LABEL</Typography.label>
+        <Paragraph size="s">paragraph small</Paragraph>
         <Tag kind="success" appearance="outline">
-          <Typography.caption>0.75rem</Typography.caption>
+          <Paragraph size="xs">0.75rem</Paragraph>
         </Tag>
-        <Typography.caption>caption</Typography.caption>
+        <Paragraph size="xs">paragraph Xsmall</Paragraph>
       </Grid>
       <Props copy={{ props: typographyProps }} />
     </Card>

@@ -1,0 +1,28 @@
+@forward './placeholders';
+
+.control-button {
+  @extend %phantom-button-style;
+  display: flex;
+  align-items: center;
+  top: 0.51rem;
+  right: 0.51rem;
+  cursor: pointer;
+  margin: calc(-1 * 2 * 0.51rem);
+  height: auto;
+  width: auto;
+  padding: 0.51rem 1rem 0.51rem 1rem;
+  // otherwise hidden under input padding and cursor pointer doesn't work
+  z-index: 9;
+
+  transform: rotate(0deg);
+  transition: transform 0.125s linear;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}

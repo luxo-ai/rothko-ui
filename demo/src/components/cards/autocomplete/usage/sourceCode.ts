@@ -1,6 +1,6 @@
 export const BASIC = `
 import React, { useState } from 'react';
-import { Autocomplete } from '@rothko-ui/ui';
+import { Autocomplete } from '@rothko-ui/components';
 import { listOfCountries } from './listOfCountries';
 
 const countryOptions = listOfCountries.map((country, idx) => ({ id: idx, label: country }));
@@ -15,7 +15,7 @@ export default App;
 `;
 export const DISABLED = `
 import React, { useState } from 'react';
-import { Autocomplete } from '@rothko-ui/ui';
+import { Autocomplete } from '@rothko-ui/components';
 import { listOfCountries } from './listOfCountries';
 
 const countryOptions = listOfCountries.map((country, idx) => ({ id: idx, label: country }));
@@ -37,7 +37,7 @@ export default App;
 `;
 export const MENU_VARIANT = `
 import React, { useState } from 'react';
-import { Autocomplete } from '@rothko-ui/ui';
+import { Autocomplete } from '@rothko-ui/components';
 import { listOfCountries } from './listOfCountries';
 
 const countryOptions = listOfCountries.map((country, idx) => ({ id: idx, label: country }));
@@ -59,8 +59,8 @@ export default App;
 `;
 export const RENDER_OPTION = `
 import React, { useState } from 'react';
-import type { Option } from '@rothko-ui/ui';
-import { Autocomplete, Typography } from '@rothko-ui/ui';
+import type { Option } from '@rothko-ui/components';
+import { Autocomplete, Paragraph } from '@rothko-ui/components';
 import { listOfCountriesWithFlags } from './listOfCountries';
 
 const countryOptions: Option<number, { flag: string }>[] = listOfCountriesWithFlags.map(
@@ -80,10 +80,10 @@ const App = () => {
       onChange={v => setSelected(v)}
       options={countryOptions}
       renderOption={({ option }) => (
-        <Typography.bodySmall>
+        <Paragraph size="s">
           <span style={{ marginRight: '0.5rem' }}>{option.data.flag}</span>
           {option.label}
-        </Typography.bodySmall>
+        </Paragraph>
       )}
     />
   );

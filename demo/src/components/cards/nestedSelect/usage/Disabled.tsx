@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import type { NestedOption } from '@rothko-ui/ui';
-import { NestedSelect } from '@rothko-ui/ui';
+import type { NestedOption } from '@rothko-ui/components';
+import { NestedSelect } from '@rothko-ui/components';
 
 const DROPDOWN_OPTIONS: NestedOption<string>[] = [
   {

@@ -1,4 +1,4 @@
-import { Container, Flex } from '@rothko-ui/ui';
+import { Container, Flex } from '@rothko-ui/components';
 
 import { APPEARANCE } from '../button/usage/sourceCode';
 import { BASIC, CLOSEABLE, WITH_KIND } from './usage/sourceCode';
@@ -15,9 +15,9 @@ import tagProps from './props';
 import WithKind from './usage/WithKind';
 import Usage from '../Usage';
 
-const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Tag';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Tag';
 
-const IMPORT = "import { Tag } from '@rothko-ui/ui';";
+const IMPORT = "import { Tag } from '@rothko-ui/components';";
 
 const TagCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();

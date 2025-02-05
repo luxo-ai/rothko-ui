@@ -1,5 +1,5 @@
 import React from 'react';
-import { BreadCrumbItem, BreadCrumbs } from '@rothko-ui/ui';
+import { BreadCrumbItem, BreadCrumbs } from '@rothko-ui/components';
 
 const App = () => {
   return (

@@ -2,9 +2,17 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Github } from '@rothko-ui/icons';
-import { Container, Flex, FlexItem, TabBar, Typography } from '@rothko-ui/ui';
-import { asCompactedArray, isString, toKebabCase } from '@rothko-ui/utils';
-
+import {
+  Tabs,
+  Tab,
+  Container,
+  Flex,
+  FlexItem,
+  Paragraph,
+  Heading1,
+  Heading,
+} from '@rothko-ui/components';
+import toKebabCase from 'lodash.kebabcase';
 import { Code } from '../Code';
 import styles from './Cards.module.scss';
 import type { Body as BodyType, CCode, CardCopy, Section as SectionType } from './types';
@@ -24,8 +32,8 @@ const Card = ({ children, copy, codeUrl }: CardProps) => {
   return (
     <div className={styles.componentCard}>
       <header>
-        <Typography.h1 className={styles.cardTitle}>{title}</Typography.h1>
-        <Typography.body className={styles.bodySubtext}>{description}</Typography.body>
+        <Heading1 className={styles.cardTitle}>{title}</Heading1>
+        <Paragraph className={styles.bodySubtext}>{description}</Paragraph>
         {codeUrl && (
           <Container marginTop="1.5rem">
             <Link
@@ -42,7 +50,7 @@ const Card = ({ children, copy, codeUrl }: CardProps) => {
               // className="phantom-button"
             >
               <Github width={23} height={23} fill={theme === 'dark' ? '#fff' : undefined} />
-              <Typography.bodySmall>View Source</Typography.bodySmall>
+              <Paragraph size="s">View Source</Paragraph>
             </Link>
           </Container>
         )}
@@ -67,7 +75,7 @@ const Section = ({ sectionKey, section }: SectionProps) => {
 
   const Body = ({ body }: { body: BodyType }) => {
     // string
-    if (isString(body)) {
+    if (typeof body === 'string') {
       return (
         <div style={{ marginTop: '0.5rem' }}>
           <Markdown>{body}</Markdown>
@@ -93,7 +101,7 @@ const Section = ({ sectionKey, section }: SectionProps) => {
     ) {
       return (
         <Flex flexDirection="column" rowGap="1rem">
-          {asCompactedArray(body as CCode[]).map((item, idx) => {
+          {(body as CCode[]).map((item, idx) => {
             const subSectionKey = `${sectionKey}_${idx}`;
             return (
               <FlexItem key={subSectionKey}>
@@ -119,9 +127,10 @@ const Section = ({ sectionKey, section }: SectionProps) => {
     }
     // Section || Section[]
     if (!('kind' in body)) {
+      const bodyArray = (Array.isArray(body) ? body : [body]) as SectionType[];
       return (
         <Flex marginTop="1rem" flexDirection="column" rowGap="1.75rem">
-          {asCompactedArray(body as SectionType | SectionType[]).map((item, idx) => {
+          {bodyArray.filter(Boolean).map((item, idx) => {
             const subSectionKey = item.title || `${sectionKey}_${idx}`;
             return <Section sectionKey={subSectionKey} key={subSectionKey} section={item} />;
           })}
@@ -163,16 +172,14 @@ const Section = ({ sectionKey, section }: SectionProps) => {
               <Markdown>{body.text}</Markdown>
             </div>
           )}
-          <TabBar
-            kind="success"
-            initialTab="Example"
-            style={{ maxWidth: '10rem', margin: '0' }}
-            containerStyle={{ margin: '1rem 0 1rem 0' }}
-            tabs={body.code.map(({ tag, text, icon: Icon }) => ({
-              leftIcon: Icon && <Icon />,
-              title: tag,
-              key: text,
-              render: (
+          <Tabs kind="success" style={{ maxWidth: '10rem', margin: '0' }} initialTab="Example">
+            {body.code.map(({ tag, text, icon: Icon }) => (
+              <Tab
+                style={{ margin: '1rem 0 1rem 0' }}
+                leftIcon={Icon && <Icon />}
+                title={tag}
+                $key={text}
+              >
                 <Code
                   maxWidth={!['jsx', 'json'].includes(body.language) ? '28rem' : undefined}
                   maxHeight={body.language !== 'jsx' ? '25rem' : undefined}
@@ -181,22 +188,22 @@ const Section = ({ sectionKey, section }: SectionProps) => {
                   displayLineNumbers={body.language === 'jsx'}
                   sourceCode={text}
                 />
-              ),
-            }))}
-          />
+              </Tab>
+            ))}
+          </Tabs>
         </>
       );
     }
     return null;
   };
 
-  const Header = Typography[headerVariant];
   const titleAsKebab = title && toKebabCase(title);
 
   return (
     <section>
       {title && headerVariant !== 'body' && (
-        <Header
+        <Heading
+          variant={headerVariant}
           className={styles.headerIdk}
           id={titleAsKebab}
           // for nav
@@ -205,9 +212,9 @@ const Section = ({ sectionKey, section }: SectionProps) => {
           <Link href={`#${titleAsKebab}`} scroll style={{ textDecoration: 'none' }}>
             {title}
           </Link>
-        </Header>
+        </Heading>
       )}
-      {title && headerVariant === 'body' && <Header bold>{title}</Header>}
+      {title && headerVariant === 'body' && <Paragraph bold>{title}</Paragraph>}
       {subtitle && (
         <div style={{ marginTop: '0.5rem', marginBottom: '1rem' }}>
           <Markdown>{subtitle}</Markdown>

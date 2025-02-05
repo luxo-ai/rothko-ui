@@ -1,0 +1,71 @@
+@use '../../../../styles/mixins' as mixins;
+@use './variables' as variables;
+@use '../../../../styles/placeholders';
+
+.handle {
+  @extend %hide-chrome-browser-outline;
+  @include mixins.iosTapHighlightColorTransparent;
+  @include mixins.userSelectNone;
+
+  position: absolute;
+  width: variables.$sliderHandleSize;
+  height: variables.$sliderHandleSize;
+
+  // https://stackoverflow.com/questions/30552307/ios-safari-buttons-not-perfect-circles
+  padding: 0;
+
+  transform: translate(-50%, 0%);
+  touch-action: pan-x;
+
+  background-color: variables.$sliderHandleBackground;
+  border: 0.125rem solid variables.$sliderHandleBorder;
+  border-radius: 50%;
+
+  z-index: 3;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.inner-handle {
+  @extend %hide-chrome-browser-outline;
+  @include mixins.iosTapHighlightColorTransparent;
+  @include mixins.userSelectNone;
+
+  // ======== start phantom button ========
+  // https://stackoverflow.com/questions/30552307/ios-safari-buttons-not-perfect-circles
+  padding: unset; // sets padding to 0
+  border: unset;
+  outline: none;
+  background: transparent;
+  touch-action: manipulation;
+  // ========= end phantom button =========
+
+  z-index: 3;
+  // in mobile without display flex, height is larger than inner button.
+  display: flex;
+}
+
+.inner-handle-movement {
+  position: absolute;
+  transform: translate(-50%, 0%);
+  touch-action: pan-x;
+}
+
+.pseudo-handle {
+  width: variables.$sliderHandleSize;
+  height: variables.$sliderHandleSize;
+
+  background-color: variables.$sliderHandleBackground;
+  border: 0.125rem solid variables.$sliderHandleBorder;
+  border-radius: 50%;
+
+  // z-index: 3;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

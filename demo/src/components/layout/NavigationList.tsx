@@ -1,4 +1,4 @@
-import { Typography, LinkButton } from '@rothko-ui/ui';
+import { Paragraph, Label, LinkButton } from '@rothko-ui/components';
 import React from 'react';
 import { NAVIGATION_LIST } from './constants';
 import { isLeaf } from './helpers';
@@ -31,8 +31,11 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
               textAlign: 'inherit',
               padding: `0.5rem calc(${depth} * 0.75rem)`,
               color: 'var(--rothko-foreground, #000)',
+              fontWeight: isSelected ? 600 : 400,
+              fontFamily: isSelected
+                ? 'var(--rothko-font-family-bold)'
+                : 'var(--rothko-font-family)',
             }}
-            bold={isSelected}
           >
             {isSelected ? '_ ' : ''}
             {item.label}
@@ -44,7 +47,9 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
   return (
     <List margin={0} padding="0">
       <ListItem paddingTop="0.5rem" paddingLeft={`calc(${depth} * 0.75rem)`}>
-        <Typography.label>{item.label.toUpperCase()}</Typography.label>
+        <Paragraph bold size="xs">
+          {item.label.toUpperCase()}
+        </Paragraph>
       </ListItem>
       <List padding="0">
         {item.children.map((subItem, idx) => (

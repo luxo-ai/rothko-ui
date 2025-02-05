@@ -1,21 +1,10 @@
 import React, { useState } from 'react';
 
-import { Slider } from '@rothko-ui/ui';
+import { Slider } from '@rothko-ui/components';
 
 const App = () => {
   const [value, setValue] = useState<number>(25);
-  return (
-    <Slider
-      label="Percent"
-      disabled
-      kind="primary"
-      showValue
-      value={value}
-      onChange={setValue}
-      min={0}
-      max={100}
-    />
-  );
+  return <Slider disabled kind="primary" value={value} onChange={setValue} min={0} max={100} />;
 };
 
 export default App;

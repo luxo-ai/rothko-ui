@@ -1,4 +1,4 @@
-import { Container, Flex } from '@rothko-ui/ui';
+import { Container, Flex } from '@rothko-ui/components';
 
 import { BASIC } from './usage/sourceCode';
 import { TSCode } from '../../Code';
@@ -10,10 +10,9 @@ import Example from '../Example';
 import Props from '../Props';
 import Usage from '../Usage';
 
-const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Alert';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Alert';
 
-const IMPORT = "import { Alert } from '@rothko-ui/ui';";
+const IMPORT = "import { Alert } from '@rothko-ui/components';";
 
 const AlertCard = () => {
   return (

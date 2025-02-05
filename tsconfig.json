@@ -8,13 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "moduleResolution": "node",
-    "paths": {
-      "@rothko-ui/ui": ["./packages/ui"],
-      "@rothko-ui/utils": ["./packages/utils"],
-      "@rothko-ui/tokens": ["./packages/tokens"],
-      "@rothko-ui/icons": ["./packages/icons"]
-    }
+    "moduleResolution": "node"
   },
   "compileOnSave": true,
   "exclude": ["**/*.spec.ts", "node_modules"],

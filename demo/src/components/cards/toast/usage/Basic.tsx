@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, useToaster } from '@rothko-ui/ui';
+import { Button, useToaster } from '@rothko-ui/components';
 
 const TOAST_DURATION = 4000;
 

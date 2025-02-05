@@ -3,7 +3,7 @@
 const withTM = require('next-transpile-modules')([
   '@rothko-ui/icons',
   '@rothko-ui/tokens',
-  '@rothko-ui/ui',
+  '@rothko-ui/components',
 ]);
 
 module.exports = {

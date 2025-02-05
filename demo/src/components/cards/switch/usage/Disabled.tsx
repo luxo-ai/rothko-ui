@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Switch } from '@rothko-ui/ui';
+import { Switch } from '@rothko-ui/components';
 
 const App = () => {
   const [selected, setSelected] = useState(false);

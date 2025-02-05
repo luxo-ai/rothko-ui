@@ -1,0 +1,75 @@
+@use './variables' as variables;
+@use '../../../styles/mixins' as mixins;
+@use './placeholders';
+
+// container for all panels
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  &.compact {
+    gap: 0;
+  }
+}
+
+// container for single panel
+.accordion__panel {
+  background-color: variables.$accordionBackgroundColor;
+  border: 1px solid variables.$accordionBackgroundColor;
+  border-radius: variables.$accordionPanelBorderRadius;
+
+  &.bordered {
+    border-color: variables.$accordionBorderColor;
+
+    @each $kind in variables.$rothkoKinds {
+      &.#{$kind} {
+        border-color: variables.safeGetTheme($kind);
+      }
+    }
+  }
+
+  &.compact {
+    border-radius: 0;
+    &:last-of-type {
+      border-bottom-left-radius: variables.$accordionPanelBorderRadius;
+      border-bottom-right-radius: variables.$accordionPanelBorderRadius;
+    }
+    &:first-of-type {
+      border-top-left-radius: variables.$accordionPanelBorderRadius;
+      border-top-right-radius: variables.$accordionPanelBorderRadius;
+    }
+    &:not(:last-of-type) {
+      border-bottom: none;
+    }
+  }
+
+  &.disabled {
+    @extend %accordion-disabled;
+  }
+}
+
+// phantom button
+.accordion__panel__label {
+  @include mixins.userSelectNone;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: variables.$accordionVerticalPadding variables.$accordionHorizontalPadding;
+  cursor: pointer;
+
+  &:disabled,
+  &.disabled {
+    @extend %accordion-disabled;
+  }
+
+  &:focus-visible {
+    outline: 1px solid variables.$accordionBorderColor;
+  }
+}
+
+.accordion__panel__content {
+  padding: 0 variables.$accordionHorizontalPadding variables.$accordionVerticalPadding;
+}

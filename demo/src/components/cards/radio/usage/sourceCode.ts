@@ -1,7 +1,7 @@
 export const BASIC = `
 import React, { useState } from 'react';
 
-import { RadioGroup, Radio } from '@rothko-ui/ui';
+import { RadioGroup, Radio } from '@rothko-ui/components';
 
 const App = () => {
   const [selected, setSelected] = useState<string>();
@@ -19,7 +19,7 @@ export default App;
 export const DISABLED = `
 import React, { useState } from 'react';
 
-import { Radio, RadioGroup } from '@rothko-ui/ui';
+import { Radio, RadioGroup } from '@rothko-ui/components';
 
 const App = () => {
   const [selected, setSelected] = useState<string>();
@@ -37,7 +37,7 @@ export default App;
 export const MAX_COLUMN = `
 import React, { useState } from 'react';
 
-import { Radio, RadioGroup } from '@rothko-ui/ui';
+import { Radio, RadioGroup } from '@rothko-ui/components';
 
 const App = () => {
   const [selected, setSelected] = useState<string>();

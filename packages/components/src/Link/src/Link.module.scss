@@ -1,0 +1,46 @@
+@use '../../../styles/variables' as variables;
+
+$defaultLinkColor: var(--rothko-typography-link-color, #492bfb);
+
+.link {
+  font-family: variables.$regularFont;
+  font-size: variables.$bodyFontSize;
+  line-height: variables.$bodyLineHeight;
+
+  color: $defaultLinkColor;
+  padding: 0;
+  text-decoration: none;
+  cursor: pointer;
+
+  &.link-small {
+    font-size: variables.$bodySmallFontSize;
+    line-height: variables.$bodySmallLineHeight;
+  }
+}
+
+.link__underline-none {
+  text-decoration: none;
+  &:hover,
+  &:active,
+  &:focus,
+  &:visited {
+    text-decoration: none;
+  }
+}
+
+.link__underline-hover {
+  text-decoration: none;
+  &:hover:not(:disabled):not(.link--disabled) {
+    text-decoration: underline;
+  }
+}
+
+.link__underline-always {
+  text-decoration: underline;
+}
+
+.link--disabled {
+  cursor: not-allowed;
+  text-decoration: none;
+  opacity: 0.7;
+}

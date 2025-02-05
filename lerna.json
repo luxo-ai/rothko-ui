@@ -1,5 +1,11 @@
 {
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/components/src/*",
+    "packages/components",
+    "packages/icons",
+    "packages/tokens",
+    "packages/system"
+  ],
   "version": "independent",
   "npmClient": "yarn",
   "command": {

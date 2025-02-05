@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from '@rothko-ui/ui';
+import { Button } from '@rothko-ui/components';
 import { Flash, Inbox } from '@rothko-ui/icons';
 
 const App = () => {

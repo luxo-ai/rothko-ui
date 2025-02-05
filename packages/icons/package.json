@@ -17,13 +17,14 @@
   "types": "dist/index.d.ts",
   "source": "src/index.ts",
   "scripts": {
-    "build": "microbundle --jsx React.createElement --format modern,cjs --no-sourcemap",
+    "build": "microbundle --jsx React.createElement --format modern --no-sourcemap",
     "prebuild": "rimraf src && rimraf dist && yarn run svgr",
-    "prepare": "run-s build",
-    "svgr": "svgr --icon --typescript --ref -d src -- assets"
+    "prepare": "yarn build",
+    "svgr": "rimraf src && svgr --svg-props width=1rem,height=auto --typescript --index-template index-template.js --out-dir src -- assets"
   },
   "files": [
     "dist",
+    "README.md",
     "LICENSE"
   ],
   "peerDependencies": {
@@ -33,10 +34,10 @@
   "devDependencies": {
     "@svgr/cli": "^6.2.1",
     "@types/react": "^18.0.0",
+    "lodash.kebabcase": "^4.1.1",
     "microbundle": "^0.13.3",
-    "npm-run-all": "^4.1.5",
+    "path": "^0.12.7",
     "rimraf": "^3.0.2",
     "typescript": "^4.7.4"
-  },
-  "gitHead": "fa0338bf50f574c0a42d143d3bd317a40a6e3fb9"
+  }
 }

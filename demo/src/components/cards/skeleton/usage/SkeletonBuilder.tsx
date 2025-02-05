@@ -1,5 +1,5 @@
 import React from 'react';
-import { SkeletonBuilder } from '@rothko-ui/ui';
+import { SkeletonBuilder } from '@rothko-ui/components';
 
 const App = () => {
   return (

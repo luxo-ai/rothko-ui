@@ -1,0 +1,7 @@
+@use '../../../../styles/mixins' as mixins;
+
+.back-button {
+  @include mixins.iosTapHighlightColorTransparent;
+  display: inline-flex;
+  align-items: center;
+}

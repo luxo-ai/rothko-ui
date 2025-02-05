@@ -1,0 +1,34 @@
+@use '../../../styles/mixins' as mixins;
+@use '../../../styles/variables' as variables;
+
+.text {
+  margin: 0;
+  padding: 0;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  font-family: variables.$regularFont;
+  color: variables.$bodyColor;
+  font-size: variables.$bodyFontSize;
+  line-height: variables.$bodyLineHeight;
+
+  &.title {
+    font-family: variables.$boldFont;
+    font-weight: bold;
+  }
+
+  &.subtext {
+    font-family: variables.$lightFont;
+    font-size: variables.$bodySmallFontSize;
+    line-height: variables.$bodySmallLineHeight;
+    opacity: 0.85;
+  }
+}
+
+// make a base stylesheet that you can import?
+@each $kind in variables.$rothkoKinds {
+  .color--#{$kind} {
+    color: variables.safeGetTheme($kind);
+  }
+}

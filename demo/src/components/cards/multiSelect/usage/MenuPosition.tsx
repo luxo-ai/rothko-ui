@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MultiSelect } from '@rothko-ui/ui';
+import { MultiSelect } from '@rothko-ui/components';
 import { listOfNames } from './listOfNames';
 
 const nameOptions = listOfNames.map((name, idx) => ({ id: idx, label: name }));

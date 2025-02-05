@@ -1,5 +1,5 @@
 import { Globe2 } from '@rothko-ui/icons';
-import { Flex, FlexItem, Typography } from '@rothko-ui/ui';
+import { Flex, FlexItem, Paragraph, Heading1 } from '@rothko-ui/components';
 import { TextCode } from '../components/Code';
 import config from '../config';
 
@@ -15,8 +15,8 @@ const SponsorMe = () => {
       <Flex gap="1rem" maxWidth="34rem" alignItems="center">
         <img src="/logo.svg" width="65rem" height="65rem" alt="Rothko-UI" />
         <div>
-          <Typography.h1>Sponsor</Typography.h1>
-          <Typography.body>How to support Rothko UI</Typography.body>
+          <Heading1>Sponsor</Heading1>
+          <Paragraph>How to support Rothko UI</Paragraph>
         </div>
       </Flex>
       <FlexItem marginTop="2rem">
@@ -25,7 +25,7 @@ const SponsorMe = () => {
             <Globe2 width="1.125rem" height="1.125rem" />
           </FlexItem>
           <FlexItem>
-            <Typography.body>Rothko ETH Wallet</Typography.body>
+            <Paragraph>Rothko ETH Wallet</Paragraph>
           </FlexItem>
         </Flex>
         <TextCode sourceCode={config.ethWallet} />

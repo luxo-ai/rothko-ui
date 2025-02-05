@@ -1,7 +1,7 @@
 export const BASIC = `
 import React, { useState } from 'react';
 import { ArrowUpOutline } from '@rothko-ui/icons';
-import { BottomPopup, Button } from '@rothko-ui/ui';
+import { Popup, Button } from '@rothko-ui/components';
 
 const POPUP_CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
@@ -19,9 +19,9 @@ const App = () => {
       >
         Open
       </Button>
-      <BottomPopup open={open} onClose={() => setOpen(false)}>
+      <Popup open={open} onClose={() => setOpen(false)}>
         {POPUP_CONTENT}
-      </BottomPopup>
+      </Popup>
     </>
   );
 };
@@ -31,7 +31,7 @@ export default App;
 export const BLUR = `
 import React, { useState } from 'react';
 import { ArrowUpOutline } from '@rothko-ui/icons';
-import { BottomPopup, Button } from '@rothko-ui/ui';
+import { Popup, Button } from '@rothko-ui/components';
 
 const POPUP_CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
@@ -49,9 +49,9 @@ const App = () => {
       >
         Open
       </Button>
-      <BottomPopup blur open={open} onClose={() => setOpen(false)}>
+      <Popup blur open={open} onClose={() => setOpen(false)}>
         {POPUP_CONTENT}
-      </BottomPopup>
+      </Popup>
     </>
   );
 };

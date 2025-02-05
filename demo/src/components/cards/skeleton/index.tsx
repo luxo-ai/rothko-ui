@@ -1,4 +1,4 @@
-import { Container, Flex } from '@rothko-ui/ui';
+import { Container, Flex } from '@rothko-ui/components';
 
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import { TSCode } from '../../Code';
@@ -14,9 +14,9 @@ import Props from '../Props';
 import Usage from '../Usage';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Skeleton';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Skeleton';
 
-const IMPORT = "import { SkeletonBoxWithLabel } from '@rothko-ui/ui';";
+const IMPORT = "import { SkeletonBoxWithLabel } from '@rothko-ui/components';";
 
 const SkeletonCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();

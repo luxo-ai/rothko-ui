@@ -1,8 +1,9 @@
-import { Flex, FlexItem, Table, TableData, TableRow, Typography } from '@rothko-ui/ui';
+import { Flex, FlexItem, Code, Heading5, Heading3 } from '@rothko-ui/components';
 import React from 'react';
+import { Table, TableData, TableRow } from '../table';
 import styles from './Cards.module.scss';
 import type { ComponentProperty } from './types';
-import { toKebabCase } from '@rothko-ui/utils';
+import toKebabCase from 'lodash.kebabcase';
 import Link from 'next/link';
 
 type PropsTableProps = {
@@ -16,13 +17,13 @@ const PropsTable = ({ props: propsMeta }: PropsTableProps) => {
         <TableRow key={name}>
           <TableData>{name}</TableData>
           <TableData>
-            <Typography.code style={{ fontSize: '0.875rem' }}>{type}</Typography.code>
+            <Code style={{ fontSize: '0.875rem' }}>{type}</Code>
           </TableData>
           {defaultValue === null ? (
             <TableData />
           ) : (
             <TableData>
-              <Typography.code style={{ fontSize: '0.875rem' }}>{defaultValue}</Typography.code>
+              <Code style={{ fontSize: '0.875rem' }}>{defaultValue}</Code>
             </TableData>
           )}
           <TableData>{description}</TableData>
@@ -38,19 +39,18 @@ type PropsCopy = {
 };
 
 const Props = ({ copy }: { copy: PropsCopy | Required<PropsCopy>[] }) => {
-  const Title = Typography['h3'];
   if (Array.isArray(copy)) {
     return (
       <section>
-        <Title className={styles.headerIdk} id="props">
+        <Heading3 className={styles.headerIdk} id="props">
           <Link href="#props" scroll>
             Props
           </Link>
-        </Title>
+        </Heading3>
         <Flex className={styles.propsContainer} flexDirection="column" rowGap="3rem">
           {copy.map(propsCopy => (
             <FlexItem key={propsCopy.title}>
-              <Typography.h5 style={{ marginBottom: '1rem' }}>{propsCopy.title}</Typography.h5>
+              <Heading5 style={{ marginBottom: '1rem' }}>{propsCopy.title}</Heading5>
               <PropsTable props={propsCopy.props} />
             </FlexItem>
           ))}
@@ -64,11 +64,11 @@ const Props = ({ copy }: { copy: PropsCopy | Required<PropsCopy>[] }) => {
 
   return (
     <section>
-      <Title className={styles.headerIdk} id={titleAsKebab}>
+      <Heading3 className={styles.headerIdk} id={titleAsKebab}>
         <Link href={`#${titleAsKebab}`} scroll>
           {title}
         </Link>
-      </Title>
+      </Heading3>
       <div className={styles.propsContainer}>
         <PropsTable props={copy.props} />
       </div>

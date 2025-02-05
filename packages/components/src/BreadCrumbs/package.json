@@ -1,0 +1,61 @@
+{
+  "name": "@rothko-ui/breadcrumbs",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luxo-ai/rothko-ui.git",
+    "directory": "packages/components/src/Button"
+  },
+  "homepage": "https://rothko-ui.com",
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
+  "license": "MIT",
+  "author": "luxo-ai <luxo@rothko-ui.com>",
+  "description": "Button for Rothko UI",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "source": "src/index.ts",
+  "scripts": {
+    "build": "NODE_ENV=prod rollup --config",
+    "build:dev": "NODE_ENV=dev rollup --config --watch",
+    "generate:scss": "typed-scss-modules src --nameFormat none --exportType default",
+    "prebuild": "rimraf dist",
+    "lint": "eslint ./src --ext .js,.ts,.jsx,.tsx",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@rothko-ui/link": "^1.0.0",
+    "@rothko-ui/system": "^1.0.0",
+    "@rothko-ui/typography": "^1.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.7",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "autoprefixer": "^10.4.20",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.34.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-visualizer": "^5.14.0",
+    "sass": "^1.77.0",
+    "typed-scss-modules": "^8.1.1",
+    "typescript": "^5.7.3"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ]
+}

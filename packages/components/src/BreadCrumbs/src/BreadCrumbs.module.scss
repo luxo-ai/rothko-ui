@@ -1,0 +1,17 @@
+@use '../../../styles/variables' as variables;
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.breadcrumbs__item {
+  &:not(:last-of-type):after {
+    font-family: variables.$regularFont;
+    color: variables.$bodyColor;
+    font-size: variables.$bodyFontSize;
+    line-height: variables.$bodyLineHeight;
+    content: ' / ';
+  }
+}

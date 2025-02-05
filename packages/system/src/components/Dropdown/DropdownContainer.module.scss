@@ -1,0 +1,53 @@
+@use '../../../../styles/variables' as variables;
+@use '../../../../styles/placeholders';
+@use '../../../../styles/mixins' as mixins;
+
+$background: var(--rothko-input-background, #fff);
+$foreground: var(--rothko-input-foreground, #000);
+$borderRadius: var(--rothko-input-border-radius, 0.125rem);
+
+.dropdown-container {
+  @extend %ios-tap-highlight-color-transparent;
+
+  @include mixins.optimizeLegibility;
+  color: variables.$bodyColor;
+  font-size: variables.$bodyFontSize;
+  line-height: variables.$bodyLineHeight;
+
+  // taken from input
+  background-color: $background;
+  color: $foreground;
+  border-radius: $borderRadius;
+  &.error:not(:focus) {
+    outline: 1px solid variables.$rothkoDanger / 2;
+  }
+  // end taken from input
+
+  cursor: default;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border: none;
+  outline: none;
+
+  // placeholder text (body) line-height + text margin + top padding + bottom padding + top border + bottom border
+  min-height: calc(1.5rem + 2 * 0.125rem + 2 * 0.5rem + 2 * 2px);
+  // border: 0.125rem solid ${vuar({ category: 'border', fallback: '#000' })};
+
+  &:not(.open) {
+    cursor: pointer;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &:focus-visible,
+  &.focus {
+    //  outline: 0.125rem solid green;
+    //  outline-offset: 0.125rem;
+  }
+}

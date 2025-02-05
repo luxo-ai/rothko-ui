@@ -1,4 +1,4 @@
-import { Container, Flex } from '@rothko-ui/ui';
+import { Container, Flex } from '@rothko-ui/components';
 
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import { TSCode } from '../../Code';
@@ -13,10 +13,9 @@ import { BASIC, DISABLED, MAX_COLUMN } from './usage/sourceCode';
 import Props from '../Props';
 import Usage from '../Usage';
 
-const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Radio';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Radio';
 
-const IMPORT = "import { RadioGroup } from '@rothko-ui/ui';";
+const IMPORT = "import { RadioGroup } from '@rothko-ui/components';";
 
 const RadioGroupCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();

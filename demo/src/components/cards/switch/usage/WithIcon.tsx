@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Switch } from '@rothko-ui/ui';
+import { Switch } from '@rothko-ui/components';
 import { Video, VideoOff } from '@rothko-ui/icons';
 
 const App = () => {

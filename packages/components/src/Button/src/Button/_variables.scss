@@ -1,0 +1,21 @@
+@forward '../../../../styles/variables';
+
+$defaultBorderRadius: 0.125rem; // 2px
+
+$paddingSizeMap: (
+  'xs': 0.3rem 0.5rem,
+  's': 0.3rem 0.5rem,
+  'm': 0.5rem 0.75rem,
+  'l': 0.625rem 0.94rem,
+);
+
+$fontSizeMap: (
+  'xs': 0.75rem,
+  's': 0.85rem,
+  'm': 1rem,
+  'l': 1.25rem,
+);
+
+$borderWidthSizeMap: (
+  'l': 2px,
+);

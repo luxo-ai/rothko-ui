@@ -1,4 +1,4 @@
-import { Flex, Typography } from '@rothko-ui/ui';
+import { Flex, Heading2, Heading1 } from '@rothko-ui/components';
 import React from 'react';
 import { DesktopOnly, MobileOnly } from './Dimensions';
 
@@ -20,19 +20,19 @@ const ErrorPage = ({ code, header, children }: ErrorProps) => {
       <div>
         <DesktopOnly>
           <Flex gap="0.5rem">
-            <Typography.h1>{code}</Typography.h1>
+            <Heading1>{code}</Heading1>
             {header && (
               <>
-                <Typography.h1>|</Typography.h1>
-                <Typography.h1>{header}</Typography.h1>
+                <Heading1>|</Heading1>
+                <Heading1>{header}</Heading1>
               </>
             )}
           </Flex>
         </DesktopOnly>
         <MobileOnly>
           <Flex flexDirection="column" gap="0.5rem" alignItems="center">
-            <Typography.h2>{code}</Typography.h2>
-            {header && <Typography.h2>{header}</Typography.h2>}
+            <Heading2>{code}</Heading2>
+            {header && <Heading2>{header}</Heading2>}
           </Flex>
         </MobileOnly>
       </div>

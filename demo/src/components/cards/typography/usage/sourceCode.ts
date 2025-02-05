@@ -1,21 +1,29 @@
 export const BASIC = `
 import React from 'react';
 
-import { Typography } from '@rothko-ui/ui';
+import {
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+  Heading6,
+  Paragraph,
+} from '@rothko-ui/components';
 
 const App = () => {
   return (
     <>
-      <Typography.h1>h1</Typography.h1>
-      <Typography.h2>h2</Typography.h2>
-      <Typography.h3>h3</Typography.h3>
-      <Typography.h4>h4</Typography.h4>
-      <Typography.h5>h5</Typography.h5>
-      <Typography.h6>h6</Typography.h6>
-      <Typography.body>body</Typography.body>
-      <Typography.bodySmall>bodySmall</Typography.bodySmall>
-      <Typography.label>LABEL</Typography.label>
-      <Typography.caption>caption</Typography.caption>
+      <Heading1>h1</Heading1>
+      <Heading2>h2</Heading2>
+      <Heading3>h3</Heading3>
+      <Heading4>h4</Heading4>
+      <Heading5>h5</Heading5>
+      <Heading6>h6</Heading6>
+      <Paragraph size="l">paragraph large</Paragraph>
+      <Paragraph>paragraph</Paragraph>
+      <Paragraph size="s">paragraph small</Paragraph>
+      <Paragraph size="xs">paragraph Xsmall</Paragraph>
     </>
   );
 };

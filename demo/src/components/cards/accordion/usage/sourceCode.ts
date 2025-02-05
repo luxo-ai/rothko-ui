@@ -1,6 +1,6 @@
 export const BASIC = `
 import React from 'react';
-import { Accordion, AccordionPanel } from '@rothko-ui/ui';
+import { Accordion, AccordionPanel } from '@rothko-ui/components';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
@@ -19,7 +19,7 @@ export default App;
 `;
 export const BORDERED = `
 import React from 'react';
-import { Accordion, AccordionPanel } from '@rothko-ui/ui';
+import { Accordion, AccordionPanel } from '@rothko-ui/components';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
@@ -38,7 +38,7 @@ export default App;
 `;
 export const COMPACT = `
 import React from 'react';
-import { Accordion, AccordionPanel } from '@rothko-ui/ui';
+import { Accordion, AccordionPanel } from '@rothko-ui/components';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
@@ -57,7 +57,7 @@ export default App;
 `;
 export const ICON_OVERRIDE = `
 import React from 'react';
-import { Accordion, AccordionPanel } from '@rothko-ui/ui';
+import { Accordion, AccordionPanel } from '@rothko-ui/components';
 import { ArrowIosForward, RadioButtonOff, RadioButtonOn } from '@rothko-ui/icons';
 
 const ICON_SIZE = '1rem';
@@ -109,7 +109,7 @@ export default App;
 `;
 export const MULTIPLE = `
 import React from 'react';
-import { Accordion, AccordionPanel } from '@rothko-ui/ui';
+import { Accordion, AccordionPanel } from '@rothko-ui/components';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
@@ -128,7 +128,7 @@ export default App;
 `;
 export const SELECTED = `
 import React from 'react';
-import { Accordion, AccordionPanel } from '@rothko-ui/ui';
+import { Accordion, AccordionPanel } from '@rothko-ui/components';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
@@ -153,7 +153,7 @@ export default App;
 `;
 export const WITH_KIND = `
 import React from 'react';
-import { Accordion, AccordionPanel } from '@rothko-ui/ui';
+import { Accordion, AccordionPanel } from '@rothko-ui/components';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
@@ -172,7 +172,7 @@ export default App;
 `;
 export const WITH_SUBTITLE = `
 import React from 'react';
-import { Accordion, AccordionPanel, Typography } from '@rothko-ui/ui';
+import { Accordion, AccordionPanel, Paragraph } from '@rothko-ui/components';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
@@ -185,7 +185,7 @@ const App = () => {
       </AccordionPanel>
       <AccordionPanel
         title="Label 2"
-        subtitle={<Typography.bodySmall>ReactElement subtitle</Typography.bodySmall>}
+        subtitle={<Paragraph size="s">ReactElement subtitle</Paragraph>}
       >
         {CONTENT}
       </AccordionPanel>

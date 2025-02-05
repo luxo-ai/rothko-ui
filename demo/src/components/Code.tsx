@@ -3,8 +3,9 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import React from 'react';
 
 import { CopyOutline } from '@rothko-ui/icons';
-import { Flex, PhantomButton, ToastContextConsumer, Typography } from '@rothko-ui/ui';
+import { Flex, ToasterConsumer, Paragraph } from '@rothko-ui/components';
 import useTheme from './theme/useTheme';
+import { PhantomButton } from './PhantomButton';
 
 export type Language = 'bash' | 'jsx' | 'json' | 'text' | 'typescript';
 
@@ -54,9 +55,11 @@ export const Code = ({
               backgroundColor={style.backgroundColor}
             >
               {displayLanguage && (
-                <Typography.caption style={{ color: style.color }}>{language}</Typography.caption>
+                <Paragraph size="xs" style={{ color: style.color }}>
+                  {language}
+                </Paragraph>
               )}
-              <ToastContextConsumer>
+              <ToasterConsumer>
                 {({ addToast }) => (
                   <CopyToClipboard
                     text={sourceCode}
@@ -65,14 +68,14 @@ export const Code = ({
                     <PhantomButton>
                       <Flex gap="0.25rem">
                         <CopyOutline fill={style.color} width="1.125rem" height="1.125rem" />
-                        <Typography.caption bold style={{ color: style.color }}>
+                        <Paragraph size="xs" bold style={{ color: style.color }}>
                           Copy
-                        </Typography.caption>
+                        </Paragraph>
                       </Flex>
                     </PhantomButton>
                   </CopyToClipboard>
                 )}
-              </ToastContextConsumer>
+              </ToasterConsumer>
             </Flex>
             <pre
               style={{

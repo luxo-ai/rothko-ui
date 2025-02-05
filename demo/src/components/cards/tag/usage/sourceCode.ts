@@ -1,7 +1,7 @@
 export const APPEARANCE = `
 import React from 'react';
 
-import { Tag } from '@rothko-ui/ui';
+import { Tag } from '@rothko-ui/components';
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ export default App;
 export const BASIC = `
 import React from 'react';
 
-import { Tag } from '@rothko-ui/ui';
+import { Tag } from '@rothko-ui/components';
 
 const App = () => {
   return (
@@ -32,7 +32,7 @@ export default App;
 export const CLOSEABLE = `
 import React from 'react';
 
-import { Tag } from '@rothko-ui/ui';
+import { Tag } from '@rothko-ui/components';
 
 const App = () => {
   return <Tag onClose={() => alert('Closed!')}>closeable tag</Tag>;
@@ -43,7 +43,7 @@ export default App;
 export const WITH_KIND = `
 import React from 'react';
 
-import { Tag } from '@rothko-ui/ui';
+import { Tag } from '@rothko-ui/components';
 
 const App = () => {
   return (

@@ -1,4 +1,4 @@
-import { Container, Flex } from '@rothko-ui/ui';
+import { Container, Flex } from '@rothko-ui/components';
 
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import { TSCode } from '../../Code';
@@ -15,9 +15,9 @@ import Props from '../Props';
 import autocompleteProps from './props';
 
 const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/ui/src/components/Autocomplete';
+  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Autocomplete';
 
-const IMPORT = "import { Autocomplete } from '@rothko-ui/ui';";
+const IMPORT = "import { Autocomplete } from '@rothko-ui/components';";
 
 const SingleDropdownCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();

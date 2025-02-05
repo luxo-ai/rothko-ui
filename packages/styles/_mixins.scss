@@ -1,0 +1,48 @@
+@use './variables' as variables;
+
+@mixin semanticTextChildren($kind, $foreground: false) {
+  & > h1,
+  & > h2,
+  & > h3,
+  & > h4,
+  & > h5,
+  & > h6,
+  & > p,
+  & > span,
+  & > code {
+    color: if($foreground, variables.safeGetThemeForeground($kind), variables.safeGetTheme($kind));
+  }
+  & > svg {
+    fill: if($foreground, variables.safeGetThemeForeground($kind), variables.safeGetTheme($kind));
+  }
+}
+
+@mixin textChildrenColor($color) {
+  & > h1,
+  & > h2,
+  & > h3,
+  & > h4,
+  & > h5,
+  & > h6,
+  & > p,
+  & > span,
+  & > code {
+    color: $color;
+  }
+  & > svg {
+    fill: $color;
+  }
+}
+
+@mixin iosTapHighlightColorTransparent {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@mixin userSelectNone {
+  user-select: none;
+}
+
+@mixin optimizeLegibility {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
