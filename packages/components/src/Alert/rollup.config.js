@@ -1,66 +1,69 @@
-import resolve from '@rollup/plugin-node-resolve';
+import resolveNodeModules from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import { babel } from '@rollup/plugin-babel';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import externalPeerDependencies from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import { visualizer } from 'rollup-plugin-visualizer';
 import autoprefixer from 'autoprefixer';
 
 const isDev = process.env.NODE_ENV === 'dev';
 
-export default [
-  {
-    input: 'src/index.ts',
-    output: [
-      {
-        dir: 'dist',
-        entryFileNames: '[name].mjs',
-        chunkFileNames: 'chunk-[hash].mjs',
-        format: 'esm',
-        sourcemap: false, // isDev,
-      },
-    ],
-    treeshake: true,
-    plugins: [
-      // similar to "external" keyword in output
-      peerDepsExternal(),
-      resolve({
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        mainFields: ['module', 'main'],
-      }),
-      commonjs({
-        ignoreGlobal: true,
-        include: /\/node_modules\//,
-      }),
-      typescript({
-        tsconfig: './tsconfig.json',
-        // Enable generation of declaration files
-        declaration: true,
-        // Output directory for declaration files
-        declarationDir: 'dist',
-        outDir: 'dist',
-        include: ['**/*.ts', '**/*.tsx', '**/*.d.ts', './declarations.d.ts'],
-      }),
-      postcss({
-        plugins: [autoprefixer()],
-        extract: false, // true,
-        modules: true,
-        minimize: true,
-        sourceMap: isDev,
-        use: ['sass'],
-      }),
-      babel({
-        exclude: /\/node_modules\//,
-        // convert JSX syntax to React.createElement calls
-        presets: ['@babel/preset-react'],
-        // mark helpers meant to transpile modern ECMAScript features as 'external'
-        babelHelpers: 'bundled',
-      }),
-      visualizer({
-        open: false,
-        filename: 'reports/bundle-analysis.html',
-      }),
-    ],
+export default {
+  input: 'src/index.ts',
+  output: {
+    dir: 'dist',
+    entryFileNames: '[name].mjs',
+    format: 'esm',
+    sourcemap: isDev,
   },
-];
+  treeshake: {
+    // Helps treeshake remove unused imports if:
+    // 1) you declare that there are no side effects when loading a module
+    moduleSideEffects: false,
+    // 2) you declare that there are no side effects when reading a property
+    propertyReadSideEffects: false,
+  },
+  plugins: [
+    /* == Keep peer dependencies as external imports and not bundled == */
+    externalPeerDependencies(),
+    /* == Resolve modules from node_modules == */
+    resolveNodeModules({
+      // 1) if can't find the module in package.json, try with these extensions in this order
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      // 2) order of preference for package.json entry point fields
+      mainFields: ['module', 'main'],
+      // 3) prefer browser versions of modules (specified package.jsons)
+      browser: true,
+    }),
+    /* == Convert CommonJS modules to ES6 == */
+    commonjs({
+      ignoreGlobal: true,
+      include: /\/node_modules\//,
+    }),
+    typescript({
+      tsconfig: './tsconfig.json',
+      // Enable generation of declaration files
+      declaration: true,
+      outDir: 'dist',
+    }),
+    postcss({
+      plugins: [autoprefixer()],
+      extract: true,
+      modules: true,
+      minimize: true,
+      sourceMap: isDev,
+      use: ['sass'],
+    }),
+    babel({
+      exclude: /\/node_modules\//,
+      // convert JSX syntax to React.createElement calls
+      presets: ['@babel/preset-react'],
+      babelHelpers: 'bundled',
+    }),
+    visualizer({
+      open: false,
+      filename: 'reports/bundle-analysis.html',
+    }),
+  ],
+};

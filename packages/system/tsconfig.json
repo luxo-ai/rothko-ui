@@ -1,26 +1,17 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "module": "ESNext",
-    "target": "ES2020",
+    "target": "ES2022",
     "outDir": "dist",
-    // Generate corresponding '.d.ts' file
     "declaration": false,
-    // Don't create sourcemaps for '.d.ts' files
     "declarationMap": false,
-    "rootDir": "./src",
-    "strict": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "moduleResolution": "node",
     "sourceMap": false,
+    "rootDir": "./src",
+    "moduleResolution": "node",
     "jsx": "react",
-    // include dom API for definitions like window on compile
-    "lib": ["dom"]
+    "lib": ["dom", "esnext"]
   },
-  "compileOnSave": true,
   "exclude": [
     "**/*.spec.ts",
     "**/*.spec.tsx",
@@ -29,5 +20,5 @@
     "node_modules",
     "dist"
   ],
-  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx", "**/*.module.scss"]
+  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx"]
 }

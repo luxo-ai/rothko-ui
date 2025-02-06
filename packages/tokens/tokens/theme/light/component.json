@@ -29,8 +29,10 @@
       "background::focus": { "value": "#EEE" }
     }
   },
-  "tabBar": {
-    "border": { "value": "#000" }
+  "tabs": {
+    "border": { "value": "#000" },
+    "background": { "value": "transparent" },
+    "foreground": { "value": "{foreground}" }
   },
   "radio": {
     "border": { "value": "#DEE7F5" },

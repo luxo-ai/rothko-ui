@@ -1,1 +1,0 @@
-@babel/core @rollup/plugin-babel @rollup/plugin-commonjs @rollup/plugin-node-resolve @rollup/plugin-typescript "@types/react@^18.0.0" "@types/react-dom@^18.0.0" autoprefixer rimraf rollup rollup-plugin-peer-deps-external rollup-plugin-postcss "sass@^1.77.0" typed-scss-modules typescript

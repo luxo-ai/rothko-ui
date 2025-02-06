@@ -186,7 +186,7 @@ const AccordionPanel = React.forwardRef<
     return (
       <div id={id} className={classes(baseContainerClasses, className)} style={style} ref={ref}>
         <header>
-          <PhantomButton
+          <button
             id={toggleId}
             aria-controls={contentId}
             aria-disabled={disabled}
@@ -215,7 +215,7 @@ const AccordionPanel = React.forwardRef<
                 {subtitle}
               </Flex>
             )}
-          </PhantomButton>
+          </button>
         </header>
         <PanelContent
           id={contentId}

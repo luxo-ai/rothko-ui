@@ -5,6 +5,7 @@
 .tab-list {
   list-style: none;
   justify-content: space-between;
+  background: variables.$tabsBackground;
 
   margin: 0;
   // padding betweeb list and underline
@@ -27,7 +28,7 @@
 .tab__underline {
   $borderWidthAndStyle: 3px solid;
 
-  border-bottom: $borderWidthAndStyle variables.$tabBarBorder;
+  border-bottom: $borderWidthAndStyle variables.$tabsBorder;
   @each $kind in variables.$rothkoKinds {
     &--#{$kind} {
       border-bottom: $borderWidthAndStyle variables.safeGetTheme($kind);
@@ -43,7 +44,7 @@
   @include mixins.iosTapHighlightColorTransparent;
 
   font-family: variables.$regularFont;
-  color: variables.$tabBarForeground;
+  color: variables.$tabsForeground;
   font-size: variables.$bodyFontSize;
   line-height: variables.$bodyLineHeight;
 

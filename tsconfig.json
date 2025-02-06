@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "ESNext",
-    "target": "ESNext",
+    "target": "ES2022",
     "strict": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -10,7 +10,5 @@
     "isolatedModules": true,
     "moduleResolution": "node"
   },
-  "compileOnSave": true,
-  "exclude": ["**/*.spec.ts", "node_modules"],
-  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx"]
+  "compileOnSave": true
 }
