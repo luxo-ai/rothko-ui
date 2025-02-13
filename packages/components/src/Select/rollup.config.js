@@ -49,7 +49,7 @@ export default {
     }),
     postcss({
       plugins: [autoprefixer()],
-      extract: true,
+      extract: false,
       modules: true,
       minimize: true,
       sourceMap: isDev,

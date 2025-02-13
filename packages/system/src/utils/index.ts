@@ -35,4 +35,3 @@ export {
   filterIterable,
   map,
 } from './helpers';
-export { default as Stack } from './Stack';

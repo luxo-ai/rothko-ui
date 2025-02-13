@@ -1,12 +1,9 @@
 import React from 'react';
 
-import { classes, scopedClasses, keyDownFactory, ListenableKeys, useId } from '@rothko-ui/system';
+import { classes, keyDownFactory, ListenableKeys, useId } from '@rothko-ui/system';
 
 import type { RothkoKind, WithAria } from '@rothko-ui/system';
 import { Paragraph } from '@rothko-ui/typography';
-import styles from './Radio.module.scss';
-
-const sc = scopedClasses(styles);
 
 export type AriaAttributes =
   | 'aria-label'
@@ -66,6 +63,15 @@ export type RadioInnerProps = {
   style?: React.CSSProperties;
 };
 
+const rothkoKindBg = {
+  danger: 'bg-(--rothko-danger)',
+  info: 'bg-(--rothko-info)',
+  success: 'bg-(--rothko-success)',
+  warning: 'bg-(--rothko-warning)',
+  primary: 'bg-(--rothko-primary)',
+  secondary: 'bg-(--rothko-secondary)',
+} as const;
+
 const RadioInner = ({
   id,
   'aria-label': ariaLabel,
@@ -92,17 +98,36 @@ const RadioInner = ({
 
   const onKeyDown = keyDownFactory({ [ListenableKeys.Enter]: clickRadio });
 
-  const outerDivClassess = sc('radio__outer-circle', disabled && 'disabled', error && 'error');
+  const clzContainer = classes('flex', 'items-center', 'justify-start', 'gap-[0.3rem]', className);
 
-  const middleDivClasses = sc(
-    'radio__middle-circle',
-    error && 'error',
-    selected && 'selected',
-    kind && kind
+  const clzOuterCircle = classes(
+    'w-[1.25rem]',
+    'h-[1.25rem]',
+    'rounded-full',
+    'p-[0.125rem]',
+    !disabled && 'cursor-pointer',
+    'bg-(--rothko-radio-border)',
+    disabled && 'cursor-not-allowed',
+    disabled && 'opacity-60',
+    error && 'outline outline-[1.5px] outline-[var(--danger-500)] outline-offset-[0.5px]'
   );
 
+  const clzMiddleCircle = classes(
+    'w-full',
+    'h-full',
+    'rounded-full',
+    'p-[0.25rem]',
+    !selected && 'bg-(--rothko-radio-background)',
+    'transition-[background-color 0.1s ease]',
+    !error && selected && !kind && 'bg-(--rothko-radio-background-focus)',
+    !error && selected && kind && rothkoKindBg[kind],
+    error && selected && 'bg-(--rothko-danger-500)'
+  );
+
+  const clzInnerCircle = classes('w-full', 'h-full', 'rounded-full', 'bg-(--rothko-radio-border)');
+
   return (
-    <div style={style} className={classes(styles['radio__container'], className)}>
+    <div style={style} className={clzContainer}>
       <div
         id={id}
         aria-describedby={ariaDescribedBy}
@@ -114,13 +139,13 @@ const RadioInner = ({
         aria-label={ariaLabel}
         aria-errormessage={ariaErrorMessage}
         role="radio"
-        className={outerDivClassess}
+        className={clzOuterCircle}
         onClick={() => clickRadio()}
         onKeyDown={onKeyDown}
         tabIndex={0}
       >
-        <div aria-hidden className={middleDivClasses}>
-          {selected && <div aria-hidden className={styles['radio__inner-circle']} />}
+        <div aria-hidden className={clzMiddleCircle}>
+          {selected && <div aria-hidden className={clzInnerCircle} />}
         </div>
       </div>
       {children &&

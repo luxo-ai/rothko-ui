@@ -35,7 +35,6 @@
 }
 
 .modal__header {
-  @include mixins.optimizeLegibility;
   font-family: variables.$regularFont;
   color: variables.$modalForeground;
 

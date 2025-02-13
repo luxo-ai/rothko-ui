@@ -1,16 +1,24 @@
 import { Github, Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
-import { Button, Drawer, Flex, FlexItem, Paragraph, Heading5 } from '@rothko-ui/components';
+import {
+  Button,
+  Drawer,
+  Flex,
+  FlexItem,
+  Paragraph,
+  Heading5,
+  classes,
+} from '@rothko-ui/components';
 import cookieCutter from 'cookie-cutter';
 import { useEffect, useMemo, useState } from 'react';
 
 import config from '../../config';
 import styles from './Navigation.module.scss';
 import NextLink from 'next/link';
-import { DesktopOnly, MobileOnly } from '../Dimensions';
+import { DesktopOnly, MobileOnly } from '../dimensions';
 import NavigationList from './NavigationList';
 import { useRouter } from 'next/router';
-import useTheme from '../theme/useTheme';
-import { PhantomButton } from '../PhantomButton';
+import useTheme from '../../hooks/useTheme';
+import { PhantomButton } from '../button';
 
 const Navigation = () => {
   const { theme, toggleTheme } = useTheme();
@@ -41,8 +49,8 @@ const Navigation = () => {
             <MobileOnly>
               <FlexItem>
                 <PhantomButton
-                  style={{ display: 'flex' }}
                   aria-label="Menu"
+                  className="flex"
                   onClick={() => setIsDrawerOpen(true)}
                 >
                   <Menu width={28} height={28} />
@@ -60,19 +68,10 @@ const Navigation = () => {
           </Flex>
           <Flex justifyContent="center" alignItems="center" columnGap="1.75rem">
             <Flex justifyContent="center" alignItems="center" columnGap="1rem">
-              <NextLink
-                target="_blank"
-                href={config.repoUrl}
-                style={{ display: 'flex' }}
-                className={styles.hoverButton}
-              >
+              <NextLink target="_blank" href={config.repoUrl} className={styles.hoverButton}>
                 <Github fill={theme === 'dark' ? '#fff' : '#000'} width={28} height={28} />
               </NextLink>
-              <PhantomButton
-                style={{ display: 'flex' }}
-                className={styles.hoverButton}
-                onClick={() => toggleTheme()}
-              >
+              <PhantomButton className={styles.hoverButton} onClick={() => toggleTheme()}>
                 {modeIcon}
               </PhantomButton>
             </Flex>

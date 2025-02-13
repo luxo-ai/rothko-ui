@@ -1,12 +1,9 @@
-@use '../../../styles/mixins' as mixins;
-@use '../../../styles/variables' as variables;
+@use '../../../../styles/mixins' as mixins;
+@use '../../../../styles/variables' as variables;
 
 .text {
   margin: 0;
   padding: 0;
-
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 
   font-family: variables.$regularFont;
   color: variables.$bodyColor;

@@ -1,7 +1,7 @@
 import { Flex, FlexItem, Code, Heading5, Heading3 } from '@rothko-ui/components';
 import React from 'react';
 import { Table, TableData, TableRow } from '../table';
-import styles from './Cards.module.scss';
+import styles from './Card.module.scss';
 import type { ComponentProperty } from './types';
 import toKebabCase from 'lodash.kebabcase';
 import Link from 'next/link';

@@ -12,7 +12,6 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import React from 'react';
 import { ToasterContextProvider } from '@rothko-ui/components';
 import PaddedNavLayout from '../components/layout/PaddedNavLayout';
-import ThemeProvider from '../components/theme/ThemeProvider';
 
 type RothkoAppProps = AppProps & {
   cookies?: Partial<Record<string, string>>;
@@ -29,13 +28,11 @@ export default function App({
     <ErrorBoundary>
       <RothkoHeader />
       <IsMobileOrTabletContext.Provider value={isMobileOrTablet}>
-        <ThemeProvider defaultTheme={theme}>
-          <PaddedNavLayout selected={pageProps.router.pathname}>
-            <ToasterContextProvider>
-              <Component {...pageProps} />
-            </ToasterContextProvider>
-          </PaddedNavLayout>
-        </ThemeProvider>
+        <PaddedNavLayout selected={pageProps.router.pathname}>
+          <ToasterContextProvider>
+            <Component {...pageProps} />
+          </ToasterContextProvider>
+        </PaddedNavLayout>
       </IsMobileOrTabletContext.Provider>
     </ErrorBoundary>
   );

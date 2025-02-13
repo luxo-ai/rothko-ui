@@ -4,8 +4,8 @@ import React from 'react';
 
 import { CopyOutline } from '@rothko-ui/icons';
 import { Flex, ToasterConsumer, Paragraph } from '@rothko-ui/components';
-import useTheme from './theme/useTheme';
-import { PhantomButton } from './PhantomButton';
+import useTheme from '../hooks/useTheme';
+import { PhantomButton } from './button';
 
 export type Language = 'bash' | 'jsx' | 'json' | 'text' | 'typescript';
 

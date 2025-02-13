@@ -1,10 +1,11 @@
 import { Container, Flex } from '@rothko-ui/components';
 
-import { BASIC } from './usage/sourceCode';
+import { BASIC, APPEARANCE } from './usage/sourceCode';
 import { TSCode } from '../../Code';
 import alertCopy from './copy';
 import alertProps from './props';
 import Basic from './usage/Basic';
+import Appearance from './usage/Appearance';
 import Card from '../Card';
 import Example from '../Example';
 import Props from '../Props';
@@ -19,11 +20,14 @@ const AlertCard = () => {
     <Card codeUrl={GITHUB_URL} copy={alertCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Usage />
-        <Container maxWidth="32rem">
+        <Container maxWidth="34rem">
           <TSCode sourceCode={IMPORT} />
         </Container>
         <Example sourceCode={BASIC}>
           <Basic />
+        </Example>
+        <Example title="Appearance" sourceCode={APPEARANCE}>
+          <Appearance />
         </Example>
       </Flex>
       <Props copy={{ props: alertProps }} />

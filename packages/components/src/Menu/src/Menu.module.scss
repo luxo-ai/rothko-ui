@@ -1,5 +1,5 @@
 @use '../../../styles/mixins' as mixins;
-@use '../../../styles/placeholders';
+@use '../../../../styles/placeholders';
 @use '../../../styles/variables' as variables;
 
 // rename to menu vars
@@ -42,9 +42,7 @@ $dropdownOptionBackgroundFocused: var(--rothko-dropdown-option-background-focus,
 
 %menuItem {
   outline: none;
-  padding: 0.75rem 1rem;
 
-  @include mixins.optimizeLegibility;
   font-family: variables.$regularFont;
   color: variables.$bodyColor;
   font-size: variables.$bodyFontSize;

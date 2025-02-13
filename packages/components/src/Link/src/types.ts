@@ -1,8 +1,8 @@
-export type UnderlineVariant = 'none' | 'hover' | 'always';
+export type LinkUnderlineVariant = 'none' | 'hover' | 'always';
 
 export type LinkProps = {
   disabled?: boolean;
-  underline?: UnderlineVariant;
-  small?: boolean;
+  underlineVariant?: LinkUnderlineVariant;
+  size?: 's' | 'm';
   as?: keyof JSX.IntrinsicElements;
 };

@@ -1,4 +1,71 @@
 @import '../../node_modules/@rothko-ui/tokens/build/tokens.css';
+@import 'tailwindcss';
+@source '../../node_modules/@rothko-ui/accordion';
+@source '../../node_modules/@rothko-ui/alert';
+@source '../../node_modules/@rothko-ui/autocomplete';
+@source '../../node_modules/@rothko-ui/breadcrumbs';
+@source '../../node_modules/@rothko-ui/button';
+@source '../../node_modules/@rothko-ui/checkbox';
+@source '../../node_modules/@rothko-ui/drawer';
+@source '../../node_modules/@rothko-ui/input';
+@source '../../node_modules/@rothko-ui/modal';
+@source '../../node_modules/@rothko-ui/link';
+@source '../../node_modules/@rothko-ui/menu';
+@source '../../node_modules/@rothko-ui/select';
+@source '../../node_modules/@rothko-ui/popup';
+@source '../../node_modules/@rothko-ui/radio';
+@source '../../node_modules/@rothko-ui/switch';
+
+@layer utilities {
+  .font-rothko-light {
+    font-family: var(--rothko-font-family-light);
+  }
+  .font-rothko-regular {
+    font-family: var(--rothko-font-family-regular);
+  }
+  .font-rothko-bold {
+    font-family: var(--rothko-font-family-bold);
+  }
+  .font-rothko-size-body {
+    font-size: var(--rothko-font-size-body);
+  }
+  .color-input {
+    color: var(--rothko-input-foreground);
+  }
+  .bg-input {
+    background-color: var(--rothko-input-background);
+  }
+  .menu-top {
+    top: calc(100% + 0.25rem);
+  }
+
+  .ios-tap-highlight-color-transparent {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .slash-separated:not(:last-of-type)::after {
+    content: ' / ';
+  }
+  .font-smoothing-antialiased {
+    /* Use font smoothing to make text more readable + lighter */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .hide-chrome-browser-outline {
+    outline: none;
+    :active,
+    :focus {
+      outline: none;
+    }
+  }
+  .webkit-overflow-scrolling-touch {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+pre {
+  font-family: revert;
+}
+
 /* ^ REPLACE TODO */
 html,
 body {
@@ -12,11 +79,6 @@ body {
 
 * {
   box-sizing: border-box;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 
 :root {

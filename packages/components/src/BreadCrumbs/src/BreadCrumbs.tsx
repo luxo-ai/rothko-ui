@@ -1,7 +1,6 @@
 import { classes } from '@rothko-ui/system';
 import React from 'react';
 
-import styles from './BreadCrumbs.module.scss';
 import type { WithAria } from '@rothko-ui/system';
 
 type AriaAttributes =
@@ -51,7 +50,7 @@ const BreadCrumbs = ({
       aria-describedby={ariaDescribedBy}
       role="navigation"
       style={style}
-      className={classes(styles['breadcrumbs'], className)}
+      className={classes('flex items-center gap-1', className)}
     >
       {children}
     </div>

@@ -1,6 +1,6 @@
 import { Heading3 } from '@rothko-ui/components';
 import Link from 'next/link';
-import styles from './Cards.module.scss';
+import styles from './Card.module.scss';
 
 const Usage = () => (
   <Heading3 className={styles.headerIdk} id="usage">

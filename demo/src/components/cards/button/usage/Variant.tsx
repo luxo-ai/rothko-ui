@@ -5,8 +5,8 @@ import { Button } from '@rothko-ui/components';
 const App = () => {
   return (
     <>
-      <Button variant="square">Square</Button>
-      <Button variant="pill">Pill</Button>
+      <Button variant="filled">Filled</Button>
+      <Button variant="outline">Outline</Button>
     </>
   );
 };

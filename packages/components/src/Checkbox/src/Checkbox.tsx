@@ -2,19 +2,9 @@ import React from 'react';
 
 import { Checkmark } from '@rothko-ui/icons';
 import type { Dictionary, RothkoKind, WithAria } from '@rothko-ui/system';
-import {
-  classes,
-  scopedClasses,
-  isString,
-  useId,
-  keyDownFactory,
-  ListenableKeys,
-} from '@rothko-ui/system';
+import { classes, isString, useId, keyDownFactory, ListenableKeys } from '@rothko-ui/system';
 
 import { Paragraph } from '@rothko-ui/typography';
-import styles from './Checkbox.module.scss';
-
-const sc = scopedClasses(styles);
 
 type StyleableComponents = 'errorText' | 'label';
 
@@ -102,6 +92,15 @@ type CheckboxProps = {
   styles?: Partial<Record<StyleableComponents, React.CSSProperties>>;
 };
 
+const rothkoKindLookup = {
+  primary: 'bg-(--rothko-primary)',
+  secondary: 'bg-(--rothko-secondary)',
+  success: 'bg-(--rothko-success)',
+  info: 'bg-(--rothko-info)',
+  warning: 'bg-(--rothko-warning)',
+  danger: 'bg-(--rothko-danger)',
+};
+
 const Checkbox = ({
   id,
   'aria-label': ariaLabel,
@@ -139,18 +138,35 @@ WithAria<CheckboxProps, AriaAttributes>) => {
 
   const onKeyDown = keyDownFactory({ [ListenableKeys.Enter]: clickCheckbox });
 
-  const baseClassses = sc(
-    'checkbox',
-    kind && kind,
-    error && 'error',
-    checked && 'selected',
-    disabled && 'disabled'
+  const baseClasses = classes(
+    'ios-tap-highlight-color-transparent',
+    'flex',
+    'items-center',
+    'justify-center',
+    'w-[1.125rem]', // add to tokens
+    'h-[1.125rem]',
+    'cursor-pointer',
+    'rounded-[1px]', // add to tokens?
+    'p-[0.125rem]', // add to tokens
+    'bg-(--rothko-checkbox-background)',
+    'transition-[background-color] ease-[0.1s]',
+    checked && !kind && 'bg-(--rothko-checkbox-background-focus)',
+    checked && kind && rothkoKindLookup[kind],
+    'focus-visible:outline',
+    'focus-visible:outline-1',
+    'focus-visible:outline-(--rothko-info-300)', // replacce with token
+    error && 'peer group bg-[rgba(var(--rothkoDanger),0.1)]', // check if works
+    disabled && 'cursor-not-allowed',
+    disabled && 'opacity-60' // make token => disabled opacity
   );
 
   const iconColorVar = kind ? `--rothko-${kind}-foreground` : '--rothko-checkbox-icon-background';
 
   return (
-    <div style={style} className={classes(styles['checkbox__container'], className)}>
+    <div
+      style={style}
+      className={classes('relative flex items-center justify-start gap-2', className)}
+    >
       <div
         id={id}
         aria-describedby={ariaDescribedBy}
@@ -166,7 +182,7 @@ WithAria<CheckboxProps, AriaAttributes>) => {
         aria-disabled={ariaDisabled || disabled}
         aria-label={ariaLabel}
         aria-errormessage={!ariaErrorMessage && error ? errorMessageId : ariaErrorMessage}
-        className={baseClassses}
+        className={baseClasses}
         onClick={() => clickCheckbox()}
         onKeyDown={onKeyDown}
         role="checkbox"

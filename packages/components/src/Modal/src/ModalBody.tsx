@@ -1,6 +1,4 @@
 import React from 'react';
-import styles from './Modal.module.scss';
-import { classes } from '@rothko-ui/system';
 
 type ModalBodyProps = {
   id?: string;
@@ -11,7 +9,7 @@ type ModalBodyProps = {
 
 const ModalBody = ({ id, className, style, children }: ModalBodyProps) => {
   return (
-    <div id={id} style={style} className={classes(styles['modal__body'], className)}>
+    <div id={id} style={style} className={className}>
       {children}
     </div>
   );

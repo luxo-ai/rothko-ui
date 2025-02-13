@@ -1,2 +1,2 @@
-export type ButtonAppearance = 'filled' | 'outline';
-export type ButtonVariant = 'pill' | 'square' | 'default';
+export type ButtonVariant = 'filled' | 'outline';
+export type ButtonRadius = 'default' | 'full' | 'none';

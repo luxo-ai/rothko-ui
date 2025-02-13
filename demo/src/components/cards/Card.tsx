@@ -14,11 +14,11 @@ import {
 } from '@rothko-ui/components';
 import toKebabCase from 'lodash.kebabcase';
 import { Code } from '../Code';
-import styles from './Cards.module.scss';
+import styles from './Card.module.scss';
 import type { Body as BodyType, CCode, CardCopy, Section as SectionType } from './types';
 import Markdown from './Markdown';
-import { List, ListItem } from '../List';
-import useTheme from '../theme/useTheme';
+import { List, ListItem } from '../list';
+import useTheme from '../../hooks/useTheme';
 
 type CardProps = {
   children?: React.ReactNode;
@@ -32,22 +32,14 @@ const Card = ({ children, copy, codeUrl }: CardProps) => {
   return (
     <div className={styles.componentCard}>
       <header>
-        <Heading1 className={styles.cardTitle}>{title}</Heading1>
+        <Heading1>{title}</Heading1>
         <Paragraph className={styles.bodySubtext}>{description}</Paragraph>
         {codeUrl && (
           <Container marginTop="1.5rem">
             <Link
-              style={{
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                columnGap: '0.4rem',
-                width: 'fit-content',
-              }}
+              className="cursor-pointer flex items-center gap-2 w-fit"
               href={codeUrl}
               target="_bank"
-              // fixes mobile flashing issue
-              // className="phantom-button"
             >
               <Github width={23} height={23} fill={theme === 'dark' ? '#fff' : undefined} />
               <Paragraph size="s">View Source</Paragraph>

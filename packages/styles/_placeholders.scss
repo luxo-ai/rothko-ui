@@ -1,19 +1,5 @@
 @use './variables' as variables;
 
-%ios-tap-highlight-color-transparent {
-  -webkit-tap-highlight-color: transparent;
-}
-
-// i don't think this is necessary anymore postcss adds vendor prefixes
-%user-select-none {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none;
-}
-
 %hide-chrome-browser-outline {
   outline: none;
   :active,

@@ -1,29 +1,22 @@
 import React from 'react';
 
-import { classes, scopedClasses, PhantomButton } from '@rothko-ui/system';
+import { PhantomButton } from '@rothko-ui/system';
 
 import type { LinkProps } from './types';
-import styles from './Link.module.scss';
-
-const sc = scopedClasses(styles);
+import { baseClz } from './styles';
 
 const LinkButton = React.forwardRef<
   HTMLButtonElement,
   LinkProps & Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'ref' | 'type'>
->(({ disabled, small, underline, className, children, ...props }, ref) => {
-  const baseClasses = sc(
-    'link',
-    small && 'link-small',
-    disabled && 'link--disabled',
-    underline && `link__underline-${underline}`
-  );
+>(({ disabled, size, underlineVariant, className, children, ...props }, ref) => {
+  const baseClasses = baseClz({ underlineVariant, size, disabled })(className);
   return (
     <PhantomButton
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
       disabled={disabled}
       ref={ref}
-      className={classes(baseClasses, className)}
+      className={baseClasses}
     >
       {children}
     </PhantomButton>

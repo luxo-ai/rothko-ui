@@ -1,18 +1,8 @@
-import {
-  classes,
-  useId,
-  isString,
-  scopedClasses,
-  ListenableKeys,
-  keyDownFactory,
-} from '@rothko-ui/system';
+import { classes, useId, isString, ListenableKeys, keyDownFactory } from '@rothko-ui/system';
 import type { CSSProperties } from 'react';
 import React from 'react';
 import type { WithAria, RothkoKind, Dictionary } from '@rothko-ui/system';
 import { Paragraph } from '@rothko-ui/typography';
-import styles from './Switch.module.scss';
-
-const sc = scopedClasses(styles);
 
 type StyleableComponents = 'errorText' | 'label';
 
@@ -112,6 +102,15 @@ type SwitchProps = {
   selected?: boolean;
 };
 
+const rothkoKindBg = {
+  danger: 'bg-(--rothko-danger)',
+  info: 'bg-(--rothko-info)',
+  success: 'bg-(--rothko-success)',
+  warning: 'bg-(--rothko-warning)',
+  primary: 'bg-(--rothko-primary)',
+  secondary: 'bg-(--rothko-secondary)',
+} as const;
+
 const Switch = ({
   children,
   className,
@@ -150,8 +149,42 @@ const Switch = ({
 
   const onKeyDown = keyDownFactory({ [ListenableKeys.Enter]: handleChange });
 
+  const clzOuterCircle = classes(
+    'hide-chrome-browser-outline',
+    'ios-tap-highlight-color-transparent',
+    'flex',
+    'justify-start',
+    'items-center',
+    !disabled && 'cursor-pointer',
+    'user-select-none',
+    'outline-none',
+    'w-[2.5rem]',
+    'h-[calc(1.25rem_+_2px)]',
+    'rounded-full',
+    !selected && 'bg-(--rothko-switch-background)',
+    'transition-colors duration-250 ease-in',
+    selected && !kind && 'bg-(--rothko-switch-background-focus)',
+    selected && kind && rothkoKindBg[kind],
+    error && 'outline outline-[1px] outline-(--rothko-danger-500)',
+    disabled && 'cursor-not-allowed opacity-60'
+  );
+
+  const clzInnerCircle = classes(
+    'flex',
+    'justify-center',
+    'items-center',
+    'w-[1.25rem]',
+    'h-[1.25rem]',
+    'my-0',
+    'mx-[1px]',
+    'rounded-full',
+    'bg-(--rothko-switch-handle-background)',
+    'transition-transform duration-[0.15s] ease-in-out',
+    selected && 'transform translate-x-[calc(1.25rem_-_2px)]'
+  );
+
   return (
-    <div className={classes(styles['switch__container'], className)} style={style}>
+    <div className={classes('flex items-center gap-[0.5rem]', className)} style={style}>
       <div
         id={id}
         aria-describedby={ariaDescribedBy}
@@ -167,19 +200,13 @@ const Switch = ({
         aria-disabled={ariaDisabled || disabled}
         aria-label={ariaLabel}
         aria-errormessage={!ariaErrorMessage && error ? errorMessageId : ariaErrorMessage}
-        className={sc(
-          'switch__outer-circle',
-          selected && 'selected',
-          kind && kind,
-          disabled && 'disabled',
-          error && 'error'
-        )}
+        className={clzOuterCircle}
         onClick={handleChange}
         onKeyDown={onKeyDown}
         role="switch"
         tabIndex={0}
       >
-        <div className={sc('switch__inner-circle', { selected })}>
+        <div className={clzInnerCircle}>
           {selected ? onIcon && <>{onIcon}</> : offIcon && <>{offIcon}</>}
         </div>
       </div>

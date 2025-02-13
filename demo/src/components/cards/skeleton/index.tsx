@@ -26,7 +26,7 @@ const SkeletonCard = () => {
     <Card codeUrl={GITHUB_URL} copy={skeletonCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Usage />
-        <Container maxWidth="32rem">
+        <Container maxWidth="34rem">
           <TSCode sourceCode={IMPORT} />
         </Container>
         <Example title="Box with Label" sourceCode={SKELETON_BOX_WITH_LABEL}>

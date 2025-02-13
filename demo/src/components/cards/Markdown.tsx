@@ -27,7 +27,7 @@ const Markdown = (props: { children: string }) => (
       p: ({ children }) => <Paragraph>{children}</Paragraph>,
       a: ({ children, href = '/' }) => (
         <Link target={startsWithHttpOrHttps(href) ? '_blank' : undefined} href={href}>
-          <LinkButton underline="none" as="span">
+          <LinkButton underlineVariant="none" as="span">
             {children}
           </LinkButton>
         </Link>

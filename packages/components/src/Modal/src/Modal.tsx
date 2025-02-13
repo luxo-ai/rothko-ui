@@ -13,15 +13,12 @@ import {
   DomPortal,
   classes,
   isString,
-  scopedClasses,
   getKeyCode,
   ListenableKeys,
 } from '@rothko-ui/system';
 import type { RothkoSize, WithAria } from '@rothko-ui/system';
-import styles from './Modal.module.scss';
 import ModalBody from './ModalBody';
-
-const sc = scopedClasses(styles);
+import ModalHeader from './ModalHeader';
 
 type AriaAttributes = 'aria-label' | 'aria-labelledby' | 'aria-describedby';
 
@@ -76,6 +73,20 @@ type ModalProps = {
   blur?: boolean;
 };
 
+const modalPaddingSizeMap: Record<string, string> = {
+  xs: 'pt-[2.75rem] pr-[1.125rem] pb-[1.5rem] pl-[1.125rem]',
+  s: 'pt-[2.75rem] pr-[1.25rem] pb-[1.75rem] pl-[1.25rem]',
+  m: 'pt-[2.75rem] pr-[1.25rem] pb-[1.75rem] pl-[1.25rem]',
+  l: 'pt-[2.875rem] pr-[1.5rem] pb-[1.875rem] pl-[1.5rem]',
+};
+
+const modalMaxWidthSizeMap: Record<string, string> = {
+  xs: 'max-w-[20rem]',
+  s: 'max-w-[22rem]',
+  m: 'max-w-[32rem]',
+  l: 'max-w-[43rem]',
+};
+
 const Modal = ({
   id,
   children,
@@ -94,7 +105,24 @@ const Modal = ({
   const contentId = useId();
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  const baseClasses = sc('modal', `modal--${size}`);
+  const clz = classes(
+    'w-full',
+    'max-h-[calc(100vh-1rem)]',
+    'rounded-[0.125rem]', // make token
+    'bg-(--rothko-background)', // make own token?
+    'm-auto',
+    'overflow-scroll',
+    'user-select-text',
+    'text-(--rothko-typography-body-color)',
+    'font-rothko-regular',
+    'font-size-(--rothko-font-size-body)',
+    'line-height-(--rothko-line-height-body)',
+    modalPaddingSizeMap[size],
+    modalMaxWidthSizeMap[size],
+    className
+  );
+
+  // const baseClasses = sc('modal', `modal--${size}`);
 
   const closeModal = useCallback(() => {
     onClose?.();
@@ -176,17 +204,17 @@ const Modal = ({
                 aria-modal
                 role="dialog"
                 style={{ ...styleProp, ...style }}
-                className={classes(baseClasses, className)}
+                className={clz}
                 ref={modalRef}
               >
                 <CloseButton
-                  className={styles['modal__close-button']}
+                  className="absolute top-[14px] right-[16px]"
                   onClick={() => closeModal()}
                 />
                 {title && (
-                  <p id={titleId} className={sc(`modal__header--${size}`)}>
+                  <ModalHeader id={titleId} size={size}>
                     {title}
-                  </p>
+                  </ModalHeader>
                 )}
                 {isString(children) ? <ModalBody>{children}</ModalBody> : <>{children}</>}
               </animated.div>

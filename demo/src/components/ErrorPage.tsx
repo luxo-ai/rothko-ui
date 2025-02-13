@@ -1,6 +1,6 @@
 import { Flex, Heading2, Heading1 } from '@rothko-ui/components';
 import React from 'react';
-import { DesktopOnly, MobileOnly } from './Dimensions';
+import { DesktopOnly, MobileOnly } from './dimensions';
 
 type ErrorProps = {
   code: 400 | 404 | 500 | 501;

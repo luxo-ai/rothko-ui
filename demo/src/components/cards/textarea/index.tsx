@@ -1,6 +1,6 @@
 import { Container, Flex } from '@rothko-ui/components';
 
-import { BASIC, DISABLED, VARIANT } from './usage/sourceCode';
+import { BASIC, DISABLED } from './usage/sourceCode';
 import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Basic from './usage/Basic';
@@ -11,6 +11,7 @@ import textareaCopy from './copy';
 import Usage from '../Usage';
 import Props from '../Props';
 import textareaProps from './props';
+import style from './Textarea.module.scss';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Input';
 
@@ -24,16 +25,16 @@ const TextareaCard = () => {
     <Card codeUrl={GITHUB_URL} copy={textareaCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Usage />
-        <Container maxWidth="32rem">
+        <Container maxWidth="34rem">
           <TSCode sourceCode={IMPORT} />
         </Container>
         <Example sourceCode={BASIC}>
-          <Container maxWidth={maxWith}>
+          <Container className={style['textarea-container']} maxWidth={maxWith}>
             <Basic />
           </Container>
         </Example>
         <Example title="Disabled" sourceCode={DISABLED}>
-          <Container maxWidth={maxWith}>
+          <Container className={style['textarea-container']} maxWidth={maxWith}>
             <Disabled />
           </Container>
         </Example>

@@ -1,4 +1,4 @@
-@use '../../../../styles/mixins' as mixins;
+@use '../../../../../styles/mixins' as mixins;
 @use './variables' as variables;
 
 @mixin buttonPill {
@@ -15,13 +15,8 @@
 
 @mixin baseButtonStyle {
   @include mixins.iosTapHighlightColorTransparent;
-  @include mixins.userSelectNone;
   font-family: variables.$regularFont;
-  // @include typographyMixins.regularFontStyle; // TODO-TYPEOGRAPHY
-  // Use font smoothing to make text more readable
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-
+  user-select: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;

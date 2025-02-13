@@ -7,12 +7,13 @@ const App = () => {
   return (
     <>
       <Button
-        accessoryLeft={({ size, color }) => <Inbox fill={color} width={size} height={size} />}
+        kind="info"
+        accessoryLeft={({ size }) => <Inbox fill="currentColor" width={size} height={size} />}
       >
         Left Accessory
       </Button>
       <Button
-        accessoryRight={({ size, color }) => <Flash fill={color} width={size} height={size} />}
+        accessoryRight={({ size }) => <Flash fill="currentColor" width={size} height={size} />}
       >
         Right Accessory
       </Button>

@@ -3,7 +3,6 @@ export { useFieldIds } from './useFieldIds';
 export { useId } from './useId';
 export { useInterval } from './useInterval';
 export { useIsMounted } from './useIsMounted';
-export { useNestedOptions } from './useNestedOptions';
 export { useOptions } from './useOptions';
 export { useScrollIntoView } from './useScrollIntoView';
 export { Direction } from './types';

@@ -53,9 +53,13 @@ $mainPaddingTop: 3rem;
   }
 }
 
-.hoverButton:hover {
-  @media screen and (min-width: 750px) {
-    opacity: 0.8;
+.hoverButton {
+  display: flex;
+
+  &:hover {
+    @media screen and (min-width: 750px) {
+      opacity: 0.8;
+    }
   }
 }
 

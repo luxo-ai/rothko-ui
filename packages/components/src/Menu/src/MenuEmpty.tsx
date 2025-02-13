@@ -1,21 +1,19 @@
 import React, { useContext } from 'react';
-import styles from './Menu.module.scss';
 import MenuContext from './MenuContext';
-import { scopedClasses } from '@rothko-ui/system';
-
-const sc = scopedClasses(styles);
+import { itemBase } from './styles';
 
 type MenuEmptyProps = {
   children?: React.ReactNode;
+  className?: string;
 };
 
-const MenuEmpty = ({ children }: MenuEmptyProps) => {
+const MenuEmpty = ({ children, className }: MenuEmptyProps) => {
   const { numberOfItems } = useContext(MenuContext);
   if (numberOfItems > 1) return null;
   return typeof children === 'string' ? (
-    <p className={sc('menu__empty', 'text-center')}>{children}</p>
+    <p className={itemBase('text-center p-[1rem] font-rothko-light', className)}>{children}</p>
   ) : (
-    <div className={sc('menu__empty')}>{children}</div>
+    <div className={itemBase('text-center p-[1rem] font-rothko-light', className)}>{children}</div>
   );
 };
 

@@ -42,6 +42,8 @@ export const ControlButton = ({ state, disabled, ...callbackProps }: ControlButt
   const wasOpened =
     state === ControlState.Open && (previousState === ControlState.Close || previousState == null);
 
+  console.log('PREV STATE', previousState, 'STATE', state, 'WAS OPENED', wasOpened);
+
   return (
     <button
       aria-label={CONTROL_STATE_TO_LABEL[state]}

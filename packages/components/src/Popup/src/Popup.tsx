@@ -4,7 +4,6 @@ import React, { useEffect, useRef } from 'react';
 import {
   isString,
   classes,
-  scopedClasses,
   DomPortal,
   ShadedBackdrop,
   useId,
@@ -14,10 +13,7 @@ import {
   CloseButton,
 } from '@rothko-ui/system';
 import type { WithAria } from '@rothko-ui/system';
-import styles from './Popup.module.scss';
 import PopupBody from './PopupBody';
-
-const sc = scopedClasses(styles);
 
 type AriaAttributes = 'aria-label' | 'aria-labelledby' | 'aria-describedby';
 
@@ -77,7 +73,26 @@ const Popup = ({
   const popupRef = useRef<HTMLDivElement | null>(null);
   const contentId = useId();
 
-  const baseClasses = sc('popup');
+  const clz = classes(
+    'fixed',
+    'top-auto right-0 bottom-0 left-0', // inset: auto 0 0 0;
+    'h-0', // create token
+    'overflow-hidden',
+    'rounded-t-lg', // make token - border-top-left-radius: 0.75rem; border-top-right-radius: 0.75rem;
+    'bg-(--rothko-background)', // background: variables.$bottomPopupBackground;
+    'pt-[3.25rem]', // padding-top: 3.25rem;
+    'pr-[1.5rem]', // padding-right: 1.5rem;
+    'pb-[1.5rem]', // padding-bottom: 1.5rem;
+    'pl-[1.5rem]', // padding-left: 1.5rem;
+    'will-change-[transform,opacity,height] transition-all ease-out',
+    'user-select-text', // TODO - do we need this here and on drawer?
+    // let children inherit text stuff
+    'text-(--rothko-typography-body-color)',
+    'font-rothko-regular',
+    'font-size-(--rothko-font-size-body)',
+    'line-height-(--rothko-line-height-body)',
+    className
+  );
 
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -148,9 +163,12 @@ const Popup = ({
                 id={id}
                 style={{ ...styleProp, ...style }}
                 ref={popupRef}
-                className={classes(baseClasses, className)}
+                className={clz}
               >
-                <CloseButton className={sc('popup__close-button')} onClick={() => onClose()} />
+                <CloseButton
+                  className="absolute top-[14px] right-[16px]"
+                  onClick={() => onClose()}
+                />
                 {isString(children) ? <PopupBody>{children}</PopupBody> : <>{children}</>}
               </animated.div>
             )

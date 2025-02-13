@@ -12,4 +12,5 @@ export {
   outerHeight,
   outerWidth,
   getElementFullHeight,
+  getElementFullWidth,
 } from '../dom/dimensionUtils';

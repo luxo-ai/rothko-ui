@@ -8,9 +8,7 @@
 
 %phantom-button-style {
   @include mixins.iosTapHighlightColorTransparent;
-  @include mixins.userSelectNone;
-  // use font smoothing to make text/svgs clearer
-  -webkit-font-smoothing: antialiased;
+  user-select: none;
   // prevent double tap zoom on mobile
   touch-action: manipulation;
   background: transparent;

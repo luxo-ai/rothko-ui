@@ -2,8 +2,6 @@
 @use './placeholders';
 
 @mixin phantomButtonStyle() {
-  // use font smoothing to make text/svgs clearer
-  -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   // prevent double tap zoom on mobile
   touch-action: manipulation;

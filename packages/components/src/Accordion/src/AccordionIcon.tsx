@@ -2,8 +2,7 @@ import { MinusOutline, PlusOutline } from '@rothko-ui/icons';
 import React from 'react';
 
 import type { Icon } from './types';
-import { vuar, isFunction } from '@rothko-ui/system';
-import type { RothkoKind } from '@rothko-ui/system';
+import { isFunction } from '@rothko-ui/system';
 
 const ICON_SIZE = '1rem';
 
@@ -20,11 +19,6 @@ type AccordionIconProps = {
    */
   iconOverride?: Icon;
   /**
-   * The icon's semantic style.
-   * @type {RothkoKind}
-   */
-  kind?: RothkoKind;
-  /**
    * Determines if the icon is open.
    * @type {boolean}
    * @default false
@@ -32,21 +26,13 @@ type AccordionIconProps = {
   open?: boolean;
 };
 
-const AccordionIcon = ({
-  kind,
-  iconOverride: IconOverride,
-  open,
-  disabled,
-}: AccordionIconProps) => {
-  const color = vuar({ kind, category: 'background', element: 'icon' });
-
+const AccordionIcon = ({ iconOverride: IconOverride, open, disabled }: AccordionIconProps) => {
   if (IconOverride) {
     return isFunction(IconOverride) ? (
       <IconOverride
         aria-hidden
         open={Boolean(open)}
         disabled={Boolean(disabled)}
-        color={color}
         size={ICON_SIZE}
       />
     ) : (
@@ -55,9 +41,9 @@ const AccordionIcon = ({
   }
 
   return open ? (
-    <MinusOutline aria-hidden fill={color} width={ICON_SIZE} height={ICON_SIZE} />
+    <MinusOutline aria-hidden width={ICON_SIZE} height={ICON_SIZE} />
   ) : (
-    <PlusOutline aria-hidden fill={color} width={ICON_SIZE} height={ICON_SIZE} />
+    <PlusOutline aria-hidden width={ICON_SIZE} height={ICON_SIZE} />
   );
 };
 

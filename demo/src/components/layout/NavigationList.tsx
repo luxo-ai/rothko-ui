@@ -4,7 +4,7 @@ import { NAVIGATION_LIST } from './constants';
 import { isLeaf } from './helpers';
 import type { NavigationSection } from './types';
 import Link from 'next/link';
-import { List, ListItem } from '../List';
+import { List, ListItem } from '../list';
 
 type ExpandNavListProps = {
   depth?: number;

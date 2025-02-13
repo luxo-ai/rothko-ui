@@ -1,12 +1,8 @@
-import { classes, scopedClasses } from '@rothko-ui/system';
+import { classes } from '@rothko-ui/system';
 import React, { useCallback, useMemo, useState } from 'react';
-
-import styles from './Accordion.module.scss';
 import AccordionContext from './AccordionContext';
 import type { Icon } from './types';
-import type { RothkoKind, WithAria } from '@rothko-ui/system';
-
-const sc = scopedClasses(styles);
+import type { WithAria } from '@rothko-ui/system';
 
 type AriaAttributes =
   | 'aria-describedby'
@@ -50,11 +46,6 @@ type AccordionProps = {
    */
   icon?: Icon;
   /**
-   * The accordion's semantic style.
-   * @type {RothkoKind}
-   */
-  kind?: RothkoKind;
-  /**
    * If `true`, multiple panels can be expanded at once.
    * @type {boolean}
    * @default false
@@ -89,13 +80,12 @@ const Accordion = ({
   className,
   compact,
   icon: iconOverride,
-  kind,
   multiple,
   onPanelChange,
   selectedKeys = [],
   style,
 }: WithAria<AccordionProps, AriaAttributes>) => {
-  const baseClasses = sc('accordion', compact && 'compact');
+  const baseClasses = classes('flex flex-col', compact ? 'gap-0' : 'gap-3');
   const [selectedPanels, setSelectedPanels] = useState(selectedKeys || []);
 
   const onClickPanel = useCallback(
@@ -118,12 +108,11 @@ const Accordion = ({
     () => ({
       bordered,
       iconOverride,
-      kind,
       onClickPanel,
       selectedPanels,
       compact,
     }),
-    [bordered, iconOverride, kind, onClickPanel, selectedPanels, compact]
+    [bordered, iconOverride, onClickPanel, selectedPanels, compact]
   );
 
   return (

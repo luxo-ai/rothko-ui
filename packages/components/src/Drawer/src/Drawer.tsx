@@ -10,11 +10,9 @@ import {
   disableBodyScroll,
   enableBodyScroll,
   CloseButton,
-  useId,
 } from '@rothko-ui/system';
 
 import DrawerContext from './DrawerContext';
-import styles from './Drawer.module.scss';
 import type { WithAria } from '@rothko-ui/system';
 import DrawerBody from './DrawerBody';
 
@@ -123,6 +121,24 @@ const Drawer = ({
     }
   }, [isOpen, drawerRef]);
 
+  const clz = classes(
+    'fixed',
+    'inset-y-0 left-0', // inset: 0 auto 0 0;
+    'w-[25rem]', // create token
+    'z-9999', // z-index: 9999;
+    'overflow-y-auto',
+    'bg-(--rothko-background)',
+    'p-6', // 1.5rem
+    'sm:w-[calc(100% - 2 * 1.5rem)]', // from padding,
+    'user-select-text',
+    // let children inherit text stuff
+    'text-(--rothko-typography-body-color)',
+    'font-rothko-regular',
+    'font-size-(--rothko-font-size-body)',
+    'line-height-(--rothko-line-height-body)',
+    className
+  );
+
   return (
     <DrawerContext.Provider value={{ isOpen, closeDrawer }}>
       <DomPortal wrapperId="rothko-drawer-portal">
@@ -135,7 +151,7 @@ const Drawer = ({
                   aria-labelledby={ariaLabelledBy}
                   aria-describedby={ariaDescribedBy}
                   role="dialog"
-                  className={classes(styles.drawer, className)}
+                  className={clz}
                   id={id}
                   ref={drawerRef}
                   style={{ ...styleProp, ...style }}

@@ -1,5 +1,5 @@
 @use './variables' as variables;
-@use '../../../styles/mixins' as mixins;
+@use '../../../../styles/mixins' as mixins;
 
 .input {
   @include mixins.iosTapHighlightColorTransparent;

@@ -1,10 +1,7 @@
 import React, { useImperativeHandle, useMemo } from 'react';
-import { classes, scopedClasses, useScrollIntoView } from '@rothko-ui/system';
-import styles from './Menu.module.scss';
+import { classes, useScrollIntoView } from '@rothko-ui/system';
 import MenuContext from './MenuContext';
 import type { MenuVariant, ScrollableHTMLElement } from './types';
-
-const sc = scopedClasses(styles);
 
 type MenuProps = Omit<React.HTMLProps<HTMLUListElement>, 'ref' | 'role' | 'tabIndex'> & {
   /**
@@ -39,7 +36,29 @@ const Menu = React.forwardRef<ScrollableHTMLElement, MenuProps>(
     },
     forwardedRef
   ) => {
-    const baseClasses = sc('menu', variant === 'top' && 'menu--reverse');
+    const clz = classes(
+      'hide-chrome-browser-outline',
+      'w-full',
+      'overflow-y-scroll',
+      'webkit-overflow-scrolling-touch',
+      'bg-(--rothko-dropdown-background)',
+      !disabled && 'cursor-default',
+      'absolute',
+      'left-0',
+      variant === 'bottom' && 'menu-top', //  top-[calc(100%+0.25rem)] wasn't working
+      variant === 'top' && 'bottom-[calc(100%+0.25rem)]',
+      'rounded-[0.125rem]',
+      'shadow-[0px_0px_12px_rgba(0,0,0,0.03),_0px_2px_8px_rgba(0,0,0,0.06)]',
+      disabled && 'cursor-not-allowed',
+      disabled && 'opacity-60',
+      // ====== text
+      'text-(--rothko-typography-body-color)',
+      'font-rothko-regular',
+      'font-size-(--rothko-font-size-body)',
+      'leading-(--rothko-line-height-body)',
+      //
+      className
+    );
 
     const { scrollIntoView, scrollElRef } = useScrollIntoView();
 
@@ -75,12 +94,17 @@ const Menu = React.forwardRef<ScrollableHTMLElement, MenuProps>(
           id={id}
           style={style}
           ref={scrollElRef}
-          aria-hidden
-          className={classes(baseClasses, className)}
+          className={clz}
           data-rothko-body-scroll-lock-ignore
         >
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          <ul {...listProps} tabIndex={-1} aria-disabled={ariaDisabled || disabled} role="listbox">
+          <ul
+            {...listProps}
+            tabIndex={-1}
+            aria-disabled={ariaDisabled || disabled}
+            className="list-none p-0 m-0"
+            role="listbox"
+          >
             {children}
           </ul>
         </div>

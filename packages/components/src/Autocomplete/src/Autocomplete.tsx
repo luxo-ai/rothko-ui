@@ -21,12 +21,12 @@ import type {
   Option,
   FocusHandler,
 } from '@rothko-ui/system';
-import styles from './Autocomplete.module.scss';
 import type { QueryMatchFn } from './types';
 import useAutocomplete from './useAutocomplete';
 import { Label, Paragraph } from '@rothko-ui/typography';
 import { MenuEmpty, MenuItem, Menu } from '@rothko-ui/menu';
 import type { MenuVariant, ScrollableHTMLElement } from '@rothko-ui/menu';
+import { PhantomInput } from './PhantomInput';
 
 const debug = debugFactory('<Autocomplete/>');
 
@@ -314,19 +314,12 @@ function Autocomplete<V extends Value, T = undefined>({
         aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
         tabIndex={0}
       >
-        <input
-          aria-autocomplete="list"
-          aria-controls={autocompleteMenuId}
-          autoComplete="off"
-          spellCheck="false"
-          onChange={e => setQuery(e.target.value)}
-          type="text"
-          aria-label="Search"
-          tabIndex={0}
-          value={query}
+        <PhantomInput
+          id={autocompleteMenuId}
+          onChange={v => setQuery(v)}
           disabled={disabled}
-          className={styles['autocomplete__phantom-input']}
           placeholder={placeholder}
+          value={query}
         />
         <ControlButton
           state={controlState}
@@ -340,7 +333,7 @@ function Autocomplete<V extends Value, T = undefined>({
           ref={menuRef}
           open={open}
           variant={menuVariant}
-          className={styles['dropdown-menu']}
+          className="max-h-(--rothko-autocomplete-dropdown-max-height) z-10"
           aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
         >
           <MenuEmpty>{noResultsMessage}</MenuEmpty>

@@ -1,16 +1,14 @@
-@use '../../../styles/mixins' as mixins;
-@use '../../../styles/placeholders';
-@use '../../../styles/variables' as variables;
+@use '../../../../styles/mixins' as mixins;
+@use '../../../../styles/variables' as variables;
 
 $autoCompleteDropdownMaxHeight: var(--rothko-autocomplete-dropdown-max-height, 13rem);
 
 .dropdown-menu {
-  max-height: 13rem;
+  max-height: $autoCompleteDropdownMaxHeight;
   z-index: 10;
 }
 
 .autocomplete__phantom-input {
-  @extend %hide-chrome-browser-outline;
   @include mixins.iosTapHighlightColorTransparent;
 
   font-family: variables.$regularFont;

@@ -2,7 +2,6 @@ import { classes } from '@rothko-ui/system';
 import React from 'react';
 
 import { Link, LinkButton } from '@rothko-ui/link';
-import styles from './BreadCrumbs.module.scss';
 import type { WithAria } from '@rothko-ui/system';
 import { Paragraph } from '@rothko-ui/typography';
 
@@ -67,7 +66,14 @@ const BreadCrumbItem = ({
   style,
   className,
 }: WithAria<BreadCrumbItemProps, AriaAttributes>) => {
-  const classNames = classes(styles['breadcrumbs__item'], className);
+  const classNames = classes(
+    'slash-separated',
+    'text-(--rothko-typography-body-color)',
+    'font-rothko-regular',
+    'font-size-(--rothko-font-size-body)',
+    'line-height-(--rothko-line-height-body)',
+    className
+  );
 
   if (to) {
     return (
@@ -83,7 +89,7 @@ const BreadCrumbItem = ({
         style={style}
         className={classNames}
       >
-        <Link underline="always" href={to} target={target}>
+        <Link underlineVariant="always" href={to} target={target}>
           {children}
         </Link>
       </span>
@@ -103,7 +109,7 @@ const BreadCrumbItem = ({
         style={style}
         className={classNames}
       >
-        <LinkButton underline="always" onClick={onClick}>
+        <LinkButton underlineVariant="always" onClick={onClick}>
           {children}
         </LinkButton>
       </span>

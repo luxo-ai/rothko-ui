@@ -1,11 +1,7 @@
-import { classes, isString, scopedClasses } from '@rothko-ui/system';
+import { classes, isString } from '@rothko-ui/system';
 import React from 'react';
 
-import styles from './Alert.module.scss';
 import type { RothkoKind, WithAria } from '@rothko-ui/system';
-import { Paragraph } from '@rothko-ui/typography';
-
-const sc = scopedClasses(styles);
 
 type AriaAttributes =
   | 'aria-describedby'
@@ -51,6 +47,33 @@ type AlertProps = {
   appearance?: 'filled' | 'outline';
 };
 
+const rothkoKindBg = {
+  danger: 'bg-(--rothko-danger)',
+  info: 'bg-(--rothko-info)',
+  success: 'bg-(--rothko-success)',
+  warning: 'bg-(--rothko-warning)',
+  primary: 'bg-(--rothko-primary)',
+  secondary: 'bg-(--rothko-secondary)',
+} as const;
+
+const rothkoKindFg = {
+  danger: 'text-(--rothko-danger-foreground)',
+  info: 'text-(--rothko-info-foreground)',
+  success: 'text-(--rothko-success-foreground)',
+  warning: 'text-(--rothko-warning-foreground)',
+  primary: 'text-(--rothko-primary-foreground)',
+  secondary: 'text-(--rothko-secondary-foreground)',
+} as const;
+
+const rothkoKindBorder = {
+  danger: 'border-(--rothko-danger)',
+  info: 'border-(--rothko-info)',
+  success: 'border-(--rothko-success)',
+  warning: 'border-(--rothko-warning)',
+  primary: 'border-(--rothko-primary)',
+  secondary: 'border-(--rothko-secondary)',
+};
+
 const Alert = React.forwardRef<HTMLDivElement, WithAria<AlertProps, AriaAttributes>>(
   (
     {
@@ -69,7 +92,19 @@ const Alert = React.forwardRef<HTMLDivElement, WithAria<AlertProps, AriaAttribut
     },
     ref
   ) => {
-    const baseClasses = sc('alert', `alert--${kind}`, `alert--${appearance}`);
+    const baseClasses = classes(
+      'p-5', // 1.25rem
+      // == text classes for children to inherit ==
+      'font-rothko-regular',
+      'font-size-(--rothko-font-size-body)',
+      'line-height-(--rothko-line-height-body)',
+      appearance === 'filled' && rothkoKindBg[kind],
+      appearance === 'filled' && rothkoKindFg[kind],
+      appearance === 'outline' && 'border',
+      appearance === 'outline' && 'border-solid',
+      appearance === 'outline' && rothkoKindBorder[kind],
+      appearance === 'outline' && 'text-(--rothko-typography-body-color)'
+    );
     return (
       <div
         id={id}
@@ -84,7 +119,7 @@ const Alert = React.forwardRef<HTMLDivElement, WithAria<AlertProps, AriaAttribut
         ref={ref}
         style={style}
       >
-        {isString(children) ? <Paragraph>{children}</Paragraph> : children}
+        {isString(children) ? <div>{children}</div> : children}
       </div>
     );
   }

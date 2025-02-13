@@ -1,28 +1,31 @@
-import { animated, useSpring } from '@react-spring/web';
 import {
   classes,
   isString,
-  scopedClasses,
   debugFactory,
-  PhantomButton,
   useId,
-  getElementFullHeight,
   ListenableKeys,
   getKeyCode,
   Flex,
   FlexItem,
+  getElementFullHeight,
 } from '@rothko-ui/system';
 import React, { useCallback, useMemo, useRef } from 'react';
-
-import styles from './Accordion.module.scss';
+import { animated, useSpring } from '@react-spring/web';
 import AccordionIcon from './AccordionIcon';
 import type { Icon } from './types';
 import useAccordion from './useAccordion';
 import { AccordionBodyText, AccordionSubtitleText, AccordionTitleText } from './AccordionText';
 import type { WithAria, Dictionary } from '@rothko-ui/system';
 
-const sc = scopedClasses(styles);
 const debug = debugFactory('<AccordionPanel />');
+
+const textClasses = [
+  // let children inherit
+  'text-(--rothko-typography-body-color)',
+  'font-(--rothko-font-family-regular)',
+  'font-size-(--rothko-font-size-body)',
+  'line-height-(--rothko-line-height-body)',
+];
 
 type AriaAttributes = 'aria-hidden' | 'aria-label';
 type StyleableComponents = 'label' | 'content';
@@ -122,17 +125,49 @@ const AccordionPanel = React.forwardRef<
     const contentId = useId();
     const toggleId = useId();
 
-    const { bordered, iconOverride, kind, onClickPanel, selectedPanels, compact } = useAccordion();
+    const { bordered, iconOverride, onClickPanel, selectedPanels, compact } = useAccordion();
 
-    const baseContainerClasses = sc(
-      'accordion__panel',
-      kind && kind,
-      compact && 'compact',
-      disabled && 'disabled',
-      bordered && 'bordered'
+    const containerClassNames = classes(
+      'bg-(--rothko-accordion-background)',
+      'border',
+      'border-solid',
+      'border-(--rothko-accordion-background)',
+      !compact && 'rounded-xs', // 0.125rem
+      // == bordered ==
+      bordered && 'border-(--rothko-accordion-border)',
+      // == compact ==
+      compact && 'rounded-none',
+      compact && 'last:rounded-bl-xs', // 0.125rem
+      compact && 'last:rounded-br-xs', // 0.125rem
+      compact && 'first:rounded-tl-xs', // 0.125rem
+      compact && 'first:rounded-tr-xs', // 0.125rem
+      compact && 'not:last:border-b-0', // border-bottom: 0
+      // == disabled ==
+      disabled && 'pointer-events-none',
+      disabled && 'cursor-not-allowed',
+      disabled && 'opacity-50',
+      // == text classes for children to inherit ==
+      'text-(--rothko-typography-body-color)',
+      'font-rothko-regular',
+      'font-size-(--rothko-font-size-body)',
+      'line-height-(--rothko-line-height-body)',
+      className
     );
 
-    const baseLabelClasses = sc('accordion__panel__label', disabled && 'disabled');
+    const labelClassNames = classes(
+      'ios-tap-highlight-color-transparent',
+      'select-none',
+      'flex',
+      'items-center',
+      'gap-2', // 0.5rem
+      'w-full', // 100%
+      'py-4', // 1rem (same as content)
+      'px-3.5', // 0.875rem (same as content)
+      'cursor-pointer',
+      'focus-visible:outline',
+      'focus-visible:outline-(--rothko-accordion-border)',
+      classNames.label
+    );
 
     const panelKey = useId($key);
     const isPanelSelected = selectedPanels.includes(panelKey);
@@ -168,23 +203,23 @@ const AccordionPanel = React.forwardRef<
         return null;
       }
       if (isString(titleProp)) {
-        return <AccordionTitleText kind={kind}>{titleProp}</AccordionTitleText>;
+        return <AccordionTitleText>{titleProp}</AccordionTitleText>;
       }
       return <FlexItem>{titleProp}</FlexItem>;
-    }, [titleProp, kind]);
+    }, [titleProp]);
 
     const subtitle = useMemo(() => {
       if (!subtitleProp) {
         return null;
       }
       if (isString(subtitleProp)) {
-        return <AccordionSubtitleText kind={kind}>{subtitleProp}</AccordionSubtitleText>;
+        return <AccordionSubtitleText>{subtitleProp}</AccordionSubtitleText>;
       }
       return <FlexItem>{subtitleProp}</FlexItem>;
-    }, [subtitleProp, kind]);
+    }, [subtitleProp]);
 
     return (
-      <div id={id} className={classes(baseContainerClasses, className)} style={style} ref={ref}>
+      <div id={id} className={containerClassNames} style={style} ref={ref}>
         <header>
           <button
             id={toggleId}
@@ -194,7 +229,7 @@ const AccordionPanel = React.forwardRef<
             aria-hidden={ariaHidden}
             aria-label={ariaLabel}
             aria-selected={isPanelSelected}
-            className={classes(baseLabelClasses, classNames.label)}
+            className={labelClassNames}
             disabled={disabled}
             onClick={onClick}
             onKeyDown={onKeyDown}
@@ -206,7 +241,6 @@ const AccordionPanel = React.forwardRef<
             <AccordionIcon
               open={isPanelSelected}
               disabled={!!disabled}
-              kind={kind}
               iconOverride={iconOverrideLocal || iconOverride}
             />
             {(title || subtitle) && (
@@ -217,7 +251,7 @@ const AccordionPanel = React.forwardRef<
             )}
           </button>
         </header>
-        <PanelContent
+        <AccordionPanelContent
           id={contentId}
           style={stylesProp.content}
           className={classNames.content}
@@ -225,7 +259,7 @@ const AccordionPanel = React.forwardRef<
           toggleId={toggleId}
         >
           {isString(children) ? <AccordionBodyText>{children}</AccordionBodyText> : <>{children}</>}
-        </PanelContent>
+        </AccordionPanelContent>
       </div>
     );
   }
@@ -247,7 +281,7 @@ const getDefaultClosedStyle = (): React.CSSProperties => ({
   visibility: 'hidden',
 });
 
-type PanelContentProps = {
+type AccordionPanelContentProps = {
   children: React.ReactNode;
   className?: string;
   id?: string;
@@ -256,8 +290,21 @@ type PanelContentProps = {
   toggleId: string;
 };
 
-const PanelContent = ({ children, className, style, isOpen, id, toggleId }: PanelContentProps) => {
-  const baseContentClasses = sc('accordion__panel__content');
+const AccordionPanelContent = ({
+  children,
+  className,
+  style,
+  isOpen,
+  id,
+  toggleId,
+}: AccordionPanelContentProps) => {
+  const panelContentClasses = classes(
+    'pt-0', // 0rem
+    'px-3.5', // 0.875rem
+    'pb-4', // 1rem
+    className
+  );
+
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   const springStyle = useSpring({
@@ -278,7 +325,7 @@ const PanelContent = ({ children, className, style, isOpen, id, toggleId }: Pane
 
   return (
     <animated.section id={id} role="tabpanel" aria-labelledby={toggleId} style={springStyle}>
-      <div style={style} className={classes(baseContentClasses, className)} ref={contentRef}>
+      <div style={style} className={panelContentClasses} ref={contentRef}>
         {children}
       </div>
     </animated.section>

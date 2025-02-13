@@ -1,16 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
   InlineSpinner,
-  vuar,
   getElementFullHeight,
+  getElementFullWidth,
   classes,
-  scopedClasses,
 } from '@rothko-ui/system';
-import type { Accessory, RothkoKind, RothkoSize, WithAria } from '@rothko-ui/system';
-import type { ButtonAppearance, ButtonVariant } from '../types';
-import styles from './Button.module.scss';
-
-const sc = scopedClasses(styles);
+import type { Accessory, Dictionary, RothkoKind, RothkoSize, WithAria } from '@rothko-ui/system';
+import type { ButtonRadius, ButtonVariant } from '../types';
 
 const accessorySizeMap: Record<RothkoSize, number> = {
   xs: 10,
@@ -48,12 +44,6 @@ type ButtonProps = {
    */
   accessoryRight?: Accessory;
   /**
-   * The appearance style of the button.
-   * @type {ButtonAppearance}
-   * @default 'filled'
-   */
-  appearance?: ButtonAppearance;
-  /**
    * The content of the button.
    * @type {React.ReactNode}
    */
@@ -70,11 +60,11 @@ type ButtonProps = {
    */
   disabled?: boolean;
   /**
-   * Whether the button should fit its content.
+   * Display the button as an icon.
    * @type {boolean}
    * @default false
    */
-  fitContent?: boolean;
+  asIcon?: boolean;
   /**
    * The button's semantic style.
    * @type {RothkoKind}
@@ -104,9 +94,15 @@ type ButtonProps = {
   /**
    * The variant of the button.
    * @type {ButtonVariant}
-   * @default 'default'
+   * @default 'filled'
    */
   variant?: ButtonVariant;
+  /**
+   * The radius of the button.
+   * @type {ButtonRadius}
+   * @default 'default'
+   */
+  radius?: ButtonRadius;
   /**
    * The size of the button.
    * @type {RothkoSize}
@@ -131,11 +127,28 @@ type ButtonProps = {
   type?: 'button' | 'submit' | 'reset';
 };
 
+export const paddingSizeMap: Record<string, string> = {
+  xs: 'px-[0.5rem] py-[0.3rem]',
+  s: 'px-[0.5rem] py-[0.3rem]',
+  m: 'px-[0.75rem] py-[0.5rem]',
+  l: 'px-[0.94rem] py-[0.625rem]',
+};
+
+export const fontSizeMap: Record<string, string> = {
+  xs: 'text-xs', // Tailwind has `text-xs` = 0.75rem
+  s: 'text-[0.85rem]', // No exact match in Tailwind, use arbitrary value
+  m: 'text-base', // `text-base` = 1rem in Tailwind
+  l: 'text-xl', // `text-xl` ≈ 1.25rem
+};
+
+export const borderWidthSizeMap: Dictionary<RothkoSize, string> = {
+  l: 'border-[2px]',
+};
+
 const Button = ({
   id,
   accessoryLeft: Left,
   accessoryRight: Right,
-  appearance = 'filled',
   'aria-label': ariaLabel,
   'aria-describedby': ariaDescribedBy,
   'aria-details': ariaDetails,
@@ -149,12 +162,13 @@ const Button = ({
   children,
   className,
   disabled,
-  fitContent,
+  asIcon,
   kind = 'primary',
   loading,
   onClick: onClickProp,
   onKeyDown: onKeyDownProp,
-  variant = 'default',
+  radius = 'default',
+  variant = 'filled',
   size = 'm',
   style,
   tabIndex,
@@ -162,21 +176,46 @@ const Button = ({
   role = 'button',
 }: WithAria<ButtonProps, AriaAttributes>) => {
   const childrenContainerRef = useRef<HTMLDivElement | null>(null);
+  const [childrenDim, setChildrenDim] = useState<{ width: number; height: number }>();
   const [childrenHeight, setChildrenHeight] = useState<number | null>(18); // was null before. How do we do this better?
 
-  const baseClasses = sc(
-    'button',
-    `button--${appearance}--${kind}`,
-    `button--${size}`,
-    variant !== 'default' && `button--${variant}`,
-    fitContent && 'button--fit-content'
+  const baseClasses = classes(
+    // ==== base button style ====
+    'ios-tap-highlight-color-transparent',
+    'font-smoothing-antialiased',
+    'font-rothko-regular',
+    'user-select-none',
+    'appearance-none',
+    // Prevent double tap zoom on mobile
+    'touch-action-manipulation',
+    'inline-flex',
+    'items-center',
+    'justify-center',
+    !disabled && !loading && 'cursor-pointer',
+    radius === 'default' && 'rounded-(--rothko-button-border-radius)', // 0.125rem
+    radius === 'full' && 'rounded-[50vmin]',
+    // ==== disabled ====
+    disabled && 'pointer-events-none',
+    disabled && 'cursor-not-allowed',
+    disabled && 'opacity-65',
+    // ==== kind ====
+    variant === 'outline' && 'text-(--button-kind-bg)',
+    variant === 'filled' && 'text-(--button-kind-fg)',
+    variant === 'filled' && 'bg-(--button-kind-bg)',
+    borderWidthSizeMap[size] || 'border',
+    'border-solid',
+    'border-(--button-kind-bg)',
+    // ==== size ====
+    !asIcon && paddingSizeMap[size],
+    asIcon && 'p-1',
+    !asIcon && 'min-w-20', // 5rem
+    asIcon && 'w-[fit-content]',
+    fontSizeMap[size],
+    'transition-colors duration-400 ease-out',
+    'not-disabled:active:border-(--button-kind-bg-active)',
+    variant === 'outline' && 'not-disabled:active:text-(--button-kind-bg-active)',
+    variant !== 'outline' && 'not-disabled:active:bg-(--button-kind-bg-active)'
   );
-
-  const iconColor = vuar({
-    kind,
-    category: appearance === 'outline' ? 'background' : 'foreground',
-    fallback: '#000',
-  });
 
   const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (loading || disabled) {
@@ -196,11 +235,22 @@ const Button = ({
     }
   };
 
+  const hasLeftAccessory = !!Left;
+  const hasRightAccessory = !!Right;
+
   useEffect(() => {
-    if (!childrenContainerRef.current) return;
+    if (!childrenContainerRef.current || loading) return;
+    const width = getElementFullWidth(childrenContainerRef.current);
     const height = getElementFullHeight(childrenContainerRef.current);
+    setChildrenDim({ width, height });
     setChildrenHeight(height);
-  }, [setChildrenHeight, childrenContainerRef]);
+  }, [setChildrenHeight, childrenContainerRef, hasLeftAccessory, hasRightAccessory, size, loading]);
+
+  const rothkoButtonKindVarStyle = {
+    '--button-kind-bg': `var(--rothko-${kind})`,
+    '--button-kind-bg-active': `var(--rothko-${kind}-400)`,
+    '--button-kind-fg': `var(--rothko-${kind}-foreground)`,
+  } as React.CSSProperties;
 
   return (
     <button
@@ -221,36 +271,54 @@ const Button = ({
       onClick={onClick}
       onKeyDown={onKeyDown}
       role={role}
-      style={style}
+      style={style ? { ...style, ...rothkoButtonKindVarStyle } : rothkoButtonKindVarStyle}
       tabIndex={disabled ? -1 : tabIndex}
       type={type}
     >
-      <div className={styles['button__content']} ref={childrenContainerRef}>
+      <div
+        className="flex items-center justify-center gap-1"
+        style={
+          loading
+            ? { width: childrenDim?.width || undefined, height: childrenDim?.height || undefined }
+            : undefined
+        }
+        ref={childrenContainerRef}
+      >
         {!loading && Left && (
-          <div className={styles['button__accessory']}>
-            <Left aria-hidden size={accessorySizeMap[size]} color={iconColor} />
-          </div>
+          <AccessoryContainer>
+            <Left size={accessorySizeMap[size]} />
+          </AccessoryContainer>
         )}
         {loading ? (
           <InlineSpinner
-            style={
-              childrenHeight
-                ? { width: childrenHeight, height: childrenHeight, margin: 'auto' }
-                : { margin: 'auto' }
-            }
-            color={iconColor}
+            style={{
+              height: childrenHeight ? childrenHeight - 4 : 16,
+              width: childrenHeight ? childrenHeight - 4 : 16,
+              margin: 'auto',
+            }}
+            color="inherit"
             size="s"
           />
         ) : (
           <span>{children}</span>
         )}
         {!loading && Right && (
-          <div className={styles['button__accessory']}>
-            <Right aria-hidden size={accessorySizeMap[size]} color={iconColor} />
-          </div>
+          <AccessoryContainer>
+            <Right size={accessorySizeMap[size]} />
+          </AccessoryContainer>
         )}
       </div>
     </button>
+  );
+};
+
+const AccessoryContainer = ({ children }: { children: React.ReactNode }) => {
+  // add flex + align-center since SVG elements that are children of a flex container (button)
+  // can sometimes behave unexpectedly due to how their default sizing works.
+  return (
+    <div aria-hidden className="flex items-center">
+      {children}
+    </div>
   );
 };
 

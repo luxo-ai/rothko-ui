@@ -22,7 +22,7 @@ import styles from './Icons.module.scss';
 import iconographyCopy from './copy';
 import { filledIconList, outlineIconList } from './iconsList';
 import { BASIC } from './usage/sourceCode';
-import SearchBar from '../../SearchBar';
+import { SearchBar } from '../../searchBar';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/icons';
 
@@ -59,12 +59,12 @@ const IconsCard = () => {
           />
         </div>
         <Container maxWidth="13rem">
-          <ButtonGroup noEffect kind="primary" size="xs" variant="pill">
+          <ButtonGroup noEffect kind="primary" size="xs" radius="full">
             <Button
               accessoryLeft={({ size, color }) => (
                 <Icons.Moon width={size} height={size} fill={color} />
               )}
-              appearance={iconKind === 'filled' ? 'filled' : 'outline'}
+              variant={iconKind === 'filled' ? 'filled' : 'outline'}
               onClick={() => setIconKind('filled')}
             >
               Filled
@@ -73,7 +73,7 @@ const IconsCard = () => {
               accessoryRight={({ size, color }) => (
                 <Icons.MoonOutline width={size} height={size} fill={color} />
               )}
-              appearance={iconKind === 'outline' ? 'filled' : 'outline'}
+              variant={iconKind === 'outline' ? 'filled' : 'outline'}
               onClick={() => setIconKind('outline')}
             >
               Outline

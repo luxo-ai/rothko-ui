@@ -27,7 +27,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@rothko-ui/typography": "^1.0.0",
     "@rothko-ui/system": "^1.0.0"
   },
   "peerDependencies": {

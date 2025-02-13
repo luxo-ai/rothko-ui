@@ -8,31 +8,16 @@ const App = () => {
   return (
     <>
       <Button
-        accessoryLeft={({ size, color }) => <Inbox fill={color} width={size} height={size} />}
+        kind="info"
+        accessoryLeft={({ size }) => <Inbox fill="currentColor" width={size} height={size} />}
       >
         Left Accessory
       </Button>
       <Button
-        accessoryRight={({ size, color }) => <Flash fill={color} width={size} height={size} />}
+        accessoryRight={({ size }) => <Flash fill="currentColor" width={size} height={size} />}
       >
         Right Accessory
       </Button>
-    </>
-  );
-};
-
-export default App;
-`;
-export const APPEARANCE = `
-import React from 'react';
-
-import { Button } from '@rothko-ui/components';
-
-const App = () => {
-  return (
-    <>
-      <Button appearance="filled">Filled</Button>
-      <Button appearance="outline">Outline</Button>
     </>
   );
 };
@@ -51,12 +36,42 @@ const App = () => {
 export default App;
 `;
 export const LOADING = `
+import React, { useEffect, useState } from 'react';
+
+import { Button } from '@rothko-ui/components';
+
+const App = () => {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (loading) {
+      const timeout = setTimeout(() => setLoading(false), 4000);
+      return () => clearTimeout(timeout);
+    }
+  }, [loading]);
+
+  return (
+    <Button onClick={() => setLoading(true)} loading={loading}>
+      Click to load...
+    </Button>
+  );
+};
+
+export default App;
+`;
+export const RADIUS = `
 import React from 'react';
 
 import { Button } from '@rothko-ui/components';
 
 const App = () => {
-  return <Button loading>Button</Button>;
+  return (
+    <>
+      <Button radius="none">None</Button>
+      <Button radius="default">Default</Button>
+      <Button radius="full">Full</Button>
+    </>
+  );
 };
 
 export default App;
@@ -87,8 +102,8 @@ import { Button } from '@rothko-ui/components';
 const App = () => {
   return (
     <>
-      <Button variant="square">Square</Button>
-      <Button variant="pill">Pill</Button>
+      <Button variant="filled">Filled</Button>
+      <Button variant="outline">Outline</Button>
     </>
   );
 };

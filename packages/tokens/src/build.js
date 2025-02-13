@@ -34,7 +34,24 @@ const generateLayoutStyleDictionaryConfig = () => ({
       transformGroup: 'css',
       files: [
         {
-          destination: 'global-variables.css',
+          destination: 'layout-variables.css',
+          format: 'css/variables',
+        },
+      ],
+    },
+  },
+});
+
+const generateComponentStyleDictionaryConfig = () => ({
+  source: ['tokens/component.json'],
+  platforms: {
+    web: {
+      buildPath: `${CSS_OUT_DIRECTORY}/`,
+      // css transform group generates a kebab case token name
+      transformGroup: 'css',
+      files: [
+        {
+          destination: 'component-variables.css',
           format: 'css/variables',
         },
       ],
@@ -93,7 +110,12 @@ const build = () => {
   console.log('\n==============================================');
   console.log(`\nCreating typography`);
   styledDictionary.extend(generateLayoutStyleDictionaryConfig()).buildPlatform('web');
-  generatedFiles.push(path.join(CSS_OUT_DIRECTORY, 'global-variables.css'));
+  generatedFiles.push(path.join(CSS_OUT_DIRECTORY, 'layout-variables.css'));
+
+  console.log('\n==============================================');
+  console.log(`\nCreating components`);
+  styledDictionary.extend(generateComponentStyleDictionaryConfig()).buildPlatform('web');
+  generatedFiles.push(path.join(CSS_OUT_DIRECTORY, 'component-variables.css'));
 
   console.log('\n==============================================');
   console.log('\nToken generation completed!');

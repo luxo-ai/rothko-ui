@@ -5,7 +5,7 @@
 .handle {
   @extend %hide-chrome-browser-outline;
   @include mixins.iosTapHighlightColorTransparent;
-  @include mixins.userSelectNone;
+  user-select: none;
 
   position: absolute;
   width: variables.$sliderHandleSize;
@@ -32,7 +32,7 @@
 .inner-handle {
   @extend %hide-chrome-browser-outline;
   @include mixins.iosTapHighlightColorTransparent;
-  @include mixins.userSelectNone;
+  user-select: none;
 
   // ======== start phantom button ========
   // https://stackoverflow.com/questions/30552307/ios-safari-buttons-not-perfect-circles

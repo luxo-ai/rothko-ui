@@ -1,5 +1,4 @@
 @use '../../../../styles/variables' as variables;
-@use '../../../../styles/placeholders';
 @use '../../../../styles/mixins' as mixins;
 
 $background: var(--rothko-input-background, #fff);
@@ -7,9 +6,8 @@ $foreground: var(--rothko-input-foreground, #000);
 $borderRadius: var(--rothko-input-border-radius, 0.125rem);
 
 .dropdown-container {
-  @extend %ios-tap-highlight-color-transparent;
+  @include mixins.iosTapHighlightColorTransparent;
 
-  @include mixins.optimizeLegibility;
   color: variables.$bodyColor;
   font-size: variables.$bodyFontSize;
   line-height: variables.$bodyLineHeight;

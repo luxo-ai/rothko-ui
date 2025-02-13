@@ -18,6 +18,7 @@
   "types": "dist/index.d.ts",
   "module": "dist/index.mjs",
   "source": "src/index.ts",
+  "style": "dist/index.css",
   "scripts": {
     "build": "NODE_ENV=prod rollup --config",
     "build:dev": "NODE_ENV=dev rollup --config --watch",

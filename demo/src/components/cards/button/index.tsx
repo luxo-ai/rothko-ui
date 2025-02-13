@@ -3,25 +3,17 @@ import { Container, Flex, Grid } from '@rothko-ui/components';
 import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import Accessory from './usage/Accessory';
-import Appearance from './usage/Appearance';
+import Variant from './usage/Variant';
 import buttonCopy from './copy';
 import buttonProps from './props';
 import Card from '../Card';
 import Disabled from './usage/Disabled';
 import Example from '../Example';
 import Loading from './usage/Loading';
-import Shape from './usage/Variant';
+import Radius from './usage/Radius';
 import Size from './usage/Size';
 import WithKind from './usage/WithKind';
-import {
-  ACCESSORY,
-  APPEARANCE,
-  DISABLED,
-  LOADING,
-  VARIANT,
-  SIZE,
-  WITH_KIND,
-} from './usage/sourceCode';
+import { ACCESSORY, DISABLED, LOADING, VARIANT, SIZE, WITH_KIND, RADIUS } from './usage/sourceCode';
 import Props from '../Props';
 import Usage from '../Usage';
 
@@ -37,7 +29,7 @@ const ButtonCard = () => {
     <Card codeUrl={GITHUB_URL} copy={buttonCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Usage />
-        <Container maxWidth="32rem">
+        <Container maxWidth="34rem">
           <TSCode sourceCode={IMPORT} />
         </Container>
         <Example title="With Kind" sourceCode={WITH_KIND}>
@@ -45,14 +37,14 @@ const ButtonCard = () => {
             <WithKind />
           </Grid>
         </Example>
-        <Example title="Appearance" sourceCode={APPEARANCE}>
-          <Flex gap="1rem" maxWidth="22rem">
-            <Appearance />
-          </Flex>
-        </Example>
         <Example title="Variant" sourceCode={VARIANT}>
           <Flex gap="1rem" maxWidth="22rem">
-            <Shape />
+            <Variant />
+          </Flex>
+        </Example>
+        <Example title="Radius" sourceCode={RADIUS}>
+          <Flex gap="1rem" maxWidth="22rem">
+            <Radius />
           </Flex>
         </Example>
         <Example title="Size" sourceCode={SIZE}>

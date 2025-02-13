@@ -5,9 +5,9 @@ import React from 'react';
 import config from '../../config';
 import Navigation from './Navigation';
 import styles from './Navigation.module.scss';
-import { DesktopOnly } from '../Dimensions';
+import { DesktopOnly } from '../dimensions';
 import NavigationList from './NavigationList';
-import useTheme from '../theme/useTheme';
+import useTheme from '../../hooks/useTheme';
 
 type LayoutProps = {
   selected?: string;

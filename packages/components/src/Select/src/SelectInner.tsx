@@ -8,25 +8,137 @@ import {
   getKeyCode,
   ListenableKeys,
   debugFactory,
-  PhantomButton,
   DefaultRenderOption,
-  vuar,
   useFieldIds,
   ControlButton,
   DropdownContainer,
   Direction,
   ControlState,
+  classes,
 } from '@rothko-ui/system';
 
-import type { Option, Value } from '@rothko-ui/system';
+import type { FocusHandler, Option, RenderOption, Value, WithAria } from '@rothko-ui/system';
 import { Paragraph, Label } from '@rothko-ui/typography';
-import type { SelectInnerProps } from './types';
 import useSelect from './useSelect';
 import ItemText from './ItemText';
 import { Menu, MenuItem, MenuEmpty } from '@rothko-ui/menu';
-import { CloseOutline } from '@rothko-ui/icons';
-import styles from './Select.module.scss';
-import type { ScrollableHTMLElement } from '@rothko-ui/menu';
+import type { MenuVariant, ScrollableHTMLElement } from '@rothko-ui/menu';
+import { MultiSelectValue } from './MultiSelectValue';
+
+type AriaAttributes =
+  | 'aria-label'
+  | 'aria-describedby'
+  | 'aria-details'
+  | 'aria-labelledby'
+  | 'aria-disabled'
+  | 'aria-required'
+  | 'aria-invalid'
+  | 'aria-errormessage';
+
+type StyledComponents = 'errorText' | 'label';
+
+export type SelectInnerProps<V extends Value, T> = WithAria<
+  {
+    id?: string;
+    /**
+     * Additional class name for the select.
+     */
+    className?: string;
+    /**
+     * Additional class names for the select components.
+     */
+    classNames?: Partial<Record<StyledComponents, string>>;
+    /**
+     * Whether the select is clearable.
+     */
+    clearable?: boolean;
+    /**
+     * Whether the select is disabled.
+     */
+    disabled?: boolean;
+    /**
+     * Whether the select has an error state.
+     */
+    error?: boolean;
+    /**
+     * The error message to display when the select has an error state.
+     * @default: 'Invalid'
+     */
+    errorText?: string;
+    /**
+     * The label for the select.
+     */
+    label?: string;
+    /**
+     * The position of the select menu.
+     * @default: 'bottom'
+     */
+    menuVariant?: MenuVariant;
+    /**
+     * Whether the select allows multiple selections.
+     */
+    multiple?: boolean;
+    /**
+     * The message to display when there are no search results.
+     * @default: 'No results'
+     */
+    noResultsMessage?: React.ReactNode;
+    /**
+     * Event handler for when the select loses focus.
+     */
+    onBlur?: FocusHandler;
+    /**
+     * Event handler for when the select value changes.
+     */
+    onChange: (v: V | V[] | null) => void;
+    /**
+     * Event handler for when the select is cleared.
+     */
+    onClear?: () => void;
+    /**
+     * Event handler for when the select is closed.
+     */
+    onClose?: () => void;
+    /**
+     * Event handler for when an option is deleted in multiple selection mode.
+     */
+    onDelete?: (v: V) => void;
+    /**
+     * Event handler for when the select gains focus.
+     */
+    onFocus?: FocusHandler;
+    /**
+     * Event handler for when the select is opened.
+     */
+    onOpen?: () => void;
+    /**
+     * The options for the select.
+     */
+    options: Option<V, T>[];
+    /**
+     * The placeholder text for the select.
+     * @default: 'Select'
+     */
+    placeholder?: string;
+    /**
+     * Custom rendering function for select options.
+     */
+    renderOption?: RenderOption<V, T>;
+    /**
+     * Custom styles for the select.
+     */
+    style?: React.CSSProperties;
+    /**
+     * Additional inline styles for the select components
+     */
+    styles?: Partial<Record<StyledComponents, React.CSSProperties>>;
+    /**
+     * The value(s) of the select.
+     */
+    value?: V | V[] | null;
+  },
+  AriaAttributes
+>;
 
 function SelectInner<V extends Value, T = undefined>({
   id,
@@ -178,6 +290,13 @@ function SelectInner<V extends Value, T = undefined>({
     }
   }, [open, menuRef, openReverse, optIdx]);
 
+  const clzDropdown = classes(
+    'text-(--rothko-typography-body-color)',
+    'font-rothko-regular',
+    'font-size-(--rothko-font-size-body)',
+    'leading-(--rothko-line-height-body)'
+  );
+
   return (
     <div style={style} className={className}>
       {label && (
@@ -209,42 +328,20 @@ function SelectInner<V extends Value, T = undefined>({
         onKeyDown={onKeyDown}
         aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
         tabIndex={0}
+        className={clzDropdown}
       >
-        {!hasValue && (
-          <ItemText style={{ cursor: 'pointer' }} isPlaceHolder>
-            {placeholder}
-          </ItemText>
-        )}
+        {!hasValue && <ItemText className="cursor-pointer opacity-75">{placeholder}</ItemText>}
         {!isNil(value) && isArray(value) && (
-          <div className={styles['multi-select-container']}>
-            {value.map(v => {
-              const opt = optionLookup[v];
-              return (
-                <div className={styles['multi-select-label']} tabIndex={-1} key={opt.id}>
-                  <Paragraph size="s">{opt.label}</Paragraph>
-                  <PhantomButton
-                    aria-label={`Delete ${opt.label}`}
-                    displayFlex
-                    tabIndex={-1}
-                    onClick={() => {
-                      deleteOne(opt.id);
-                      containerRef.current?.focus();
-                    }}
-                  >
-                    <CloseOutline
-                      aria-hidden
-                      fill={vuar({
-                        element: 'dropdown-multiselect',
-                        category: 'foreground',
-                        fallback: '#000',
-                      })}
-                      width={16}
-                      height={16}
-                    />
-                  </PhantomButton>
-                </div>
-              );
-            })}
+          <div className="flex flex-wrap gap-[0.5rem]">
+            {value.map(v => (
+              <MultiSelectValue
+                option={optionLookup[v]}
+                onClear={valId => {
+                  deleteOne(valId);
+                  containerRef.current?.focus();
+                }}
+              />
+            ))}
           </div>
         )}
         {!multiple && !isNil(value) && !isArray(value) && (
@@ -264,7 +361,7 @@ function SelectInner<V extends Value, T = undefined>({
           variant={menuVariant}
           aria-multiselectable={multiple}
           aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
-          className={styles['dropdown-menu']}
+          className="max-h-[13rem] z-10" // just like autocomplete
         >
           <MenuEmpty>{noResultsMessage}</MenuEmpty>
           {mapper(options, (option, idx) => (

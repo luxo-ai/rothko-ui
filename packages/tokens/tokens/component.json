@@ -1,0 +1,14 @@
+{
+  "autocomplete": {
+    "dropdown": {
+      "maxHeight": {
+        "value": "13.5rem"
+      }
+    }
+  },
+  "button": {
+    "borderRadius": {
+      "value": "0.125rem"
+    }
+  }
+}

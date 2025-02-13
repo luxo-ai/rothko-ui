@@ -1,10 +1,8 @@
 @use '../../../../styles/variables' as variables;
-@use '../../../../styles/mixins' as mixins;
 
 .default-render-option {
   margin: 0;
   user-select: none;
-  @include mixins.optimizeLegibility;
   color: variables.$bodyColor;
   font-size: variables.$bodySmallFontSize;
   line-height: variables.$bodySmallLineHeight;

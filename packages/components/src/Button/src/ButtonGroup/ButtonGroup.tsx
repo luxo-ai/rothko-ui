@@ -1,10 +1,7 @@
 import React from 'react';
 import type { RothkoKind, RothkoSize } from '@rothko-ui/system';
-import type { ButtonAppearance, ButtonVariant } from '../types';
-import styles from './ButtonGroup.module.scss';
-import { classes, scopedClasses } from '@rothko-ui/system';
-
-const sc = scopedClasses(styles);
+import type { ButtonRadius, ButtonVariant } from '../types';
+import { classes } from '@rothko-ui/system';
 
 type ButtonGroupProps = {
   /**
@@ -12,11 +9,6 @@ type ButtonGroupProps = {
    * @type {string}
    */
   id?: string;
-  /**
-   * The appearance style of buttons in the group.
-   * @type {ButtonAppearance}
-   */
-  appearance?: ButtonAppearance;
   /**
    * The buttons in the group.
    * @type {React.ReactNode}
@@ -50,6 +42,12 @@ type ButtonGroupProps = {
    */
   variant?: ButtonVariant;
   /**
+   * The radius of the button.
+   * @type {ButtonRadius}
+   * @default 'default'
+   */
+  radius?: ButtonRadius;
+  /**
    * The size of the buttons in the group.
    * @type {RothkoSize}
    */
@@ -62,7 +60,7 @@ type ButtonGroupProps = {
 };
 
 const ButtonGroup = ({
-  appearance,
+  radius,
   children,
   className,
   gap,
@@ -72,7 +70,6 @@ const ButtonGroup = ({
   size,
   style = {},
 }: ButtonGroupProps) => {
-  const baseClasses = sc('button-group', noEffect && 'no-effect');
   const buttonChildren = React.Children.map(children, (child, index) => {
     if (!React.isValidElement(child)) {
       return child;
@@ -81,18 +78,34 @@ const ButtonGroup = ({
       // eslint-disable-next-line no-console
       console.warn("ButtonGroup expects 'button' elements as children.");
     }
+
+    const childClassNames = classes(
+      'first:rounded-r-none',
+      'last:rounded-l-none',
+      'not-first:not-last:rounded-none',
+      !noEffect && 'transition-transform duration-300',
+      !noEffect && 'ease-[cubic-bezier(0.39,0.58,0.57,1)]',
+      !noEffect && 'active:scale-[0.97]',
+      !noEffect && 'motion-reduce:transition-none',
+      child.props.className
+    );
+
     return React.cloneElement(child, {
       ...(child.props || {}),
       key: child.key || `bttn${index}`,
-      appearance: child.props.appearance || appearance,
+      radius: child.props.radius || radius,
       variant: child.props.variant || variant,
       kind: child.props.kind || kind,
       size: child.props.size || size,
+      className: childClassNames,
     });
   });
 
   return (
-    <div style={{ ...style, gap: gap || style.gap }} className={classes(baseClasses, className)}>
+    <div
+      style={{ ...style, gap: gap || style.gap }}
+      className={classes('inline-flex items-center justify-center', className)}
+    >
       {buttonChildren}
     </div>
   );

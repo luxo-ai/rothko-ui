@@ -22,7 +22,7 @@ const CheckboxCard = () => {
     <Card codeUrl={GITHUB_URL} copy={checkboxCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
         <Usage />
-        <Container maxWidth="32rem">
+        <Container maxWidth="34rem">
           <TSCode sourceCode={IMPORT} />
         </Container>
         <Example sourceCode={BASIC}>
