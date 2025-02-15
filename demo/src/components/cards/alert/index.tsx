@@ -1,19 +1,19 @@
-import { Container, Flex } from '@rothko-ui/components';
+import { Container, Flex } from '@rothko-ui/react';
 
-import { BASIC, APPEARANCE } from './usage/sourceCode';
+import { BASIC, VARIANT } from './usage/sourceCode';
 import { TSCode } from '../../Code';
 import alertCopy from './copy';
 import alertProps from './props';
 import Basic from './usage/Basic';
-import Appearance from './usage/Appearance';
+import Variant from './usage/Variant';
 import Card from '../Card';
 import Example from '../Example';
 import Props from '../Props';
 import Usage from '../Usage';
 
-const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Alert';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Alert';
 
-const IMPORT = "import { Alert } from '@rothko-ui/components';";
+const IMPORT = "import { Alert } from '@rothko-ui/react';";
 
 const AlertCard = () => {
   return (
@@ -26,8 +26,8 @@ const AlertCard = () => {
         <Example sourceCode={BASIC}>
           <Basic />
         </Example>
-        <Example title="Appearance" sourceCode={APPEARANCE}>
-          <Appearance />
+        <Example title="Variant" sourceCode={VARIANT}>
+          <Variant />
         </Example>
       </Flex>
       <Props copy={{ props: alertProps }} />

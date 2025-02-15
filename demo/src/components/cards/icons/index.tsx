@@ -13,7 +13,7 @@ import {
   Paragraph,
   Button,
   Heading3,
-} from '@rothko-ui/components';
+} from '@rothko-ui/react';
 
 import truncateString from 'lodash.truncate';
 import { JSXCode } from '../../Code';
@@ -114,7 +114,7 @@ const IconsCard = () => {
           )}
           {iconList.length === 0 && (
             <FlexItem flex={1} width="100%" margin="auto" maxWidth="40rem">
-              <Alert appearance="outline" kind="primary" style={{ textAlign: 'center' }}>
+              <Alert variant="outline" kind="primary" style={{ textAlign: 'center' }}>
                 No results. Please try another search...
               </Alert>
             </FlexItem>

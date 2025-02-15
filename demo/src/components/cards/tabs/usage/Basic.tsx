@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Tabs, Tab } from '@rothko-ui/components';
+import { Tabs, Tab } from '@rothko-ui/react';
 
 const App = () => {
   return (

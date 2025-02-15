@@ -1,4 +1,4 @@
-import { Container, Flex, Grid } from '@rothko-ui/components';
+import { Container, Flex, Grid } from '@rothko-ui/react';
 
 import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
@@ -17,9 +17,9 @@ import { ACCESSORY, DISABLED, LOADING, VARIANT, SIZE, WITH_KIND, RADIUS } from '
 import Props from '../Props';
 import Usage from '../Usage';
 
-const IMPORT = "import { Button } from '@rothko-ui/components';";
+const IMPORT = "import { Button } from '@rothko-ui/react';";
 
-const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Button';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Button';
 
 const ButtonCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();

@@ -1,4 +1,4 @@
-import { Heading3 } from '@rothko-ui/components';
+import { Heading3 } from '@rothko-ui/react';
 import Link from 'next/link';
 import styles from './Card.module.scss';
 

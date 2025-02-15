@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import type { RothkoKind } from '@rothko-ui/components';
-import { Container, Flex, FlexItem } from '@rothko-ui/components';
+import type { RothkoKind } from '@rothko-ui/react';
+import { Container, Flex, FlexItem } from '@rothko-ui/react';
 
 import { BASIC, DISABLED, WITH_KIND } from './usage/sourceCode';
 import { TSCode } from '../../Code';
@@ -18,9 +18,9 @@ import { insertKind } from '../helpers';
 import Usage from '../Usage';
 import KindRadioGroup from '../KindRadioGroup';
 
-const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Slider';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Slider';
 
-const IMPORT = "import { Slider } from '@rothko-ui/components';";
+const IMPORT = "import { Slider } from '@rothko-ui/react';";
 
 const SliderCard = () => {
   const [kind, setKind] = useState<RothkoKind>('secondary');

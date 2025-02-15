@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Slider, SliderHandle } from '@rothko-ui/components';
+import { Slider, SliderHandle } from '@rothko-ui/react';
 import styles from './Testing.module.scss';
 
 const App = () => {

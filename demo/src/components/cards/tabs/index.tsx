@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import type { RothkoKind } from '@rothko-ui/components';
-import { Container, Flex, FlexItem } from '@rothko-ui/components';
+import type { RothkoKind } from '@rothko-ui/react';
+import { Container, Flex, FlexItem } from '@rothko-ui/react';
 
 import { BASIC, WITH_KIND } from './usage/sourceCode';
 import { insertKind } from '../helpers';
@@ -17,9 +17,9 @@ import WithKind from './usage/WithKind';
 import Usage from '../Usage';
 import KindRadioGroup from '../KindRadioGroup';
 
-const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Tabs';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Tabs';
 
-const IMPORT = "import { TabBar } from '@rothko-ui/components';";
+const IMPORT = "import { TabBar } from '@rothko-ui/react';";
 
 const TabsCard = () => {
   const [kind, setKind] = useState<RothkoKind>('secondary');

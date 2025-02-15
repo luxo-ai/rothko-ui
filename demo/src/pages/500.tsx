@@ -1,4 +1,4 @@
-import { Paragraph } from '@rothko-ui/components';
+import { Paragraph } from '@rothko-ui/react';
 import ErrorPage from '../components/ErrorPage';
 import React from 'react';
 

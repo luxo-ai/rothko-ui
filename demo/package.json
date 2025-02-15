@@ -18,7 +18,7 @@
     "generate:scss": "typed-scss-modules src --nameFormat none --exportType default"
   },
   "dependencies": {
-    "@rothko-ui/components": "*",
+    "@rothko-ui/react": "*",
     "@rothko-ui/icons": "*",
     "@rothko-ui/tokens": "*",
     "@tailwindcss/postcss": "^4.0.4",

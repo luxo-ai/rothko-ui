@@ -1,7 +1,7 @@
 import React from 'react';
 
-import type { RothkoKind } from '@rothko-ui/components';
-import { Tabs, Tab } from '@rothko-ui/components';
+import type { RothkoKind } from '@rothko-ui/react';
+import { Tabs, Tab } from '@rothko-ui/react';
 
 const App = (props: { kind: RothkoKind }) => {
   return (

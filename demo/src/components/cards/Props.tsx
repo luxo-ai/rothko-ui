@@ -1,4 +1,4 @@
-import { Flex, FlexItem, Code, Heading5, Heading3 } from '@rothko-ui/components';
+import { Flex, FlexItem, Code, Heading5, Heading3 } from '@rothko-ui/react';
 import React from 'react';
 import { Table, TableData, TableRow } from '../table';
 import styles from './Card.module.scss';

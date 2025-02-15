@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Tag } from '@rothko-ui/components';
+import { Tag } from '@rothko-ui/react';
 
 const App = () => {
   return (
-    <Tag appearance="filled" kind="danger">
+    <Tag variant="filled" kind="danger">
       example tag
     </Tag>
   );

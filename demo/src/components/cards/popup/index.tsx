@@ -1,4 +1,4 @@
-import { Container, Flex } from '@rothko-ui/components';
+import { Container, Flex } from '@rothko-ui/react';
 
 import { BASIC, BLUR } from './usage/sourceCode';
 import { TSCode } from '../../Code';
@@ -12,9 +12,9 @@ import Props from '../Props';
 import Usage from '../Usage';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 
-const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Popup';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Popup';
 
-const IMPORT = "import { BottomPopup } from '@rothko-ui/components';";
+const IMPORT = "import { BottomPopup } from '@rothko-ui/react';";
 
 const PopupCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import type { RothkoKind } from '@rothko-ui/components';
-import { Container, Flex, FlexItem } from '@rothko-ui/components';
+import type { RothkoKind } from '@rothko-ui/react';
+import { Container, Flex, FlexItem } from '@rothko-ui/react';
 
 import { BASIC, WITH_KIND, WITH_LIFE } from './usage/sourceCode';
 import { insertKind } from '../helpers';
@@ -18,9 +18,9 @@ import WithLife from './usage/WithLife';
 import Usage from '../Usage';
 import KindRadioGroup from '../KindRadioGroup';
 
-const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Toaster';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Toaster';
 
-const IMPORT = "import { useToaster } from '@rothko-ui/components';";
+const IMPORT = "import { useToaster } from '@rothko-ui/react';";
 
 const ToastCard = () => {
   const [kind, setKind] = useState<RothkoKind>('danger');

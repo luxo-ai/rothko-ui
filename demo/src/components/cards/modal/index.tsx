@@ -1,4 +1,4 @@
-import { Container, Flex } from '@rothko-ui/components';
+import { Container, Flex } from '@rothko-ui/react';
 
 import { BASIC, BLUR } from './usage/sourceCode';
 import { TSCode } from '../../Code';
@@ -12,9 +12,9 @@ import modalProps from './props';
 import Props from '../Props';
 import Usage from '../Usage';
 
-const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Modal';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Modal';
 
-const IMPORT = "import { Modal } from '@rothko-ui/components';";
+const IMPORT = "import { Modal } from '@rothko-ui/react';";
 
 const ModalCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();

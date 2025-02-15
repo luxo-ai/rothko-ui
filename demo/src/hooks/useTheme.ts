@@ -1,5 +1,5 @@
 const useTheme = () => {
-  return { theme: 'dark', toggleTheme: () => {} };
+  return { theme: 'light', toggleTheme: () => {} };
 };
 
 export default useTheme;

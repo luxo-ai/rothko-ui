@@ -1,11 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 
 import { ChevronDownOutline, CloseOutline } from '@rothko-ui/icons';
-import { scopedClasses } from '../../utils/classes';
+import { classes } from '../../utils/classes';
 
-import style from './ControlButton.module.scss';
-
-const sc = scopedClasses(style);
+import { PhantomButton } from './PhantomButton';
 
 export enum ControlState {
   Clear = 'Clear',
@@ -44,18 +42,34 @@ export const ControlButton = ({ state, disabled, ...callbackProps }: ControlButt
 
   console.log('PREV STATE', previousState, 'STATE', state, 'WAS OPENED', wasOpened);
 
+  const controlButtonClasses = classes(
+    'flex',
+    'items-center',
+    'top-[0.51rem]',
+    'right-[0.51rem]',
+    'cursor-pointer',
+    'm-[-1rem]',
+    'h-auto',
+    'w-auto',
+    'p-[0.51rem_1rem]',
+    'z-9',
+    'transition-transform duration-[125ms] ease-linear',
+    !wasOpened && 'rotate-0',
+    wasOpened && 'rotate-180'
+  );
+
   return (
-    <button
+    <PhantomButton
       aria-label={CONTROL_STATE_TO_LABEL[state]}
       disabled={disabled}
       onClick={() => callbackProps[`on${state}`]?.()}
-      className={sc('control-button', wasOpened && 'open')}
+      className={controlButtonClasses}
     >
       {state === ControlState.Clear ? (
         <CloseOutline aria-hidden width={ICON_SIZE} height={ICON_SIZE} />
       ) : (
         <ChevronDownOutline aria-hidden width={ICON_SIZE} height={ICON_SIZE} />
       )}
-    </button>
+    </PhantomButton>
   );
 };

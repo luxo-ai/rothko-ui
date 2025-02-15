@@ -1,4 +1,4 @@
-import { Heading1 } from '@rothko-ui/components';
+import { Heading1 } from '@rothko-ui/react';
 
 const App = () => {
   return <Heading1>Hello World!</Heading1>;

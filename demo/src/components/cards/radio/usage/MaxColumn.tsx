@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Radio, RadioGroup } from '@rothko-ui/components';
+import { Radio, RadioGroup } from '@rothko-ui/react';
 
 const App = () => {
   const [selected, setSelected] = useState<string>();

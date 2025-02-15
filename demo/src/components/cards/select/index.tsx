@@ -1,4 +1,4 @@
-import { Container, Flex } from '@rothko-ui/components';
+import { Container, Flex } from '@rothko-ui/react';
 
 import { BASIC, CLEARABLE, DISABLED, MENU_VARIANT, RENDER_OPTION } from './usage/sourceCode';
 import { TSCode } from '../../Code';
@@ -15,9 +15,9 @@ import MenuVariant from './usage/MenuVariant';
 import Props from '../Props';
 import Usage from '../Usage';
 
-const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Select';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Select';
 
-const IMPORT = "import { Select } from '@rothko-ui/components';";
+const IMPORT = "import { Select } from '@rothko-ui/react';";
 
 // change postfix/prefix with "onRenderSelected"
 

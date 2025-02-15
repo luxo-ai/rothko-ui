@@ -2,11 +2,11 @@
 
 # Rothko-UI
 
-Welcome to Rothko-UI, a comprehensive UI component library designed with flexibility and ease of use in mind. This monorepo contains various packages, with `@rothko-ui/components` and `@rothko-ui/icons` being the primary ones for external use.
+Welcome to Rothko-UI, a comprehensive UI component library designed with flexibility and ease of use in mind. This monorepo contains various packages, with `@rothko-ui/react` and `@rothko-ui/icons` being the primary ones for external use.
 
 ## Key Packages
 
-- `@rothko-ui/components`: The main package containing all the UI components.
+- `@rothko-ui/react`: The main package containing all the UI components.
 - `@rothko-ui/icons`: A collection of SVG icons optimized for Rothko-UI.
 
 ## Using Rothko-UI
@@ -16,7 +16,7 @@ Welcome to Rothko-UI, a comprehensive UI component library designed with flexibi
 Before using any Rothko-UI components, it's essential to wrap your application or component tree with the `RothkoProvider`. This context provider ensures that all components function correctly and inherit the necessary themes and configurations.
 
 ```jsx
-import { RothkoProvider } from '@rothko-ui/components';
+import { RothkoProvider } from '@rothko-ui/react';
 
 function MyApp() {
   return <RothkoProvider>{/* Your application components here */}</RothkoProvider>;
@@ -28,7 +28,7 @@ function MyApp() {
 After setting up the `RothkoProvider`, you can import and use the components:
 
 ```jsx
-import { Button } from '@rothko-ui/components';
+import { Button } from '@rothko-ui/react';
 
 function MyComponent() {
   return <Button>Click Me</Button>;
@@ -52,13 +52,13 @@ function MyComponent() {
 To get started with Rothko-UI:
 
 ```bash
-npm install @rothko-ui/components @rothko-ui/icons
+npm install @rothko-ui/react @rothko-ui/icons
 ```
 
 or
 
 ```bash
-yarn add @rothko-ui/components @rothko-ui/icons
+yarn add @rothko-ui/react @rothko-ui/icons
 ```
 
 ## Server-Side Rendering (SSR) with Rothko UI

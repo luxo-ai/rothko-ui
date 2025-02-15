@@ -9,7 +9,7 @@ import {
   Heading5,
   Heading6,
   Paragraph,
-} from '@rothko-ui/components';
+} from '@rothko-ui/react';
 
 const App = () => {
   return (

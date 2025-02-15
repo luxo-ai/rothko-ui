@@ -11,7 +11,7 @@ import {
   Paragraph,
   Heading1,
   Heading,
-} from '@rothko-ui/components';
+} from '@rothko-ui/react';
 import toKebabCase from 'lodash.kebabcase';
 import { Code } from '../Code';
 import styles from './Card.module.scss';
@@ -207,7 +207,7 @@ const Section = ({ sectionKey, section }: SectionProps) => {
           </Link>
         </Heading>
       )}
-      {title && headerVariant === 'body' && <Paragraph bold>{title}</Paragraph>}
+      {title && headerVariant === 'body' && <Paragraph variant="bold">{title}</Paragraph>}
       {subtitle && (
         <div style={{ marginTop: '0.5rem', marginBottom: '1rem' }}>
           <Markdown>{subtitle}</Markdown>

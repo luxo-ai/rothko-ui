@@ -1,5 +1,5 @@
-import type { RothkoKind } from '@rothko-ui/components';
-import { Container, Flex, FlexItem } from '@rothko-ui/components';
+import type { RothkoKind } from '@rothko-ui/react';
+import { Container, Flex, FlexItem } from '@rothko-ui/react';
 import { useState } from 'react';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import { TSCode } from '../../Code';
@@ -16,9 +16,9 @@ import { insertKind } from '../helpers';
 import Usage from '../Usage';
 import KindRadioGroup from '../KindRadioGroup';
 
-const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Slider';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Slider';
 
-const IMPORT = "import { MultiSlider } from '@rothko-ui/components';";
+const IMPORT = "import { MultiSlider } from '@rothko-ui/react';";
 
 const MultiSliderCard = () => {
   const [kind, setKind] = useState<RothkoKind>('secondary');

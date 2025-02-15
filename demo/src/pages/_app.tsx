@@ -10,7 +10,7 @@ import config from '../config';
 import '../globals.css';
 import ErrorBoundary from '../components/ErrorBoundary';
 import React from 'react';
-import { ToasterContextProvider } from '@rothko-ui/components';
+import { ToasterContextProvider } from '@rothko-ui/react';
 import PaddedNavLayout from '../components/layout/PaddedNavLayout';
 
 type RothkoAppProps = AppProps & {

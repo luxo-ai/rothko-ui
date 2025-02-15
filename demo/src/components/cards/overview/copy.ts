@@ -14,7 +14,7 @@ const overviewCopy: CardCopy = {
         variant: 'h6',
         title: 'Installing Rothko UI',
         subtitle:
-          'Rothko UI is available on npm as `@rothko-ui/components`. This single package contains all Rothko UI components. The iconography library is separately available as `@rothko-ui/icons`.',
+          'Rothko UI is available on npm as `@rothko-ui/react`. This single package contains all Rothko UI components. The iconography library is separately available as `@rothko-ui/icons`.',
         body: {
           kind: 'code',
           language: 'bash',
@@ -22,12 +22,12 @@ const overviewCopy: CardCopy = {
             {
               icon: lazy(() => import('./NpmSvg')),
               tag: 'npm',
-              text: 'npm install @rothko-ui/components @rothko-ui/icons',
+              text: 'npm install @rothko-ui/react @rothko-ui/icons',
             },
             {
               icon: lazy(() => import('./YarnSvg')),
               tag: 'yarn',
-              text: 'yarn add @rothko-ui/components @rothko-ui/icons',
+              text: 'yarn add @rothko-ui/react @rothko-ui/icons',
             },
           ],
         },

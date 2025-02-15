@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import type { Option } from '@rothko-ui/components';
-import { Autocomplete, Paragraph } from '@rothko-ui/components';
+import type { Option } from '@rothko-ui/react';
+import { Autocomplete, Paragraph } from '@rothko-ui/react';
 import { listOfCountriesWithFlags } from './listOfCountries';
 
 const countryOptions: Option<number, { flag: string }>[] = listOfCountriesWithFlags.map(

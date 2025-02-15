@@ -1,4 +1,4 @@
-import { Container, Flex } from '@rothko-ui/components';
+import { Container, Flex } from '@rothko-ui/react';
 
 import { BASIC, DISABLED, WITH_KIND } from './usage/sourceCode';
 import { TSCode } from '../../Code';
@@ -12,10 +12,9 @@ import Props from '../Props';
 import WithKind from './usage/WithKind';
 import Usage from '../Usage';
 
-const GITHUB_URL =
-  'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Checkbox';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Checkbox';
 
-const IMPORT = "import { Checkbox } from '@rothko-ui/components';";
+const IMPORT = "import { Checkbox } from '@rothko-ui/react';";
 
 const CheckboxCard = () => {
   return (

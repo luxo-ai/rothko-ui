@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Button, Modal } from '@rothko-ui/components';
+import { Button, Modal } from '@rothko-ui/react';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';

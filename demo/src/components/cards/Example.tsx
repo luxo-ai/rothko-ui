@@ -1,4 +1,4 @@
-import { Flex, FlexItem, Paragraph, Tabs, Tab, Heading5 } from '@rothko-ui/components';
+import { Flex, FlexItem, Paragraph, Tabs, Tab, Heading5 } from '@rothko-ui/react';
 
 import { JSXCode } from '../Code';
 

@@ -1,13 +1,5 @@
 import { Github, Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
-import {
-  Button,
-  Drawer,
-  Flex,
-  FlexItem,
-  Paragraph,
-  Heading5,
-  classes,
-} from '@rothko-ui/components';
+import { Button, Drawer, Flex, FlexItem, Paragraph, Heading5, classes } from '@rothko-ui/react';
 import cookieCutter from 'cookie-cutter';
 import { useEffect, useMemo, useState } from 'react';
 

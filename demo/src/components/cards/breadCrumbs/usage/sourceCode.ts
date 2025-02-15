@@ -1,6 +1,6 @@
 export const BASIC = `
 import React from 'react';
-import { BreadCrumbItem, BreadCrumbs } from '@rothko-ui/components';
+import { BreadCrumbItem, BreadCrumbs } from '@rothko-ui/react';
 
 const App = () => {
   return (

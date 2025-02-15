@@ -1,5 +1,5 @@
 import { Email, Github, Twitter } from '@rothko-ui/icons';
-import { Flex, Paragraph } from '@rothko-ui/components';
+import { Flex, Paragraph } from '@rothko-ui/react';
 import Link from 'next/link';
 import React from 'react';
 import config from '../../config';
@@ -32,7 +32,7 @@ const PaddedNavLayout = ({ children, selected }: LayoutProps) => {
       <footer>
         <Flex marginBottom="0.5rem" flexDirection="column" alignItems="center">
           <Paragraph>Built in NYC</Paragraph>
-          <Paragraph size="s" light>
+          <Paragraph size="s" variant="light">
             © {new Date().getFullYear()} Rothko-UI
           </Paragraph>
         </Flex>

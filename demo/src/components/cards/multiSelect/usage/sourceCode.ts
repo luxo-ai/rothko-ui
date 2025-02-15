@@ -1,6 +1,6 @@
 export const BASIC = `
 import React, { useState } from 'react';
-import { MultiSelect } from '@rothko-ui/components';
+import { MultiSelect } from '@rothko-ui/react';
 import { listOfNames } from './listOfNames';
 
 const nameOptions = listOfNames.map((name, idx) => ({ id: idx, label: name }));
@@ -14,7 +14,7 @@ export default App;
 `;
 export const CLEARABLE = `
 import React, { useState } from 'react';
-import { MultiSelect } from '@rothko-ui/components';
+import { MultiSelect } from '@rothko-ui/react';
 import { listOfNames } from './listOfNames';
 
 const nameOptions = listOfNames.map((name, idx) => ({ id: idx, label: name }));
@@ -30,7 +30,7 @@ export default App;
 `;
 export const DISABLED = `
 import React, { useState } from 'react';
-import { MultiSelect } from '@rothko-ui/components';
+import { MultiSelect } from '@rothko-ui/react';
 import { listOfNames } from './listOfNames';
 
 const nameOptions = listOfNames.map((name, idx) => ({ id: idx, label: name }));
@@ -46,7 +46,7 @@ export default App;
 `;
 export const MENU_POSITION = `
 import React, { useState } from 'react';
-import { MultiSelect } from '@rothko-ui/components';
+import { MultiSelect } from '@rothko-ui/react';
 import { listOfNames } from './listOfNames';
 
 const nameOptions = listOfNames.map((name, idx) => ({ id: idx, label: name }));

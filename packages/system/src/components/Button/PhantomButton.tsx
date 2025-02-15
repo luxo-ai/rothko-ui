@@ -1,8 +1,5 @@
 import React from 'react';
-import { classes, scopedClasses } from '../../utils/classes';
-import styles from './Button.module.scss';
-
-const sc = scopedClasses(styles);
+import { classes } from '../../utils/classes';
 
 type PhantomButtonProps = Omit<React.HTMLProps<HTMLButtonElement>, 'type' | 'children'> & {
   displayFlex?: boolean;
@@ -15,12 +12,27 @@ export const PhantomButton = ({
   type = 'button',
   children,
   className,
+  disabled,
   ...props
 }: PhantomButtonProps) => {
-  const baseClasses = sc('phantom-button', displayFlex && 'flex');
+  const phantomButtonClasses = classes(
+    'ios-tap-highlight-color-transparent',
+    'touch-action-manipulation',
+    'bg-transparent',
+    'border-none',
+    'outline-none',
+    'p-0',
+    !disabled && 'cursor-pointer',
+    'appearance-none',
+    disabled && 'cursor-not-allowed',
+    disabled && 'pointer-events-none',
+    disabled && 'opacity-60',
+    displayFlex && 'flex',
+    className
+  );
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <button {...props} type={type} className={classes(baseClasses, className)}>
+    <button {...props} type={type} className={phantomButtonClasses}>
       {children}
     </button>
   );

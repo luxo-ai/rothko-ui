@@ -1,10 +1,10 @@
-import { Container, Flex } from '@rothko-ui/components';
+import { Container, Flex } from '@rothko-ui/react';
 
-import { APPEARANCE } from '../button/usage/sourceCode';
+import { VARIANT } from '../button/usage/sourceCode';
 import { BASIC, CLOSEABLE, WITH_KIND } from './usage/sourceCode';
 import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import Appearance from './usage/Appearance';
+import Variant from './usage/Variant';
 import Basic from './usage/Basic';
 import Card from '../Card';
 import Closeable from './usage/Closeable';
@@ -15,9 +15,9 @@ import tagProps from './props';
 import WithKind from './usage/WithKind';
 import Usage from '../Usage';
 
-const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Tag';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Tag';
 
-const IMPORT = "import { Tag } from '@rothko-ui/components';";
+const IMPORT = "import { Tag } from '@rothko-ui/react';";
 
 const TagCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();
@@ -35,9 +35,9 @@ const TagCard = () => {
             <Basic />
           </Container>
         </Example>
-        <Example title="Appearance" sourceCode={APPEARANCE}>
+        <Example title="Variant" sourceCode={VARIANT}>
           <Flex gap="0.75rem" maxWidth={maxWidth}>
-            <Appearance />
+            <Variant />
           </Flex>
         </Example>
         <Example title="Closeable" sourceCode={CLOSEABLE}>

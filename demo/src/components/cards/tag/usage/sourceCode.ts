@@ -1,27 +1,11 @@
-export const APPEARANCE = `
-import React from 'react';
-
-import { Tag } from '@rothko-ui/components';
-
-const App = () => {
-  return (
-    <>
-      <Tag appearance="outline">outline tag</Tag>
-      <Tag appearance="filled">filled tag</Tag>
-    </>
-  );
-};
-
-export default App;
-`;
 export const BASIC = `
 import React from 'react';
 
-import { Tag } from '@rothko-ui/components';
+import { Tag } from '@rothko-ui/react';
 
 const App = () => {
   return (
-    <Tag appearance="filled" kind="danger">
+    <Tag variant="filled" kind="danger">
       example tag
     </Tag>
   );
@@ -32,7 +16,7 @@ export default App;
 export const CLOSEABLE = `
 import React from 'react';
 
-import { Tag } from '@rothko-ui/components';
+import { Tag } from '@rothko-ui/react';
 
 const App = () => {
   return <Tag onClose={() => alert('Closed!')}>closeable tag</Tag>;
@@ -40,10 +24,26 @@ const App = () => {
 
 export default App;
 `;
+export const VARIANT = `
+import React from 'react';
+
+import { Tag } from '@rothko-ui/react';
+
+const App = () => {
+  return (
+    <>
+      <Tag variant="outline">outline tag</Tag>
+      <Tag variant="filled">filled tag</Tag>
+    </>
+  );
+};
+
+export default App;
+`;
 export const WITH_KIND = `
 import React from 'react';
 
-import { Tag } from '@rothko-ui/components';
+import { Tag } from '@rothko-ui/react';
 
 const App = () => {
   return (

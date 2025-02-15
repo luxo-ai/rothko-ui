@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Slider } from '@rothko-ui/components';
+import { Slider } from '@rothko-ui/react';
 
 const App = () => {
   const [value, setValue] = useState<number>(25);

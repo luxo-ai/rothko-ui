@@ -1,4 +1,4 @@
-import { Container, Flex } from '@rothko-ui/components';
+import { Container, Flex } from '@rothko-ui/react';
 
 import { BASIC, DISABLED } from './usage/sourceCode';
 import { TSCode } from '../../Code';
@@ -13,9 +13,9 @@ import Props from '../Props';
 import textareaProps from './props';
 import style from './Textarea.module.scss';
 
-const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Input';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Input';
 
-const IMPORT = "import { Textarea } from '@rothko-ui/components';";
+const IMPORT = "import { Textarea } from '@rothko-ui/react';";
 
 const TextareaCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();

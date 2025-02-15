@@ -11,7 +11,7 @@ const escapeForTemplateLiteral = str => str.replace(/\\/g, '\\\\').replace(/`/g,
 
 const cleanComponent = str => {
   return str
-    .replace(/import\s+(type\s+)?\{\s*RothkoKind\s*\}\s+from\s+'@rothko-ui\/components';\s*/, '') // Remove import type { RothkoKind } from '@rothko-ui/components';
+    .replace(/import\s+(type\s+)?\{\s*RothkoKind\s*\}\s+from\s+'@rothko-ui\/react';\s*/, '') // Remove import type { RothkoKind } from '@rothko-ui/react';
     .replace(/\(props:\s*\{[^}]*\}\)\s*=>\s*/, '() => ') // Remove prop type annotation
     .replace(/\s+kind={props\.kind}/, ' kind="info"'); // Remove kind={props.kind} and set it to "info"
 };

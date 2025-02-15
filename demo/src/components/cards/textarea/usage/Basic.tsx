@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Textarea } from '@rothko-ui/components';
+import { Textarea } from '@rothko-ui/react';
 
 const App = () => {
   const [value, setValue] = useState<string>('');

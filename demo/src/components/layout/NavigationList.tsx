@@ -1,4 +1,4 @@
-import { Paragraph, Label, LinkButton } from '@rothko-ui/components';
+import { Paragraph, Label, LinkButton } from '@rothko-ui/react';
 import React from 'react';
 import { NAVIGATION_LIST } from './constants';
 import { isLeaf } from './helpers';
@@ -47,7 +47,7 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
   return (
     <List margin={0} padding="0">
       <ListItem paddingTop="0.5rem" paddingLeft={`calc(${depth} * 0.75rem)`}>
-        <Paragraph bold size="xs">
+        <Paragraph variant="bold" size="xs">
           {item.label.toUpperCase()}
         </Paragraph>
       </ListItem>

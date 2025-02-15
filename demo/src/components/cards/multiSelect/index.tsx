@@ -1,4 +1,4 @@
-import { Container, Flex } from '@rothko-ui/components';
+import { Container, Flex } from '@rothko-ui/react';
 
 import { BASIC, CLEARABLE, DISABLED, MENU_POSITION } from './usage/sourceCode';
 import { TSCode } from '../../Code';
@@ -14,9 +14,9 @@ import multiDropdownProps from './props';
 import Props from '../Props';
 import Usage from '../Usage';
 
-const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/components/src/Select';
+const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Select';
 
-const IMPORT = "import { MultiSelet } from '@rothko-ui/components';";
+const IMPORT = "import { MultiSelet } from '@rothko-ui/react';";
 
 const MultiSelectCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();

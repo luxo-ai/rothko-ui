@@ -1,7 +1,7 @@
 {
   "packages": [
-    "packages/components/src/*",
-    "packages/components",
+    "packages/react/src/*",
+    "packages/react",
     "packages/icons",
     "packages/tokens",
     "packages/system"

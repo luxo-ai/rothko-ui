@@ -1,4 +1,4 @@
-import type { RothkoKind } from '@rothko-ui/components';
+import type { RothkoKind } from '@rothko-ui/react';
 
 type PropValue = string | number | boolean | null;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import type { RothkoKind } from '@rothko-ui/components';
-import { Button, useToaster } from '@rothko-ui/components';
+import type { RothkoKind } from '@rothko-ui/react';
+import { Button, useToaster } from '@rothko-ui/react';
 
 const TOAST_DURATION = 4000;
 

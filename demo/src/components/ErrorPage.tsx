@@ -1,4 +1,4 @@
-import { Flex, Heading2, Heading1 } from '@rothko-ui/components';
+import { Flex, Heading2, Heading1 } from '@rothko-ui/react';
 import React from 'react';
 import { DesktopOnly, MobileOnly } from './dimensions';
 

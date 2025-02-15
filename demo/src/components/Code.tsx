@@ -3,7 +3,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import React from 'react';
 
 import { CopyOutline } from '@rothko-ui/icons';
-import { Flex, ToasterConsumer, Paragraph } from '@rothko-ui/components';
+import { Flex, ToasterConsumer, Paragraph } from '@rothko-ui/react';
 import useTheme from '../hooks/useTheme';
 import { PhantomButton } from './button';
 
@@ -68,7 +68,7 @@ export const Code = ({
                     <PhantomButton>
                       <Flex gap="0.25rem">
                         <CopyOutline fill={style.color} width="1.125rem" height="1.125rem" />
-                        <Paragraph size="xs" bold style={{ color: style.color }}>
+                        <Paragraph size="xs" variant="bold" style={{ color: style.color }}>
                           Copy
                         </Paragraph>
                       </Flex>

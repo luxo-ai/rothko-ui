@@ -11,7 +11,7 @@ import {
   Paragraph,
   Code,
   LinkButton,
-} from '@rothko-ui/components';
+} from '@rothko-ui/react';
 
 import { startsWithHttpOrHttps } from './helpers';
 
