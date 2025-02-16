@@ -15,6 +15,9 @@ yarn build:typography
 echo "Building link ..."
 yarn build:link
 
+echo "Building menu ..."
+yarn build:menu
+
 echo "Building rest ..."
 yarn build:button
 yarn build:tabs
@@ -29,7 +32,6 @@ yarn build:accordion
 yarn build:skeleton
 yarn build:checkbox
 yarn build:slider
-yarn build:menu
 yarn build:switch
 yarn build:select
 yarn build:modal
