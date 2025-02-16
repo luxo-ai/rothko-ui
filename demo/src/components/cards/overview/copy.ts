@@ -13,13 +13,13 @@ const overviewCopy: CardCopy = {
         {
           variant: 'h6',
           title: 'Prerequisites',
-          body: 'Rothko-ui is built off of tailwindcss `v4.x`. To use rothko-ui, first follow the installation guide in the [official docs](https://tailwindcss.com/docs/installation/using-vite).',
+          body: 'Rothko ui is built off of tailwindcss `v4.x`. To use rothko-ui, first follow the installation guide in the [official docs](https://tailwindcss.com/docs/installation/using-vite).',
         },
         {
           variant: 'h6',
-          title: 'Installing Rothko UI',
+          title: 'Installation',
           subtitle:
-            'Rothko UI is available on npm as `@rothko-ui/react`. This single package contains all Rothko UI components. The iconography library is separately available as `@rothko-ui/icons`. Style tokens are available through `@rothko-ui/tokens`.',
+            'Rothko ui is available on npm as `@rothko-ui/react`. This single package contains all rothko ui components. The iconography library is separately available as `@rothko-ui/icons`. Style tokens are available through `@rothko-ui/tokens`.',
           body: {
             kind: 'code',
             language: 'bash',
