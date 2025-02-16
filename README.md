@@ -8,7 +8,7 @@ Welcome to rothko-ui, an expressive react component library designed with flexib
 
 - `@rothko-ui/react` The main package containing all components.
 
-- `@rothko-ui/system` Shared components, helper functions, and React hooks that provide the building blocks for rothko-ui.
+- `@rothko-ui/system` Shared components, helper functions, and React hooks.
 
 - `@rothko-ui/icons` A set of customizable SVG icons.
 
