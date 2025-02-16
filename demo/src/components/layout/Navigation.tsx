@@ -13,11 +13,11 @@ import useTheme from '../../hooks/useTheme';
 import { PhantomButton } from '../button';
 
 const Navigation = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const modeIcon = useMemo(() => {
+  const _modeIcon = useMemo(() => {
     return theme === 'dark' ? (
       <Sun fill="#ffbb00" width={28} height={28} />
     ) : (
@@ -63,9 +63,9 @@ const Navigation = () => {
               <NextLink target="_blank" href={config.repoUrl} className={styles.hoverButton}>
                 <Github fill={theme === 'dark' ? '#fff' : '#000'} width={28} height={28} />
               </NextLink>
-              <PhantomButton className={styles.hoverButton} onClick={() => toggleTheme()}>
+              {/* <PhantomButton className={styles.hoverButton} onClick={() => toggleTheme()}>
                 {modeIcon}
-              </PhantomButton>
+              </PhantomButton> */}
             </Flex>
             <DesktopOnly height="100%">
               <NextLink href="/sponsor">

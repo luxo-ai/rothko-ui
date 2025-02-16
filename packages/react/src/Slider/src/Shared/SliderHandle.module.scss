@@ -1,6 +1,6 @@
-@use '../../../../styles/mixins' as mixins;
+@use '../../../../../styles/mixins' as mixins;
 @use './variables' as variables;
-@use '../../../../styles/placeholders';
+@use '../../../../../styles/placeholders';
 
 .handle {
   @extend %hide-chrome-browser-outline;

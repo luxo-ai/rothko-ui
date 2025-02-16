@@ -10,7 +10,7 @@ import autoprefixer from 'autoprefixer';
 const isDev = process.env.NODE_ENV === 'dev';
 
 export default {
-  input: 'src/index.ts',
+  input: 'src/index.tsx',
   output: {
     dir: 'dist',
     entryFileNames: '[name].mjs',

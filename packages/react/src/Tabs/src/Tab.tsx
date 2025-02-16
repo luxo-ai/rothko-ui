@@ -28,9 +28,24 @@ export type TabProps = {
    */
   className?: string;
   /**
-   * The `aria-labelledby` attribute of the tab.
+   * The title of the tab.
    * @type {string}
+   * @required
    */
+  // eslint-disable-next-line react/no-unused-prop-types
+  title: string;
+  /**
+   * The icon to display on the left side of the tab.
+   * @type {React.ReactElement}
+   */
+  // eslint-disable-next-line react/no-unused-prop-types
+  leftIcon?: React.ReactElement;
+  /**
+   * The icon to display on the right side of the tab.
+   * @type {React.ReactElement}
+   */
+  // eslint-disable-next-line react/no-unused-prop-types
+  rightIcon?: React.ReactElement;
   'aria-labelledby'?: string;
 };
 
