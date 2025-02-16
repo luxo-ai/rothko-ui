@@ -1,11 +1,3 @@
-// ignore PascalCase requirements for exports from text.tsx
-// const lowerCaseExports = new RegExp('^export const ([a-z][a-zA-Z0-9]*)\\s{0,1}=.*$', 'gm');
-/*const textNames = require('fs')
-  .readFileSync('./packages/ui/Text/Text.tsx')
-  .toString()
-  .match(lowerCaseExports)
-  .map(s => s.replace(lowerCaseExports, '$1'));*/
-
 /**
  * "off" or 0 - turn the rule off
  * "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)

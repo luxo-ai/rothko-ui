@@ -2,11 +2,8 @@
   "name": "rothko-ui",
   "version": "1.0.0",
   "repository": "github:luxo-ai/rothko-ui",
-  "publishConfig": {
-    "registry": "https://www.npmjs.com/package/@rothko-ui"
-  },
   "license": "MIT",
-  "author": "luxo-ai <luxo@rothko-ui.com>",
+  "author": "Luis Serazo <luxo.ai@proton.me>",
   "private": true,
   "scripts": {
     "add:accordion": "yarn workspace @rothko-ui/accordion add $1",
@@ -84,7 +81,7 @@
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^9.0.11",
-    "lerna": "^7.0.1",
+    "lerna": "^8.1.9",
     "prettier": "^2.3.2"
   },
   "workspaces": {

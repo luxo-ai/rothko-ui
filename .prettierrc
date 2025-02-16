@@ -3,5 +3,7 @@
   "singleQuote": true,
   "jsxSingleQuote": false,
   "trailingComma": "es5",
-  "arrowParens": "avoid"
+  "arrowParens": "avoid",
+  "tabWidth": 2,
+  "useTabs": false
 }

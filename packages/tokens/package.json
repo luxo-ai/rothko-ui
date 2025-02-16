@@ -11,7 +11,7 @@
   },
   "private": false,
   "license": "MIT",
-  "author": "luxo-ai <luxo@rothko-ui.com>",
+  "author": "Luis Serazo <luxo.ai@proton.me>",
   "description": "Style tokens for Rothko UI",
   "source": "src/index.ts",
   "styles": "build/tokens.css",

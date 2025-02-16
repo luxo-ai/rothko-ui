@@ -12,7 +12,7 @@
   },
   "private": false,
   "license": "MIT",
-  "author": "luxo-ai <luxo@rothko-ui.com>",
+  "author": "Luis Serazo <luxo.ai@proton.me>",
   "description": "Button for Rothko UI",
   "type": "module",
   "types": "dist/index.d.ts",

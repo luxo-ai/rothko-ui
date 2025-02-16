@@ -8,7 +8,7 @@
   },
   "private": true,
   "license": "MIT",
-  "author": "luxo-ai <luxo@rothko-ui.com>",
+  "author": "Luis Serazo <luxo.ai@proton.me>",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

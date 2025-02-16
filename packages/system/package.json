@@ -12,7 +12,7 @@
   },
   "private": false,
   "license": "MIT",
-  "author": "luxo-ai <luxo@rothko-ui.com>",
+  "author": "Luis Serazo <luxo.ai@proton.me>",
   "description": "System library for Rothko UI",
   "type": "module",
   "sideEffects": false,
