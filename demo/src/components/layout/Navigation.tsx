@@ -1,5 +1,5 @@
 import { Github, Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
-import { Button, Drawer, Flex, FlexItem, Paragraph, Heading5 } from '@rothko-ui/react';
+import { Button, Drawer, Flex, FlexItem, Heading5 } from '@rothko-ui/react';
 import cookieCutter from 'cookie-cutter';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
@@ -53,7 +53,6 @@ const Navigation = () => {
               <NextLink href="/">
                 <Flex cursor="pointer" alignItems="end" columnGap="0.25rem">
                   <Heading5>Rothko UI</Heading5>
-                  {config.version && <Paragraph size="xs">v{config.version}</Paragraph>}
                 </Flex>
               </NextLink>
             </FlexItem>
