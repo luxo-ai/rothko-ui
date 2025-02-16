@@ -16,7 +16,13 @@ Welcome to rothko-ui, an expressive react component library designed with flexib
 
 ## Using rothko-ui
 
+### Installation
+
+##### tailwindcss 🌀
+
 Rothko-ui is built off of tailwindcss v4.x. To use rothko-ui first, follow the installation guide in the [official docs](https://tailwindcss.com/docs/installation/using-vite).
+
+##### rothko-ui 🖌️
 
 Once you've gotten tailwind set-up, you can now install the rothko packages:
 
