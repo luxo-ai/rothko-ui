@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 // ====== Theme Types ======
 // semantic names + primary + secondary
@@ -45,7 +45,6 @@ export type RenderNestedOption<V, T = undefined> = (props: {
 
 export type FocusHandler = (e: React.FocusEvent<HTMLElement>) => void;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type Accessory<Props = {}> = (
   props: Props & {
     size: number | Size;

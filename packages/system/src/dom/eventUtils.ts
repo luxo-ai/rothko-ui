@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Nilable, Obj } from '../utils/types';
 import type React from 'react';
 
-const touchesKeys = ['touches', 'targetTouches', 'changedTouches'] as const;
-type TouchKey = (typeof touchesKeys)[number];
+import type { Nilable, Obj } from '../utils/types';
+
+type TouchKey = 'touches' | 'targetTouches' | 'changedTouches';
 export type WithTouches<V extends Obj, K extends TouchKey> = V & { [k in K]: React.TouchList };
 
 export const hasTouches = <K extends TouchKey>(evt: React.UIEvent, ...keys: K[]): evt is any => {

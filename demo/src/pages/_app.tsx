@@ -1,32 +1,31 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
+import { ToasterContextProvider } from '@rothko-ui/react';
 import cookie from 'cookie';
 import MobileDetect from 'mobile-detect';
 import type { AppContext, AppProps } from 'next/app';
-
-import '../../public/fonts/style.css';
 import React from 'react';
 
 import ErrorBoundary from '../components/ErrorBoundary';
 import RothkoHeader from '../components/Header';
 import { IsMobileOrTabletContext } from '../components/IsMobileOrTabletContext';
 import PaddedNavLayout from '../components/layout/PaddedNavLayout';
-import config from '../config';
+// import config from '../config';
 
 import '../globals.css';
-import { ToasterContextProvider } from '@rothko-ui/react';
+import '../../public/fonts/style.css';
 
 type RothkoAppProps = AppProps & {
-  cookies?: Partial<Record<string, string>>;
+  // cookies?: Partial<Record<string, string>>;
   isMobileOrTablet?: boolean;
 };
 export default function App({
   Component,
-  cookies,
+  // cookies,
   isMobileOrTablet = false,
   ...pageProps
 }: RothkoAppProps) {
-  const theme = (cookies?.[config.preference.theme] || 'dark') as 'dark' | 'light';
+  // const theme = (cookies?.[config.preference.theme] || 'dark') as 'dark' | 'light';
   return (
     <ErrorBoundary>
       <RothkoHeader />

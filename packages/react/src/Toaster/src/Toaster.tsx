@@ -1,7 +1,7 @@
 import type { SpringValue } from '@react-spring/web';
 import { animated } from '@react-spring/web';
 import { CloseOutline } from '@rothko-ui/icons';
-import { vuar, PhantomButton, isString, scopedClasses, useId } from '@rothko-ui/system';
+import { PhantomButton, isString, scopedClasses, useId } from '@rothko-ui/system';
 import type { WithAria, RothkoKind } from '@rothko-ui/system';
 import { Paragraph } from '@rothko-ui/typography';
 import React from 'react';
@@ -62,7 +62,7 @@ const Toast = React.forwardRef<HTMLDivElement, WithAria<ToastProps, AriaAttribut
     } = props;
     const labelId = useId();
 
-    const iconColor = vuar({ kind, element: 'toast', category: 'foreground' });
+    const iconColor = 'var(--rothko-rothko-toast-foreground)';
 
     return (
       <animated.div

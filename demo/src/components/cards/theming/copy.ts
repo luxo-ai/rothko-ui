@@ -1,6 +1,6 @@
 import type { CardCopy } from '../types';
-import { COMPONENT_OVERRIDE, SEMANTIC_OVERRIDE, TYPOGRAPHY_OVERRIDE } from './usage/sourceCode';
 import overrides from './overrides';
+import { COMPONENT_OVERRIDE, SEMANTIC_OVERRIDE, TYPOGRAPHY_OVERRIDE } from './usage/sourceCode';
 
 const themeCopy: CardCopy = {
   title: 'Theming Guide',

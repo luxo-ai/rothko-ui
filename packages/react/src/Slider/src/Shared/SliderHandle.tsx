@@ -283,5 +283,5 @@ export type SliderHandleProps = Pick<
 
 export const SliderHandle = ({ className, style, id }: SliderHandleProps) => {
   const baseClassName = sc('inner-handle', 'pseudo-handle');
-  return <button style={style} className={classes(baseClassName, className)} />;
+  return <button id={id} style={style} className={classes(baseClassName, className)} />;
 };

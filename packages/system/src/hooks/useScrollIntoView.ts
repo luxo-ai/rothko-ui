@@ -18,7 +18,6 @@ export const useScrollIntoView = () => {
       if (isOutOfUpperView) {
         menu.scrollTop = childElement.offsetTop;
       } else if (isOutOfLowerView) {
-        // eslint-disable-next-line no-mixed-operators
         menu.scrollTop = childElement.offsetTop + childElement.clientHeight - menu.clientHeight;
       }
     },

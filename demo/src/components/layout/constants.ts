@@ -1,4 +1,5 @@
 import toCamelCase from 'lodash.camelcase';
+
 import type { NavigationSection, NavigationSectionWithoutTo } from './types';
 
 const GETTING_STARTED: readonly NavigationSectionWithoutTo[] = [

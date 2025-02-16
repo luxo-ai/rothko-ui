@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 
-import { debugFactory } from '../utils/debug';
 import type { Option } from '../types';
 import { INITIAL_OPTION_IDX } from './constants';
 import type { Direction } from './types';
 import { dial } from './utils';
+import { debugFactory } from '../utils/debug';
 
 export const useOptions = <V, T>(initialOptions: Option<V, T>[]) => {
   const debug = debugFactory('useOptions');

@@ -44,11 +44,6 @@ type SliderProps = {
    */
   onChange: (v: number) => void;
   /**
-   * The precision of the value.
-   * @default 0
-   */
-  precision?: number;
-  /**
    * The inline style for the Slider component.
    */
   style?: React.CSSProperties;
@@ -68,7 +63,6 @@ export const Slider = ({
   kind,
   max,
   min = 0,
-  precision, // use in the onChange?
   onChange,
   value,
   id,

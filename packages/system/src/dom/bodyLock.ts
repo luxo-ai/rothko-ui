@@ -3,12 +3,13 @@
  * Adaption of: https://github.com/willmcpo/body-scroll-lock
  * The decision to adapt was to get more control and fix mobie issues found in the original solution
  */
-import type { Nilable } from '../utils/types';
-import { isNil, parseInt } from '../utils/helpers';
 import type React from 'react';
+
 import { getStyle, scrollBarWidth } from './dimensionUtils';
 import type { WithTouches } from './eventUtils';
 import { addEvent, hasTouches, removeEvent } from './eventUtils';
+import { isNil, parseInt } from '../utils/helpers';
+import type { Nilable } from '../utils/types';
 
 export const BODY_SCROLL_LOCK_IGNORE_ID = 'data-rothko-body-scroll-lock-ignore';
 

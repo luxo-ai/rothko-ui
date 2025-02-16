@@ -28,21 +28,9 @@ export type TabProps = {
    */
   className?: string;
   /**
-   * The title of the tab.
+   * The `aria-labelledby` attribute of the tab.
    * @type {string}
-   * @required
    */
-  title: string;
-  /**
-   * The icon to display on the left side of the tab.
-   * @type {React.ReactElement}
-   */
-  leftIcon?: React.ReactElement;
-  /**
-   * The icon to display on the right side of the tab.
-   * @type {React.ReactElement}
-   */
-  rightIcon?: React.ReactElement;
   'aria-labelledby'?: string;
 };
 

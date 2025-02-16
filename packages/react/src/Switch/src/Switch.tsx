@@ -102,15 +102,6 @@ type SwitchProps = {
   selected?: boolean;
 };
 
-const rothkoKindBg = {
-  danger: 'bg-(--rothko-danger)',
-  info: 'bg-(--rothko-info)',
-  success: 'bg-(--rothko-success)',
-  warning: 'bg-(--rothko-warning)',
-  primary: 'bg-(--rothko-primary)',
-  secondary: 'bg-(--rothko-secondary)',
-} as const;
-
 const Switch = ({
   children,
   className,

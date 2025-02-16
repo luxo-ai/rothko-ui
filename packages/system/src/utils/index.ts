@@ -1,5 +1,4 @@
 export { debugFactory } from './debug';
-export { vuar } from './vuar';
 export { classes, scopedClasses } from './classes';
 export {
   isArray,

@@ -1,5 +1,5 @@
 import type { Color } from '@rothko-ui/system';
-import { useId, vuar } from '@rothko-ui/system';
+import { useId } from '@rothko-ui/system';
 import type { SVGAttributes } from 'react';
 import React from 'react';
 
@@ -27,8 +27,10 @@ const SkeletonBuilder = ({
   const clipId = `${id}-clip`;
   const gradientId = `${id}-gradient`;
 
-  const backgroundColor = bgColorProp || vuar({ element: 'skeleton', category: 'background' });
-  const foregroundColor = fgColorProp || vuar({ element: 'skeleton', category: 'foreground' });
+  const rothkoBgVar = 'var(--rothko-skeleton-background)';
+  const rothkoFgVar = 'var(--rothko-skeleton-foreground)';
+  const backgroundColor = bgColorProp || rothkoBgVar;
+  const foregroundColor = fgColorProp || rothkoFgVar;
   const animationDuration = `${speed}s`;
 
   return (

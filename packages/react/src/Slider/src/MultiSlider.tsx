@@ -48,11 +48,6 @@ type MultiSliderProps = {
    */
   onChange: (r: Range) => void;
   /**
-   * The precision of the range values displayed.
-   * @default 0
-   */
-  precision?: number;
-  /**
    * The inline style for the MultiSlider component.
    */
   style?: React.CSSProperties;
@@ -73,7 +68,6 @@ export const MultiSlider = ({
   max,
   min = 0,
   onChange,
-  // precision,
   value,
   id,
   style,

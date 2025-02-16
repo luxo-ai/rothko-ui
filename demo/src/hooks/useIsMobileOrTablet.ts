@@ -1,6 +1,7 @@
 import { useContext } from 'react';
-import { IsMobileOrTabletContext } from '../components/IsMobileOrTabletContext';
 import { useMediaQuery } from 'react-responsive';
+
+import { IsMobileOrTabletContext } from '../components/IsMobileOrTabletContext';
 
 export const tabletOrMobileMaxWidth = 700; // px
 

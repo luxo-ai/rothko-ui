@@ -1,5 +1,5 @@
-import type { Nilable } from '../utils/types';
 import { parseInt } from '../utils/helpers';
+import type { Nilable } from '../utils/types';
 
 export const innerHeight = (el: HTMLElement) => {
   const height = el.clientHeight;

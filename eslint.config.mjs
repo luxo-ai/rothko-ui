@@ -11,6 +11,26 @@ const rootDir = path.dirname(new URL(import.meta.url).pathname);
 
 export default defineConfig([
   {
+    files: ['**/*.ts', '**/*.tsx'],
+    ignores: [
+      'packages/icons/**/*',
+      '**/reports/**/*',
+      '**/dist/**/*',
+      '**/build/**/*',
+      '*.html',
+      '*.txt',
+      '*.sh',
+      '*.md',
+      '*.json',
+      '*.png',
+      '*.js',
+      '**/*.js',
+      '**/*.jsx',
+      'postcss.config.mjs',
+      'eslint.config.mjs',
+      '.eslintrc.js',
+      'next-env.d.ts',
+    ],
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {
@@ -72,7 +92,7 @@ export default defineConfig([
       'react/require-default-props': 'off',
       'react/no-unused-prop-types': 'error',
       'react/no-unescaped-entities': 'error',
-      'react/destructuring-assignment': 'warn',
+      'react/destructuring-assignment': 'off',
 
       // React Hooks Rules
       'react-hooks/rules-of-hooks': 'error',
@@ -81,22 +101,13 @@ export default defineConfig([
       // Prettier Integration
       'prettier/prettier': 'error',
     },
-    ignores: [
-      'packages/icons/**/*',
-      '**/reports/',
-      '**/dist/**/*',
-      '**/build/**/*',
-      '*.html',
-      '*.txt',
-      '*.sh',
-      '*.md',
-      '*.json',
-      '*.png',
-      '*.js',
-      '**/*.js',
-      '**/*.jsx',
-      '.eslintrc.js',
-      'next-env.d.ts',
-    ],
+  },
+  {
+    files: ['**/demo/**/*'],
+    rules: {
+      // next.js
+      'react/jsx-uses-react': 'off',
+      'react/react-in-jsx-scope': 'off',
+    },
   },
 ]);

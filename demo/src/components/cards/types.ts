@@ -1,4 +1,5 @@
 import type { LazyExoticComponent } from 'react';
+
 import type { Language } from '../Code';
 
 export type CardCopy = {

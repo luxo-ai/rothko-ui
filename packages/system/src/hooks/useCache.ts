@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useRef } from 'react';
-import { debugFactory } from '../utils/debug';
+
 import { useInterval } from './useInterval';
+import { debugFactory } from '../utils/debug';
 
 const ONE_MS = 1000;
 const EXPIRES_SECONDS_DEFAULT = 5 * 60; // 5 min
