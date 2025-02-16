@@ -1,6 +1,6 @@
-import React from 'react';
-import { Accordion, AccordionPanel } from '@rothko-ui/react';
 import { ArrowIosForward, RadioButtonOff, RadioButtonOn } from '@rothko-ui/icons';
+import { Accordion, AccordionPanel } from '@rothko-ui/react';
+import React from 'react';
 
 const ICON_SIZE = '1rem';
 

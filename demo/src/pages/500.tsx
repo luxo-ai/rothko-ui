@@ -1,6 +1,7 @@
 import { Paragraph } from '@rothko-ui/react';
-import ErrorPage from '../components/ErrorPage';
 import React from 'react';
+
+import ErrorPage from '../components/ErrorPage';
 
 const InternalErrorPage = () => (
   <ErrorPage code={500} header="Interna Error">

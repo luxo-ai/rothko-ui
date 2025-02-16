@@ -1,22 +1,21 @@
-import { useState } from 'react';
-
 import type { RothkoKind } from '@rothko-ui/react';
 import { Container, Flex, FlexItem } from '@rothko-ui/react';
+import { useState } from 'react';
 
-import { BASIC, WITH_KIND, WITH_LIFE } from './usage/sourceCode';
-import { insertKind } from '../helpers';
-import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import Basic from './usage/Basic';
 import Card from '../Card';
 import Example from '../Example';
+import { insertKind } from '../helpers';
 import Props from '../Props';
 import toastCopy from './copy';
 import toastProps from './props';
+import Basic from './usage/Basic';
+import { BASIC, WITH_KIND, WITH_LIFE } from './usage/sourceCode';
 import WithKind from './usage/WithKind';
-import WithLife from './usage/WithLife';
-import Usage from '../Usage';
+import { TSCode } from '../../Code';
 import KindRadioGroup from '../KindRadioGroup';
+import Usage from '../Usage';
+import WithLife from './usage/WithLife';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Toaster';
 

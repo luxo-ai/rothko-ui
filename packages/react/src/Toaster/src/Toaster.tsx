@@ -1,14 +1,13 @@
 import type { SpringValue } from '@react-spring/web';
 import { animated } from '@react-spring/web';
-import React from 'react';
-
 import { CloseOutline } from '@rothko-ui/icons';
 import { vuar, PhantomButton, isString, scopedClasses, useId } from '@rothko-ui/system';
-
 import type { WithAria, RothkoKind } from '@rothko-ui/system';
 import { Paragraph } from '@rothko-ui/typography';
-import type { ToastDetails } from './types';
+import React from 'react';
+
 import styles from './Toaster.module.scss';
+import type { ToastDetails } from './types';
 
 const sc = scopedClasses(styles);
 

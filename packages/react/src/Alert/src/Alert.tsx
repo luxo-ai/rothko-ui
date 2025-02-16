@@ -1,7 +1,6 @@
 import { classes, isString } from '@rothko-ui/system';
-import React from 'react';
-
 import type { RothkoKind, WithAria } from '@rothko-ui/system';
+import React from 'react';
 
 type AriaAttributes =
   | 'aria-describedby'

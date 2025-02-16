@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const styledDictionary = require('style-dictionary');
 const compact = require('lodash/compact');
 const fs = require('fs');

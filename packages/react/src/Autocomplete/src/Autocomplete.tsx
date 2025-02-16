@@ -1,3 +1,5 @@
+import { MenuEmpty, MenuItem, Menu } from '@rothko-ui/menu';
+import type { MenuVariant, ScrollableHTMLElement } from '@rothko-ui/menu';
 import {
   isNil,
   map,
@@ -12,7 +14,6 @@ import {
   ControlButton,
   ControlState,
 } from '@rothko-ui/system';
-import React, { useEffect, useRef } from 'react';
 import type {
   Dictionary,
   WithAria,
@@ -21,12 +22,12 @@ import type {
   Option,
   FocusHandler,
 } from '@rothko-ui/system';
+import { Label, Paragraph } from '@rothko-ui/typography';
+import React, { useEffect, useRef } from 'react';
+
+import { PhantomInput } from './PhantomInput';
 import type { QueryMatchFn } from './types';
 import useAutocomplete from './useAutocomplete';
-import { Label, Paragraph } from '@rothko-ui/typography';
-import { MenuEmpty, MenuItem, Menu } from '@rothko-ui/menu';
-import type { MenuVariant, ScrollableHTMLElement } from '@rothko-ui/menu';
-import { PhantomInput } from './PhantomInput';
 
 const debug = debugFactory('<Autocomplete/>');
 

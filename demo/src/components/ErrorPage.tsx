@@ -1,5 +1,6 @@
 import { Flex, Heading2, Heading1 } from '@rothko-ui/react';
 import React from 'react';
+
 import { DesktopOnly, MobileOnly } from './dimensions';
 
 type ErrorProps = {

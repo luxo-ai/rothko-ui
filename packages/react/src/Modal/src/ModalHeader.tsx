@@ -1,5 +1,6 @@
+import type { RothkoSize } from '@rothko-ui/system';
+import { classes } from '@rothko-ui/system';
 import React from 'react';
-import { classes, RothkoSize } from '@rothko-ui/system';
 
 type ModalHeaderProps = {
   id?: string;

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-
 import { MultiSlider, SliderHandle } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [value, setValue] = useState<[number, number]>([0, 50]);

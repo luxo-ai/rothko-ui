@@ -1,18 +1,14 @@
-import { useState } from 'react';
-
-import type { RothkoKind } from '@rothko-ui/react';
 import { Container, Flex } from '@rothko-ui/react';
 
 import accordionCopy from './copy';
+import Card from '../Card';
+import Example from '../Example';
 import Basic from './usage/Basic';
 import Bordered from './usage/Bordered';
-import Card from '../Card';
 import Compact from './usage/Compact';
-import Example from '../Example';
 import IconOverride from './usage/IconOverride';
 import Multiple from './usage/Multiple';
 import Selected from './usage/Selected';
-import WithSubtitle from './usage/WithSubtitle';
 import {
   BASIC,
   BORDERED,
@@ -22,6 +18,7 @@ import {
   SELECTED,
   WITH_SUBTITLE,
 } from './usage/sourceCode';
+import WithSubtitle from './usage/WithSubtitle';
 import { TSCode } from '../../Code';
 import Props from '../Props';
 import propsCopy from './props';
@@ -32,8 +29,6 @@ const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/reac
 const IMPORT = "import { Accordion, AccordionPanel } from '@rothko-ui/react';";
 
 const AccordionCard = () => {
-  const [kind, setKind] = useState<RothkoKind>('secondary');
-
   return (
     <Card codeUrl={GITHUB_URL} copy={accordionCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">

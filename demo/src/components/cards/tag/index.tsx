@@ -1,19 +1,19 @@
 import { Container, Flex } from '@rothko-ui/react';
 
-import { VARIANT } from '../button/usage/sourceCode';
-import { BASIC, CLOSEABLE, WITH_KIND } from './usage/sourceCode';
-import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import Variant from './usage/Variant';
-import Basic from './usage/Basic';
+import { TSCode } from '../../Code';
 import Card from '../Card';
-import Closeable from './usage/Closeable';
 import Example from '../Example';
 import Props from '../Props';
 import tagCopy from './copy';
 import tagProps from './props';
-import WithKind from './usage/WithKind';
 import Usage from '../Usage';
+import Basic from './usage/Basic';
+import Closeable from './usage/Closeable';
+import { BASIC, CLOSEABLE, WITH_KIND } from './usage/sourceCode';
+import Variant from './usage/Variant';
+import WithKind from './usage/WithKind';
+import { VARIANT } from '../button/usage/sourceCode';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Tag';
 

@@ -1,8 +1,8 @@
-import React from 'react';
 import type { RothkoKind, RothkoSize } from '@rothko-ui/system';
-import type { ButtonRadius, ButtonVariant } from '../types';
 import { classes } from '@rothko-ui/system';
-import Button from '../Button/Button';
+import React from 'react';
+
+import type { ButtonRadius, ButtonVariant } from '../types';
 
 type ButtonGroupProps = {
   /**

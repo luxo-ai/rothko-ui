@@ -1,18 +1,18 @@
 import { Container, Flex } from '@rothko-ui/react';
 
-import { BASIC, CLEARABLE, DISABLED, MENU_POSITION } from './usage/sourceCode';
-import { TSCode } from '../../Code';
-import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import Basic from './usage/Basic';
 import Card from '../Card';
-import Clearable from './usage/Clearable';
-import Disabled from './usage/Disabled';
 import Example from '../Example';
-import MenuPosition from './usage/MenuPosition';
 import multiSelectCopy from './copy';
 import multiDropdownProps from './props';
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
+import { TSCode } from '../../Code';
 import Props from '../Props';
 import Usage from '../Usage';
+import Basic from './usage/Basic';
+import Clearable from './usage/Clearable';
+import Disabled from './usage/Disabled';
+import MenuPosition from './usage/MenuPosition';
+import { BASIC, CLEARABLE, DISABLED, MENU_POSITION } from './usage/sourceCode';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Select';
 

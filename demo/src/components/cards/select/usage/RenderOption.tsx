@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
 import type { Option } from '@rothko-ui/react';
 import { Select, Paragraph } from '@rothko-ui/react';
+import React, { useState } from 'react';
+
 import { listOfNamesWithUsername } from './listOfNames';
 
 const nameOptions: Option<number, { username: string }>[] = listOfNamesWithUsername.map(

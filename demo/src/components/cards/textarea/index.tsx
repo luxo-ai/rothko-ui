@@ -1,17 +1,17 @@
 import { Container, Flex } from '@rothko-ui/react';
 
-import { BASIC, DISABLED } from './usage/sourceCode';
-import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import Basic from './usage/Basic';
-import Disabled from './usage/Disabled';
+import { TSCode } from '../../Code';
 import Card from '../Card';
 import Example from '../Example';
 import textareaCopy from './copy';
-import Usage from '../Usage';
 import Props from '../Props';
+import Usage from '../Usage';
 import textareaProps from './props';
 import style from './Textarea.module.scss';
+import Basic from './usage/Basic';
+import Disabled from './usage/Disabled';
+import { BASIC, DISABLED } from './usage/sourceCode';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Input';
 

@@ -1,7 +1,8 @@
-import React from 'react';
 import { Grid, useId } from '@rothko-ui/system';
 import type { RothkoKind, Size, WithAria, Dictionary } from '@rothko-ui/system';
 import { Paragraph, Label } from '@rothko-ui/typography';
+import React from 'react';
+
 import type { RadioGroupContextType } from './RadioGroupContext';
 import RadioGroupContext from './RadioGroupContext';
 

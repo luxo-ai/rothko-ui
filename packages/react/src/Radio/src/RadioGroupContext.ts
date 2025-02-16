@@ -1,5 +1,5 @@
-import { createContext } from 'react';
 import type { RothkoKind } from '@rothko-ui/system';
+import { createContext } from 'react';
 
 export type RadioGroupContextType = {
   radioGroupLabelId: string;

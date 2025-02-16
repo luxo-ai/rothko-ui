@@ -1,7 +1,7 @@
 import type { Nilable, Size } from '@rothko-ui/system';
 import { parseInt, findBy } from '@rothko-ui/system';
-import type React from 'react';
 import { innerHeight, innerWidth, outerHeight, outerWidth } from '@rothko-ui/system';
+import type React from 'react';
 
 export const getOffsetFactory = (args: { min: number; max: number }) => {
   return (v: number) => {

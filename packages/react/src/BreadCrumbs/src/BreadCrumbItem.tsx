@@ -1,9 +1,8 @@
-import { classes } from '@rothko-ui/system';
-import React from 'react';
-
 import { Link, LinkButton } from '@rothko-ui/link';
+import { classes } from '@rothko-ui/system';
 import type { WithAria } from '@rothko-ui/system';
 import { Paragraph } from '@rothko-ui/typography';
+import React from 'react';
 
 type AriaAttributes =
   | 'aria-haspopup'

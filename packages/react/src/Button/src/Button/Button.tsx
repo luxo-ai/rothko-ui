@@ -1,4 +1,3 @@
-import React, { useEffect, useRef, useState } from 'react';
 import {
   InlineSpinner,
   getElementFullHeight,
@@ -6,6 +5,8 @@ import {
   classes,
 } from '@rothko-ui/system';
 import type { Accessory, Dictionary, RothkoKind, RothkoSize, WithAria } from '@rothko-ui/system';
+import React, { useEffect, useRef, useState } from 'react';
+
 import type { ButtonRadius, ButtonVariant } from '../types';
 
 const accessorySizeMap: Record<RothkoSize, number> = {

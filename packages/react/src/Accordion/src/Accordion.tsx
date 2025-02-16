@@ -1,8 +1,9 @@
 import { classes } from '@rothko-ui/system';
+import type { WithAria } from '@rothko-ui/system';
 import React, { useCallback, useMemo, useState } from 'react';
+
 import AccordionContext from './AccordionContext';
 import type { Icon } from './types';
-import type { WithAria } from '@rothko-ui/system';
 
 type AriaAttributes =
   | 'aria-describedby'

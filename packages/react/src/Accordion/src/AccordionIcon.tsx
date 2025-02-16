@@ -1,8 +1,8 @@
 import { MinusOutline, PlusOutline } from '@rothko-ui/icons';
+import { isFunction } from '@rothko-ui/system';
 import React from 'react';
 
 import type { Icon } from './types';
-import { isFunction } from '@rothko-ui/system';
 
 const ICON_SIZE = '1rem';
 

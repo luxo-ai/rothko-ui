@@ -1,6 +1,4 @@
 import { animated, useTransition } from '@react-spring/web';
-import React, { useEffect, useRef } from 'react';
-
 import {
   isString,
   classes,
@@ -13,6 +11,8 @@ import {
   CloseButton,
 } from '@rothko-ui/system';
 import type { WithAria } from '@rothko-ui/system';
+import React, { useEffect, useRef } from 'react';
+
 import PopupBody from './PopupBody';
 
 type AriaAttributes = 'aria-label' | 'aria-labelledby' | 'aria-describedby';

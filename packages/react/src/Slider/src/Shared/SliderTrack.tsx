@@ -1,5 +1,6 @@
-import React from 'react';
 import { scopedClasses } from '@rothko-ui/system';
+import React from 'react';
+
 import styles from './SliderTrack.module.scss';
 
 const sc = scopedClasses(styles);

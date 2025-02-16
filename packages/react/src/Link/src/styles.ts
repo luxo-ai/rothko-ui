@@ -1,5 +1,6 @@
 import { classes, type RothkoSize } from '@rothko-ui/system';
-import { LinkUnderlineVariant } from './types';
+
+import type { LinkUnderlineVariant } from './types';
 
 export const createLinkBaseClasses = ({
   size = 'm',

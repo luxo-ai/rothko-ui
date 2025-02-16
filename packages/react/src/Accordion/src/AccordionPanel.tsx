@@ -1,3 +1,4 @@
+import { animated, useSpring } from '@react-spring/web';
 import {
   classes,
   isString,
@@ -9,13 +10,13 @@ import {
   FlexItem,
   getElementFullHeight,
 } from '@rothko-ui/system';
+import type { WithAria, Dictionary } from '@rothko-ui/system';
 import React, { useCallback, useMemo, useRef } from 'react';
-import { animated, useSpring } from '@react-spring/web';
+
 import AccordionIcon from './AccordionIcon';
+import { AccordionBodyText, AccordionSubtitleText, AccordionTitleText } from './AccordionText';
 import type { Icon } from './types';
 import useAccordion from './useAccordion';
-import { AccordionBodyText, AccordionSubtitleText, AccordionTitleText } from './AccordionText';
-import type { WithAria, Dictionary } from '@rothko-ui/system';
 
 const debug = debugFactory('<AccordionPanel />');
 

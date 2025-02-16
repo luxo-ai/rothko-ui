@@ -1,7 +1,6 @@
 import { classes } from '@rothko-ui/system';
-import React from 'react';
-
 import type { WithAria } from '@rothko-ui/system';
+import React from 'react';
 
 type AriaAttributes =
   | 'aria-label'

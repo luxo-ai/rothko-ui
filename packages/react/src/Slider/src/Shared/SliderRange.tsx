@@ -1,6 +1,7 @@
-import React from 'react';
 import { scopedClasses } from '@rothko-ui/system';
 import type { RothkoKind } from '@rothko-ui/system';
+import React from 'react';
+
 import styles from './SliderRange.modue.scss';
 
 const sc = scopedClasses(styles);

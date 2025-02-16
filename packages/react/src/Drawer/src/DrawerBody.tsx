@@ -1,5 +1,5 @@
-import React from 'react';
 import { classes } from '@rothko-ui/system';
+import React from 'react';
 
 type DrawerBodyProps = {
   id?: string;

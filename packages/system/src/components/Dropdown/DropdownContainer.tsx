@@ -1,6 +1,7 @@
 import React from 'react';
-import { classes, scopedClasses } from '../../utils/classes';
+
 import styles from './DropdownContainer.module.scss';
+import { classes, scopedClasses } from '../../utils/classes';
 
 const sc = scopedClasses(styles);
 

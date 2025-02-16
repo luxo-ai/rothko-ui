@@ -1,4 +1,6 @@
+/* eslint-disable react/no-unused-prop-types */
 import React from 'react';
+
 import extractAriaProps from './extractAriaProps';
 import styles from './Grid.module.scss';
 import { classes } from '../utils/classes';

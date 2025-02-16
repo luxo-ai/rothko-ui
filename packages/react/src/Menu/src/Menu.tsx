@@ -1,5 +1,6 @@
-import React, { useImperativeHandle, useMemo } from 'react';
 import { classes, useScrollIntoView } from '@rothko-ui/system';
+import React, { useImperativeHandle, useMemo } from 'react';
+
 import MenuContext from './MenuContext';
 import type { MenuVariant, ScrollableHTMLElement } from './types';
 
@@ -96,8 +97,9 @@ const Menu = React.forwardRef<ScrollableHTMLElement, MenuProps>(
           className={baseMenuClasses}
           data-rothko-body-scroll-lock-ignore
         >
-          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+          {}
           <ul
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...listProps}
             tabIndex={-1}
             aria-disabled={ariaDisabled || disabled}

@@ -1,5 +1,6 @@
 import { Globe2 } from '@rothko-ui/icons';
 import { Flex, FlexItem, Paragraph, Heading1 } from '@rothko-ui/react';
+
 import { TextCode } from '../components/Code';
 import config from '../config';
 

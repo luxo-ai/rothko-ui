@@ -1,9 +1,10 @@
 import type { WithAria, Nilable, RothkoKind } from '@rothko-ui/system';
-import React, { useMemo } from 'react';
-import { SliderRange, SliderTrack, SliderHandleInner, SliderHandle } from './Shared';
-import { getOffsetFactory } from './sliderUtils';
 import { useId } from '@rothko-ui/system';
+import React, { useMemo } from 'react';
+
+import { SliderRange, SliderTrack, SliderHandleInner, SliderHandle } from './Shared';
 import type { SliderHandleProps } from './Shared';
+import { getOffsetFactory } from './sliderUtils';
 
 type AriaAttributes =
   | 'aria-label'

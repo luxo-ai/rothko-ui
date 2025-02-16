@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-
 import { Switch } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [withoutLabelSelected, setWithoutLabelSelected] = useState(true);

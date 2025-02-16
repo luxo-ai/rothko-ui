@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-
 import type { RothkoKind } from '@rothko-ui/react';
 import { Slider } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = (props: { kind: RothkoKind }) => {
   const [value, setValue] = useState<number>(100);

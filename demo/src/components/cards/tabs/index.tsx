@@ -1,21 +1,20 @@
-import { useState } from 'react';
-
 import type { RothkoKind } from '@rothko-ui/react';
 import { Container, Flex, FlexItem } from '@rothko-ui/react';
+import { useState } from 'react';
 
-import { BASIC, WITH_KIND } from './usage/sourceCode';
-import { insertKind } from '../helpers';
-import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import Basic from './usage/Basic';
+import { TSCode } from '../../Code';
 import Card from '../Card';
 import Example from '../Example';
+import { insertKind } from '../helpers';
+import KindRadioGroup from '../KindRadioGroup';
 import Props from '../Props';
 import tabBarCopy from './copy';
 import tabBarProps from './props';
-import WithKind from './usage/WithKind';
 import Usage from '../Usage';
-import KindRadioGroup from '../KindRadioGroup';
+import Basic from './usage/Basic';
+import { BASIC, WITH_KIND } from './usage/sourceCode';
+import WithKind from './usage/WithKind';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Tabs';
 

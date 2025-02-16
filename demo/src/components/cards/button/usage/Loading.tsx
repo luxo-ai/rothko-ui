@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-
 import { Button } from '@rothko-ui/react';
+import React, { useEffect, useState } from 'react';
 
 const App = () => {
   const [loading, setLoading] = useState(false);

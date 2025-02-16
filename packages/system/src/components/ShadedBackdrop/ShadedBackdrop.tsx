@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './ShadedBackdrop.module.scss';
 import { classes } from '../../utils/classes';
 

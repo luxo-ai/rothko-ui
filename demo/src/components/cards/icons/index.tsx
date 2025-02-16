@@ -1,7 +1,3 @@
-import FuzzySearch from 'fuzzy-search';
-import React, { useMemo, useState } from 'react';
-import CopyToClipboard from 'react-copy-to-clipboard';
-
 import * as Icons from '@rothko-ui/icons';
 import {
   Alert,
@@ -14,12 +10,15 @@ import {
   Button,
   Heading3,
 } from '@rothko-ui/react';
-
+import FuzzySearch from 'fuzzy-search';
 import truncateString from 'lodash.truncate';
+import React, { useMemo, useState } from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
+
 import { JSXCode } from '../../Code';
 import Card from '../Card';
-import styles from './Icons.module.scss';
 import iconographyCopy from './copy';
+import styles from './Icons.module.scss';
 import { filledIconList, outlineIconList } from './iconsList';
 import { BASIC } from './usage/sourceCode';
 import { SearchBar } from '../../searchBar';

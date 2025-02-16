@@ -1,8 +1,9 @@
 import React from 'react';
-import TableContext from './TableContext';
-import TableData from './TableData';
+
 import { isStringHeader } from './helpers';
 import styles from './Table.module.scss';
+import TableContext from './TableContext';
+import TableData from './TableData';
 
 type TableRowProps = {
   children: React.ReactElement[];

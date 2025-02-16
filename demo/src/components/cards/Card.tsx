@@ -1,6 +1,3 @@
-import Link from 'next/link';
-import React from 'react';
-
 import { Github } from '@rothko-ui/icons';
 import {
   Tabs,
@@ -13,12 +10,15 @@ import {
   Heading,
 } from '@rothko-ui/react';
 import toKebabCase from 'lodash.kebabcase';
+import Link from 'next/link';
+import React from 'react';
+
 import { Code } from '../Code';
 import styles from './Card.module.scss';
-import type { Body as BodyType, CCode, CardCopy, Section as SectionType } from './types';
 import Markdown from './Markdown';
-import { List, ListItem } from '../list';
+import type { Body as BodyType, CCode, CardCopy, Section as SectionType } from './types';
 import useTheme from '../../hooks/useTheme';
+import { List, ListItem } from '../list';
 
 type CardProps = {
   children?: React.ReactNode;

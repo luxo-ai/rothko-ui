@@ -1,9 +1,8 @@
-import React from 'react';
-
 import type { WithAria, Dictionary, RothkoKind } from '@rothko-ui/system';
 import { Flex, classes } from '@rothko-ui/system';
+import React from 'react';
 
-import { TabProps } from './Tab';
+import type { TabProps } from './Tab';
 import { useTabs } from './useTabs';
 
 type AriaAttributes = 'aria-label' | 'aria-controls';

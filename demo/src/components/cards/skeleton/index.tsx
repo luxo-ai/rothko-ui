@@ -6,12 +6,12 @@ import Card from '../Card';
 import Example from '../Example';
 import skeletonCopy from './copy';
 import skeletonProps from './props';
-import SkeletonBoxWithLabel from './usage/SkeletonBoxWithLabel';
-import SkeletonBuilder from './usage/SkeletonBuilder';
-import SkeletonBox from './usage/SkeletonBox';
-import { SKELETON_BOX_WITH_LABEL, SKELETON_BOX, SKELETON_BUILDER } from './usage/sourceCode';
 import Props from '../Props';
 import Usage from '../Usage';
+import SkeletonBox from './usage/SkeletonBox';
+import SkeletonBoxWithLabel from './usage/SkeletonBoxWithLabel';
+import SkeletonBuilder from './usage/SkeletonBuilder';
+import { SKELETON_BOX_WITH_LABEL, SKELETON_BOX, SKELETON_BUILDER } from './usage/sourceCode';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Skeleton';
 

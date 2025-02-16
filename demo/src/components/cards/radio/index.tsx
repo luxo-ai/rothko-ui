@@ -6,12 +6,12 @@ import Card from '../Card';
 import Example from '../Example';
 import radioCopy from './copy';
 import radioProps from './props';
+import Props from '../Props';
+import Usage from '../Usage';
 import Basic from './usage/Basic';
 import Disabled from './usage/Disabled';
 import MaxColumn from './usage/MaxColumn';
 import { BASIC, DISABLED, MAX_COLUMN } from './usage/sourceCode';
-import Props from '../Props';
-import Usage from '../Usage';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Radio';
 

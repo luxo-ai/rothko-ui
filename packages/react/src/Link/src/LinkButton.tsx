@@ -1,9 +1,8 @@
+import { PhantomButton } from '@rothko-ui/system';
 import React from 'react';
 
-import { PhantomButton } from '@rothko-ui/system';
-
-import type { LinkProps } from './types';
 import { createLinkBaseClasses } from './styles';
+import type { LinkProps } from './types';
 
 const LinkButton = React.forwardRef<
   HTMLButtonElement,

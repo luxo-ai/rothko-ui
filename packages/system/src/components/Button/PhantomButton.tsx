@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { classes } from '../../utils/classes';
 
 type PhantomButtonProps = Omit<React.HTMLProps<HTMLButtonElement>, 'type' | 'children'> & {

@@ -1,12 +1,12 @@
 import { useTransition } from '@react-spring/web';
+import { DomPortal } from '@rothko-ui/system';
 import React, { useCallback, useMemo, useState } from 'react';
 import * as uuid from 'uuid';
 
-import { DomPortal } from '@rothko-ui/system';
 import Toast from './Toaster';
+import styles from './Toaster.module.scss';
 import ToasterContext from './ToasterContext';
 import type { ToastDetails, ToastKey } from './types';
-import styles from './Toaster.module.scss';
 
 const DEFAULT_DURATION_MS = 3000;
 

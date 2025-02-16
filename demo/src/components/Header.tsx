@@ -1,5 +1,6 @@
 import Header from 'next/head';
 import React from 'react';
+
 import config from '../config';
 
 type HeaderProps = {

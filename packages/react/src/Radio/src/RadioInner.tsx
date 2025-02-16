@@ -1,9 +1,7 @@
-import React from 'react';
-
 import { classes, keyDownFactory, ListenableKeys, useId } from '@rothko-ui/system';
-
 import type { RothkoKind, WithAria } from '@rothko-ui/system';
 import { Paragraph } from '@rothko-ui/typography';
+import React from 'react';
 
 export type AriaAttributes =
   | 'aria-label'

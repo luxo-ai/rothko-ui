@@ -1,6 +1,4 @@
 import { animated, useTransition } from '@react-spring/web';
-import React, { useEffect, useRef } from 'react';
-
 import {
   classes,
   isString,
@@ -11,10 +9,11 @@ import {
   enableBodyScroll,
   CloseButton,
 } from '@rothko-ui/system';
-
-import DrawerContext from './DrawerContext';
 import type { WithAria } from '@rothko-ui/system';
+import React, { useEffect, useRef } from 'react';
+
 import DrawerBody from './DrawerBody';
+import DrawerContext from './DrawerContext';
 
 type AriaAttributes = 'aria-label' | 'aria-labelledby' | 'aria-describedby';
 

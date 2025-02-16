@@ -1,10 +1,8 @@
-import React from 'react';
-import type { RothkoKind } from '@rothko-ui/system';
 import { classes } from '@rothko-ui/system';
+import React from 'react';
 
 type TextProps = {
   children: React.ReactNode;
-  kind?: RothkoKind;
 };
 
 const commonClassNames = 'm-0 p-0';

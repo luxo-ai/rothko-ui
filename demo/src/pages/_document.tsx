@@ -1,7 +1,7 @@
+import cookie from 'cookie';
 import type { DocumentContext } from 'next/document';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
-import cookie from 'cookie';
 // import config from '../config';
 
 type CookiesProps = {

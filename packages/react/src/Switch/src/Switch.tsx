@@ -1,8 +1,8 @@
 import { classes, useId, isString, ListenableKeys, keyDownFactory } from '@rothko-ui/system';
-import type { CSSProperties } from 'react';
-import React from 'react';
 import type { WithAria, RothkoKind, Dictionary } from '@rothko-ui/system';
 import { Paragraph } from '@rothko-ui/typography';
+import type { CSSProperties } from 'react';
+import React from 'react';
 
 type StyleableComponents = 'errorText' | 'label';
 

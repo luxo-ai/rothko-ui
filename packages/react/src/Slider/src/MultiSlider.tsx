@@ -1,9 +1,10 @@
 import type { Nilable, RothkoKind, WithAria } from '@rothko-ui/system';
-import React, { useMemo } from 'react';
-import { SliderRange, SliderTrack, SliderHandle, SliderHandleInner } from './Shared';
-import { getOffsetFactory } from './sliderUtils';
 import { useId } from '@rothko-ui/system';
+import React, { useMemo } from 'react';
+
+import { SliderRange, SliderTrack, SliderHandle, SliderHandleInner } from './Shared';
 import type { SliderHandleProps } from './Shared';
+import { getOffsetFactory } from './sliderUtils';
 
 const BUFFER = 1;
 

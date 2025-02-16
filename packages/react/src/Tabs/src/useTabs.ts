@@ -1,8 +1,7 @@
+import { first, last, useId } from '@rothko-ui/system';
 import React, { Children, useMemo, useState } from 'react';
 
-import { first, last, useId } from '@rothko-ui/system';
-
-import { TabProps } from './Tab';
+import type { TabProps } from './Tab';
 
 class IndexedIterable<K extends string, V> implements Iterable<V> {
   private valueKeys: K[] = [];

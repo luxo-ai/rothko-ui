@@ -1,11 +1,10 @@
-import React from 'react';
-
 import { isString } from '@rothko-ui/system';
+import type { WithAria } from '@rothko-ui/system';
+import React from 'react';
 
 import type { AriaAttributes, RadioInnerProps } from './RadioInner';
 import RadioInner from './RadioInner';
 import useRadioGroup from './useRadioGroup';
-import type { WithAria } from '@rothko-ui/system';
 
 type RadioProps = Pick<
   WithAria<RadioInnerProps, AriaAttributes>,

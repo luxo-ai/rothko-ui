@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { Checkbox, Flex } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [primaryChecked, setPrimaryChecked] = useState(true);

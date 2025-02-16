@@ -1,6 +1,4 @@
 import { animated, useTransition } from '@react-spring/web';
-import React, { useCallback, useEffect, useRef } from 'react';
-
 import {
   BODY_SCROLL_LOCK_IGNORE_ID,
   addEvent,
@@ -17,6 +15,8 @@ import {
   ListenableKeys,
 } from '@rothko-ui/system';
 import type { RothkoSize, WithAria } from '@rothko-ui/system';
+import React, { useCallback, useEffect, useRef } from 'react';
+
 import ModalBody from './ModalBody';
 import ModalHeader from './ModalHeader';
 

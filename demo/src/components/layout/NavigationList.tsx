@@ -1,9 +1,10 @@
-import { Paragraph, Label, LinkButton } from '@rothko-ui/react';
+import { Paragraph, LinkButton } from '@rothko-ui/react';
+import Link from 'next/link';
 import React from 'react';
+
 import { NAVIGATION_LIST } from './constants';
 import { isLeaf } from './helpers';
 import type { NavigationSection } from './types';
-import Link from 'next/link';
 import { List, ListItem } from '../list';
 
 type ExpandNavListProps = {

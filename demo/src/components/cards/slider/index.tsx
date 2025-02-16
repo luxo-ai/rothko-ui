@@ -1,22 +1,21 @@
-import { useState } from 'react';
-
 import type { RothkoKind } from '@rothko-ui/react';
 import { Container, Flex, FlexItem } from '@rothko-ui/react';
+import { useState } from 'react';
 
-import { BASIC, DISABLED, WITH_KIND } from './usage/sourceCode';
-import { TSCode } from '../../Code';
+import sliderCopy from './copy';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import Basic from './usage/Basic';
 import Card from '../Card';
-import Disabled from './usage/Disabled';
 import Example from '../Example';
 import Props from '../Props';
-import sliderCopy from './copy';
 import sliderProps from './props';
-import WithKind from './usage/WithKind';
 import { insertKind } from '../helpers';
 import Usage from '../Usage';
+import Basic from './usage/Basic';
+import { BASIC, DISABLED, WITH_KIND } from './usage/sourceCode';
+import { TSCode } from '../../Code';
 import KindRadioGroup from '../KindRadioGroup';
+import Disabled from './usage/Disabled';
+import WithKind from './usage/WithKind';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Slider';
 

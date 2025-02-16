@@ -1,14 +1,14 @@
 import { Github, Heart, Menu, Moon, Sun } from '@rothko-ui/icons';
-import { Button, Drawer, Flex, FlexItem, Paragraph, Heading5, classes } from '@rothko-ui/react';
+import { Button, Drawer, Flex, FlexItem, Paragraph, Heading5 } from '@rothko-ui/react';
 import cookieCutter from 'cookie-cutter';
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
-import config from '../../config';
 import styles from './Navigation.module.scss';
-import NextLink from 'next/link';
 import { DesktopOnly, MobileOnly } from '../dimensions';
 import NavigationList from './NavigationList';
-import { useRouter } from 'next/router';
+import config from '../../config';
 import useTheme from '../../hooks/useTheme';
 import { PhantomButton } from '../button';
 

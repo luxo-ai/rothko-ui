@@ -1,5 +1,5 @@
-import React from 'react';
 import type { Dictionary, RothkoKind } from '@rothko-ui/system';
+import type React from 'react';
 
 type AriaAttributes = 'aria-label' | 'aria-controls';
 type StyleableComponents = 'tab' | 'tabs';

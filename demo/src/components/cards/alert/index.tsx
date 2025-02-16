@@ -1,15 +1,15 @@
 import { Container, Flex } from '@rothko-ui/react';
 
-import { BASIC, VARIANT } from './usage/sourceCode';
-import { TSCode } from '../../Code';
 import alertCopy from './copy';
 import alertProps from './props';
-import Basic from './usage/Basic';
-import Variant from './usage/Variant';
+import { TSCode } from '../../Code';
 import Card from '../Card';
 import Example from '../Example';
 import Props from '../Props';
 import Usage from '../Usage';
+import Basic from './usage/Basic';
+import { BASIC, VARIANT } from './usage/sourceCode';
+import Variant from './usage/Variant';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Alert';
 

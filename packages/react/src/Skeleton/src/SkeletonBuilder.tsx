@@ -1,8 +1,7 @@
-import type { SVGAttributes } from 'react';
-import React from 'react';
-
 import type { Color } from '@rothko-ui/system';
 import { useId, vuar } from '@rothko-ui/system';
+import type { SVGAttributes } from 'react';
+import React from 'react';
 
 const ANIMATION_KEY_TIMES = '0;0.5;1';
 

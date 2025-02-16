@@ -6,13 +6,13 @@ import Card from '../Card';
 import Example from '../Example';
 import Usage from '../Usage';
 import autocompleteCopy from './copy';
+import Props from '../Props';
+import autocompleteProps from './props';
 import Basic from './usage/Basic';
 import Disabled from './usage/Disabled';
 import MenuVariant from './usage/MenuVariant';
 import RenderOption from './usage/RenderOption';
 import { BASIC, DISABLED, MENU_VARIANT } from './usage/sourceCode';
-import Props from '../Props';
-import autocompleteProps from './props';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Autocomplete';
 

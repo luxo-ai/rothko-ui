@@ -1,16 +1,16 @@
 import { Container, Flex } from '@rothko-ui/react';
 
-import { BASIC, BLUR } from './usage/sourceCode';
-import { TSCode } from '../../Code';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import Basic from './usage/Basic';
-import Blur from './usage/Blur';
+import { TSCode } from '../../Code';
 import Card from '../Card';
 import Example from '../Example';
 import modalCopy from './copy';
 import modalProps from './props';
 import Props from '../Props';
 import Usage from '../Usage';
+import Basic from './usage/Basic';
+import Blur from './usage/Blur';
+import { BASIC, BLUR } from './usage/sourceCode';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Modal';
 

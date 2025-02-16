@@ -1,11 +1,12 @@
 import React from 'react';
+
+import { isStringHeader } from './helpers';
+import styles from './Table.module.scss';
 import TableBody from './TableBody';
 import TableContext from './TableContext';
 import TableHeader from './TableHeader';
 import TableHeaders from './TableHeaders';
-import { isStringHeader } from './helpers';
 import type { Header } from './types';
-import styles from './Table.module.scss';
 
 type TableProps = {
   headers?: Header[];

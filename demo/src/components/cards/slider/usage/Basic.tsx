@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-
 import { Slider, SliderHandle } from '@rothko-ui/react';
-import styles from './Testing.module.scss';
+import React, { useState } from 'react';
 
 const App = () => {
   const [value, setValue] = useState<number>(50);

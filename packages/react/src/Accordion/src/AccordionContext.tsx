@@ -1,7 +1,7 @@
+import type { RothkoKind } from '@rothko-ui/system';
 import { createContext } from 'react';
 
 import type { Icon } from './types';
-import type { RothkoKind } from '@rothko-ui/system';
 
 type AccordionContextType = {
   /**

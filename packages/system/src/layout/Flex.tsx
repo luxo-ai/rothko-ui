@@ -1,7 +1,9 @@
-import { classes } from '../utils/classes';
+/* eslint-disable react/no-unused-prop-types */
 import React from 'react';
+
 import extractAriaProps from './extractAriaProps';
 import styles from './Flex.module.scss';
+import { classes } from '../utils/classes';
 
 type FlexProps = React.AriaAttributes &
   Omit<React.CSSProperties, 'display'> & {

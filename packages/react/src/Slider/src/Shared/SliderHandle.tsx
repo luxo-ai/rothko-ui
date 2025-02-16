@@ -1,6 +1,7 @@
 import type { Nilable, WithAria } from '@rothko-ui/system';
 import { useIsMounted, scopedClasses, classes, addEvent, removeEvent } from '@rothko-ui/system';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+
 import type { DragDelta, DragEvent } from '../sliderUtils';
 import {
   getOffsetFactory,

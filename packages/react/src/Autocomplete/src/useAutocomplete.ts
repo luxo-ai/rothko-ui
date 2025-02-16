@@ -1,8 +1,8 @@
 import { debounce, isNil, debugFactory, useOptions } from '@rothko-ui/system';
+import type { FocusHandler, Option, Value } from '@rothko-ui/system';
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 import type { QueryMatchFn } from './types';
-import type { FocusHandler, Option, Value } from '@rothko-ui/system';
 
 const DEBOUNCE_MS = 200;
 

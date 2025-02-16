@@ -1,5 +1,7 @@
+/* eslint-disable react/jsx-props-no-spreading */
+import type { RothkoKind, RothkoSize } from '@rothko-ui/system';
+import { classes } from '@rothko-ui/system';
 import React from 'react';
-import { classes, RothkoKind, RothkoSize } from '@rothko-ui/system';
 
 interface ParagrpahProps extends React.HTMLAttributes<HTMLParagraphElement> {
   as?: keyof JSX.IntrinsicElements;

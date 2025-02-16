@@ -1,11 +1,11 @@
-import { Highlight, themes } from 'prism-react-renderer';
-import CopyToClipboard from 'react-copy-to-clipboard';
-import React from 'react';
-
 import { CopyOutline } from '@rothko-ui/icons';
 import { Flex, ToasterConsumer, Paragraph } from '@rothko-ui/react';
-import useTheme from '../hooks/useTheme';
+import { Highlight, themes } from 'prism-react-renderer';
+import React from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
+
 import { PhantomButton } from './button';
+import useTheme from '../hooks/useTheme';
 
 export type Language = 'bash' | 'jsx' | 'json' | 'text' | 'typescript';
 

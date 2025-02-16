@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-
+import { Menu, MenuItem, MenuEmpty } from '@rothko-ui/menu';
+import type { MenuVariant, ScrollableHTMLElement } from '@rothko-ui/menu';
 import {
   isArray,
   isNil,
@@ -14,16 +14,14 @@ import {
   DropdownContainer,
   Direction,
   ControlState,
-  classes,
 } from '@rothko-ui/system';
-
 import type { FocusHandler, Option, RenderOption, Value, WithAria } from '@rothko-ui/system';
 import { Paragraph, Label } from '@rothko-ui/typography';
-import useSelect from './useSelect';
+import React, { useEffect, useRef } from 'react';
+
 import ItemText from './ItemText';
-import { Menu, MenuItem, MenuEmpty } from '@rothko-ui/menu';
-import type { MenuVariant, ScrollableHTMLElement } from '@rothko-ui/menu';
 import { MultiSelectValue } from './MultiSelectValue';
+import useSelect from './useSelect';
 
 type AriaAttributes =
   | 'aria-label'

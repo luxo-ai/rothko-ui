@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { scopedClasses } from '../../utils/classes';
-
-import type { RothkoSize } from '../../types';
 import styles from './Spinner.module.scss';
+import type { RothkoSize } from '../../types';
+import { scopedClasses } from '../../utils/classes';
 
 const sc = scopedClasses(styles);
 

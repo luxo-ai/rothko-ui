@@ -1,9 +1,8 @@
+import { ChevronDownOutline, CloseOutline } from '@rothko-ui/icons';
 import React, { useEffect, useRef } from 'react';
 
-import { ChevronDownOutline, CloseOutline } from '@rothko-ui/icons';
-import { classes } from '../../utils/classes';
-
 import { PhantomButton } from './PhantomButton';
+import { classes } from '../../utils/classes';
 
 export enum ControlState {
   Clear = 'Clear',

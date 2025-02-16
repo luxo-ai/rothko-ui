@@ -1,6 +1,7 @@
-import React from 'react';
-import styles from './Button.module.scss';
 import { classes } from '@rothko-ui/react';
+import React from 'react';
+
+import styles from './Button.module.scss';
 
 type PhantomButtonProps = {
   children: React.ReactNode;

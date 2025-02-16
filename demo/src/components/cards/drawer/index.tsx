@@ -1,16 +1,16 @@
 import { Container, Flex } from '@rothko-ui/react';
 
-import { BASIC, BLUR } from './usage/sourceCode';
+import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
 import { TSCode } from '../../Code';
-import Basic from './usage/Basic';
-import Blur from './usage/Blur';
 import Card from '../Card';
 import drawerCopy from './copy';
 import drawerProps from './props';
 import Example from '../Example';
 import Props from '../Props';
 import Usage from '../Usage';
-import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
+import Basic from './usage/Basic';
+import Blur from './usage/Blur';
+import { BASIC, BLUR } from './usage/sourceCode';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Drawer';
 

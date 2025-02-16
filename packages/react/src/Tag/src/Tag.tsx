@@ -1,9 +1,7 @@
-import React from 'react';
-
 import { CloseOutline } from '@rothko-ui/icons';
 import { isString, classes, PhantomButton } from '@rothko-ui/system';
-
 import type { WithAria, RothkoKind } from '@rothko-ui/system';
+import React from 'react';
 
 type TagVariant = 'filled' | 'outline';
 

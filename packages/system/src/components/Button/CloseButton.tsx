@@ -1,5 +1,6 @@
-import React from 'react';
 import { CloseOutline } from '@rothko-ui/icons';
+import React from 'react';
+
 import { PhantomButton } from './PhantomButton';
 import type { Size, WithAria } from '../../types';
 

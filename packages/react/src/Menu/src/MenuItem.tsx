@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from 'react';
 import { useId } from '@rothko-ui/system';
+import React, { useContext, useEffect } from 'react';
+
 import MenuContext from './MenuContext';
 import { itemBase } from './styles';
 

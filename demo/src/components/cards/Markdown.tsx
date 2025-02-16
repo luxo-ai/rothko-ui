@@ -1,6 +1,3 @@
-import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
-
 import {
   Heading1,
   Heading2,
@@ -12,6 +9,8 @@ import {
   Code,
   LinkButton,
 } from '@rothko-ui/react';
+import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 
 import { startsWithHttpOrHttps } from './helpers';
 

@@ -1,4 +1,5 @@
-import { classes, Nilable } from '@rothko-ui/system';
+import type { Nilable } from '@rothko-ui/system';
+import { classes } from '@rothko-ui/system';
 
 const nonDynamicClasses = [
   'ios-tap-highlight-color-transparent',

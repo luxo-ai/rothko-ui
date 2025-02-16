@@ -1,5 +1,6 @@
-import React from 'react';
 import type { Value } from '@rothko-ui/system';
+import React from 'react';
+
 import SelectInner from './SelectInner';
 import type { SelectInnerProps } from './SelectInner';
 

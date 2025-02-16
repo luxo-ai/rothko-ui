@@ -1,10 +1,8 @@
-import React from 'react';
-
 import { Checkmark } from '@rothko-ui/icons';
 import type { Dictionary, RothkoKind, WithAria } from '@rothko-ui/system';
 import { classes, isString, useId, keyDownFactory, ListenableKeys } from '@rothko-ui/system';
-
 import { Paragraph } from '@rothko-ui/typography';
+import React from 'react';
 
 type StyleableComponents = 'errorText' | 'label';
 

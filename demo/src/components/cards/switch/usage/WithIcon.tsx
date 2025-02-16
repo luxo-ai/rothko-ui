@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Switch } from '@rothko-ui/react';
 import { Video, VideoOff } from '@rothko-ui/icons';
+import { Switch } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [selected, setSelected] = useState(true);

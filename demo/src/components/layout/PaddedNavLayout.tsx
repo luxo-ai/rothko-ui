@@ -2,11 +2,12 @@ import { Email, Github, Twitter } from '@rothko-ui/icons';
 import { Flex, Paragraph } from '@rothko-ui/react';
 import Link from 'next/link';
 import React from 'react';
-import config from '../../config';
+
 import Navigation from './Navigation';
 import styles from './Navigation.module.scss';
 import { DesktopOnly } from '../dimensions';
 import NavigationList from './NavigationList';
+import config from '../../config';
 import useTheme from '../../hooks/useTheme';
 
 type LayoutProps = {

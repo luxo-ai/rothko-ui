@@ -1,6 +1,6 @@
-import React from 'react';
 import { CloseOutline } from '@rothko-ui/icons';
 import { classes, PhantomButton, type Option, type Value } from '@rothko-ui/system';
+import React from 'react';
 
 type MultiSelectValueProps<V extends Value, T> = {
   onClear: (id: V) => void;
