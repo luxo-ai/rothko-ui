@@ -3,11 +3,11 @@
 echo "Building tokens ..."
 yarn build:tokens
 
-echo "Building system ..."
-yarn build:system
-
 echo "Building icons ..."
 yarn build:icons
+
+echo "Building system ..."
+yarn build:system
 
 echo "[priority] Building typography ..."
 yarn build:typography
