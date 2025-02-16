@@ -10,7 +10,6 @@ export type DropdownContainerProps = Omit<
   'focus' | 'error' | 'ref' | 'disabled' | 'open'
 > & {
   children: React.ReactNode;
-  focus?: boolean;
   error?: boolean;
   disabled?: boolean;
   open?: boolean;

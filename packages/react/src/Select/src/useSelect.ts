@@ -131,13 +131,16 @@ const useSelect = <V extends Value, T = undefined>({
     [opts]
   );
 
+  // can cause problems ....
   useEffect(() => {
     if (!multiple) return;
     setOptions(
-      opts.filter(o => !selectedValuesLookup.has(o.id)),
-      { resetIdx: false }
+      opts.filter(opt => !selectedValuesLookup.has(opt.id)),
+      {
+        resetIdx: false,
+      }
     );
-  }, [selectedValuesLookup, multiple, setOptions, opts]);
+  }, [multiple, selectedValuesLookup, opts, setOptions]);
 
   return {
     deleteOne,

@@ -6,9 +6,9 @@ import type { Direction } from './types';
 import { dial } from './utils';
 import { debugFactory } from '../utils/debug';
 
-export const useOptions = <V, T>(initialOptions: Option<V, T>[]) => {
-  const debug = debugFactory('useOptions');
+const debug = debugFactory('useOptions');
 
+export const useOptions = <V, T>(initialOptions: Option<V, T>[]) => {
   const [optIdx, setOptIdx] = useState<number>(INITIAL_OPTION_IDX);
   const [options, setOptionsInner] = useState<Option<V, T>[]>(initialOptions);
 
@@ -20,7 +20,7 @@ export const useOptions = <V, T>(initialOptions: Option<V, T>[]) => {
       const upperBound = options.length - 1;
       setOptIdx(prevIdx => dial[direction](prevIdx, upperBound));
     },
-    [setOptIdx, options.length, debug]
+    [setOptIdx, options.length]
   );
 
   const resetOptionIdx = useCallback(() => {
@@ -28,13 +28,13 @@ export const useOptions = <V, T>(initialOptions: Option<V, T>[]) => {
   }, [setOptIdx]);
 
   const setOptions = useCallback(
-    (opts: Option<V, T>[], { resetIdx = true }: { resetIdx?: boolean } = {}) => {
+    (newOpts: Option<V, T>[], { resetIdx = true }: { resetIdx?: boolean } = {}) => {
       debug(`setOptions`);
-      setOptionsInner(opts);
+      setOptionsInner(newOpts);
       // just make option index the same unless greater than then just take the max?
       if (resetIdx) resetOptionIdx();
     },
-    [setOptionsInner, resetOptionIdx, debug]
+    [setOptionsInner, resetOptionIdx]
   );
 
   return {

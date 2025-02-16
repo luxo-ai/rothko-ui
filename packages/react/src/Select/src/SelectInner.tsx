@@ -187,7 +187,6 @@ function SelectInner<V extends Value, T = undefined>({
     selectOne,
     closeMenu,
     containerRef,
-    focus,
     onBlurHandler,
     onFocusHandler,
     open,
@@ -299,7 +298,6 @@ function SelectInner<V extends Value, T = undefined>({
         id={id}
         error={error}
         disabled={disabled}
-        focus={focus}
         open={open}
         aria-invalid={ariaInvalid || error}
         aria-required={ariaRequired}
@@ -326,6 +324,7 @@ function SelectInner<V extends Value, T = undefined>({
           <div className="flex flex-wrap gap-[0.5rem]">
             {value.map(v => (
               <MultiSelectValue
+                key={String(v)}
                 option={optionLookup[v]}
                 onClear={valId => {
                   deleteOne(valId);
