@@ -205,7 +205,6 @@ function Autocomplete<V extends Value, T = undefined>({
     setQuery,
     closeMenu,
     containerRef,
-    focus,
     onBlurHandler,
     onFocusHandler,
     open,
@@ -292,7 +291,6 @@ function Autocomplete<V extends Value, T = undefined>({
         id={id}
         error={error}
         disabled={disabled}
-        focus={focus}
         open={open}
         aria-invalid={ariaInvalid || error}
         aria-required={ariaRequired}
