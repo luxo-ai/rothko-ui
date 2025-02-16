@@ -51,7 +51,7 @@ export default defineConfig([
       'no-extra-boolean-cast': 'error',
       'arrow-body-style': 'off',
       'import/no-cycle': 'error',
-      'import/prefer-default-export': 'warn',
+      'import/prefer-default-export': 'off',
 
       // TypeScript Rules
       '@typescript-eslint/no-explicit-any': 'error',
@@ -82,7 +82,7 @@ export default defineConfig([
       'prettier/prettier': 'error',
     },
     ignores: [
-      'packages/icons/',
+      'packages/icons/**/*',
       '**/reports/',
       '**/dist/**/*',
       '**/build/**/*',
@@ -98,20 +98,5 @@ export default defineConfig([
       '.eslintrc.js',
       'next-env.d.ts',
     ],
-  },
-  {
-    files: [
-      '*.ts',
-      '*.js',
-      '**/index.tsx',
-      '**/index.jsx',
-      '**/*.tsx',
-      '**/*.jsx',
-      'packages/react/src/**/*.ts',
-      'packages/react/src/**/*.tsx',
-    ],
-    rules: {
-      'import/prefer-default-export': 'off',
-    },
   },
 ]);

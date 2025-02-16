@@ -71,6 +71,7 @@ const getElementName = (element: React.ReactElement<unknown>) => {
 };
 
 const ButtonGroup = ({
+  id,
   radius,
   children,
   className,
@@ -118,6 +119,7 @@ const ButtonGroup = ({
 
   return (
     <div
+      id={id}
       style={{ ...style, gap: gap || style.gap }}
       className={classes('inline-flex items-center justify-center', className)}
     >
