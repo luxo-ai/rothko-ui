@@ -9,34 +9,33 @@ yarn build:icons
 echo "Building system ..."
 yarn build:system
 
-echo "[priority] Building typography ..."
+echo "Building typography ..."
 yarn build:typography
 
-echo "[priority] Building link ..."
+echo "Building link ..."
 yarn build:link
 
 echo "Building rest ..."
-cat <<EOF | xargs -n 1 lerna run build --scope=% --stream
-@rothko-ui/button
-@rothko-ui/tabs
-@rothko-ui/toaster
-@rothko-ui/drawer
-@rothko-ui/popup
-@rothko-ui/radio
-@rothko-ui/autocomplete
-@rothko-ui/input
-@rothko-ui/alert
-@rothko-ui/accordion
-@rothko-ui/skeleton
-@rothko-ui/checkbox
-@rothko-ui/slider
-@rothko-ui/menu
-@rothko-ui/switch
-@rothko-ui/select
-@rothko-ui/modal
-@rothko-ui/breadcrumbs
-@rothko-ui/tag
-EOF
+yarn build:button
+yarn build:tabs
+yarn build:toaster
+yarn build:drawer
+yarn build:popup
+yarn build:radio
+yarn build:autocomplete
+yarn build:input
+yarn build:alert
+yarn build:accordion
+yarn build:skeleton
+yarn build:checkbox
+yarn build:slider
+yarn build:menu
+yarn build:switch
+yarn build:select
+yarn build:modal
+yarn build:breadcrumbs
+yarn build:tag
+
 # find packages/react/src -maxdepth 2 -name 'package.json' -exec sh -c 'jq -r .name {} | xargs -I % lerna run build --scope=% --stream' \;
 
 echo "Done!"
