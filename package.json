@@ -6,6 +6,7 @@
   "author": "Luis Serazo <luxo.ai@proton.me>",
   "private": true,
   "scripts": {
+    "build:all": "sh ./scripts/build.sh",
     "add:accordion": "yarn workspace @rothko-ui/accordion add $1",
     "add:alert": "yarn workspace @rothko-ui/alert add $1",
     "add:autocomplete": "yarn workspace @rothko-ui/autocomplete add $1",
@@ -85,10 +86,8 @@
     "remove:toaster": "yarn workspace @rothko-ui/toaster remove $1",
     "remove:tokens": "yarn workspace @rothko-ui/tokens remove $1",
     "remove:typography": "yarn workspace @rothko-ui/typography remove $1",
-    "build:components": "find packages/react/src -maxdepth 2 -name 'package.json' -exec sh -c 'jq -r .name {} | xargs -I % lerna run build --scope=% --stream' \\;",
     "generate:source": "yarn workspace demo generate:source",
     "generate:scss": "yarn workspace demo generate:scss",
-    "build": "lerna run build --stream",
     "clean": "lerna clean",
     "lint": "lerna run lint",
     "test": "lerna run test",
