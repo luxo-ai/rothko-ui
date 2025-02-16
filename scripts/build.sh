@@ -16,7 +16,7 @@ echo "[priority] Building link ..."
 yarn build:link
 
 echo "Building rest ..."
-cat <<EOF
+cat <<EOF | xargs -n 1 lerna run build --scope=% --stream
 @rothko-ui/button
 @rothko-ui/tabs
 @rothko-ui/toaster
@@ -36,7 +36,7 @@ cat <<EOF
 @rothko-ui/modal
 @rothko-ui/breadcrumbs
 @rothko-ui/tag
-EOF | xargs -I % lerna run build --scope=% --stream
+EOF
 # find packages/react/src -maxdepth 2 -name 'package.json' -exec sh -c 'jq -r .name {} | xargs -I % lerna run build --scope=% --stream' \;
 
 echo "Done!"
