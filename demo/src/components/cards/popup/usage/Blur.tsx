@@ -11,9 +11,7 @@ const App = () => {
   return (
     <>
       <Button
-        accessoryLeft={({ size, color }) => (
-          <ArrowUpOutline width={size} height={size} fill={color} />
-        )}
+        accessoryLeft={({ size }) => <ArrowUpOutline width={size} height={size} />}
         onClick={() => setOpen(true)}
       >
         Open

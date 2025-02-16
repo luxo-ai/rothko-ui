@@ -3,9 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import { babel } from '@rollup/plugin-babel';
 import externalPeerDependencies from 'rollup-plugin-peer-deps-external';
-import postcss from 'rollup-plugin-postcss';
 import { visualizer } from 'rollup-plugin-visualizer';
-import autoprefixer from 'autoprefixer';
 
 const isDev = process.env.NODE_ENV === 'dev';
 
@@ -46,14 +44,6 @@ export default {
       // Enable generation of declaration files
       declaration: true,
       outDir: 'dist',
-    }),
-    postcss({
-      plugins: [autoprefixer()],
-      extract: false,
-      modules: true,
-      minimize: true,
-      sourceMap: isDev,
-      use: ['sass'],
     }),
     babel({
       exclude: /\/node_modules\//,

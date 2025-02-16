@@ -1,0 +1,110 @@
+@layer utilities {
+  .rothko-font-regular {
+    font-family: var(--rothko-font-family-regular);
+  }
+  .rothko-font-bold {
+    font-family: var(--rothko-font-family-bold);
+    font-weight: bold;
+  }
+  .rothko-font-italic {
+    font-family: var(--rothko-font-family-italic);
+    font-style: italic;
+  }
+  .rothko-font-light {
+    font-family: var(--rothko-font-family-light);
+    font-weight: 200;
+  }
+  .rothko-font-heading {
+    font-family: var(--rothko-font-family-heading);
+    font-weight: 700;
+  }
+  .rothko-font-code {
+    font-family: var(--rothko-font-family-code);
+  }
+  .rothko-color-body {
+    color: var(--rothko-typography-body-color);
+  }
+  .rothko-color-heading {
+    color: var(--rothko-typography-heading-color);
+  }
+  .rothko-color-code {
+    color: var(--rothko-typography-code-color);
+  }
+  /* XS */
+  .rothko-paragraph-size-xs {
+    font-size: var(--rothko-font-size-body-xsmall, 0.75rem);
+    line-height: var(--rothko-line-height-body-xsmall, 0.9375rem);
+  }
+  /* S */
+  .rothko-paragraph-size-s {
+    font-size: var(--rothko-font-size-body-small, 0.875rem);
+    line-height: var(--rothko-line-height-body-small, 1.25rem);
+  }
+  /* M */
+  .rothko-paragraph-size-m,
+  .rothko-paragraph-size-default {
+    font-size: var(--rothko-font-size-body, 1rem);
+    line-height: var(--rothko-line-height-body, 1.5rem);
+  }
+  /* L */
+  .rothko-paragraph-size-l {
+    font-size: var(--rothko-font-size-body-large, 1.25rem);
+    line-height: var(--rothko-line-height-body-large, 1.75rem);
+  }
+  /* h1 */
+  .rothko-heading-size-h1 {
+    font-size: var(--rothko-font-size-h1, 2.5rem);
+    line-height: var(--rothko-line-height-h1, 3.25rem);
+  }
+  /* h2 */
+  .rothko-heading-size-h2 {
+    font-size: var(--rothko-font-size-h2, 2.25rem);
+    line-height: var(--rothko-line-height-h2, 2.75rem);
+  }
+  /* h3 */
+  .rothko-heading-size-h3 {
+    font-size: var(--rothko-font-size-h3, 2rem);
+    line-height: var(--rothko-line-height-h3, 2.5rem);
+  }
+  /* h4 */
+  .rothko-heading-size-h4 {
+    font-size: var(--rothko-font-size-h4, 1.75rem);
+    line-height: var(--rothko-line-height-h4, 2.25rem);
+  }
+  /* h5 */
+  .rothko-heading-size-h5 {
+    font-size: var(--rothko-font-size-h5, 1.5rem);
+    line-height: var(--rothko-line-height-h5, 2rem);
+  }
+  /* h6 */
+  .rothko-heading-size-h6 {
+    font-size: var(--rothko-font-size-h6, 1.25rem);
+    line-height: var(--rothko-line-height-h6, 1.75rem);
+  }
+  /* code */
+  .rothko-code-size {
+    font-size: var(--rothko-font-size-code, 1rem);
+    line-height: var(--rothko-line-height-code, 1.25rem);
+  }
+  .ios-tap-highlight-color-transparent {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .slash-separated:not(:last-of-type)::after {
+    content: ' / ';
+  }
+  .font-smoothing-antialiased {
+    /* Use font smoothing to make text more readable + lighter */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .hide-chrome-browser-outline {
+    outline: none;
+    :active,
+    :focus {
+      outline: none;
+    }
+  }
+  .webkit-overflow-scrolling-touch {
+    -webkit-overflow-scrolling: touch;
+  }
+}

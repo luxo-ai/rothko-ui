@@ -1,6 +1,6 @@
 export const BASIC = `
-import React, { useState } from 'react';
 import { Checkbox, Flex } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [withoutLabelChecked, setWithoutLabelChecked] = useState(true);
@@ -19,8 +19,8 @@ const App = () => {
 export default App;
 `;
 export const DISABLED = `
-import React from 'react';
 import { Checkbox, Flex } from '@rothko-ui/react';
+import React from 'react';
 
 const App = () => {
   return (
@@ -36,8 +36,8 @@ const App = () => {
 export default App;
 `;
 export const WITH_KIND = `
-import React, { useState } from 'react';
 import { Checkbox, Flex } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [primaryChecked, setPrimaryChecked] = useState(true);

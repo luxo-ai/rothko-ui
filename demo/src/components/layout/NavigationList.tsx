@@ -8,13 +8,14 @@ import type { NavigationSection } from './types';
 import { List, ListItem } from '../list';
 
 type ExpandNavListProps = {
+  idx: number;
   depth?: number;
   item: NavigationSection;
   selected?: string;
   onNavigate?: () => void;
 };
 
-const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListProps) => {
+const ExpandNavList = ({ idx, depth = 0, item, selected, onNavigate }: ExpandNavListProps) => {
   if (isLeaf(item)) {
     const isSelected = selected === item.to;
     return (
@@ -38,7 +39,7 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
                 : 'var(--rothko-font-family)',
             }}
           >
-            {isSelected ? '_ ' : ''}
+            {isSelected ? '\\ ' : ''}
             {item.label}
           </LinkButton>
         </Link>
@@ -48,13 +49,17 @@ const ExpandNavList = ({ depth = 0, item, selected, onNavigate }: ExpandNavListP
   return (
     <List margin={0} padding="0">
       <ListItem paddingTop="0.5rem" paddingLeft={`calc(${depth} * 0.75rem)`}>
-        <Paragraph variant="bold" size="xs">
+        <Paragraph
+          style={{ letterSpacing: 2, marginTop: idx !== 0 ? '0.25rem' : undefined }}
+          size="xs"
+        >
           {item.label.toUpperCase()}
         </Paragraph>
       </ListItem>
       <List padding="0">
         {item.children.map((subItem, idx) => (
           <ExpandNavList
+            idx={idx}
             onNavigate={onNavigate}
             selected={selected}
             depth={depth + 1}
@@ -76,8 +81,9 @@ type NavigationListProps = {
 
 const NavigationList = ({ onNavigate, selected, style }: NavigationListProps) => (
   <nav style={style}>
-    {NAVIGATION_LIST.map(item => (
+    {NAVIGATION_LIST.map((item, idx) => (
       <ExpandNavList
+        idx={idx}
         item={item}
         key={`${isLeaf(item) ? 'leaf' : 'section'}_${item.label}`}
         onNavigate={onNavigate}

@@ -1,6 +1,6 @@
 export const BASIC = `
-import React from 'react';
 import { Accordion, AccordionPanel } from '@rothko-ui/react';
+import React from 'react';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
@@ -18,8 +18,8 @@ const App = () => {
 export default App;
 `;
 export const BORDERED = `
-import React from 'react';
 import { Accordion, AccordionPanel } from '@rothko-ui/react';
+import React from 'react';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
@@ -37,8 +37,8 @@ const App = () => {
 export default App;
 `;
 export const COMPACT = `
-import React from 'react';
 import { Accordion, AccordionPanel } from '@rothko-ui/react';
+import React from 'react';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
@@ -56,9 +56,9 @@ const App = () => {
 export default App;
 `;
 export const ICON_OVERRIDE = `
-import React from 'react';
-import { Accordion, AccordionPanel } from '@rothko-ui/react';
 import { ArrowIosForward, RadioButtonOff, RadioButtonOn } from '@rothko-ui/icons';
+import { Accordion, AccordionPanel } from '@rothko-ui/react';
+import React from 'react';
 
 const ICON_SIZE = '1rem';
 
@@ -108,8 +108,8 @@ const App = () => {
 export default App;
 `;
 export const MULTIPLE = `
-import React from 'react';
 import { Accordion, AccordionPanel } from '@rothko-ui/react';
+import React from 'react';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
@@ -127,8 +127,8 @@ const App = () => {
 export default App;
 `;
 export const SELECTED = `
-import React from 'react';
 import { Accordion, AccordionPanel } from '@rothko-ui/react';
+import React from 'react';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
@@ -152,8 +152,8 @@ const App = () => {
 export default App;
 `;
 export const WITH_SUBTITLE = `
-import React from 'react';
 import { Accordion, AccordionPanel, Paragraph } from '@rothko-ui/react';
+import React from 'react';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';

@@ -43,14 +43,10 @@
     "@rollup/plugin-typescript": "^12.1.2",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "autoprefixer": "^10.4.20",
     "rimraf": "^6.0.1",
     "rollup": "^4.34.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-visualizer": "^5.14.0",
-    "sass": "^1.77.0",
-    "typed-scss-modules": "^8.1.1",
     "typescript": "^5.7.3"
   },
   "files": [

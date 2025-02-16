@@ -146,7 +146,7 @@ WithAria<CheckboxProps, AriaAttributes>) => {
     'cursor-pointer',
     'rounded-[1px]', // add to tokens?
     'p-[0.125rem]', // add to tokens
-    'bg-(--rothko-checkbox-background)',
+    !checked && 'bg-(--rothko-checkbox-background)',
     'transition-[background-color] ease-[0.1s]',
     checked && 'bg-(--checkbox-background-checked)', // local var
     checked && 'text-(--checkbox-foreground-checked)', // local var

@@ -73,9 +73,7 @@ const Navigation = () => {
                   size="s"
                   kind="primary"
                   style={{ height: '100%' }}
-                  accessoryLeft={({ size, color }) => (
-                    <Heart fill={color} height={size} width={size} />
-                  )}
+                  accessoryLeft={({ size }) => <Heart height={size} width={size} />}
                 >
                   Sponsor
                 </Button>

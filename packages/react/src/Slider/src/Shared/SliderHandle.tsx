@@ -1,5 +1,5 @@
 import type { Nilable, WithAria } from '@rothko-ui/system';
-import { useIsMounted, scopedClasses, classes, addEvent, removeEvent } from '@rothko-ui/system';
+import { useIsMounted, classes, addEvent, removeEvent } from '@rothko-ui/system';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import type { DragDelta, DragEvent } from '../sliderUtils';
@@ -11,9 +11,6 @@ import {
   isMainClick,
   isMouseEvent,
 } from '../sliderUtils';
-import styles from './SliderHandle.module.scss';
-
-const sc = scopedClasses(styles);
 
 type DraggableEvents = {
   start: string;
@@ -46,6 +43,37 @@ export type SliderHandleInnerProps = {
   max: number;
   children: React.ReactElement<SliderHandleProps>;
 };
+
+const innerHandleClassnames = [
+  'hide-chrome-browser-outline',
+  'ios-tap-highlight-color-transparent',
+  'user-select-none',
+  // https://stackoverflow.com/questions/30552307/ios-safari-buttons-not-perfect-circles
+  'p-0',
+  'border-none',
+  'outline-none',
+  'bg-transparent',
+  'touch-manipulation',
+  'z-3',
+  // in mobile without display flex, height is larger than inner button.
+  'flex',
+].join(' ');
+
+const innerHandleMovementClassnames = [
+  'absolute',
+  '-translate-x-1/2', // transform: translate(-50%, 0%);
+  'touch-pan-x',
+].join(' ');
+
+const pseudoHandleClassnamesBase = [
+  'w-[1.125rem]', // make token
+  'h-[1.125rem]',
+  'bg-(--rothko-slider-handle-background)',
+  'border-[0.125rem]',
+  'border-solid',
+  'border-(--rothko-slider-handle-border)',
+  'rounded-full',
+].join(' ');
 
 export const SliderHandleInner = ({
   disabled,
@@ -263,12 +291,17 @@ export const SliderHandleInner = ({
       ref={handleRef}
       role="slider"
       style={positionStyle}
-      className={sc('inner-handle', 'inner-handle-movement')}
+      className={classes(innerHandleClassnames, innerHandleMovementClassnames)}
     >
       {React.createElement('span', {
         style: el.props.style,
         id: el.props.id,
-        className: classes(sc('pseudo-handle'), el.props.className),
+        className: classes(
+          pseudoHandleClassnamesBase,
+          disabled && 'cursor-not-allowed',
+          !disabled && 'cursor-pointer',
+          el.props.className
+        ),
         // this is a phantom element, hide from screen readers
         'aria-hidden': 'true',
       })}
@@ -278,10 +311,21 @@ export const SliderHandleInner = ({
 
 export type SliderHandleProps = Pick<
   React.HTMLProps<HTMLButtonElement>,
-  'className' | 'style' | 'id'
+  'className' | 'style' | 'id' | 'disabled'
 >;
 
-export const SliderHandle = ({ className, style, id }: SliderHandleProps) => {
-  const baseClassName = sc('inner-handle', 'pseudo-handle');
-  return <button id={id} style={style} className={classes(baseClassName, className)} />;
+export const SliderHandle = ({ className, style, disabled, id }: SliderHandleProps) => {
+  return (
+    <button
+      id={id}
+      style={style}
+      className={classes(
+        innerHandleClassnames,
+        pseudoHandleClassnamesBase,
+        disabled && 'cursor-not-allowed',
+        !disabled && 'cursor-pointer',
+        className
+      )}
+    />
+  );
 };

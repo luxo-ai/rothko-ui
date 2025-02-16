@@ -1,7 +1,6 @@
 export const BASIC = `
-import React from 'react';
-
 import { Tabs, Tab } from '@rothko-ui/react';
+import React from 'react';
 
 const App = () => {
   return (
@@ -19,9 +18,8 @@ const App = () => {
 export default App;
 `;
 export const WITH_KIND = `
-import React from 'react';
-
 import { Tabs, Tab } from '@rothko-ui/react';
+import React from 'react';
 
 const App = () => {
   return (

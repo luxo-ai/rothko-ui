@@ -188,7 +188,7 @@ const Button = ({
     'user-select-none',
     'appearance-none',
     // Prevent double tap zoom on mobile
-    'touch-action-manipulation',
+    'touch-manipulation',
     'inline-flex',
     'items-center',
     'justify-center',

@@ -18,7 +18,7 @@ export const PhantomButton = ({
 }: PhantomButtonProps) => {
   const phantomButtonClasses = classes(
     'ios-tap-highlight-color-transparent',
-    'touch-action-manipulation',
+    'touch-manipulation',
     'bg-transparent',
     'border-none',
     'outline-none',

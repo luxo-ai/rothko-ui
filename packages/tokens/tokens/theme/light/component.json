@@ -56,10 +56,10 @@
     "background": { "value": "#000" },
     "life": {
       "filled": {
-        "background": { "value": "#e93c2f" }
+        "background": { "value": "#ff0000" }
       },
       "empty": {
-        "background": { "value": "transparent" }
+        "background": { "value": "#e1594e" }
       }
     }
   },

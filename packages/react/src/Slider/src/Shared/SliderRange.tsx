@@ -1,10 +1,6 @@
-import { scopedClasses } from '@rothko-ui/system';
+import { classes } from '@rothko-ui/system';
 import type { RothkoKind } from '@rothko-ui/system';
 import React from 'react';
-
-import styles from './SliderRange.modue.scss';
-
-const sc = scopedClasses(styles);
 
 export type SliderRangeDivProps = {
   kind?: RothkoKind;
@@ -13,11 +9,31 @@ export type SliderRangeDivProps = {
   style?: React.CSSProperties;
 };
 
-const SliderRange = ({ kind, disabled, children, style }: SliderRangeDivProps) => {
+const SliderRange = ({ kind, disabled, children, style = {} }: SliderRangeDivProps) => {
+  const sliderRangeVarStyle = {
+    '--slider-range-background': kind
+      ? `var(--rothko-${kind})`
+      : 'var(--rothko-slider-range-background)',
+  } as React.CSSProperties;
+
+  const sliderRangeBaseStyle = {
+    borderRadius: 'inherit', // variables.$sliderBorderRadius;
+  };
+
+  const sliderRangeClassnames = classes(
+    'absolute',
+    'h-full',
+    'bg-(--slider-range-background)',
+    'overflow-hidden',
+    'user-select-none',
+    'z-2',
+    disabled && 'opacity-75'
+  );
+
   return (
     <div
-      style={style}
-      className={sc('slider-range', kind && `slider-range--${kind}`, disabled && 'disabled')}
+      style={{ ...style, ...sliderRangeVarStyle, ...sliderRangeBaseStyle }}
+      className={sliderRangeClassnames}
     >
       {children}
     </div>

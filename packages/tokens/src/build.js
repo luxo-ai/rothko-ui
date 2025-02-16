@@ -120,6 +120,10 @@ const build = () => {
   console.log('\nToken generation completed!');
 
   console.log('\n==============================================');
+  console.log('\nPushing directives');
+  generatedFiles.push('./src/directive.css');
+
+  console.log('\n==============================================');
   console.log('\nCreating combined CSS file');
   const combinedCss = generatedFiles.map(file => fs.readFileSync(file)).join('\n\n');
   fs.writeFileSync(path.join(CSS_OUT_DIRECTORY, COMBINED_CSS_FILE_NAME), combinedCss);

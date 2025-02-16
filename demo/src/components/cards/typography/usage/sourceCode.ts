@@ -1,6 +1,4 @@
 export const BASIC = `
-import React from 'react';
-
 import {
   Heading1,
   Heading2,
@@ -10,6 +8,7 @@ import {
   Heading6,
   Paragraph,
 } from '@rothko-ui/react';
+import React from 'react';
 
 const App = () => {
   return (

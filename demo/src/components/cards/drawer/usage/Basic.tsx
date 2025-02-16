@@ -10,9 +10,7 @@ const App = () => {
   return (
     <>
       <Button
-        accessoryLeft={({ size, color }) => (
-          <ArrowRightOutline width={size} height={size} fill={color} />
-        )}
+        accessoryLeft={({ size }) => <ArrowRightOutline width={size} height={size} />}
         kind="primary"
         onClick={() => setOpen(true)}
       >

@@ -1,6 +1,6 @@
 export const BASIC = `
-import React, { useState } from 'react';
 import { Input } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [value, setValue] = useState<string>('');
@@ -13,8 +13,8 @@ const App = () => {
 export default App;
 `;
 export const DISABLED = `
-import React from 'react';
 import { Input } from '@rothko-ui/react';
+import React from 'react';
 
 const App = () => {
   return <Input placeholder="Email" disabled />;

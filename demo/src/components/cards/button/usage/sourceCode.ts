@@ -1,8 +1,7 @@
 export const ACCESSORY = `
-import React from 'react';
-
-import { Button } from '@rothko-ui/react';
 import { Flash, Inbox } from '@rothko-ui/icons';
+import { Button } from '@rothko-ui/react';
+import React from 'react';
 
 const App = () => {
   return (
@@ -25,9 +24,8 @@ const App = () => {
 export default App;
 `;
 export const DISABLED = `
-import React from 'react';
-
 import { Button } from '@rothko-ui/react';
+import React from 'react';
 
 const App = () => {
   return <Button disabled>Disabled Button</Button>;
@@ -36,9 +34,8 @@ const App = () => {
 export default App;
 `;
 export const LOADING = `
-import React, { useEffect, useState } from 'react';
-
 import { Button } from '@rothko-ui/react';
+import React, { useEffect, useState } from 'react';
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -60,9 +57,8 @@ const App = () => {
 export default App;
 `;
 export const RADIUS = `
-import React from 'react';
-
 import { Button } from '@rothko-ui/react';
+import React from 'react';
 
 const App = () => {
   return (
@@ -77,9 +73,8 @@ const App = () => {
 export default App;
 `;
 export const SIZE = `
-import React from 'react';
-
 import { Button } from '@rothko-ui/react';
+import React from 'react';
 
 const App = () => {
   return (
@@ -95,9 +90,8 @@ const App = () => {
 export default App;
 `;
 export const VARIANT = `
-import React from 'react';
-
 import { Button } from '@rothko-ui/react';
+import React from 'react';
 
 const App = () => {
   return (
@@ -111,9 +105,8 @@ const App = () => {
 export default App;
 `;
 export const WITH_KIND = `
-import React from 'react';
-
 import { Button } from '@rothko-ui/react';
+import React from 'react';
 
 const App = () => {
   return (

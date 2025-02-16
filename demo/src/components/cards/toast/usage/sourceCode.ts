@@ -1,9 +1,8 @@
 export const BASIC = `
+import { Button, useToaster } from '@rothko-ui/react';
 import React from 'react';
 
-import { Button, useToaster } from '@rothko-ui/react';
-
-const TOAST_DURATION = 4000;
+const TOAST_DURATION = 40000000;
 
 const App = () => {
   const toaster = useToaster();
@@ -22,9 +21,8 @@ const App = () => {
 export default App;
 `;
 export const WITH_KIND = `
-import React from 'react';
-
 import { Button, useToaster } from '@rothko-ui/react';
+import React from 'react';
 
 const TOAST_DURATION = 4000;
 
@@ -46,9 +44,8 @@ const App = () => {
 export default App;
 `;
 export const WITH_LIFE = `
-import React from 'react';
-
 import { Button, useToaster } from '@rothko-ui/react';
+import React from 'react';
 
 const TOAST_DURATION = 4000;
 

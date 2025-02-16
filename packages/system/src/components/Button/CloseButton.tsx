@@ -12,7 +12,7 @@ type CloseButtonProps = {
   id?: string;
   className?: string;
   style?: React.CSSProperties;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   size?: Size | number;
 };
 
@@ -31,7 +31,7 @@ export const CloseButton = ({
       className={className}
       style={style}
       aria-label={ariaLabel || 'Close'}
-      onClick={() => onClick()}
+      onClick={e => onClick(e)}
       aria-hidden={ariaHidden}
     >
       <CloseOutline aria-hidden width={size} height={size} />

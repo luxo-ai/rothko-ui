@@ -1,7 +1,6 @@
 export const BASIC = `
-import React, { useState } from 'react';
-
 import { MultiSlider, SliderHandle } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [value, setValue] = useState<[number, number]>([0, 50]);
@@ -16,9 +15,8 @@ const App = () => {
 export default App;
 `;
 export const DISABLED = `
-import React, { useState } from 'react';
-
 import { MultiSlider } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [value, setValue] = useState<[number, number]>([0, 50]);
@@ -30,9 +28,8 @@ const App = () => {
 export default App;
 `;
 export const WITH_KIND = `
-import React, { useState } from 'react';
-
 import { MultiSlider } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [value, setValue] = useState<[number, number]>([0, 50]);

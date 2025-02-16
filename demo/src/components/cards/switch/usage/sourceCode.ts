@@ -1,7 +1,6 @@
 export const BASIC = `
-import React, { useState } from 'react';
-
 import { Switch } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [withoutLabelSelected, setWithoutLabelSelected] = useState(true);
@@ -24,8 +23,8 @@ const App = () => {
 export default App;
 `;
 export const DISABLED = `
-import React, { useState } from 'react';
 import { Switch } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [selected, setSelected] = useState(false);
@@ -36,9 +35,9 @@ const App = () => {
 export default App;
 `;
 export const WITH_ICON = `
-import React, { useState } from 'react';
-import { Switch } from '@rothko-ui/react';
 import { Video, VideoOff } from '@rothko-ui/icons';
+import { Switch } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [selected, setSelected] = useState(true);
@@ -56,8 +55,8 @@ const App = () => {
 export default App;
 `;
 export const WITH_KIND = `
-import React, { useState } from 'react';
 import { Switch } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [selected, setSelected] = useState(true);

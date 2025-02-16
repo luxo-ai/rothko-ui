@@ -48,7 +48,6 @@ export type FocusHandler = (e: React.FocusEvent<HTMLElement>) => void;
 export type Accessory<Props = {}> = (
   props: Props & {
     size: number | Size;
-    color?: string;
   }
 ) => JSX.Element;
 

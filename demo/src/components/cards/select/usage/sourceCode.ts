@@ -1,6 +1,7 @@
 export const BASIC = `
-import React, { useState } from 'react';
 import { Select } from '@rothko-ui/react';
+import React, { useState } from 'react';
+
 import { listOfNames } from './listOfNames';
 
 const nameOptions = listOfNames.map((name, idx) => ({ id: idx, label: name }));
@@ -14,8 +15,9 @@ const App = () => {
 export default App;
 `;
 export const CLEARABLE = `
-import React, { useState } from 'react';
 import { Select } from '@rothko-ui/react';
+import React, { useState } from 'react';
+
 import { listOfNames } from './listOfNames';
 
 const nameOptions = listOfNames.map((name, idx) => ({ id: idx, label: name }));
@@ -29,8 +31,9 @@ const App = () => {
 export default App;
 `;
 export const DISABLED = `
-import React, { useState } from 'react';
 import { Select } from '@rothko-ui/react';
+import React, { useState } from 'react';
+
 import { listOfNames } from './listOfNames';
 
 const nameOptions = listOfNames.map((name, idx) => ({ id: idx, label: name }));
@@ -44,8 +47,9 @@ const App = () => {
 export default App;
 `;
 export const MENU_VARIANT = `
-import React, { useState } from 'react';
 import { Select } from '@rothko-ui/react';
+import React, { useState } from 'react';
+
 import { listOfNames } from './listOfNames';
 
 const nameOptions = listOfNames.map((name, idx) => ({ id: idx, label: name }));
@@ -65,9 +69,10 @@ const App = () => {
 export default App;
 `;
 export const RENDER_OPTION = `
-import React, { useState } from 'react';
 import type { Option } from '@rothko-ui/react';
 import { Select, Paragraph } from '@rothko-ui/react';
+import React, { useState } from 'react';
+
 import { listOfNamesWithUsername } from './listOfNames';
 
 const nameOptions: Option<number, { username: string }>[] = listOfNamesWithUsername.map(

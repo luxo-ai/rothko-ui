@@ -1,5 +1,6 @@
 export const BASIC = `
-import React, { Alert } from '@rothko-ui/react';
+import { Alert } from '@rothko-ui/react';
+import React from 'react';
 
 const App = () => {
   return (
@@ -14,7 +15,8 @@ const App = () => {
 export default App;
 `;
 export const VARIANT = `
-import React, { Alert } from '@rothko-ui/react';
+import { Alert } from '@rothko-ui/react';
+import React from 'react';
 
 const App = () => {
   return (

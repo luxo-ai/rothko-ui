@@ -60,18 +60,14 @@ const IconsCard = () => {
         <Container maxWidth="13rem">
           <ButtonGroup noEffect kind="primary" size="xs" radius="full">
             <Button
-              accessoryLeft={({ size, color }) => (
-                <Icons.Moon width={size} height={size} fill={color} />
-              )}
+              accessoryLeft={({ size }) => <Icons.Moon width={size} height={size} />}
               variant={iconKind === 'filled' ? 'filled' : 'outline'}
               onClick={() => setIconKind('filled')}
             >
               Filled
             </Button>
             <Button
-              accessoryRight={({ size, color }) => (
-                <Icons.MoonOutline width={size} height={size} fill={color} />
-              )}
+              accessoryRight={({ size }) => <Icons.MoonOutline width={size} height={size} />}
               variant={iconKind === 'outline' ? 'filled' : 'outline'}
               onClick={() => setIconKind('outline')}
             >

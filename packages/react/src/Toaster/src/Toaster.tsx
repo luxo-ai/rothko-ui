@@ -1,15 +1,11 @@
 import type { SpringValue } from '@react-spring/web';
 import { animated } from '@react-spring/web';
-import { CloseOutline } from '@rothko-ui/icons';
-import { PhantomButton, isString, scopedClasses, useId } from '@rothko-ui/system';
+import { CloseButton, isString, useId } from '@rothko-ui/system';
 import type { WithAria, RothkoKind } from '@rothko-ui/system';
-import { Paragraph } from '@rothko-ui/typography';
 import React from 'react';
 
-import styles from './Toaster.module.scss';
+import { ToasterContent, ToasterLabel } from './ToasterText';
 import type { ToastDetails } from './types';
-
-const sc = scopedClasses(styles);
 
 type AriaAttributes = 'aria-label' | 'aria-labelledby';
 
@@ -46,6 +42,39 @@ type ToastProps = Pick<ToastDetails, 'label' | 'content' | 'withLife'> & {
   style?: React.CSSProperties;
 };
 
+const toastAnimatedBackdropClassnames = [
+  'bg-(--rothko-background)',
+  'rounded-[0.125rem]',
+  'relative',
+].join(' ');
+
+const toastAnimatedClassnames = [
+  'absolute',
+  'bottom-0',
+  'left-0',
+  'w-auto',
+  'h-[0.2rem]',
+  'bg-[linear-gradient(130deg,_var(--toast-animated-background-from),_var(--toast-animated-background-to))]',
+].join(' ');
+
+const toastContentContainerClassnames = ['flex', 'flex-col', 'gap-[0.1rem]'].join(' ');
+
+const toastClassnames = [
+  'flex',
+  'flex-wrap',
+  'gap-[0.5rem]',
+  'items-start',
+  'justify-between',
+  'py-[1rem]',
+  'px-[0.75rem]',
+  'bg-(--toast-background)',
+  'rounded-[0.125rem]',
+  // == text classes for children to inherit ==
+  'rothko-font-regular',
+  'rothko-paragraph-size-default',
+  'text-(--toast-content-foreground)',
+].join(' ');
+
 const Toast = React.forwardRef<HTMLDivElement, WithAria<ToastProps, AriaAttributes>>(
   (props, ref) => {
     const {
@@ -62,17 +91,32 @@ const Toast = React.forwardRef<HTMLDivElement, WithAria<ToastProps, AriaAttribut
     } = props;
     const labelId = useId();
 
-    const iconColor = 'var(--rothko-rothko-toast-foreground)';
+    const toastAnimatedVarStyle = {
+      '--toast-animated-background-from': kind
+        ? `var(--rothko-${kind})`
+        : 'var(--rothko-toast-life-filled-background)',
+      '--toast-animated-background-to': kind
+        ? `var(--rothko-${kind}-100)`
+        : 'var(--rothko-toast-life-empty-background)',
+    } as React.CSSProperties;
+
+    const toastVarStyle = {
+      '--toast-background': kind ? `var(--rothko-${kind})` : 'var(--rothko-toast-background)',
+      '--toast-content-foreground': kind
+        ? `var(--rothko-${kind}-foreground)`
+        : 'var(--rothko-toast-foreground)',
+    } as React.CSSProperties;
 
     return (
       <animated.div
-        className={sc('toast__animated-backdrop')}
+        className={toastAnimatedBackdropClassnames}
         aria-hidden
         style={{ ...style, opacity: animatedStyle.opacity, height: animatedStyle.height }}
       >
         <div
           id={id}
-          className={sc('toast', kind && `toast--${kind}`)}
+          style={toastVarStyle}
+          className={toastClassnames}
           role="alert"
           aria-live={kind === 'danger' ? 'assertive' : 'polite'}
           aria-atomic
@@ -80,35 +124,31 @@ const Toast = React.forwardRef<HTMLDivElement, WithAria<ToastProps, AriaAttribut
           aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
           ref={ref}
         >
-          <div
-            className={sc('toast__content-container', kind && `toast__content-container--${kind}`)}
-          >
+          <div className={toastContentContainerClassnames}>
             {label &&
               (isString(label) ? (
-                <Paragraph id={labelId} variant="bold">
-                  {label}
-                </Paragraph>
+                <ToasterLabel id={labelId}>{label}</ToasterLabel>
               ) : (
                 <div id={labelId}>{label}</div>
               ))}
             {content && typeof content === 'string' ? (
-              <Paragraph>{content}</Paragraph>
+              <ToasterContent>{content}</ToasterContent>
             ) : (
               <div>{content}</div>
             )}
           </div>
-          <PhantomButton
-            className={styles['toast__close-button']}
-            aria-label="Close"
-            onClick={onClose}
-          >
-            <CloseOutline fill={iconColor} aria-hidden width="1.125rem" height="1.125rem" />
-          </PhantomButton>
+
+          <CloseButton
+            onClick={e => onClose?.(e)}
+            size="1.125rem"
+            className="mt-[0.125rem] block ml-auto"
+            // fill = var(--rothko-rothko-toast-foreground)
+          />
         </div>
         {withLife && (
           <animated.div
-            className={sc('toast__animated-life', kind && `toast__animated-life--${kind}`)}
-            style={{ right: life }}
+            className={toastAnimatedClassnames}
+            style={{ right: life, ...toastAnimatedVarStyle }}
             aria-hidden
           />
         )}

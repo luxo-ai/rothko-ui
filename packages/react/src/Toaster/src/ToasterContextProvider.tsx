@@ -4,7 +4,6 @@ import React, { useCallback, useMemo, useState } from 'react';
 import * as uuid from 'uuid';
 
 import Toast from './Toaster';
-import styles from './Toaster.module.scss';
 import ToasterContext from './ToasterContext';
 import type { ToastDetails, ToastKey } from './types';
 
@@ -19,6 +18,23 @@ const EXIT_CONFIG = {
 type ToastContextProviderProps = {
   children?: React.ReactNode;
 };
+
+const toastsClassnames = [
+  'fixed',
+  'flex',
+  'flex-col',
+  'gap-4', // 1rem
+  'bottom-[0.75rem]',
+  'right-0',
+  'my-[0.25rem]',
+  'mx-[1rem]',
+  'min-w-[10rem]',
+  'max-w-[max(18rem,20%)]',
+  'md:right-[0.75rem]',
+  'md:max-w-[max(32rem,20%)]',
+  'md:min-w-[15rem]',
+  'z-[99999]',
+].join(' ');
 
 const ToastContextProvider = ({ children }: ToastContextProviderProps) => {
   const refMap = useMemo(() => new WeakMap(), []);
@@ -62,7 +78,7 @@ const ToastContextProvider = ({ children }: ToastContextProviderProps) => {
   return (
     <ToasterContext.Provider value={{ removeToast, addToast }}>
       <DomPortal wrapperId="toaster">
-        <div className={styles['toasts']}>
+        <div className={toastsClassnames}>
           {transitions((style, toast) => (
             <Toast
               key={toast.key}

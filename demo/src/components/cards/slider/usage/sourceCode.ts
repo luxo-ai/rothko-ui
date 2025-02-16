@@ -1,8 +1,6 @@
 export const BASIC = `
-import React, { useState } from 'react';
-
 import { Slider, SliderHandle } from '@rothko-ui/react';
-import styles from './Testing.module.scss';
+import React, { useState } from 'react';
 
 const App = () => {
   const [value, setValue] = useState<number>(50);
@@ -16,9 +14,8 @@ const App = () => {
 export default App;
 `;
 export const DISABLED = `
-import React, { useState } from 'react';
-
 import { Slider } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [value, setValue] = useState<number>(25);
@@ -28,9 +25,8 @@ const App = () => {
 export default App;
 `;
 export const WITH_KIND = `
-import React, { useState } from 'react';
-
 import { Slider } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const App = () => {
   const [value, setValue] = useState<number>(100);

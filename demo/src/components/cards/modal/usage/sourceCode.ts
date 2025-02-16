@@ -1,7 +1,6 @@
 export const BASIC = `
-import React, { useState } from 'react';
-
 import { Button, Modal } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
@@ -23,9 +22,8 @@ const App = () => {
 export default App;
 `;
 export const BLUR = `
-import React, { useState } from 'react';
-
 import { Button, Modal } from '@rothko-ui/react';
+import React, { useState } from 'react';
 
 const CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Aliquam id diam maecenas ultricies mi eget.';
