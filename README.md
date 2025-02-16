@@ -27,12 +27,6 @@ Rothko-ui is built off of tailwindcss v4.x. To use rothko-ui first, follow the i
 Once you've gotten tailwind set-up, you can now install the rothko packages:
 
 ```bash
-npm install @rothko-ui/react @rothko-ui/icons @rothko-ui/tokens
-```
-
-or
-
-```bash
 yarn add @rothko-ui/react @rothko-ui/icons @rothko-ui/tokens
 ```
 
