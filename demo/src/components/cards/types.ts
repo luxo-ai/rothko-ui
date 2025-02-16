@@ -13,6 +13,7 @@ export type Section = {
   title?: string;
   subtitle?: string;
   body: Body;
+  subtext?: boolean;
 };
 
 // meta data for a prop
@@ -37,6 +38,7 @@ export type Body =
       language: Language;
       showLanguage?: boolean;
       showLineNumbers?: boolean;
+      hideBar?: boolean;
       text?: string;
       code: string;
     }
@@ -46,6 +48,7 @@ export type Body =
       text?: string;
       showLanguage?: boolean;
       showLineNumbers?: boolean;
+      hideBar?: boolean;
       code: {
         icon?: LazyExoticComponent<() => JSX.Element>;
         tag: string;

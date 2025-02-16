@@ -1,75 +1,143 @@
 import { lazy } from 'react';
 
 import type { CardCopy } from '../types';
-import { ROTHKO_PROVIDER } from './usage/sourceCode';
 
 const overviewCopy: CardCopy = {
   title: 'Overview',
   description:
-    'Welcome to Rothko UI, a cutting-edge and lightweight UI component library designed to elevate your web development projects. Rothko UI stands out from the crowd by offering a sleek and modern design aesthetic that aligns perfectly with the latest trends in UI/UX.',
+    'Welcome to rothko ui, a cutting-edge and lightweight UI component library designed to elevate your web development projects. rothko ui stands out from the crowd by offering a sleek and modern design aesthetic that aligns perfectly with the latest trends in UI/UX.',
   sections: [
     {
       title: 'Setup',
-      body: {
-        variant: 'h6',
-        title: 'Installing Rothko UI',
-        subtitle:
-          'Rothko UI is available on npm as `@rothko-ui/react`. This single package contains all Rothko UI components. The iconography library is separately available as `@rothko-ui/icons`.',
-        body: {
-          kind: 'code',
-          language: 'bash',
-          code: [
+      body: [
+        {
+          variant: 'h6',
+          title: 'Prerequisites',
+          body: 'Rothko-ui is built off of tailwindcss `v4.x`. To use rothko-ui, first follow the installation guide in the [official docs](https://tailwindcss.com/docs/installation/using-vite).',
+        },
+        {
+          variant: 'h6',
+          title: 'Installing Rothko UI',
+          subtitle:
+            'Rothko UI is available on npm as `@rothko-ui/react`. This single package contains all Rothko UI components. The iconography library is separately available as `@rothko-ui/icons`. Style tokens are available through `@rothko-ui/tokens`.',
+          body: {
+            kind: 'code',
+            language: 'bash',
+            code: [
+              {
+                icon: lazy(() => import('./NpmSvg')),
+                tag: 'npm',
+                text: 'npm install @rothko-ui/react @rothko-ui/icons @rothko-ui/tokens',
+              },
+              {
+                icon: lazy(() => import('./YarnSvg')),
+                tag: 'yarn',
+                text: 'yarn add @rothko-ui/react @rothko-ui/icons @rothko-ui/tokens',
+              },
+            ],
+          },
+        },
+        {
+          variant: 'h6',
+          title: 'Registering Source Files',
+          body: [
             {
-              icon: lazy(() => import('./NpmSvg')),
-              tag: 'npm',
-              text: 'npm install @rothko-ui/react @rothko-ui/icons',
+              variant: 'body',
+              body: "Wherever you've added `@import 'tailwindcss';` in your `globals.css` file, you'll need to register the rothko source files. You can do so using the `@source` directive.",
             },
             {
-              icon: lazy(() => import('./YarnSvg')),
-              tag: 'yarn',
-              text: 'yarn add @rothko-ui/react @rothko-ui/icons',
+              body: {
+                kind: 'code',
+                language: 'css',
+                hideBar: true,
+                showLanguage: false,
+                // showLineNumbers: true,
+                code: ["@import 'tailwindcss';", "@source '../node_modules/@rothko-ui';"].join(
+                  '\n'
+                ),
+              },
+            },
+            {
+              variant: 'body',
+              body: 'For more information on registering source files see the tailwindcss [docs](https://tailwindcss.com/docs/detecting-classes-in-source-files#explicitly-registering-sources).',
+              subtext: true,
             },
           ],
         },
-      },
-    },
-    {
-      title: 'Features',
-      body: [
         {
-          variant: 'body',
-          title: 'Modern and Minimalist Design',
-          body: "Rothko UI's default styling reflects the contemporary design landscape, featuring cleaner lines and a minimalist approach. You can create sleek and sophisticated interfaces that effortlessly align with the latest design trends. The library places a strong emphasis on component design that feels natural for mobile or tablet devices, ensuring a seamless user experience across the modern web.",
-        },
-        {
-          variant: 'body',
-          title: 'Lightweight Package',
-          body: 'Rothko UI is designed with efficiency in mind. The library offers a lightweight package, ensuring fast loading times and optimal performance for your applications. You can enjoy the benefits of a robust UI component library without sacrificing speed or resource consumption.',
-        },
-        {
-          variant: 'body',
-          title: 'Strong Customization',
-          body: "Rothko UI provides extensive customization options to tailor the components to your project's specific needs. From colors and typography to layout and interaction, you have the power to create a unique and personalized UI. The library empowers developers to shape their applications according to their vision.",
+          variant: 'h6',
+          title: 'Adding Theme Tokens',
+          subtitle: 'You will need to add the theme tokens you installed in the first step.',
+          body: [
+            {
+              body: {
+                kind: 'code',
+                language: 'css',
+                hideBar: true,
+                showLanguage: false,
+                // showLineNumbers: true,
+                code: [
+                  "@import 'tailwindcss';",
+                  "@source '../node_modules/@rothko-ui';",
+                  "@import '../node_modules/@rothko-ui/tokens/index.css';",
+                ].join('\n'),
+              },
+            },
+          ],
         },
       ],
     },
     {
-      title: 'Rothko Provider',
+      title: 'Usage',
       subtitle:
-        'To utilize the full capabilities of Rothko-UI components, it is important to wrap your main app with the Rothko-UI Context Provider. This context provider ensures that the necessary configuration and state are accessible throughout your application.',
+        'After setting up you `global.css` file, you can now import and use the components:',
       body: {
         kind: 'code',
-        code: ROTHKO_PROVIDER,
         language: 'jsx',
+        showLanguage: false,
+        code: [
+          "import { Button } from '@rothko-ui/react';",
+          '',
+          'function MyComponent() {',
+          '  return <Button>Click Me</Button>;',
+          '}',
+        ].join('\n'),
       },
     },
     {
-      title: 'SSR',
-      body: "Rothko UI uses [styled-components](https://styled-components.com/) to style its components. If you are using Rothko UI in a server-side rendered app, you will need to ensure that the style sheets are generated correctly. For [Next.js](https://nextjs.org/) apps you'll need to use `ServerStyleSheet`.",
+      title: 'Philosophy',
+      body: 'Compound components enhance UI library design by pairing a parent component with its children to create reusable, yet customizable, functional units. This pattern allows for implicit state management and a more expressive API, while also exposing the individual building blocks so users can style and arrange them as needed. Learn more about this powerful technique [here](https://kentcdodds.com/blog/compound-components-with-react-hooks).',
     },
     {
+      title: 'SSR / Next.js',
+      subtitle:
+        "In Next.js with Server-Side Rendering (SSR), components that utilize React Context from rothko-ui require the `'use client'` directive. This is because React Context relies on client-side rendering and is not supported in SSR.",
+      body: {
+        kind: 'code',
+        language: 'jsx',
+        code: [
+          "'use client';",
+          "import { Accordion, AccordionPanel } from '@rothko-ui/react';",
+          '',
+          'export default function MyComponent() { ',
+          '  return (',
+          '    <Accordion>',
+          '      <AccordionPanel label="My Label 1">',
+          '        Content 1',
+          '      </AccordionPanel>',
+          '      <AccordionPanel label="My Label 2">',
+          '        Content 2',
+          '      </AccordionPanel>',
+          '    </Accordion>',
+          '  );',
+          '}',
+        ].join('\n'),
+      },
+    },
+    {
+      variant: 'h4',
       title: 'Next Steps',
-      body: 'Check out the [theming](/theming) section, to better understand how to customize Rothko UI to your needs.',
+      body: 'Check out the [theming](/theming) section, to better understand how to customize rothko ui to your needs.',
     },
   ],
 };

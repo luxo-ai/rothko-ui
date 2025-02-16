@@ -52,7 +52,7 @@ const Navigation = () => {
             <FlexItem>
               <NextLink href="/">
                 <Flex cursor="pointer" alignItems="end" columnGap="0.25rem">
-                  <Heading5>Rothko UI</Heading5>
+                  <Heading5>rothko ui</Heading5>
                 </Flex>
               </NextLink>
             </FlexItem>

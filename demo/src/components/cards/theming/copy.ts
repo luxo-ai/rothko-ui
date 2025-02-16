@@ -5,7 +5,7 @@ import { COMPONENT_OVERRIDE, SEMANTIC_OVERRIDE, TYPOGRAPHY_OVERRIDE } from './us
 const themeCopy: CardCopy = {
   title: 'Theming Guide',
   description:
-    'Customize and personalize your Rothko UI components with ease using our powerful theming capabilities. Take control of the visual style, colors, typography, and more to create a cohesive and branded experience for your applications.',
+    'Customize and personalize your rothko ui components with ease using our powerful theming capabilities. Take control of the visual style, colors, typography, and more to create a cohesive and branded experience for your applications.',
   sections: [
     {
       variant: 'h5',

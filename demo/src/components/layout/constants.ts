@@ -4,7 +4,7 @@ import type { NavigationSection, NavigationSectionWithoutTo } from './types';
 
 const GETTING_STARTED: readonly NavigationSectionWithoutTo[] = [
   { label: 'Overview' },
-  { label: 'Theming' },
+  //  { label: 'Theming' },
   { label: 'Typography' },
   { label: 'Icons' },
 ];

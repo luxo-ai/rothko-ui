@@ -50,7 +50,7 @@ const Card = ({ children, copy, codeUrl }: CardProps) => {
       {sections &&
         sections.map((section, idx) => {
           const sectionKey = section.title || `${title}_${idx}`;
-          return <Section sectionKey={sectionKey} key={sectionKey} section={section} />;
+          return <Section depth={1} sectionKey={sectionKey} key={sectionKey} section={section} />;
         })}
       {children && <>{children}</>}
     </div>
@@ -58,18 +58,19 @@ const Card = ({ children, copy, codeUrl }: CardProps) => {
 };
 
 type SectionProps = {
+  depth: number;
   sectionKey: string;
   section: SectionType;
 };
 
-const Section = ({ sectionKey, section }: SectionProps) => {
+const Section = ({ sectionKey, section, depth }: SectionProps) => {
   const { variant: headerVariant = 'h3', title, subtitle, body } = section;
 
   const Body = ({ body }: { body: BodyType }) => {
     // string
     if (typeof body === 'string') {
       return (
-        <div style={{ marginTop: '0.5rem' }}>
+        <div style={{ marginTop: section.subtext ? undefined : '0.5rem' }}>
           <Markdown>{body}</Markdown>
         </div>
       );
@@ -121,10 +122,17 @@ const Section = ({ sectionKey, section }: SectionProps) => {
     if (!('kind' in body)) {
       const bodyArray = (Array.isArray(body) ? body : [body]) as SectionType[];
       return (
-        <Flex marginTop="1rem" flexDirection="column" rowGap="1.75rem">
+        <Flex marginTop="1rem" flexDirection="column" rowGap={`calc(2.875rem / ${depth})`}>
           {bodyArray.filter(Boolean).map((item, idx) => {
             const subSectionKey = item.title || `${sectionKey}_${idx}`;
-            return <Section sectionKey={subSectionKey} key={subSectionKey} section={item} />;
+            return (
+              <Section
+                depth={depth + 1}
+                sectionKey={subSectionKey}
+                key={subSectionKey}
+                section={item}
+              />
+            );
           })}
         </Flex>
       );
@@ -145,12 +153,13 @@ const Section = ({ sectionKey, section }: SectionProps) => {
           )}
           <Code
             marginTop="1rem"
-            maxWidth={!['jsx', 'json'].includes(body.language) ? '28rem' : undefined}
+            maxWidth={!['jsx', 'json', 'css'].includes(body.language) ? '28rem' : undefined}
             maxHeight={body.language !== 'jsx' ? '25rem' : undefined}
             language={body.language}
-            displayLanguage={body.language !== 'jsx'}
-            displayLineNumbers={body.language === 'jsx'}
+            displayLanguage={body.showLanguage !== false && body.language !== 'jsx'}
+            displayLineNumbers={body.language === 'jsx' || body.showLineNumbers}
             sourceCode={body.code}
+            hideBar={body.hideBar}
           />
         </>
       );
@@ -160,7 +169,7 @@ const Section = ({ sectionKey, section }: SectionProps) => {
       return (
         <>
           {body.text && (
-            <div style={{ marginTop: '0.5rem', marginBottom: '1rem' }}>
+            <div style={{ marginTop: '0.5rem', marginBottom: '1.5rem' }}>
               <Markdown>{body.text}</Markdown>
             </div>
           )}
@@ -168,18 +177,19 @@ const Section = ({ sectionKey, section }: SectionProps) => {
             {body.code.map(({ tag, text, icon: Icon }) => (
               <Tab
                 key={text}
-                style={{ margin: '1rem 0 1rem 0' }}
+                style={{ margin: '1rem 0 0.125rem 0' }}
                 leftIcon={Icon && <Icon />}
                 title={tag}
                 $key={text}
               >
                 <Code
-                  maxWidth={!['jsx', 'json'].includes(body.language) ? '28rem' : undefined}
+                  maxWidth={!['jsx', 'json', 'css'].includes(body.language) ? '28rem' : undefined}
                   maxHeight={body.language !== 'jsx' ? '25rem' : undefined}
                   language={body.language}
-                  displayLanguage={body.language !== 'jsx'}
-                  displayLineNumbers={body.language === 'jsx'}
+                  displayLanguage={body.showLanguage !== false && body.language !== 'jsx'}
+                  displayLineNumbers={body.language === 'jsx' || body.showLineNumbers}
                   sourceCode={text}
+                  hideBar={body.hideBar}
                 />
               </Tab>
             ))}
@@ -207,7 +217,9 @@ const Section = ({ sectionKey, section }: SectionProps) => {
           </Link>
         </Heading>
       )}
-      {title && headerVariant === 'body' && <Paragraph variant="bold">{title}</Paragraph>}
+      {title && headerVariant === 'body' && (
+        <Paragraph style={{ color: '#6a6a6a' }}>{title}</Paragraph>
+      )}
       {subtitle && (
         <div style={{ marginTop: '0.5rem', marginBottom: '1rem' }}>
           <Markdown>{subtitle}</Markdown>

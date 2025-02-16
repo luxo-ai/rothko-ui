@@ -31,7 +31,7 @@ const Markdown = (props: { children: string }) => (
           </LinkButton>
         </Link>
       ),
-      code: ({ children }) => <Code>{children}</Code>,
+      code: ({ children }) => <Code style={{ fontSize: '0.875rem' }}>{children}</Code>,
     }}
   >
     {props.children}

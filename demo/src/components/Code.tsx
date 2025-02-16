@@ -7,7 +7,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import { PhantomButton } from './button';
 import useTheme from '../hooks/useTheme';
 
-export type Language = 'bash' | 'jsx' | 'json' | 'text' | 'typescript';
+export type Language = 'bash' | 'jsx' | 'json' | 'text' | 'typescript' | 'css';
 
 const THEMES = {
   jetwave: {
@@ -22,6 +22,7 @@ const THEMES = {
 
 type CodeProps = React.CSSProperties & {
   sourceCode: string;
+  hideBar?: boolean;
   displayLanguage?: boolean;
   displayLineNumbers?: boolean;
   language: Language;
@@ -31,6 +32,7 @@ type CodeProps = React.CSSProperties & {
 export const Code = ({
   sourceCode,
   language,
+  hideBar,
   displayLanguage,
   displayLineNumbers,
   themeOverride,
@@ -48,41 +50,45 @@ export const Code = ({
       >
         {({ style, tokens, getLineProps, getTokenProps }) => (
           <>
-            <Flex
-              alignItems="center"
-              justifyContent="space-between"
-              padding="0.5rem 1rem"
-              backgroundColor={style.backgroundColor}
-            >
-              {displayLanguage && (
-                <Paragraph size="xs" style={{ color: style.color }}>
-                  {language}
-                </Paragraph>
-              )}
-              <ToasterConsumer>
-                {({ addToast }) => (
-                  <CopyToClipboard
-                    text={sourceCode}
-                    onCopy={() => addToast({ content: 'Added to clipboard!', withLife: true })}
-                  >
-                    <PhantomButton>
-                      <Flex gap="0.25rem">
-                        <CopyOutline fill={style.color} width="1.125rem" height="1.125rem" />
-                        <Paragraph size="xs" variant="bold" style={{ color: style.color }}>
-                          Copy
-                        </Paragraph>
-                      </Flex>
-                    </PhantomButton>
-                  </CopyToClipboard>
+            {!hideBar && (
+              <Flex
+                alignItems="center"
+                justifyContent="space-between"
+                padding="0.5rem 1rem"
+                backgroundColor={style.backgroundColor}
+              >
+                {displayLanguage ? (
+                  <Paragraph size="xs" style={{ color: style.color }}>
+                    {language}
+                  </Paragraph>
+                ) : (
+                  <div />
                 )}
-              </ToasterConsumer>
-            </Flex>
+                <ToasterConsumer>
+                  {({ addToast }) => (
+                    <CopyToClipboard
+                      text={sourceCode}
+                      onCopy={() => addToast({ content: 'Added to clipboard!', withLife: true })}
+                    >
+                      <PhantomButton>
+                        <Flex gap="0.25rem">
+                          <CopyOutline fill={style.color} width="1.125rem" height="1.125rem" />
+                          <Paragraph size="xs" variant="bold" style={{ color: style.color }}>
+                            Copy
+                          </Paragraph>
+                        </Flex>
+                      </PhantomButton>
+                    </CopyToClipboard>
+                  )}
+                </ToasterConsumer>
+              </Flex>
+            )}
             <pre
               style={{
                 ...style,
                 ...containerStyle,
                 margin: '0.125rem 0',
-                padding: '0.5rem 1rem',
+                padding: hideBar ? '1rem' : '0.5rem 1rem',
                 //  overflow: 'scroll',
                 overflow: 'auto',
               }}
