@@ -50,7 +50,6 @@
     "build:dev": "NODE_ENV=dev rollup --config --watch",
     "generate:scss": "typed-scss-modules src --nameFormat none --exportType default",
     "prebuild": "rimraf dist",
-    "lint": "eslint ./src --ext .js,.ts,.jsx,.tsx",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
