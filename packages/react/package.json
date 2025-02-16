@@ -22,7 +22,7 @@
     "build:dev": "microbundle watch --no-compress --format modern",
     "build": "microbundle --format modern --no-sourcemap",
     "prebuild": "rimraf dist",
-    "postbuild": "mv dist/components.modern.js dist/index.mjs",
+    "postbuild": "mv dist/react.modern.js dist/index.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
