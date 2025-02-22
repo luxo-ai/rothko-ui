@@ -19,6 +19,7 @@ const DropdownContainer = React.forwardRef<HTMLDivElement, DropdownContainerProp
       'text-(--rothko-input-foreground)',
       'rothko-font-regular',
       'rothko-paragraph-size-s',
+      'sm:rothko-paragraph-size-m',
       'bg-(--rothko-input-background)',
       'rounded-(--rothko-input-border-radius)',
       error && 'border-(--rothko-danger)', // && !focus

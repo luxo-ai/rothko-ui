@@ -15,6 +15,7 @@ const DefaultRenderOption = ({ option, className }: DefaultRenderOptionProps) =>
     'rothko-color-body',
     'rothko-font-regular',
     'rothko-paragraph-size-s',
+    'sm:rothko-paragraph-size-m',
     className
   );
 
