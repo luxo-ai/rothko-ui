@@ -37,8 +37,10 @@ In you `globals.css` file, you'll need to register the rothko source files. You 
 
 ```css
 @import 'tailwindcss';
-@source '../node_modules/@rothko-ui';
+@source '../../node_modules/@rothko-ui';
 ```
+
+**Note**: Depending on the structure of your project, `node_modules` may be located in a different location.
 
 For more information on registering source files see the tailwindcss [docs](https://tailwindcss.com/docs/detecting-classes-in-source-files#explicitly-registering-sources).
 
@@ -48,8 +50,8 @@ You'll then need to add the theme tokens you installed in first step.
 
 ```css
 @import 'tailwindcss';
-@source '../node_modules/@rothko-ui/react';
-@import '../node_modules/@rothko-ui/tokens/index.css';
+@source "../../node_modules/@rothko-ui";
+@import '@rothko-ui/tokens/style.css';
 ```
 
 ## Basic Component Usage

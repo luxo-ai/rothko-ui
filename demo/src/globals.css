@@ -28,6 +28,11 @@ pre {
   font-family: revert;
 }
 
+/* for code snippets */
+.non-selectable {
+  user-select: none;
+}
+
 html,
 body {
   padding: 0;

@@ -1,7 +1,7 @@
 import { CopyOutline } from '@rothko-ui/icons';
 import { Flex, ToasterConsumer, Paragraph } from '@rothko-ui/react';
 import { Highlight, themes } from 'prism-react-renderer';
-import React from 'react';
+import React, { useEffect } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 import { PhantomButton } from './button';
@@ -41,6 +41,36 @@ export const Code = ({
   const { theme: mode } = useTheme();
   const defaultTheme = language === 'jsx' ? 'nightOwl' : 'jetwave';
   const theme = THEMES[themeOverride || defaultTheme];
+
+  useEffect(() => {
+    const handleCopy = (e: ClipboardEvent) => {
+      const selection = window.getSelection();
+      if (!selection) return;
+
+      const range = selection.getRangeAt(0);
+      const clonedSelection = range.cloneContents();
+
+      // Remove non-selectable spans
+      clonedSelection.querySelectorAll('.non-selectable').forEach(el => el.remove());
+
+      // Convert selection to plain text & HTML
+      const tempDiv = document.createElement('pre');
+      tempDiv.appendChild(clonedSelection);
+      const modifiedText = tempDiv.innerText || tempDiv.textContent || ' '; // Plain text
+      const modifiedHtml = tempDiv.innerHTML; // Formatted HTML
+
+      // Override clipboard content
+      e.clipboardData?.setData('text/plain', modifiedText);
+      e.clipboardData?.setData('text/html', modifiedHtml);
+      e.preventDefault();
+    };
+
+    document.addEventListener('copy', handleCopy);
+    return () => {
+      document.removeEventListener('copy', handleCopy);
+    };
+  }, []);
+
   return (
     <div style={{ maxWidth: containerStyle.maxWidth, width: containerStyle.width }}>
       <Highlight
@@ -96,7 +126,11 @@ export const Code = ({
               {tokens.map((line, i) => (
                 // eslint-disable-next-line react/jsx-props-no-spreading, react/no-array-index-key
                 <div key={i} {...getLineProps({ line })}>
-                  {displayLineNumbers && <span>{i + 1}&nbsp;</span>}
+                  {displayLineNumbers && (
+                    <span className="non-selectable">
+                      {i + 1}&nbsp;{i < 9 ? ' ' : ''}
+                    </span>
+                  )}
                   {line.map((token, key) => (
                     // eslint-disable-next-line react/jsx-props-no-spreading, react/no-array-index-key
                     <span key={key} {...getTokenProps({ token })} />

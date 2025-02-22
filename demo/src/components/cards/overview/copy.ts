@@ -52,10 +52,9 @@ const overviewCopy: CardCopy = {
                 hideBar: true,
                 showLanguage: false,
                 // showLineNumbers: true,
-                code: [
-                  "@import 'tailwindcss';",
-                  "@source '../node_modules/@rothko-ui/react';",
-                ].join('\n'),
+                code: ['@import "tailwindcss";', '@source "../../node_modules/@rothko-ui";'].join(
+                  '\n'
+                ),
               },
             },
             {
@@ -77,10 +76,11 @@ const overviewCopy: CardCopy = {
                 hideBar: true,
                 showLanguage: false,
                 // showLineNumbers: true,
+
                 code: [
-                  "@import 'tailwindcss';",
-                  "@source '../node_modules/@rothko-ui/react';",
-                  "@import '../node_modules/@rothko-ui/tokens/index.css';",
+                  '@import "tailwindcss";',
+                  '@source "../../node_modules/@rothko-ui";',
+                  '@import "@rothko-ui/tokens/style.css";',
                 ].join('\n'),
               },
             },
