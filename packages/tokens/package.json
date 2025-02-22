@@ -13,8 +13,8 @@
   "license": "MIT",
   "author": "Luis Serazo <luxo.ai@proton.me>",
   "description": "Style tokens for Rothko UI",
-  "source": "src/index.ts",
-  "styles": "build/tokens.css",
+  "source": "./src/index.ts",
+  "styles": "./build/tokens.css",
   "scripts": {
     "prebuild": "yarn clean",
     "build": "node ./src/build.js",
@@ -28,10 +28,7 @@
     "style-dictionary": "^3.9.2"
   },
   "exports": {
-    ".": {
-      "import": "./build/tokens.css",
-      "require": "./build/tokens.css"
-    }
+    "./style.css": "./build/tokens.css"
   },
   "files": [
     "build/tokens.css",

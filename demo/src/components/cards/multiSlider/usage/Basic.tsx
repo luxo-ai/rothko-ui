@@ -6,7 +6,6 @@ const App = () => {
   return (
     <MultiSlider kind="primary" value={value} onChange={setValue} min={0} max={100}>
       <SliderHandle />
-      <SliderHandle />
     </MultiSlider>
   );
 };
