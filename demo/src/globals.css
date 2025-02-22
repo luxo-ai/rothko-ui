@@ -67,6 +67,7 @@ body {
   --rothko-font-family-code: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+:root,
 :root .light {
   --demo-background: #fff;
   --demo-nav-background: rgba(255, 255, 255, 0.75);

@@ -17,7 +17,7 @@ const generateThemeCssStyleDictionaryConfig = theme => ({
         {
           destination: `${theme}-variables.css`,
           format: 'css/variables-themed',
-          options: { className: theme },
+          options: { className: theme, isDefault: theme === 'light' },
         },
       ],
     },
@@ -68,25 +68,39 @@ const createSpaces = numSpaces => {
 
 const rothkoCssRootFormatter = ({ dictionary, options, file }) => {
   const header = styledDictionary.formatHelpers.fileHeader({ file });
-  const { className } = options;
+
+  const classNameOpt = options.className;
+  const includeRoot = Boolean(options.isDefault || !classNameOpt);
 
   const cssVariables = dictionary.allProperties.map(token => {
     return `--rothko-${removeDefaultSuffix(token.name)}: ${token.value};`;
   });
 
-  const styleClassName = compact([':root', className && `.${className}`]).join(' ');
-  const styleContent = `${createSpaces(2)}${cssVariables.join(`\n${createSpaces(2)}`)}`;
+  const classNames = compact([
+    includeRoot && ':root',
+    classNameOpt && `:root .${classNameOpt}`,
+  ]).join(', ');
 
-  return `${header}${styleClassName} {\n${styleContent}\n}`;
+  const styleContent = `${createSpaces(2)}${cssVariables.join(`\n${createSpaces(2)}`)}`;
+  return `${header}${classNames} {\n${styleContent}\n}`;
 };
 
 styledDictionary.registerFormat({
   name: 'css/variables-themed',
   formatter: function (args) {
     const themedVariablesFormat = rothkoCssRootFormatter(args);
+
+    const classNameOpt = args.options.className;
+    const includeRoot = Boolean(args.options.isDefault || !classNameOpt);
+
     const fill = 'fill: var(--rothko-icon-background, #000)';
-    const className = args.options.className ? `:root .${args.options.className}` : ':root';
-    return `${themedVariablesFormat}\n\n${className} {\n  ${fill}\n}`;
+
+    const classNames = compact([
+      includeRoot && ':root',
+      classNameOpt && `:root .${classNameOpt}`,
+    ]).join(', ');
+
+    return `${themedVariablesFormat}\n\n${classNames} {\n  ${fill}\n}`;
   },
 });
 
