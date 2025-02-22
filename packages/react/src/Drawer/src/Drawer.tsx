@@ -2,14 +2,14 @@ import { animated, useTransition } from '@react-spring/web';
 import {
   classes,
   isString,
-  ShadedBackdrop,
+  Backdrop,
   DomPortal,
   BODY_SCROLL_LOCK_IGNORE_ID,
   disableBodyScroll,
   enableBodyScroll,
   CloseButton,
 } from '@rothko-ui/system';
-import type { WithAria } from '@rothko-ui/system';
+import type { BackdropVariant, WithAria } from '@rothko-ui/system';
 import React, { useEffect, useRef } from 'react';
 
 import DrawerBody from './DrawerBody';
@@ -49,11 +49,10 @@ type DrawerProps = {
    */
   style?: React.CSSProperties;
   /**
-   * Determines whether the drawer is blurred.
-   * @type {boolean}
-   * @default false
+   * Variant of the backdrop.
+   * @type {BackdropVariant}
    */
-  blur?: boolean;
+  variant?: BackdropVariant;
 };
 
 const Drawer = ({
@@ -66,7 +65,7 @@ const Drawer = ({
   onClose,
   open: isOpen = false,
   style: styleProp = {},
-  blur,
+  variant,
 }: WithAria<DrawerProps, AriaAttributes>) => {
   const drawerRef = useRef<HTMLDivElement | null>(null);
 
@@ -135,13 +134,14 @@ const Drawer = ({
     'rothko-color-body',
     'rothko-font-regular',
     'rothko-paragraph-size-default',
+    variant === 'none' && 'shadow-lg',
     className
   );
 
   return (
     <DrawerContext.Provider value={{ isOpen, closeDrawer }}>
       <DomPortal wrapperId="rothko-drawer-portal">
-        <ShadedBackdrop blur={blur} show={isOpen} onClick={onBackdropClick}>
+        <Backdrop variant={variant} show={isOpen} onClick={onBackdropClick}>
           {transition(
             (style, item) =>
               item && (
@@ -170,7 +170,7 @@ const Drawer = ({
                 </animated.div>
               )
           )}
-        </ShadedBackdrop>
+        </Backdrop>
       </DomPortal>
     </DrawerContext.Provider>
   );

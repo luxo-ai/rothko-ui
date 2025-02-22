@@ -16,7 +16,7 @@ const App = () => {
       >
         Open
       </Button>
-      <Drawer blur open={open} onClose={() => setOpen(false)}>
+      <Drawer variant="blur" open={open} onClose={() => setOpen(false)}>
         {DRAWER_CONTENT}
       </Drawer>
     </>

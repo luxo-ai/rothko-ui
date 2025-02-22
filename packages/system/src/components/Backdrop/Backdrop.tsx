@@ -2,15 +2,17 @@ import React from 'react';
 
 import { classes } from '../../utils/classes';
 
-type ShadedBackdropProps = {
+export type BackdropVariant = 'shaded' | 'none' | 'blur';
+
+type BackdropProps = {
   /**
    * Whether to show the backdrop.
    */
   show?: boolean;
   /**
-   * Whether to blur the backdrop.
+   * The variant of the backdrop.
    */
-  blur?: boolean;
+  variant?: BackdropVariant;
   /**
    * The children to render.
    */
@@ -25,13 +27,13 @@ type ShadedBackdropProps = {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 };
 
-export const ShadedBackdrop = ({
+export const Backdrop = ({
   show,
-  blur,
+  variant = 'shaded',
   children,
   className,
   onClick,
-}: ShadedBackdropProps) => {
+}: BackdropProps) => {
   const clz = classes(
     'select-none',
     'fixed',
@@ -39,10 +41,10 @@ export const ShadedBackdrop = ({
     'opacity-0',
     'transition-opacity duration-[80ms] ease-in-out',
     show && 'opacity-100',
-    show && 'bg-black/50',
+    show && (variant === 'shaded' || variant === 'blur') && 'bg-black/50',
     show && 'inset-0',
     show && 'z-[999999]',
-    blur && show && 'backdrop-blur-[6px]', // make token
+    variant === 'blur' && show && 'backdrop-blur-[4px]', // make token
     className
   );
 

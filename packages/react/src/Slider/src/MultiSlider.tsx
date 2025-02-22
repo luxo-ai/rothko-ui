@@ -58,7 +58,7 @@ type MultiSliderProps = {
   /**
    * The slider handle.
    */
-  children?: ReadonlyArray<React.ReactElement<SliderHandleProps>>;
+  children?: React.ReactElement<SliderHandleProps>;
 };
 
 export const MultiSlider = ({
@@ -84,18 +84,18 @@ export const MultiSlider = ({
   const getOffset = useMemo(() => getOffsetFactory({ min, max }), [min, max]);
   const [lower, upper] = useMemo(() => (value ? value : [min, max]), [value, min, max]);
 
-  const [child1, child2] = useMemo(() => {
+  // validation
+  const childHandle = useMemo(() => {
     if (!children) {
-      return [null, null];
+      return null;
     }
-    if (React.Children.count(children) !== 2) {
-      throw new Error('MultiSlider requires exactly two children');
+    if (React.Children.count(children) !== 1) {
+      throw new Error('MultiSlider requires exactly one child');
     }
-    const [c1, c2] = React.Children.toArray(children);
-    if (!React.isValidElement(c1) || !React.isValidElement(c2)) {
-      throw new Error('MultiSlider requires children to be valid React elements');
+    if (!React.isValidElement(children)) {
+      throw new Error('MultiSlider requires child to be valid React element');
     }
-    return [c1, c2];
+    return children;
   }, [children]);
 
   return (
@@ -125,7 +125,7 @@ export const MultiSlider = ({
           onChange([v, upper]);
         }}
       >
-        {child1 ? child1 : <SliderHandle />}
+        {childHandle ? childHandle : <SliderHandle />}
       </SliderHandleInner>
       <SliderRange
         disabled={disabled}
@@ -147,7 +147,7 @@ export const MultiSlider = ({
           onChange([lower, v]);
         }}
       >
-        {child2 ? child2 : <SliderHandle />}
+        {childHandle ? childHandle : <SliderHandle />}
       </SliderHandleInner>
     </SliderTrack>
   );

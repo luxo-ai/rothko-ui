@@ -155,8 +155,8 @@ const Switch = ({
     !disabled && 'cursor-pointer',
     'user-select-none',
     'outline-none',
-    'w-[2.5rem]',
-    'h-[calc(1.25rem_+_2px)]',
+    'w-[2.25rem]',
+    'h-[calc(1.125rem_+_2px)]',
     'rounded-full',
     !selected && 'bg-(--rothko-switch-background)',
     'transition-colors duration-250 ease-in',
@@ -169,14 +169,15 @@ const Switch = ({
     'flex',
     'justify-center',
     'items-center',
-    'w-[1.25rem]',
-    'h-[1.25rem]',
+    'w-[1.125rem]',
+    'h-[1.125rem]',
+    'p-[0.125rem]',
     'my-0',
     'mx-[1px]',
     'rounded-full',
     'bg-(--rothko-switch-handle-background)',
     'transition-transform duration-[0.15s] ease-in-out',
-    selected && 'transform translate-x-[calc(1.25rem_-_2px)]'
+    selected && 'transform translate-x-[calc(1.125rem_-_2px)]'
   );
 
   return (

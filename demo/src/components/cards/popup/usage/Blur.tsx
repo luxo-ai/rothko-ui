@@ -16,7 +16,7 @@ const App = () => {
       >
         Open
       </Button>
-      <Popup blur open={open} onClose={() => setOpen(false)}>
+      <Popup variant="none" open={open} onClose={() => setOpen(false)}>
         {POPUP_CONTENT}
       </Popup>
     </>

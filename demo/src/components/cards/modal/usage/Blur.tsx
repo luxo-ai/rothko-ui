@@ -11,7 +11,7 @@ const App = () => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open</Button>
-      <Modal blur size="m" title={TITLE} open={open} onClose={() => setOpen(false)}>
+      <Modal variant="blur" size="m" title={TITLE} open={open} onClose={() => setOpen(false)}>
         {CONTENT}
       </Modal>
     </>

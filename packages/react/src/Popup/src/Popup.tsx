@@ -3,14 +3,14 @@ import {
   isString,
   classes,
   DomPortal,
-  ShadedBackdrop,
+  Backdrop,
   useId,
   BODY_SCROLL_LOCK_IGNORE_ID,
   disableBodyScroll,
   enableBodyScroll,
   CloseButton,
 } from '@rothko-ui/system';
-import type { WithAria } from '@rothko-ui/system';
+import type { BackdropVariant, WithAria } from '@rothko-ui/system';
 import React, { useEffect, useRef } from 'react';
 
 import PopupBody from './PopupBody';
@@ -51,11 +51,10 @@ type PopupProps = {
    */
   style?: React.CSSProperties;
   /**
-   * Determines whether the popup should blur the background.
-   * @type {boolean}
-   * @default false
+   * Variant of the backdrop.
+   * @type {BackdropVariant}
    */
-  blur?: boolean;
+  variant?: BackdropVariant;
 };
 
 const Popup = ({
@@ -68,7 +67,7 @@ const Popup = ({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   'aria-describedby': ariaDescribedBy,
-  blur,
+  variant,
 }: WithAria<PopupProps, AriaAttributes>) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
   const contentId = useId();
@@ -90,6 +89,7 @@ const Popup = ({
     'rothko-color-body',
     'rothko-font-regular',
     'rothko-paragraph-size-default',
+    variant === 'none' && 'shadow-[0_-4px_15px_rgba(0,_0,_0,_0.1)]',
     className
   );
 
@@ -151,7 +151,7 @@ const Popup = ({
 
   return (
     <DomPortal wrapperId="rothko-bottom-popup">
-      <ShadedBackdrop blur={blur} onClick={onBackdropClick} show={isOpen}>
+      <Backdrop variant={variant} onClick={onBackdropClick} show={isOpen}>
         {transition(
           (style, item) =>
             item && (
@@ -172,7 +172,7 @@ const Popup = ({
               </animated.div>
             )
         )}
-      </ShadedBackdrop>
+      </Backdrop>
     </DomPortal>
   );
 };

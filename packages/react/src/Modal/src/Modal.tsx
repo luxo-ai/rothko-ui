@@ -7,14 +7,14 @@ import {
   removeEvent,
   CloseButton,
   useId,
-  ShadedBackdrop,
+  Backdrop,
   DomPortal,
   classes,
   isString,
   getKeyCode,
   ListenableKeys,
 } from '@rothko-ui/system';
-import type { RothkoSize, WithAria } from '@rothko-ui/system';
+import type { BackdropVariant, RothkoSize, WithAria } from '@rothko-ui/system';
 import React, { useCallback, useEffect, useRef } from 'react';
 
 import ModalBody from './ModalBody';
@@ -66,11 +66,10 @@ type ModalProps = {
    */
   title?: string;
   /**
-   * Whether the modal should blur the background.
-   * @type {boolean}
-   * @default false
+   * Variant of the backdrop.
+   * @type {BackdropVariant}
    */
-  blur?: boolean;
+  variant?: BackdropVariant;
 };
 
 const modalPaddingSizeMap: Record<string, string> = {
@@ -98,7 +97,7 @@ const Modal = ({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   'aria-describedby': ariaDescribedBy,
-  blur,
+  variant,
   style: styleProp = {},
 }: WithAria<ModalProps, AriaAttributes>) => {
   const titleId = useId();
@@ -116,6 +115,7 @@ const Modal = ({
     'rothko-color-body',
     'rothko-font-regular',
     'rothko-paragraph-size-default',
+    variant === 'none' && 'shadow-lg',
     modalPaddingSizeMap[size],
     modalMaxWidthSizeMap[size],
     className
@@ -189,7 +189,7 @@ const Modal = ({
 
   return (
     <DomPortal wrapperId={`modal-portal-${size}`}>
-      <ShadedBackdrop className="p-3.5" blur={blur} show={isOpen} onClick={onBackdropClick}>
+      <Backdrop className="p-3.5" variant={variant} show={isOpen} onClick={onBackdropClick}>
         {transition(
           (style, item) =>
             item && (
@@ -217,7 +217,7 @@ const Modal = ({
               </animated.div>
             )
         )}
-      </ShadedBackdrop>
+      </Backdrop>
     </DomPortal>
   );
 };
