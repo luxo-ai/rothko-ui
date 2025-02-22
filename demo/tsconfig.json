@@ -40,5 +40,5 @@
     ".next/types/**/*.ts",
     "scripts/generateSource.js",
     "build/types/**/*.ts"
-  ]
+, "next.config.mjs"  ]
 }

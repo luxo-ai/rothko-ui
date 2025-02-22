@@ -1,13 +1,4 @@
-/** @type {import('next').NextConfig} */
-
-const withTM = require('next-transpile-modules')([
-  '@rothko-ui/icons',
-  '@rothko-ui/tokens',
-  '@rothko-ui/react',
-]);
-
-module.exports = {
-  ...withTM(),
+const nextConfig = {
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
   swcMinify: true,
   env: {
@@ -15,6 +6,9 @@ module.exports = {
     BASE_URL: process.env.BASE_URL,
     VERSION: process.env.VERSION,
   },
+  transpilePackages: ['@rothko-ui/icons', '@rothko-ui/tokens', '@rothko-ui/react'],
   // otherwise .next
   distDir: 'build',
 };
+
+export default nextConfig;

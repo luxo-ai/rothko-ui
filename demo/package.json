@@ -18,8 +18,8 @@
     "generate:scss": "typed-scss-modules src --nameFormat none --exportType default"
   },
   "dependencies": {
-    "@rothko-ui/react": "*",
     "@rothko-ui/icons": "*",
+    "@rothko-ui/react": "*",
     "@rothko-ui/tokens": "*",
     "@tailwindcss/postcss": "^4.0.4",
     "@types/cookie": "^0.5.1",
@@ -40,7 +40,6 @@
     "lodash.truncate": "^4.4.2",
     "mobile-detect": "^1.4.5",
     "next": "^14.2.3",
-    "next-transpile-modules": "^10.0.1",
     "path": "^0.12.7",
     "postcss": "^8.5.1",
     "prism-react-renderer": "^2.0.4",
