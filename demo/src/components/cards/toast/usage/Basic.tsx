@@ -1,7 +1,7 @@
 import { Button, useToaster } from '@rothko-ui/react';
 import React from 'react';
 
-const TOAST_DURATION = 40000000;
+const TOAST_DURATION = 4000;
 
 const App = () => {
   const toaster = useToaster();
