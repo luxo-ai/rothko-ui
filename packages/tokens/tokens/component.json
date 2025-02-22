@@ -10,5 +10,10 @@
     "borderRadius": {
       "value": "0.125rem"
     }
+  },
+  "input": {
+    "borderRadius": {
+      "value": "0.125rem"
+    }
   }
 }

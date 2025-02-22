@@ -2,7 +2,6 @@
 import React from 'react';
 
 import extractAriaProps from './extractAriaProps';
-import styles from './FlexItem.module.scss';
 import { classes } from '../utils/classes';
 
 type FlexProps = React.AriaAttributes &
@@ -29,7 +28,7 @@ const FlexItem = React.forwardRef<HTMLElement, FlexProps>((props, ref) => {
       onClick,
       onFocus,
       onBlur,
-      className: classes(className, styles['flex-item']),
+      className: classes(className, 'flex-1 shrink-0 basis-auto'),
       style,
       role,
     },

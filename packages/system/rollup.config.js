@@ -4,9 +4,7 @@ import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import { babel } from '@rollup/plugin-babel';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import postcss from 'rollup-plugin-postcss';
 import { visualizer } from 'rollup-plugin-visualizer';
-import autoprefixer from 'autoprefixer';
 
 const isDev = process.env.NODE_ENV === 'dev';
 
@@ -45,14 +43,6 @@ export default {
       declaration: true,
       outDir: 'dist',
       include: ['**/*.ts', '**/*.tsx', '**/*.d.ts', './declarations.d.ts'],
-    }),
-    postcss({
-      plugins: [autoprefixer()],
-      extract: false, // true,
-      modules: true,
-      minimize: true,
-      sourceMap: isDev,
-      use: ['sass'],
     }),
     babel({
       exclude: /\/node_modules\//,

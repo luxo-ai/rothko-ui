@@ -317,7 +317,6 @@ function SelectInner<V extends Value, T = undefined>({
         onKeyDown={onKeyDown}
         aria-labelledby={!ariaLabelledBy && label ? labelId : ariaLabelledBy}
         tabIndex={0}
-        className="rothko-color-body rothko-font-regular rothko-paragraph-size-default"
       >
         {!hasValue && <ItemText className="cursor-pointer opacity-75">{placeholder}</ItemText>}
         {!isNil(value) && isArray(value) && (

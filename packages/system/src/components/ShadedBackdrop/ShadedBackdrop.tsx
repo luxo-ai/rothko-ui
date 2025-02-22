@@ -1,6 +1,5 @@
 import React from 'react';
 
-import styles from './ShadedBackdrop.module.scss';
 import { classes } from '../../utils/classes';
 
 type ShadedBackdropProps = {
@@ -16,9 +15,13 @@ type ShadedBackdropProps = {
    * The children to render.
    */
   children?: React.ReactNode;
-  paddingH?: boolean;
-  paddingV?: boolean;
-
+  /**
+   * CSS class name(s).
+   */
+  className?: string;
+  /**
+   * Click event handler.
+   */
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 };
 
@@ -26,22 +29,25 @@ export const ShadedBackdrop = ({
   show,
   blur,
   children,
-  paddingH,
-  paddingV,
+  className,
   onClick,
 }: ShadedBackdropProps) => {
+  const clz = classes(
+    'select-none',
+    'fixed',
+    'flex',
+    'opacity-0',
+    'transition-opacity duration-[80ms] ease-in-out',
+    show && 'opacity-100',
+    show && 'bg-black/50',
+    show && 'inset-0',
+    show && 'z-[999999]',
+    blur && show && 'backdrop-blur-[6px]', // make token
+    className
+  );
+
   return (
-    <div
-      aria-hidden
-      className={classes(
-        styles['shaded-backdrop'],
-        show && styles['show'],
-        blur && styles['blur'],
-        paddingH && styles['padding-h'],
-        paddingV && styles['padding-v']
-      )}
-      onClick={onClick}
-    >
+    <div aria-hidden className={clz} onClick={onClick}>
       {children}
     </div>
   );

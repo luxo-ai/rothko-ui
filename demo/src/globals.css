@@ -19,6 +19,7 @@
 @source '../../node_modules/@rothko-ui/typography';
 @source '../../node_modules/@rothko-ui/slider';
 @source '../../node_modules/@rothko-ui/toaster';
+@source '../../node_modules/@rothko-ui/system';
 
 @import '../../node_modules/@rothko-ui/tokens/build/tokens.css';
 

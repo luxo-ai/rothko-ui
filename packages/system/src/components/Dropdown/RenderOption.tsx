@@ -1,10 +1,24 @@
 import React from 'react';
 
-import styles from './RenderOption.module.scss';
 import type { Option } from '../../types';
+import { classes } from '../../utils';
 
-const DefaultRenderOption = (props: { option: Pick<Option<unknown>, 'label'> }) => (
-  <span className={styles['default-render-option']}>{props.option.label}</span>
-);
+type DefaultRenderOptionProps = {
+  option: Pick<Option<unknown>, 'label'>;
+  className?: string;
+};
+
+const DefaultRenderOption = ({ option, className }: DefaultRenderOptionProps) => {
+  const clz = classes(
+    'm-0',
+    'select-none',
+    'rothko-color-body',
+    'rothko-font-regular',
+    'rothko-paragraph-size-s',
+    className
+  );
+
+  return <span className={clz}>{option.label}</span>;
+};
 
 export default DefaultRenderOption;

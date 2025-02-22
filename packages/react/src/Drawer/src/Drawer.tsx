@@ -141,7 +141,7 @@ const Drawer = ({
   return (
     <DrawerContext.Provider value={{ isOpen, closeDrawer }}>
       <DomPortal wrapperId="rothko-drawer-portal">
-        <ShadedBackdrop paddingH blur={blur} show={isOpen} onClick={onBackdropClick}>
+        <ShadedBackdrop blur={blur} show={isOpen} onClick={onBackdropClick}>
           {transition(
             (style, item) =>
               item && (

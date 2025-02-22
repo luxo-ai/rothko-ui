@@ -189,7 +189,7 @@ const Modal = ({
 
   return (
     <DomPortal wrapperId={`modal-portal-${size}`}>
-      <ShadedBackdrop paddingH paddingV blur={blur} show={isOpen} onClick={onBackdropClick}>
+      <ShadedBackdrop className="p-3.5" blur={blur} show={isOpen} onClick={onBackdropClick}>
         {transition(
           (style, item) =>
             item && (

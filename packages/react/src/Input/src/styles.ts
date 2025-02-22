@@ -13,7 +13,7 @@ const nonDynamicClasses = [
   'outline-none',
   // ===
   'bg-(--rothko-input-background)',
-  'rounded-[0.125rem]', // make token
+  'rounded-(--rothko-input-border-radius)',
   'py-[0.5rem]', // make token
   'px-[0.75rem]', // make token
 ].join(' ');

@@ -295,10 +295,7 @@ const Button = ({
             style={{
               height: childrenHeight ? childrenHeight - 4 : 16,
               width: childrenHeight ? childrenHeight - 4 : 16,
-              margin: 'auto',
             }}
-            color="inherit"
-            size="s"
           />
         ) : (
           <span>{children}</span>

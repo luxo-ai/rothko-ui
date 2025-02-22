@@ -1,34 +1,30 @@
 import React from 'react';
 
-import styles from './Spinner.module.scss';
-import type { RothkoSize } from '../../types';
-import { scopedClasses } from '../../utils/classes';
-
-const sc = scopedClasses(styles);
-
 type SimpleInlineSpinnerProps = {
-  color?: string;
-  size?: RothkoSize;
-  style?: Omit<
-    React.CSSProperties,
-    'borderTopColor' | 'borderBottomColor' | 'borderRightColor' | 'borderLeftColor'
-  >;
+  width?: number | string;
+  height?: number | string;
+  style?: React.CSSProperties;
 };
 
-export const InlineSpinner = ({ size = 'm', style = {}, color }: SimpleInlineSpinnerProps) => {
-  const borderColorStyle = color
-    ? {
-        borderTopColor: color,
-        borderRightColor: color,
-        borderBottomColor: color,
-      }
-    : {};
+const clz = [
+  'inline-block',
+  'rounded-full',
+  'indent-[-9999em]',
+  'border-solid',
+  'border-inherit border-l-transparent',
+  'animate-spin',
+  'w-[0.875rem]',
+  'h-[0.875rem]',
+  'border-[0.125rem]',
+].join(' ');
+
+export const InlineSpinner = ({ width, height, style = {} }: SimpleInlineSpinnerProps) => {
   return (
     <span
       aria-label="Loading"
       role="progressbar"
-      className={sc('inline-spinner', `inline-spinner--${size}`)}
-      style={{ ...style, ...borderColorStyle }}
+      className={clz}
+      style={{ ...style, width, height }}
     >
       loading...
     </span>

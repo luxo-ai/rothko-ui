@@ -1,9 +1,0 @@
-@use '../../../../styles/variables' as variables;
-
-.default-render-option {
-  margin: 0;
-  user-select: none;
-  color: variables.$bodyColor;
-  font-size: variables.$bodySmallFontSize;
-  line-height: variables.$bodySmallLineHeight;
-}

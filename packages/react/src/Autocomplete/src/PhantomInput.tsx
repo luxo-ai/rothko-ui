@@ -11,9 +11,6 @@ type PhantomInputProps = {
 
 const classNames = classes(
   'ios-tap-highlight-color-transparent',
-  'rothko-color-body',
-  'rothko-font-regular',
-  'rothko-paragraph-size-default',
   'appearance-none',
   'bg-transparent',
   'border-none',

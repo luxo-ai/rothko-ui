@@ -2,7 +2,6 @@
 import React from 'react';
 
 import extractAriaProps from './extractAriaProps';
-import styles from './Grid.module.scss';
 import { classes } from '../utils/classes';
 
 type GridProps = React.AriaAttributes &
@@ -29,7 +28,7 @@ const Grid = React.forwardRef<HTMLElement, GridProps>((props, ref) => {
       onClick,
       onFocus,
       onBlur,
-      className: classes(className, styles.grid),
+      className: classes(className, 'grid'),
       style,
       role,
     },
