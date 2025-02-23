@@ -34,7 +34,7 @@ const PaddedNavLayout = ({ children, selected }: LayoutProps) => {
         <Flex marginBottom="0.5rem" flexDirection="column" alignItems="center">
           <Paragraph>Built in NYC</Paragraph>
           <Paragraph size="s" variant="light">
-            © {new Date().getFullYear()} Rothko-UI
+            © {new Date().getFullYear()} rothko ui
           </Paragraph>
         </Flex>
         <Flex columnGap="1rem" justifyContent="center" alignItems="center">

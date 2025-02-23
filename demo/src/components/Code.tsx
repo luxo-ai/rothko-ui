@@ -1,4 +1,4 @@
-import { CopyOutline, Gift } from '@rothko-ui/icons';
+import { CopyOutline } from '@rothko-ui/icons';
 import { Flex, ToasterConsumer, Paragraph } from '@rothko-ui/react';
 import { Highlight, themes } from 'prism-react-renderer';
 import React, { useEffect } from 'react';
@@ -170,6 +170,8 @@ export const Code = ({
                 width: '100%',
                 gap: '0.5rem',
                 alignItems: 'center',
+                overflowY: 'hidden',
+                height: '100%',
               }}
             >
               <pre style={{ flexDirection: 'column', display: 'inline-flex', overflowX: 'auto' }}>
