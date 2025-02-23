@@ -29,7 +29,7 @@
   "dependencies": {
     "@react-spring/web": "^9.5.2",
     "@rothko-ui/icons": "^1.2.1",
-    "@rothko-ui/system": "^1.0.0"
+    "@rothko-ui/system": "^1.0.1"
   },
   "peerDependencies": {
     "react": "^18.0.0",

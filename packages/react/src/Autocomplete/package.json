@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@rothko-ui/menu": "^1.0.0",
-    "@rothko-ui/system": "^1.0.0",
+    "@rothko-ui/system": "^1.0.1",
     "@rothko-ui/typography": "^1.0.0"
   },
   "peerDependencies": {

@@ -29,7 +29,7 @@
     "@rothko-ui/icons": "^1.2.1",
     "@rothko-ui/link": "^1.0.0",
     "@rothko-ui/menu": "^1.0.0",
-    "@rothko-ui/system": "^1.0.0",
+    "@rothko-ui/system": "^1.0.1",
     "@rothko-ui/typography": "^1.0.0"
   },
   "peerDependencies": {
