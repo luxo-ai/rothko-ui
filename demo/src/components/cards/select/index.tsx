@@ -4,8 +4,8 @@ import Card from '../Card';
 import selectCopy from './copy';
 import dropdownProps from './props';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import { TSCode } from '../../Code';
 import Example from '../Example';
+import Import from '../Import';
 import Props from '../Props';
 import Usage from '../Usage';
 import Basic from './usage/Basic';
@@ -17,9 +17,8 @@ import { BASIC, CLEARABLE, DISABLED, MENU_VARIANT, RENDER_OPTION } from './usage
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Select';
 
-const IMPORT = "import { Select } from '@rothko-ui/react';";
-
-// change postfix/prefix with "onRenderSelected"
+const IMPORT_GLOBAL = "import { Select } from '@rothko-ui/react';";
+const IMPORT_SINGLE = "import { Select } from '@rothko-ui/select';";
 
 const SelectCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();
@@ -28,10 +27,8 @@ const SelectCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={selectCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Import global={IMPORT_GLOBAL} single={IMPORT_SINGLE} />
         <Usage />
-        <Container maxWidth="34rem">
-          <TSCode sourceCode={IMPORT} />
-        </Container>
         <Example sourceCode={BASIC}>
           <Container maxWidth={maxWith}>
             <Basic />

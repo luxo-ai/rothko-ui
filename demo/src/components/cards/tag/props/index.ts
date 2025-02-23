@@ -1,45 +1,48 @@
+import { rothkoKindPropStr } from '@/components/constants';
+import { asUnionStr } from '@/components/helpers';
+
 const tagProps = [
+  {
+    name: 'variant',
+    type: asUnionStr('filled', 'outlined'),
+    defaultValue: "'filled'",
+    description: 'The appearance style of the tag',
+  },
+  {
+    name: 'children',
+    type: 'ReactNode',
+    defaultValue: null,
+    description: 'The content of the tag',
+  },
   {
     name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'Additional class name for the tag.',
+    description: 'CSS class name(s)',
   },
   {
-    name: 'appearance',
-    type: "'filled' | 'outline'",
+    name: 'kind',
+    type: rothkoKindPropStr,
     defaultValue: null,
-    description: 'Appearance style of the tag',
+    description: "The tag's semantic style",
   },
   {
     name: 'onClose',
     type: '() => void',
     defaultValue: null,
-    description: 'Callback function triggered when the tag is closed',
-  },
-  {
-    name: 'kind',
-    type: 'RothkoKind',
-    defaultValue: null,
-    description: 'Sets the font and border color semantically',
-  },
-  {
-    name: 'id',
-    type: 'string',
-    defaultValue: null,
-    description: 'Unique identifier for the tag.',
+    description: 'The callback function when the tag is closed',
   },
   {
     name: 'role',
-    type: 'React.AriaRole',
+    type: 'AriaRole',
     defaultValue: null,
-    description: 'The role of the tag.',
+    description: 'The ARIA role for the tag',
   },
   {
     name: 'style',
-    type: 'React.CSSProperties',
+    type: 'CSSProperties',
     defaultValue: null,
-    description: 'Custom styles for the tag.',
+    description: 'The inline style for the tag',
   },
 ] as const;
 

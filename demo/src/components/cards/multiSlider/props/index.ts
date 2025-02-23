@@ -1,51 +1,41 @@
+import { rothkoKindPropStr } from '@/components/constants';
+
 const multiSliderProps = [
   {
     name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'Class name for custom styling',
+    description: 'CSS class name(s)',
   },
   {
     name: 'disabled',
     type: 'boolean',
     defaultValue: null,
-    description: 'Disables the multi-slider',
+    description: 'Specifies whether the slider is disabled',
   },
   {
     name: 'kind',
-    type: 'RothkoKind',
+    type: rothkoKindPropStr,
     defaultValue: null,
-    description: 'Sets the font and border color semantically',
-  },
-  {
-    name: 'label',
-    type: 'string',
-    defaultValue: null,
-    description: 'Label for the multi-slider',
+    description: 'The semantic style of the slider',
   },
   {
     name: 'max',
     type: 'number',
     defaultValue: null,
-    description: 'Maximum value of the multi-slider',
-  },
-  {
-    name: 'maxWidth',
-    type: 'SliderWidth',
-    defaultValue: '100%',
-    description: 'Maximum width of the multi-slider',
+    description: 'Maximum value of the slider',
   },
   {
     name: 'min',
     type: 'number',
     defaultValue: 0,
-    description: 'Minimum value of the multi-slider',
+    description: 'Minimum value of the slider',
   },
   {
-    name: 'minWidth',
-    type: 'SliderWidth',
+    name: 'style',
+    type: 'CSSProperties',
     defaultValue: null,
-    description: 'Minimum width of the multi-slider',
+    description: 'The inline style for the slider',
   },
   {
     name: 'onChange',
@@ -54,35 +44,16 @@ const multiSliderProps = [
     description: 'Callback function triggered when the range of the multi-slider changes',
   },
   {
-    name: 'orMore',
-    type: 'boolean',
-    defaultValue: null,
-    description:
-      'Specifies if the multi-slider allows values equal to or greater than the current range',
-  },
-  {
-    name: 'postfix',
-    type: 'string',
-    defaultValue: null,
-    description: 'Text to display after the multi-slider range',
-  },
-  {
-    name: 'precision',
-    type: 'number',
-    defaultValue: 0,
-    description: 'Number of decimal places to round the multi-slider range values',
-  },
-  {
     name: 'value',
-    type: 'Nilable<Range>',
+    type: '[number, number] | undefined | null',
     defaultValue: null,
-    description: 'Current range of the multi-slider',
+    description: 'Current value of the slider',
   },
   {
-    name: 'showRange',
-    type: 'boolean',
+    name: 'children',
+    type: 'ReactElement<SliderHandleProps>;',
     defaultValue: null,
-    description: 'Specifies if the multi-slider range should be displayed',
+    description: 'Slider handle',
   },
 ] as const;
 

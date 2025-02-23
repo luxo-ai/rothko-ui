@@ -1,7 +1,2 @@
-import accordion from './accordion';
-import accordionPanel from './accordionPanel';
-
-export default {
-  accordion,
-  accordionPanel,
-};
+export { default as accordionProps } from './accordion';
+export { default as accordionPanelProps } from './accordionPanel';

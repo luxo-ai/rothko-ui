@@ -18,37 +18,37 @@ type AriaAttributes =
 type SliderProps = {
   id?: string;
   /**
-   * The class name for the Slider component.
+   * CSS class name(s).
    */
   className?: string;
   /**
-   * Specifies whether the Slider component is disabled.
+   * Specifies whether the slider is disabled.
    */
   disabled?: boolean;
   /**
-   * The kind of Slider component.
+   * The semantic style of the slider.
    */
   kind?: RothkoKind;
   /**
-   * The maximum value of the Slider component.
+   * The maximum value of the slider.
    */
   max: number;
   /**
-   * The minimum value of the Slider component.
+   * The minimum value of the slider.
    * @default 0
    */
   min?: number;
   /**
-   * The callback function that is called when the value of the Slider component changes.
-   * @param v - The new value of the Slider component.
+   * The callback function that is called when the value of the slider changes.
+   * @param v - The new value of the slider.
    */
   onChange: (v: number) => void;
   /**
-   * The inline style for the Slider component.
+   * The inline style for the slider.
    */
   style?: React.CSSProperties;
   /**
-   * The current value of the Slider component.
+   * The current value of the slider.
    */
   value?: Nilable<number>;
   /**

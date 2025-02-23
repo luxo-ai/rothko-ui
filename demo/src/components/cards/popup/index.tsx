@@ -2,19 +2,20 @@ import { Container, Flex } from '@rothko-ui/react';
 
 import bottomPopupCopy from './copy';
 import bottomPopupProps from './props';
-import { BASIC, BLUR } from './usage/sourceCode';
+import { BASIC, VARIANT } from './usage/sourceCode';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import { TSCode } from '../../Code';
 import Card from '../Card';
 import Example from '../Example';
+import Import from '../Import';
 import Props from '../Props';
 import Usage from '../Usage';
 import Basic from './usage/Basic';
-import Blur from './usage/Blur';
+import Variant from './usage/Variant';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Popup';
 
-const IMPORT = "import { BottomPopup } from '@rothko-ui/react';";
+const IMPORT_GLOBAL = "import { BottomPopup } from '@rothko-ui/react';";
+const IMPORT_SINGLE = "import { BottomPopup } from '@rothko-ui/popup';";
 
 const PopupCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();
@@ -22,18 +23,16 @@ const PopupCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={bottomPopupCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Import global={IMPORT_GLOBAL} single={IMPORT_SINGLE} />
         <Usage />
-        <Container maxWidth="34rem">
-          <TSCode sourceCode={IMPORT} />
-        </Container>
         <Example sourceCode={BASIC}>
           <Container maxWidth={maxWidth}>
             <Basic />
           </Container>
         </Example>
-        <Example title="Blur" sourceCode={BLUR}>
+        <Example title="Variant" sourceCode={VARIANT}>
           <Container maxWidth={maxWidth}>
-            <Blur />
+            <Variant />
           </Container>
         </Example>
       </Flex>

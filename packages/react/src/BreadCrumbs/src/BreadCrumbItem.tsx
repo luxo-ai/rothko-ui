@@ -25,7 +25,7 @@ type BreadCrumbItemProps = {
    */
   children: string;
   /**
-   * The function to be called when the breadcrumb item is clicked.
+   * onClick handler for the breadcrumb item.
    */
   onClick?: () => void;
   /**
@@ -44,7 +44,7 @@ type BreadCrumbItemProps = {
    */
   className?: string;
   /**
-   * The inline style for the breadcrumb item.
+   * Inline style for the breadcrumb item.
    * @type {React.CSSProperties}
    */
   style?: React.CSSProperties;

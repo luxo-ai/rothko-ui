@@ -1,33 +1,29 @@
+import { rothkoKindPropStr } from '@/components/constants';
+
 const alertProps = [
   {
-    name: 'appearance',
+    name: 'variant',
     type: "'filled' | 'outline'",
     defaultValue: "'filled'",
-    description: 'The appearance style of the Alert component. Default is "filled".',
+    description: 'Specifies the variant of the alert.',
   },
   {
     name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'The class name for the Alert component.',
-  },
-  {
-    name: 'id',
-    type: 'string',
-    defaultValue: null,
-    description: 'Unique identifier for the Alert component.',
+    description: 'CSS class name(s).',
   },
   {
     name: 'kind',
-    type: 'RothkoKind',
+    type: rothkoKindPropStr,
     defaultValue: "'danger'",
-    description: "Specifies the alert's style kind. Default is 'danger'.",
+    description: "The alert's semantic style.",
   },
   {
     name: 'style',
     type: 'CSSProperties',
     defaultValue: null,
-    description: 'The inline style for the Alert component.',
+    description: 'The inline style for the alert.',
   },
 ] as const;
 

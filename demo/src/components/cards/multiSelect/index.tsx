@@ -3,9 +3,9 @@ import { Container, Flex } from '@rothko-ui/react';
 import Card from '../Card';
 import Example from '../Example';
 import multiSelectCopy from './copy';
-import multiDropdownProps from './props';
+import multiSelectProps from './props';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import { TSCode } from '../../Code';
+import Import from '../Import';
 import Props from '../Props';
 import Usage from '../Usage';
 import Basic from './usage/Basic';
@@ -16,7 +16,8 @@ import { BASIC, CLEARABLE, DISABLED, MENU_POSITION } from './usage/sourceCode';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Select';
 
-const IMPORT = "import { MultiSelet } from '@rothko-ui/react';";
+const IMPORT_GLOBAL = "import { MultiSelect } from '@rothko-ui/react';";
+const IMPORT_SINGLE = "import { MultiSelect } from '@rothko-ui/select';";
 
 const MultiSelectCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();
@@ -25,10 +26,8 @@ const MultiSelectCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={multiSelectCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Import global={IMPORT_GLOBAL} single={IMPORT_SINGLE} />
         <Usage />
-        <Container maxWidth="34rem">
-          <TSCode sourceCode={IMPORT} />
-        </Container>
         <Example sourceCode={BASIC}>
           <Container maxWidth={maxWidth}>
             <Basic />
@@ -50,7 +49,7 @@ const MultiSelectCard = () => {
           </Container>
         </Example>
       </Flex>
-      <Props copy={{ props: multiDropdownProps }} />
+      <Props copy={{ props: multiSelectProps }} />
     </Card>
   );
 };

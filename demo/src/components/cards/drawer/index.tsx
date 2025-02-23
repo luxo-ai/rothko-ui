@@ -1,20 +1,21 @@
 import { Container, Flex } from '@rothko-ui/react';
 
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import { TSCode } from '../../Code';
 import Card from '../Card';
 import drawerCopy from './copy';
 import drawerProps from './props';
 import Example from '../Example';
+import Import from '../Import';
 import Props from '../Props';
 import Usage from '../Usage';
 import Basic from './usage/Basic';
-import Blur from './usage/Blur';
-import { BASIC, BLUR } from './usage/sourceCode';
+import { BASIC, VARIANT } from './usage/sourceCode';
+import Variant from './usage/Variant';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Drawer';
 
-const IMPORT = "import { Drawer } from '@rothko-ui/react';";
+const IMPORT_GLOBAL = "import { Drawer } from '@rothko-ui/react';";
+const IMPORT_SINGLE = "import { Drawer } from '@rothko-ui/drawer';";
 
 const DrawerCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();
@@ -22,18 +23,16 @@ const DrawerCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={drawerCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Import global={IMPORT_GLOBAL} single={IMPORT_SINGLE} />
         <Usage />
-        <Container maxWidth="34rem">
-          <TSCode sourceCode={IMPORT} />
-        </Container>
         <Example sourceCode={BASIC}>
           <Container maxWidth={maxWidth}>
             <Basic />
           </Container>
         </Example>
-        <Example title="Blur" sourceCode={BLUR}>
+        <Example title="Variant" sourceCode={VARIANT}>
           <Container maxWidth={maxWidth}>
-            <Blur />
+            <Variant />
           </Container>
         </Example>
       </Flex>

@@ -118,7 +118,7 @@ const AccordionPanel = React.forwardRef<
     const contentId = useId();
     const toggleId = useId();
 
-    const { bordered, iconOverride, onClickPanel, selectedPanels, compact } = useAccordion();
+    const { variant, iconOverride, onClickPanel, selectedPanels, compact } = useAccordion();
 
     const containerClassNames = classes(
       'bg-(--rothko-accordion-background)',
@@ -127,7 +127,7 @@ const AccordionPanel = React.forwardRef<
       'border-(--rothko-accordion-background)',
       !compact && 'rounded-xs', // 0.125rem
       // == bordered ==
-      bordered && 'border-(--rothko-accordion-border)', // TODO: decide if we still want this?
+      variant === 'bordered' && 'border-(--rothko-accordion-border)', // TODO: decide if we still want this?
       // == compact ==
       compact && 'rounded-none',
       compact && 'last:rounded-bl-xs', // 0.125rem

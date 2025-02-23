@@ -9,17 +9,18 @@ import Example from '../Example';
 import Props from '../Props';
 import sliderProps from './props';
 import { insertKind } from '../helpers';
+import Import from '../Import';
+import KindRadioGroup from '../KindRadioGroup';
 import Usage from '../Usage';
 import Basic from './usage/Basic';
-import { BASIC, DISABLED, WITH_KIND } from './usage/sourceCode';
-import { TSCode } from '../../Code';
-import KindRadioGroup from '../KindRadioGroup';
 import Disabled from './usage/Disabled';
+import { BASIC, DISABLED, WITH_KIND } from './usage/sourceCode';
 import WithKind from './usage/WithKind';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Slider';
 
-const IMPORT = "import { Slider } from '@rothko-ui/react';";
+const IMPORT_GLOBAL = "import { Slider, SliderHandle } from '@rothko-ui/react';";
+const IMPORT_SINGLE = "import { Slider, SliderHandle } from '@rothko-ui/slider';";
 
 const SliderCard = () => {
   const [kind, setKind] = useState<RothkoKind>('secondary');
@@ -29,10 +30,8 @@ const SliderCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={sliderCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Import global={IMPORT_GLOBAL} single={IMPORT_SINGLE} />
         <Usage />
-        <Container maxWidth="34rem">
-          <TSCode sourceCode={IMPORT} />
-        </Container>
         <Example sourceCode={BASIC}>
           <Container maxWidth={maxWidth}>
             <Basic />

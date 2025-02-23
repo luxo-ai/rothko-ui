@@ -1,21 +1,11 @@
+import { asUnionStr } from '@/components/helpers';
+
 const popupProps = [
-  {
-    name: 'blur',
-    type: 'boolean',
-    defaultValue: 'false',
-    description: 'Determines whether the popup should blur the background.',
-  },
   {
     name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'The CSS class name for the popup.',
-  },
-  {
-    name: 'id',
-    type: 'string',
-    defaultValue: null,
-    description: 'Unique identifier for the popup.',
+    description: 'CSS class name(s).',
   },
   {
     name: 'onClose',
@@ -31,9 +21,15 @@ const popupProps = [
   },
   {
     name: 'style',
-    type: 'React.CSSProperties',
+    type: 'CSSProperties',
     defaultValue: null,
     description: 'The inline style for the popup.',
+  },
+  {
+    name: 'variant',
+    type: asUnionStr('shaded', 'none', 'blur'),
+    defaultValue: "'none'",
+    description: 'Variant of the backdrop.',
   },
 ] as const;
 

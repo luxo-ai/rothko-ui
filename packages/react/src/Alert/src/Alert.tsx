@@ -39,7 +39,7 @@ type AlertProps = {
    */
   style?: React.CSSProperties;
   /**
-   * The appearance style of the alert.
+   * Specifies the variant of the alert.
    * @type {'filled' | 'outline'}
    * @default 'filled'
    */

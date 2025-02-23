@@ -6,7 +6,7 @@ const CONTENT =
 
 const App = () => {
   return (
-    <Accordion bordered>
+    <Accordion variant="bordered">
       <AccordionPanel title="Label 1">{CONTENT}</AccordionPanel>
       <AccordionPanel title="Label 2">{CONTENT}</AccordionPanel>
       <AccordionPanel title="Label 3">{CONTENT}</AccordionPanel>

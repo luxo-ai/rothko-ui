@@ -1,7 +1,6 @@
 import { Container, Flex } from '@rothko-ui/react';
 
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import { TSCode } from '../../Code';
 import Card from '../Card';
 import Example from '../Example';
 import Props from '../Props';
@@ -14,10 +13,12 @@ import { BASIC, CLOSEABLE, WITH_KIND } from './usage/sourceCode';
 import Variant from './usage/Variant';
 import WithKind from './usage/WithKind';
 import { VARIANT } from '../button/usage/sourceCode';
+import Import from '../Import';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Tag';
 
-const IMPORT = "import { Tag } from '@rothko-ui/react';";
+const IMPORT_GLOBAL = "import { Tag } from '@rothko-ui/react';";
+const IMPORT_SINGLE = "import { Tag } from '@rothko-ui/tag';";
 
 const TagCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();
@@ -26,10 +27,8 @@ const TagCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={tagCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Import global={IMPORT_GLOBAL} single={IMPORT_SINGLE} />
         <Usage />
-        <Container maxWidth="34rem">
-          <TSCode sourceCode={IMPORT} />
-        </Container>
         <Example sourceCode={BASIC}>
           <Container maxWidth={maxWidth}>
             <Basic />

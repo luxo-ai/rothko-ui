@@ -20,7 +20,7 @@ const Example = ({ title, sourceCode, subTitle, children }: CodeSnippetProps) =>
       )}
       <FlexItem>
         <Tabs
-          kind="success"
+          kind="primary"
           styles={{
             tabs: { maxWidth: '10rem' },
             tab: { margin: '1rem 0 1rem 0' },

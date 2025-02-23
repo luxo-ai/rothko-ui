@@ -1,3 +1,5 @@
+import { rothkoKindPropStr } from '@/components/constants';
+
 const checkboxProps = [
   {
     name: 'checked',
@@ -9,7 +11,7 @@ const checkboxProps = [
     name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'The CSS class name for the checkbox.',
+    description: 'CSS class name(s).',
   },
   {
     name: 'disabled',
@@ -26,20 +28,14 @@ const checkboxProps = [
   {
     name: 'errorText',
     type: 'string',
-    defaultValue: 'Invalid',
+    defaultValue: '"Invalid"',
     description: 'The error text to be displayed when there is an error.',
   },
   {
-    name: 'id',
-    type: 'string',
-    defaultValue: null,
-    description: 'Unique identifier for the checkbox.',
-  },
-  {
     name: 'kind',
-    type: 'RothkoKind',
+    type: rothkoKindPropStr,
     defaultValue: null,
-    description: 'The visual style of the checkbox.',
+    description: "The checkbox's semantic style.",
   },
   {
     name: 'onChange',
@@ -55,9 +51,15 @@ const checkboxProps = [
   },
   {
     name: 'style',
-    type: 'React.CSSProperties',
+    type: 'CSSProperties',
     defaultValue: null,
     description: 'The inline style for the checkbox.',
+  },
+  {
+    name: 'styles',
+    type: 'Object<StyleableComponents, CSSProperties>',
+    defaultValue: null,
+    description: 'Additional inline styles for the checkbox components.',
   },
 ] as const;
 

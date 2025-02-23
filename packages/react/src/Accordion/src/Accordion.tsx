@@ -3,7 +3,7 @@ import type { WithAria } from '@rothko-ui/system';
 import React, { useCallback, useMemo, useState } from 'react';
 
 import AccordionContext from './AccordionContext';
-import type { Icon } from './types';
+import type { AccordionVariant, Icon } from './types';
 
 type AriaAttributes =
   | 'aria-describedby'
@@ -19,11 +19,11 @@ type AccordionProps = {
    */
   id?: string;
   /**
-   * If `true`, borders are added around each accordion item.
-   * @type {boolean}
-   * @default false
+   * Specifies the variant of the accordion.
+   * @type {AccordionVariant}
+   * @default 'none'
    */
-  bordered?: boolean;
+  variant?: AccordionVariant;
   /**
    * The content of the accordion.
    * @type {React.ReactNode}
@@ -70,21 +70,21 @@ type AccordionProps = {
 };
 
 const Accordion = ({
-  id,
   'aria-describedby': ariaDescribedBy,
   'aria-details': ariaDetails,
   'aria-hidden': ariaHidden,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
-  bordered,
   children,
   className,
   compact,
   icon: iconOverride,
+  id,
   multiple,
   onPanelChange,
   selectedKeys = [],
   style,
+  variant = 'none',
 }: WithAria<AccordionProps, AriaAttributes>) => {
   const baseClasses = classes('flex flex-col', compact ? 'gap-0' : 'gap-3');
   const [selectedPanels, setSelectedPanels] = useState(selectedKeys || []);
@@ -107,13 +107,13 @@ const Accordion = ({
 
   const value = useMemo(
     () => ({
-      bordered,
+      variant,
       iconOverride,
       onClickPanel,
       selectedPanels,
       compact,
     }),
-    [bordered, iconOverride, onClickPanel, selectedPanels, compact]
+    [variant, iconOverride, onClickPanel, selectedPanels, compact]
   );
 
   return (

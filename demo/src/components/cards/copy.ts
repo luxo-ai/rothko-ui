@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-import type { CardCopy } from '../types';
+import type { CardCopy } from './types';
 
 const overviewCopy: CardCopy = {
   title: 'Overview',
@@ -25,12 +25,12 @@ const overviewCopy: CardCopy = {
             language: 'bash',
             code: [
               {
-                icon: lazy(() => import('./NpmSvg')),
+                icon: lazy(() => import('../svg/NpmSvg')),
                 tag: 'npm',
                 text: 'npm install @rothko-ui/react @rothko-ui/icons @rothko-ui/tokens',
               },
               {
-                icon: lazy(() => import('./YarnSvg')),
+                icon: lazy(() => import('../svg/YarnSvg')),
                 tag: 'yarn',
                 text: 'yarn add @rothko-ui/react @rothko-ui/icons @rothko-ui/tokens',
               },

@@ -1,4 +1,4 @@
-import { CopyOutline } from '@rothko-ui/icons';
+import { CopyOutline, Gift } from '@rothko-ui/icons';
 import { Flex, ToasterConsumer, Paragraph } from '@rothko-ui/react';
 import { Highlight, themes } from 'prism-react-renderer';
 import React, { useEffect } from 'react';
@@ -18,6 +18,46 @@ const THEMES = {
     dark: themes.nightOwl,
     light: themes.nightOwlLight,
   },
+  dracula: {
+    dark: themes.dracula,
+    light: themes.dracula,
+  },
+  duotone: {
+    dark: themes.duotoneDark,
+    light: themes.duotoneLight,
+  },
+  vs: {
+    dark: themes.vsDark,
+    light: themes.vsLight,
+  },
+  github: {
+    dark: themes.github,
+    light: themes.github,
+  },
+  oceanicNext: {
+    dark: themes.oceanicNext,
+    light: themes.oceanicNext,
+  },
+  okaidia: {
+    dark: themes.okaidia,
+    light: themes.okaidia,
+  },
+  palenight: {
+    dark: themes.palenight,
+    light: themes.palenight,
+  },
+  shadesOfPurple: {
+    dark: themes.shadesOfPurple,
+    light: themes.shadesOfPurple,
+  },
+  synthwave84: {
+    dark: themes.synthwave84,
+    light: themes.synthwave84,
+  },
+  ultramin: {
+    dark: themes.ultramin,
+    light: themes.ultramin,
+  },
 } as const;
 
 type CodeProps = React.CSSProperties & {
@@ -27,6 +67,7 @@ type CodeProps = React.CSSProperties & {
   displayLineNumbers?: boolean;
   language: Language;
   themeOverride?: keyof typeof THEMES;
+  testing?: boolean;
 };
 
 export const Code = ({
@@ -36,6 +77,7 @@ export const Code = ({
   displayLanguage,
   displayLineNumbers,
   themeOverride,
+  testing,
   ...containerStyle
 }: CodeProps) => {
   const { theme: mode } = useTheme();
@@ -80,7 +122,7 @@ export const Code = ({
       >
         {({ style, tokens, getLineProps, getTokenProps }) => (
           <>
-            {!hideBar && (
+            {!hideBar && !testing && (
               <Flex
                 alignItems="center"
                 justifyContent="space-between"
@@ -113,31 +155,63 @@ export const Code = ({
                 </ToasterConsumer>
               </Flex>
             )}
-            <pre
+            <div
+              className="code"
               style={{
                 ...style,
                 ...containerStyle,
-                margin: '0.125rem 0',
-                padding: hideBar ? '1rem' : '0.5rem 1rem',
+                margin: testing ? '0.125rem 0' : '0.125rem 0',
+                padding: testing || hideBar ? '0.75rem' : '0.5rem 1rem',
+                lineHeight: testing ? '1' : undefined,
                 //  overflow: 'scroll',
-                overflow: 'auto',
+                // overflow: 'auto',
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                gap: '0.5rem',
+                alignItems: 'center',
               }}
             >
-              {tokens.map((line, i) => (
-                // eslint-disable-next-line react/jsx-props-no-spreading, react/no-array-index-key
-                <div key={i} {...getLineProps({ line })}>
-                  {displayLineNumbers && (
-                    <span className="non-selectable">
-                      {i + 1}&nbsp;{i < 9 ? ' ' : ''}
-                    </span>
+              <pre style={{ flexDirection: 'column', display: 'inline-flex', overflowX: 'auto' }}>
+                {tokens.map((line, i) => (
+                  <div
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={i}
+                    // eslint-disable-next-line react/jsx-props-no-spreading
+                    {...getLineProps({ line })}
+                  >
+                    {displayLineNumbers && (
+                      <span className="non-selectable">
+                        {i + 1}&nbsp;{i < 9 ? ' ' : ''}
+                      </span>
+                    )}
+                    {line.map((token, key) => (
+                      // eslint-disable-next-line react/jsx-props-no-spreading, react/no-array-index-key
+                      <span key={key} {...getTokenProps({ token })} />
+                    ))}
+                  </div>
+                ))}
+              </pre>
+              {testing && (
+                <ToasterConsumer>
+                  {({ addToast }) => (
+                    <CopyToClipboard
+                      text={sourceCode}
+                      onCopy={() => addToast({ content: 'Added to clipboard!', withLife: true })}
+                    >
+                      <PhantomButton>
+                        <CopyOutline
+                          fill={style.color}
+                          opacity={0.65}
+                          width="1.125rem"
+                          height="1.125rem"
+                        />
+                      </PhantomButton>
+                    </CopyToClipboard>
                   )}
-                  {line.map((token, key) => (
-                    // eslint-disable-next-line react/jsx-props-no-spreading, react/no-array-index-key
-                    <span key={key} {...getTokenProps({ token })} />
-                  ))}
-                </div>
-              ))}
-            </pre>
+                </ToasterConsumer>
+              )}
+            </div>
           </>
         )}
       </Highlight>
@@ -169,13 +243,20 @@ export const JsonCode = ({ sourceCode, maxWidth }: Pick<CodeProps, 'sourceCode' 
   />
 );
 
-export const TSCode = ({ sourceCode, maxWidth }: Pick<CodeProps, 'sourceCode' | 'maxWidth'>) => (
+export const TSCode = ({
+  sourceCode,
+  maxWidth,
+  testing,
+  themeOverride,
+}: Pick<CodeProps, 'sourceCode' | 'maxWidth' | 'testing' | 'themeOverride'>) => (
   <Code
     displayLanguage
     maxHeight="25rem"
     language="typescript"
     sourceCode={sourceCode}
     maxWidth={maxWidth}
+    testing={testing}
+    themeOverride={themeOverride}
   />
 );
 

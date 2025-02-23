@@ -1,46 +1,29 @@
+import { asUnionStr } from '@/components/helpers';
+
 const accordionProps = [
-  {
-    name: 'bordered',
-    type: 'boolean',
-    defaultValue: 'false',
-    description: 'If `true`, borders are added around each accordion item. Default is `false`.',
-  },
   {
     name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'CSS class name for custom styling.',
+    description: 'CSS class name(s).',
   },
   {
     name: 'compact',
     type: 'boolean',
     defaultValue: 'false',
-    description: 'Adds spacing around items for better separation. Default is `false`.',
+    description: 'If `true`, removes spacing between panels.',
   },
   {
     name: 'icon',
     type: 'Icon',
     defaultValue: null,
-    description: 'Custom icons for accordion state indicators.',
-  },
-  {
-    name: 'id',
-    type: 'string',
-    defaultValue: null,
-    description: 'Unique identifier for the accordion.',
-  },
-  {
-    name: 'kind',
-    type: 'RothkoKind',
-    defaultValue: null,
-    description: "Specifies the accordion's style kind.",
+    description: 'Custom icon for accordion state indicators.',
   },
   {
     name: 'multiple',
     type: 'boolean',
     defaultValue: 'false',
-    description:
-      'If `true`, multiple accordion items can be open at the same time. Default is `false`.',
+    description: 'If `true`, multiple panels can be expanded at once.',
   },
   {
     name: 'onPanelChange',
@@ -58,7 +41,13 @@ const accordionProps = [
     name: 'style',
     type: 'CSSProperties',
     defaultValue: null,
-    description: 'Inline styles for the accordion.',
+    description: 'Inline style for the accordion.',
+  },
+  {
+    name: 'variant',
+    type: asUnionStr('bordered', 'none'),
+    defaultValue: "'none'",
+    description: 'Specifies the variant of the accordion.',
   },
 ] as const;
 

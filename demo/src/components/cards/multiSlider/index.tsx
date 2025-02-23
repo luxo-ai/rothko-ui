@@ -3,12 +3,12 @@ import { Container, Flex, FlexItem } from '@rothko-ui/react';
 import { useState } from 'react';
 
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import { TSCode } from '../../Code';
 import Card from '../Card';
 import Example from '../Example';
 import multiSliderCopy from './copy';
 import multiSliderProps from './props';
 import { insertKind } from '../helpers';
+import Import from '../Import';
 import KindRadioGroup from '../KindRadioGroup';
 import Props from '../Props';
 import Usage from '../Usage';
@@ -19,7 +19,8 @@ import WithKind from './usage/WithKind';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Slider';
 
-const IMPORT = "import { MultiSlider } from '@rothko-ui/react';";
+const IMPORT_GLOBAL = "import { MultiSlider, SliderHandle } from '@rothko-ui/react';";
+const IMPORT_SINGLE = "import { MultiSlider, SliderHandle } from '@rothko-ui/slider';";
 
 const MultiSliderCard = () => {
   const [kind, setKind] = useState<RothkoKind>('secondary');
@@ -29,10 +30,8 @@ const MultiSliderCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={multiSliderCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Import global={IMPORT_GLOBAL} single={IMPORT_SINGLE} />
         <Usage />
-        <Container maxWidth="34rem">
-          <TSCode sourceCode={IMPORT} />
-        </Container>
         <Example sourceCode={BASIC}>
           <Container maxWidth={maxWidth}>
             <Basic />

@@ -1,45 +1,131 @@
-const multiDropdownProps = [
+import { asUnionStr } from '@/components/helpers';
+
+const multiSelectProps = [
   {
-    name: 'value',
-    type: 'V | V[] | null',
-    defaultValue: null,
-    description: 'Current value of dropdown or value array if multiple',
-  },
-  {
-    name: 'placeholder',
+    name: 'className',
     type: 'string',
-    defaultValue: "'Select'",
-    description: 'Placeholder in input',
+    defaultValue: null,
+    description: 'CSS class name(s).',
   },
   {
-    name: 'options',
-    type: 'Option<V, T>[]',
+    name: 'classNames',
+    type: 'Object<StyledComponents, string>',
     defaultValue: null,
-    description: 'Dropdown options',
+    description: 'Additional class names for the select components',
   },
   {
-    name: 'onChange',
-    type: '(v: V | V[] | null) => void',
+    name: 'clearable',
+    type: 'boolean',
     defaultValue: null,
-    description: 'Event handler for value change',
+    description: 'Whether the select is clearable.',
   },
   {
-    name: 'onOpen',
-    type: '() => void',
+    name: 'disabled',
+    type: 'boolean',
     defaultValue: null,
-    description: 'OnOpen handler',
+    description: 'Whether the select is disabled.',
+  },
+  {
+    name: 'error',
+    type: 'boolean',
+    defaultValue: null,
+    description: 'Whether the select has an error state.',
+  },
+  {
+    name: 'errorText',
+    type: 'string',
+    defaultValue: 'Invalid',
+    description: 'The error message to display when the select has an error state.',
+  },
+  {
+    name: 'label',
+    type: 'string',
+    defaultValue: null,
+    description: 'The label for the select.',
+  },
+  {
+    name: 'menuVariant',
+    type: asUnionStr('top', 'bottom'),
+    defaultValue: "'bottom'",
+    description: 'The position of the select menu.',
+  },
+  {
+    name: 'noResultsMessage',
+    type: 'ReactNode',
+    defaultValue: '"No results"',
+    description: 'The message to display when there are no search results.',
   },
   {
     name: 'onBlur',
     type: '(e: FocusEvent) => void',
     defaultValue: null,
-    description: 'OnBlur handler',
+    description: 'Event handler for when the select loses focus.',
+  },
+  {
+    name: 'onChange',
+    type: '(v: V[] | null) => void',
+    defaultValue: null,
+    description: 'Event handler for when the select value changes.',
+  },
+  {
+    name: 'onClear',
+    type: '() => void',
+    defaultValue: null,
+    description: 'Event handler for when the select is cleared.',
+  },
+  {
+    name: 'onClose',
+    type: '() => void',
+    defaultValue: null,
+    description: 'Event handler for when the select is closed.',
   },
   {
     name: 'onFocus',
     type: '(e: FocusEvent) => void',
     defaultValue: null,
-    description: 'OnFocus handler',
+    description: 'Event handler for when the select gains focus.',
+  },
+  {
+    name: 'onOpen',
+    type: '() => void',
+    defaultValue: null,
+    description: 'Event handler for when the select is opened.',
+  },
+  {
+    name: 'options',
+    type: 'Option<V, T>[]',
+    defaultValue: null,
+    description: 'The options for the select.',
+  },
+  {
+    name: 'placeholder',
+    type: 'string',
+    defaultValue: '"Select"',
+    description: 'The placeholder text for the select.',
+  },
+  {
+    name: 'renderOption',
+    type: 'RenderOption<V, T>',
+    defaultValue: null,
+    description: 'Custom rendering function for select options.',
+  },
+  {
+    name: 'style',
+    type: 'CSSProperties',
+    defaultValue: null,
+    description: 'Inline styles for the select.',
+  },
+  {
+    name: 'styles',
+    type: 'Object<StyledComponents, CSSProperties>',
+    defaultValue: null,
+    description: 'Additional inline styles for the select components.',
+  },
+  {
+    name: 'value',
+    type: 'V[] | null',
+    defaultValue: null,
+    description: 'The value(s) of the select.',
   },
   {
     name: 'onDelete',
@@ -47,61 +133,6 @@ const multiDropdownProps = [
     defaultValue: null,
     description: 'Callback triggered on deletion',
   },
-  {
-    name: 'clearable',
-    type: 'boolean',
-    defaultValue: null,
-    description: 'Can you clear the selection',
-  },
-
-  {
-    name: 'disabled',
-    type: 'boolean',
-    defaultValue: null,
-    description: 'Is the dropdown disabled',
-  },
-  {
-    name: 'error',
-    type: 'boolean',
-    defaultValue: null,
-    description: 'Did an error occur. Alert user when true',
-  },
-  {
-    name: 'renderOption',
-    type: 'RenderOption<V, T>',
-    defaultValue: null,
-    description: 'Custom method for rendering option',
-  },
-  {
-    name: 'className',
-    type: 'string',
-    defaultValue: null,
-    description: 'Class names of outer wrapper',
-  },
-  {
-    name: 'label',
-    type: 'string',
-    defaultValue: null,
-    description: 'If the dropdown has a label',
-  },
-  {
-    name: 'menuPosition',
-    type: "'top' | 'bottom' | 'auto'",
-    defaultValue: "'bottom'",
-    description: 'Open dropdown position',
-  },
-  {
-    name: 'bordered',
-    type: 'boolean',
-    defaultValue: true,
-    description: 'Is this a minimal dropdown',
-  },
-  {
-    name: 'style',
-    type: 'React.CSSProperties',
-    defaultValue: null,
-    description: 'Adds a style to the component',
-  },
 ] as const;
 
-export default multiDropdownProps;
+export default multiSelectProps;

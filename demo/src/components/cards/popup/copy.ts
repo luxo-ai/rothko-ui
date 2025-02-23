@@ -1,8 +1,8 @@
 import type { CardCopy } from '../types';
 
 const bottomPopupCopy: CardCopy = {
-  title: 'Bottom Popup',
+  title: 'Popup',
   description:
-    "Add interactive and context-aware tooltips, popovers, and menus to your application with rothko ui's Bottom Popup component. Enhance user interactions by displaying additional information or actions in a visually appealing and unobtrusive manner.",
+    'Popup UI component that slides up from the bottom of the screen, typically used for displaying settings, configurations, or additional options in mobile views.',
 };
 export default bottomPopupCopy;

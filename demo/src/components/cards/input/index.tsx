@@ -1,10 +1,10 @@
 import { Container, Flex } from '@rothko-ui/react';
 
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import { TSCode } from '../../Code';
 import Card from '../Card';
 import Example from '../Example';
 import inputCopy from './copy';
+import Import from '../Import';
 import Props from '../Props';
 import Usage from '../Usage';
 import styles from './Input.module.scss';
@@ -15,7 +15,8 @@ import { BASIC, DISABLED } from './usage/sourceCode';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Input';
 
-const IMPORT = "import { Input } from '@rothko-ui/react';";
+const IMPORT_GLOBAL = "import { Input } from '@rothko-ui/react';";
+const IMPORT_SINGLE = "import { Input } from '@rothko-ui/input';";
 
 const InputCard = () => {
   const isMobileOrTablet = useIsMobileOrTablet();
@@ -24,10 +25,8 @@ const InputCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={inputCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Import global={IMPORT_GLOBAL} single={IMPORT_SINGLE} />
         <Usage />
-        <Container maxWidth="34rem">
-          <TSCode sourceCode={IMPORT} />
-        </Container>
         <Example sourceCode={BASIC}>
           <Container className={styles['input-container']} maxWidth={maxWith}>
             <Basic />

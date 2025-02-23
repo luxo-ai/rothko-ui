@@ -15,9 +15,10 @@ import { ACCESSORY, DISABLED, LOADING, VARIANT, SIZE, WITH_KIND, RADIUS } from '
 import Variant from './usage/Variant';
 import WithKind from './usage/WithKind';
 import { useIsMobileOrTablet } from '../../../hooks/useIsMobileOrTablet';
-import { TSCode } from '../../Code';
+import Import from '../Import';
 
-const IMPORT = "import { Button } from '@rothko-ui/react';";
+const IMPORT_GLOBAL = "import { Button } from '@rothko-ui/react';";
+const IMPORT_SINGLE = "import { Button } from '@rothko-ui/button';";
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Button';
 
@@ -28,10 +29,8 @@ const ButtonCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={buttonCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Import global={IMPORT_GLOBAL} single={IMPORT_SINGLE} />
         <Usage />
-        <Container maxWidth="34rem">
-          <TSCode sourceCode={IMPORT} />
-        </Container>
         <Example title="With Kind" sourceCode={WITH_KIND}>
           <Grid gridTemplateColumns={gridTemplateColumns} rowGap="1rem" columnGap="0.75rem">
             <WithKind />

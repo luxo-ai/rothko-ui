@@ -34,7 +34,7 @@ type TabsProps = {
    */
   onSelect?: (tab: string) => void;
   /**
-   * The inline style for the tab bar.
+   * The inline style for the tabs.
    * @type {React.CSSProperties}
    */
   style?: React.CSSProperties;

@@ -1,7 +1,9 @@
+import { rothkoKindPropStr } from '@/components/constants';
+
 const toastProps = [
   {
     name: 'content',
-    type: 'React.ReactNode',
+    type: 'ReactNode',
     defaultValue: null,
     description: 'The content of the toast',
   },
@@ -13,13 +15,13 @@ const toastProps = [
   },
   {
     name: 'kind',
-    type: 'RothkoKind',
+    type: rothkoKindPropStr,
     defaultValue: null,
-    description: 'Sets the font and border color semantically',
+    description: 'Semantic style of the toast',
   },
   {
     name: 'label',
-    type: 'React.ReactNode',
+    type: 'ReactNode',
     defaultValue: null,
     description: 'The label of the toast',
   },

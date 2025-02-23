@@ -1,33 +1,48 @@
+import { rothkoSizePropStr } from '@/components/constants';
+import { asUnionStr } from '@/components/helpers';
+
 const modalProps = [
   {
     name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'Class name of the modal',
+    description: 'CSS class name(s).',
   },
   {
-    name: 'isOpen',
+    name: 'open',
     type: 'boolean',
     defaultValue: null,
-    description: 'Indicates whether the modal is open',
+    description: 'Whether the modal is open or closed.',
   },
   {
     name: 'onClose',
     type: '() => void',
     defaultValue: null,
-    description: 'Event handler for closing the modal',
+    description: 'The callback function called when the modal is closed.',
   },
   {
     name: 'size',
-    type: 'RothkoSize',
+    type: rothkoSizePropStr,
     defaultValue: "'m'",
     description: 'Size of the modal',
+  },
+  {
+    name: 'style',
+    type: 'CSSProperties',
+    defaultValue: null,
+    description: 'The inline style for the modal.',
   },
   {
     name: 'title',
     type: 'string',
     defaultValue: null,
-    description: 'Title of the modal',
+    description: 'The title of the modal.',
+  },
+  {
+    name: 'variant',
+    type: asUnionStr('shaded', 'none', 'blur'),
+    defaultValue: "'shaded'",
+    description: 'Variant of the backdrop.',
   },
 ] as const;
 

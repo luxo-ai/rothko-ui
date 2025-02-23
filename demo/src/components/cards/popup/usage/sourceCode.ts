@@ -26,7 +26,7 @@ const App = () => {
 
 export default App;
 `;
-export const BLUR = `
+export const VARIANT = `
 import { ArrowUpOutline } from '@rothko-ui/icons';
 import { Popup, Button } from '@rothko-ui/react';
 import React, { useState } from 'react';
@@ -45,7 +45,7 @@ const App = () => {
       >
         Open
       </Button>
-      <Popup blur open={open} onClose={() => setOpen(false)}>
+      <Popup variant="none" open={open} onClose={() => setOpen(false)}>
         {POPUP_CONTENT}
       </Popup>
     </>

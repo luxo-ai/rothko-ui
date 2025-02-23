@@ -15,7 +15,14 @@ import {
   Direction,
   ControlState,
 } from '@rothko-ui/system';
-import type { FocusHandler, Option, RenderOption, Value, WithAria } from '@rothko-ui/system';
+import type {
+  Dictionary,
+  FocusHandler,
+  Option,
+  RenderOption,
+  Value,
+  WithAria,
+} from '@rothko-ui/system';
 import { Paragraph, Label } from '@rothko-ui/typography';
 import React, { useEffect, useRef } from 'react';
 
@@ -39,13 +46,13 @@ export type SelectInnerProps<V extends Value, T> = WithAria<
   {
     id?: string;
     /**
-     * Additional class name for the select.
+     * CSS class name(s).
      */
     className?: string;
     /**
      * Additional class names for the select components.
      */
-    classNames?: Partial<Record<StyledComponents, string>>;
+    classNames?: Dictionary<StyledComponents, string>;
     /**
      * Whether the select is clearable.
      */
@@ -123,7 +130,7 @@ export type SelectInnerProps<V extends Value, T> = WithAria<
      */
     renderOption?: RenderOption<V, T>;
     /**
-     * Custom styles for the select.
+     * Inline styles for the select.
      */
     style?: React.CSSProperties;
     /**

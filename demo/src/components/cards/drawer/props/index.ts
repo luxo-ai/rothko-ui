@@ -1,39 +1,35 @@
+import { asUnionStr } from '@/components/helpers';
+
 const drawerProps = [
   {
     name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'The CSS class name for the Drawer.',
-  },
-  {
-    name: 'id',
-    type: 'string',
-    defaultValue: null,
-    description: 'Unique identifier for the Drawer.',
+    description: 'CSS class name(s).',
   },
   {
     name: 'onClose',
     type: '() => void',
     defaultValue: null,
-    description: 'Callback function called when the Drawer is closed.',
+    description: 'Callback function called when the drawer is closed.',
   },
   {
     name: 'open',
     type: 'boolean',
     defaultValue: 'false',
-    description: 'Determines whether the Drawer is open or closed.',
+    description: 'Determines whether the drawer is open or closed.',
   },
   {
     name: 'style',
-    type: 'React.CSSProperties',
+    type: 'CSSProperties',
     defaultValue: null,
-    description: 'The inline style for the Drawer.',
+    description: 'The inline style for the drawer.',
   },
   {
-    name: 'blur',
-    type: 'boolean',
-    defaultValue: 'false',
-    description: 'Determines whether the Drawer is blurred.',
+    name: 'variant',
+    type: asUnionStr('shaded', 'none', 'blur'),
+    defaultValue: "'shaded'",
+    description: 'Variant of the backdrop.',
   },
 ] as const;
 

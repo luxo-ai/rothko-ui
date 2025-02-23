@@ -1,9 +1,17 @@
+import { asUnionStr } from '@/components/helpers';
+
 const selectProps = [
   {
     name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'Additional class name for the select.',
+    description: 'CSS class name(s).',
+  },
+  {
+    name: 'classNames',
+    type: 'Object<StyledComponents, string>',
+    defaultValue: null,
+    description: 'Additional class names for the select components',
   },
   {
     name: 'clearable',
@@ -30,12 +38,6 @@ const selectProps = [
     description: 'The error message to display when the select has an error state.',
   },
   {
-    name: 'id',
-    type: 'string',
-    defaultValue: null,
-    description: 'Unique identifier for the select.',
-  },
-  {
     name: 'label',
     type: 'string',
     defaultValue: null,
@@ -43,31 +45,25 @@ const selectProps = [
   },
   {
     name: 'menuVariant',
-    type: 'MenuVariant',
-    defaultValue: 'bottom',
+    type: asUnionStr('top', 'bottom'),
+    defaultValue: "'bottom'",
     description: 'The position of the select menu.',
   },
   {
-    name: 'multiple',
-    type: 'boolean',
-    defaultValue: null,
-    description: 'Whether the select allows multiple selections.',
-  },
-  {
     name: 'noResultsMessage',
-    type: 'React.ReactNode',
-    defaultValue: 'No results',
+    type: 'ReactNode',
+    defaultValue: '"No results"',
     description: 'The message to display when there are no search results.',
   },
   {
     name: 'onBlur',
-    type: 'FocusHandler',
+    type: '(e: FocusEvent) => void',
     defaultValue: null,
     description: 'Event handler for when the select loses focus.',
   },
   {
     name: 'onChange',
-    type: '(v: V | V[] | null) => void',
+    type: '(v: V | null) => void',
     defaultValue: null,
     description: 'Event handler for when the select value changes.',
   },
@@ -84,14 +80,8 @@ const selectProps = [
     description: 'Event handler for when the select is closed.',
   },
   {
-    name: 'onDelete',
-    type: '(v: V) => void',
-    defaultValue: null,
-    description: 'Event handler for when an option is deleted in multiple selection mode.',
-  },
-  {
     name: 'onFocus',
-    type: 'FocusHandler',
+    type: '(e: FocusEvent) => void',
     defaultValue: null,
     description: 'Event handler for when the select gains focus.',
   },
@@ -110,7 +100,7 @@ const selectProps = [
   {
     name: 'placeholder',
     type: 'string',
-    defaultValue: 'Select',
+    defaultValue: '"Select"',
     description: 'The placeholder text for the select.',
   },
   {
@@ -121,13 +111,19 @@ const selectProps = [
   },
   {
     name: 'style',
-    type: 'React.CSSProperties',
+    type: 'CSSProperties',
     defaultValue: null,
-    description: 'Custom styles for the select.',
+    description: 'Inline styles for the select.',
+  },
+  {
+    name: 'styles',
+    type: 'Object<StyledComponents, CSSProperties>',
+    defaultValue: null,
+    description: 'Additional inline styles for the select components.',
   },
   {
     name: 'value',
-    type: 'V | V[] | null',
+    type: 'V | null',
     defaultValue: null,
     description: 'The value(s) of the select.',
   },

@@ -1,5 +1,4 @@
 import {
-  Container,
   Flex,
   Grid,
   Tag,
@@ -12,26 +11,24 @@ import {
   Paragraph,
 } from '@rothko-ui/react';
 
-import { TSCode } from '../../Code';
 import Card from '../Card';
-import Props from '../Props';
 import Usage from '../Usage';
 import typographyCopy from './copy';
-import typographyProps from './props';
+import Import from '../Import';
 
 const GITHUB_URL = 'https://github.com/luxo-ai/rothko-ui/tree/main/packages/react/src/Typography';
 
-const IMPORT =
+const IMPORT_GLOBAL =
   "import { Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Paragraph, } from '@rothko-ui/react';";
+const IMPORT_SINGLE =
+  "import { Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Paragraph, } from '@rothko-ui/typography';";
 
 const TypographyCard = () => {
   return (
     <Card codeUrl={GITHUB_URL} copy={typographyCopy}>
       <Flex as="section" flexDirection="column" rowGap="1.5rem">
+        <Import global={IMPORT_GLOBAL} single={IMPORT_SINGLE} />
         <Usage />
-        <Container maxWidth="34rem">
-          <TSCode sourceCode={IMPORT} />
-        </Container>
       </Flex>
       <Grid
         maxWidth="40rem"
@@ -83,7 +80,6 @@ const TypographyCard = () => {
         </Tag>
         <Paragraph size="xs">paragraph Xsmall</Paragraph>
       </Grid>
-      <Props copy={{ props: typographyProps }} />
     </Card>
   );
 };

@@ -1,27 +1,21 @@
 const breadCrumbsProps = [
   {
     name: 'children',
-    type: 'React.ReactNode',
+    type: 'ReactNode',
     defaultValue: null,
-    description: 'The content to be displayed as the children of the BreadCrumbs component.',
+    description: 'Breadcrumb items to be displayed.',
   },
   {
     name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'The class name for the BreadCrumbs component.',
-  },
-  {
-    name: 'id',
-    type: 'string',
-    defaultValue: null,
-    description: 'Unique identifier for the BreadCrumbs component.',
+    description: 'CSS class name(s).',
   },
   {
     name: 'style',
     type: 'React.CSSProperties',
     defaultValue: null,
-    description: 'The style for the BreadCrumbs component.',
+    description: 'Inline style for the breadcrumbs.',
   },
 ] as const;
 

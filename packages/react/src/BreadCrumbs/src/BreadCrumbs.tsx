@@ -13,15 +13,15 @@ type AriaAttributes =
 type BreadCrumbsProps = {
   id?: string;
   /**
-   * The content to be displayed as the children of the BreadCrumbs component.
+   * Breadcrumb items to be displayed.
    */
   children: React.ReactNode;
   /**
-   * The class name for the BreadCrumbs component.
+   * CSS class name(s).
    */
   className?: string;
   /**
-   * The style for the BreadCrumbs component.
+   * Inline style for the breadcrumbs.
    */
   style?: React.CSSProperties;
 };

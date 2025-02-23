@@ -143,7 +143,7 @@ export type AutocompleteProps<V extends Value, T> = {
    */
   searchFn?: QueryMatchFn<V, T>;
   /**
-   * Custom styles for the autocomplete.
+   * Inline styles for the autocomplete.
    */
   style?: React.CSSProperties;
   /**

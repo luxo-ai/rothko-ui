@@ -66,18 +66,18 @@ type SwitchProps = {
   kind?: RothkoKind;
   /**
    * The icon element to be displayed when the switch is in the "off" state.
-   * @type {React.ReactNode}
+   * @type {React.ReactElement}
    */
-  offIcon?: JSX.Element;
+  offIcon?: React.ReactElement;
   /**
    * The event handler called when the switch's value changes.
    */
-  onChange: (Switchd: boolean) => void;
+  onChange: (selected: boolean) => void;
   /**
    * The icon element to be displayed when the switch is in the "on" state.
-   * @type {React.ReactNode}
+   * @type {React.ReactElement}
    */
-  onIcon?: JSX.Element;
+  onIcon?: React.ReactElement;
   /**
    * Specifies whether the switch is required.
    * @type {boolean}

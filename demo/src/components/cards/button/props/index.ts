@@ -1,3 +1,6 @@
+import { rothkoKindPropStr, rothkoSizePropStr } from '@/components/constants';
+import { asUnionStr } from '@/components/helpers';
+
 const buttonProps = [
   {
     name: 'accessoryLeft',
@@ -12,16 +15,10 @@ const buttonProps = [
     description: 'The right accessory component.',
   },
   {
-    name: 'appearance',
-    type: "'filled' | 'outline'",
-    defaultValue: 'filled',
-    description: 'The appearance style of the button.',
-  },
-  {
     name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'The class name for styling purposes.',
+    description: 'CSS class name(s).',
   },
   {
     name: 'disabled',
@@ -30,22 +27,16 @@ const buttonProps = [
     description: 'Whether the button is disabled.',
   },
   {
-    name: 'fitContent',
+    name: 'asIcon',
     type: 'boolean',
     defaultValue: null,
-    description: 'Whether the button should fit its content.',
-  },
-  {
-    name: 'id',
-    type: 'string',
-    defaultValue: null,
-    description: 'Unique identifier for the button.',
+    description: 'Display the button as an icon.',
   },
   {
     name: 'kind',
-    type: 'RothkoKind',
-    defaultValue: 'primary',
-    description: 'The kind of button.',
+    type: rothkoKindPropStr,
+    defaultValue: "'primary'",
+    description: "The button's semantic style.",
   },
   {
     name: 'loading',
@@ -55,31 +46,43 @@ const buttonProps = [
   },
   {
     name: 'onClick',
-    type: '(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void',
+    type: '(e: MouseEvent) => void',
     defaultValue: null,
     description: 'The click event handler.',
   },
   {
     name: 'onKeyDown',
-    type: '(e: React.KeyboardEvent<HTMLButtonElement>) => void',
+    type: '(e: KeyboardEvent) => void',
     defaultValue: null,
     description: 'The keydown event handler.',
   },
   {
     name: 'role',
-    type: 'React.AriaRole',
-    defaultValue: 'button',
+    type: 'AriaRole',
+    defaultValue: "'button'",
     description: 'The role of the button.',
   },
   {
+    name: 'variant',
+    type: asUnionStr('filled', 'outline'),
+    defaultValue: "'filled'",
+    description: 'The variant of the button.',
+  },
+  {
     name: 'size',
-    type: 'RothkoSize',
-    defaultValue: 'm',
+    type: rothkoSizePropStr,
+    defaultValue: "'m'",
     description: 'The size of the button.',
   },
   {
+    name: 'radius',
+    type: asUnionStr('none', 'default', 'full'),
+    defaultValue: "'default'",
+    description: 'The radius of the button.',
+  },
+  {
     name: 'style',
-    type: 'React.CSSProperties',
+    type: 'CSSProperties',
     defaultValue: null,
     description: 'The inline style for the button.',
   },
@@ -91,15 +94,9 @@ const buttonProps = [
   },
   {
     name: 'type',
-    type: "'button' | 'submit' | 'reset'",
-    defaultValue: 'button',
+    type: asUnionStr('button', 'submit', 'reset'),
+    defaultValue: "'button'",
     description: 'The type of the button.',
-  },
-  {
-    name: 'variant',
-    type: "'square' | 'pill' | 'default'",
-    defaultValue: 'default',
-    description: 'The variant of the button.',
   },
 ] as const;
 

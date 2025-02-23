@@ -1,15 +1,17 @@
+import { asUnionStr } from '@/components/helpers';
+
 const autocompleteProps = [
   {
     name: 'className',
     type: 'string',
     defaultValue: null,
-    description: 'Additional class name for the autocomplete.',
+    description: 'CSS class name(s).',
   },
   {
     name: 'clearable',
     type: 'boolean',
     defaultValue: 'true',
-    description: 'Whether the autocomplete is clearable.',
+    description: ' Whether the autocomplete is clearable.',
   },
   {
     name: 'disabled',
@@ -26,14 +28,8 @@ const autocompleteProps = [
   {
     name: 'errorText',
     type: 'string',
-    defaultValue: 'Invalid',
+    defaultValue: '"Invalid"',
     description: 'The error message to display when the autocomplete has an error state.',
-  },
-  {
-    name: 'id',
-    type: 'string',
-    defaultValue: null,
-    description: 'Unique identifier for the autocomplete.',
   },
   {
     name: 'label',
@@ -43,25 +39,25 @@ const autocompleteProps = [
   },
   {
     name: 'menuVariant',
-    type: 'MenuVariant',
-    defaultValue: 'bottom',
+    type: asUnionStr('top', 'bottom'),
+    defaultValue: "'bottom'",
     description: 'The position of the autocomplete menu.',
   },
   {
     name: 'noResultsMessage',
-    type: 'React.ReactNode',
-    defaultValue: 'No results',
+    type: 'ReactNode',
+    defaultValue: '"No results"',
     description: 'The message to display when there are no search results.',
   },
   {
     name: 'onBlur',
-    type: 'FocusHandler',
+    type: '(e: FocusEvent) => void',
     defaultValue: null,
     description: 'Event handler for when the autocomplete loses focus.',
   },
   {
     name: 'onChange',
-    type: '(v: V | null) => void',
+    type: '(value: V | null) => void',
     defaultValue: null,
     description: 'Event handler for when the autocomplete value changes.',
   },
@@ -79,7 +75,7 @@ const autocompleteProps = [
   },
   {
     name: 'onFocus',
-    type: 'FocusHandler',
+    type: '(e: FocusEvent) => void',
     defaultValue: null,
     description: 'Event handler for when the autocomplete gains focus.',
   },
@@ -98,7 +94,7 @@ const autocompleteProps = [
   {
     name: 'placeholder',
     type: 'string',
-    defaultValue: 'Select',
+    defaultValue: '"Select"',
     description: 'The placeholder text for the autocomplete.',
   },
   {
@@ -115,15 +111,15 @@ const autocompleteProps = [
   },
   {
     name: 'style',
-    type: 'React.CSSProperties',
+    type: 'CSSProperties',
     defaultValue: null,
-    description: 'Custom styles for the autocomplete.',
+    description: 'Inline styles for the autocomplete.',
   },
   {
     name: 'value',
     type: 'V | null',
     defaultValue: null,
-    description: 'The value(s) of the autocomplete.',
+    description: 'The selected value of the autocomplete.',
   },
 ] as const;
 

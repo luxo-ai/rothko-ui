@@ -1,21 +1,47 @@
-const toggleProps = [
+import { rothkoKindPropStr } from '@/components/constants';
+
+const switchProps = [
   {
     name: 'children',
-    type: 'string',
+    type: 'ReactNode',
     defaultValue: null,
     description: 'The content of the switch',
   },
   {
     name: 'className',
-    type: 'React.ReactNode',
+    type: 'string',
     defaultValue: null,
-    description: 'Adds a class to the switch',
+    description: 'CSS class name(s)',
+  },
+  {
+    name: 'classNames',
+    type: 'Objecct<StyleableComponents, string>',
+    defaultValue: null,
+    description: 'Additional class names for the switch',
+  },
+  {
+    name: 'error',
+    type: 'boolean',
+    defaultValue: false,
+    description: 'Specifies whether the switch has an error state',
+  },
+  {
+    name: 'errorText',
+    type: 'string',
+    defaultValue: '"Invalid"',
+    description: 'The error text to be displayed when the switch is in an error state',
+  },
+  {
+    name: 'kind',
+    type: rothkoKindPropStr,
+    defaultValue: null,
+    description: "The switch's semantic style",
   },
   {
     name: 'onChange',
     type: '(selected: boolean) => void',
     defaultValue: null,
-    description: 'Event handler for switch state change',
+    description: "The event handler called when the switch's value changes",
   },
   {
     name: 'style',
@@ -24,29 +50,35 @@ const toggleProps = [
     description: 'Inline style for the switch',
   },
   {
+    name: 'styles',
+    type: 'Object<StyleableComponents, string>',
+    defaultValue: null,
+    description: 'Additional inline styles for the switch',
+  },
+  {
     name: 'selected',
     type: 'boolean',
     defaultValue: null,
-    description: 'Specifies if the switch is selected or not',
+    description: 'Specifies whether the switch is selected',
   },
   {
     name: 'onIcon',
-    type: 'JSX.Element',
+    type: 'ReactElement',
     defaultValue: null,
-    description: 'Icon to display when the switch is on',
+    description: 'The icon element to be displayed when the switch is in the "on" state',
   },
   {
     name: 'offIcon',
-    type: 'JSX.Element',
+    type: 'ReactElement',
     defaultValue: null,
-    description: 'Icon to display when the switch is off',
+    description: 'The icon element to be displayed when the switch is in the "off" state',
   },
   {
     name: 'disabled',
     type: 'boolean',
     defaultValue: null,
-    description: 'Disables the checkbox',
+    description: 'Specifies whether the switch is disabled',
   },
 ] as const;
 
-export default toggleProps;
+export default switchProps;

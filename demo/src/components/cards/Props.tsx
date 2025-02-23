@@ -1,7 +1,8 @@
 import { Flex, FlexItem, Code, Heading5, Heading3 } from '@rothko-ui/react';
 import toKebabCase from 'lodash.kebabcase';
+import sortBy from 'lodash.sortby';
 import Link from 'next/link';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { Table, TableData, TableRow } from '../table';
 import styles from './Card.module.scss';
@@ -12,9 +13,13 @@ type PropsTableProps = {
 };
 
 const PropsTable = ({ props: propsMeta }: PropsTableProps) => {
+  const sortedPropsMeta = useMemo(() => {
+    return sortBy([...propsMeta], ['name']);
+  }, [propsMeta]);
+
   return (
     <Table headers={['Name', 'Type', 'Default', 'Description']}>
-      {propsMeta.map(({ name, type, defaultValue, description }) => (
+      {sortedPropsMeta.map(({ name, type, defaultValue, description }) => (
         <TableRow key={name}>
           <TableData>{name}</TableData>
           <TableData>

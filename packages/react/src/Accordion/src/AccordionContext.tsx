@@ -1,13 +1,13 @@
 import type { RothkoKind } from '@rothko-ui/system';
 import { createContext } from 'react';
 
-import type { Icon } from './types';
+import type { AccordionVariant, Icon } from './types';
 
 type AccordionContextType = {
   /**
-   * Determines whether the Accordion should have a border.
+   * Variant of the accordion.
    */
-  bordered?: boolean;
+  variant?: AccordionVariant;
   /**
    * Determines whether the Accordion should have a compact layout.
    */
