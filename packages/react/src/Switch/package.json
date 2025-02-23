@@ -1,6 +1,6 @@
 {
   "name": "@rothko-ui/switch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/luxo-ai/rothko-ui.git",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@rothko-ui/system": "^1.0.1",
-    "@rothko-ui/typography": "^1.0.0"
+    "@rothko-ui/typography": "^1.0.1"
   },
   "peerDependencies": {
     "react": "^18.0.0",
