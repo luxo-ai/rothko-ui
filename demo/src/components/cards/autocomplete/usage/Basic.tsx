@@ -1,7 +1,7 @@
 import { Autocomplete } from '@rothko-ui/react';
 import React, { useState } from 'react';
 
-import { listOfCountries } from './listOfCountries';
+import { listOfCountries } from '@/components/cards/listOfCountries';
 
 const countryOptions = listOfCountries.map((country, idx) => ({ id: idx, label: country }));
 

@@ -1,5 +1,5 @@
 export { debugFactory } from './debug';
-export { classes, scopedClasses } from './classes';
+export { classes } from './classes';
 export {
   isArray,
   isString,

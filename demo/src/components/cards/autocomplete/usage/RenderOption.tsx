@@ -2,7 +2,7 @@ import type { Option } from '@rothko-ui/react';
 import { Autocomplete, Paragraph } from '@rothko-ui/react';
 import React, { useState } from 'react';
 
-import { listOfCountriesWithFlags } from './listOfCountries';
+import { listOfCountriesWithFlags } from '@/components/cards/listOfCountries';
 
 const countryOptions: Option<number, { flag: string }>[] = listOfCountriesWithFlags.map(
   (country, idx) => ({

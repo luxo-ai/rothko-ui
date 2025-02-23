@@ -156,14 +156,19 @@ export const Label = ({
 
 interface CodeProps extends React.HTMLAttributes<HTMLElement> {
   as?: keyof JSX.IntrinsicElements;
+  size?: RothkoSize;
 }
 
-export const Code = ({ as, children, className, ...props }: CodeProps): JSX.Element => {
+export const Code = ({ as, children, className, size, ...props }: CodeProps): JSX.Element => {
   const codeClasses = classes(
     'my-[0.125rem] mx-0',
     'rothko-font-code',
     'rothko-color-code',
-    'rothko-code-size',
+    size === 'xs' && 'rothko-paragraph-size-xs',
+    size === 's' && 'rothko-paragraph-size-s',
+    size === 'm' && 'rothko-paragraph-size-m',
+    size === 'l' && 'rothko-paragraph-size-l',
+    !size && 'rothko-code-size',
     'whitespace-pre-wrap',
     'px-[0.25rem]', //
     'py-[0.125rem]', //

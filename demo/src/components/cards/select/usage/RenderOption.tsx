@@ -1,8 +1,8 @@
 import type { Option } from '@rothko-ui/react';
-import { Select, Paragraph } from '@rothko-ui/react';
+import { Select, Paragraph, Code, Grid } from '@rothko-ui/react';
 import React, { useState } from 'react';
 
-import { listOfNamesWithUsername } from './listOfNames';
+import { listOfNamesWithUsername } from '@/components/cards/listOfNames';
 
 const nameOptions: Option<number, { username: string }>[] = listOfNamesWithUsername.map(
   (user, idx) => ({
@@ -21,12 +21,12 @@ const App = () => {
       onChange={v => setSelected(v)}
       options={nameOptions}
       renderOption={({ option }) => (
-        <Paragraph size="s">
-          {option.label}{' '}
-          <Paragraph size="xs" variant="italic" as="span">
+        <Grid gridTemplateColumns="3rem 1rem 1fr">
+          <Paragraph size="s">{option.label}</Paragraph> /
+          <Code size="s" style={{ width: 'fit-content' }}>
             ({option.data.username})
-          </Paragraph>
-        </Paragraph>
+          </Code>
+        </Grid>
       )}
     />
   );

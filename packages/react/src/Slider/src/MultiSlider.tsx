@@ -5,6 +5,7 @@ import React, { useMemo } from 'react';
 import { SliderRange, SliderTrack, SliderHandle, SliderHandleInner } from './Shared';
 import type { SliderHandleProps } from './Shared';
 import { getOffsetFactory } from './sliderUtils';
+import { useValidateHandle } from './useValidateHandle';
 
 const BUFFER = 1;
 
@@ -83,21 +84,7 @@ export const MultiSlider = ({
   const trackId = useId(id);
   const getOffset = useMemo(() => getOffsetFactory({ min, max }), [min, max]);
   const [lower, upper] = useMemo(() => (value ? value : [min, max]), [value, min, max]);
-
-  // validation
-  const childHandle = useMemo(() => {
-    if (!children) {
-      return null;
-    }
-    if (React.Children.count(children) !== 1) {
-      throw new Error('MultiSlider requires exactly one child');
-    }
-    if (!React.isValidElement(children)) {
-      throw new Error('MultiSlider requires child to be valid React element');
-    }
-    return children;
-  }, [children]);
-
+  const childHandle = useValidateHandle(children);
   return (
     <SliderTrack
       id={trackId}

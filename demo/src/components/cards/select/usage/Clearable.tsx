@@ -1,7 +1,7 @@
 import { Select } from '@rothko-ui/react';
 import React, { useState } from 'react';
 
-import { listOfNames } from './listOfNames';
+import { listOfNames } from '@/components/cards/listOfNames';
 
 const nameOptions = listOfNames.map((name, idx) => ({ id: idx, label: name }));
 

@@ -2,7 +2,7 @@ export const BASIC = `
 import { Autocomplete } from '@rothko-ui/react';
 import React, { useState } from 'react';
 
-import { listOfCountries } from './listOfCountries';
+import { listOfCountries } from '@/components/cards/listOfCountries';
 
 const countryOptions = listOfCountries.map((country, idx) => ({ id: idx, label: country }));
 
@@ -18,7 +18,7 @@ export const DISABLED = `
 import { Autocomplete } from '@rothko-ui/react';
 import React, { useState } from 'react';
 
-import { listOfCountries } from './listOfCountries';
+import { listOfCountries } from '@/components/cards/listOfCountries';
 
 const countryOptions = listOfCountries.map((country, idx) => ({ id: idx, label: country }));
 
@@ -41,7 +41,7 @@ export const MENU_VARIANT = `
 import { Autocomplete } from '@rothko-ui/react';
 import React, { useState } from 'react';
 
-import { listOfCountries } from './listOfCountries';
+import { listOfCountries } from '@/components/cards/listOfCountries';
 
 const countryOptions = listOfCountries.map((country, idx) => ({ id: idx, label: country }));
 
@@ -65,7 +65,7 @@ import type { Option } from '@rothko-ui/react';
 import { Autocomplete, Paragraph } from '@rothko-ui/react';
 import React, { useState } from 'react';
 
-import { listOfCountriesWithFlags } from './listOfCountries';
+import { listOfCountriesWithFlags } from '@/components/cards/listOfCountries';
 
 const countryOptions: Option<number, { flag: string }>[] = listOfCountriesWithFlags.map(
   (country, idx) => ({

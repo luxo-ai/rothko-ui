@@ -1,4 +1,4 @@
-import { Email, Github, Twitter } from '@rothko-ui/icons';
+import { Email, Github } from '@rothko-ui/icons';
 import { Flex, Paragraph } from '@rothko-ui/react';
 import Link from 'next/link';
 import React from 'react';
@@ -32,13 +32,12 @@ const PaddedNavLayout = ({ children, selected }: LayoutProps) => {
       </main>
       <footer>
         <Flex marginBottom="0.5rem" flexDirection="column" alignItems="center">
-          <Paragraph>Built in NYC</Paragraph>
+          <Paragraph size="s">Built in NYC</Paragraph>
           <Paragraph size="s" variant="light">
             © {new Date().getFullYear()} rothko ui
           </Paragraph>
         </Flex>
         <Flex columnGap="1rem" justifyContent="center" alignItems="center">
-          <Twitter width={20} height={20} fill={theme === 'dark' ? '#cccc' : undefined} />
           <Link href={config.repoUrl} target="_bank">
             <Github width={20} height={20} fill={theme === 'dark' ? '#cccc' : undefined} />
           </Link>

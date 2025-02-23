@@ -5,6 +5,7 @@ import React, { useMemo } from 'react';
 import { SliderRange, SliderTrack, SliderHandleInner, SliderHandle } from './Shared';
 import type { SliderHandleProps } from './Shared';
 import { getOffsetFactory } from './sliderUtils';
+import { useValidateHandle } from './useValidateHandle';
 
 type AriaAttributes =
   | 'aria-label'
@@ -79,6 +80,7 @@ export const Slider = ({
   const trackId = useId(id);
   const getOffset = useMemo(() => getOffsetFactory({ min, max }), [min, max]);
   const localVal = useMemo(() => value || min, [value, min]);
+  const childHandle = useValidateHandle(children);
   return (
     <SliderTrack
       id={trackId}
@@ -105,7 +107,7 @@ export const Slider = ({
         }}
         value={localVal}
       >
-        {children ? children : <SliderHandle />}
+        {childHandle ? childHandle : <SliderHandle />}
       </SliderHandleInner>
       <SliderRange disabled={disabled} kind={kind} style={{ width: getOffset(localVal) }} />
     </SliderTrack>
