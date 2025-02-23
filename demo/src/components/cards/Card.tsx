@@ -207,7 +207,7 @@ const Section = ({ sectionKey, section, depth }: SectionProps) => {
       {title && headerVariant !== 'body' && (
         <Heading
           variant={headerVariant}
-          className={styles.headerIdk}
+          className={styles.hashLinkableHeader}
           id={titleAsKebab}
           // for nav
           style={{ scrollMarginTop: 80 }}

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styles from './Card.module.scss';
 
 const Usage = () => (
-  <Heading3 className={styles.headerIdk} id="usage">
+  <Heading3 className={styles.hashLinkableHeader} id="usage">
     <Link href="#usage" scroll>
       Usage
     </Link>

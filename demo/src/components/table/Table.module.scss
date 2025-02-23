@@ -4,6 +4,7 @@ $tableRowBorder: var(--rothko-table-row-border, #000);
 $tableRowMinimizedBackground: var(--rothko-table-row-minimized-background, transparent);
 $rothkoForeground: var(--rothko-foreground, #000);
 $bodyFontSize: var(--rothko-font-size-body, 1rem);
+$bodyFontSizeSmall: var(--rothko-font-size-body-small, 1rem);
 $regularFont: var(--rothko-font-family-regular);
 $lightFont: var(--rothko-font-family-light, $regularFont);
 
@@ -37,7 +38,7 @@ $lightFont: var(--rothko-font-family-light, $regularFont);
 
   & td {
     font-weight: 300;
-    font-size: $bodyFontSize;
+    font-size: $bodyFontSizeSmall;
     font-family: $regularFont;
     padding: 1.25rem;
   }

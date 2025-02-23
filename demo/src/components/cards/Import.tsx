@@ -11,7 +11,7 @@ type ImportProps = {
 
 const Import = ({ single, global }: ImportProps) => (
   <div>
-    <Heading3 className={styles.headerIdk} id="import">
+    <Heading3 className={styles.hashLinkableHeader} id="import">
       <Link href="#import" scroll>
         Import
       </Link>

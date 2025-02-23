@@ -64,7 +64,8 @@ const Navigation = () => {
               </NextLink>
               {/* <PhantomButton className={styles.hoverButton} onClick={() => toggleTheme()}>
                 {modeIcon}
-              </PhantomButton> */}
+              </PhantomButton>
+              */}
             </Flex>
             <DesktopOnly height="100%">
               <NextLink href="/sponsor">

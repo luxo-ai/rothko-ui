@@ -1,7 +1,7 @@
 export type Styles = {
   bodySubtext: string;
   componentCard: string;
-  headerIdk: string;
+  hashLinkableHeader: string;
   propsContainer: string;
 };
 

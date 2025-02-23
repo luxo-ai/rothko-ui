@@ -48,7 +48,7 @@ const Props = ({ copy }: { copy: PropsCopy | Required<PropsCopy>[] }) => {
   if (Array.isArray(copy)) {
     return (
       <section>
-        <Heading3 className={styles.headerIdk} id="props">
+        <Heading3 className={styles.hashLinkableHeader} id="props">
           <Link href="#props" scroll>
             Props
           </Link>
@@ -70,7 +70,7 @@ const Props = ({ copy }: { copy: PropsCopy | Required<PropsCopy>[] }) => {
 
   return (
     <section>
-      <Heading3 className={styles.headerIdk} id={titleAsKebab}>
+      <Heading3 className={styles.hashLinkableHeader} id={titleAsKebab}>
         <Link href={`#${titleAsKebab}`} scroll>
           {title}
         </Link>

@@ -1,7 +1,7 @@
 import type { RothkoKind } from '@rothko-ui/react';
 import { Radio, RadioGroup } from '@rothko-ui/react';
 
-const kinds: RothkoKind[] = ['danger', 'info', 'primary', 'secondary', 'success', 'warning'];
+import { rothkoKinds } from '../constants';
 
 type KindRadioProps = {
   kind: RothkoKind;
@@ -18,7 +18,7 @@ const KindRadioGroup = ({ kind, setKind }: KindRadioProps) => {
       onChange={k => setKind(k)}
       style={{ maxWidth: '25rem' }}
     >
-      {kinds.map(k => (
+      {rothkoKinds.map(k => (
         <Radio $key={k} key={k}>
           {k}
         </Radio>
