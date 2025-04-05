@@ -1,5 +1,5 @@
 export type Styles = {
-  'phantom-button': string;
+  phantomButton: string;
 };
 
 export type ClassNames = keyof Styles;

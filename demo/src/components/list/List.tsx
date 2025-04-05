@@ -8,7 +8,7 @@ type ListProps = React.CSSProperties & {
 
 export const List = ({ children, ...style }: ListProps) => {
   return (
-    <ul className={styles['list']} style={style} role="list">
+    <ul className={styles.list} style={style} role="list">
       {children}
     </ul>
   );

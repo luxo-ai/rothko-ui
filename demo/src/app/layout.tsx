@@ -87,4 +87,18 @@ const Layout = async (props: LayoutProps) => {
   );
 };
 
+/*
+
+App.getInitialProps = async (ctx: AppContext) => {
+  const cookieString = ctx.ctx.req?.headers.cookie || '';
+  const cookies = cookie.parse(cookieString);
+  const mobileDetect = new MobileDetect(ctx.ctx.req?.headers['user-agent'] || '');
+  return {
+    cookies,
+    isMobileOrTablet: !!mobileDetect.mobile() || !!mobileDetect.tablet(),
+  };
+};
+
+*/
+
 export default Layout;

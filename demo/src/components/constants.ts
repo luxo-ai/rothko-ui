@@ -1,4 +1,4 @@
-import { asUnionStr } from './helpers';
+import { asUnionStr } from '@helpers';
 
 export const rothkoKinds = ['primary', 'secondary', 'success', 'danger', 'warning', 'info'];
 export const rothkoSizes = ['xs', 's', 'm', 'l'];

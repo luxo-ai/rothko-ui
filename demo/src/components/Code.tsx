@@ -1,11 +1,13 @@
-import { CopyOutline } from '@rothko-ui/icons';
-import { Flex, ToasterConsumer, Paragraph } from '@rothko-ui/react';
+import { CopyOutline, Checkmark } from '@rothko-ui/icons';
+import { Paragraph } from '@rothko-ui/typography';
 import { Highlight, themes } from 'prism-react-renderer';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 import { PhantomButton } from './button';
-import useTheme from '../hooks/useTheme';
+import { Flex } from './flex';
+
+import useTheme from '@/hooks/useTheme';
 
 export type Language = 'bash' | 'jsx' | 'json' | 'text' | 'typescript' | 'css';
 
@@ -126,8 +128,7 @@ export const Code = ({
               <Flex
                 alignItems="center"
                 justifyContent="space-between"
-                padding="0.5rem 1rem"
-                backgroundColor={style.backgroundColor}
+                style={{ padding: '0.5rem 1rem', background: style.backgroundColor }}
               >
                 {displayLanguage ? (
                   <Paragraph size="xs" style={{ color: style.color }}>
@@ -136,23 +137,7 @@ export const Code = ({
                 ) : (
                   <div />
                 )}
-                <ToasterConsumer>
-                  {({ addToast }) => (
-                    <CopyToClipboard
-                      text={sourceCode}
-                      onCopy={() => addToast({ content: 'Added to clipboard!', withLife: true })}
-                    >
-                      <PhantomButton>
-                        <Flex gap="0.25rem">
-                          <CopyOutline fill={style.color} width="1.125rem" height="1.125rem" />
-                          <Paragraph size="xs" variant="bold" style={{ color: style.color }}>
-                            Copy
-                          </Paragraph>
-                        </Flex>
-                      </PhantomButton>
-                    </CopyToClipboard>
-                  )}
-                </ToasterConsumer>
+                <CopyToClipboardButton fill={style.color} sourceCode={sourceCode} />
               </Flex>
             )}
             <div
@@ -194,30 +179,46 @@ export const Code = ({
                   </div>
                 ))}
               </pre>
-              {testing && (
-                <ToasterConsumer>
-                  {({ addToast }) => (
-                    <CopyToClipboard
-                      text={sourceCode}
-                      onCopy={() => addToast({ content: 'Added to clipboard!', withLife: true })}
-                    >
-                      <PhantomButton>
-                        <CopyOutline
-                          fill={style.color}
-                          opacity={0.65}
-                          width="1.125rem"
-                          height="1.125rem"
-                        />
-                      </PhantomButton>
-                    </CopyToClipboard>
-                  )}
-                </ToasterConsumer>
-              )}
+              {testing && <CopyToClipboardButton fill={style.color} sourceCode={sourceCode} />}
             </div>
           </>
         )}
       </Highlight>
     </div>
+  );
+};
+
+type CopyToClipboardButtonProps = {
+  fill: React.SVGAttributes<SVGSVGElement>['fill'];
+  sourceCode: string;
+};
+
+const ICON_SIZE = '1.125rem';
+
+const CopyToClipboardButton = ({ sourceCode, fill }: CopyToClipboardButtonProps) => {
+  const activeTimeoutInterval = useRef<NodeJS.Timeout | null>(null);
+  const [checkActive, setCheckActive] = useState(false);
+
+  const onCopy = useCallback(() => {
+    if (activeTimeoutInterval.current) {
+      clearTimeout(activeTimeoutInterval.current);
+    }
+    setCheckActive(true);
+    activeTimeoutInterval.current = setTimeout(() => setCheckActive(false), 2000);
+  }, []);
+
+  return (
+    <CopyToClipboard text={sourceCode} onCopy={() => onCopy()}>
+      <PhantomButton>
+        <Flex gap="0.25rem">
+          {checkActive ? (
+            <Checkmark width={ICON_SIZE} height={ICON_SIZE} fill="green" />
+          ) : (
+            <CopyOutline width={ICON_SIZE} height={ICON_SIZE} fill={fill} />
+          )}
+        </Flex>
+      </PhantomButton>
+    </CopyToClipboard>
   );
 };
 

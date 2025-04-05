@@ -1,7 +1,7 @@
-import { Flex, Heading2, Heading1 } from '@rothko-ui/react';
 import React from 'react';
 
 import { DesktopOnly, MobileOnly } from './dimensions';
+import { Flex } from './flex';
 
 type ErrorProps = {
   code: 400 | 404 | 500 | 501;
@@ -12,7 +12,7 @@ type ErrorProps = {
 const ErrorPage = ({ code, header, children }: ErrorProps) => {
   return (
     <Flex
-      height="50vh"
+      style={{ height: '50vh' }}
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
@@ -21,19 +21,19 @@ const ErrorPage = ({ code, header, children }: ErrorProps) => {
       <div>
         <DesktopOnly>
           <Flex gap="0.5rem">
-            <Heading1>{code}</Heading1>
+            <h1>{code}</h1>
             {header && (
               <>
-                <Heading1>|</Heading1>
-                <Heading1>{header}</Heading1>
+                <h1>|</h1>
+                <h1>{header}</h1>
               </>
             )}
           </Flex>
         </DesktopOnly>
         <MobileOnly>
           <Flex flexDirection="column" gap="0.5rem" alignItems="center">
-            <Heading2>{code}</Heading2>
-            {header && <Heading2>{header}</Heading2>}
+            <h2>{code}</h2>
+            {header && <h2>{header}</h2>}
           </Flex>
         </MobileOnly>
       </div>

@@ -17,7 +17,11 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/components/*": ["./src/components/*"]
+      "@/components/*": ["./src/components/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@helpers": ["./src/helpers"],
+      "@config": ["./src/config"],
+      "@types": ["./src/types"]
     },
     "plugins": [
       {
@@ -30,15 +34,8 @@
     "**/*.spec.tsx",
     "**/*.test.ts",
     "**/*.test.tsx",
-    "node_modules",
-    "build"
+    "scripts",
+    "node_modules"
   ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "scripts/generateSource.js",
-    "build/types/**/*.ts"
-, "next.config.mjs"  ]
+  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"]
 }

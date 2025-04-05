@@ -22,15 +22,5 @@
 @font-face {
   font-family: 'Soehne-Buch';
   font-display: swap;
-  src: url('/fonts/Soehne/soehne-buch.woff2');
-}
-@font-face {
-  font-family: 'Soehne-Halbfett';
-  font-display: swap;
-  src: url('/fonts/Soehne/soehne-halbfett.woff2');
-}
-@font-face {
-  font-family: 'Soehne-Mono-Buch';
-  font-display: swap;
-  src: url('/fonts/Soehne/soehne-mono-buch.woff2');
+  src: url('/fonts/Soehne/Soehne-Buch.woff2');
 }

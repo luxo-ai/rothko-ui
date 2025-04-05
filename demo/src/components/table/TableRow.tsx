@@ -1,3 +1,4 @@
+import { classes } from '@helpers';
 import React from 'react';
 
 import { isStringHeader } from './helpers';
@@ -31,7 +32,7 @@ const TableRow = ({ children }: TableRowProps) => (
             return (
               <td
                 // /* export classes from components */
-                className={className ? `${styles['pivoted']} ${className}` : styles['pivoted']}
+                className={classes(styles.pivoted, className)}
                 style={style}
               >
                 {header && (

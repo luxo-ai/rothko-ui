@@ -15,7 +15,7 @@ type TableProps = {
 
 const Table = ({ headers = [], children }: TableProps) => (
   <TableContext.Provider value={{ headers }}>
-    <table className={styles['table']}>
+    <table className={styles.table} role="table">
       {headers && (
         <TableHeaders>
           <tr>

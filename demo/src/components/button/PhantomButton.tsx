@@ -1,4 +1,4 @@
-import { classes } from '@rothko-ui/react';
+import { classes } from '@helpers';
 import React from 'react';
 
 import styles from './Button.module.scss';
@@ -11,11 +11,7 @@ type PhantomButtonProps = {
 
 export const PhantomButton = ({ children, onClick, className }: PhantomButtonProps) => {
   return (
-    <button
-      type="button"
-      className={classes(styles['phantom-button'], className)}
-      onClick={onClick}
-    >
+    <button type="button" className={classes(styles.phantomButton, className)} onClick={onClick}>
       {children}
     </button>
   );
