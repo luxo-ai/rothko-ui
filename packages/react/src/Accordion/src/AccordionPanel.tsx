@@ -6,7 +6,6 @@ import {
   useId,
   ListenableKeys,
   getKeyCode,
-  Flex,
   getElementFullHeight,
 } from '@rothko-ui/system';
 import type { WithAria, Dictionary } from '@rothko-ui/system';
@@ -235,10 +234,10 @@ const AccordionPanel = React.forwardRef<
               iconOverride={iconOverrideLocal || iconOverride}
             />
             {(title || subtitle) && (
-              <Flex flexDirection="column" rowGap="0.1rem" alignItems="start">
+              <div className="flex flex-col gap-y-[0.1rem] items-start">
                 {title}
                 {subtitle}
-              </Flex>
+              </div>
             )}
           </button>
         </header>

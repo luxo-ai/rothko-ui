@@ -1,5 +1,7 @@
-import { Checkbox, Flex } from '@rothko-ui/react';
+import { Checkbox } from '@rothko-ui/react';
 import React, { useState } from 'react';
+
+import { Flex } from '@/components/flex';
 
 const App = () => {
   const [withoutLabelChecked, setWithoutLabelChecked] = useState(true);

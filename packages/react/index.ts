@@ -19,5 +19,4 @@ export * from '@rothko-ui/tabs';
 export * from '@rothko-ui/tag';
 export * from '@rothko-ui/toaster';
 export * from '@rothko-ui/typography';
-export { Flex } from '@rothko-ui/system';
 export type { RothkoKind, Option, NestedOption, RothkoSize, Accessory } from '@rothko-ui/system';

@@ -15,7 +15,6 @@ export default {
     dom: 'src/dom/index.ts',
     hooks: 'src/hooks/index.ts',
     utils: 'src/utils/index.ts',
-    layout: 'src/layout/index.ts',
   },
   output: {
     dir: 'dist',

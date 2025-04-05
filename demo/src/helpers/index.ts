@@ -1,5 +1,7 @@
 import type { RothkoKind } from '@rothko-ui/react';
 
+export * from './extractAriaProps';
+
 export const isSSR = typeof window === 'undefined';
 export const isBrowser = !isSSR;
 

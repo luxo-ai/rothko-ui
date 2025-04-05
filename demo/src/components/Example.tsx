@@ -1,6 +1,7 @@
-import { Flex, Paragraph, Tabs, Tab, Heading5 } from '@rothko-ui/react';
+import { Paragraph, Tabs, Tab, Heading5 } from '@rothko-ui/react';
 
 import { JSXCode } from './Code';
+import { Flex } from './flex';
 
 type CodeSnippetProps = {
   children: React.ReactElement;

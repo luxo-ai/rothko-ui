@@ -1,7 +1,7 @@
 'use client';
 
 import { insertKind } from '@helpers';
-import { Flex, ToasterContextProvider, type RothkoKind } from '@rothko-ui/react';
+import { ToasterContextProvider, type RothkoKind } from '@rothko-ui/react';
 import { useState } from 'react';
 
 import toastCopy from './copy';
@@ -14,6 +14,7 @@ import WithLife from './usage/WithLife';
 import { Card, Import, Props, Usage } from '@/components/card';
 import { Container } from '@/components/container';
 import Example from '@/components/Example';
+import { Flex } from '@/components/flex';
 import { KindRadioGroup } from '@/components/KindRadioGroup';
 import { useIsMobileOrTablet } from '@/hooks/useIsMobileOrTablet';
 

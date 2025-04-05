@@ -29,10 +29,6 @@
       "import": "./dist/components.mjs",
       "types": "./dist/components/index.d.ts"
     },
-    "./layout": {
-      "import": "./dist/layout.mjs",
-      "types": "./dist/layout/index.d.ts"
-    },
     "./hooks": {
       "import": "./dist/hooks.mjs",
       "types": "./dist/hooks/index.d.ts"

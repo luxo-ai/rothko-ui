@@ -1,5 +1,5 @@
 import type { WithAria, Dictionary, RothkoKind } from '@rothko-ui/system';
-import { Flex, classes } from '@rothko-ui/system';
+import { classes } from '@rothko-ui/system';
 import React from 'react';
 
 import type { TabProps } from './Tab';
@@ -122,27 +122,21 @@ export function Tabs({
             const rightIcon = controller.getRightIcon(tabKey);
             const title = controller.getTitle(tabKey);
             return (
-              <Flex
-                className="w-full"
-                as="li"
+              <li
+                className="w-full my-0 mx-auto flex items-center justify-center gap-x-[0.5rem] cursor-pointer"
                 role="tab"
                 onClick={() => {
                   setTabIdx(idx);
                   onSelect?.(tabKey);
                 }}
                 key={tabKey}
-                margin="0 auto"
-                alignItems="center"
-                justifyContent="center"
-                columnGap="0.5rem"
-                cursor="pointer"
                 id={`${tabsId}-${tabKey}-tab`}
                 aria-controls={`${tabsId}-${tabKey}--tab-content`}
               >
                 {leftIcon && <div>{leftIcon}</div>}
                 <div className={tabItemClassnames}>{title}</div>
                 {rightIcon && <div>{rightIcon}</div>}
-              </Flex>
+              </li>
             );
           })}
         </ul>
