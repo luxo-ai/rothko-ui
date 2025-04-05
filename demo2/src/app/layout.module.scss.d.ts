@@ -5,6 +5,7 @@ export type Styles = {
   main: string;
   nav: string;
   navList: string;
+  navListContainer: string;
 };
 
 export type ClassNames = keyof Styles;

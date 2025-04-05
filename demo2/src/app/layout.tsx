@@ -1,13 +1,14 @@
 import config from '@config';
 import { Email, Github } from '@rothko-ui/icons';
 import { Paragraph } from '@rothko-ui/typography';
-import { headers } from 'next/headers';
+// import { headers } from 'next/headers';
 import NextLink from 'next/link';
 
 import styles from './layout.module.scss';
 
 import './global.css';
 import '../../public/fonts/style.css';
+import { DesktopOnly } from '@/components/dimensions';
 import { Flex } from '@/components/flex';
 import { Grid } from '@/components/grid';
 import { Navigation } from '@/components/navigation/Navigation';
@@ -33,8 +34,8 @@ const PRELOADED_FONTS = [
 const theme = 'light' as string;
 
 const Layout = async (props: LayoutProps) => {
-  const headerValues = await headers();
-  const pathname = headerValues.get('x-current-path') || '/';
+  // const headerValues = await headers();
+  // const pathname = headerValues.get('x-current-path') || '/';
   return (
     <html lang="en">
       <head>
@@ -51,11 +52,17 @@ const Layout = async (props: LayoutProps) => {
       </head>
       <body className={styles.body}>
         <header className={styles.header}>
-          <Navigation className={styles.nav} pathname={pathname} />
+          <Navigation className={styles.nav} />
         </header>
         <main className={styles.main}>
-          <Grid gridTemplateColumns="250px 1fr" columnGap="2.5rem">
-            <NavList className={styles.navList} />
+          <Grid
+            className={styles.navListContainer}
+            gridTemplateColumns="250px 1fr"
+            columnGap="2.5rem"
+          >
+            <DesktopOnly>
+              <NavList className={styles.navList} />
+            </DesktopOnly>
             <div>{props.children}</div>
           </Grid>
         </main>

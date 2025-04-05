@@ -1,6 +1,7 @@
 import React from 'react';
 
 import styles from './Searchbar.module.scss';
+import { Input } from '@rothko-ui/input';
 
 type SearchBarProps = {
   onQueryChange: (q: string) => void;
@@ -11,7 +12,7 @@ type SearchBarProps = {
 const SearchBar = ({ onQueryChange, placeholder, query }: SearchBarProps) => {
   return (
     <form role="search" tabIndex={-1}>
-      <input
+      <Input
         className={styles.searchbox}
         onChange={e => onQueryChange(e.target.value)}
         placeholder={placeholder}

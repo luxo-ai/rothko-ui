@@ -1,10 +1,9 @@
-'use client';
-import { Paragraph, LinkButton } from '@rothko-ui/react';
-import Link from 'next/link';
+import { Paragraph } from '@rothko-ui/typography';
 import React from 'react';
 
 import { NAVIGATION_LIST } from './constants';
 import { isLeaf } from './helpers';
+import { NavListLink } from './NavListLink';
 import type { NavigationSection } from './types';
 
 import { List, ListItem } from '@/components/list';
@@ -13,38 +12,16 @@ type ExpandNavListProps = {
   idx: number;
   depth?: number;
   item: NavigationSection;
-  selected?: string;
   onNavigate?: () => void;
 };
 
-const ExpandNavList = ({ idx, depth = 0, item, selected, onNavigate }: ExpandNavListProps) => {
+const ExpandNavList = ({ idx, depth = 0, item, onNavigate }: ExpandNavListProps) => {
   if (isLeaf(item)) {
-    const isSelected = selected === item.to;
     return (
       <ListItem>
-        <Link href={item.to}>
-          <LinkButton
-            as="span"
-            onClick={() => {
-              onNavigate?.();
-            }}
-            style={{
-              display: 'inline-block',
-              textDecoration: 'none',
-              width: '100%',
-              textAlign: 'inherit',
-              padding: `0.5rem calc(${depth} * 0.75rem)`,
-              color: 'var(--rothko-foreground, #000)',
-              fontWeight: isSelected ? 600 : 400,
-              fontFamily: isSelected
-                ? 'var(--rothko-font-family-bold)'
-                : 'var(--rothko-font-family)',
-            }}
-          >
-            {isSelected ? '\\ ' : ''}
-            {item.label}
-          </LinkButton>
-        </Link>
+        <NavListLink href={item.to} depth={depth}>
+          {item.label}
+        </NavListLink>
       </ListItem>
     );
   }
@@ -63,7 +40,6 @@ const ExpandNavList = ({ idx, depth = 0, item, selected, onNavigate }: ExpandNav
           <ExpandNavList
             idx={idx}
             onNavigate={onNavigate}
-            selected={selected}
             depth={depth + 1}
             // eslint-disable-next-line react/no-array-index-key
             key={`${item.label}-sub-${idx}`}
@@ -78,11 +54,10 @@ const ExpandNavList = ({ idx, depth = 0, item, selected, onNavigate }: ExpandNav
 type NavListProps = {
   className?: string;
   onNavigate?: () => void;
-  selected?: string;
   style?: React.CSSProperties;
 };
 
-export const NavList = ({ className, onNavigate, selected, style }: NavListProps) => (
+export const NavList = ({ className, onNavigate, style }: NavListProps) => (
   <nav className={className} style={style}>
     {NAVIGATION_LIST.map((item, idx) => (
       <ExpandNavList
@@ -90,7 +65,6 @@ export const NavList = ({ className, onNavigate, selected, style }: NavListProps
         item={item}
         key={`${isLeaf(item) ? 'leaf' : 'section'}_${item.label}`}
         onNavigate={onNavigate}
-        selected={selected}
       />
     ))}
   </nav>
