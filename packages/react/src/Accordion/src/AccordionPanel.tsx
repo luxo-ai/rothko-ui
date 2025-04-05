@@ -7,7 +7,6 @@ import {
   ListenableKeys,
   getKeyCode,
   Flex,
-  FlexItem,
   getElementFullHeight,
 } from '@rothko-ui/system';
 import type { WithAria, Dictionary } from '@rothko-ui/system';
@@ -197,7 +196,7 @@ const AccordionPanel = React.forwardRef<
       if (isString(titleProp)) {
         return <AccordionTitleText>{titleProp}</AccordionTitleText>;
       }
-      return <FlexItem>{titleProp}</FlexItem>;
+      return <div>{titleProp}</div>;
     }, [titleProp]);
 
     const subtitle = useMemo(() => {
@@ -207,7 +206,7 @@ const AccordionPanel = React.forwardRef<
       if (isString(subtitleProp)) {
         return <AccordionSubtitleText>{subtitleProp}</AccordionSubtitleText>;
       }
-      return <FlexItem>{subtitleProp}</FlexItem>;
+      return <div>{subtitleProp}</div>;
     }, [subtitleProp]);
 
     return (
