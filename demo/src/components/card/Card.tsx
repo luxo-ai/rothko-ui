@@ -1,14 +1,5 @@
 import { Github } from '@rothko-ui/icons';
-import {
-  Tabs,
-  Tab,
-  Container,
-  Flex,
-  FlexItem,
-  Paragraph,
-  Heading1,
-  Heading,
-} from '@rothko-ui/react';
+import { Tabs, Tab, Paragraph, Heading1, Heading } from '@rothko-ui/react';
 import toKebabCase from 'lodash.kebabcase';
 import Link from 'next/link';
 import React from 'react';
@@ -18,6 +9,8 @@ import styles from './Card.module.scss';
 import Markdown from '../Markdown';
 import type { Body as BodyType, CCode, CardCopy, Section as SectionType } from './types';
 import useTheme from '../../hooks/useTheme';
+import { Container } from '../container';
+import { Flex } from '../flex';
 import { List, ListItem } from '../list';
 
 type CardProps = {
@@ -97,7 +90,7 @@ const Section = ({ sectionKey, section, depth }: SectionProps) => {
           {(body as CCode[]).map((item, idx) => {
             const subSectionKey = `${sectionKey}_${idx}`;
             return (
-              <FlexItem key={subSectionKey}>
+              <div key={subSectionKey}>
                 {item.text && (
                   <div style={{ marginTop: '0.5rem', marginBottom: '1rem' }}>
                     <Markdown>{item.text}</Markdown>
@@ -112,7 +105,7 @@ const Section = ({ sectionKey, section, depth }: SectionProps) => {
                   displayLineNumbers={item.language === 'jsx'}
                   sourceCode={item.code}
                 />
-              </FlexItem>
+              </div>
             );
           })}
         </Flex>

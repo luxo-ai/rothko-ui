@@ -2,7 +2,6 @@
 
 import { insertKind } from '@helpers';
 import type { RothkoKind } from '@rothko-ui/react';
-import { Container, Flex, FlexItem } from '@rothko-ui/react';
 import { useState } from 'react';
 
 import multiSliderCopy from './copy';
@@ -13,7 +12,9 @@ import { BASIC, DISABLED, WITH_KIND } from './usage/sourceCode';
 import WithKind from './usage/WithKind';
 
 import { Card, Import, Props, Usage } from '@/components/card';
+import { Container } from '@/components/container';
 import Example from '@/components/Example';
+import { Flex } from '@/components/flex';
 import { KindRadioGroup } from '@/components/KindRadioGroup';
 import { useIsMobileOrTablet } from '@/hooks/useIsMobileOrTablet';
 
@@ -42,14 +43,14 @@ const Page = () => {
             <Disabled />
           </Container>
         </Example>
-        <FlexItem>
+        <Container>
           <Example title="With Kind" sourceCode={insertKind(WITH_KIND, kind)}>
             <Container maxWidth={maxWidth}>
               <WithKind kind={kind} />
             </Container>
           </Example>
           <KindRadioGroup kind={kind} setKind={setKind} />
-        </FlexItem>
+        </Container>
       </Flex>
       <Props copy={{ props: multiSliderProps }} />
     </Card>

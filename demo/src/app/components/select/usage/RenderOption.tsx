@@ -1,8 +1,9 @@
 import type { Option } from '@rothko-ui/react';
-import { Select, Paragraph, Code, Grid } from '@rothko-ui/react';
+import { Select, Paragraph, Code } from '@rothko-ui/react';
 import React, { useState } from 'react';
 
 import { listOfNamesWithUsername } from '@/components/card/listOfNames';
+import { Grid } from '@/components/grid';
 
 const nameOptions: Option<number, { username: string }>[] = listOfNamesWithUsername.map(
   (user, idx) => ({

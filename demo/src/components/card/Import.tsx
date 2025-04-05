@@ -1,8 +1,9 @@
-import { Container, Heading3, Tab, Tabs } from '@rothko-ui/react';
+import { Heading3, Tab, Tabs } from '@rothko-ui/react';
 import NextLink from 'next/link';
 
 import styles from './Card.module.scss';
 import { TSCode } from '../Code';
+import { Container } from '../container';
 
 type ImportProps = {
   single: string;

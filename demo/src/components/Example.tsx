@@ -1,4 +1,4 @@
-import { Flex, FlexItem, Paragraph, Tabs, Tab, Heading5 } from '@rothko-ui/react';
+import { Flex, Paragraph, Tabs, Tab, Heading5 } from '@rothko-ui/react';
 
 import { JSXCode } from './Code';
 
@@ -13,12 +13,12 @@ const Example = ({ title, sourceCode, subTitle, children }: CodeSnippetProps) =>
   return (
     <Flex flexDirection="column" rowGap="0.25rem">
       {title && (
-        <FlexItem>
+        <div>
           <Heading5>{title}</Heading5>
           {subTitle && <Paragraph>{subTitle}</Paragraph>}
-        </FlexItem>
+        </div>
       )}
-      <FlexItem>
+      <div>
         <Tabs
           kind="primary"
           styles={{
@@ -33,7 +33,7 @@ const Example = ({ title, sourceCode, subTitle, children }: CodeSnippetProps) =>
             <JSXCode maxWidth="52rem" sourceCode={sourceCode} />
           </Tab>
         </Tabs>
-      </FlexItem>
+      </div>
     </Flex>
   );
 };

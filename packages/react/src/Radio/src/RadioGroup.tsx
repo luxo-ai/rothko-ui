@@ -1,4 +1,4 @@
-import { Grid, useId } from '@rothko-ui/system';
+import { useId } from '@rothko-ui/system';
 import type { RothkoKind, Size, WithAria, Dictionary } from '@rothko-ui/system';
 import { Paragraph, Label } from '@rothko-ui/typography';
 import React from 'react';
@@ -161,6 +161,12 @@ WithAria<RadioGroupProps<K>, AriaAttributes>) {
     [value, error, kind, labelId, errorMessageId, disabled, onChange]
   );
 
+  const radioGroupVarStyle = {
+    '--radio-group-grid-template-col': `repeat(${maxCol}, 1fr)`,
+    '--radio-group-row-gap': typeof rowGap === 'number' ? `${rowGap}px` : rowGap,
+    '--radio-group-col-gap': typeof columnGap === 'number' ? `${columnGap}px` : columnGap,
+  } as React.CSSProperties;
+
   return (
     <div id={id} style={style} className={className}>
       {label && (
@@ -168,7 +174,11 @@ WithAria<RadioGroupProps<K>, AriaAttributes>) {
           {label}
         </Label>
       )}
-      <Grid
+      <div
+        className={
+          'grow grid grid-cols-(--radio-group-grid-template-col) gap-y-(--radio-group-row-gap) gap-x-(--radio-group-col-gap)'
+        }
+        style={radioGroupVarStyle}
         aria-label={ariaLabel}
         aria-describedby={ariaDescribedBy}
         aria-details={ariaDetails}
@@ -180,15 +190,11 @@ WithAria<RadioGroupProps<K>, AriaAttributes>) {
         aria-required={ariaRequired}
         aria-errormessage={!ariaErrorMessage && error ? errorMessageId : ariaErrorMessage}
         role="radiogroup"
-        flexGrow={1}
-        gridTemplateColumns={`repeat(${maxCol}, 1fr)`}
-        rowGap={rowGap}
-        columnGap={columnGap}
       >
         <RadioGroupContext.Provider value={contextValue as RadioGroupContextType}>
           {children}
         </RadioGroupContext.Provider>
-      </Grid>
+      </div>
       {error && (
         <Paragraph
           className={classNames.errorText}

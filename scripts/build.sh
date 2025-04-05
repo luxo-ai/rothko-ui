@@ -37,6 +37,7 @@ yarn build:select
 yarn build:modal
 yarn build:breadcrumbs
 yarn build:tag
+yarn build:react
 
 # find packages/react/src -maxdepth 2 -name 'package.json' -exec sh -c 'jq -r .name {} | xargs -I % lerna run build --scope=% --stream' \;
 
