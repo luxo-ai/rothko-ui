@@ -1,0 +1,129 @@
+@import 'tailwindcss';
+
+@source '../../../node_modules/@rothko-ui/accordion';
+@source '../../../node_modules/@rothko-ui/alert';
+@source '../../../node_modules/@rothko-ui/autocomplete';
+@source '../../../node_modules/@rothko-ui/breadcrumbs';
+@source '../../../node_modules/@rothko-ui/button';
+@source '../../../node_modules/@rothko-ui/checkbox';
+@source '../../../node_modules/@rothko-ui/drawer';
+@source '../../../node_modules/@rothko-ui/input';
+@source '../../../node_modules/@rothko-ui/modal';
+@source '../../../node_modules/@rothko-ui/link';
+@source '../../../node_modules/@rothko-ui/menu';
+@source '../../../node_modules/@rothko-ui/select';
+@source '../../../node_modules/@rothko-ui/popup';
+@source '../../../node_modules/@rothko-ui/radio';
+@source '../../../node_modules/@rothko-ui/switch';
+@source '../../../node_modules/@rothko-ui/tag';
+@source '../../../node_modules/@rothko-ui/tabs';
+@source '../../../node_modules/@rothko-ui/typography';
+@source '../../../node_modules/@rothko-ui/slider';
+@source '../../../node_modules/@rothko-ui/toaster';
+@source '../../../node_modules/@rothko-ui/system';
+
+@import '../../../node_modules/@rothko-ui/tokens/build/tokens.css';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(119, 114, 114, 0.1) transparent;
+}
+
+/* prevent tailwind from overriding stuff from code snippets */
+pre {
+  font-family: revert;
+}
+
+div.code {
+  font-family: monospace;
+  font-size: 13px;
+  line-height: 19.5px;
+}
+
+.shadow {
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  width: 10px;
+  height: 100%;
+  background: red;
+}
+
+.shadow--top {
+  left: 0;
+  background: -webkit-linear-gradient(270deg, rgba(0, 0, 0, 0.35), transparent);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.35), transparent);
+  opacity: 0;
+}
+
+.shadow--bottom {
+  right: 0;
+  background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.35), transparent);
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0.35), transparent);
+}
+
+/* for code snippets */
+.non-selectable {
+  user-select: none;
+}
+
+html,
+body {
+  scrollbar-color: rgba(119, 114, 114, 0.1) transparent;
+}
+
+:root {
+  --rothko-font-family-regular:
+    'Soehne-Buch', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --rothko-font-family-bold: 'LabGrotesque-Bold';
+  --rothko-font-family-italic: 'LabGrotesque-Italic';
+  --rothko-font-family-light: 'LabGrotesque-Light';
+  --rothko-font-family-heading: 'LabGrotesque-Regular';
+  --rothko-font-family-code: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+:root,
+:root .light {
+  --demo-background: #fff;
+  --demo-nav-background: rgba(255, 255, 255, 0.75);
+  background: #fff;
+  color-scheme: light;
+}
+
+:root ::selection {
+  color: #fff;
+  background: #000;
+}
+:root ::-moz-selection {
+  color: #fff;
+  background: #000;
+}
+
+:root .dark {
+  --demo-background: #000;
+  --demo-nav-background: rgba(0, 0, 0, 0.75);
+  background: #000;
+  color-scheme: dark;
+}
+
+:root .dark :not(code) ::selection {
+  background: #f81be5;
+}
+:root .dark :not(code) ::-moz-selection {
+  background: #f81be5;
+}

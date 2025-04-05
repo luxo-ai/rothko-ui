@@ -1,0 +1,99 @@
+.grid {
+  display: grid;
+
+  &.gridTemplateColumns {
+    grid-template-columns: var(--grd-grid-template-columns);
+  }
+
+  &.gridTemplateRows {
+    grid-template-rows: var(--grd-grid-template-rows);
+  }
+
+  &.gridTemplateAreas {
+    grid-template-areas: var(--grd-grid-template-areas);
+  }
+
+  &.gap {
+    gap: var(--grd-gap);
+  }
+
+  &.rowGap {
+    row-gap: var(--grd-row-gap);
+  }
+
+  &.columnGap {
+    column-gap: var(--grd-column-gap);
+  }
+
+  &.gridAutoColumns {
+    grid-auto-columns: var(--grd-grid-auto-columns);
+  }
+
+  &.gridAutoRows {
+    grid-auto-rows: var(--grd-grid-auto-rows);
+  }
+
+  &.gridAutoFlow {
+    grid-auto-flow: var(--grd-grid-auto-flow);
+  }
+
+  &.gridColumn {
+    grid-column: var(--grd-grid-column);
+  }
+
+  &.gridRow {
+    grid-row: var(--grd-grid-row);
+  }
+
+  &.gridColumnStart {
+    grid-column-start: var(--grd-grid-column-start);
+  }
+
+  &.gridColumnEnd {
+    grid-column-end: var(--grd-grid-column-end);
+  }
+
+  &.gridRowStart {
+    grid-row-start: var(--grd-grid-row-start);
+  }
+
+  &.gridRowEnd {
+    grid-row-end: var(--grd-grid-row-end);
+  }
+
+  &.justifyContent {
+    justify-content: var(--grd-justify-content);
+  }
+
+  &.justifyItems {
+    justify-items: var(--grd-justify-items);
+  }
+
+  &.alignItems {
+    align-items: var(--grd-align-items);
+  }
+
+  &.alignContent {
+    align-content: var(--grd-align-content);
+  }
+
+  &.placeItems {
+    place-items: var(--grd-place-items);
+  }
+
+  &.placeContent {
+    place-content: var(--grd-place-content);
+  }
+
+  &.placeSelf {
+    place-self: var(--grd-place-self);
+  }
+
+  &.justifySelf {
+    justify-self: var(--grd-justify-self);
+  }
+
+  &.alignSelf {
+    align-self: var(--grd-align-self);
+  }
+}

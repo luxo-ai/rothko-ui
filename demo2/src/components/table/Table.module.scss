@@ -1,0 +1,111 @@
+$tableBackground: var(--rothko-table-background, transparent);
+$tableHeaderBackground: var(--rothko-table-header-background, #ccc);
+$tableRowBorder: var(--rothko-table-row-border, #000);
+$tableRowMinimizedBackground: var(--rothko-table-row-minimized-background, transparent);
+$rothkoForeground: var(--rothko-foreground, #000);
+$bodyFontSize: var(--rothko-font-size-body, 1rem);
+$bodyFontSizeSmall: var(--rothko-font-size-body-small, 1rem);
+$regularFont: var(--rothko-font-family-regular);
+$lightFont: var(--rothko-font-family-light, $regularFont);
+
+.table {
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+  border-collapse: collapse;
+  background: $tableBackground;
+
+  color: $rothkoForeground;
+  // width: 100%;
+
+  & thead {
+    background: $tableHeaderBackground;
+  }
+
+  & tr:not(:last-of-type) {
+    border-bottom-width: 0.1rem;
+    border-bottom-style: solid;
+    border-bottom-color: $tableRowBorder;
+  }
+
+  & th {
+    text-align: start;
+
+    font-size: $bodyFontSize;
+    font-family: $lightFont;
+    font-weight: 100;
+    padding: 1rem 1.25rem;
+  }
+
+  & td {
+    font-weight: 300;
+    font-size: $bodyFontSizeSmall;
+    font-family: $regularFont;
+    padding: 1.25rem;
+  }
+
+  & td .tdBefore {
+    display: none;
+  }
+
+  @media screen and (max-width: 40rem) {
+    &,
+    & thead,
+    & tbody,
+    & tr,
+    & th,
+    & td {
+      display: block;
+    }
+
+    & thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    & tr:not(:last-of-type) {
+      border-bottom-style: none;
+    }
+
+    & tr {
+      background: $tableRowMinimizedBackground;
+      margin-bottom: 0.3rem;
+    }
+
+    & td {
+      padding: 0.75rem 0.5rem;
+    }
+
+    & tbody tr {
+      padding: 0.25em;
+    }
+
+    & {
+      background: unset;
+    }
+
+    & td.pivoted {
+      /* Behave like a "row" */
+      border: none !important;
+      position: relative;
+      padding-left: calc(50% + 10px) !important;
+      text-align: left !important;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+    }
+
+    & td .tdBefore {
+      /* Now like a table header */
+      position: absolute;
+      display: block;
+
+      /* Top/left values mimic padding */
+      left: 1rem;
+      width: calc(50% - 20px);
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+      text-align: left !important;
+      font-weight: 600;
+    }
+  }
+}

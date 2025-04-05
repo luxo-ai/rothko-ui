@@ -1,0 +1,15 @@
+$mobile: 750px;
+
+.mobile-only {
+  display: none;
+  @media (max-width: $mobile) {
+    display: block;
+  }
+}
+
+.desktop-only {
+  display: block;
+  @media (max-width: $mobile) {
+    display: none;
+  }
+}

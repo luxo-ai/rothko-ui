@@ -1,0 +1,66 @@
+@use '../variables' as v;
+@use '../mixins' as mxn;
+
+$navHeight: 60px;
+$maxWidth: 75rem;
+
+$px-mobile: 6 * v.$base-rem; // 1.5rem = 24px
+$px-desktop: 6 * v.$base-rem; // 2rem = 32px
+
+$py-desktop: 3rem;
+
+.body {
+  margin: 0; // body element has default margin
+  margin-top: $navHeight;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - $navHeight);
+}
+
+.header {
+  background: var(--demo-background, #000);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  height: $navHeight;
+  z-index: 3;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  margin: 0 auto;
+  max-width: $maxWidth;
+  width: 100%;
+
+  padding: 0 $px-desktop;
+  @include mxn.mobile {
+    padding: 0 $px-mobile;
+  }
+}
+
+.main {
+  flex: 1;
+  margin: 0 auto;
+  max-width: $maxWidth;
+  width: 100%;
+
+  padding: $py-desktop $px-desktop;
+  @include mxn.mobile {
+    padding: 1rem $px-mobile;
+  }
+}
+
+.navList {
+  position: sticky;
+  top: calc($navHeight + $py-desktop);
+  height: calc(100vh - $navHeight - $py-desktop);
+  overflow-y: auto;
+  padding-bottom: 1.5rem;
+}
+
+.footer {
+  margin: 9rem auto 2rem auto;
+}

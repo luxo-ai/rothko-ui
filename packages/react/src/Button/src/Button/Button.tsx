@@ -1,3 +1,5 @@
+'use client';
+
 import {
   InlineSpinner,
   getElementFullHeight,
@@ -5,7 +7,7 @@ import {
   classes,
 } from '@rothko-ui/system';
 import type { Accessory, Dictionary, RothkoKind, RothkoSize, WithAria } from '@rothko-ui/system';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import type { ButtonRadius, ButtonVariant } from '../types';
 
@@ -176,7 +178,6 @@ const Button = ({
   type = 'button',
   role = 'button',
 }: WithAria<ButtonProps, AriaAttributes>) => {
-  const childrenContainerRef = useRef<HTMLDivElement | null>(null);
   const [childrenDim, setChildrenDim] = useState<{ width: number; height: number }>();
   const [childrenHeight, setChildrenHeight] = useState<number | null>(18); // was null before. How do we do this better?
 
@@ -236,16 +237,16 @@ const Button = ({
     }
   };
 
-  const hasLeftAccessory = !!Left;
-  const hasRightAccessory = !!Right;
-
-  useEffect(() => {
-    if (!childrenContainerRef.current || loading) return;
-    const width = getElementFullWidth(childrenContainerRef.current);
-    const height = getElementFullHeight(childrenContainerRef.current);
-    setChildrenDim({ width, height });
-    setChildrenHeight(height);
-  }, [setChildrenHeight, childrenContainerRef, hasLeftAccessory, hasRightAccessory, size, loading]);
+  const childrenContainerRefCallback = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (!node || loading) return;
+      const width = getElementFullWidth(node);
+      const height = getElementFullHeight(node);
+      setChildrenDim({ width, height });
+      setChildrenHeight(height);
+    },
+    [setChildrenHeight, setChildrenDim, loading]
+  );
 
   const rothkoButtonKindVarStyle = {
     '--button-kind-bg': `var(--rothko-${kind})`,
@@ -283,7 +284,7 @@ const Button = ({
             ? { width: childrenDim?.width || undefined, height: childrenDim?.height || undefined }
             : undefined
         }
-        ref={childrenContainerRef}
+        ref={childrenContainerRefCallback}
       >
         {!loading && Left && (
           <AccessoryContainer>

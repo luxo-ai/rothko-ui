@@ -1,3 +1,5 @@
+'use client';
+
 import type { RothkoKind, RothkoSize } from '@rothko-ui/system';
 import { classes } from '@rothko-ui/system';
 import React from 'react';

@@ -1,0 +1,115 @@
+.box {
+  // Margin
+  &.margin {
+    margin: var(--bx-margin);
+  }
+  &.marginLeft {
+    margin-left: var(--bx-margin-left);
+  }
+  &.marginRight {
+    margin-right: var(--bx-margin-right);
+  }
+  &.marginTop {
+    margin-top: var(--bx-margin-top);
+  }
+  &.marginBottom {
+    margin-bottom: var(--bx-margin-bottom);
+  }
+
+  // Padding
+  &.padding {
+    padding: var(--bx-padding);
+  }
+  &.paddingLeft {
+    padding-left: var(--bx-padding-left);
+  }
+  &.paddingRight {
+    padding-right: var(--bx-padding-right);
+  }
+  &.paddingTop {
+    padding-top: var(--bx-padding-top);
+  }
+  &.paddingBottom {
+    padding-bottom: var(--bx-padding-bottom);
+  }
+
+  // Width and Height
+  &.width {
+    width: var(--bx-width);
+  }
+  &.height {
+    height: var(--bx-height);
+  }
+  &.maxWidth {
+    max-width: var(--bx-max-width);
+  }
+  &.maxHeight {
+    max-height: var(--bx-max-height);
+  }
+
+  // Border
+  &.border {
+    border: var(--bx-border);
+  }
+  &.borderTop {
+    border-top: var(--bx-border-top);
+  }
+  &.borderBottom {
+    border-bottom: var(--bx-border-bottom);
+  }
+  &.borderLeft {
+    border-left: var(--bx-border-left);
+  }
+  &.borderRight {
+    border-right: var(--bx-border-right);
+  }
+
+  // Border Radius
+  &.borderRadius {
+    border-radius: var(--bx-border-radius);
+  }
+
+  // Background
+  &.background {
+    background: var(--bx-background);
+  }
+  &.backgroundColor {
+    background-color: var(--bx-background-color);
+  }
+
+  // Display and Positioning
+  &.display {
+    display: var(--bx-display);
+  }
+  &.position {
+    position: var(--bx-position);
+  }
+
+  // Miscellaneous
+  &.zIndex {
+    z-index: var(--bx-z-index);
+  }
+  &.overflow {
+    overflow: var(--bx-overflow);
+  }
+  &.boxShadow {
+    box-shadow: var(--bx-box-shadow);
+  }
+  &.opacity {
+    opacity: var(--bx-opacity);
+  }
+
+  // Flexbox properties
+  &.flex {
+    flex: var(--bx-flex);
+  }
+  &.flexGrow {
+    flex-grow: var(--bx-flex-grow);
+  }
+  &.flexShrink {
+    flex-shrink: var(--bx-flex-shrink);
+  }
+  &.flexBasis {
+    flex-basis: var(--bx-flex-basis);
+  }
+}

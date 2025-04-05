@@ -3,5 +3,6 @@
   "compilerOptions": {
     "rootDir": "./src"
   },
-  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["vite.config.ts"]
 }
